@@ -16,7 +16,6 @@ import {BusinessComponent} from './components/business/business.component';
 import {InventoryComponent} from './components/inventory/inventory.component';
 import {AnalysisComponent} from './components/analysis/analysis.component';
 import {DataComponent} from './components/data/data.component';
-import {SystemComponent} from './components/system/system.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {TestingComponent} from './components/testing/testing.component';
 import {PharmacyComponent} from './components/pharmacy/pharmacy.component';
@@ -37,7 +36,6 @@ import { MembersComponent } from './components/members/members.component';
     InventoryComponent,
     AnalysisComponent,
     DataComponent,
-    SystemComponent,
     SettingsComponent,
     TestingComponent,
     PharmacyComponent,

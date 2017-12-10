@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+.large-panel-margin  {
+  margin-top: 50px;
+}
+
+.isaac-form-space {
+  margin-left: 10px;
+}
+
+.isaac-margin-top {
+  margin-top: 5px;
+}
