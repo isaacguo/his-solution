@@ -21,8 +21,8 @@ RUN /usr/local/bin/install-plugins.sh \
       sonar \
       ec2 \
       build-monitor-plugin \
-      github \
-      matrix-auth 
+      matrix-auth \
+      blueocean 
       
       
 
