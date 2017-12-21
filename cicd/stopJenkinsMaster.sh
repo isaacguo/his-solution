@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker stop es_service_jenkins
+docker stop his-jenkins-master

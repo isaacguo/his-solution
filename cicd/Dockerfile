@@ -3,7 +3,7 @@ FROM jenkins:latest
 MAINTAINER Isaac Guo <yue_guo@keysight.com>
 
 
-USER root
+#USER root
 
 COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
 
@@ -12,7 +12,6 @@ COPY executors.groovy /usr/share/jenkins/ref/init.groovy.d/executors.groovy
 RUN /usr/local/bin/install-plugins.sh \
       workflow-aggregator \
       docker-workflow \
-      artifactory \
       slack \
       copyartifact \
       jobConfigHistory \
@@ -22,7 +21,8 @@ RUN /usr/local/bin/install-plugins.sh \
       sonar \
       ec2 \
       build-monitor-plugin \
-      github
+      github \
+      matrix-auth 
       
       
 
