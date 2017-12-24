@@ -29,7 +29,7 @@ node {
             echo 'Change Version Number'
         }
     }
-    if (enf.BRANCH_NAME == 'master') {
+    if (env.BRANCH_NAME == 'master') {
         stage('Deploy') {
             echo 'Do Deploy'
         }
