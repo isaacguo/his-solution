@@ -8,7 +8,7 @@ node {
             sh 'cd src && mvn -B -s ../settings.xml -DskipTests compile'
         }
 
-        stage("Test") {
+        stage("Unit Test") {
             sh "uname -a"
             sh "pwd"
             sh "cd src && mvn -B -s ../settings.xml test"
@@ -19,5 +19,19 @@ node {
     }
     stage('Push to Docker Registry') {
         echo 'Push to Docker Registry'
+    }
+
+    stage('UAT') {
+        echo 'Push to Docker Registry'
+    }
+    if (env.BRANCH_NAME.startsWith('release')) {
+        stage('Release') {
+            echo 'Change Version Number'
+        }
+    }
+    if (enf.BRANCH_NAME == 'master') {
+        stage('Deploy') {
+            echo 'Do Deploy'
+        }
     }
 }
