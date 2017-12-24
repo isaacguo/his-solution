@@ -4,7 +4,7 @@ node {
         writeFile file: 'settings.xml', text: "<settings><localRepository>${pwd()}/.m2repo</localRepository></settings>"
         stage("Build") {
             sh "uname -a"
-            sh 'mvn -B -s settings.xml -DskipTests compile'
+            sh 'cd src && mvn -B -s settings.xml -DskipTests compile'
         }
 
         stage("Test") {
