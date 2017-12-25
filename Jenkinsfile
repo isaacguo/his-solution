@@ -5,13 +5,13 @@ node {
         stage("Build") {
             sh "uname -a"
             sh "pwd"
-            sh 'mvn -B -s ../settings.xml -DskipTests compile'
+            sh 'mvn -B -s settings.xml -DskipTests compile'
         }
 
         stage("Unit Test") {
             sh "uname -a"
             sh "pwd"
-            sh "mvn -B -s ../settings.xml test"
+            sh "mvn -B -s settings.xml test"
         }
         stage ("Code Analysis") {
             sh  "mvn sonar:sonar \
