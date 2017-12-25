@@ -22,7 +22,8 @@ RUN /usr/local/bin/install-plugins.sh \
       ec2 \
       build-monitor-plugin \
       matrix-auth \
-      blueocean 
+      blueocean \
+      swarm 
       
       
 

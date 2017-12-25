@@ -324,3 +324,4 @@ his-deploy/
 
 .vscode
 .mvn
+**/nohup.out
