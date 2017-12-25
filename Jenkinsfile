@@ -5,16 +5,16 @@ node {
         stage("Build") {
             sh "uname -a"
             sh "pwd"
-            sh 'cd src && mvn -B -s ../settings.xml -DskipTests compile'
+            sh 'mvn -B -s ../settings.xml -DskipTests compile'
         }
 
         stage("Unit Test") {
             sh "uname -a"
             sh "pwd"
-            sh "cd src && mvn -B -s ../settings.xml test"
+            sh "mvn -B -s ../settings.xml test"
         }
         stage ("Code Analysis") {
-            sh  "cd src && mvn sonar:sonar \
+            sh  "mvn sonar:sonar \
                  -Dsonar.host.url=http://156.140.160.92:9000 \
                  -Dsonar.login=147734b0759b9a1793f9f900f4bb9e50d984d301"
         }
