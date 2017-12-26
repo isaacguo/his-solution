@@ -14,9 +14,9 @@ node {
             sh "mvn -B -s settings.xml test"
         }
         stage ("Code Analysis") {
-            sh  "mvn sonar:sonar \
-                 -Dsonar.host.url=http://156.140.160.92:9000 \
-                 -Dsonar.login=147734b0759b9a1793f9f900f4bb9e50d984d301"
+	    withSonarQubeEnv('SonarQubeLocal') {
+	    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+            }
         }
     }
     stage('Build Docker Image') {
