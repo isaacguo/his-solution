@@ -19,6 +19,12 @@ node {
 	    sh 'mvn -B -s settings.xml package sonar:sonar' 
             }
         }
+        stage ("Code Analysis Check") {
+	    withSonarQubeEnv('SonarQubeLocal') {
+	    
+	    sh 'mvn -B -s settings.xml sonar:check' 
+            }
+        }
     }
     stage('Build Docker Image') {
         echo 'Build Docker Image'
