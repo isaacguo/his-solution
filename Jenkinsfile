@@ -7,11 +7,7 @@ node {
             sh 'mvn -B -DskipTests compile'
     }
 
-    stage("Unit Test") {
-            sh "uname -a"
-            sh "pwd"
-            sh "mvn -B test"
-    }
+    
     stage ("Code Analysis") {
 	    withSonarQubeEnv('SonarQubeLocal') {
 	    
@@ -22,7 +18,7 @@ node {
             
     stage('Build Docker Image') {
         echo 'Build Docker Image'
-	sh "mvn install"
+        sh "mvn com.spotify:dockerfile-maven-plugin:1.3.7:build"
     }
     stage('Push to Docker Registry') {
         echo 'Push to Docker Registry'
