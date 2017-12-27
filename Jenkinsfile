@@ -30,6 +30,7 @@ node {
         
     stage('Build Docker Image') {
         echo 'Build Docker Image'
+	sh "mvn package"
     }
     stage('Push to Docker Registry') {
         echo 'Push to Docker Registry'
