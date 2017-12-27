@@ -1,6 +1,7 @@
 node {
     checkout scm
     stage("Build") {
+	    sh "whoami"
             sh "uname -a"
             sh "pwd"
             sh 'mvn -B -DskipTests compile'
