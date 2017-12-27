@@ -3,24 +3,24 @@ node {
     stage("Build") {
             sh "uname -a"
             sh "pwd"
-            sh 'mvn -B -s settings.xml -DskipTests compile'
+            sh 'mvn -B -DskipTests compile'
         }
 
         stage("Unit Test") {
             sh "uname -a"
             sh "pwd"
-            sh "mvn -B -s settings.xml test"
+            sh "mvn -B test"
         }
         stage ("Code Analysis") {
 	    withSonarQubeEnv('SonarQubeLocal') {
 	    
-	    sh 'mvn -B -s settings.xml package sonar:sonar' 
+	    sh 'mvn -B package sonar:sonar' 
             }
         }
         stage ("Code Analysis Check") {
 	    withSonarQubeEnv('SonarQubeLocal') {
 	    
-	    sh 'mvn -B -s settings.xml sonar:check' 
+	    sh 'mvn -B sonar:check' 
             }
         }
     stage('Build Docker Image') {
