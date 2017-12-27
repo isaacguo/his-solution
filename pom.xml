@@ -65,6 +65,13 @@
                                 <goal>build</goal>
                             </goals>
                         </execution>
+                        <execution>
+                            <id>push-image</id>
+                            <phase>deploy</phase>
+                            <goals>
+                                <goal>push</goal>
+                            </goals>
+                        </execution>
                     </executions>
                     <configuration>
                         <repository>${docker.image.prefix}/${project.artifactId}</repository>
@@ -88,6 +95,7 @@
             </plugin>
         </plugins>
     </build>
+
 
     <profiles>
         <profile>
