@@ -90,7 +90,6 @@
                             </execution>
                             <execution>
                                 <id>default-check</id>
-                                <phase>prepare-package</phase>
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
