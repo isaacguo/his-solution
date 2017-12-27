@@ -90,20 +90,21 @@
                             </execution>
                             <execution>
                                 <id>default-check</id>
+                                <phase>test</phase>
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
                                 <configuration>
                                     <rules>
-                                        <rule>
+                                        <rule implementation="org.jacoco.maven.RuleConfiguration">
                                             <element>CLASS</element>
                                             <limits>
-                                                <limit>
+                                                <limit implementation="org.jacoco.report.check.Limit">
                                                     <counter>LINE</counter>
                                                     <value>COVEREDRATIO</value>
                                                     <minimum>0.80</minimum>
                                                 </limit>
-						<limit>
+						<limit implementation="org.jacoco.report.check.Limit">
                                                     <counter>BRANCH</counter>
                                                     <value>COVEREDRATIO</value>
                                                     <minimum>0.80</minimum>
