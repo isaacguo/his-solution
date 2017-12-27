@@ -1,8 +1,6 @@
 node {
     checkout scm
-    docker.image('maven:alpine').inside {
-        writeFile file: 'settings.xml', text: "<settings><localRepository>${pwd()}/.m2repo</localRepository></settings>"
-        stage("Build") {
+    stage("Build") {
             sh "uname -a"
             sh "pwd"
             sh 'mvn -B -s settings.xml -DskipTests compile'
@@ -25,7 +23,6 @@ node {
 	    sh 'mvn -B -s settings.xml sonar:check' 
             }
         }
-    }
     stage('Build Docker Image') {
         echo 'Build Docker Image'
     }
