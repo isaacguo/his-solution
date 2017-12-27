@@ -67,7 +67,6 @@
                         </execution>
                         <execution>
                             <id>push-image</id>
-                            <phase>deploy</phase>
                             <goals>
                                 <goal>push</goal>
                             </goals>
@@ -79,6 +78,7 @@
                         <buildArgs>
                             <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                         </buildArgs>
+                        <forceTags>true</forceTags>
                     </configuration>
                 </plugin>
             </plugins>

@@ -22,7 +22,7 @@ node {
     }
     stage('Push to Docker Registry') {
         echo 'Push to Docker Registry'
-	sh "mvn --settings settings.xml deploy"
+	sh "mvn --settings settings.xml com.spotify:dockerfile-maven-plugin:1.3.7:push"
     }
 
     stage('UAT') {
