@@ -22,7 +22,7 @@ node {
     }
     stage('Push to Docker Registry') {
         echo 'Push to Docker Registry'
-	sh "mvn deploy"
+	sh "mvn --settings settings.xml deploy"
     }
 
     stage('UAT') {
