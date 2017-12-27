@@ -34,6 +34,7 @@
              the same report, so that, it will give the cross-module code coverage. -->
         <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
         <sonar.groovy.binaries>target/classes</sonar.groovy.binaries>
+	<docker.image.prefix>isaacguo</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -62,6 +63,17 @@
                     </plugins>
                 </pluginManagement>
                 <plugins>
+		    <plugin>
+		        <groupId>com.spotify</groupId>
+		        <artifactId>dockerfile-maven-plugin</artifactId>
+		        <version>1.3.6</version>
+		        <configuration>
+	                <repository>${docker.image.prefix}/${project.artifactId}</repository>
+			    <buildArgs>
+			        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+			    </buildArgs>
+			</configuration>
+		    </plugin>
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
