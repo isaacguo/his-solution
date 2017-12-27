@@ -95,10 +95,10 @@
                                 </goals>
                                 <configuration>
                                     <rules>
-                                        <rule>
+                                        <rule implementation="org.jacoco.maven.RuleConfiguration">
                                             <element>BUNDLE</element>
                                             <limits>
-                                                <limit>
+                                                <limit implementation="org.jacoco.report.check.limit" >
                                                     <counter>COMPLEXITY</counter>
                                                     <value>COVEREDRATIO</value>
                                                     <minimum>0.60</minimum>
