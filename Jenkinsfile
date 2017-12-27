@@ -19,6 +19,16 @@ node {
             }
     }
     
+stage ("Quality Gate") {
+withSonarQubeEnv('SonarQubeLocal') {
+            timeout(time: 1, unit: 'HOURS' ){
+                def qg= waitForQualityGate()
+                if (qg.status != 'OK') {
+                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                }
+            }
+  }
+}
         
     stage('Build Docker Image') {
         echo 'Build Docker Image'
@@ -42,13 +52,4 @@ node {
     }
 }
 
-stage ("Quality Gate") {
-withSonarQubeEnv('SonarQubeLocal') {
-            timeout(time: 1, unit: 'HOURS' ){
-                def qg= waitForQualityGate()
-                if (qg.status != 'OK') {
-                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                }
-            }
-}
-    }
+
