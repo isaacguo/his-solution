@@ -325,3 +325,5 @@ his-deploy/
 .vscode
 .mvn
 **/nohup.out
+cicd/swarm*
+cicd/workspace
