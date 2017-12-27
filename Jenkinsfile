@@ -5,25 +5,20 @@ node {
             sh "uname -a"
             sh "pwd"
             sh 'mvn -B -DskipTests compile'
-        }
+    }
 
-        stage("Unit Test") {
+    stage("Unit Test") {
             sh "uname -a"
             sh "pwd"
             sh "mvn -B test"
-        }
-        stage ("Code Analysis") {
+    }
+    stage ("Code Analysis") {
 	    withSonarQubeEnv('SonarQubeLocal') {
 	    
 	    sh 'mvn -B package sonar:sonar' 
             }
-        }
-        stage ("Code Analysis Check") {
-	    withSonarQubeEnv('SonarQubeLocal') {
-	    
-	    sh 'mvn -B sonar:check' 
-            }
-        }
+    }
+        
     stage('Build Docker Image') {
         echo 'Build Docker Image'
     }
