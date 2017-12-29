@@ -10,7 +10,7 @@ node {
 
     stage("Package & Code Analysis") {
         withSonarQubeEnv('SonarQubeLocal') {
-            sh 'mvn -B package sonar:sonar'
+            sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
         }
     }
 
