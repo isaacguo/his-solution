@@ -8,7 +8,7 @@
       <!-- Maven Central Deployment -->
       <id>docker-hub</id>
       <username>isaacguo</username>
-      <password>{671MmfSolmsHAN19FWqw/jW2A72QitShB9GqYfIKwUs=}</password>
+      <password>{WB3tsYh7XGcHNei519eWKAqW/em+yQ39jEo+cQJXTmI=}</password>
     </server>
   </servers>
 
