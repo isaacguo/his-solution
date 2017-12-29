@@ -35,6 +35,7 @@
         <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
         <sonar.groovy.binaries>target/classes</sonar.groovy.binaries>
         <docker.image.prefix>isaacguo</docker.image.prefix>
+        <git.commit.shortRev>${git.commit.id.abbrev}</git.commit.shortRev>
     </properties>
 
     <dependencies>
@@ -124,7 +125,7 @@
                                 <goal>tag</goal>
                             </goals>
                             <configuration>
-                                <tag>${git.commit.id.abbrev}</tag>
+                                <tag>${git.commit.shortRev}</tag>
                             </configuration>
                         </execution>
                         <execution>
@@ -144,7 +145,7 @@
                                 <goal>push</goal>
                             </goals>
                             <configuration>
-                                <tag>${git.commit.id.abbrev}</tag>
+                                <tag>${git.commit.shortRev}</tag>
                             </configuration>
                         </execution>
                     </executions>
