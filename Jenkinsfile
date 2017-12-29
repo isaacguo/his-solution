@@ -10,14 +10,14 @@ node {
 
     stage("Package & Code Analysis") {
         withSonarQubeEnv('SonarQubeLocal') {
-            sh 'mvn -B clean package sonar:sonar -Ddockerfile.build.skip'
+            sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
         }
     }
 
 
     stage('Build and Push Docker Image') {
         echo 'Build Docker Image'
-        sh "mvn dockerfile:build dockerfile:push"
+        sh "mvn dockerfile:build dockerfile:tag dockerfile:push"
     }
 
     stage('Deploy to Staging') {
