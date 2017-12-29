@@ -144,7 +144,7 @@
                                 <goal>push</goal>
                             </goals>
                             <configuration>
-                                <tag>${project.version}</tag>
+                                <tag>${git.commit.id.abbrev}</tag>
                             </configuration>
                         </execution>
                     </executions>
