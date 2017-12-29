@@ -69,7 +69,6 @@
             </resource>
         </resources>
         <pluginManagement>
-
             <plugins>
                 <plugin>
                     <groupId>pl.project13.maven</groupId>
@@ -77,8 +76,15 @@
                     <version>2.2.4</version>
                     <executions>
                         <execution>
+                            <id>get-the-git-infos</id>
                             <goals>
                                 <goal>revision</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>validate-the-git-infos</id>
+                            <goals>
+                                <goal>validateRevision</goal>
                             </goals>
                         </execution>
                     </executions>
@@ -88,8 +94,9 @@
                             use this setting, otherwise we'll perform a search trying to
                             figure out the right directory. It's better to add it explicitly IMHO.
                         -->
-                        <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                        <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
                         <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                        <skipPoms>true</skipPoms>
                     </configuration>
                 </plugin>
                 <!-- https://mvnrepository.com/artifact/pl.project13.maven/git-commit-id-plugin -->
