@@ -114,6 +114,7 @@
                             <id>default</id>
                             <goals>
                                 <goal>build</goal>
+                                <goal>tag</goal>
                                 <goal>push</goal>
                             </goals>
                         </execution>
@@ -135,7 +136,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <inherited>false</inherited>
                 <configuration>
-                    <skip>True</skip>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
