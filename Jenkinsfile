@@ -17,7 +17,7 @@ node {
 
     stage('Build and Push Docker Image') {
         echo 'Build Docker Image'
-        sh "mvn dockerfile:build dockerfile:tag dockerfile:push"
+        sh "mvn dockerfile:build && mvn dockerfile:tag@tag-version && mvn dockerfile:push@push-latest && mvn dockerfile:push@push-version"
     }
 
     stage('Deploy to Staging') {
