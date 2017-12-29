@@ -1,18 +1,17 @@
 node {
     checkout scm
+
+    /*
     stage("Build") {
-	    sh "whoami"
-            sh "uname -a"
-            sh "pwd"
             sh 'mvn -B -DskipTests compile'
     }
+    */
 
     
-    stage ("Code Analysis") {
-	    withSonarQubeEnv('SonarQubeLocal') {
-	    
-	    sh 'mvn -B package sonar:sonar' 
-            }
+    stage ("Package & Code Analysis") {
+	withSonarQubeEnv('SonarQubeLocal') {
+          sh 'mvn -B package sonar:sonar' 
+        }
     }
     
             
@@ -25,9 +24,14 @@ node {
 	sh "mvn --settings settings.xml com.spotify:dockerfile-maven-plugin:1.3.7:push"
     }
 
+    stage('Deploy to Staging'){
+        echo 'Deploy to Staging Server'
+    }
+
     stage('UAT') {
         echo 'Push to Docker Registry'
     }
+    
     if (env.BRANCH_NAME.startsWith('release')) {
         stage('Release') {
             echo 'Change Version Number'
