@@ -111,26 +111,19 @@
                     <version>1.3.7</version>
                     <executions>
                         <execution>
-                            <id>build-image</id>
+                            <id>default</id>
                             <goals>
                                 <goal>build</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>push-image</id>
-                            <goals>
                                 <goal>push</goal>
                             </goals>
                         </execution>
                     </executions>
                     <configuration>
-                        <dockerConfigFile>${project.build.directory}/classes</dockerConfigFile>
-                        <repository>docker-hub/${docker.image.prefix}/${project.artifactId}</repository>
+                        <repository>${docker.image.prefix}/${project.artifactId}</repository>
                         <tag>${git.commit.id.abbrev}</tag>
                         <buildArgs>
-                            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                            <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                         </buildArgs>
-                        <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                     </configuration>
                 </plugin>
             </plugins>

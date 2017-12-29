@@ -15,13 +15,9 @@ node {
     }
 
 
-    stage('Build Docker Image') {
+    stage('Build and Push Docker Image') {
         echo 'Build Docker Image'
-        sh "mvn com.spotify:dockerfile-maven-plugin:1.3.7:build"
-    }
-    stage('Push to Docker Registry') {
-        echo 'Push to Docker Registry'
-        sh "mvn --settings settings.xml com.spotify:dockerfile-maven-plugin:1.3.7:push"
+        sh "mvn dockerfile:build dockerfile:push"
     }
 
     stage('Deploy to Staging') {
