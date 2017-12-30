@@ -5,7 +5,11 @@
 
     <groupId>com.isaac</groupId>
     <artifactId>his-eureka</artifactId>
+<<<<<<< HEAD
     <version>0.5.2.RELEASE</version>
+=======
+    <version>0.5.3-RC1-SNAPSHOT</version>
+>>>>>>> release/0.5.3-RC1-SNAPSHOT
     <packaging>jar</packaging>
 
     <name>his-eureka</name>
@@ -14,7 +18,11 @@
     <parent>
         <groupId>com.isaac</groupId>
         <artifactId>his-solution</artifactId>
+<<<<<<< HEAD
         <version>0.5.2.RELEASE</version> <!-- lookup parent from repository -->
+=======
+        <version>0.5.3-RC1-SNAPSHOT</version> <!-- lookup parent from repository -->
+>>>>>>> release/0.5.3-RC1-SNAPSHOT
     </parent>
 
     <properties>
