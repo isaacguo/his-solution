@@ -17,9 +17,9 @@ node {
 
     stage('Build and Push Docker Image') {
         echo 'Build Docker Image'
-        sh "docker images | grep his- | awk {'print \$3'} | xargs docker rmi --force"
+
         sh "mvn pl.project13.maven:git-commit-id-plugin:2.2.4:revision dockerfile:build dockerfile:tag@tag-version dockerfile:push@push-version dockerfile:push@push-latest"
-        sh "docker images -q --filter \"dangling=true\" | xargs docker rmi --force"
+
     }
 
     stage('Deploy to Staging') {
@@ -38,6 +38,13 @@ node {
     if (env.BRANCH_NAME == 'master') {
         stage('Deploy') {
             echo 'Do Deploy'
+        }
+    }
+
+    post {
+        always {
+            sh "docker images | grep his- | awk {'print \$3'} | xargs docker rmi --force"
+            sh "docker images -q --filter \"dangling=true\" | xargs docker rmi --force"
         }
     }
 }
