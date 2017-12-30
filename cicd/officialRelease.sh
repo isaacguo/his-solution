@@ -24,7 +24,7 @@ mvn versions:set -DnewVersion=$versionNumber.RELEASE
 mvn versions:commit
 
 git add .
-git commit -m 'update to release version:' v$versionNumber.RELEASE
+git commit -m 'update to release version: v'"$versionNumber"'.RELEASE'
 
 git tag v$versionNumber
 git push --tags
