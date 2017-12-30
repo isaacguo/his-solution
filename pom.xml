@@ -35,7 +35,7 @@
         <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
         <sonar.groovy.binaries>target/classes</sonar.groovy.binaries>
         <docker.image.prefix>isaacguo</docker.image.prefix>
-        <git.commit.shortRev>${git.commit.id.abbrev}</git.commit.shortRev>
+        <git.commit.shortRev>git-${git.commit.id.abbrev}</git.commit.shortRev>
     </properties>
 
     <dependencies>

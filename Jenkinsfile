@@ -18,18 +18,9 @@ node {
     stage('Build and Push Docker Image') {
         echo 'Build Docker Image'
 
-        try {
-            sh "docker images | grep his- | awk {'print \$3'} | xargs docker rmi --force"
-        }
-        catch (e) {
-
-        }
+        sh "docker images | grep his- | awk {'print \$3'} | xargs docker rmi --force; exit 0"
         sh "mvn pl.project13.maven:git-commit-id-plugin:2.2.4:revision dockerfile:build dockerfile:tag@tag-version dockerfile:push@push-version dockerfile:push@push-latest"
-        try {
-            sh "docker images -q --filter \"dangling=true\" | xargs docker rmi --force"
-        }
-        catch (e) {
-        }
+        sh "docker images -q --filter \"dangling=true\" | xargs docker rmi --force; exit 0"
 
     }
 
