@@ -24,5 +24,6 @@ mvn versions:commit
 
 git commit -am 'update to release version:' v$versionNumber
 
-git tag -a v$versionNumber
+git tag v$versionNumber
+git push --tags
 
