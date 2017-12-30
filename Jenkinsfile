@@ -42,7 +42,7 @@ node {
             echo 'Change Version Number'
         }
     } else if (env.BRANCH_NAME == 'master') {
-        stage('Deploy') {
+        stage('Deploy to Production') {
             echo 'Do Deploy'
         }
     } else if (env.BRANCH_NAME.startsWith('PR-')) {
