@@ -28,11 +28,11 @@ node {
 
     }
 
-    stage('Deploy to Staging') {
+    stage('Deploy to Staging Server') {
         echo 'Deploy to Staging Server'
     }
 
-    stage('UAT') {
+    stage('User Acceptance Test') {
         echo 'Push to Docker Registry'
     }
 
