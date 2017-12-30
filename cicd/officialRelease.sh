@@ -8,6 +8,7 @@ if [[ $branch_name == release/* ]]; then
   echo 'this is a release branch'
 else
   echo 'this is not a release barnch, please swith to a release branch'
+  exit 1;
 fi
 
 
@@ -22,7 +23,8 @@ cd `pwd`/..
 mvn versions:set -DnewVersion=$versionNumber.RELEASE
 mvn versions:commit
 
-git commit -a -m 'update to release version:' v$versionNumber.RELEASE
+git add .
+git commit -m 'update to release version:' v$versionNumber.RELEASE
 
 git tag v$versionNumber
 git push --tags
