@@ -19,10 +19,10 @@ git checkout master
 git merge --no-ff $branch_name
 
 cd `pwd`/..
-mvn versions:set -DnewVersion=$versionNumber
+mvn versions:set -DnewVersion=$versionNumber.RELEASE
 mvn versions:commit
 
-git commit -a -m 'update to release version:' v$versionNumber
+git commit -a -m 'update to release version:' v$versionNumber.RELEASE
 
 git tag v$versionNumber
 git push --tags
