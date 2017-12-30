@@ -18,11 +18,10 @@ node {
     stage('Build and Push Docker Image') {
         echo 'Build Docker Image'
 
-        try{
+        try {
             sh "docker images | grep his- | awk {'print \$3'} | xargs docker rmi --force"
         }
-        catch (e)
-        {
+        catch (e) {
 
         }
         sh "mvn pl.project13.maven:git-commit-id-plugin:2.2.4:revision dockerfile:build dockerfile:tag@tag-version dockerfile:push@push-version dockerfile:push@push-latest"
@@ -37,14 +36,18 @@ node {
         echo 'Push to Docker Registry'
     }
 
+
     if (env.BRANCH_NAME.startsWith('release')) {
         stage('Release') {
             echo 'Change Version Number'
         }
-    }
-    if (env.BRANCH_NAME == 'master') {
+    } else if (env.BRANCH_NAME == 'master') {
         stage('Deploy') {
             echo 'Do Deploy'
+        }
+    } else if (env.BRANCH_NAME.startsWith('PR-')) {
+        stage('Pull Request') {
+            echo 'Pull Request'
         }
     }
 
