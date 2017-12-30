@@ -5,7 +5,7 @@
 
     <groupId>com.isaac</groupId>
     <artifactId>his-config-server</artifactId>
-    <version>0.5.4-SNAPSHOT</version>
+    <version>0.5.5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>his-config-server</name>
@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.isaac</groupId>
         <artifactId>his-solution</artifactId>
-        <version>0.5.4-SNAPSHOT</version> <!-- lookup parent from repository -->
+        <version>0.5.5-SNAPSHOT</version> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
