@@ -17,7 +17,7 @@ echo $versionNumber
 
 
 git checkout master
-git merge --no-ff $branch_name
+git merge --no-ff -X theirs $branch_name
 
 cd `pwd`/..
 mvn versions:set -DnewVersion=$versionNumber.RELEASE
