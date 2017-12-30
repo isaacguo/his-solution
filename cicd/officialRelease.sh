@@ -22,7 +22,7 @@ cd `pwd`/..
 mvn versions:set -DnewVersion=$versionNumber
 mvn versions:commit
 
-git commit -am 'update to release version:' v$versionNumber
+git commit -a -m 'update to release version:' v$versionNumber
 
 git tag v$versionNumber
 git push --tags
