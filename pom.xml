@@ -101,10 +101,7 @@
                     </configuration>
                 </plugin>
                 <!-- https://mvnrepository.com/artifact/pl.project13.maven/git-commit-id-plugin -->
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
+
                 <!-- tag::plugin[] -->
                 <plugin>
                     <groupId>com.spotify</groupId>
@@ -117,6 +114,10 @@
                             <goals>
                                 <goal>build</goal>
                             </goals>
+                            <configuration>
+                                <classifier></classifier>
+                            </configuration>
+
                         </execution>
                         <execution>
                             <id>tag-version</id>
@@ -180,6 +181,10 @@
         </pluginManagement>
 
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
