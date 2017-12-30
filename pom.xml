@@ -114,10 +114,6 @@
                             <goals>
                                 <goal>build</goal>
                             </goals>
-                            <configuration>
-                                <classifier></classifier>
-                            </configuration>
-
                         </execution>
                         <execution>
                             <id>tag-version</id>
