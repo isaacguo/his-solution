@@ -149,6 +149,7 @@
                     <configuration>
                         <repository>${docker.image.prefix}/${project.artifactId}</repository>
                         <buildArgs>
+                            <IMAGE_VERSION>${git.commit.shortRev}</IMAGE_VERSION>
                             <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                         </buildArgs>
                     </configuration>
