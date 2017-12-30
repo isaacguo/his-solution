@@ -27,5 +27,6 @@ git add .
 git commit -m 'update to release version: v'"$versionNumber"'.RELEASE'
 
 git tag v$versionNumber
+git push
 git push --tags
 
