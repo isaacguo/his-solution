@@ -17,7 +17,7 @@ node {
 
     stage('Build and Push Docker Image') {
         echo 'Build Docker Image'
-        sh "mvn dockerfile:build && mvn dockerfile:tag@tag-version && mvn dockerfile:push@push-latest && mvn dockerfile:push@push-version"
+        sh "mvn pl.project13.maven:git-commit-id-plugin:2.2.4:revision dockerfile:tag@tag-version dockerfile:push@push-version dockerfile@push-latest"
     }
 
     stage('Deploy to Staging') {
