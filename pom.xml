@@ -13,6 +13,7 @@
         <module>his-config-server</module>
         <module>his-eureka</module>
         <module>his-employee-management</module>
+        <module>his-gateway</module>
     </modules>
 
     <parent>
