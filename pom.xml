@@ -6,7 +6,7 @@
 
     <groupId>com.isaac</groupId>
     <artifactId>his-solution</artifactId>
-    <version>0.5.6-SNAPSHOT</version>
+    <version>0.5.6-RC1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
