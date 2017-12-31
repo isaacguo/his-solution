@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build -prod",
+    "build": "npm install && ng build -prod",
     "postbuild": "npm run deploy",
     "predeploy": "rm -rf ../his-gateway/src/main/resources/static/ && mkdir -p ../his-gateway/src/main/resources/static/",
     "deploy": "cp -r dist/** ../his-gateway/src/main/resources/static",
