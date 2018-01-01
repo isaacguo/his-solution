@@ -10,9 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>his-config-server</module>
+        <module>his-config</module>
         <module>his-eureka</module>
-        <module>his-employee-management</module>
+        <module>his-employee</module>
         <module>his-gateway</module>
     </modules>
 
