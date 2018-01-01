@@ -53,16 +53,6 @@
 
 
     <build>
-        <resources>
-            <resource>
-                <directory>${project.basedir}</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/Dockerfile</include>
-                </includes>
-            </resource>
-
-        </resources>
         <pluginManagement>
             <plugins>
                 <plugin>
