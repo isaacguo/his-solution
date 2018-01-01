@@ -6,3 +6,8 @@ spring:
       uri: http://HisConfig:17601
 server:
   port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://HisEureka:8761/eureka/

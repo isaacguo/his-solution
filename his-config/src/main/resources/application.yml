@@ -9,3 +9,8 @@ spring:
           uri: file:///root/his-config-repo
   application:
     name: HisConfig
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://HisEureka:8761/eureka/
