@@ -31,6 +31,6 @@ his-eureka:
 
 his-gateway:
    image: isaacguo/his-gateway
-  ports:
+   ports:
      - "8090:8080"
 
