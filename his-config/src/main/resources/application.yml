@@ -6,6 +6,6 @@ spring:
     config:
       server:
         git:
-          uri: file:///root/his-config-repo
+          uri: file://root/his-config-repo
   application:
     name: HisConfig
