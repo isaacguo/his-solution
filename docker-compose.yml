@@ -1,6 +1,8 @@
-graphite:
-   image: hopsoft/graphite-statsd
-   ports:
+version '2'
+services:
+  graphite:
+    image: hopsoft/graphite-statsd
+    ports:
       - "8000:80"
       - "2003:2003"
       - "2004:2004"
@@ -8,45 +10,45 @@ graphite:
       - "2024:2024"
       - "8125:8125/udp"
       - "8126:8126"
-grafana:
-   image: grafana/grafana
-   ports:
+  grafana:
+    image: grafana/grafana
+    ports:
       - "3000:3000"
-   links:
+    links:
       - graphite
-   environment:
+    environment:
       - GF_SECURITY_ADMIN_PASSWORD=secret
-   volumes:
+    volumes:
       - ./grafana/data:/var/lib/grafana
 
-his-config:
-   image: isaacguo/his-config
-   ports:
-     - "17601:17601"
-   volumes:
-     - /root/his-config-repo:/root/his-config-repo
+  his-config:
+    image: isaacguo/his-config
+    ports:
+      - "17601:17601"
+    volumes:
+      - /root/his-config-repo:/root/his-config-repo
 
-his-eureka:
-   image: isaacguo/his-eureka
-   ports:
-     - "8761:8761"
-   links:
-     - his-config
+  his-eureka:
+    image: isaacguo/his-eureka
+    ports:
+      - "8761:8761"
+    depends_on:
+      - his-config
 
-his-employee:
-   image: isaacguo/his-employee
-   ports:
-     - "8091:8080"
-   links:
-     - his-config
-     - his-eureka
+  his-employee:
+    image: isaacguo/his-employee
+    ports:
+      - "8091:8080"
+    depends_on:
+      - his-config
+      - his-eureka
 
-his-gateway:
-   image: isaacguo/his-gateway
-   ports:
-     - "8090:8080"
-   links:
-     - his-config
-     - his-eureka
-     - his-employee
+  his-gateway:
+    image: isaacguo/his-gateway
+    ports:
+      - "8090:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+      - his-employee
 
