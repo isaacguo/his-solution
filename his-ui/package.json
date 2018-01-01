@@ -5,9 +5,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "npm install && ng build -prod",
+    "prebuild": "npm install",
+    "build": "ng build -prod",
     "postbuild": "npm run deploy",
-    "predeploy": "rm -rf ../his-gateway/src/main/resources/static/ && mkdir -p ../his-gateway/src/main/resources/static/",
+    "predeploy": "rimraf ../his-gateway/src/main/resources/static/ && mkdirp ../his-gateway/src/main/resources/static/",
     "deploy": "cp -r dist/** ../his-gateway/src/main/resources/static",
     "test": "ng test",
     "lint": "ng lint",
