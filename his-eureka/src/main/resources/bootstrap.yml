@@ -3,11 +3,11 @@ spring:
     name: HisEureka
   cloud:
     config:
-      uri: http://HisConfig:17601
+      uri: http://his-config:17601
 server:
   port: 8761
 
-  
+
 eureka:
   client:
       registerWithEureka: false
