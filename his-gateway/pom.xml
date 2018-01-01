@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.isaac</groupId>
-    <artifactId>his-eureka</artifactId>
+    <artifactId>his-gateway</artifactId>
     <version>0.5.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>his-eureka</name>
-    <description>Demo project for Spring Boot</description>
+    <name>his-gateway</name>
+    <description>The Gateway Service</description>
 
     <parent>
         <groupId>com.isaac</groupId>
@@ -25,9 +25,10 @@
     </properties>
 
     <dependencies>
+
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -62,6 +63,27 @@
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>exec-npm-run-build</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <executable>npm</executable>
+                            <workingDirectory>../his-ui</workingDirectory>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
+                        </configuration>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

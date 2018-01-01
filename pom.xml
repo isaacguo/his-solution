@@ -6,13 +6,14 @@
 
     <groupId>com.isaac</groupId>
     <artifactId>his-solution</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.5.8-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>his-config-server</module>
+        <module>his-config</module>
         <module>his-eureka</module>
-        <module>his-employee-management</module>
+        <module>his-employee</module>
+        <module>his-gateway</module>
     </modules>
 
     <parent>
@@ -52,23 +53,6 @@
 
 
     <build>
-        <resources>
-            <resource>
-                <directory>${project.basedir}</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/Dockerfile</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
         <pluginManagement>
             <plugins>
                 <plugin>

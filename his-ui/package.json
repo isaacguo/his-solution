@@ -5,10 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
+    "prebuild": "npm install",
     "build": "ng build -prod",
     "postbuild": "npm run deploy",
-    "predeploy": "rimraf ../es-gateway/src/main/resources/static/ && mkdirp ../es-gateway/src/main/resources/static/",
-    "deploy": "copyfiles -f dist/** ../es-gateway/src/main/resources/static",
+    "predeploy": "rimraf ../his-gateway/src/main/resources/static/ && mkdirp ../his-gateway/src/main/resources/static/",
+    "deploy": "cp -r dist/** ../his-gateway/src/main/resources/static",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
