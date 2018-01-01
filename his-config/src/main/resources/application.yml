@@ -1,3 +1,11 @@
 server:
   port: 17601
 
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///root/his-config-repo
+  application:
+    name: HisConfig

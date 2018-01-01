@@ -23,14 +23,30 @@ his-config:
    image: isaacguo/his-config
    ports:
      - "17601:17601"
+   volumes:
+     - /root/his-config-repo:/root/his-config-repo
 
 his-eureka:
    image: isaacguo/his-eureka
    ports:
      - "8761:8761"
+   links:
+     - his-config
+
+his-employee:
+   image: isaacguo/his-employee
+   ports:
+     - "8091:8080"
+   links:
+     - his-config
+     - his-eureka
 
 his-gateway:
    image: isaacguo/his-gateway
    ports:
      - "8090:8080"
+   links:
+     - his-config
+     - his-eureka
+     - his-employee
 
