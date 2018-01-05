@@ -41,7 +41,7 @@ node {
 
                     sh "ls /home/isaac/.ssh"
 		    sh "cat /home/isaac/.ssh/id_rsa"
-		    sh "ansible all -m ping"
+		    sh "ansible all -m ping --become no"
                  
 		    //sh "ansible-playbook /home/isaac/ansible/playbook/playbook.yml -c paramiko"
 
