@@ -37,7 +37,7 @@ node {
        
         dir('../../../../ansible')
         {
-           docker.image('williamyeh/ansible:centos7').inside("--volume=`pwd`/ssh:/root/.ssh --volume=`pwd`/hosts:/etc/ansible/ --volume=`pwd`/playbook:/root/ansible/playbook){
+           docker.image('williamyeh/ansible:centos8').inside("--volume=`pwd`/ssh:/root/.ssh --volume=`pwd`/hosts:/etc/ansible/ --volume=`pwd`/playbook:/root/ansible/playbook"){
 	      cat /etc/ansible/hosts
 	   }
 
