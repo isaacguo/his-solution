@@ -34,7 +34,7 @@ node {
     */
 
     stage('Deploy to Staging Server') {
-        dir('../ansible')
+        dir('../../../../ansible')
 	{
 	   sh 'pwd'
 	}
