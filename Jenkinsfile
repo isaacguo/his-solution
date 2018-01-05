@@ -37,7 +37,7 @@ node {
        
            docker.image('williamyeh/ansible:centos7').inside("--volume=/home/isaac/projects/ansible/ssh:/root/.ssh --volume=/home/isaac/projects/ansible/hosts:/etc/ansible/ --volume=/home/isaac/projects/ansible/playbook:/root/ansible/playbook"){
 
-	   sh "ls /root"
+	   sh "whoami && pwd"
 
 	   /*
                  
