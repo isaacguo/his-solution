@@ -34,10 +34,23 @@ node {
     */
 
     stage('Deploy to Staging Server') {
+       
+        dir('../../../../ansible')
+        {
+           docker.image('williamyeh/ansible:centos7').inside("--volume=`pwd`/ssh:/root/.ssh --volume=`pwd`/hosts:/etc/ansible/ --volume=`pwd`/playbook:/root/ansible/playbook){
+	      cat /etc/ansible/hosts
+	   }
+
+	} 
+
+
+    /*
         dir('../../../../ansible')
 	{
-	   sh 'pwd'
+	   
+	   sh 'docker run --rm -v `pwd`/ssh:/root/.ssh -v `pwd`/hosts:/etc/ansible/ -v `pwd`/playbook:/root/ansible/playbook williamyeh/ansible:centos7 '
 	}
+	*/
     }
 
     stage('User Acceptance Test') {
