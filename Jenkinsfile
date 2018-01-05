@@ -39,7 +39,7 @@ node {
                  
 		 dir("/root/ansible")
 		 {
-		    sh "ansible-playbook playbook/playbook.yml"
+		    sh "ansible-playbook playbook/playbook.yml -c paramiko"
 		 }
 
 	   }
