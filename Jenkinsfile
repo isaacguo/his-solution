@@ -1,13 +1,8 @@
 node {
     checkout scm
 
-    /*
-    stage("Build") {
-            sh 'mvn -B -DskipTests compile'
-    }
-    */
 
-
+/*
     stage("Package & Code Analysis") {
         withSonarQubeEnv('SonarQubeLocal') {
             sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
@@ -24,7 +19,6 @@ node {
     }
 
 
-
     stage('Build and Push Docker Image') {
         echo 'Build Docker Image'
 
@@ -37,9 +31,13 @@ node {
         sh "mvn pl.project13.maven:git-commit-id-plugin:2.2.4:revision dockerfile:build dockerfile:tag@tag-version dockerfile:push@push-version dockerfile:push@push-latest"
 
     }
+    */
 
     stage('Deploy to Staging Server') {
-        echo 'Deploy to Staging Server'
+        dir(../ansible)
+	{
+	   sh 'pwd'
+	}
     }
 
     stage('User Acceptance Test') {
