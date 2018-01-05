@@ -35,13 +35,10 @@ node {
 
     stage('Deploy to Staging Server') {
        
-        dir('../../../../ansible')
-        {
-           docker.image('williamyeh/ansible:centos7').inside("--volume=`pwd`/ssh:/root/.ssh --volume=`pwd`/hosts:/etc/ansible/ --volume=`pwd`/playbook:/root/ansible/playbook"){
+           docker.image('williamyeh/ansible:centos7').inside("--volume=/home/isaac/projects/ansible/ssh:/root/.ssh --volume=/home/isaac/projects/ansible/hosts:/etc/ansible/ --volume=/home/isaac/projects/ansible/playbook:/root/ansible/playbook"){
 	      cat /etc/ansible/hosts
 	   }
 
-	} 
 
 
     /*
