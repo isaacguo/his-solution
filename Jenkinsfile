@@ -38,10 +38,10 @@ node {
 	
        
            docker.image('williamyeh/ansible:centos7').inside("-v /home/isaac/projects/ansible/ssh:/home/isaac/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/home/isaac/ansible/playbook"){
-
+                    sh "whoami"
                     sh "ls /home/isaac/.ssh"
 		    sh "cat /home/isaac/.ssh/id_rsa"
-		    sh "ansible all -m ping --become-user=isaac"
+		    sh "ansible all -m ping --become-user=root"
                  
 		    //sh "ansible-playbook /home/isaac/ansible/playbook/playbook.yml -c paramiko"
 
