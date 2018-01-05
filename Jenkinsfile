@@ -2,7 +2,6 @@ node {
     checkout scm
 
 
-/*
     stage("Package & Code Analysis") {
         withSonarQubeEnv('SonarQubeLocal') {
             sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
@@ -31,7 +30,6 @@ node {
         sh "mvn pl.project13.maven:git-commit-id-plugin:2.2.4:revision dockerfile:build dockerfile:tag@tag-version dockerfile:push@push-version dockerfile:push@push-latest"
 
     }
-    */
 
     stage('Deploy to Staging Server') {
         
@@ -39,16 +37,7 @@ node {
 	
        
 
-
-
-    /*
-        dir('../../../../ansible')
-	{
-	   
-	   sh 'docker run --rm -v `pwd`/ssh:/root/.ssh -v `pwd`/hosts:/etc/ansible/ -v `pwd`/playbook:/root/ansible/playbook williamyeh/ansible:centos7 '
-	}
-	*/
-    }
+        }
 
     stage('User Acceptance Test') {
         echo 'Push to Docker Registry'
