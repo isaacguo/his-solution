@@ -2,6 +2,7 @@ node {
     checkout scm
 
 
+    /*
     stage("Package & Code Analysis") {
         withSonarQubeEnv('SonarQubeLocal') {
             sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
@@ -31,13 +32,12 @@ node {
 
     }
 
+    */
     stage('Deploy to Staging Server') {
-        
-	sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible//hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml -c paramiko"
-	
-       
-
-        }
+        def workspaceInfSlave=pwd()
+        sh "echo ${workspaceInfSlave}"
+        sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml -c paramiko"
+    }
 
     stage('User Acceptance Test') {
         echo 'Push to Docker Registry'
