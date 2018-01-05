@@ -35,17 +35,9 @@ node {
 
     stage('Deploy to Staging Server') {
         
+	sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible//hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml -c paramiko"
 	
        
-           docker.image('williamyeh/ansible:centos7').inside("-v /home/isaac/projects/ansible/ssh:/home/isaac/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/home/isaac/ansible/playbook"){
-                    sh "whoami"
-                    sh "ls /home/isaac/.ssh"
-		    sh "cat /home/isaac/.ssh/id_rsa"
-		    sh "ansible all -m ping --become-user=root"
-                 
-		    //sh "ansible-playbook /home/isaac/ansible/playbook/playbook.yml -c paramiko"
-
-	   }
 
 
 
