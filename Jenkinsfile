@@ -35,7 +35,7 @@ node {
     */
     stage('Deploy to Staging Server') {
         def workspaceInfSlave=pwd()
-        sh "echo ${workspaceInfSlave}"
+        sh "cp docker-compose.yml /home/isaac/projects/ansible/playbook"
         sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml -c paramiko"
     }
 
