@@ -37,6 +37,7 @@ node {
        
            docker.image('williamyeh/ansible:centos7').inside("-v /home/isaac/projects/ansible/ssh:/home/isaac/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/home/isaac/ansible/playbook"){
 
+                    sh "ls /home/isaac/ansible"
                  
 		    sh "ansible-playbook /home/isaac/ansible/playbook/playbook.yml -c paramiko"
 
