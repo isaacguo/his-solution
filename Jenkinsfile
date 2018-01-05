@@ -35,21 +35,13 @@ node {
 
     stage('Deploy to Staging Server') {
        
-           docker.image('williamyeh/ansible:centos7').inside("-v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook"){
+           docker.image('williamyeh/ansible:centos7').inside("-v /home/isaac/projects/ansible/ssh:/home/isaac/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/home/isaac/ansible/playbook"){
 
-	   sh "pwd"
-	   dir('/root')
-	   {
-	   sh "pwd"
-	   }
-
-	   /*
                  
-		 dir("/root/ansible")
+		 dir("/home/isaac/ansible")
 		 {
 		    sh "ansible-playbook playbook/playbook.yml -c paramiko"
 		 }
-		 */
 
 	   }
 
