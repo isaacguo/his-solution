@@ -1,0 +1,55 @@
+version: "3"
+services:
+
+  graphite:
+    image: hopsoft/graphite-statsd
+    ports:
+      - "8000:80"
+      - "2003:2003"
+      - "2004:2004"
+      - "2023:2023"
+      - "2024:2024"
+      - "8125:8125/udp"
+      - "8126:8126"
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    links:
+      - graphite
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+
+  his-config:
+    image: isaacguo/his-config
+    ports:
+      - "17601:17601"
+    volumes:
+      - /root/his-config-repo:/root/his-config-repo
+
+  his-eureka:
+    image: isaacguo/his-eureka
+    ports:
+      - "8761:8761"
+    depends_on:
+      - his-config
+
+  his-employee:
+    image: isaacguo/his-employee
+    ports:
+      - "8091:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+
+  his-gateway:
+    image: isaacguo/his-gateway
+    ports:
+      - "8090:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+      - his-employee
+

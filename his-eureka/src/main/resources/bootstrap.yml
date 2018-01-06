@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: HisEureka
+  cloud:
+    config:
+      uri: http://his-config:17601
+server:
+  port: 8761
+
+
+eureka:
+  client:
+      registerWithEureka: false
+      fetchRegistry: false
+      server:
+        waitTimeInMsWhenSyncEmpty: 0

@@ -1,0 +1,16 @@
+server:
+  port: 17601
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///root/his-config-repo
+  application:
+    name: HisConfig
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://his-eureka:8761/eureka/
