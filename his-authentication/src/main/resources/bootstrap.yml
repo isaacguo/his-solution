@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: HisAuthentication
+  cloud:
+    config:
+      uri: http://his-config:17601
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://his-eureka:8761/eureka/
