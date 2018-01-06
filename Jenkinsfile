@@ -6,6 +6,7 @@ node {
         checkout scm
 
         stage("Package & Code Analysis") {
+            notifyBuild("In Package & Code Analysis")
             withSonarQubeEnv('SonarQubeLocal') {
                 sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
             }
@@ -22,6 +23,7 @@ node {
 
 
         stage('Build and Push Docker Image') {
+            notifyBuild("In Build and Push Docker Image")
             echo 'Build Docker Image'
 
             try {
@@ -35,13 +37,15 @@ node {
         }
 
         stage('Deploy to Staging Server') {
+            notifyBuild("In Deploy to Staging Server")
             def workspaceInfSlave = pwd()
             sh "cp docker-compose.yml /home/isaac/projects/ansible/playbook"
             sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml -c paramiko"
         }
 
         stage('User Acceptance Test') {
-            echo 'Push to Docker Registry'
+            notifyBuild("In User Acceptance Test")
+            echo 'User Acceptance Test'
         }
 
 
