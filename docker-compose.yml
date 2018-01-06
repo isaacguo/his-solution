@@ -36,6 +36,14 @@ services:
     depends_on:
       - his-config
 
+  his-authentication:
+    image: isaacguo/his-authentication
+    ports:
+      - "8094:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+
   his-employee:
     image: isaacguo/his-employee
     ports:
@@ -43,6 +51,7 @@ services:
     depends_on:
       - his-config
       - his-eureka
+      - his-authentication
 
   his-gateway:
     image: isaacguo/his-gateway
@@ -52,4 +61,5 @@ services:
       - his-config
       - his-eureka
       - his-employee
+      - his-authentication
 
