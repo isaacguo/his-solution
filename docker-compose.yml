@@ -53,6 +53,15 @@ services:
       - his-eureka
       - his-authentication
 
+  his-medicine:
+    image: isaacguo/his-medicine
+    ports:
+      - "8095:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+      - his-authentication
+
   his-gateway:
     image: isaacguo/his-gateway
     ports:
@@ -61,5 +70,6 @@ services:
       - his-config
       - his-eureka
       - his-employee
+      - his-medicine
       - his-authentication
 

@@ -15,6 +15,7 @@
         <module>his-employee</module>
         <module>his-gateway</module>
         <module>his-authentication</module>
+        <module>his-medicine</module>
     </modules>
 
     <parent>
