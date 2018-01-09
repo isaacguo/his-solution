@@ -22,12 +22,14 @@ services:
     volumes:
       - ./grafana/data:/var/lib/grafana
 
-  his-config:
-    image: isaacguo/his-config
-    ports:
-      - "17601:17601"
-    volumes:
-      - /root/his-config-repo:/root/his-config-repo
+
+  #his-config:
+  #  image: isaacguo/his-config
+  #  ports:
+  #    - "17601:17601"
+  #  volumes:
+  #    - /root/his-config-repo:/root/his-config-repo
+  #  command: --spring.profiles.active=production
 
   his-eureka:
     image: isaacguo/his-eureka
@@ -35,6 +37,8 @@ services:
       - "8761:8761"
     depends_on:
       - his-config
+    command: --spring.profiles.active=production
+
 
   his-authentication:
     image: isaacguo/his-authentication
@@ -43,6 +47,7 @@ services:
     depends_on:
       - his-config
       - his-eureka
+    command: --spring.profiles.active=production
 
   his-employee:
     image: isaacguo/his-employee
@@ -52,6 +57,7 @@ services:
       - his-config
       - his-eureka
       - his-authentication
+    command: --spring.profiles.active=production
 
   his-medicine:
     image: isaacguo/his-medicine
@@ -61,6 +67,7 @@ services:
       - his-config
       - his-eureka
       - his-authentication
+    command: --spring.profiles.active=production
 
   his-gateway:
     image: isaacguo/his-gateway
@@ -72,4 +79,5 @@ services:
       - his-employee
       - his-medicine
       - his-authentication
+    command: --spring.profiles.active=production
 
