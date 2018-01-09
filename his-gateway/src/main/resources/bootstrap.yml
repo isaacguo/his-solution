@@ -1,14 +1,19 @@
 spring:
   application:
     name: HisGateway
-  cloud:
-    config:
-      uri: http://his-config:17601
 
 server:
   port: 8080
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://his-eureka:8761/eureka/
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      uri: http://localhost:17601
+---
+spring:
+  profiles: production
+  cloud:
+    config:
+      uri: http://his-config:17601

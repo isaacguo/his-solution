@@ -1,14 +1,32 @@
 server:
   port: 17601
+spring:
+  application:
+    name: HisConfig
+
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///${user.home}/his-config-repo
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+---
 
 spring:
+  profiles: production
   cloud:
     config:
       server:
         git:
           uri: file:///root/his-config-repo
-  application:
-    name: HisConfig
 
 eureka:
   client:
