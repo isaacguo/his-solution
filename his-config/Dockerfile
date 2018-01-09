@@ -1,6 +1,9 @@
 FROM openjdk:8-jdk-alpine
 MAINTAINER Isaac Guo <isaac_guo@163.com>
 
+
+COPY target/classes/his-config-repo /root/his-repo-config
+
 ENTRYPOINT ["/usr/bin/java", "-jar", "/usr/share/myservice/myservice.jar"]
 
 # Add Maven dependencies (not shaded into the artifact; Docker-cached)
