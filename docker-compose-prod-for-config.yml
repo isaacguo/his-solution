@@ -4,8 +4,6 @@ services:
     image: isaacguo/his-config
     ports:
       - "17601:17601"
-    volumes:
-      - /root/his-config-repo:/root/his-config-repo
     command: --spring.profiles.active=production
 
 
