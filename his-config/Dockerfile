@@ -2,7 +2,7 @@ FROM openjdk:8-jdk-alpine
 MAINTAINER Isaac Guo <isaac_guo@163.com>
 
 
-COPY target/classes/his-config-repo /root/his-repo-config
+COPY target/classes/his-config-repo /root/his-config-repo
 
 ENTRYPOINT ["/usr/bin/java", "-jar", "/usr/share/myservice/myservice.jar"]
 
