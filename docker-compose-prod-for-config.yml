@@ -1,9 +1,0 @@
-version: "3"
-services:
-  his-config:
-    image: isaacguo/his-config
-    ports:
-      - "17601:17601"
-    command: --spring.profiles.active=production
-
-

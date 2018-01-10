@@ -22,14 +22,25 @@ services:
     volumes:
       - ./grafana/data:/var/lib/grafana
 
+  his_start_his-config:
+        image: bash
+        depends_on:
+          - his-config
+        command: >
+          /usr/local/bin/bash -c "
+            while ! nc -z his-config 17601;
+            do
+              echo sleeping;
+              sleep 1;
+            done;
+            echo Connected!;
+          "
 
-  #his-config:
-  #  image: isaacguo/his-config
-  #  ports:
-  #    - "17601:17601"
-  #  volumes:
-  #    - /root/his-config-repo:/root/his-config-repo
-  #  command: --spring.profiles.active=production
+  his-config:
+      image: isaacguo/his-config
+      ports:
+        - "17601:17601"
+      command: --spring.profiles.active=production
 
   his-eureka:
     image: isaacguo/his-eureka
