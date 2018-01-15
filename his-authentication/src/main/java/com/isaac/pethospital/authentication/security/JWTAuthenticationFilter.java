@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.isaac.pethospital.authentication.security.SecurityConstants.EXPIRATION_TIME;
 import static com.isaac.pethospital.authentication.security.SecurityConstants.HEADER_STRING;
@@ -38,7 +40,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         try {
 
-            ApplicationUser creds= new ObjectMapper().readValue(request.getInputStream(), ApplicationUser.class);
+            ApplicationUser creds = new ObjectMapper().readValue(request.getInputStream(), ApplicationUser.class);
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             creds.getUsername(),
@@ -54,15 +56,18 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-                                            FilterChain chain,  Authentication authResult) throws IOException, ServletException {
+                                            FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("a", "d");
 
-        String token= Jwts.builder().setSubject(((User)authResult.getPrincipal()).getUsername())
-                .setExpiration(new Date(System.currentTimeMillis()+ EXPIRATION_TIME))
+        String token = Jwts.builder().setSubject(((User) authResult.getPrincipal()).getUsername())
+                .setIssuer("his-authentication")
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .claim("a","b")
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
     }
-
 
 
 }

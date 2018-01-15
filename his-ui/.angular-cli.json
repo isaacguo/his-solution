@@ -22,6 +22,7 @@
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "assets/css/sb-admin-2.css",
+        "assets/css/AdminLTE.css",
         "styles.css"
       ],
       "scripts": [
