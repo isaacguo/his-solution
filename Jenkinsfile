@@ -7,12 +7,12 @@ node {
 
         stage("Package & Code Analysis") {
             notifyBuild("In Package & Code Analysis")
-            //withSonarQubeEnv('SonarQubeLocal') {
+            withSonarQubeEnv('SonarQubeLocal') {
                 sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
-           // }
+            }
         }
 
-/*
+
         stage("Quality Gate") {
             timeout(time: 1, unit: 'HOURS') {
                 def qg = waitForQualityGate()
@@ -21,7 +21,7 @@ node {
                 }
             }
         }
-	*/
+
 
 
         stage('Build and Push Docker Image') {
