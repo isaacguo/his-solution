@@ -7,12 +7,13 @@ node {
 
         stage("Package & Code Analysis") {
             notifyBuild("In Package & Code Analysis")
-            withSonarQubeEnv('SonarQubeLocal') {
+            //withSonarQubeEnv('SonarQubeLocal') {
                 sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
-            }
+            //}
         }
 
 
+        /*
         stage("Quality Gate") {
             timeout(time: 1, unit: 'HOURS') {
                 def qg = waitForQualityGate()
@@ -21,6 +22,7 @@ node {
                 }
             }
         }
+        */
 
 
 
@@ -92,11 +94,10 @@ def notifyBuild(String buildStatus = 'STARTED') {
     } else if (buildStatus == 'SUCCESSFUL') {
         color = 'GREEN'
         colorCode = '#00FF00'
-    } else if(buildStatus.startsWith('In')) {
+    } else if (buildStatus.startsWith('In')) {
         color = 'BLUE'
         colorCode = '#0000FF'
-    }
-    else {
+    } else {
         color = 'RED'
         colorCode = '#FF0000'
     }
