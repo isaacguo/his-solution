@@ -22,7 +22,8 @@ public class EmployeeEntity {
     private String employeeNumber;
     private String phoneNumber;
     private String officeNumber;
-    private EmployeeEntity reportTo;
+    
+    //private EmployeeEntity reportTo;
     private String emergencyContact;
     private String emergencyPhoneNumber;
 
