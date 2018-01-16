@@ -7,7 +7,7 @@ import {LoginComponent} from './components/login/login.component';
 import {routing} from "../app.routing";
 import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
-import {PathLocationStrategy, LocationStrategy} from "@angular/common";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {FrontDeskComponent} from './components/front-desk/front-desk.component';
 import {TreatmentComponent} from './components/treatment/treatment.component';
 import {ProfilesComponent} from './components/profiles/profiles.component';
@@ -47,7 +47,7 @@ import { MembersComponent } from './components/members/members.component';
     BrowserModule, routing, HttpModule, FormsModule
   ],
   providers: [
-    {provide: LocationStrategy, useClass: PathLocationStrategy},
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
   ],
   bootstrap: [AppComponent]
 })
