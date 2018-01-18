@@ -16,12 +16,15 @@ import {InventoryComponent} from "./app/components/inventory/inventory.component
 import {AnalysisComponent} from "./app/components/analysis/analysis.component";
 import {DataComponent} from "./app/components/data/data.component";
 import {SettingsComponent} from "./app/components/settings/settings.component";
+import {AuthGuard, LogoutGuardService} from "./app/guards/auth.guard";
+import {LogoutComponent} from "./app/components/logout/logout.component";
 
 
 const appRoutes: Routes = [
   {
     path: '',
     component: IndexComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'frontdesk',
@@ -84,7 +87,18 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  }
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+    canActivate: [LogoutGuardService]
+  },
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: 'login' }
+
+
+
 
 ]
 

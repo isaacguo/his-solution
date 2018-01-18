@@ -16,6 +16,7 @@
         <module>his-gateway</module>
         <module>his-authentication</module>
         <module>his-medicine</module>
+        <module>his-common</module>
     </modules>
 
     <parent>

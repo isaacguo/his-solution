@@ -1,5 +1,10 @@
 {
-  "/his": {
+  "/api/employee": {
+    "target": "http://localhost:80",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/": {
     "target": "http://localhost:80",
     "secure": false,
     "logLevel": "debug"
