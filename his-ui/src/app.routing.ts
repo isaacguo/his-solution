@@ -18,6 +18,7 @@ import {DataComponent} from "./app/components/data/data.component";
 import {SettingsComponent} from "./app/components/settings/settings.component";
 import {AuthGuard, LogoutGuardService} from "./app/guards/auth.guard";
 import {LogoutComponent} from "./app/components/logout/logout.component";
+import {EmployeeComponent} from "./app/components/employee/employee.component";
 
 
 const appRoutes: Routes = [
@@ -49,6 +50,10 @@ const appRoutes: Routes = [
       {
         path: 'profiles',
         component: ProfilesComponent
+      },
+      {
+        path: 'employee',
+        component: EmployeeComponent
       },
       {
         path: 'members',

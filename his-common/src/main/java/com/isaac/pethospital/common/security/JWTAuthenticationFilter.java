@@ -53,13 +53,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        Map<String, Object> map = new HashMap<>();
-        map.put("a", "d");
 
         String token = Jwts.builder().setSubject(((User) authResult.getPrincipal()).getUsername())
                 .setIssuer("his-authentication")
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .claim("a","b")
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);

@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,12 +18,14 @@ public class EmployeeEntity {
 
     private String givenName;
     private String surname;
-    private String department;
+    @ManyToOne
+    @JsonBackReference("DepartmentEntity-EmployeeEntity")
+    private DepartmentEntity department;
     private String gender;
     private String employeeNumber;
     private String phoneNumber;
     private String officeNumber;
-    
+
     //private EmployeeEntity reportTo;
     private String emergencyContact;
     private String emergencyPhoneNumber;

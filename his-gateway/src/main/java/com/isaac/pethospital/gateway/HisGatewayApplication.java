@@ -24,11 +24,4 @@ public class HisGatewayApplication {
     }
 }
 
-@Configuration
-class BeanConfiguration {
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-}

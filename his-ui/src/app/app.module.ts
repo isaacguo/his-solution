@@ -26,6 +26,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {AuthGuard, LogoutGuardService} from "./guards/auth.guard";
 import {AuthenticationService} from "./services/common/authentication.service";
+import { EmployeeComponent } from './components/employee/employee.component';
+import {EmployeeService} from "./services/business/employee/employee.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -58,7 +60,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementComponent,
     ImagesComponent,
     MembersComponent,
-    LogoutComponent
+    LogoutComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule
@@ -71,6 +74,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthGuard,
     LogoutGuardService,
     AuthenticationService,
+    EmployeeService
   ],
   bootstrap: [AppComponent]
 })

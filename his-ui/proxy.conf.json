@@ -1,11 +1,11 @@
 {
-  "/api/employee": {
-    "target": "http://localhost:80",
+  "/api/hisemployee": {
+    "target": "http://localhost:8080",
     "secure": false,
     "logLevel": "debug"
   },
   "/": {
-    "target": "http://localhost:80",
+    "target": "http://localhost:8080",
     "secure": false,
     "logLevel": "debug"
   }
