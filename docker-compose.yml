@@ -51,15 +51,6 @@ services:
     command: --spring.profiles.active=production
 
 
-  his-authentication:
-    image: isaacguo/his-authentication
-    ports:
-      - "8094:8080"
-    depends_on:
-      - his-config
-      - his-eureka
-    command: --spring.profiles.active=production
-
   his-employee:
     image: isaacguo/his-employee
     ports:
@@ -67,7 +58,6 @@ services:
     depends_on:
       - his-config
       - his-eureka
-      - his-authentication
     command: --spring.profiles.active=production
 
   his-medicine:
@@ -77,7 +67,6 @@ services:
     depends_on:
       - his-config
       - his-eureka
-      - his-authentication
     command: --spring.profiles.active=production
 
   his-gateway:
@@ -89,6 +78,5 @@ services:
       - his-eureka
       - his-employee
       - his-medicine
-      - his-authentication
     command: --spring.profiles.active=production
 
