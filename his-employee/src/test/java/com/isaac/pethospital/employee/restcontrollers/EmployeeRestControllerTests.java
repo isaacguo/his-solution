@@ -37,7 +37,7 @@ public class EmployeeRestControllerTests {
 
     @Test
     public void whenGetApplicationsThenGetApplicationIsInvoked() throws Exception {
-        this.mockMvc.perform(get("/employee")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/employees")).andExpect(status().isOk());
         //verify(applicationService, times(1)).getApplications();
     }
 
