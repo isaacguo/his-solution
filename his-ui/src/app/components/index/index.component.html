@@ -19,7 +19,7 @@
     <ul class="nav navbar-top-links navbar-right">
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+          <i class="fa fa-user fa-fw"></i> 欢迎 {{authInfo.displayName}} <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
           <li><a href="#"><i class="fa fa-user fa-fw"></i> 我的</a>
@@ -49,6 +49,10 @@
             <!-- /input-group -->
           </li>
           <li>
+            <a routerLink="/dashboard" routerLinkActive="active" class="text-center"> 快捷方式</a>
+            <!-- /.nav-second-level -->
+          </li>
+          <li>
             <a routerLink="/frontdesk" routerLinkActive="active" class="text-center"> 前台服务</a>
             <!-- /.nav-second-level -->
           </li>
@@ -68,7 +72,15 @@
             <a routerLink="/profiles" routerLinkActive="active" class="text-center"> 基本资料</a>
           </li>
           <li>
-            <a routerLink="/employee" routerLinkActive="active" class="text-center"> 人力资源</a>
+            <a href="#" class="text-center"> 人力资源<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a routerLink="/employee-profile" routerLinkActive="active" class="text-center"> 个人信息</a>
+              </li>
+              <li>
+                <a routerLink="/employee-leave" routerLinkActive="active" class="text-center"> 请假管理</a>
+              </li>
+            </ul>
           </li>
           <li>
             <a routerLink="/members" routerLinkActive="active" class="text-center"> 会员管理</a>

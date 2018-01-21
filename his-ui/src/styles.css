@@ -11,3 +11,8 @@
 .isaac-margin-top {
   margin-top: 5px;
 }
+
+.light-blue-label {
+  font-size: 14px !important;
+  color: #3c8dbc;
+}

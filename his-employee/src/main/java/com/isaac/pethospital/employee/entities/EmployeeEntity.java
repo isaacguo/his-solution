@@ -1,6 +1,7 @@
 package com.isaac.pethospital.employee.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.isaac.pethospital.employee.common.MaritalStatusEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +30,12 @@ public class EmployeeEntity {
     //private EmployeeEntity reportTo;
     private String emergencyContact;
     private String emergencyPhoneNumber;
+
+    private String nationality;
+    private String driverLicense;
+
+    @Enumerated(EnumType.STRING)
+    private MaritalStatusEnum maritalStatus;
 
     @OneToOne
     private SalaryEntity salary;

@@ -26,7 +26,7 @@ export class AuthenticationService {
     if(s_token)
     {
       this.decoded = this.jwtHelper.decodeToken(s_token);
-      this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.dpn));
+      this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub));
     }
   }
 
@@ -35,11 +35,9 @@ export class AuthenticationService {
       .map((response: Response) => {
 
         let token = response.headers.get("authorization");
-        console.log(token);
         if (token) {
           sessionStorage.setItem("id_token", token);
           this.decoded = this.jwtHelper.decodeToken(token);
-
 
           return true;
         }
@@ -49,8 +47,8 @@ export class AuthenticationService {
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')).subscribe(r => {
       if (r) {
-        this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.dpn));
-        this.router.navigate(['']);
+        this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub));
+        this.router.navigate(['/dashboard']);
       }
     })
   }

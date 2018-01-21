@@ -19,6 +19,9 @@ import {SettingsComponent} from "./app/components/settings/settings.component";
 import {AuthGuard, LogoutGuardService} from "./app/guards/auth.guard";
 import {LogoutComponent} from "./app/components/logout/logout.component";
 import {EmployeeComponent} from "./app/components/employee/employee.component";
+import {EmployeeLeaveComponent} from "./app/components/employee/employee-leave/employee-leave.component";
+import {EmployeeProfileComponent} from "./app/components/employee/employee-profile/employee-profile.component";
+import {DashboardComponent} from "./app/components/dashboard/dashboard.component";
 
 
 const appRoutes: Routes = [
@@ -27,6 +30,10 @@ const appRoutes: Routes = [
     component: IndexComponent,
     canActivate: [AuthGuard],
     children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
       {
         path: 'frontdesk',
         component: FrontDeskComponent
@@ -37,7 +44,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'testing',
-        component:TestingComponent
+        component: TestingComponent
       },
       {
         path: 'images',
@@ -52,8 +59,17 @@ const appRoutes: Routes = [
         component: ProfilesComponent
       },
       {
+        path: 'employee-profile',
+        component: EmployeeProfileComponent
+      },
+      {
+        path: 'employee-leave',
+        component: EmployeeLeaveComponent
+      },
+      {
         path: 'employee',
-        component: EmployeeComponent
+        component: EmployeeComponent,
+        children: []
       },
       {
         path: 'members',
@@ -100,7 +116,7 @@ const appRoutes: Routes = [
   },
 
   // otherwise redirect to home
-  { path: '**', redirectTo: 'login' }
+  {path: '**', redirectTo: 'login'}
 
 
 ]
