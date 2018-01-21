@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-employee-profile',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeProfileComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
+  }
+
+  onEditProfileButtonClicked()
+  {
+    this.router.navigate(['employee-profile-edit']);
+
   }
 
 }

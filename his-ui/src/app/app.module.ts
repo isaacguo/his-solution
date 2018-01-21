@@ -31,6 +31,7 @@ import {EmployeeService} from "./services/business/employee/employee.service";
 import { EmployeeProfileComponent } from './components/employee/employee-profile/employee-profile.component';
 import { EmployeeLeaveComponent } from './components/employee/employee-leave/employee-leave.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { EmployeeProfileEditComponent } from './components/employee/employee-profile-edit/employee-profile-edit.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -67,7 +68,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EmployeeComponent,
     EmployeeProfileComponent,
     EmployeeLeaveComponent,
-    DashboardComponent
+    DashboardComponent,
+    EmployeeProfileEditComponent
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule
