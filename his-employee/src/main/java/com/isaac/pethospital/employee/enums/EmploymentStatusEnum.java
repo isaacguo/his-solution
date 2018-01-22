@@ -1,4 +1,4 @@
-package com.isaac.pethospital.employee.common;
+package com.isaac.pethospital.employee.enums;
 
 public enum EmploymentStatusEnum {
 

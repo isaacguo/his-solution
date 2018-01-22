@@ -3,6 +3,9 @@ package com.isaac.pethospital.employee;
 import com.isaac.pethospital.employee.entities.CompanyEntity;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
+import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
+import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
+import com.isaac.pethospital.employee.enums.SexualEnum;
 import com.isaac.pethospital.employee.repositories.CompanyRepository;
 import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
@@ -19,6 +22,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -30,8 +36,6 @@ public class HisEmployeeManagementApplication {
     public static void main(String[] args) {
         SpringApplication.run(HisEmployeeManagementApplication.class, args);
     }
-
-
 
 
     @Bean
@@ -52,12 +56,73 @@ public class HisEmployeeManagementApplication {
                 CompanyEntity savedCe1 = companyRepository.save(companyEntity);
                 DepartmentEntity savedDe1 = departmentRepository.findAll().get(0);
 
-                EmployeeEntity employeeEntity = new EmployeeEntity();
-                employeeEntity.setDepartment(savedDe1);
-                employeeEntity.setSurname("Guo");
-                employeeEntity.setGivenName("Isaac");
-                employeeRepository.save(employeeEntity);
+                employeeRepository.save(generateEmployee1());
+                employeeRepository.save(generateEmployee2());
+                employeeRepository.save(generateEmployee3());
 
+            }
+
+
+            private EmployeeEntity generateEmployee1() {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateOfBirth = LocalDateTime.parse("1900-04-01 00:00:00", formatter);
+                LocalDateTime joinedDate = LocalDateTime.parse("2015-10-01 00:00:00", formatter);
+
+                EmployeeEntity ee = new EmployeeEntity();
+                ee.setGivenName("梦琪");
+                ee.setSurname("李");
+                ee.setDateOfBirth(dateOfBirth);
+                ee.setEmail("mengqi_li@pethos.com");
+                ee.setEmployeeNumber("000003");
+                ee.setGender(SexualEnum.FEMAILE);
+                ee.setEthnic("汉族");
+                ee.setNationality("中国");
+                ee.setJobTitle("主治医师");
+                ee.setMaritalStatus(MaritalStatusEnum.MARRIED);
+                ee.setJoinedDate(joinedDate);
+
+                return ee;
+            }
+
+            private EmployeeEntity generateEmployee2() {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
+                LocalDateTime joinedDate = LocalDateTime.parse("2012-04-17 00:00:00", formatter);
+
+                EmployeeEntity ee = new EmployeeEntity();
+                ee.setGivenName("忆柳");
+                ee.setSurname("张");
+                ee.setDateOfBirth(dateOfBirth);
+                ee.setEmail("yiliu_zhang@pethos.com");
+                ee.setEmployeeNumber("000004");
+                ee.setGender(SexualEnum.MALE);
+                ee.setEthnic("汉族");
+                ee.setNationality("中国");
+                ee.setJobTitle("主任医师");
+                ee.setMaritalStatus(MaritalStatusEnum.SINGLE);
+                ee.setJoinedDate(joinedDate);
+                return ee;
+            }
+
+            private EmployeeEntity generateEmployee3() {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
+                LocalDateTime joinedDate = LocalDateTime.parse("2012-04-17 00:00:00", formatter);
+
+                EmployeeEntity ee = new EmployeeEntity();
+                ee.setGivenName("之桃");
+                ee.setSurname("赵");
+                ee.setDateOfBirth(dateOfBirth);
+                ee.setEmail("zhidong_zhao@pethos.com");
+                ee.setEmployeeNumber("000005");
+                ee.setGender(SexualEnum.MALE);
+                ee.setEthnic("壮族");
+                ee.setNationality("中国");
+                ee.setJobTitle("实习工程师");
+                ee.setEmploymentStatus(EmploymentStatusEnum.INTERN);
+                ee.setMaritalStatus(MaritalStatusEnum.SINGLE);
+                ee.setJoinedDate(joinedDate);
+                return ee;
             }
         };
     }
