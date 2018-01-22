@@ -3,7 +3,7 @@ package com.isaac.pethospital.employee.enums;
 public enum SexualEnum {
 
     MALE("男"),
-    FEMAILE("女");
+    FEMALE("女");
 
     SexualEnum(String desc) {
 

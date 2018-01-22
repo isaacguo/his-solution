@@ -9,7 +9,6 @@ import com.isaac.pethospital.employee.enums.SexualEnum;
 import com.isaac.pethospital.employee.repositories.CompanyRepository;
 import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,14 +16,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -74,7 +69,7 @@ public class HisEmployeeManagementApplication {
                 ee.setDateOfBirth(dateOfBirth);
                 ee.setEmail("mengqi_li@pethos.com");
                 ee.setEmployeeNumber("000003");
-                ee.setGender(SexualEnum.FEMAILE);
+                ee.setGender(SexualEnum.FEMALE);
                 ee.setEthnic("汉族");
                 ee.setNationality("中国");
                 ee.setJobTitle("主治医师");

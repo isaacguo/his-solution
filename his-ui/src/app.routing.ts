@@ -23,6 +23,7 @@ import {EmployeeLeaveComponent} from "./app/components/employee/employee-leave/e
 import {EmployeeProfileComponent} from "./app/components/employee/employee-profile/employee-profile.component";
 import {DashboardComponent} from "./app/components/dashboard/dashboard.component";
 import {EmployeeProfileEditComponent} from "./app/components/employee/employee-profile-edit/employee-profile-edit.component";
+import {EmployeeAdminComponent} from "./app/components/employee/employee-admin/employee-admin.component";
 
 
 const appRoutes: Routes = [
@@ -70,6 +71,10 @@ const appRoutes: Routes = [
       {
         path: 'employee-leave',
         component: EmployeeLeaveComponent
+      },
+      {
+        path: 'employee-admin',
+        component: EmployeeAdminComponent
       },
       {
         path: 'employee',
