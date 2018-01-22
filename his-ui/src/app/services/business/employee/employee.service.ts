@@ -3,6 +3,7 @@ import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@ang
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
 import {Employee} from "../../../dto/employee.model";
+import {EmployeeCount} from "../../../dto/employee.count.model";
 
 
 @Injectable()
@@ -11,6 +12,10 @@ export class EmployeeService {
   constructor(private authHttp: AuthHttp) {
   }
 
+  getEmployeeCount():Observable<EmployeeCount>{
+    let url = `/api/hisemployee/employees/counts`;
+    return this.authHttp.get(url).map(this.extractData);
+  }
   getEmployees(): Observable<Employee[]> {
 
     let url = `/api/hisemployee/employees`;

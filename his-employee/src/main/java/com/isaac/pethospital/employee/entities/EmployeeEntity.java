@@ -38,7 +38,7 @@ public class EmployeeEntity {
     private MaritalStatusEnum maritalStatus;
     private LocalDateTime joinedDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ContactAddressEntity contactAddress;
 
 
