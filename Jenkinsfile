@@ -7,13 +7,11 @@ node {
 
         stage("Package & Code Analysis") {
             notifyBuild("In Package & Code Analysis")
-            //withSonarQubeEnv('SonarQubeLocal') {
+            withSonarQubeEnv('SonarQubeLocal') {
                 sh 'mvn -B clean package sonar:sonar -Ddockerfile.skip'
-            //}
+            }
         }
 
-
-        /*
         stage("Quality Gate") {
             timeout(time: 1, unit: 'HOURS') {
                 def qg = waitForQualityGate()
@@ -22,7 +20,7 @@ node {
                 }
             }
         }
-        */
+
 
 
 
@@ -75,6 +73,7 @@ node {
     }
 }
 
+
 def notifyBuild(String buildStatus = 'STARTED') {
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESSFUL'
@@ -105,5 +104,4 @@ def notifyBuild(String buildStatus = 'STARTED') {
     // Send notifications
     slackSend(color: colorCode, message: summary)
 }
-
 
