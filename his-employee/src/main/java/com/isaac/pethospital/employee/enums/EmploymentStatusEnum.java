@@ -9,6 +9,8 @@ public enum EmploymentStatusEnum {
     RE_EMPLOY_AFTER_RETIRMENT("返聘"),
     OUTSOURCE("外包");
 
+    private String desc;
+
     EmploymentStatusEnum(String desc)
     {
 

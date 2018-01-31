@@ -1,6 +1,7 @@
 package com.isaac.pethospital.employee;
 
 import com.isaac.pethospital.employee.entities.CompanyEntity;
+import com.isaac.pethospital.employee.entities.ContactAddressEntity;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
@@ -62,10 +63,24 @@ public class HisEmployeeManagementApplication {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime dateOfBirth = LocalDateTime.parse("1900-04-01 00:00:00", formatter);
                 LocalDateTime joinedDate = LocalDateTime.parse("2015-10-01 00:00:00", formatter);
+                ContactAddressEntity cae=new ContactAddressEntity();
+                cae.setAddress("昆仑山大酒店18层");
+                cae.setCity("北京");
+                cae.setCountry("大梁");
+                cae.setDistrict("崆峒路");
+                cae.setHomePhone("023-1494452");
+                cae.setMobilePhone("1231231234");
+                cae.setPersonalEmail("huchong_ling@136.com");
+                cae.setWorkPhone("123566332");
+                cae.setPost("911000");
+
 
                 EmployeeEntity ee = new EmployeeEntity();
-                ee.setGivenName("梦琪");
-                ee.setSurname("李");
+                ee.setGivenName("狐冲");
+                ee.setSurname("令");
+                ee.setContactAddress(cae);
+                ee.setWorkPhoneNumber("010-3391232");
+                ee.setLoginAccount("linghuchong");
                 ee.setDateOfBirth(dateOfBirth);
                 ee.setEmail("mengqi_li@pethos.com");
                 ee.setEmployeeNumber("000003");

@@ -12,16 +12,24 @@ export class EmployeeService {
   constructor(private authHttp: AuthHttp) {
   }
 
-  getEmployeeCount():Observable<EmployeeCount>{
+  getEmployeeCount(): Observable<EmployeeCount> {
     let url = `/api/hisemployee/employees/counts`;
     return this.authHttp.get(url).map(this.extractData);
   }
+
   getEmployees(): Observable<Employee[]> {
 
     let url = `/api/hisemployee/employees`;
     return this.authHttp.get(url)
       .map(this.extractData);
   }
+
+  getMyInfo(): Observable<Employee> {
+    let url = `/api/hisemployee/employees/getMyInfo`;
+    return this.authHttp.get(url)
+      .map(this.extractData);
+  }
+
 
   private extractData(res: Response) {
     let body = res.json();

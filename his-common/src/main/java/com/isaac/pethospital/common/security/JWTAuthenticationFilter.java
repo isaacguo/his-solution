@@ -19,16 +19,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.isaac.pethospital.common.security.SecurityConstants.*;
 
-@Data
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
     private final AuthenticationManager authenticationManager;
+
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
 
     @Override

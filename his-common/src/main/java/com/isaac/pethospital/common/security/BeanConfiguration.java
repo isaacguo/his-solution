@@ -30,7 +30,13 @@ class BeanConfiguration {
                 ApplicationUser applicationUser = new ApplicationUser();
                 applicationUser.setUsername("admin");
                 applicationUser.setPassword(bCryptPasswordEncoder.encode("admin"));
+
                 applicationUserRepository.save(applicationUser);
+
+                ApplicationUser applicationUser2=new ApplicationUser();
+                applicationUser2.setUsername("linghuchong");
+                applicationUser2.setPassword(bCryptPasswordEncoder.encode("linghuchong_1"));
+                applicationUserRepository.save(applicationUser2);
 
             }
         };

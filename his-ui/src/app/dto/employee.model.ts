@@ -1,4 +1,5 @@
 import {Department} from "./department.model";
+import {ContactAddress} from "./employee.contact.model";
 
 export class Employee {
   constructor(public givenName?: number,
@@ -19,6 +20,8 @@ export class Employee {
               public teamMembers?: Employee[],
               public department?: Department,
               public emergencyContact?: string,
+              public workPhoneNumber?:string,
+              public contactAddress?:ContactAddress,
               public emergencyPhoneNumber?: string) {
   }
 }
