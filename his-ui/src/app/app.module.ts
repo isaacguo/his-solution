@@ -34,6 +34,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EmployeeProfileEditComponent } from './components/employee/employee-profile-edit/employee-profile-edit.component';
 import { EmployeeAdminComponent } from './components/employee/employee-admin/employee-admin.component';
 import {AdminGuard} from "./guards/admin.guard";
+import { FinanceComponent } from './components/finance/finance.component';
+import {FinanceGuard} from "./guards/finance.guard";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -72,7 +74,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EmployeeLeaveComponent,
     DashboardComponent,
     EmployeeProfileEditComponent,
-    EmployeeAdminComponent
+    EmployeeAdminComponent,
+    FinanceComponent
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule
@@ -84,6 +87,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     },
     AuthGuard,
     AdminGuard,
+    FinanceGuard,
     LogoutGuardService,
     AuthenticationService,
     EmployeeService

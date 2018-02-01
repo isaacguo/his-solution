@@ -100,19 +100,38 @@ public class HisEmployeeManagementApplication {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
                 LocalDateTime joinedDate = LocalDateTime.parse("2012-04-17 00:00:00", formatter);
+                ContactAddressEntity cae=new ContactAddressEntity();
+                cae.setAddress("昆仑山大酒店17层");
+                cae.setCity("北京");
+                cae.setCountry("大梁");
+                cae.setDistrict("崆峒路");
+                cae.setHomePhone("023-14942123");
+                cae.setMobilePhone("1341231675");
+                cae.setPersonalEmail("lingshan_yue@136.com");
+                cae.setWorkPhone("123577432");
+                cae.setPost("611000");
+
+                LeaveInfoEntity leaveInfo=new LeaveInfoEntity();
+                leaveInfo.setAnuualLeave(80L);
+                leaveInfo.setSickLeave(32L);
 
                 EmployeeEntity ee = new EmployeeEntity();
                 ee.setGivenName("灵珊");
                 ee.setSurname("岳");
+                ee.setContactAddress(cae);
+                ee.setWorkPhoneNumber("010-3391233");
+                ee.setLoginAccount("yuelingshan");
                 ee.setDateOfBirth(dateOfBirth);
                 ee.setEmail("lingshan_yue@pethos.com");
                 ee.setEmployeeNumber("000004");
                 ee.setGender(SexualEnum.FEMALE);
                 ee.setEthnic("汉族");
                 ee.setNationality("中国");
-                ee.setJobTitle("主任医师");
+                ee.setJobTitle("会计");
+                ee.setEmploymentStatus(EmploymentStatusEnum.FULL_TIME);
                 ee.setMaritalStatus(MaritalStatusEnum.MARRIED);
                 ee.setJoinedDate(joinedDate);
+                ee.setLeaveInfo(leaveInfo);
                 return ee;
             }
 

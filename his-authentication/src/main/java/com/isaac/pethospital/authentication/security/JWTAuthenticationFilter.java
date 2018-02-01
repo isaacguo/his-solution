@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isaac.pethospital.authentication.entities.ApplicationUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import javafx.application.Application;
 import lombok.Data;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,10 +22,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.isaac.pethospital.authentication.security.SecurityConstants.EXPIRATION_TIME;
-import static com.isaac.pethospital.authentication.security.SecurityConstants.HEADER_STRING;
-import static com.isaac.pethospital.authentication.security.SecurityConstants.TOKEN_PREFIX;
-import static com.isaac.pethospital.authentication.security.SecurityConstants.SECRET;
+import static com.isaac.pethospital.authentication.security.SecurityConstants.*;
 
 @Data
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {

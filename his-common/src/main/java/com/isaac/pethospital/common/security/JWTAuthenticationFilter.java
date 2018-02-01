@@ -59,6 +59,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = Jwts.builder().setSubject(((User) authResult.getPrincipal()).getUsername())
                 .setIssuer("his-authentication")
                 .claim("isAdmin", loginAccount.equals("admin") ? "true" : "false")
+                .claim("isFinance", loginAccount.equals("yuelingshan")?"true":"false")
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();

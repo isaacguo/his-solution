@@ -6,7 +6,7 @@ import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/take";
 
 @Injectable()
-export class AdminGuard implements CanActivate {
+export class FinanceGuard implements CanActivate {
 
 
   constructor(private authenticationService: AuthenticationService, private router: Router) {
@@ -16,7 +16,7 @@ export class AdminGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.authenticationService.authChange.map(
       authInfo => {
-        if (authInfo.isAdmin)
+        if (authInfo.isFinance)
           return true;
         else
           return false;

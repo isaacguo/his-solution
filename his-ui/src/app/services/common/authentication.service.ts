@@ -40,6 +40,7 @@ export class AuthenticationService {
         if (token) {
           sessionStorage.setItem("id_token", token);
           this.decoded = this.jwtHelper.decodeToken(token);
+          console.log(this.decoded);
 
           return true;
         }
@@ -50,7 +51,7 @@ export class AuthenticationService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')).subscribe(r => {
       if (r) {
         console.log(this.decoded);
-        this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub, this.decoded.isAdmin=='true'));
+        this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub, this.decoded.isAdmin == 'true', this.decoded.isFinance=='true'));
         this.router.navigate(['/dashboard']);
       }
       else {
@@ -83,7 +84,7 @@ export class AuthenticationService {
 
 export class AuthInfo {
 
-  constructor(public authState: AuthState, public displayName: string, public isAdmin: boolean=false) {
+  constructor(public authState: AuthState, public displayName: string, public isAdmin: boolean = false, public isFinance: boolean = false) {
 
   }
 

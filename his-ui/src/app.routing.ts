@@ -25,6 +25,8 @@ import {DashboardComponent} from "./app/components/dashboard/dashboard.component
 import {EmployeeProfileEditComponent} from "./app/components/employee/employee-profile-edit/employee-profile-edit.component";
 import {EmployeeAdminComponent} from "./app/components/employee/employee-admin/employee-admin.component";
 import {AdminGuard} from "./app/guards/admin.guard";
+import {FinanceComponent} from "./app/components/finance/finance.component";
+import {FinanceGuard} from "./app/guards/finance.guard";
 
 
 const appRoutes: Routes = [
@@ -54,6 +56,11 @@ const appRoutes: Routes = [
         component: ImagesComponent
       },
       {
+        path: 'finance',
+        canActivate: [FinanceGuard],
+        component: FinanceComponent
+      },
+      {
         path: 'pharmacy',
         component: PharmacyComponent
       },
@@ -75,7 +82,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'employee-admin',
-        canActivate:[AdminGuard],
+        canActivate: [AdminGuard],
         component: EmployeeAdminComponent
       },
       {
