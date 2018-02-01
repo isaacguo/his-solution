@@ -24,6 +24,7 @@ import {EmployeeProfileComponent} from "./app/components/employee/employee-profi
 import {DashboardComponent} from "./app/components/dashboard/dashboard.component";
 import {EmployeeProfileEditComponent} from "./app/components/employee/employee-profile-edit/employee-profile-edit.component";
 import {EmployeeAdminComponent} from "./app/components/employee/employee-admin/employee-admin.component";
+import {AdminGuard} from "./app/guards/admin.guard";
 
 
 const appRoutes: Routes = [
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'employee-admin',
+        canActivate:[AdminGuard],
         component: EmployeeAdminComponent
       },
       {

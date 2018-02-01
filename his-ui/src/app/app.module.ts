@@ -33,6 +33,7 @@ import { EmployeeLeaveComponent } from './components/employee/employee-leave/emp
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EmployeeProfileEditComponent } from './components/employee/employee-profile-edit/employee-profile-edit.component';
 import { EmployeeAdminComponent } from './components/employee/employee-admin/employee-admin.component';
+import {AdminGuard} from "./guards/admin.guard";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -82,6 +83,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http, RequestOptions]
     },
     AuthGuard,
+    AdminGuard,
     LogoutGuardService,
     AuthenticationService,
     EmployeeService

@@ -16,10 +16,14 @@ export class EmployeeProfileComponent implements OnInit {
   }
 
 
+  getDateString(date:Date):number
+  {
+    console.log(date);
+    return date.valueOf();
+  }
   ngOnInit() {
     this.employeeService.getMyInfo().subscribe(r => {
       this.employee = r;
-      console.log(this.employee);
     })
   }
 

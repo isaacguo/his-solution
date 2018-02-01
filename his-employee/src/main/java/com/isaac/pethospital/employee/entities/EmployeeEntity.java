@@ -1,7 +1,10 @@
 package com.isaac.pethospital.employee.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
 import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
 import com.isaac.pethospital.employee.enums.SexualEnum;
@@ -24,6 +27,8 @@ public class EmployeeEntity {
     private String employeeNumber;
     private String idNumber;
     private String driverLicenseNumber;
+
+
     private LocalDateTime dateOfBirth;
     @Enumerated(EnumType.STRING)
     private SexualEnum gender;
@@ -56,7 +61,7 @@ public class EmployeeEntity {
     private EmployeeEntity directReportTo;
     @OneToMany(mappedBy = "directReportTo")
     @JsonManagedReference("directReportTo-teamMembers")
-    private List<EmployeeEntity> teamMembers=new LinkedList<>();
+    private List<EmployeeEntity> teamMembers = new LinkedList<>();
     @ManyToOne
     @JsonBackReference("DepartmentEntity-EmployeeEntity")
     private DepartmentEntity department;
@@ -127,6 +132,8 @@ public class EmployeeEntity {
         this.driverLicenseNumber = driverLicenseNumber;
     }
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
     public LocalDateTime getDateOfBirth() {
         return dateOfBirth;
     }
@@ -191,7 +198,7 @@ public class EmployeeEntity {
         if (contactAddress == null)
             throw new RuntimeException("ContactAddress should not be null");
         else {
-            this.contactAddress=contactAddress;
+            this.contactAddress = contactAddress;
             this.contactAddress.setEmployeeEntity(this);
         }
         this.contactAddress = contactAddress;

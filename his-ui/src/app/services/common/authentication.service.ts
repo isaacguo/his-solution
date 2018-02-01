@@ -22,15 +22,17 @@ export class AuthenticationService {
 
     this.jwtHelper = new JwtHelper();
 
-    let s_token=sessionStorage.getItem("id_token");
-    if(s_token)
-    {
+    let s_token = sessionStorage.getItem("id_token");
+    if (s_token) {
       this.decoded = this.jwtHelper.decodeToken(s_token);
       this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub));
     }
   }
 
   login(username: string, password: string) {
+
+    this.setAuthState(new AuthInfo(AuthState.Logging, ""));
+
     this.authHttp.post('/login', JSON.stringify({username: username, password: password}))
       .map((response: Response) => {
 
@@ -47,10 +49,20 @@ export class AuthenticationService {
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error')).subscribe(r => {
       if (r) {
-        this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub));
+        console.log(this.decoded);
+        this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub, this.decoded.isAdmin=='true'));
         this.router.navigate(['/dashboard']);
       }
+      else {
+        this.setAuthState(new AuthInfo(AuthState.LoginFailed, ""));
+      }
+    }, (err) => {
+      if (err === "Unauthorized")
+        this.setAuthState(new AuthInfo(AuthState.LoginFailed, ""));
+      else
+        this.setAuthState(new AuthInfo(AuthState.ServerError, ""));
     })
+
   }
 
   logout(): void {
@@ -71,7 +83,7 @@ export class AuthenticationService {
 
 export class AuthInfo {
 
-  constructor(public authState: AuthState, public displayName: string) {
+  constructor(public authState: AuthState, public displayName: string, public isAdmin: boolean=false) {
 
   }
 
@@ -79,5 +91,8 @@ export class AuthInfo {
 
 export const enum AuthState {
   LoggedIn,
-  LoggedOut
+  LoggedOut,
+  Logging,
+  LoginFailed,
+  ServerError
 }

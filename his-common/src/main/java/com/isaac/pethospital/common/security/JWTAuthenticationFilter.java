@@ -55,13 +55,19 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
+        String loginAccount = ((User) authResult.getPrincipal()).getUsername();
         String token = Jwts.builder().setSubject(((User) authResult.getPrincipal()).getUsername())
                 .setIssuer("his-authentication")
+                .claim("isAdmin", loginAccount.equals("admin") ? "true" : "false")
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
     }
 
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed");
 
+    }
 }

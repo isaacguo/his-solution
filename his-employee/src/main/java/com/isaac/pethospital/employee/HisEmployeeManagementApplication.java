@@ -82,13 +82,13 @@ public class HisEmployeeManagementApplication {
                 ee.setWorkPhoneNumber("010-3391232");
                 ee.setLoginAccount("linghuchong");
                 ee.setDateOfBirth(dateOfBirth);
-                ee.setEmail("mengqi_li@pethos.com");
+                ee.setEmail("huchong_ling@pethos.com");
                 ee.setEmployeeNumber("000003");
-                ee.setGender(SexualEnum.FEMALE);
+                ee.setGender(SexualEnum.MALE);
                 ee.setEthnic("汉族");
                 ee.setNationality("中国");
                 ee.setJobTitle("主治医师");
-                ee.setMaritalStatus(MaritalStatusEnum.MARRIED);
+                ee.setMaritalStatus(MaritalStatusEnum.SINGLE);
                 ee.setJoinedDate(joinedDate);
 
                 return ee;
@@ -100,16 +100,16 @@ public class HisEmployeeManagementApplication {
                 LocalDateTime joinedDate = LocalDateTime.parse("2012-04-17 00:00:00", formatter);
 
                 EmployeeEntity ee = new EmployeeEntity();
-                ee.setGivenName("忆柳");
-                ee.setSurname("张");
+                ee.setGivenName("灵珊");
+                ee.setSurname("岳");
                 ee.setDateOfBirth(dateOfBirth);
-                ee.setEmail("yiliu_zhang@pethos.com");
+                ee.setEmail("lingshan_yue@pethos.com");
                 ee.setEmployeeNumber("000004");
-                ee.setGender(SexualEnum.MALE);
+                ee.setGender(SexualEnum.FEMALE);
                 ee.setEthnic("汉族");
                 ee.setNationality("中国");
                 ee.setJobTitle("主任医师");
-                ee.setMaritalStatus(MaritalStatusEnum.SINGLE);
+                ee.setMaritalStatus(MaritalStatusEnum.MARRIED);
                 ee.setJoinedDate(joinedDate);
                 return ee;
             }

@@ -8,6 +8,16 @@
         <div class="panel-body">
           <form role="form">
             <fieldset>
+              <div *ngIf="isLogginFailed()" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+                用户名或密码不正确，请重新输入
+              </div>
+              <div *ngIf="isServerError()" class="alert alert-warning" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+                服务器内部错误，请稍后重试，给你带来的不便，请您谅解
+              </div>
               <div class="form-group">
                 <input class="form-control" placeholder="用户名" [(ngModel)]="username" name="useraccount"
                        type="useraccount" autofocus>
@@ -25,7 +35,9 @@
               </div>
               -->
               <!-- Change this to a button or input when using this as a form -->
-              <button type="button" class="btn btn-lg btn-success btn-block "(click)="onLoginBtnClicked()">登录</button>
+              <button type="button" class="btn btn-lg btn-success btn-block " (click)="onLoginBtnClicked()"><i
+                *ngIf="isLogging()" class="fa fa-refresh fa-spin fa-fw"></i>登录
+              </button>
             </fieldset>
           </form>
         </div>
