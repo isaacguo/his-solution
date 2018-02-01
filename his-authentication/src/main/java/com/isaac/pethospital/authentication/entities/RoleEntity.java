@@ -2,12 +2,10 @@ package com.isaac.pethospital.authentication.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -39,24 +37,31 @@ public class RoleEntity {
         this.role = role;
     }
 
-    public void setPermissions(PermissionEntity permission)
+
+    public void addPermission(PermissionEntity permission)
     {
+        if(permission==users) throw new RuntimeException("permission is null");
+        permission.addRole(this);
         this.permissions.add(permission);
     }
+
     public Set<PermissionEntity> getPermissions() {
         return permissions;
     }
 
-    public List<UserEntity> getUsers() {
+    public Set<UserEntity> getUsers() {
         return users;
     }
 
-    public void setUsers(List<UserEntity> users) {
-        this.users = users;
+
+    public void addUser(UserEntity user)
+    {
+        this.users.add(user);
+
     }
 
     @ManyToMany(mappedBy = "roles")
     @JsonBackReference("User-Role")
-    List<UserEntity> users;
+    Set<UserEntity> users=new LinkedHashSet<>();
 
 }

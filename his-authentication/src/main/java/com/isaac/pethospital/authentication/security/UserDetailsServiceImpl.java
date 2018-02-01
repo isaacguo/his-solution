@@ -2,7 +2,6 @@ package com.isaac.pethospital.authentication.security;
 
 import com.isaac.pethospital.authentication.entities.ApplicationUser;
 import com.isaac.pethospital.authentication.repositories.ApplicationUserRepository;
-import lombok.Data;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

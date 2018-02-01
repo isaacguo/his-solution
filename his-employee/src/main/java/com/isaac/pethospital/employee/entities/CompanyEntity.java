@@ -1,17 +1,13 @@
 package com.isaac.pethospital.employee.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-@Data
 @Entity
-@NoArgsConstructor
 public class CompanyEntity {
 
     @Id
@@ -32,5 +28,45 @@ public class CompanyEntity {
             departmentEntity.setCompany(this);
         }
         this.departmentEntities.add(departmentEntity);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyLocation() {
+        return companyLocation;
+    }
+
+    public void setCompanyLocation(String companyLocation) {
+        this.companyLocation = companyLocation;
+    }
+
+    public List<DepartmentEntity> getDepartmentEntities() {
+        return departmentEntities;
+    }
+
+    public void setDepartmentEntities(List<DepartmentEntity> departmentEntities) {
+        this.departmentEntities = departmentEntities;
     }
 }

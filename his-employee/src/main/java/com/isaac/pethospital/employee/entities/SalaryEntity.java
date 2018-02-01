@@ -1,22 +1,46 @@
 package com.isaac.pethospital.employee.entities;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
-@Data
 @Entity
-@NoArgsConstructor
 public class SalaryEntity {
-
+    @OneToOne
+    EmployeeEntity employee;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private long baseSalary;
     private long bonus;
 
-    @OneToOne
-    EmployeeEntity employee;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getBaseSalary() {
+        return baseSalary;
+    }
+
+    public void setBaseSalary(long baseSalary) {
+        this.baseSalary = baseSalary;
+    }
+
+    public long getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(long bonus) {
+        this.bonus = bonus;
+    }
+
+    public EmployeeEntity getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(EmployeeEntity employee) {
+        this.employee = employee;
+    }
 }

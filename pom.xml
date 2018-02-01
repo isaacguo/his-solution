@@ -39,7 +39,7 @@
         <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
         <sonar.groovy.binaries>target/classes</sonar.groovy.binaries>
         <docker.image.prefix>isaacguo</docker.image.prefix>
-        <git.commit.shortRev>git-${git.commit.id.abbrev}</git.commit.shortRev>
+        <git.commit.shortRev>git-${git.branch}-${git.commit.id.abbrev}</git.commit.shortRev>
     </properties>
 
     <dependencyManagement>
@@ -56,12 +56,6 @@
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/pl.project13.maven/git-commit-id-plugin -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
