@@ -1,5 +1,6 @@
 import {Department} from "./department.model";
 import {ContactAddress} from "./employee.contact.model";
+import {SexualEnum} from "../enums/sexual.enum";
 
 export class Employee {
   constructor(public givenName?: number,
@@ -8,7 +9,7 @@ export class Employee {
               public idNumber?: string,
               public driverLicenseNumber?: string,
               public dateOfBirth?: Date,
-              public gender?: string,
+              public gender?: SexualEnum,
               public nationality?: string,
               public ethnic?: string,
               public email?: string,

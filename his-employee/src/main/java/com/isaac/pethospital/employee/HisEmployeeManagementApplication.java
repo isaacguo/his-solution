@@ -1,9 +1,6 @@
 package com.isaac.pethospital.employee;
 
-import com.isaac.pethospital.employee.entities.CompanyEntity;
-import com.isaac.pethospital.employee.entities.ContactAddressEntity;
-import com.isaac.pethospital.employee.entities.DepartmentEntity;
-import com.isaac.pethospital.employee.entities.EmployeeEntity;
+import com.isaac.pethospital.employee.entities.*;
 import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
 import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
 import com.isaac.pethospital.employee.enums.SexualEnum;
@@ -74,6 +71,9 @@ public class HisEmployeeManagementApplication {
                 cae.setWorkPhone("123566332");
                 cae.setPost("911000");
 
+                LeaveInfoEntity leaveInfo=new LeaveInfoEntity();
+                leaveInfo.setAnuualLeave(80L);
+                leaveInfo.setSickLeave(32L);
 
                 EmployeeEntity ee = new EmployeeEntity();
                 ee.setGivenName("狐冲");
@@ -88,8 +88,10 @@ public class HisEmployeeManagementApplication {
                 ee.setEthnic("汉族");
                 ee.setNationality("中国");
                 ee.setJobTitle("主治医师");
+                ee.setEmploymentStatus(EmploymentStatusEnum.FULL_TIME);
                 ee.setMaritalStatus(MaritalStatusEnum.SINGLE);
                 ee.setJoinedDate(joinedDate);
+                ee.setLeaveInfo(leaveInfo);
 
                 return ee;
             }

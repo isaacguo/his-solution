@@ -35,15 +35,6 @@ public class EmployeeEntity {
     private String nationality;
     private String ethnic;
     private String email;
-
-    public String getWorkPhoneNumber() {
-        return workPhoneNumber;
-    }
-
-    public void setWorkPhoneNumber(String workPhoneNumber) {
-        this.workPhoneNumber = workPhoneNumber;
-    }
-
     private String workPhoneNumber;
     @Enumerated(EnumType.STRING)
     private MaritalStatusEnum maritalStatus;
@@ -53,9 +44,12 @@ public class EmployeeEntity {
     private ContactAddressEntity contactAddress;
     private String jobTitle;
     private EmploymentStatusEnum employmentStatus;
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
+    @JsonManagedReference("employee-leaveInfo")
+    private LeaveInfoEntity leaveInfo;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    @JsonManagedReference("employee-leave")
-    private List<LeaveEntity> leaves = new LinkedList<>();
+    @JsonManagedReference("employee-leaverecords")
+    private List<LeaveRecordEntity> leaveRecords=new LinkedList<>();
     @ManyToOne()
     @JsonBackReference("directReportTo-teamMembers")
     private EmployeeEntity directReportTo;
@@ -67,6 +61,28 @@ public class EmployeeEntity {
     private DepartmentEntity department;
     private String emergencyContact;
     private String emergencyPhoneNumber;
+
+    public String getWorkPhoneNumber() {
+        return workPhoneNumber;
+    }
+
+    public void setWorkPhoneNumber(String workPhoneNumber) {
+        this.workPhoneNumber = workPhoneNumber;
+    }
+
+    public List<LeaveRecordEntity> getLeaveRecords() {
+        return leaveRecords;
+    }
+
+    public void addLeaveRecord(LeaveRecordEntity leaveRecord)
+    {
+        if(leaveRecord==null) throw new RuntimeException("Leave Record is null");
+        if(leaveRecord!=null)
+        {
+            leaveRecord.setEmployee(this);
+            this.leaveRecords.add(leaveRecord);
+        }
+    }
 
     public String getUuid() {
         return uuid;
@@ -133,7 +149,7 @@ public class EmployeeEntity {
     }
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime getDateOfBirth() {
         return dateOfBirth;
     }
@@ -182,6 +198,8 @@ public class EmployeeEntity {
         this.maritalStatus = maritalStatus;
     }
 
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDateTime getJoinedDate() {
         return joinedDate;
     }
@@ -201,7 +219,6 @@ public class EmployeeEntity {
             this.contactAddress = contactAddress;
             this.contactAddress.setEmployeeEntity(this);
         }
-        this.contactAddress = contactAddress;
     }
 
     public String getJobTitle() {
@@ -220,12 +237,18 @@ public class EmployeeEntity {
         this.employmentStatus = employmentStatus;
     }
 
-    public List<LeaveEntity> getLeaves() {
-        return leaves;
+    public LeaveInfoEntity getLeaveInfo() {
+        return leaveInfo;
     }
 
-    public void setLeaves(List<LeaveEntity> leaves) {
-        this.leaves = leaves;
+    public void setLeaveInfo(LeaveInfoEntity leaveInfo) {
+
+        if (leaveInfo == null)
+            throw new RuntimeException("Leave info should not be null");
+        else {
+            this.leaveInfo=leaveInfo;
+            this.leaveInfo.setEmployee(this);
+        }
     }
 
     public EmployeeEntity getDirectReportTo() {
