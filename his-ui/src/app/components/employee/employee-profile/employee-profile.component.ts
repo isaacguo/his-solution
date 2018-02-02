@@ -45,7 +45,7 @@ export class EmployeeProfileComponent implements OnInit {
   }
 
   onEditProfileButtonClicked() {
-    this.router.navigate(['employee-profile-edit']);
+    this.router.navigate(['employee-profile-edit',this.employee.uuid]);
   }
 
 }
