@@ -60,6 +60,15 @@ services:
       - his-eureka
     command: --spring.profiles.active=production
 
+  his-treatment:
+    image: isaacguo/his-treatment
+    ports:
+      - "8092:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+    command: --spring.profiles.active=production
+
   his-medicine:
     image: isaacguo/his-medicine
     ports:

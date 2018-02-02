@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>his-solution</artifactId>
+        <groupId>com.isaac.pethospital</groupId>
+        <version>0.5.8-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.isaac.pethospital</groupId>
-    <artifactId>his-employee</artifactId>
+    <artifactId>his-treatment</artifactId>
     <version>0.5.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>his-employee</name>
-    <description>His Employee Management</description>
-
-    <parent>
-        <groupId>com.isaac.pethospital</groupId>
-        <artifactId>his-solution</artifactId>
-        <version>0.5.8-SNAPSHOT</version> <!-- lookup parent from repository -->
-    </parent>
-
+    <name>his-treatment</name>
+    <description>His Treatment Service</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -94,3 +93,4 @@
         </plugins>
     </build>
 </project>
+
