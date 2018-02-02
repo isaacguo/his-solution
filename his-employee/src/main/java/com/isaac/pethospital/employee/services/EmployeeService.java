@@ -10,4 +10,6 @@ public interface EmployeeService {
     EmployeeEntity createEmployee(EmployeeEntity employeeEntity);
 
     EmployeeEntity getMyInfo();
+
+    EmployeeEntity getEmployeeByUuid(String uuid);
 }

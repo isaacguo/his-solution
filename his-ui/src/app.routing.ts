@@ -69,11 +69,17 @@ const appRoutes: Routes = [
       },
       {
         path: 'employee-profile',
-        component: EmployeeProfileComponent
+        component: EmployeeProfileComponent,
+      },
+      {
+        path: 'employee-profile/:uuid', component: EmployeeProfileComponent
       },
       {
         path: 'employee-profile-edit',
         component: EmployeeProfileEditComponent
+      },
+      {
+        path: 'employee-profile-edit/:uuid', component: EmployeeProfileEditComponent
       },
       {
         path: 'employee-leave',

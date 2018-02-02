@@ -33,17 +33,21 @@ public class EmployeeRestController {
 
     }
 
+    @GetMapping("/{uuid}/")
+    public EmployeeEntity getEmployeeInfoByEmployeeUuidId(@PathVariable("uuid") String uuid)
+    {
+        return this.employeeService.getEmployeeByUuid(uuid);
+    }
+
     @PostMapping(value = "/create")
     public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity employee)
     {
         return this.employeeService.createEmployee(employee);
     }
 
-
     @GetMapping
     public List<EmployeeEntity> getEmployees()
     {
         return this.employeeRepository.findAll();
     }
-
 }

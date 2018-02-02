@@ -30,6 +30,12 @@ export class EmployeeService {
       .map(this.extractData);
   }
 
+  getEmployeeInfoByEmployeeUuid(uuid:string):Observable<Employee>{
+    let url = `/api/hisemployee/employees/${uuid}/`;
+    return this.authHttp.get(url)
+      .map(this.extractData);
+  }
+
 
   private extractData(res: Response) {
     let body = res.json();

@@ -29,9 +29,11 @@
     <td>{{employee?.gender==='MALE'?'男':'女'}}</td>
     <td></td>
     <td>
-      <button type="button" class="btn btn-default btn-s">修改</button>
-      |
-      <button type="button" class="btn btn-default btn-s">删除</button>
+      <div class="button-group">
+        <button type="button" class="btn btn-default btn-s" (click)="onViewButtonClicked(employee.uuid)"><span class="glyphicon glyphicon-search"></span></button>
+        <button type="button" class="btn btn-default btn-s" (click)="onEditButtonClicked(employee.uuid)"><span class="glyphicon glyphicon-pencil"></span></button>
+        <button type="button" class="btn btn-default btn-s"><span class="glyphicon glyphicon-remove"></span></button>
+      </div>
     </td>
   </tr>
 

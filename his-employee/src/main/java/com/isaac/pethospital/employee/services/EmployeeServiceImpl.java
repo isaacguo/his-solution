@@ -42,4 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         String userAccount = this.getUserAccount();
         return this.employeeRepository.findByLoginAccount(userAccount);
     }
+
+    @Override
+    public EmployeeEntity getEmployeeByUuid(String uuid) {
+        return this.employeeRepository.findByUuid(uuid);
+    }
 }

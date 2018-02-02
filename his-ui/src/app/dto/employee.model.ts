@@ -24,6 +24,7 @@ export class Employee {
               public emergencyContact?: string,
               public workPhoneNumber?:string,
               public contactAddress?:ContactAddress,
-              public emergencyPhoneNumber?: string) {
+              public emergencyPhoneNumber?: string,
+              public uuid?:string) {
   }
 }

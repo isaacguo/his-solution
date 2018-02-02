@@ -7,6 +7,7 @@ import com.isaac.pethospital.employee.enums.SexualEnum;
 import com.isaac.pethospital.employee.repositories.CompanyRepository;
 import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
+import com.isaac.pethospital.employee.services.EmployeeService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,7 +33,7 @@ public class HisEmployeeManagementApplication {
 
 
     @Bean
-    CommandLineRunner commandLineRunner(CompanyRepository companyRepository, DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
+    CommandLineRunner commandLineRunner(CompanyRepository companyRepository, DepartmentRepository departmentRepository, EmployeeRepository employeeRepository, EmployeeService employeeService) {
 
         return new CommandLineRunner() {
 
@@ -49,9 +50,14 @@ public class HisEmployeeManagementApplication {
                 CompanyEntity savedCe1 = companyRepository.save(companyEntity);
                 DepartmentEntity savedDe1 = departmentRepository.findAll().get(0);
 
+                employeeService.createEmployee(generateEmployee1());
+                employeeService.createEmployee(generateEmployee2());
+                employeeService.createEmployee(generateEmployee3());
+                /*
                 employeeRepository.save(generateEmployee1());
                 employeeRepository.save(generateEmployee2());
                 employeeRepository.save(generateEmployee3());
+                */
 
             }
 

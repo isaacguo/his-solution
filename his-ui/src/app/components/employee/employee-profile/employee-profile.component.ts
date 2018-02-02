@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeService} from "../../../services/business/employee/employee.service";
 import {Employee} from "../../../dto/employee.model";
 import {SexualEnum} from "../../../enums/sexual.enum";
@@ -12,25 +12,35 @@ import {EmploymentStatusEnum} from "../../../enums/employment.status.enum";
 })
 export class EmployeeProfileComponent implements OnInit {
 
+  uuid: string;
   employee: Employee = {};
 
-  constructor(private employeeService: EmployeeService, private router: Router) {
-  }
+  constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {
 
+  }
 
   ngOnInit() {
-    this.employeeService.getMyInfo().subscribe(r => {
-      this.employee = r;
-      //console.log(SexualEnum[this.employee.gender]);
-    })
+    this.route.params.subscribe(params => {
+      this.uuid = params['uuid'];
+      if (this.uuid != null) {
+        this.employeeService.getEmployeeInfoByEmployeeUuid(this.uuid).subscribe(r=>{
+          this.employee=r;
+        })
+      }
+      else {
+        this.employeeService.getMyInfo().subscribe(r => {
+          this.employee = r;
+          //console.log(SexualEnum[this.employee.gender]);
+        })
+      }
+    });
   }
-  getLiteralGender(sexualEnum:SexualEnum):string
-  {
+
+  getLiteralGender(sexualEnum: SexualEnum): string {
     return SexualEnum[sexualEnum];
   }
 
-  getLiteralEmploymentStatus(employmentStatusEnum:EmploymentStatusEnum):string
-  {
+  getLiteralEmploymentStatus(employmentStatusEnum: EmploymentStatusEnum): string {
     return EmploymentStatusEnum[employmentStatusEnum];
   }
 
