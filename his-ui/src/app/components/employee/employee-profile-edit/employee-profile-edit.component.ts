@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {EmployeeService} from "../../../services/business/employee/employee.service";
+import {Employee} from "../../../dto/employee.model";
+import {ActivatedRoute, Router} from "@angular/router";
+import {error} from "util";
 
 @Component({
   selector: 'app-employee-profile-edit',
@@ -7,9 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeProfileEditComponent implements OnInit {
 
-  constructor() { }
+  uuid: string;
+  employee: Employee;
 
-  ngOnInit() {
+  constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {
+
   }
 
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.uuid = params['uuid'];
+      if (this.uuid != null) {
+        this.employeeService.getEmployeeInfoByEmployeeUuid(this.uuid).subscribe(r=>{
+          this.employee=r;
+        })
+      }
+      else {
+        //TODO:should throw error
+        this.employee={};
+      }
+    });
+  }
 }
