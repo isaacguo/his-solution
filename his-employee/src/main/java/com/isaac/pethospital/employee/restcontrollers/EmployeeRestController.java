@@ -4,10 +4,7 @@ import com.isaac.pethospital.employee.dto.EmployeeCount;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import com.isaac.pethospital.employee.services.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +31,12 @@ public class EmployeeRestController {
     {
         return this.employeeService.getMyInfo();
 
+    }
+
+    @PostMapping(value = "/create")
+    public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity employee)
+    {
+        return this.employeeService.createEmployee(employee);
     }
 
 

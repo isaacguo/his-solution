@@ -33,12 +33,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeEntity createEmployee(EmployeeEntity employeeEntity) {
         String uuid = UUID.randomUUID().toString();
-        return null;
+        employeeEntity.setUuid(uuid);
+        return this.employeeRepository.save(employeeEntity);
     }
 
     @Override
     public EmployeeEntity getMyInfo() {
-        String userAccount= this.getUserAccount();
+        String userAccount = this.getUserAccount();
         return this.employeeRepository.findByLoginAccount(userAccount);
     }
 }

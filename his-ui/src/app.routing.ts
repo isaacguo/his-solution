@@ -33,7 +33,6 @@ const appRoutes: Routes = [
   {
     path: '',
     component: IndexComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -82,7 +81,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'employee-admin',
-        canActivate: [AdminGuard],
+        //canActivate: [AdminGuard],
         component: EmployeeAdminComponent
       },
       {

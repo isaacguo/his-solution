@@ -2,9 +2,7 @@ package com.isaac.pethospital.authentication.entities;
 
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 public class PermissionEntityTests {
@@ -22,7 +20,11 @@ public class PermissionEntityTests {
     public void givenRoleEntityThenItHasFieldRole() {
         PermissionEntity pe = getPermissionEntity();
         assertThat(pe, hasProperty("roles", hasItem(re)));
+
     }
+
+
+
 
     private PermissionEntity getPermissionEntity() {
 
