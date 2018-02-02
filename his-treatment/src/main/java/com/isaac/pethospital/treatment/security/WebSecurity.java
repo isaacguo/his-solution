@@ -1,4 +1,4 @@
-package com.isaac.pethospital.employee.security;
+package com.isaac.pethospital.treatment.security;
 
 import com.isaac.pethospital.common.security.JWTAuthenticationFilter;
 import com.isaac.pethospital.common.security.JWTAuthorizationFilter;

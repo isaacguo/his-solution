@@ -1,4 +1,4 @@
-package com.isaac.pethospital.employee.converter;
+package com.isaac.pethospital.common.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
