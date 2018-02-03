@@ -27,6 +27,8 @@ import {EmployeeAdminComponent} from "./app/components/employee/employee-admin/e
 import {AdminGuard} from "./app/guards/admin.guard";
 import {FinanceComponent} from "./app/components/finance/finance.component";
 import {FinanceGuard} from "./app/guards/finance.guard";
+import {RegisterComponent} from "./app/components/treatment/register/register.component";
+import {DoctorListComponent} from "./app/components/treatment/doctor-list/doctor-list.component";
 
 
 const appRoutes: Routes = [
@@ -45,6 +47,14 @@ const appRoutes: Routes = [
       {
         path: 'treatment',
         component: TreatmentComponent
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      },
+      {
+        path: 'doctor-list',
+        component: DoctorListComponent
       },
       {
         path: 'testing',

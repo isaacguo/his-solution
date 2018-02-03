@@ -21,21 +21,23 @@ import {TestingComponent} from './components/testing/testing.component';
 import {PharmacyComponent} from './components/pharmacy/pharmacy.component';
 import {ProcurementComponent} from './components/procurement/procurement.component';
 import {ImagesComponent} from './components/images/images.component';
-import { MembersComponent } from './components/members/members.component';
-import { LogoutComponent } from './components/logout/logout.component';
+import {MembersComponent} from './components/members/members.component';
+import {LogoutComponent} from './components/logout/logout.component';
 import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {AuthGuard, LogoutGuardService} from "./guards/auth.guard";
 import {AuthenticationService} from "./services/common/authentication.service";
-import { EmployeeComponent } from './components/employee/employee.component';
+import {EmployeeComponent} from './components/employee/employee.component';
 import {EmployeeService} from "./services/business/employee/employee.service";
-import { EmployeeProfileComponent } from './components/employee/employee-profile/employee-profile.component';
-import { EmployeeLeaveComponent } from './components/employee/employee-leave/employee-leave.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { EmployeeProfileEditComponent } from './components/employee/employee-profile-edit/employee-profile-edit.component';
-import { EmployeeAdminComponent } from './components/employee/employee-admin/employee-admin.component';
+import {EmployeeProfileComponent} from './components/employee/employee-profile/employee-profile.component';
+import {EmployeeLeaveComponent} from './components/employee/employee-leave/employee-leave.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {EmployeeProfileEditComponent} from './components/employee/employee-profile-edit/employee-profile-edit.component';
+import {EmployeeAdminComponent} from './components/employee/employee-admin/employee-admin.component';
 import {AdminGuard} from "./guards/admin.guard";
-import { FinanceComponent } from './components/finance/finance.component';
+import {FinanceComponent} from './components/finance/finance.component';
 import {FinanceGuard} from "./guards/finance.guard";
+import {RegisterComponent} from './components/treatment/register/register.component';
+import { DoctorListComponent } from './components/treatment/doctor-list/doctor-list.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -75,7 +77,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DashboardComponent,
     EmployeeProfileEditComponent,
     EmployeeAdminComponent,
-    FinanceComponent
+    FinanceComponent,
+    RegisterComponent,
+    DoctorListComponent
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule

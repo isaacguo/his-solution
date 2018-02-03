@@ -52,7 +52,13 @@
             <a routerLink="/dashboard" routerLinkActive="active" class="text-center"> 快捷方式</a>
           </li>
           <li>
-            <a routerLink="/treatment" routerLinkActive="active" class="text-center"> 医院就诊</a>
+            <a href="javascript:void(0)"  routerLinkActive="active" class="text-center"> 医院就诊<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <!--<li *ngIf="authInfo.isAdmin">-->
+              <li>
+                <a routerLink="/register" routerLinkActive="active" class="text-center"> 看病挂号</a>
+              </li >
+            </ul>
           </li>
           <li>
             <a routerLink="/inventory" routerLinkActive="active" class="text-center"> 库存管理</a>
