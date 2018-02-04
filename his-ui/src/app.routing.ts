@@ -28,7 +28,12 @@ import {AdminGuard} from "./app/guards/admin.guard";
 import {FinanceComponent} from "./app/components/finance/finance.component";
 import {FinanceGuard} from "./app/guards/finance.guard";
 import {RegisterComponent} from "./app/components/treatment/register/register.component";
-import {DoctorListComponent} from "./app/components/treatment/doctor-list/doctor-list.component";
+import {DoctorRegistrationComponent} from "./app/components/treatment/doctor-registration/doctor-registration.component";
+import {DoctorListViewComponent} from "./app/components/treatment/doctor-registration/views/doctor-list-view/doctor-list-view.component";
+import {TimeBasedViewComponent} from "./app/components/treatment/doctor-registration/views/time-based-view/time-based-view.component";
+import {MyConsultingRoomComponent} from "./app/components/treatment/my-consulting-room/my-consulting-room.component";
+import {CallNextComponent} from "./app/components/treatment/my-consulting-room/call-next/call-next.component";
+import {PatientTreatmentComponent} from "./app/components/treatment/my-consulting-room/patient-treatment/patient-treatment.component";
 
 
 const appRoutes: Routes = [
@@ -53,8 +58,37 @@ const appRoutes: Routes = [
         component: RegisterComponent
       },
       {
-        path: 'doctor-list',
-        component: DoctorListComponent
+        path: 'my-consulting-room',
+        component: MyConsultingRoomComponent,
+        children:[
+          {
+            path: 'call-next-patient',
+            component: CallNextComponent
+          },
+          {
+            path: 'patient-treatment',
+            component:PatientTreatmentComponent
+          }
+        ]
+
+      },
+      {
+        path: 'doctor-registration',
+        component: DoctorRegistrationComponent,
+        children: [
+          {
+            path: 'doctor-list-view',
+            component: DoctorListViewComponent,
+          },
+          {
+            path: 'time-based-view',
+            component: TimeBasedViewComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'doctor-list-view'
+          }
+        ]
       },
       {
         path: 'testing',
@@ -151,7 +185,6 @@ const appRoutes: Routes = [
 
   // otherwise redirect to home
   {path: '**', redirectTo: 'login'}
-
 
 ]
 

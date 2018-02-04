@@ -16,3 +16,29 @@
   font-size: 14px !important;
   color: #3c8dbc;
 }
+.head-photo
+{
+  text-align:center;
+  vertical-align: top;
+}
+.head-photo img
+{
+  height:70px;
+  border-radius: 50%;
+
+}
+.doctor-details
+{
+  vertical-align: top;
+}
+.doctor-score
+{
+  vertical-align: top;
+  text-align:center;
+  margin-top:25px;
+}
+.doctor-book
+{
+  vertical-align: top;
+  margin-top:25px;
+}

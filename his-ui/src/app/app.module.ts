@@ -37,7 +37,13 @@ import {AdminGuard} from "./guards/admin.guard";
 import {FinanceComponent} from './components/finance/finance.component';
 import {FinanceGuard} from "./guards/finance.guard";
 import {RegisterComponent} from './components/treatment/register/register.component';
-import { DoctorListComponent } from './components/treatment/doctor-list/doctor-list.component';
+import {DoctorRegistrationComponent} from './components/treatment/doctor-registration/doctor-registration.component';
+import {DoctorListViewComponent} from './components/treatment/doctor-registration/views/doctor-list-view/doctor-list-view.component';
+import {TimeBasedViewComponent} from './components/treatment/doctor-registration/views/time-based-view/time-based-view.component';
+import {DoctorListItemComponent} from './components/treatment/doctor-registration/views/doctor-list-view/doctor-list-item/doctor-list-item.component';
+import {MyConsultingRoomComponent} from './components/treatment/my-consulting-room/my-consulting-room.component';
+import {CallNextComponent} from './components/treatment/my-consulting-room/call-next/call-next.component';
+import {PatientTreatmentComponent} from './components/treatment/my-consulting-room/patient-treatment/patient-treatment.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -79,7 +85,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EmployeeAdminComponent,
     FinanceComponent,
     RegisterComponent,
-    DoctorListComponent
+    DoctorRegistrationComponent,
+    DoctorListViewComponent,
+    TimeBasedViewComponent,
+    DoctorListItemComponent,
+    MyConsultingRoomComponent,
+    CallNextComponent,
+    PatientTreatmentComponent
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule
