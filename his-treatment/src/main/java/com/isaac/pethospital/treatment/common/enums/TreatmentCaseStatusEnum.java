@@ -1,6 +1,6 @@
 package com.isaac.pethospital.treatment.common.enums;
 
-public enum CaseStatusEnum {
+public enum TreatmentCaseStatusEnum {
 
     BOOKED("已预约"),
     UNPRESENTED("未候诊"),
@@ -9,7 +9,7 @@ public enum CaseStatusEnum {
     FINISHED("已完成"),
     UNFINISHED("未完成");
 
-    CaseStatusEnum(String desc) {
+    TreatmentCaseStatusEnum(String desc) {
 
     }
 

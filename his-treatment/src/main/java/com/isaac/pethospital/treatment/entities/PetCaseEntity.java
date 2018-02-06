@@ -17,6 +17,8 @@ public class PetCaseEntity {
     @JsonBackReference("pet-petCase")
     private PetEntity pet;
 
+
+
     private LocalDateTime date;
 
     public long getId() {
