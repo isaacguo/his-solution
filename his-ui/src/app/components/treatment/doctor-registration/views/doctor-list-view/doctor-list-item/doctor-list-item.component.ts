@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Doctor} from "../../../../../../dto/doctor.model";
 
 @Component({
   selector: 'doctor-list-item',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DoctorListItemComponent implements OnInit {
 
+  @Input()
+  doctor:Doctor;
   constructor() { }
 
   ngOnInit() {

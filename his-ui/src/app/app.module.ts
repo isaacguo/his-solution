@@ -44,6 +44,7 @@ import {DoctorListItemComponent} from './components/treatment/doctor-registratio
 import {MyConsultingRoomComponent} from './components/treatment/my-consulting-room/my-consulting-room.component';
 import {CallNextComponent} from './components/treatment/my-consulting-room/call-next/call-next.component';
 import {PatientTreatmentComponent} from './components/treatment/my-consulting-room/patient-treatment/patient-treatment.component';
+import {DepartmentService} from "./services/treatment/department.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -106,7 +107,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FinanceGuard,
     LogoutGuardService,
     AuthenticationService,
-    EmployeeService
+    EmployeeService,
+    DepartmentService
   ],
   bootstrap: [AppComponent]
 })

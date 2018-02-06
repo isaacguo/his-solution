@@ -1,5 +1,5 @@
 export class Department {
-  constructor(public name?: number) {
+  constructor(public uuid?: string, public name?: string, public description?: string) {
   }
 
 }

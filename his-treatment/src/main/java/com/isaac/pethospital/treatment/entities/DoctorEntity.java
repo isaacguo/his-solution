@@ -48,4 +48,23 @@ public class DoctorEntity {
     }
 
     private String name;
+
+    public DepartmentEntity getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(DepartmentEntity department) {
+        this.department = department;
+    }
+
+    public List<TreatmentCaseEntity> getTreatmentCaseEntityList() {
+        return treatmentCaseEntityList;
+    }
+
+    public void addTreatmentCase(TreatmentCaseEntity treatmentCase) {
+        if(treatmentCase==null)
+            throw new RuntimeException("treatment case is null");
+        treatmentCase.setDoctor(this);
+        this.treatmentCaseEntityList.add(treatmentCase);
+    }
 }

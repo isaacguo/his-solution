@@ -77,11 +77,11 @@ const appRoutes: Routes = [
         component: DoctorRegistrationComponent,
         children: [
           {
-            path: 'doctor-list-view',
+            path: 'doctor-list-view/:uuid',
             component: DoctorListViewComponent,
           },
           {
-            path: 'time-based-view',
+            path: 'time-based-view/:uuid',
             component: TimeBasedViewComponent,
           },
           {

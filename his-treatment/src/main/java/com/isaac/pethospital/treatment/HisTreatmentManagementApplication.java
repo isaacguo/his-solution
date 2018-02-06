@@ -1,9 +1,14 @@
 package com.isaac.pethospital.treatment;
 
+import com.isaac.pethospital.treatment.entities.DepartmentEntity;
+import com.isaac.pethospital.treatment.entities.DoctorEntity;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetTypeEntity;
+import com.isaac.pethospital.treatment.repositories.DepartmentRepository;
+import com.isaac.pethospital.treatment.repositories.DoctorRepository;
 import com.isaac.pethospital.treatment.repositories.PetRepository;
 import com.isaac.pethospital.treatment.repositories.PetTypeRepository;
+import com.isaac.pethospital.treatment.services.DepartmentSerivce;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,7 +31,11 @@ public class HisTreatmentManagementApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(PetTypeRepository petTypeRepository, PetRepository petRepository) {
+    CommandLineRunner commandLineRunner(PetTypeRepository petTypeRepository,
+                                        PetRepository petRepository,
+                                        DoctorRepository doctorRepository,
+                                        DepartmentRepository departmentRepository,
+                                        DepartmentSerivce departmentSerivce) {
 
         return new CommandLineRunner() {
 
@@ -58,6 +67,17 @@ public class HisTreatmentManagementApplication {
                 petEntity1.setPetType(p3);
                 petEntity1.setOwnerName("黄老邪");
                 petRepository.save(petEntity1);
+
+                DoctorEntity doctor1=new DoctorEntity();
+                doctor1.setName("黄蓉");
+
+                DepartmentEntity departmentEntity=new DepartmentEntity();
+                departmentEntity.setName("全科");
+                departmentEntity.addDoctor(doctor1);
+                departmentEntity.setDescription("这是科室的简要介绍");
+                departmentEntity.setExposeToPublic(true);
+
+                departmentSerivce.createDepartment(departmentEntity);
             }
         };
     }

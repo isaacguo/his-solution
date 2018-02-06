@@ -8,6 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class DoctorRegistrationComponent implements OnInit {
 
   isDoctorViewSelected: boolean = true;
+  uuid: string;
 
   constructor() {
   }
@@ -15,9 +16,8 @@ export class DoctorRegistrationComponent implements OnInit {
   ngOnInit() {
   }
 
-  onViewLinkClicked(state:boolean)
-  {
-    this.isDoctorViewSelected=state;
+  onViewLinkClicked(state: boolean) {
+    this.isDoctorViewSelected = state;
   }
 
 }
