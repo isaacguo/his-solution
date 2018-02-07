@@ -4,9 +4,13 @@ import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
 import {Department} from "../../dto/department.model";
 import {Doctor} from "../../dto/doctor.model";
+import {TreatmentCase} from "../../dto/treatment-case.model";
 
 @Injectable()
 export class DepartmentService {
+
+
+  rootUrl: string = "/api/histreatment/departments";
 
   constructor(private authHttp: AuthHttp) {
   }
@@ -22,6 +26,31 @@ export class DepartmentService {
     let url = `/api/histreatment/departments/getDoctorsInDepartmentByUuid/${uuid}/`;
     return this.authHttp.get(url)
       .map(this.extractData);
+  }
+
+  getDepartmentByUuid(uuid:string):Observable<Department> {
+    let url = `${this.rootUrl}/getDepartmentByUuid/${uuid}/`;
+    return this.authHttp.get(url)
+      .map(this.extractData);
+
+  }
+
+  createTreatmentCase(treatmentCase: TreatmentCase): Observable<TreatmentCase> {
+
+    let url = `${this.rootUrl}/book`;
+    let options = this.getOptions();
+
+    return this.authHttp.post(url, treatmentCase, options)
+      .map(this.extractData)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+
+
+  private getOptions() {
+    let headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON
+    let options = new RequestOptions({headers: headers});
+    return options;
   }
 
   private extractData(res: Response) {

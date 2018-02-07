@@ -15,12 +15,36 @@ public class PetEntity {
     private long id;
     private UUID uuid;
 
+
+
+    @ManyToOne
+    @JsonBackReference("PetOwnerEntity-PetEntity")
+    PetOwnerEntity petOwner;
+
+    public List<TreatmentCaseEntity> getTreatmentCaseList() {
+        return treatmentCaseList;
+    }
+
+    public void addTreatmentCase(TreatmentCaseEntity treatmentCase) {
+        if (treatmentCase == null)
+            throw new RuntimeException("treatment case is null");
+        treatmentCase.setPet(this);
+        this.treatmentCaseList.add(treatmentCase);
+    }
+
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
-    @JsonManagedReference("pet-petCase")
-    List<PetCaseEntity> petCaseList = new LinkedList<>();
+    @JsonManagedReference("PetEntity-TreatmentCaseEntity")
+    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
+
+    public PetOwnerEntity getPetOwner() {
+        return petOwner;
+    }
+
+    public void setPetOwner(PetOwnerEntity petOwner) {
+        this.petOwner = petOwner;
+    }
 
     private String petName;
-    private String ownerName;
 
     @ManyToOne
     @JsonBackReference("petType-pet")
@@ -42,16 +66,6 @@ public class PetEntity {
         this.uuid = uuid;
     }
 
-    public List<PetCaseEntity> getPetCaseList() {
-        return petCaseList;
-    }
-
-    public void addPetCase(PetCaseEntity petCase) {
-        if (petCase == null) throw new RuntimeException("PetCase is null");
-        petCase.setPet(this);
-        this.petCaseList.add(petCase);
-    }
-
     public String getPetName() {
         return petName;
     }
@@ -60,13 +74,6 @@ public class PetEntity {
         this.petName = petName;
     }
 
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
 
     public PetTypeEntity getPetType() {
         return petType;

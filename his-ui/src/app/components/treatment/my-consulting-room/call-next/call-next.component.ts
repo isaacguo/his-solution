@@ -1,15 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import {DepartmentService} from "../../../../services/treatment/department.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Department} from "../../../../dto/department.model";
+import {TreatmentCase} from "../../../../dto/treatment-case.model";
 
 @Component({
-  selector: 'app-call-next',
+  selector: 'call-next',
   templateUrl: './call-next.component.html',
   styleUrls: ['./call-next.component.css']
 })
 export class CallNextComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  department:Department;
+  todayTreatmentCases:TreatmentCase[]=[];
+
+  constructor(private departmentService: DepartmentService, private router: Router, private route: ActivatedRoute ) {
+
   }
 
+
+  ngOnInit() {
+    this.departmentService.getDepartments().subscribe(r=>{
+      this.todayTreatmentCases=r[0].treatmentCaseList;
+    });
+  }
 }

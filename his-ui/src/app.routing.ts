@@ -60,14 +60,19 @@ const appRoutes: Routes = [
       {
         path: 'my-consulting-room',
         component: MyConsultingRoomComponent,
-        children:[
+        children: [
           {
             path: 'call-next-patient',
             component: CallNextComponent
           },
           {
             path: 'patient-treatment',
-            component:PatientTreatmentComponent
+            component: PatientTreatmentComponent
+          },
+          {
+            path: '',
+            redirectTo: 'call-next-patient',
+            pathMatch: 'full'
           }
         ]
 
@@ -86,7 +91,8 @@ const appRoutes: Routes = [
           },
           {
             path: '**',
-            redirectTo: 'doctor-list-view'
+            redirectTo: 'doctor-list-view',
+
           }
         ]
       },

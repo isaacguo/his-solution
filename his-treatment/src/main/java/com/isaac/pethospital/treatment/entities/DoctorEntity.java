@@ -15,6 +15,36 @@ public class DoctorEntity {
     private long id;
     private UUID uuid;
 
+    private String selfIntroduction;
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    private int rating;
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    private String jobTitle;
+
+    public String getSelfIntroduction() {
+        return selfIntroduction;
+    }
+
+    public void setSelfIntroduction(String selfIntroduction) {
+        this.selfIntroduction = selfIntroduction;
+    }
+
     @ManyToOne
     @JsonBackReference("DepartmentEntity-DoctorEntity")
     DepartmentEntity department;

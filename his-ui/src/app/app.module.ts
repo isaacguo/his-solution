@@ -45,6 +45,7 @@ import {MyConsultingRoomComponent} from './components/treatment/my-consulting-ro
 import {CallNextComponent} from './components/treatment/my-consulting-room/call-next/call-next.component';
 import {PatientTreatmentComponent} from './components/treatment/my-consulting-room/patient-treatment/patient-treatment.component';
 import {DepartmentService} from "./services/treatment/department.service";
+import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -95,7 +96,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PatientTreatmentComponent
   ],
   imports: [
-    BrowserModule, routing, HttpModule, FormsModule
+    BrowserModule, routing, HttpModule, FormsModule, Ng2Bs3ModalModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

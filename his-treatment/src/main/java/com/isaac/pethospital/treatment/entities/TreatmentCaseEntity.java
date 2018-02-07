@@ -10,24 +10,52 @@ import java.util.UUID;
 @Entity
 public class TreatmentCaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private UUID uuid;
+    public boolean isCreateResult() {
+        return createResult;
+    }
 
-    @Enumerated(EnumType.STRING)
-    private TreatmentCaseStatusEnum treatmentCaseStatus;
+    public void setCreateResult(boolean createResult) {
+        this.createResult = createResult;
+    }
 
+    boolean createResult;
     LocalDateTime treatmentDate;
     LocalDateTime createdDate;
-
     @ManyToOne
     @JsonBackReference("DepartmentEntity-TreatmentCaseEntity")
     DepartmentEntity department;
-
     @ManyToOne
     @JsonBackReference("DoctorEntity-TreatmentCaseEntity")
     DoctorEntity doctor;
+    @ManyToOne
+    @JsonBackReference("PetOwnerEntity-TreatmentCaseEntity")
+    PetOwnerEntity petOwner;
+    @ManyToOne
+    @JsonBackReference("PetEntity-TreatmentCaseEntity")
+    PetEntity pet;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String uuid;
+    @Enumerated(EnumType.STRING)
+    private TreatmentCaseStatusEnum treatmentCaseStatus;
+
+    public PetOwnerEntity getPetOwner() {
+        return petOwner;
+    }
+
+    public void setPetOwner(PetOwnerEntity petOwner) {
+        this.petOwner = petOwner;
+    }
+
+    public PetEntity getPet() {
+        return pet;
+    }
+
+    public void setPet(PetEntity pet) {
+        this.pet = pet;
+    }
+
 
     public long getId() {
         return id;
@@ -37,12 +65,8 @@ public class TreatmentCaseEntity {
         this.id = id;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public TreatmentCaseStatusEnum getTreatmentCaseStatus() {
@@ -83,5 +107,9 @@ public class TreatmentCaseEntity {
 
     public void setDoctor(DoctorEntity doctor) {
         this.doctor = doctor;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

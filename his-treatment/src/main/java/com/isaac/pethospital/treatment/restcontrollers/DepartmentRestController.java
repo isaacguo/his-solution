@@ -2,11 +2,9 @@ package com.isaac.pethospital.treatment.restcontrollers;
 
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
 import com.isaac.pethospital.treatment.entities.DoctorEntity;
+import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
 import com.isaac.pethospital.treatment.services.DepartmentSerivce;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +28,12 @@ public class DepartmentRestController {
     {
         return this.departmentSerivce.getDoctorsInDepartmentByUuid(uuid);
     }
+
+    @PostMapping(value = "/book")
+    public TreatmentCaseEntity createTreatmentCase(@RequestBody TreatmentCaseEntity treatmentCase)
+    {
+
+        return this.departmentSerivce.createTreatmentCase(treatmentCase);
+    }
+
 }

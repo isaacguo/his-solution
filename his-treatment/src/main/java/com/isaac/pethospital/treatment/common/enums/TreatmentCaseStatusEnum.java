@@ -3,6 +3,7 @@ package com.isaac.pethospital.treatment.common.enums;
 public enum TreatmentCaseStatusEnum {
 
     BOOKED("已预约"),
+    UNPAID("未付款"),
     UNPRESENTED("未候诊"),
     WAITING("候诊中"),
     CALLED("已过号"),

@@ -1,13 +1,7 @@
 package com.isaac.pethospital.treatment;
 
-import com.isaac.pethospital.treatment.entities.DepartmentEntity;
-import com.isaac.pethospital.treatment.entities.DoctorEntity;
-import com.isaac.pethospital.treatment.entities.PetEntity;
-import com.isaac.pethospital.treatment.entities.PetTypeEntity;
-import com.isaac.pethospital.treatment.repositories.DepartmentRepository;
-import com.isaac.pethospital.treatment.repositories.DoctorRepository;
-import com.isaac.pethospital.treatment.repositories.PetRepository;
-import com.isaac.pethospital.treatment.repositories.PetTypeRepository;
+import com.isaac.pethospital.treatment.entities.*;
+import com.isaac.pethospital.treatment.repositories.*;
 import com.isaac.pethospital.treatment.services.DepartmentSerivce;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,7 +26,7 @@ public class HisTreatmentManagementApplication {
 
     @Bean
     CommandLineRunner commandLineRunner(PetTypeRepository petTypeRepository,
-                                        PetRepository petRepository,
+                                        PetOwnerRepository petOwnerRepository,
                                         DoctorRepository doctorRepository,
                                         DepartmentRepository departmentRepository,
                                         DepartmentSerivce departmentSerivce) {
@@ -62,14 +56,22 @@ public class HisTreatmentManagementApplication {
 
                 petTypeRepository.save(p1);
 
+                PetOwnerEntity petOwnerEntity=new PetOwnerEntity();
+                petOwnerEntity.setName("黄老邪");
                 PetEntity petEntity1 = new PetEntity();
                 petEntity1.setPetName("笨笨");
                 petEntity1.setPetType(p3);
-                petEntity1.setOwnerName("黄老邪");
-                petRepository.save(petEntity1);
+                petEntity1.setPetOwner(petOwnerEntity);
+                petOwnerEntity.addPet(petEntity1);
+                petOwnerRepository.save(petOwnerEntity);
+
+
 
                 DoctorEntity doctor1=new DoctorEntity();
                 doctor1.setName("黄蓉");
+                doctor1.setSelfIntroduction("擅长：猫，狗外科常见病，手术。");
+                doctor1.setJobTitle("主任医师");
+                doctor1.setRating(4);
 
                 DepartmentEntity departmentEntity=new DepartmentEntity();
                 departmentEntity.setName("全科");
