@@ -8,7 +8,6 @@ import {routing} from "../app.routing";
 import {Http, HttpModule, RequestOptions} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
-import {FrontDeskComponent} from './components/front-desk/front-desk.component';
 import {TreatmentComponent} from './components/treatment/treatment.component';
 import {ProfilesComponent} from './components/profiles/profiles.component';
 import {PetsComponent} from './components/pets/pets.component';
@@ -46,6 +45,8 @@ import {CallNextComponent} from './components/treatment/my-consulting-room/call-
 import {PatientTreatmentComponent} from './components/treatment/my-consulting-room/patient-treatment/patient-treatment.component';
 import {DepartmentService} from "./services/treatment/department.service";
 import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
+import {FrontDeskComponent} from "./components/treatment/front-desk/front-desk.component";
+import { PetRegistrationComponent } from './components/treatment/front-desk/pet-registration/pet-registration.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -93,7 +94,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DoctorListItemComponent,
     MyConsultingRoomComponent,
     CallNextComponent,
-    PatientTreatmentComponent
+    PatientTreatmentComponent,
+    PetRegistrationComponent
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule, Ng2Bs3ModalModule

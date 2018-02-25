@@ -2,13 +2,64 @@
   <h1 class="page-header">我的诊室</h1>
 </div>
 
-<ul class="nav nav-tabs ">
-  <li routerLinkActive="active" >
-    <a routerLink="/my-consulting-room/call-next-patient" class="text-center">叫号</a>
-  </li>
-  <li routerLinkActive="active" >
-    <a routerLink="/my-consulting-room/patient-treatment" class="text-center">诊疗</a>
-  </li>
-</ul>
+<div class="row">
+  <form class="form-inline" role="form">
+    <div class="form-group isaac-form-space">
+      <label for="cardNumber">卡号:</label>
+      <input id="cardNumber" class="form-control" type="text">
+    </div>
+    <div class="form-group isaac-form-space">
+      <label for="patientRecordId">病历: </label>
+      <input id="patientRecordId" class="form-control" type="text">
+    </div>
+    <div class="form-group isaac-form-space">
+      <label for="petName">宠物名称: </label>
+      <input id="petName" class="form-control" type="text">
+    </div>
+    <div class="form-group isaac-form-space">
+      <label for="ownerName">主人姓名: </label>
+      <input id="ownerName" class="form-control" type="text">
+    </div>
+    <button type="btn btn-default">查询</button>
+    <button type="btn btn-default">清除</button>
+  </form>
+</div>
 
-<router-outlet></router-outlet>
+<div class="row">
+  <div class="col-lg-2">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>病历号</th>
+        <th>宠物名称</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1234</td>
+        <td>笨笨</td>
+      </tr>
+      <tr>
+        <td>1235</td>
+        <td>旺旺</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-10">
+    <ul class="nav nav-tabs ">
+      <li routerLinkActive="active" >
+        <a class="text-center">宠物资料</a>
+      </li>
+      <li routerLinkActive="active" >
+        <a class="text-center">宠物病历</a>
+      </li>
+      <li routerLinkActive="active" >
+        <a class="text-center">化验记录</a>
+      </li>
+      <li routerLinkActive="active" >
+        <a class="text-center">影响记录</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -2,7 +2,6 @@ import {RouterModule, Routes} from "@angular/router";
 import {ModuleWithProviders} from "@angular/core";
 import {IndexComponent} from "./app/components/index/index.component";
 import {LoginComponent} from "./app/components/login/login.component";
-import {FrontDeskComponent} from "./app/components/front-desk/front-desk.component";
 import {TreatmentComponent} from "./app/components/treatment/treatment.component";
 import {TestingComponent} from "./app/components/testing/testing.component";
 import {ImagesComponent} from "./app/components/images/images.component";
@@ -34,6 +33,8 @@ import {TimeBasedViewComponent} from "./app/components/treatment/doctor-registra
 import {MyConsultingRoomComponent} from "./app/components/treatment/my-consulting-room/my-consulting-room.component";
 import {CallNextComponent} from "./app/components/treatment/my-consulting-room/call-next/call-next.component";
 import {PatientTreatmentComponent} from "./app/components/treatment/my-consulting-room/patient-treatment/patient-treatment.component";
+import {FrontDeskComponent} from "./app/components/treatment/front-desk/front-desk.component";
+import {PetRegistrationComponent} from "./app/components/treatment/front-desk/pet-registration/pet-registration.component";
 
 
 const appRoutes: Routes = [
@@ -48,7 +49,13 @@ const appRoutes: Routes = [
       },
       {
         path: 'frontdesk',
-        component: FrontDeskComponent
+        component: FrontDeskComponent,
+        children:[
+          {
+            path: 'petreg',
+            component: PetRegistrationComponent
+          }
+        ]
       },
       {
         path: 'treatment',
@@ -61,22 +68,6 @@ const appRoutes: Routes = [
       {
         path: 'my-consulting-room',
         component: MyConsultingRoomComponent,
-        children: [
-          {
-            path: 'call-next-patient',
-            component: CallNextComponent
-          },
-          {
-            path: 'patient-treatment',
-            component: PatientTreatmentComponent
-          },
-          {
-            path: '',
-            redirectTo: 'call-next-patient',
-            pathMatch: 'full'
-          }
-        ]
-
       },
       {
         path: 'doctor-registration',
