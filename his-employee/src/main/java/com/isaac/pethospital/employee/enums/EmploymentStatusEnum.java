@@ -9,10 +9,14 @@ public enum EmploymentStatusEnum {
     RE_EMPLOY_AFTER_RETIRMENT("返聘"),
     OUTSOURCE("外包");
 
-    private String desc;
+    EmploymentStatusEnum(String text) {
+        this.text = text;
+    }
 
-    EmploymentStatusEnum(String desc)
-    {
+    private String text;
 
+    @Override
+    public String toString() {
+        return text;
     }
 }

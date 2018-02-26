@@ -2,24 +2,89 @@ package com.isaac.pethospital.treatment.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.isaac.pethospital.common.enums.GenderEnum;
+import com.isaac.pethospital.common.enums.PetColorEnum;
+import com.isaac.pethospital.common.enums.PetGenderEnum;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class PetEntity {
+    @ManyToOne
+    @JsonBackReference("PetOwnerEntity-PetEntity")
+    PetOwnerEntity petOwner;
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    @JsonManagedReference("PetEntity-TreatmentCaseEntity")
+    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private UUID uuid;
 
+    public boolean isSterilized() {
+        return sterilized;
+    }
 
+    public void setSterilized(boolean sterilized) {
+        this.sterilized = sterilized;
+    }
 
+    boolean sterilized;
+
+    public PetColorEnum getColor() {
+        return color;
+    }
+
+    public void setColor(PetColorEnum color) {
+        this.color = color;
+    }
+
+    PetColorEnum color;
+    LocalDateTime dateOfBirth;
+    int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public LocalDateTime getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public PetGenderEnum getGender() {
+        return gender;
+    }
+
+    public void setGender(PetGenderEnum gender) {
+        this.gender = gender;
+    }
+
+    private PetGenderEnum gender;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
     @ManyToOne
-    @JsonBackReference("PetOwnerEntity-PetEntity")
-    PetOwnerEntity petOwner;
+    @JsonBackReference("petType-pet")
+    private PetTypeEntity petType;
 
     public List<TreatmentCaseEntity> getTreatmentCaseList() {
         return treatmentCaseList;
@@ -32,10 +97,6 @@ public class PetEntity {
         this.treatmentCaseList.add(treatmentCase);
     }
 
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
-    @JsonManagedReference("PetEntity-TreatmentCaseEntity")
-    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
-
     public PetOwnerEntity getPetOwner() {
         return petOwner;
     }
@@ -43,12 +104,6 @@ public class PetEntity {
     public void setPetOwner(PetOwnerEntity petOwner) {
         this.petOwner = petOwner;
     }
-
-    private String petName;
-
-    @ManyToOne
-    @JsonBackReference("petType-pet")
-    private PetTypeEntity petType;
 
     public long getId() {
         return id;
@@ -66,13 +121,6 @@ public class PetEntity {
         this.uuid = uuid;
     }
 
-    public String getPetName() {
-        return petName;
-    }
-
-    public void setPetName(String petName) {
-        this.petName = petName;
-    }
 
 
     public PetTypeEntity getPetType() {

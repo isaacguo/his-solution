@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 @Component({
   selector: 'app-pet-registration',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PetRegistrationComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
+
+  onCreatePetOwnerButtonClicked(createPetOwnerModal: ModalComponent) {
+    createPetOwnerModal.open();
+
+  }
+
+  onCreateNewPetButtonClicked(createPetModal: ModalComponent) {
+    createPetModal.open();
+
+  }
 }

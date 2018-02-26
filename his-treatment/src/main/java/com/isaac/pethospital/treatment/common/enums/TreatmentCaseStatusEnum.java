@@ -10,9 +10,14 @@ public enum TreatmentCaseStatusEnum {
     FINISHED("已完成"),
     UNFINISHED("未完成");
 
-    TreatmentCaseStatusEnum(String desc) {
-
+    TreatmentCaseStatusEnum(String text) {
+        this.text = text;
     }
 
-    private String desc;
+    private String text;
+
+    @Override
+    public String toString() {
+        return text;
+    }
 }

@@ -10,14 +10,6 @@ import java.util.UUID;
 @Entity
 public class TreatmentCaseEntity {
 
-    public boolean isCreateResult() {
-        return createResult;
-    }
-
-    public void setCreateResult(boolean createResult) {
-        this.createResult = createResult;
-    }
-
     boolean createResult;
     LocalDateTime treatmentDate;
     LocalDateTime createdDate;
@@ -39,6 +31,14 @@ public class TreatmentCaseEntity {
     private String uuid;
     @Enumerated(EnumType.STRING)
     private TreatmentCaseStatusEnum treatmentCaseStatus;
+
+    public boolean isCreateResult() {
+        return createResult;
+    }
+
+    public void setCreateResult(boolean createResult) {
+        this.createResult = createResult;
+    }
 
     public PetOwnerEntity getPetOwner() {
         return petOwner;
@@ -67,6 +67,10 @@ public class TreatmentCaseEntity {
 
     public String getUuid() {
         return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public TreatmentCaseStatusEnum getTreatmentCaseStatus() {
@@ -107,9 +111,5 @@ public class TreatmentCaseEntity {
 
     public void setDoctor(DoctorEntity doctor) {
         this.doctor = doctor;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 }

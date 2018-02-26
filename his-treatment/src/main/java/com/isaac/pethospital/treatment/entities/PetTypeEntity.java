@@ -10,20 +10,17 @@ import java.util.List;
 @Entity
 public class PetTypeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     boolean isRoot;
     String name;
-
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     @JsonManagedReference("parent-children")
     List<PetTypeEntity> children = new LinkedList<>();
-
     @ManyToOne
     @JsonBackReference("parent-children")
     PetTypeEntity parent;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @OneToMany(mappedBy = "petType", cascade = CascadeType.ALL)
     @JsonManagedReference("petType-pet")

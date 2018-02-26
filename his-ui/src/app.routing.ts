@@ -54,6 +54,10 @@ const appRoutes: Routes = [
           {
             path: 'petreg',
             component: PetRegistrationComponent
+          },
+          {
+            path: '**',
+            redirectTo: 'petreg',
           }
         ]
       },

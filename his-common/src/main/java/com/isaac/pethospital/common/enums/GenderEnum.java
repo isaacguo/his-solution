@@ -1,11 +1,11 @@
-package com.isaac.pethospital.employee.enums;
+package com.isaac.pethospital.common.enums;
 
-public enum SexualEnum {
+public enum GenderEnum {
 
     MALE("男"),
     FEMALE("女");
 
-    SexualEnum(String text) {
+    GenderEnum(String text) {
         this.text = text;
     }
 

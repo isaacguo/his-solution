@@ -59,7 +59,7 @@ public class HisTreatmentManagementApplication {
                 PetOwnerEntity petOwnerEntity=new PetOwnerEntity();
                 petOwnerEntity.setName("黄老邪");
                 PetEntity petEntity1 = new PetEntity();
-                petEntity1.setPetName("笨笨");
+                petEntity1.setName("笨笨");
                 petEntity1.setPetType(p3);
                 petEntity1.setPetOwner(petOwnerEntity);
                 petOwnerEntity.addPet(petEntity1);
