@@ -24,4 +24,12 @@ export class PetRegistrationComponent implements OnInit {
     createPetModal.open();
 
   }
+
+  onCreatePetOwnerModalClosed() {
+
+  }
+
+  onCreatePetModalClosed() {
+    
+  }
 }
