@@ -30,6 +30,6 @@ export class PetRegistrationComponent implements OnInit {
   }
 
   onCreatePetModalClosed() {
-    
+
   }
 }

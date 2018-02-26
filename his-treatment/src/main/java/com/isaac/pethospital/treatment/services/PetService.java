@@ -1,4 +1,9 @@
 package com.isaac.pethospital.treatment.services;
 
-public class PetService {
+import com.isaac.pethospital.treatment.entities.PetEntity;
+
+import java.util.List;
+
+public interface PetService {
+    List<PetEntity> findByName(String name);
 }

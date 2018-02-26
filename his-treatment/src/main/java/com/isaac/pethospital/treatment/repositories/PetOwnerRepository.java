@@ -10,4 +10,5 @@ public interface PetOwnerRepository extends JpaRepository<PetOwnerEntity,Long> {
     List<PetOwnerEntity> findByName(String name);
     PetOwnerEntity findByMemberNumber(String s);
 
+
 }
