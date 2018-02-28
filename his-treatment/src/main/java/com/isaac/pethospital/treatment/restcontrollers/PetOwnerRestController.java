@@ -3,6 +3,7 @@ package com.isaac.pethospital.treatment.restcontrollers;
 import com.isaac.pethospital.treatment.dtos.NameQuery;
 import com.isaac.pethospital.treatment.dtos.PetOwnerAddPetRequest;
 import com.isaac.pethospital.treatment.dtos.PetOwnerCreateRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerDeletePetRequest;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.services.PetOwnerService;
@@ -41,6 +42,12 @@ public class PetOwnerRestController {
     public PetOwnerEntity createPetOwner(@Valid @RequestBody PetOwnerCreateRequest petOwnerCreateRequest)
     {
         return this.petOwnerService.createPetOwner(petOwnerCreateRequest);
+    }
+
+    @DeleteMapping(value = "delete-pet")
+    public PetOwnerEntity deletePet(@RequestBody PetOwnerDeletePetRequest petOwnerDeletePetRequest)
+    {
+        return this.petOwnerService.deletePet(petOwnerDeletePetRequest);
     }
 
     @PostMapping(value = "add-pet")

@@ -2,6 +2,7 @@ package com.isaac.pethospital.treatment.restcontrollers;
 
 import com.isaac.pethospital.treatment.dtos.PetOwnerAddPetRequest;
 import com.isaac.pethospital.treatment.dtos.PetOwnerCreateRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerDeletePetRequest;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.services.PetOwnerService;
 import org.junit.Before;
@@ -25,8 +26,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -72,6 +72,18 @@ public class PetOwnerRestControllerSpecTests {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         verify(petOwnerService, times(1)).addPet(any(PetOwnerAddPetRequest.class));
+    }
+
+    @Test
+    public void givenPetOwnerDeletePetRequestdWhenDeletePetThenReturn200() throws Exception {
+
+        PetOwnerDeletePetRequest request = new PetOwnerDeletePetRequest();
+
+
+        this.mockMvc.perform(delete("/owners/delete-pet").content("{\"id\":\"1\",\"petOwner\":{\"id\":\"1\"}}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        verify(petOwnerService, times(1)).deletePet(any(PetOwnerDeletePetRequest.class));
     }
 
 

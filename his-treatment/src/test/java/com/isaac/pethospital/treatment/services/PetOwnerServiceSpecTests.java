@@ -3,6 +3,8 @@ package com.isaac.pethospital.treatment.services;
 
 import com.isaac.pethospital.treatment.dtos.PetOwnerAddPetRequest;
 import com.isaac.pethospital.treatment.dtos.PetOwnerCreateRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerDeletePetRequest;
+import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.repositories.PetOwnerRepository;
 import org.junit.Before;
@@ -14,6 +16,7 @@ import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class PetOwnerServiceSpecTests {
@@ -70,7 +73,6 @@ public class PetOwnerServiceSpecTests {
         verify(petOwnerRepository, times(1)).save(any(PetOwnerEntity.class));
     }
 
-
     @Test
     public void whenFindByMemberNumberThenMethodFindByMemberNumberInRepositoryIsInvokedOnce() {
         PetOwnerEntity petOwnerEntity = getPetOwnerEntity();
@@ -94,6 +96,45 @@ public class PetOwnerServiceSpecTests {
         //then
         verify(petOwnerRepository, times(1)).findByName("刘备");
     }
+
+    @Test
+    public void whenDeletePetByIdThenThrowExceptionIfPetOwnerIsNotFound() {
+        //given
+        PetOwnerDeletePetRequest request=new PetOwnerDeletePetRequest();
+        PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
+        petOwnerEntity.setId(2L);
+        PetEntity petEntity = new PetEntity();
+        petEntity.setId(1L);
+        petOwnerEntity.addPet(petEntity);
+        request.setId(1L);
+        request.setPetOwner(petOwnerEntity);
+        //expected
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("Cannot find Pet Owner");
+        //when
+        this.petOwnerService.deletePet(request);
+    }
+
+    @Test
+    public void whenDeletePetByIdThenPetIsRemovedOutOfThePetList() {
+        //given
+        PetOwnerDeletePetRequest request=new PetOwnerDeletePetRequest();
+        PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
+        petOwnerEntity.setId(2L);
+        PetEntity petEntity = new PetEntity();
+        petEntity.setId(1L);
+        petOwnerEntity.addPet(petEntity);
+        request.setId(1L);
+        request.setPetOwner(petOwnerEntity);
+        doReturn(true).when(this.petOwnerRepository).exists(2L);
+        doReturn(petOwnerEntity).when(this.petOwnerRepository).getOne(2L);
+        //when
+        this.petOwnerService.deletePet(request);
+        //then
+        assertThat(petOwnerEntity.getPetList().size()).isEqualTo(0);
+        verify(petOwnerRepository, times(1)).save(any(PetOwnerEntity.class));
+    }
+
 
     private PetOwnerEntity getPetOwnerEntity() {
         PetOwnerEntity petOwnerEntity = new PetOwnerEntity();

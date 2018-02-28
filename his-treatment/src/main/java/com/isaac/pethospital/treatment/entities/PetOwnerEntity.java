@@ -123,6 +123,13 @@ public class PetOwnerEntity {
     public List<PetEntity> getPetList() {
         return petList;
     }
+    public void removePet(PetEntity pet)
+    {
+        if(pet==null)
+            throw new RuntimeException("pet is null");
+        pet.setPetOwner(null);
+        this.petList.remove(pet);
+    }
 
     public void addPet(PetEntity pet) {
         if (pet == null)
