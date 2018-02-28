@@ -1,5 +1,8 @@
 package com.isaac.pethospital.treatment.services;
 
+import com.isaac.pethospital.treatment.dtos.PetOwnerAddPetRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerCreateRequest;
+import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.repositories.PetOwnerRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +29,21 @@ public class PetOwnerServiceImpl implements PetOwnerService {
     }
 
     @Override
-    public PetOwnerEntity createOwner(PetOwnerEntity petOwnerEntity) {
+    public PetOwnerEntity createPetOwner(PetOwnerCreateRequest petOwnerCreateRequest) {
+        PetOwnerEntity petOwnerEntity = petOwnerCreateRequest.toPetOwnerEntity();
+        return this.petOwnerRepository.save(petOwnerEntity);
+    }
+
+    @Override
+    public PetOwnerEntity addPet(PetOwnerAddPetRequest petOwnerAddPetRequest) {
+        Long petOwnerId = petOwnerAddPetRequest.getPetOwner().getId();
+
+        if (!this.petOwnerRepository.exists(petOwnerId))
+            throw new RuntimeException("Cannot find Pet Owner");
+
+        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.getOne(petOwnerId);
+        PetEntity petEntity = petOwnerAddPetRequest.toPetEntity();
+        petOwnerEntity.addPet(petEntity);
         return this.petOwnerRepository.save(petOwnerEntity);
     }
 }

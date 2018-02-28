@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.common.enums.GenderEnum;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,11 +22,18 @@ public class PetOwnerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String uuid;
+
     private String name;
     private GenderEnum gender;
     private LocalDateTime dateOfBirth;
 
     private String memberNumber;
+    @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
+    private List<ExpenseRecordEntity> expenseRecordList = new LinkedList<ExpenseRecordEntity>();
+    private String address;
+    private String cellPhone;
+    private String email;
+    private String homePhone;
 
     public String getMemberNumber() {
         return memberNumber;
@@ -35,10 +43,6 @@ public class PetOwnerEntity {
         this.memberNumber = memberNumber;
     }
 
-    @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
-    private List<ExpenseRecordEntity> expenseRecordList = new LinkedList<ExpenseRecordEntity>();
-    private String address;
-
     public String getAddress() {
         return address;
     }
@@ -46,10 +50,6 @@ public class PetOwnerEntity {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    private String cellPhone;
-    private String email;
-    private String homePhone;
 
     public List<ExpenseRecordEntity> getExpenseRecordList() {
         return expenseRecordList;

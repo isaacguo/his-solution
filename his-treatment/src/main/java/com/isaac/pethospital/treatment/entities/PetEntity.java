@@ -20,10 +20,19 @@ public class PetEntity {
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
     @JsonManagedReference("PetEntity-TreatmentCaseEntity")
     List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
+    boolean sterilized;
+    PetColorEnum color;
+    LocalDateTime dateOfBirth;
+    int age;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private UUID uuid;
+    private PetGenderEnum gender;
+    private String name;
+    @ManyToOne
+    @JsonBackReference("petType-pet")
+    private PetTypeEntity petType;
 
     public boolean isSterilized() {
         return sterilized;
@@ -33,8 +42,6 @@ public class PetEntity {
         this.sterilized = sterilized;
     }
 
-    boolean sterilized;
-
     public PetColorEnum getColor() {
         return color;
     }
@@ -42,10 +49,6 @@ public class PetEntity {
     public void setColor(PetColorEnum color) {
         this.color = color;
     }
-
-    PetColorEnum color;
-    LocalDateTime dateOfBirth;
-    int age;
 
     public int getAge() {
         return age;
@@ -71,8 +74,6 @@ public class PetEntity {
         this.gender = gender;
     }
 
-    private PetGenderEnum gender;
-
     public String getName() {
         return name;
     }
@@ -80,11 +81,6 @@ public class PetEntity {
     public void setName(String name) {
         this.name = name;
     }
-
-    private String name;
-    @ManyToOne
-    @JsonBackReference("petType-pet")
-    private PetTypeEntity petType;
 
     public List<TreatmentCaseEntity> getTreatmentCaseList() {
         return treatmentCaseList;
