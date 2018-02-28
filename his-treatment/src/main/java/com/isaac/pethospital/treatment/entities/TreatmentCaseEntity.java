@@ -5,7 +5,6 @@ import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 public class TreatmentCaseEntity {

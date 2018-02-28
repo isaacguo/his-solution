@@ -6,8 +6,17 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
-public class PetOwnerCreateRequest {
+public class PetOwnerOperationRequest {
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    Long id;
     @NotBlank
     private String name;
     private GenderEnum gender;
@@ -16,6 +25,9 @@ public class PetOwnerCreateRequest {
     private String cellPhone;
     private String email;
     private String homePhone;
+
+    public PetOwnerOperationRequest() {
+    }
 
     public String getName() {
         return name;
@@ -74,14 +86,16 @@ public class PetOwnerCreateRequest {
     }
 
     public PetOwnerEntity toPetOwnerEntity() {
-       PetOwnerEntity petOwnerEntity= new PetOwnerEntity();
-       petOwnerEntity.setName(this.name);
-       petOwnerEntity.setAddress(this.address);
-       petOwnerEntity.setCellPhone(this.cellPhone);
-       petOwnerEntity.setDateOfBirth(this.dateOfBirth);
-       petOwnerEntity.setEmail(this.email);
-       petOwnerEntity.setGender(this.gender);
-       petOwnerEntity.setHomePhone(this.homePhone);
-       return petOwnerEntity;
-    };
+        PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
+        petOwnerEntity.setName(this.name);
+        petOwnerEntity.setAddress(this.address);
+        petOwnerEntity.setCellPhone(this.cellPhone);
+        petOwnerEntity.setDateOfBirth(this.dateOfBirth);
+        petOwnerEntity.setEmail(this.email);
+        petOwnerEntity.setGender(this.gender);
+        petOwnerEntity.setHomePhone(this.homePhone);
+        return petOwnerEntity;
+    }
+
+    ;
 }

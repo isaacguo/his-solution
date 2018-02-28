@@ -1,10 +1,9 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
 import com.isaac.pethospital.treatment.dtos.NameQuery;
-import com.isaac.pethospital.treatment.dtos.PetOwnerAddPetRequest;
-import com.isaac.pethospital.treatment.dtos.PetOwnerCreateRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerPetOperationRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerOperationRequest;
 import com.isaac.pethospital.treatment.dtos.PetOwnerDeletePetRequest;
-import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.services.PetOwnerService;
 import com.isaac.pethospital.treatment.validators.PetOwnerCreateRequestValidator;
@@ -39,10 +38,17 @@ public class PetOwnerRestController {
     }
 
     @PostMapping(value = "create-pet-owner")
-    public PetOwnerEntity createPetOwner(@Valid @RequestBody PetOwnerCreateRequest petOwnerCreateRequest)
+    public PetOwnerEntity createPetOwner(@Valid @RequestBody PetOwnerOperationRequest petOwnerOperationRequest)
     {
-        return this.petOwnerService.createPetOwner(petOwnerCreateRequest);
+        return this.petOwnerService.createPetOwner(petOwnerOperationRequest);
     }
+
+    @PutMapping(value = "update-pet-owner")
+    public PetOwnerEntity updatePetOwner(@Valid @RequestBody PetOwnerOperationRequest petOwnerOperationRequest)
+    {
+        return this.petOwnerService.updatePetOwner(petOwnerOperationRequest);
+    }
+
 
     @DeleteMapping(value = "delete-pet")
     public PetOwnerEntity deletePet(@RequestBody PetOwnerDeletePetRequest petOwnerDeletePetRequest)
@@ -51,9 +57,15 @@ public class PetOwnerRestController {
     }
 
     @PostMapping(value = "add-pet")
-    public PetOwnerEntity addPet(@Valid @RequestBody PetOwnerAddPetRequest petOwnerAddPetRequest)
+    public PetOwnerEntity addPet(@Valid @RequestBody PetOwnerPetOperationRequest petOwnerPetOperationRequest)
     {
-        return this.petOwnerService.addPet(petOwnerAddPetRequest);
+        return this.petOwnerService.addPet(petOwnerPetOperationRequest);
+    }
+
+    @PutMapping(value = "update-pet")
+    public PetOwnerEntity updatePet(@Valid @RequestBody PetOwnerPetOperationRequest petOwnerPetOperationRequest)
+    {
+        return this.petOwnerService.updatePet(petOwnerPetOperationRequest);
     }
 
 

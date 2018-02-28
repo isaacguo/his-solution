@@ -1,7 +1,7 @@
 <modal #createPetOwnerModal (onClose)="onCreatePetOwnerModalClosed()">
   <form #modalForm1="ngForm">
     <modal-header [show-close]="true">
-      <h4 class="modal-title">新建主人</h4>
+      <h4 class="modal-title">{{ownerModalTitle}}</h4>
     </modal-header>
     <modal-body>
       <form role="form">
@@ -47,7 +47,7 @@
 <modal #createPetModal (onClose)="onCreatePetModalClosed()">
   <form #modalForm3="ngForm">
     <modal-header [show-close]="true">
-      <h4 class="modal-title">新增宠物</h4>
+      <h4 class="modal-title">{{petModalTitle}}</h4>
     </modal-header>
     <modal-body>
       <form class="form-inline" role="form">
@@ -131,31 +131,36 @@
       <form class="form-inline" role="form">
         <div class="form-group isaac-form-space">
           <label>编号:</label>
-          <input class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.id" name="currentPetOwnerId" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>姓名: </label>
-          <input [(ngModel)]="currentPetOwner.name" name="currentPetOwnerName" class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.name" name="currentPetOwnerName" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>性别: </label>
-          <input class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.gender" name="currentPetOwnerGender" class="form-control"
+                 type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>生日: </label>
-          <input class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.dateOfBirth" name="currentPetOwnerDateOfBirth" class="form-control"
+                 type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>手机: </label>
-          <input class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.cellPhone" name="currentPetOwnerCellPhone" class="form-control"
+                 type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>电话: </label>
-          <input class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.homePhone" name="currentPetOwnerHomePhone" class="form-control"
+                 type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>邮箱: </label>
-          <input class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.email" name="currentPetOwnerEmail" class="form-control"
+                 type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>最后消费: </label>
@@ -163,59 +168,57 @@
         </div>
         <div class="form-group isaac-form-space">
           <label>住址: </label>
-          <input class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.address" name="currentPetOwnerAddress" class="form-control"
+                 type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>卡号: </label>
-          <input class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner.memberNumber" name="currentPetOwnerMemberNumber"
+                 class="form-control" type="text">
         </div>
       </form>
       <div class="btn-group btn-group-lg isaac-margin-top" role="group">
-        <button type="btn btn-default">修改主人信息</button>
+        <button (click)="onModifyOwnerButtonClicked(createPetOwnerModal)" type="btn btn-default">修改主人信息</button>
+        <button (click)="onCreateNewPetButtonClicked(createPetModal)" type="btn btn-default">新增宠物</button>
       </div>
       <div class="row">
-        <div class="col-md-10">
-          <table class="table">
-            <thead>
-            <tr>
-              <th>编号</th>
-              <th>名称</th>
-              <th>性别</th>
-              <th>年龄</th>
-              <th>颜色</th>
-              <th>种类</th>
-              <th>品种</th>
-              <th>注册日期</th>
-              <th>操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let pet of currentPetOwner.petList;let petIndex=index">
-              <td>{{petIndex+1}}</td>
-              <td>{{pet.name}}</td>
-              <td>{{pet.gender}}</td>
-              <td>{{pet.age}}</td>
-              <td>{{pet.color}}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td>
-                <div class="button-group">
-                  <button type="button" class="btn btn-default btn-s" (click)="onEditPetButtonClicked(pet)"><span class="glyphicon glyphicon-pencil"></span></button>
-                  <button type="button" class="btn btn-default btn-s" (click)="onRemovePetButtonClicked(pet)"><span class="glyphicon glyphicon-remove"></span></button>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-2">
-          <div class="btn-group btn-group-lg isaac-margin-top" role="group">
-            <button (click)="onCreateNewPetButtonClicked(createPetModal)" type="btn btn-default">新增宠物</button>
-            <button type="btn btn-default">修改宠物</button>
-            <button type="btn btn-default">删除宠物</button>
-          </div>
-        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>颜色</th>
+            <th>种类</th>
+            <th>品种</th>
+            <th>注册日期</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr (click)="onRowClicked(pet)" *ngFor="let pet of currentPetOwner.petList;let petIndex=index"
+              [class.info]="isRowSelected(pet)">
+            <td>{{petIndex+1}}</td>
+            <td>{{pet.name}}</td>
+            <td>{{pet.gender}}</td>
+            <td>{{pet.age}}</td>
+            <td>{{pet.color}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <div class="button-group">
+                <button type="button" class="btn btn-default btn-s" (click)="onUpdatePetButtonClicked(createPetModal, pet)"><span
+                  class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-default btn-s" (click)="onRemovePetButtonClicked(pet)"><span
+                  class="glyphicon glyphicon-remove"></span></button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
       </div>
     </div>
   </div>
@@ -229,31 +232,27 @@
       <form class="form-inline" role="form">
         <div class="form-group isaac-form-space">
           <label>编号:</label>
-          <input class="form-control" type="text">
+          <input [(ngModel)]="selectedPet.id" name="selectedPetId" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>名称: </label>
-          <input class="form-control" type="text">
+          <input [(ngModel)]="selectedPet.name" name="selectedPetName" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>性别: </label>
-          <input class="form-control" type="text">
-        </div>
-        <div class="form-group isaac-form-space">
-          <label>生日: </label>
-          <input class="form-control" type="text">
+          <input [(ngModel)]="selectedPet.gender" name="selectedPetGender" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>年龄: </label>
-          <input class="form-control" type="text">
+          <input [(ngModel)]="selectedPet.age" name="selectedPetAge" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>颜色: </label>
-          <input class="form-control" type="text">
+          <input [(ngModel)]="selectedPet.color" name="selectedPetColor" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>种类: </label>
-          <input class="form-control" type="text">
+          <input [ngModel]="selectedPet.petType?.name" name="selectedPetPetTypeName" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>品种: </label>
@@ -261,7 +260,7 @@
         </div>
         <div class="form-group isaac-form-space">
           <label>绝育: </label>
-          <input class="form-control" type="text">
+          <input [ngModel]="selectedPet.sterilized" name="selectedPetSterilized" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>病历: </label>

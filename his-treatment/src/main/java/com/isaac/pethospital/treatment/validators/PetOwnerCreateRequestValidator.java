@@ -1,11 +1,9 @@
 package com.isaac.pethospital.treatment.validators;
 
-import com.isaac.pethospital.treatment.dtos.PetOwnerCreateRequest;
-import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
+import com.isaac.pethospital.treatment.dtos.PetOwnerOperationRequest;
 import com.isaac.pethospital.treatment.repositories.PetOwnerRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -19,7 +17,7 @@ public class PetOwnerCreateRequestValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return PetOwnerCreateRequest.class.equals(aClass);
+        return PetOwnerOperationRequest.class.equals(aClass);
     }
 
     @Override

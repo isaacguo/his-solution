@@ -8,8 +8,17 @@ import com.isaac.pethospital.treatment.entities.PetTypeEntity;
 
 import java.time.LocalDateTime;
 
-public class PetOwnerAddPetRequest {
+public class PetOwnerPetOperationRequest {
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    private Long id;
     private PetOwnerEntity petOwner;
     private boolean sterilized;
     private PetColorEnum color;

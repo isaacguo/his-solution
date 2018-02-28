@@ -1,8 +1,8 @@
 package com.isaac.pethospital.treatment.services;
 
 
-import com.isaac.pethospital.treatment.dtos.PetOwnerAddPetRequest;
-import com.isaac.pethospital.treatment.dtos.PetOwnerCreateRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerPetOperationRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerOperationRequest;
 import com.isaac.pethospital.treatment.dtos.PetOwnerDeletePetRequest;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
@@ -12,7 +12,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,9 +35,46 @@ public class PetOwnerServiceSpecTests {
     @Test
     public void whenCreateNewPetOwnerThenCreated() {
         //given
-        PetOwnerCreateRequest petOwnerCreateRequest = new PetOwnerCreateRequest();
+        PetOwnerOperationRequest petOwnerOperationRequest = new PetOwnerOperationRequest();
         //when
-        this.petOwnerService.createPetOwner(petOwnerCreateRequest);
+        this.petOwnerService.createPetOwner(petOwnerOperationRequest);
+        //then
+        verify(petOwnerRepository, times(1)).save(any(PetOwnerEntity.class));
+    }
+
+    @Test
+    public void givenRequestWhenUpdatePetOwnerThenThrowExecptionIfIdIsEmpty() {
+        //given
+        PetOwnerOperationRequest request = new PetOwnerOperationRequest();
+        //expected
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("Pet Owner Id Should Not Be Zero");
+        //when
+        this.petOwnerService.updatePetOwner(request);
+    }
+
+    @Test
+    public void givenRequestWhenUpdatePetOwnerThenThrowExecptionIfOwnerDoesNotExist() {
+        //given
+        PetOwnerOperationRequest request = new PetOwnerOperationRequest();
+        request.setId(1L);
+        doReturn(false).when(petOwnerRepository).exists(1L);
+        //expected
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("Pet Owner Cannot Be Found.");
+        //when
+        this.petOwnerService.updatePetOwner(request);
+    }
+
+    @Test
+    public void givenRequestWhenUpdatePetOwnerThenSuccess() {
+        //given
+        PetOwnerOperationRequest request = new PetOwnerOperationRequest();
+        request.setId(1L);
+        doReturn(true).when(petOwnerRepository).exists(1L);
+        doReturn(new PetOwnerEntity()).when(petOwnerRepository).getOne(1L);
+        //when
+        this.petOwnerService.updatePetOwner(request);
         //then
         verify(petOwnerRepository, times(1)).save(any(PetOwnerEntity.class));
     }
@@ -48,14 +84,14 @@ public class PetOwnerServiceSpecTests {
         //given
         PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
         petOwnerEntity.setId(2L);
-        PetOwnerAddPetRequest petOwnerAddPetRequest = new PetOwnerAddPetRequest();
-        petOwnerAddPetRequest.setPetOwner(petOwnerEntity);
+        PetOwnerPetOperationRequest petOwnerPetOperationRequest = new PetOwnerPetOperationRequest();
+        petOwnerPetOperationRequest.setPetOwner(petOwnerEntity);
         doReturn(false).when(this.petOwnerRepository).exists(1L);
         //expected
         exception.expect(RuntimeException.class);
         exception.expectMessage("Cannot find Pet Owner");
         //when
-        this.petOwnerService.addPet(petOwnerAddPetRequest);
+        this.petOwnerService.addPet(petOwnerPetOperationRequest);
     }
 
     @Test
@@ -63,15 +99,16 @@ public class PetOwnerServiceSpecTests {
         //given
         PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
         petOwnerEntity.setId(1L);
-        PetOwnerAddPetRequest petOwnerAddPetRequest = new PetOwnerAddPetRequest();
-        petOwnerAddPetRequest.setPetOwner(petOwnerEntity);
+        PetOwnerPetOperationRequest petOwnerPetOperationRequest = new PetOwnerPetOperationRequest();
+        petOwnerPetOperationRequest.setPetOwner(petOwnerEntity);
         doReturn(true).when(petOwnerRepository).exists(1L);
         doReturn(petOwnerEntity).when(petOwnerRepository).getOne(1L);
         //when
-        this.petOwnerService.addPet(petOwnerAddPetRequest);
+        this.petOwnerService.addPet(petOwnerPetOperationRequest);
         //then
         verify(petOwnerRepository, times(1)).save(any(PetOwnerEntity.class));
     }
+
 
     @Test
     public void whenFindByMemberNumberThenMethodFindByMemberNumberInRepositoryIsInvokedOnce() {
@@ -100,7 +137,7 @@ public class PetOwnerServiceSpecTests {
     @Test
     public void whenDeletePetByIdThenThrowExceptionIfPetOwnerIsNotFound() {
         //given
-        PetOwnerDeletePetRequest request=new PetOwnerDeletePetRequest();
+        PetOwnerDeletePetRequest request = new PetOwnerDeletePetRequest();
         PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
         petOwnerEntity.setId(2L);
         PetEntity petEntity = new PetEntity();
@@ -115,10 +152,11 @@ public class PetOwnerServiceSpecTests {
         this.petOwnerService.deletePet(request);
     }
 
+
     @Test
     public void whenDeletePetByIdThenPetIsRemovedOutOfThePetList() {
         //given
-        PetOwnerDeletePetRequest request=new PetOwnerDeletePetRequest();
+        PetOwnerDeletePetRequest request = new PetOwnerDeletePetRequest();
         PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
         petOwnerEntity.setId(2L);
         PetEntity petEntity = new PetEntity();
@@ -136,12 +174,92 @@ public class PetOwnerServiceSpecTests {
     }
 
 
+    @Test
+    public void givenRequestWhenUpdatePetThenThrowExceptionIfIdIsEmpty() {
+        //given
+        PetOwnerPetOperationRequest request = new PetOwnerPetOperationRequest();
+        //expected
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("Pet Id Should Not Be Zero");
+        //when
+        this.petOwnerService.updatePet(request);
+    }
+
+    @Test
+    public void givenRequestWhenUpdatePetThenThrowExceptionIfOwnerIsNull() {
+        //given
+        PetOwnerPetOperationRequest request = new PetOwnerPetOperationRequest();
+        request.setId(1L);
+
+        //expected
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("Pet Owner Id Should Not Be Zero");
+        //when
+        this.petOwnerService.updatePet(request);
+
+    }
+
+    @Test
+    public void givenRequestWhenUpdatePetThenThrowExceptionIfOwnerDoesNotExistInRepo() {
+        //given
+        PetOwnerPetOperationRequest request = new PetOwnerPetOperationRequest();
+        request.setId(1L);
+        PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
+        petOwnerEntity.setId(2L);
+        request.setPetOwner(petOwnerEntity);
+
+        doReturn(false).when(petOwnerRepository).exists(2L);
+        //expected
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("Pet Owner Cannot Be Found.");
+        //when
+        this.petOwnerService.updatePet(request);
+    }
+
+    @Test
+    public void givenRequestWhenUpdatePetThenSuccess() {
+        //given
+        PetOwnerPetOperationRequest request = new PetOwnerPetOperationRequest();
+        request.setId(1L);
+        PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
+        petOwnerEntity.setId(2L);
+
+        request.setPetOwner(petOwnerEntity);
+
+        PetEntity petEntity=new PetEntity();
+        petEntity.setId(1L);
+
+        petOwnerEntity.addPet(petEntity);
+
+        doReturn(true).when(petOwnerRepository).exists(2L);
+        doReturn(petOwnerEntity).when(petOwnerRepository).getOne(2L);
+        //when
+        this.petOwnerService.updatePet(request);
+
+        verify(petOwnerRepository,times(1)).save(any(PetOwnerEntity.class));
+    }
+
+    /*
+    @Test
+    public void givenRequestWhenUpdatePetOwnerThenSuccess() {
+        //given
+        PetOwnerOperationRequest request = new PetOwnerOperationRequest();
+        request.setId(1L);
+        doReturn(true).when(petOwnerRepository).exists(1L);
+        doReturn(new PetOwnerEntity()).when(petOwnerRepository).getOne(1L);
+        //when
+        this.petOwnerService.updatePetOwner(request);
+        //then
+        verify(petOwnerRepository, times(1)).save(any(PetOwnerEntity.class));
+    }
+    */
+
+
     private PetOwnerEntity getPetOwnerEntity() {
         PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
         petOwnerEntity.setMemberNumber("123");
         petOwnerEntity.setName("刘备");
         return petOwnerEntity;
     }
-
 
 }

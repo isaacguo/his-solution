@@ -1,21 +1,16 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
-import com.isaac.pethospital.treatment.dtos.PetOwnerAddPetRequest;
-import com.isaac.pethospital.treatment.dtos.PetOwnerCreateRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerPetOperationRequest;
+import com.isaac.pethospital.treatment.dtos.PetOwnerOperationRequest;
 import com.isaac.pethospital.treatment.dtos.PetOwnerDeletePetRequest;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.services.PetOwnerService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -63,7 +58,22 @@ public class PetOwnerRestControllerSpecTests {
         this.mockMvc.perform(post("/owners/create-pet-owner").content("{\"name\":\"isaac\",\"cellPhone\":\"123\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        verify(petOwnerService, times(1)).createPetOwner(any(PetOwnerCreateRequest.class));
+        verify(petOwnerService, times(1)).createPetOwner(any(PetOwnerOperationRequest.class));
+    }
+
+    @Test
+    public void givenPetOwnerOperationRequestWhenUpdatePetOwnerThenReturn200() throws Exception {
+        this.mockMvc.perform(put("/owners/update-pet-owner").content("{\"name\":\"isaac\",\"cellPhone\":\"123\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        verify(petOwnerService, times(1)).updatePetOwner(any(PetOwnerOperationRequest.class));
+    }
+    @Test
+    public void givenPetOperationRequestWhenUpdatePetThenReturn200() throws Exception {
+        this.mockMvc.perform(put("/owners/update-pet").content("{\"name\":\"笨笨\",\"age\":\"2\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        verify(petOwnerService, times(1)).updatePet(any(PetOwnerPetOperationRequest.class));
     }
 
     @Test
@@ -71,7 +81,7 @@ public class PetOwnerRestControllerSpecTests {
         this.mockMvc.perform(post("/owners/add-pet").content("{\"name\":\"笨笨\",\"age\":1}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        verify(petOwnerService, times(1)).addPet(any(PetOwnerAddPetRequest.class));
+        verify(petOwnerService, times(1)).addPet(any(PetOwnerPetOperationRequest.class));
     }
 
     @Test

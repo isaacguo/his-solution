@@ -10,12 +10,20 @@ import java.util.UUID;
 
 @Entity
 public class DoctorEntity {
+    @ManyToOne
+    @JsonBackReference("DepartmentEntity-DoctorEntity")
+    DepartmentEntity department;
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @JsonManagedReference("DoctorEntity-TreatmentCaseEntity")
+    List<TreatmentCaseEntity> treatmentCaseEntityList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private UUID uuid;
-
     private String selfIntroduction;
+    private int rating;
+    private String jobTitle;
+    private String name;
 
     public int getRating() {
         return rating;
@@ -25,8 +33,6 @@ public class DoctorEntity {
         this.rating = rating;
     }
 
-    private int rating;
-
     public String getJobTitle() {
         return jobTitle;
     }
@@ -35,8 +41,6 @@ public class DoctorEntity {
         this.jobTitle = jobTitle;
     }
 
-    private String jobTitle;
-
     public String getSelfIntroduction() {
         return selfIntroduction;
     }
@@ -44,14 +48,6 @@ public class DoctorEntity {
     public void setSelfIntroduction(String selfIntroduction) {
         this.selfIntroduction = selfIntroduction;
     }
-
-    @ManyToOne
-    @JsonBackReference("DepartmentEntity-DoctorEntity")
-    DepartmentEntity department;
-
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    @JsonManagedReference("DoctorEntity-TreatmentCaseEntity")
-    List<TreatmentCaseEntity> treatmentCaseEntityList = new LinkedList<>();
 
     public long getId() {
         return id;
@@ -76,8 +72,6 @@ public class DoctorEntity {
     public void setName(String name) {
         this.name = name;
     }
-
-    private String name;
 
     public DepartmentEntity getDepartment() {
         return department;

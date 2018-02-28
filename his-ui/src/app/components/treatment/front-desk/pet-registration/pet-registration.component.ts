@@ -3,6 +3,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Pet} from "../../../../dto/pet.model";
 import {PetOwner} from "../../../../dto/pet-owner.model";
 import {PetOwnerService} from "../../../../services/treatment/pet-owner.service";
+import {OperationEnum} from "../../../../enums/operation.enum";
 
 @Component({
   selector: 'app-pet-registration',
@@ -11,7 +12,14 @@ import {PetOwnerService} from "../../../../services/treatment/pet-owner.service"
 })
 export class PetRegistrationComponent implements OnInit {
 
+  ownerModalTitle: string;
+  ownerOperationMode: OperationEnum;
+
+  petModalTitle: string;
+  petOperationMode: OperationEnum;
+
   findByPetOwnerNameText: string;
+  selectedPet: Pet = {};
   newPetOwner: PetOwner = {}
   newPet: Pet = {};
 
@@ -25,26 +33,45 @@ export class PetRegistrationComponent implements OnInit {
 
 
   onCreatePetOwnerButtonClicked(createPetOwnerModal: ModalComponent) {
+    this.ownerModalTitle = "新建主人";
+    this.ownerOperationMode = OperationEnum.CREATE;
     this.newPetOwner = {};
     createPetOwnerModal.open();
 
   }
 
-  onCreateNewPetButtonClicked(createPetModal: ModalComponent) {
-    this.newPet = {};
-    createPetModal.open();
+  onModifyOwnerButtonClicked(createPetOwnerModal: ModalComponent) {
+    this.ownerModalTitle = "修改主人信息";
+    this.ownerOperationMode = OperationEnum.UPDATE;
+    this.newPetOwner = this.currentPetOwner;
+    createPetOwnerModal.open();
 
   }
 
+  onCreateNewPetButtonClicked(createPetModal: ModalComponent) {
+    this.petModalTitle = "新增宠物";
+    this.petOperationMode = OperationEnum.CREATE;
+    this.newPet = {};
+    createPetModal.open();
+  }
+
+  onUpdatePetButtonClicked(createPetModal: ModalComponent) {
+    this.petModalTitle = "修改宠物信息";
+    this.petOperationMode = OperationEnum.UPDATE;
+    this.newPet = this.selectedPet;
+    createPetModal.open();
+  }
+
   onCreatePetOwnerModalClosed() {
-    this.petOwnerService.createPetOwner(this.newPetOwner).subscribe(r => {
+    this.petOwnerService.operatePetOwner(this.newPetOwner, this.ownerOperationMode).subscribe(r => {
       this.currentPetOwner = r;
     });
   }
 
   onCreatePetModalClosed() {
-    this.newPet.petOwner = this.currentPetOwner;
-    this.petOwnerService.addPet(this.newPet).subscribe(r => {
+    this.newPet.petOwner = {};
+    this.newPet.petOwner.id = this.currentPetOwner.id;
+    this.petOwnerService.operatePet(this.newPet, this.petOperationMode).subscribe(r => {
       this.currentPetOwner = r;
     });
   }
@@ -72,4 +99,14 @@ export class PetRegistrationComponent implements OnInit {
       this.currentPetOwner = r;
     });
   }
+
+  onRowClicked(pet: Pet) {
+    this.selectedPet = pet;
+  }
+
+  isRowSelected(pet: Pet): boolean {
+    return this.selectedPet == pet;
+  }
+
+
 }

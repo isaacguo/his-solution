@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Rx";
 import {PetOwner} from "../../dto/pet-owner.model";
 import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
 import {Pet} from "../../dto/pet.model";
+import {OperationEnum} from "../../enums/operation.enum";
 
 
 @Injectable()
@@ -40,17 +41,32 @@ export class PetOwnerService {
 
   }
 
-  createPetOwner(petOwner: PetOwner): Observable<PetOwner> {
-    let url = `${this.rootUrl}/create-pet-owner`;
-
-    return this.authHttp.post(url, petOwner)
-      .map(this.extractData);
+  operatePetOwner(petOwner: PetOwner, mode: OperationEnum): Observable<PetOwner> {
+    if (mode == OperationEnum.CREATE) {
+      let url = `${this.rootUrl}/create-pet-owner`;
+      return this.authHttp.post(url, petOwner)
+        .map(this.extractData);
+    }
+    else if (mode == OperationEnum.UPDATE) {
+      let url = `${this.rootUrl}/update-pet-owner`;
+      return this.authHttp.put(url, petOwner)
+        .map(this.extractData);
+    }
   }
 
-  addPet(pet: Pet): Observable<PetOwner> {
-    let url = `${this.rootUrl}/add-pet`;
-    return this.authHttp.post(url, pet)
-      .map(this.extractData);
+
+  operatePet(pet: Pet, mode: OperationEnum): Observable<PetOwner> {
+    if (mode == OperationEnum.CREATE) {
+      let url = `${this.rootUrl}/add-pet`;
+      return this.authHttp.post(url, pet)
+        .map(this.extractData);
+    }
+    else if(mode==OperationEnum.UPDATE)
+    {
+      let url = `${this.rootUrl}/update-pet`;
+      return this.authHttp.put(url, pet)
+        .map(this.extractData);
+    }
   }
 
 

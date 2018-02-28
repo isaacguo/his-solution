@@ -10,7 +10,8 @@ export class PetOwner {
               public email?: string,
               public homePhone?: string,
               public id?:number,
-              public petList?:Pet[]
+              public petList?:Pet[],
+              public memberNumber?:string
               ) {
 
   }
