@@ -3,7 +3,7 @@ package com.isaac.pethospital.treatment.entities;
 import javax.persistence.*;
 
 @Entity
-public class ExpenseRecordEntity {
+public class ExpenseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

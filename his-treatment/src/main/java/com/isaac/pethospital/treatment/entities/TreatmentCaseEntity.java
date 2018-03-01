@@ -16,8 +16,8 @@ public class TreatmentCaseEntity {
     @JsonBackReference("DepartmentEntity-TreatmentCaseEntity")
     DepartmentEntity department;
     @ManyToOne
-    @JsonBackReference("DoctorEntity-TreatmentCaseEntity")
-    DoctorEntity doctor;
+    @JsonBackReference("EmployeeEntity-TreatmentCaseEntity")
+    EmployeeEntity doctor;
     @ManyToOne
     @JsonBackReference("PetOwnerEntity-TreatmentCaseEntity")
     PetOwnerEntity petOwner;
@@ -104,11 +104,11 @@ public class TreatmentCaseEntity {
         this.department = department;
     }
 
-    public DoctorEntity getDoctor() {
+    public EmployeeEntity getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(DoctorEntity doctor) {
+    public void setDoctor(EmployeeEntity doctor) {
         this.doctor = doctor;
     }
 }

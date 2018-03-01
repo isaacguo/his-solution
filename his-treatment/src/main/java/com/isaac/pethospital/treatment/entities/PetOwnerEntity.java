@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.common.enums.GenderEnum;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +28,7 @@ public class PetOwnerEntity {
 
     private String memberNumber;
     @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
-    private List<ExpenseRecordEntity> expenseRecordList = new LinkedList<ExpenseRecordEntity>();
+    private List<ExpenseEntity> expenseRecordList = new LinkedList<ExpenseEntity>();
     private String address;
     private String cellPhone;
     private String email;
@@ -51,7 +50,7 @@ public class PetOwnerEntity {
         this.address = address;
     }
 
-    public List<ExpenseRecordEntity> getExpenseRecordList() {
+    public List<ExpenseEntity> getExpenseRecordList() {
         return expenseRecordList;
     }
 

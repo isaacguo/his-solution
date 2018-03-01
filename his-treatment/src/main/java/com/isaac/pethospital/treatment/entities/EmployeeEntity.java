@@ -9,12 +9,19 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class DoctorEntity {
+public class EmployeeEntity {
+
+    /*
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @JsonManagedReference("EmployeeEntity-RegistrationEntity")
+    List<RegistrationEntity> registrationList = new LinkedList<>();
+    */
+
     @ManyToOne
-    @JsonBackReference("DepartmentEntity-DoctorEntity")
+    @JsonBackReference("DepartmentEntity-EmployeeEntity")
     DepartmentEntity department;
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    @JsonManagedReference("DoctorEntity-TreatmentCaseEntity")
+    @JsonManagedReference("EmployeeEntity-TreatmentCaseEntity")
     List<TreatmentCaseEntity> treatmentCaseEntityList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,7 +93,7 @@ public class DoctorEntity {
     }
 
     public void addTreatmentCase(TreatmentCaseEntity treatmentCase) {
-        if(treatmentCase==null)
+        if (treatmentCase == null)
             throw new RuntimeException("treatment case is null");
         treatmentCase.setDoctor(this);
         this.treatmentCaseEntityList.add(treatmentCase);

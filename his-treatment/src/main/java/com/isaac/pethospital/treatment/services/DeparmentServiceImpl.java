@@ -2,11 +2,10 @@ package com.isaac.pethospital.treatment.services;
 
 import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
-import com.isaac.pethospital.treatment.entities.DoctorEntity;
+import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
 import com.isaac.pethospital.treatment.repositories.DepartmentRepository;
-import com.isaac.pethospital.treatment.repositories.DoctorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,11 +16,11 @@ import java.util.UUID;
 public class DeparmentServiceImpl implements DepartmentSerivce {
 
     private final DepartmentRepository departmentRepository;
-    private final DoctorRepository doctorRepository;
+    private final EmployeeRepository employeeRepository;
 
-    public DeparmentServiceImpl(DepartmentRepository departmentRepository, DoctorRepository doctorRepository) {
+    public DeparmentServiceImpl(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
         this.departmentRepository = departmentRepository;
-        this.doctorRepository = doctorRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -30,7 +29,7 @@ public class DeparmentServiceImpl implements DepartmentSerivce {
     }
 
     @Override
-    public List<DoctorEntity> getDoctorsInDepartmentByUuid(String uuid) {
+    public List<EmployeeEntity> getDoctorsInDepartmentByUuid(String uuid) {
 
         DepartmentEntity departmentEntity = this.departmentRepository.findByUuid(uuid);
         if (departmentEntity == null) throw new RuntimeException("Can not find specified department");

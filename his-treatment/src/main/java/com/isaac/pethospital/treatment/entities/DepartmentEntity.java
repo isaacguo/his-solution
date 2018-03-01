@@ -1,12 +1,10 @@
 package com.isaac.pethospital.treatment.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class DepartmentEntity {
@@ -33,8 +31,8 @@ public class DepartmentEntity {
     List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @JsonManagedReference("DepartmentEntity-DoctorEntity")
-    List<DoctorEntity> doctorList = new LinkedList<>();
+    @JsonManagedReference("DepartmentEntity-EmployeeEntity")
+    List<EmployeeEntity> doctorList = new LinkedList<>();
 
     public boolean isExposeToPublic() {
         return exposeToPublic;
@@ -81,11 +79,11 @@ public class DepartmentEntity {
         this.treatmentCaseList.add(treatmentCase);
     }
 
-    public List<DoctorEntity> getDoctorList() {
+    public List<EmployeeEntity> getDoctorList() {
         return doctorList;
     }
 
-    public void addDoctor(DoctorEntity doctor) {
+    public void addDoctor(EmployeeEntity doctor) {
         if (doctor == null)
             throw new RuntimeException("doctor is null");
 

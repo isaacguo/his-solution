@@ -1,7 +1,7 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
-import com.isaac.pethospital.treatment.entities.DoctorEntity;
+import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
 import com.isaac.pethospital.treatment.services.DepartmentSerivce;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class DepartmentRestController {
         return this.departmentSerivce.getDepartments();
     }
     @GetMapping(value = "/getDoctorsInDepartmentByUuid/{uuid}/")
-    public List<DoctorEntity> getDoctorsInDepartmentByUuid(@PathVariable("uuid") String uuid)
+    public List<EmployeeEntity> getDoctorsInDepartmentByUuid(@PathVariable("uuid") String uuid)
     {
         return this.departmentSerivce.getDoctorsInDepartmentByUuid(uuid);
     }

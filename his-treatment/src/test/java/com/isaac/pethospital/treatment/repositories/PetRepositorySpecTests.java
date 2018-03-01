@@ -29,6 +29,7 @@ public class PetRepositorySpecTests {
         this.entityManager.persist(petOwner);
         List<PetEntity> owners = this.repository.findByName("宠物1");
         assertThat(owners.size()).isEqualTo(1);
+
     }
 
     @Test

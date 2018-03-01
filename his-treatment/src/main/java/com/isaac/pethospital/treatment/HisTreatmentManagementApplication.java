@@ -27,7 +27,7 @@ public class HisTreatmentManagementApplication {
     @Bean
     CommandLineRunner commandLineRunner(PetTypeRepository petTypeRepository,
                                         PetOwnerRepository petOwnerRepository,
-                                        DoctorRepository doctorRepository,
+                                        EmployeeRepository employeeRepository,
                                         DepartmentRepository departmentRepository,
                                         DepartmentSerivce departmentSerivce) {
 
@@ -67,7 +67,7 @@ public class HisTreatmentManagementApplication {
 
 
 
-                DoctorEntity doctor1=new DoctorEntity();
+                EmployeeEntity doctor1=new EmployeeEntity();
                 doctor1.setName("黄蓉");
                 doctor1.setSelfIntroduction("擅长：猫，狗外科常见病，手术。");
                 doctor1.setJobTitle("主任医师");
