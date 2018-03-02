@@ -70,8 +70,8 @@ public class HisTreatmentManagementApplication {
                 EmployeeEntity doctor1=new EmployeeEntity();
                 doctor1.setName("黄蓉");
                 doctor1.setSelfIntroduction("擅长：猫，狗外科常见病，手术。");
-                doctor1.setJobTitle("主任医师");
-                doctor1.setRating(4);
+                //doctor1.setJobTitle("主任医师");
+                //doctor1.setRating(4);
 
                 DepartmentEntity departmentEntity=new DepartmentEntity();
                 departmentEntity.setName("全科");

@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface PetRepository extends JpaRepository<PetEntity,Long> {
     List<PetEntity> findByName(String name);
+
+
+    PetEntity findByUuid(String uuid);
 }

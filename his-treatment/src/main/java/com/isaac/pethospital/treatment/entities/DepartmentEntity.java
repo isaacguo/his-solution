@@ -9,12 +9,19 @@ import java.util.List;
 @Entity
 public class DepartmentEntity {
 
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @JsonManagedReference("DepartmentEntity-TreatmentCaseEntity")
+    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @JsonManagedReference("DepartmentEntity-EmployeeEntity")
+    List<EmployeeEntity> doctorList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String uuid;
-
     private String name;
+    private String description;
+    private boolean exposeToPublic;
 
     public String getDescription() {
         return description;
@@ -24,16 +31,6 @@ public class DepartmentEntity {
         this.description = description;
     }
 
-    private String description;
-
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @JsonManagedReference("DepartmentEntity-TreatmentCaseEntity")
-    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
-
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @JsonManagedReference("DepartmentEntity-EmployeeEntity")
-    List<EmployeeEntity> doctorList = new LinkedList<>();
-
     public boolean isExposeToPublic() {
         return exposeToPublic;
     }
@@ -42,13 +39,11 @@ public class DepartmentEntity {
         this.exposeToPublic = exposeToPublic;
     }
 
-    private boolean exposeToPublic;
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

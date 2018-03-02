@@ -48,6 +48,7 @@ import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
 import {FrontDeskComponent} from "./components/treatment/front-desk/front-desk.component";
 import { PetRegistrationComponent } from './components/treatment/front-desk/pet-registration/pet-registration.component';
 import {PetOwnerService} from "./services/treatment/pet-owner.service";
+import {RegistrationService} from "./services/treatment/registration.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -114,6 +115,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EmployeeService,
     DepartmentService,
     PetOwnerService,
+    RegistrationService,
   ],
   bootstrap: [AppComponent]
 })

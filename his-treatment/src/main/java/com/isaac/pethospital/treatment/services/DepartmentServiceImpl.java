@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class DeparmentServiceImpl implements DepartmentSerivce {
+public class DepartmentServiceImpl implements DepartmentSerivce {
 
     private final DepartmentRepository departmentRepository;
     private final EmployeeRepository employeeRepository;
 
-    public DeparmentServiceImpl(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
         this.departmentRepository = departmentRepository;
         this.employeeRepository = employeeRepository;
     }
@@ -42,7 +42,6 @@ public class DeparmentServiceImpl implements DepartmentSerivce {
         String uuid = UUID.randomUUID().toString();
         departmentEntity.setUuid(uuid);
         return this.departmentRepository.save(departmentEntity);
-
     }
 
     @Override
