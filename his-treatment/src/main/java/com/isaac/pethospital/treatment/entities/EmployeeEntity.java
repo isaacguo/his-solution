@@ -7,8 +7,9 @@ import java.util.UUID;
 
 @Entity
 public class EmployeeEntity {
+    
     @ManyToOne
-    @JsonBackReference("DepartmentEntity-EmployeeEntity")
+    //@JsonBackReference("DepartmentEntity-EmployeeEntity")
     DepartmentEntity department;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,8 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
+import {Headers, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
 import {Department} from "../../dto/department.model";
-import {Doctor} from "../../dto/doctor.model";
-import {TreatmentCase} from "../../dto/treatment-case.model";
 
 @Injectable()
 export class DepartmentService {
@@ -17,32 +15,33 @@ export class DepartmentService {
 
   getDepartments(): Observable<Department[]> {
 
-    let url = `/api/histreatment/departments`;
-    return this.authHttp.get(url)
+    //let url = `/api/histreatment/departments`;
+    return this.authHttp.get(`${this.rootUrl}`)
       .map(this.extractData);
   }
 
-  getDoctorsInDepartmentByUuid(uuid: string): Observable<Doctor[]> {
-    let url = `/api/histreatment/departments/getDoctorsInDepartmentByUuid/${uuid}/`;
-    return this.authHttp.get(url)
-      .map(this.extractData);
-  }
+  /*
+    getDoctorsInDepartmentByUuid(uuid: string): Observable<Doctor[]> {
+      let url = `/api/histreatment/departments/getDoctorsInDepartmentByUuid/${uuid}/`;
+      return this.authHttp.get(url)
+        .map(this.extractData);
+    }
+    createTreatmentCase(treatmentCase: TreatmentCase): Observable<TreatmentCase> {
 
-  getDepartmentByUuid(uuid:string):Observable<Department> {
+      let url = `${this.rootUrl}/book`;
+      let options = this.getOptions();
+
+      return this.authHttp.post(url, treatmentCase, options)
+        .map(this.extractData)
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+    }
+    */
+
+  getDepartmentByUuid(uuid: string): Observable<Department> {
     let url = `${this.rootUrl}/getDepartmentByUuid/${uuid}/`;
     return this.authHttp.get(url)
       .map(this.extractData);
-
-  }
-
-  createTreatmentCase(treatmentCase: TreatmentCase): Observable<TreatmentCase> {
-
-    let url = `${this.rootUrl}/book`;
-    let options = this.getOptions();
-
-    return this.authHttp.post(url, treatmentCase, options)
-      .map(this.extractData)
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
   }
 

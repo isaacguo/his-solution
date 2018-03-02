@@ -1,19 +1,15 @@
 package com.isaac.pethospital.treatment.services;
 
-import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
-import com.isaac.pethospital.treatment.entities.EmployeeEntity;
-import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
 import com.isaac.pethospital.treatment.repositories.DepartmentRepository;
 import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class DepartmentServiceImpl implements DepartmentSerivce {
+public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
     private final EmployeeRepository employeeRepository;
@@ -28,14 +24,6 @@ public class DepartmentServiceImpl implements DepartmentSerivce {
         return this.departmentRepository.findAll();
     }
 
-    @Override
-    public List<EmployeeEntity> getDoctorsInDepartmentByUuid(String uuid) {
-
-        DepartmentEntity departmentEntity = this.departmentRepository.findByUuid(uuid);
-        if (departmentEntity == null) throw new RuntimeException("Can not find specified department");
-
-        return departmentEntity.getDoctorList();
-    }
 
     @Override
     public DepartmentEntity createDepartment(DepartmentEntity departmentEntity) {
@@ -44,15 +32,5 @@ public class DepartmentServiceImpl implements DepartmentSerivce {
         return this.departmentRepository.save(departmentEntity);
     }
 
-    @Override
-    public TreatmentCaseEntity createTreatmentCase(TreatmentCaseEntity treatmentCase) {
-        treatmentCase.setCreatedDate(LocalDateTime.now());
-        treatmentCase.setTreatmentCaseStatus(TreatmentCaseStatusEnum.BOOKED);
-        DepartmentEntity departmentEntity = this.departmentRepository.findByUuid(treatmentCase.getDepartment().getUuid());
-        departmentEntity.addTreatmentCase(treatmentCase);
-        this.departmentRepository.save(departmentEntity);
-        treatmentCase.setCreateResult(true);
-        return treatmentCase;
-    }
 
 }

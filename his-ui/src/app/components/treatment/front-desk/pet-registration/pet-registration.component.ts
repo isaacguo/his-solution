@@ -4,6 +4,10 @@ import {Pet} from "../../../../dto/pet.model";
 import {PetOwner} from "../../../../dto/pet-owner.model";
 import {PetOwnerService} from "../../../../services/treatment/pet-owner.service";
 import {OperationEnum} from "../../../../enums/operation.enum";
+import {DepartmentService} from "../../../../services/treatment/department.service";
+import {Department} from "../../../../dto/department.model";
+import {Employee} from "../../../../dto/employee.model";
+import {EmployeeService} from "../../../../services/treatment/employee.service";
 
 @Component({
   selector: 'app-pet-registration',
@@ -24,11 +28,17 @@ export class PetRegistrationComponent implements OnInit {
   newPet: Pet = {};
 
   currentPetOwner: PetOwner = {};
+  departments: Department[];
+  selectedDepartment : Department={};
 
-  constructor(public petOwnerService: PetOwnerService) {
+  constructor(public petOwnerService: PetOwnerService, public departmentService: DepartmentService, public employeeService:EmployeeService) {
   }
 
   ngOnInit() {
+    this.selectedDepartment.name="请选择科室";
+    this.departmentService.getDepartments().subscribe(r => {
+      this.departments = r;
+    })
   }
 
 
@@ -109,4 +119,8 @@ export class PetRegistrationComponent implements OnInit {
   }
 
 
+  setSelectedDepartment(department: Department) {
+    this.selectedDepartment=department;
+
+  }
 }

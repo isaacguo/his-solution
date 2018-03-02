@@ -9,12 +9,17 @@ import java.util.List;
 @Entity
 public class DepartmentEntity {
 
+    /*
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     @JsonManagedReference("DepartmentEntity-TreatmentCaseEntity")
     List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
+    */
+    /*
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     @JsonManagedReference("DepartmentEntity-EmployeeEntity")
     List<EmployeeEntity> doctorList = new LinkedList<>();
+    */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -63,6 +68,7 @@ public class DepartmentEntity {
         this.name = name;
     }
 
+    /*
     public List<TreatmentCaseEntity> getTreatmentCaseList() {
         return treatmentCaseList;
     }
@@ -85,4 +91,5 @@ public class DepartmentEntity {
         doctor.setDepartment(this);
         this.doctorList.add(doctor);
     }
+    */
 }

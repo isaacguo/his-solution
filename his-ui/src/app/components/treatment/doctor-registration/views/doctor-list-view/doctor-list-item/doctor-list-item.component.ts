@@ -32,8 +32,10 @@ export class DoctorListItemComponent implements OnInit {
     treatmentCase.doctor = this.doctor;
     treatmentCase.department = {};
     treatmentCase.department.uuid = this.departmentUuid;
+    /*
     this.departmentService.createTreatmentCase(treatmentCase).subscribe(r => {
       console.log(r.createResult);
     });
+    */
   }
 }
