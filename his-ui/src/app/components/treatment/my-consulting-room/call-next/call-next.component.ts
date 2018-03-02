@@ -21,8 +21,5 @@ export class CallNextComponent implements OnInit {
 
 
   ngOnInit() {
-    this.departmentService.getDepartments().subscribe(r=>{
-      this.todayTreatmentCases=r[0].treatmentCaseList;
-    });
   }
 }
