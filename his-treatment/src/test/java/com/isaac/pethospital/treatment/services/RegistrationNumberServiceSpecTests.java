@@ -63,6 +63,7 @@ public class RegistrationNumberServiceSpecTests {
 
 
         doReturn(registrationNumberEntity).when(registrationNumberRepository).findByDoctorAndDate(doctor, date);
+        doReturn(registrationNumberEntity).when(registrationNumberRepository).save(registrationNumberEntity);
         //when
         int indexOfDay = this.registrationNumberService.getNumber(doctor, LocalDate.of(2018, 3, 1));
         //then
