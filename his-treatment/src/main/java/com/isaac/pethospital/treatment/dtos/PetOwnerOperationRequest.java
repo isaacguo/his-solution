@@ -16,6 +16,15 @@ public class PetOwnerOperationRequest {
         this.id = id;
     }
 
+    public Long getPetId() {
+        return petId;
+    }
+
+    public void setPetId(Long petId) {
+        this.petId = petId;
+    }
+
+    Long petId;
     Long id;
     @NotBlank
     private String name;

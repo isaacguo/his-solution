@@ -86,6 +86,7 @@ public class HisTreatmentManagementApplication {
 
                 EmployeeEntity doctor1 = new EmployeeEntity();
                 doctor1.setName("黄蓉");
+                doctor1.setLoginAccount("doctor1");
                 doctor1.setSelfIntroduction("擅长：猫，狗外科常见病，手术。");
                 doctor1.setDepartment(createdDepartment);
 

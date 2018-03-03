@@ -18,4 +18,6 @@ public interface EmployeeService {
     List<EmployeeEntity> findByDepartment(EmployeeOperationRequest employeeOperationRequest);
 
     List<EmployeeEntity> findByEmployeeType(EmployeeOperationRequest employeeOperationRequest);
+
+    EmployeeEntity findByLoginAccount(String loginAccount);
 }

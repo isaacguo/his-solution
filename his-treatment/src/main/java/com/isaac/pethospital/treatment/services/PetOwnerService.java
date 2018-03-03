@@ -19,4 +19,5 @@ public interface PetOwnerService {
     PetOwnerEntity updatePetOwner(PetOwnerOperationRequest request);
 
     PetOwnerEntity updatePet(PetOwnerPetOperationRequest request);
+
 }

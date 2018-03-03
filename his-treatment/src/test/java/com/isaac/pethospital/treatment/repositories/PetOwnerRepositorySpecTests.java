@@ -1,5 +1,6 @@
 package com.isaac.pethospital.treatment.repositories;
 
+import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,12 +23,22 @@ public class PetOwnerRepositorySpecTests {
     @Autowired
     private PetOwnerRepository repository;
 
+
     @Test
     public void givenPetOwnerRepositoryWhenFindByNameReturnList() throws Exception {
         PetOwnerEntity petOwner = getPetOwnerEntity();
         this.entityManager.persist(petOwner);
         List<PetOwnerEntity> owners = this.repository.findByName("刘备");
         assertThat(owners.size()).isEqualTo(1);
+    }
+    @Test
+    public void givenPetWhenFindPetOwnerThenReturnPetOwnerIfContainsInPetList() throws Exception {
+        PetOwnerEntity petOwner = getPetOwnerEntity();
+        PetEntity petEntity=new PetEntity();
+        petOwner.addPet(petEntity);
+        this.entityManager.persist(petOwner);
+        PetOwnerEntity owner = this.repository.findByPetListContains(petEntity);
+        assertThat(owner).isNotNull();
     }
 
     @Test
@@ -50,6 +61,7 @@ public class PetOwnerRepositorySpecTests {
         PetOwnerEntity petOwner=new PetOwnerEntity();
         petOwner.setName("刘备");
         petOwner.setMemberNumber("1122");
+
         return petOwner;
     }
 }

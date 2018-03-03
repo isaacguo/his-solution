@@ -27,26 +27,32 @@ public class EmployeeEntitySpecTests {
         this.employeeEntity.setSelfIntroduction("我是一名侠客");
         this.employeeEntity.setDepartment(this.departmentEntity);
         this.employeeEntity.setEmployeeType(this.employeeTypeEntity);
+        this.employeeEntity.setLoginAccount("doctor1");
 
     }
 
     @Test
-    public void givenPetEntityHasFieldName() {
+    public void givenEmployeeEntityHasFieldName() {
         assertThat(employeeEntity, hasProperty("name", is("任我行")));
     }
 
     @Test
-    public void givenPetEntityHasFieldSelfIntroduction() {
+    public void givenEmployeeEntityHasFieldSelfIntroduction() {
         assertThat(employeeEntity, hasProperty("selfIntroduction", is("我是一名侠客")));
     }
 
     @Test
-    public void givenPetEntityHasFieldDepartment() {
+    public void givenEmployeeEntityHasFieldDepartment() {
         assertThat(employeeEntity, hasProperty("department", is(this.departmentEntity)));
     }
 
     @Test
-    public void givenPetEntityHasFieldJobTitle() {
+    public void givenEmployeeEntityHasFieldJobTitle() {
         assertThat(employeeEntity, hasProperty("employeeType", is(this.employeeTypeEntity)));
+    }
+
+    @Test
+    public void givenEmployeeEntityHasFieldLoginAccount() {
+        assertThat(employeeEntity, hasProperty("loginAccount", is("doctor1")));
     }
 }

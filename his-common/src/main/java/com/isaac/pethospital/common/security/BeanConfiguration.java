@@ -43,6 +43,11 @@ class BeanConfiguration {
                 applicationUser3.setPassword(bCryptPasswordEncoder.encode("yuelingshan_1"));
                 applicationUserRepository.save(applicationUser3);
 
+                ApplicationUser applicationUser4=new ApplicationUser();
+                applicationUser4.setUsername("doctor1");
+                applicationUser4.setPassword(bCryptPasswordEncoder.encode("doctor1"));
+                applicationUserRepository.save(applicationUser4);
+
             }
         };
     }

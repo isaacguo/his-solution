@@ -17,8 +17,6 @@ import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 public class EmployeeServiceSpecTests {
 
@@ -106,6 +104,29 @@ public class EmployeeServiceSpecTests {
         verify(employeeRepository, times(1)).exists(1L);
         verify(employeeRepository, times(1)).save(any(EmployeeEntity.class));
     }
+
+    @Test
+    public void givenLoginAccountWhenFindEmployeeEntityByLoginAccountThenThrowRuntimeExceptionIfNotFound() {
+        //given
+        String loginAccount="doctorunittest";
+        doReturn(null).when(employeeRepository).findByLoginAccount(loginAccount);
+        //expection
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("The Employee with loginAccount: doctorunittest cannot be found");
+        //when
+        this.employeeService.findByLoginAccount(loginAccount);
+    }
+    @Test
+    public void givenLoginAccountThenFindEmployeeEntityByLoginAccount() {
+        //given
+        String loginAccount="doctorunittest";
+        doReturn(new EmployeeEntity()).when(employeeRepository).findByLoginAccount(loginAccount);
+        //when
+        this.employeeService.findByLoginAccount(loginAccount);
+        //then
+        verify(employeeRepository, times(1)).findByLoginAccount(loginAccount);
+    }
+
 
     @Test
     public void givenEmployeeOperationRequestThenFindEmployeeEntityByName() {

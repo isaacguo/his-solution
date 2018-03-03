@@ -6,6 +6,7 @@ import com.isaac.pethospital.treatment.dtos.PetOwnerDeletePetRequest;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.repositories.PetOwnerRepository;
+import com.isaac.pethospital.treatment.repositories.PetRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class PetOwnerServiceImpl implements PetOwnerService {
 
     PetOwnerRepository petOwnerRepository;
+
 
     public PetOwnerServiceImpl(PetOwnerRepository petOwnerRepository) {
         this.petOwnerRepository = petOwnerRepository;
@@ -75,6 +77,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 
         return this.petOwnerRepository.save(petOwnerEntity);
     }
+
 
     private void updatePetOwner(PetOwnerOperationRequest request, PetOwnerEntity petOwnerEntity) {
         petOwnerEntity.setHomePhone(request.getHomePhone());

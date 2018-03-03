@@ -2,6 +2,7 @@ package com.isaac.pethospital.treatment.restcontrollers;
 
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
+import com.isaac.pethospital.treatment.services.EmployeeService;
 import com.isaac.pethospital.treatment.services.RegistrationService;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +24,8 @@ public class RegistrationRestControllerSpecTests {
 
     @Mock
     RegistrationService registrationService;
+    @Mock
+    EmployeeService employeeService;
 
     @InjectMocks
     RegistrationRestController registrationRestController;

@@ -31,10 +31,10 @@ import {DoctorRegistrationComponent} from "./app/components/treatment/doctor-reg
 import {DoctorListViewComponent} from "./app/components/treatment/doctor-registration/views/doctor-list-view/doctor-list-view.component";
 import {TimeBasedViewComponent} from "./app/components/treatment/doctor-registration/views/time-based-view/time-based-view.component";
 import {MyConsultingRoomComponent} from "./app/components/treatment/my-consulting-room/my-consulting-room.component";
-import {CallNextComponent} from "./app/components/treatment/my-consulting-room/call-next/call-next.component";
-import {PatientTreatmentComponent} from "./app/components/treatment/my-consulting-room/patient-treatment/patient-treatment.component";
 import {FrontDeskComponent} from "./app/components/treatment/front-desk/front-desk.component";
 import {PetRegistrationComponent} from "./app/components/treatment/front-desk/pet-registration/pet-registration.component";
+import {PetInfoComponent} from "./app/components/treatment/my-consulting-room/pet-info/pet-info.component";
+import {PetTreatmentComponent} from "./app/components/treatment/my-consulting-room/pet-treatment/pet-treatment.component";
 
 
 const appRoutes: Routes = [
@@ -50,7 +50,7 @@ const appRoutes: Routes = [
       {
         path: 'frontdesk',
         component: FrontDeskComponent,
-        children:[
+        children: [
           {
             path: 'petreg',
             component: PetRegistrationComponent
@@ -72,6 +72,20 @@ const appRoutes: Routes = [
       {
         path: 'my-consulting-room',
         component: MyConsultingRoomComponent,
+        children: [
+          {
+            path: 'pet-info',
+            component: PetInfoComponent,
+          },
+          {
+            path: 'pet-treatment',
+            component: PetTreatmentComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'pet-info'
+          }
+        ]
       },
       {
         path: 'doctor-registration',

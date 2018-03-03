@@ -37,6 +37,7 @@ public class EmployeeRepositorySpecTests {
     @Before
     public void init() {
         employeeEntity1=new EmployeeEntity();
+        employeeEntity1.setLoginAccount("doctorunitest");
         employeeEntity2=new EmployeeEntity();
         employeeEntity3=new EmployeeEntity();
 
@@ -65,6 +66,12 @@ public class EmployeeRepositorySpecTests {
         this.entityManager.persist(employeeTypeEntity1);
         this.entityManager.persist(employeeTypeEntity2);
 
+    }
+
+    @Test
+    public void givenLoginAccountWhenFindByLoginAccountThenReturnEmployeeEntity() throws Exception {
+        EmployeeEntity doctor = this.repository.findByLoginAccount("doctorunitest");
+        assertThat(doctor).isNotNull();
     }
 
     @Test

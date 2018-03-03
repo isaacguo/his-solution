@@ -41,15 +41,16 @@ import {DoctorListViewComponent} from './components/treatment/doctor-registratio
 import {TimeBasedViewComponent} from './components/treatment/doctor-registration/views/time-based-view/time-based-view.component';
 import {DoctorListItemComponent} from './components/treatment/doctor-registration/views/doctor-list-view/doctor-list-item/doctor-list-item.component';
 import {MyConsultingRoomComponent} from './components/treatment/my-consulting-room/my-consulting-room.component';
-import {CallNextComponent} from './components/treatment/my-consulting-room/call-next/call-next.component';
-import {PatientTreatmentComponent} from './components/treatment/my-consulting-room/patient-treatment/patient-treatment.component';
 import {DepartmentService} from "./services/treatment/department.service";
 import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
 import {FrontDeskComponent} from "./components/treatment/front-desk/front-desk.component";
-import { PetRegistrationComponent } from './components/treatment/front-desk/pet-registration/pet-registration.component';
+import {PetRegistrationComponent} from './components/treatment/front-desk/pet-registration/pet-registration.component';
 import {PetOwnerService} from "./services/treatment/pet-owner.service";
 import {RegistrationService} from "./services/treatment/registration.service";
 import {TreatmentEmployeeService} from "./services/treatment/treatment-employee.service";
+import {PetService} from "./services/treatment/pet.service";
+import {PetInfoComponent} from './components/treatment/my-consulting-room/pet-info/pet-info.component';
+import { PetTreatmentComponent } from './components/treatment/my-consulting-room/pet-treatment/pet-treatment.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -96,9 +97,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TimeBasedViewComponent,
     DoctorListItemComponent,
     MyConsultingRoomComponent,
-    CallNextComponent,
-    PatientTreatmentComponent,
-    PetRegistrationComponent
+    PetRegistrationComponent,
+    PetInfoComponent,
+    PetTreatmentComponent
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule, Ng2Bs3ModalModule
@@ -117,7 +118,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DepartmentService,
     PetOwnerService,
     RegistrationService,
-    TreatmentEmployeeService
+    TreatmentEmployeeService,
+    PetService
   ],
   bootstrap: [AppComponent]
 })

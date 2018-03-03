@@ -69,6 +69,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         return this.employeeRepository.findByEmployeeType(employeeTypeEntity);
     }
 
+    @Override
+    public EmployeeEntity findByLoginAccount(String loginAccount) {
+        EmployeeEntity employeeEntity= this.employeeRepository.findByLoginAccount(loginAccount);
+        if(employeeEntity==null)
+            throw new RuntimeException("The Employee with loginAccount: " +loginAccount +" cannot be found");
+        return employeeEntity;
+    }
+
     private EmployeeTypeEntity checkEmployeeType(EmployeeOperationRequest employeeOperationRequest) {
         if (employeeOperationRequest.getEmployeeTypeId() == null)
             throw new RuntimeException("No EmployeeType Info.");

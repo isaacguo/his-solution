@@ -20,6 +20,16 @@ public class EmployeeEntity {
     private EmployeeTypeEntity employeeType;
     private String name;
 
+    public String getLoginAccount() {
+        return loginAccount;
+    }
+
+    public void setLoginAccount(String loginAccount) {
+        this.loginAccount = loginAccount;
+    }
+
+    private String loginAccount;
+
     public EmployeeTypeEntity getEmployeeType() {
         return employeeType;
     }

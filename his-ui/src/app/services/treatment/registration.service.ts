@@ -21,4 +21,9 @@ export class RegistrationService extends AbstractService {
     return this.authHttp.post(url, operationRequest).map(this.extractData);
   }
 
+  findMyRegistrationToday(): Observable<TreatmentRegistrationModel[]> {
+    let url = `${this.rootUrl}/find-my-registration-today`;
+    return this.authHttp.get(url).map(this.extractData);
+  }
+
 }

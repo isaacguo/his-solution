@@ -27,7 +27,7 @@ public class RegistrationEntity {
     @ManyToOne
     private EmployeeEntity operator;
     @ManyToOne
-    @JsonBackReference("PetEntity-RegistrationEntity")
+    //@JsonBackReference("PetEntity-RegistrationEntity")
     private PetEntity pet;
     private RegistrationStatusEnum registrationStatus;
 

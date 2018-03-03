@@ -30,36 +30,34 @@
     <table class="table">
       <thead>
       <tr>
-        <th>病历号</th>
+        <th>就诊号</th>
         <th>宠物名称</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>1234</td>
-        <td>笨笨</td>
-      </tr>
-      <tr>
-        <td>1235</td>
-        <td>旺旺</td>
+      <tr (click)="onRowClicked(registration)" *ngFor="let registration of myRegistrations" [class.info]="isRowSelected(registration)">
+        <td>{{registration.indexOfDay}}</td>
+        <td>{{registration.pet.name}}</td>
       </tr>
       </tbody>
     </table>
   </div>
   <div class="col-lg-10">
     <ul class="nav nav-tabs ">
-      <li routerLinkActive="active" >
-        <a class="text-center">宠物资料</a>
+      <li routerLinkActive="active">
+        <a routerLink="/my-consulting-room/pet-info" class="text-center">宠物资料</a>
       </li>
-      <li routerLinkActive="active" >
-        <a class="text-center">宠物病历</a>
+      <li routerLinkActive="active">
+        <a routerLink="/my-consulting-room/pet-treatment" class="text-center">宠物病历</a>
       </li>
-      <li routerLinkActive="active" >
+      <li routerLinkActive="active">
         <a class="text-center">化验记录</a>
       </li>
-      <li routerLinkActive="active" >
+      <li routerLinkActive="active">
         <a class="text-center">影响记录</a>
       </li>
     </ul>
+    <router-outlet></router-outlet>
   </div>
+
 </div>
