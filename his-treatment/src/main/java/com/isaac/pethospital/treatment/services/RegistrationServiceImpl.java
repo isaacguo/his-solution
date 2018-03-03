@@ -6,9 +6,11 @@ import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
 import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import com.isaac.pethospital.treatment.repositories.PetRepository;
+import com.isaac.pethospital.treatment.repositories.RegistrationNumberRepository;
 import com.isaac.pethospital.treatment.repositories.RegistrationRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,11 +20,13 @@ public class RegistrationServiceImpl implements RegistrationService {
     private RegistrationRepository registrationRepository;
     private EmployeeRepository employeeRepository;
     private PetRepository petRepository;
+    private RegistrationNumberService registrationNumberService;
 
-    public RegistrationServiceImpl(RegistrationRepository registrationRepository, EmployeeRepository employeeRepository, PetRepository petRepository) {
+    public RegistrationServiceImpl(RegistrationRepository registrationRepository, EmployeeRepository employeeRepository, PetRepository petRepository, RegistrationNumberService registrationNumberService) {
         this.registrationRepository = registrationRepository;
         this.employeeRepository = employeeRepository;
         this.petRepository = petRepository;
+        this.registrationNumberService = registrationNumberService;
     }
 
     @Override
@@ -43,11 +47,14 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new RuntimeException("cannot find pet by id");
         PetEntity pet = this.petRepository.findOne(registrationOperationRequest.getPetId());
 
+        int indexOfDay=this.registrationNumberService.getNumber(doctor,LocalDate.now());
+
         RegistrationEntity registrationEntity = registrationOperationRequest.toRegistrationEntity(doctor, operator, pet);
         registrationEntity.setCreatedDate(LocalDateTime.now());
         registrationEntity.setBookDate(LocalDateTime.now());
-        return this.registrationRepository.save(registrationEntity);
-
+        registrationEntity.setIndexOfDay(indexOfDay);
+        RegistrationEntity res= this.registrationRepository.save(registrationEntity);
+        return res;
     }
 
     @Override

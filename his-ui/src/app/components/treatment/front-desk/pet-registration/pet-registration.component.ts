@@ -9,6 +9,7 @@ import {Department} from "../../../../dto/department.model";
 import {TreatmentEmployeeService} from "../../../../services/treatment/treatment-employee.service";
 import {TreatmentEmployeeModel} from "../../../../dto/treatment.employee.model";
 import {RegistrationService} from "../../../../services/treatment/registration.service";
+import {TreatmentRegistrationModel} from "../../../../dto/treatment.registration.model";
 
 @Component({
   selector: 'app-pet-registration',
@@ -35,6 +36,7 @@ export class PetRegistrationComponent implements OnInit {
   selectedDepartment: Department = {};
   selectedDoctor: TreatmentEmployeeModel = {};
   availableDoctors: TreatmentEmployeeModel[];
+  returnedRegistration:TreatmentRegistrationModel={};
 
   constructor(public petOwnerService: PetOwnerService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService:RegistrationService) {
   }
@@ -150,6 +152,7 @@ export class PetRegistrationComponent implements OnInit {
 
   onConfirmRegistrationModalClosed() {
     this.registrationService.createRegistration(this.selectedDoctor.id,1,this.selectedPet.id).subscribe(r=>{
+      this.returnedRegistration=r;
       this.registrationResultModal.open();
     });
   }

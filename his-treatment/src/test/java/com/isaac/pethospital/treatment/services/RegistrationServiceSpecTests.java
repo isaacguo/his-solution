@@ -23,6 +23,7 @@ import static org.mockito.Mockito.*;
 public class RegistrationServiceSpecTests {
 
     RegistrationService registrationService;
+    RegistrationNumberService registrationNumberService;
     RegistrationRepository registrationRepository;
     EmployeeRepository employeeRepository;
     PetRepository petRepository;
@@ -33,16 +34,17 @@ public class RegistrationServiceSpecTests {
     @Before
     public void before() {
         registrationRepository = mock(RegistrationRepository.class);
+        registrationNumberService = mock(RegistrationNumberService.class);
         employeeRepository = mock(EmployeeRepository.class);
         petRepository = mock(PetRepository.class);
-        registrationService = spy(new RegistrationServiceImpl(registrationRepository, employeeRepository, petRepository));
+        registrationService = spy(new RegistrationServiceImpl(registrationRepository, employeeRepository, petRepository, registrationNumberService));
     }
 
     @Test
     public void whenFindByDoctorAndBookDateAfterThenMethodFindByDoctorAndBookDateAfterInRepositoryIsInvokedOnce() {
         List<RegistrationEntity> list = new LinkedList<>();
-        EmployeeEntity doctor=new EmployeeEntity();
-        LocalDateTime localDateTime= LocalDateTime.now();
+        EmployeeEntity doctor = new EmployeeEntity();
+        LocalDateTime localDateTime = LocalDateTime.now();
 
         RegistrationOperationRequest registrationOperationRequest = getRegistrationOperationRequest();
         registrationOperationRequest.setBookDate(localDateTime);

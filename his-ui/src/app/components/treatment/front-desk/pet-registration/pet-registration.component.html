@@ -4,7 +4,7 @@
       <h4 class="modal-title">已成功</h4>
     </modal-header>
     <modal-body>
-      挂号已成功
+      挂号已成功, 号码 {{returnedRegistration.indexOfDay}}
     </modal-body>
     <modal-footer>
       <button type="button" class="btn btn-primary" (click)="registrationResultModal.close()">确定</button>
@@ -241,7 +241,7 @@
             <td></td>
             <td></td>
             <td>
-              <div class="button-group">
+              <div class="btn-group btn-group-sm">
                 <button type="button" class="btn btn-default btn-s"
                         (click)="onUpdatePetButtonClicked(createPetModal, pet)"><span
                   class="glyphicon glyphicon-pencil"></span></button>
