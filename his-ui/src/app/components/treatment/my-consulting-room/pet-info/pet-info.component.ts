@@ -18,8 +18,8 @@ export class PetInfoComponent implements OnInit, OnDestroy {
   }
 
 
-  private petInfo: PetInfo;
-  private petInfoChangeSubscription: Subscription;
+  petInfo: PetInfo;
+  petInfoChangeSubscription: Subscription;
 
   currentPetOwner: PetOwner;
   selectedPet: Pet;
@@ -36,4 +36,8 @@ export class PetInfoComponent implements OnInit, OnDestroy {
     this.selectedPet = this.petService.selectedPet;
   }
 
+  onModifyOwnerButtonClicked(createPetOwnerModal)
+  {
+
+  }
 }
