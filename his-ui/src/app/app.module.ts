@@ -49,6 +49,7 @@ import {FrontDeskComponent} from "./components/treatment/front-desk/front-desk.c
 import { PetRegistrationComponent } from './components/treatment/front-desk/pet-registration/pet-registration.component';
 import {PetOwnerService} from "./services/treatment/pet-owner.service";
 import {RegistrationService} from "./services/treatment/registration.service";
+import {TreatmentEmployeeService} from "./services/treatment/treatment-employee.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -116,6 +117,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DepartmentService,
     PetOwnerService,
     RegistrationService,
+    TreatmentEmployeeService
   ],
   bootstrap: [AppComponent]
 })

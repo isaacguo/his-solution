@@ -13,4 +13,6 @@ public interface RegistrationService {
     List<RegistrationEntity> findByDoctorAndBookDateAfter(RegistrationOperationRequest registrationOperationRequest);
 
     RegistrationEntity createRegistration(RegistrationOperationRequest registrationOperationRequest);
+
+    List<RegistrationEntity> getRegistrations();
 }

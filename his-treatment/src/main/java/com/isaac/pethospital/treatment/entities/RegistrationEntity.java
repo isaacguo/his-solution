@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Entity
 public class RegistrationEntity {
 
-    Long price;
-    int indexOfDay;
+    private Long price;
+    private int indexOfDay;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,6 +29,7 @@ public class RegistrationEntity {
     @ManyToOne
     @JsonBackReference("PetEntity-RegistrationEntity")
     private PetEntity pet;
+    private RegistrationStatusEnum registrationStatus;
 
     public RegistrationStatusEnum getRegistrationStatus() {
         return registrationStatus;
@@ -37,8 +38,6 @@ public class RegistrationEntity {
     public void setRegistrationStatus(RegistrationStatusEnum registrationStatus) {
         this.registrationStatus = registrationStatus;
     }
-
-    private RegistrationStatusEnum registrationStatus;
 
     public int getIndexOfDay() {
         return indexOfDay;

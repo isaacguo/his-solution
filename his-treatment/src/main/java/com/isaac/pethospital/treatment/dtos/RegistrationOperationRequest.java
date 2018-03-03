@@ -1,19 +1,22 @@
 package com.isaac.pethospital.treatment.dtos;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.isaac.pethospital.treatment.common.enums.RegistrationStatusEnum;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class RegistrationOperationRequest {
-    int indexOfDay;
+    private int indexOfDay;
     private Long id;
-    //@NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDateTime bookDate;
     @NotNull
     private Long doctorId;
@@ -21,17 +24,6 @@ public class RegistrationOperationRequest {
     private Long operatorId;
     @NotNull
     private Long petId;
-
-    public RegistrationEntity toRegistrationEntity(EmployeeEntity doctor, EmployeeEntity operator, PetEntity pet) {
-        RegistrationEntity registrationEntity = new RegistrationEntity();
-        registrationEntity.setBookDate(this.bookDate);
-        registrationEntity.setDoctor(doctor);
-        registrationEntity.setOperator(operator);
-        registrationEntity.setPet(pet);
-        registrationEntity.setCreatedDate(LocalDateTime.now());
-        registrationEntity.setRegistrationStatus(RegistrationStatusEnum.BOOKED);
-        return registrationEntity;
-    }
 
     public int getIndexOfDay() {
         return indexOfDay;
@@ -52,7 +44,7 @@ public class RegistrationOperationRequest {
     public LocalDateTime getBookDate() {
         return bookDate;
     }
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+
     public void setBookDate(LocalDateTime bookDate) {
         this.bookDate = bookDate;
     }
@@ -80,4 +72,17 @@ public class RegistrationOperationRequest {
     public void setPetId(Long petId) {
         this.petId = petId;
     }
+
+    public RegistrationEntity toRegistrationEntity(EmployeeEntity doctor, EmployeeEntity operator, PetEntity pet) {
+        RegistrationEntity registrationEntity = new RegistrationEntity();
+        registrationEntity.setBookDate(this.bookDate);
+        registrationEntity.setDoctor(doctor);
+        registrationEntity.setOperator(operator);
+        registrationEntity.setPet(pet);
+        registrationEntity.setCreatedDate(LocalDateTime.now());
+        registrationEntity.setRegistrationStatus(RegistrationStatusEnum.BOOKED);
+        return registrationEntity;
+    }
+
+
 }

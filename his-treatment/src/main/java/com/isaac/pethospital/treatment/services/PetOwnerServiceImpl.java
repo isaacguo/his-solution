@@ -42,7 +42,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
             throw new RuntimeException("Pet Owner Id Should Not Be Zero");
         if (!this.petOwnerRepository.exists(petOwnerId))
             throw new RuntimeException("Pet Owner Cannot Be Found.");
-        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.getOne(petOwnerId);
+        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.findOne(petOwnerId);
 
         updatePetOwner(request, petOwnerEntity);
 
@@ -59,7 +59,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
         if (!this.petOwnerRepository.exists(request.getPetOwner().getId()))
             throw new RuntimeException("Pet Owner Cannot Be Found.");
 
-        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.getOne(request.getPetOwner().getId());
+        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.findOne(request.getPetOwner().getId());
 
         PetEntity petToBeUpdated = petOwnerEntity.getPetList().stream().filter(r -> r.getId() == request.getId()).findFirst().orElse(null);
         if (petToBeUpdated == null)
@@ -93,7 +93,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
         if (!this.petOwnerRepository.exists(petOwnerId))
             throw new RuntimeException("Cannot find Pet Owner");
 
-        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.getOne(petOwnerId);
+        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.findOne(petOwnerId);
         PetEntity petEntity = petOwnerPetOperationRequest.toPetEntity();
         petOwnerEntity.addPet(petEntity);
         return this.petOwnerRepository.save(petOwnerEntity);
@@ -106,7 +106,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
         if (!this.petOwnerRepository.exists(petOwnerId))
             throw new RuntimeException("Cannot find Pet Owner");
 
-        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.getOne(petOwnerId);
+        PetOwnerEntity petOwnerEntity = this.petOwnerRepository.findOne(petOwnerId);
         PetEntity petToBeDeleted = petOwnerEntity.getPetList().stream().filter(r -> r.getId() == request.getId()).findFirst().orElse(null);
         if (petToBeDeleted == null)
             throw new RuntimeException("Cannot find Pet Owner in pet list");

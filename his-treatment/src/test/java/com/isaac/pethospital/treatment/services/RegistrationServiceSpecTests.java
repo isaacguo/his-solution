@@ -48,8 +48,8 @@ public class RegistrationServiceSpecTests {
         registrationOperationRequest.setBookDate(localDateTime);
         doReturn(true).when(employeeRepository).exists(20L);
         doReturn(true).when(employeeRepository).exists(10L);
-        doReturn(doctor).when(employeeRepository).getOne(20L);
-        doReturn(new EmployeeEntity()).when(employeeRepository).getOne(20L);
+        doReturn(doctor).when(employeeRepository).findOne(20L);
+        doReturn(new EmployeeEntity()).when(employeeRepository).findOne(20L);
 
         //given
         doReturn(list).when(registrationRepository).findByDoctorAndBookDateAfter(doctor, localDateTime);
@@ -76,7 +76,7 @@ public class RegistrationServiceSpecTests {
         RegistrationOperationRequest registrationOperationRequest = getRegistrationOperationRequest();
         doReturn(true).when(employeeRepository).exists(20L);
         doReturn(false).when(employeeRepository).exists(10L);
-        doReturn(new EmployeeEntity()).when(employeeRepository).getOne(20L);
+        doReturn(new EmployeeEntity()).when(employeeRepository).findOne(20L);
         exception.expect(RuntimeException.class);
         exception.expectMessage("cannot find employee by id");
         //when
@@ -90,7 +90,7 @@ public class RegistrationServiceSpecTests {
         //when
         this.registrationService.createRegistration(registrationOperationRequest);
         //then
-        verify(employeeRepository, times(2)).getOne(any(Long.class));
+        verify(employeeRepository, times(2)).findOne(any(Long.class));
     }
 
     private RegistrationOperationRequest getFullRegistrationOperationRequest() {
@@ -98,9 +98,9 @@ public class RegistrationServiceSpecTests {
         doReturn(true).when(employeeRepository).exists(20L);
         doReturn(true).when(employeeRepository).exists(10L);
         doReturn(true).when(petRepository).exists(15L);
-        doReturn(new EmployeeEntity()).when(employeeRepository).getOne(20L);
-        doReturn(new EmployeeEntity()).when(employeeRepository).getOne(10L);
-        doReturn(new PetEntity()).when(petRepository).getOne(15L);
+        doReturn(new EmployeeEntity()).when(employeeRepository).findOne(20L);
+        doReturn(new EmployeeEntity()).when(employeeRepository).findOne(10L);
+        doReturn(new PetEntity()).when(petRepository).findOne(15L);
         return registrationOperationRequest;
     }
 
@@ -110,7 +110,7 @@ public class RegistrationServiceSpecTests {
         //when
         this.registrationService.createRegistration(registrationOperationRequest);
         //then
-        verify(petRepository, times(1)).getOne(any(Long.class));
+        verify(petRepository, times(1)).findOne(any(Long.class));
     }
 
     @Test
@@ -119,8 +119,8 @@ public class RegistrationServiceSpecTests {
         doReturn(true).when(employeeRepository).exists(20L);
         doReturn(true).when(employeeRepository).exists(10L);
         doReturn(false).when(petRepository).exists(15L);
-        doReturn(new EmployeeEntity()).when(employeeRepository).getOne(20L);
-        doReturn(new EmployeeEntity()).when(employeeRepository).getOne(10L);
+        doReturn(new EmployeeEntity()).when(employeeRepository).findOne(20L);
+        doReturn(new EmployeeEntity()).when(employeeRepository).findOne(10L);
         //exception
         exception.expect(RuntimeException.class);
         exception.expectMessage("cannot find pet by id");
@@ -128,7 +128,7 @@ public class RegistrationServiceSpecTests {
         //when
         this.registrationService.createRegistration(registrationOperationRequest);
         //then
-        verify(petRepository, times(1)).getOne(any(Long.class));
+        verify(petRepository, times(1)).findOne(any(Long.class));
     }
 
     @Test

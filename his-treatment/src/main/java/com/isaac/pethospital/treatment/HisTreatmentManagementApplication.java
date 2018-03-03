@@ -72,9 +72,7 @@ public class HisTreatmentManagementApplication {
                 petOwnerRepository.save(petOwnerEntity);
 
 
-                EmployeeEntity doctor1 = new EmployeeEntity();
-                doctor1.setName("黄蓉");
-                doctor1.setSelfIntroduction("擅长：猫，狗外科常见病，手术。");
+
                 //doctor1.setJobTitle("主任医师");
                 //doctor1.setRating(4);
 
@@ -84,7 +82,15 @@ public class HisTreatmentManagementApplication {
                 departmentEntity.setDescription("这是科室的简要介绍");
                 departmentEntity.setExposeToPublic(true);
 
-                departmentService.createDepartment(departmentEntity);
+                DepartmentEntity createdDepartment=departmentService.createDepartment(departmentEntity);
+
+                EmployeeEntity doctor1 = new EmployeeEntity();
+                doctor1.setName("黄蓉");
+                doctor1.setSelfIntroduction("擅长：猫，狗外科常见病，手术。");
+                doctor1.setDepartment(createdDepartment);
+
+                employeeRepository.save(doctor1);
+
             }
         };
     }

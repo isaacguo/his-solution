@@ -3,10 +3,7 @@ package com.isaac.pethospital.treatment.restcontrollers;
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
 import com.isaac.pethospital.treatment.services.RegistrationService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,6 +16,11 @@ public class RegistrationRestController {
 
     public RegistrationRestController(RegistrationService registrationService) {
         this.registrationService = registrationService;
+    }
+    @GetMapping
+    public List<RegistrationEntity> getRegistrations()
+    {
+        return this.registrationService.getRegistrations();
     }
 
     @PostMapping("create-registration")

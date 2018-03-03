@@ -3,6 +3,11 @@ import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@ang
 
 export class AbstractService {
 
+  protected getOptions() {
+    let headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON
+    let options = new RequestOptions({headers: headers});
+    return options;
+  }
 
   protected extractData(res: Response) {
     let body = res.json();

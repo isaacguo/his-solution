@@ -72,7 +72,7 @@ public class PetOwnerServiceSpecTests {
         PetOwnerOperationRequest request = new PetOwnerOperationRequest();
         request.setId(1L);
         doReturn(true).when(petOwnerRepository).exists(1L);
-        doReturn(new PetOwnerEntity()).when(petOwnerRepository).getOne(1L);
+        doReturn(new PetOwnerEntity()).when(petOwnerRepository).findOne(1L);
         //when
         this.petOwnerService.updatePetOwner(request);
         //then
@@ -102,7 +102,7 @@ public class PetOwnerServiceSpecTests {
         PetOwnerPetOperationRequest petOwnerPetOperationRequest = new PetOwnerPetOperationRequest();
         petOwnerPetOperationRequest.setPetOwner(petOwnerEntity);
         doReturn(true).when(petOwnerRepository).exists(1L);
-        doReturn(petOwnerEntity).when(petOwnerRepository).getOne(1L);
+        doReturn(petOwnerEntity).when(petOwnerRepository).findOne(1L);
         //when
         this.petOwnerService.addPet(petOwnerPetOperationRequest);
         //then
@@ -165,7 +165,7 @@ public class PetOwnerServiceSpecTests {
         request.setId(1L);
         request.setPetOwner(petOwnerEntity);
         doReturn(true).when(this.petOwnerRepository).exists(2L);
-        doReturn(petOwnerEntity).when(this.petOwnerRepository).getOne(2L);
+        doReturn(petOwnerEntity).when(this.petOwnerRepository).findOne(2L);
         //when
         this.petOwnerService.deletePet(request);
         //then
@@ -232,7 +232,7 @@ public class PetOwnerServiceSpecTests {
         petOwnerEntity.addPet(petEntity);
 
         doReturn(true).when(petOwnerRepository).exists(2L);
-        doReturn(petOwnerEntity).when(petOwnerRepository).getOne(2L);
+        doReturn(petOwnerEntity).when(petOwnerRepository).findOne(2L);
         //when
         this.petOwnerService.updatePet(request);
 
@@ -246,7 +246,7 @@ public class PetOwnerServiceSpecTests {
         PetOwnerOperationRequest request = new PetOwnerOperationRequest();
         request.setId(1L);
         doReturn(true).when(petOwnerRepository).exists(1L);
-        doReturn(new PetOwnerEntity()).when(petOwnerRepository).getOne(1L);
+        doReturn(new PetOwnerEntity()).when(petOwnerRepository).findOne(1L);
         //when
         this.petOwnerService.updatePetOwner(request);
         //then

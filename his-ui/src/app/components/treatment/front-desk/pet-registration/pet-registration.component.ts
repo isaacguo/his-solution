@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Pet} from "../../../../dto/pet.model";
 import {PetOwner} from "../../../../dto/pet-owner.model";
@@ -6,8 +6,9 @@ import {PetOwnerService} from "../../../../services/treatment/pet-owner.service"
 import {OperationEnum} from "../../../../enums/operation.enum";
 import {DepartmentService} from "../../../../services/treatment/department.service";
 import {Department} from "../../../../dto/department.model";
-import {Employee} from "../../../../dto/employee.model";
-import {EmployeeService} from "../../../../services/treatment/employee.service";
+import {TreatmentEmployeeService} from "../../../../services/treatment/treatment-employee.service";
+import {TreatmentEmployeeModel} from "../../../../dto/treatment.employee.model";
+import {RegistrationService} from "../../../../services/treatment/registration.service";
 
 @Component({
   selector: 'app-pet-registration',
@@ -15,6 +16,8 @@ import {EmployeeService} from "../../../../services/treatment/employee.service";
   styleUrls: ['./pet-registration.component.css']
 })
 export class PetRegistrationComponent implements OnInit {
+
+  @ViewChild('registrationResultModal') registrationResultModal:ModalComponent;
 
   ownerModalTitle: string;
   ownerOperationMode: OperationEnum;
@@ -29,13 +32,16 @@ export class PetRegistrationComponent implements OnInit {
 
   currentPetOwner: PetOwner = {};
   departments: Department[];
-  selectedDepartment : Department={};
+  selectedDepartment: Department = {};
+  selectedDoctor: TreatmentEmployeeModel = {};
+  availableDoctors: TreatmentEmployeeModel[];
 
-  constructor(public petOwnerService: PetOwnerService, public departmentService: DepartmentService, public employeeService:EmployeeService) {
+  constructor(public petOwnerService: PetOwnerService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService:RegistrationService) {
   }
 
   ngOnInit() {
-    this.selectedDepartment.name="请选择科室";
+    this.selectedDepartment.name = "请选择科室";
+    this.selectedDoctor.name = "请先选择科室";
     this.departmentService.getDepartments().subscribe(r => {
       this.departments = r;
     })
@@ -100,6 +106,13 @@ export class PetRegistrationComponent implements OnInit {
 
   onClearButtonClicked() {
     this.findByPetOwnerNameText = null;
+    this.selectedDoctor = {};
+    this.selectedDoctor.name = "请先选择科室";
+    this.selectedDepartment = {};
+    this.selectedDepartment.name = "请选择科室";
+    this.availableDoctors=[];
+    this.selectedPet={};
+    this.currentPetOwner={};
   }
 
   onRemovePetButtonClicked(pet: Pet) {
@@ -120,7 +133,28 @@ export class PetRegistrationComponent implements OnInit {
 
 
   setSelectedDepartment(department: Department) {
-    this.selectedDepartment=department;
+    this.selectedDepartment = department;
+    this.treatmentEmployeeService.findByDepartment(department.id).subscribe(r => {
+      this.availableDoctors = r;
+      this.selectedDoctor.name = "请选择医生";
+    })
+  }
+
+  setSelectedDoctor(doctor: TreatmentEmployeeModel) {
+    this.selectedDoctor = doctor;
+  }
+
+  onRegistrationButtonClicked(confirmRegistrationModal:ModalComponent) {
+    confirmRegistrationModal.open();
+  }
+
+  onConfirmRegistrationModalClosed() {
+    this.registrationService.createRegistration(this.selectedDoctor.id,1,this.selectedPet.id).subscribe(r=>{
+      this.registrationResultModal.open();
+    });
+  }
+
+  onRegistrationResultModalClosed() {
 
   }
 }

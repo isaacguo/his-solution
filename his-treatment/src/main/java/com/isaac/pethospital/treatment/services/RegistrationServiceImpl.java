@@ -41,17 +41,24 @@ public class RegistrationServiceImpl implements RegistrationService {
         EmployeeEntity operator = getEmployeeById(registrationOperationRequest.getOperatorId());
         if (!petRepository.exists(registrationOperationRequest.getPetId()))
             throw new RuntimeException("cannot find pet by id");
-        PetEntity pet = this.petRepository.getOne(registrationOperationRequest.getPetId());
+        PetEntity pet = this.petRepository.findOne(registrationOperationRequest.getPetId());
 
         RegistrationEntity registrationEntity = registrationOperationRequest.toRegistrationEntity(doctor, operator, pet);
+        registrationEntity.setCreatedDate(LocalDateTime.now());
+        registrationEntity.setBookDate(LocalDateTime.now());
         return this.registrationRepository.save(registrationEntity);
 
+    }
+
+    @Override
+    public List<RegistrationEntity> getRegistrations() {
+        return this.registrationRepository.findAll();
     }
 
     private EmployeeEntity getEmployeeById(Long employeeId) {
         if (!employeeRepository.exists(employeeId)) {
             throw new RuntimeException("cannot find employee by id");
         }
-        return this.employeeRepository.getOne(employeeId);
+        return this.employeeRepository.findOne(employeeId);
     }
 }

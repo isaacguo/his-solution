@@ -43,3 +43,8 @@
   vertical-align: top;
   margin-top:25px;
 }
+
+.isaac-dropdown-button
+{
+  min-width: 160px;
+}
