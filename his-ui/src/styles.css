@@ -48,3 +48,26 @@
 {
   min-width: 160px;
 }
+.sidebar-2nd-level {
+  z-index: 1;
+  position: absolute;
+  width: 250px;
+}
+
+@media (min-width: 768px) {
+  .mysidebar {
+    max-width:250px;
+  }
+}
+
+@media (min-width: 768px) {
+  .subsidebar {
+    margin-top: 0px;
+  }
+}
+@media (min-width: 768px) {
+  .subsidebar2 {
+    margin-top: 250px;
+  }
+}
+

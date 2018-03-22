@@ -35,6 +35,7 @@ import {FrontDeskComponent} from "./app/components/treatment/front-desk/front-de
 import {PetRegistrationComponent} from "./app/components/treatment/front-desk/pet-registration/pet-registration.component";
 import {PetInfoComponent} from "./app/components/treatment/my-consulting-room/pet-info/pet-info.component";
 import {PetTreatmentComponent} from "./app/components/treatment/my-consulting-room/pet-treatment/pet-treatment.component";
+import {InventoryQueryComponent} from "./app/components/inventory/inventory-query/inventory-query.component";
 
 
 const appRoutes: Routes = [
@@ -174,6 +175,11 @@ const appRoutes: Routes = [
       {
         path: 'inventory',
         component: InventoryComponent
+      },
+      {
+        path: 'inventory-query',
+        component: InventoryQueryComponent
+
       },
       {
         path: 'analysis',

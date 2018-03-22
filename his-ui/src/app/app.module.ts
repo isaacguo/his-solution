@@ -50,7 +50,9 @@ import {RegistrationService} from "./services/treatment/registration.service";
 import {TreatmentEmployeeService} from "./services/treatment/treatment-employee.service";
 import {PetService} from "./services/treatment/pet.service";
 import {PetInfoComponent} from './components/treatment/my-consulting-room/pet-info/pet-info.component';
-import { PetTreatmentComponent } from './components/treatment/my-consulting-room/pet-treatment/pet-treatment.component';
+import {PetTreatmentComponent} from './components/treatment/my-consulting-room/pet-treatment/pet-treatment.component';
+import {InventoryQueryComponent} from './components/inventory/inventory-query/inventory-query.component';
+import {TreeModule} from "angular-tree-component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -99,10 +101,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MyConsultingRoomComponent,
     PetRegistrationComponent,
     PetInfoComponent,
-    PetTreatmentComponent
+    PetTreatmentComponent,
+    InventoryQueryComponent
   ],
   imports: [
-    BrowserModule, routing, HttpModule, FormsModule, Ng2Bs3ModalModule
+    BrowserModule, routing, HttpModule, FormsModule, Ng2Bs3ModalModule, TreeModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

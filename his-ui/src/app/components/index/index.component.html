@@ -1,6 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<div id="wrapper">
+<!--<div id="wrapper">-->
+<div id="wrapper" class="container">
 
   <!-- Navigation -->
   <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -18,11 +19,11 @@
 
     <ul class="nav navbar-top-links navbar-right">
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)" >
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
           <i class="fa fa-user fa-fw"></i> 欢迎 {{authInfo.displayName}} <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
-          <li><a href="javascript:void(0)" ><i class="fa fa-user fa-fw"></i> 我的</a>
+          <li><a href="javascript:void(0)"><i class="fa fa-user fa-fw"></i> 我的</a>
           </li>
           <li class="divider"></li>
           <li><a routerLink="/logout"><i class="fa fa-sign-out fa-fw"></i> 退出</a>
@@ -52,22 +53,29 @@
             <a routerLink="/dashboard" routerLinkActive="active" class="text-center"> 快捷方式</a>
           </li>
           <li>
-            <a href="javascript:void(0)"  routerLinkActive="active" class="text-center"> 医院就诊<span class="fa arrow"></span></a>
+            <a href="javascript:void(0)" routerLinkActive="active" class="text-center"> 医院就诊<span
+              class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <!--<li *ngIf="authInfo.isAdmin">-->
               <li>
                 <a routerLink="/frontdesk" routerLinkActive="active" class="text-center"> 前台服务</a>
-              </li >
+              </li>
               <li>
                 <a routerLink="/register" routerLinkActive="active" class="text-center"> 看病挂号</a>
-              </li >
+              </li>
               <li>
                 <a routerLink="/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室</a>
-              </li >
+              </li>
             </ul>
           </li>
           <li>
-            <a routerLink="/inventory" routerLinkActive="active" class="text-center"> 药品管理</a>
+            <a class="text-center"> 药品管理<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <!--<li *ngIf="authInfo.isAdmin">-->
+              <li>
+                <a routerLink="/inventory-query" routerLinkActive="active" class="text-center"> 药品查询</a>
+              </li>
+            </ul>
           </li>
           <li>
             <a routerLink="/profiles" routerLinkActive="active" class="text-center"> 病历管理</a>
@@ -76,12 +84,12 @@
             <a routerLink="/finance" routerLinkActive="active" class="text-center"> 财务管理</a>
           </li>
           <li>
-            <a href="javascript:void(0)"  class="text-center"> 人事管理<span class="fa arrow"></span></a>
+            <a href="javascript:void(0)" class="text-center"> 人事管理<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <!--<li *ngIf="authInfo.isAdmin">-->
               <li>
                 <a routerLink="/employee-admin" routerLinkActive="active" class="text-center"> 员工管理</a>
-              </li >
+              </li>
               <li *ngIf="!authInfo.isAdmin">
                 <a routerLink="/employee-profile" routerLinkActive="active" class="text-center"> 个人信息</a>
               </li>
@@ -103,7 +111,6 @@
   <div id="page-wrapper">
     <router-outlet></router-outlet>
   </div>
-
 
 </div>
 <!-- /#wrapper -->
