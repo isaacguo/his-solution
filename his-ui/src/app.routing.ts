@@ -10,7 +10,6 @@ import {ProfilesComponent} from "./app/components/profiles/profiles.component";
 import {MembersComponent} from "./app/components/members/members.component";
 import {PetsComponent} from "./app/components/pets/pets.component";
 import {BusinessComponent} from "./app/components/business/business.component";
-import {ProcurementComponent} from "./app/components/procurement/procurement.component";
 import {InventoryComponent} from "./app/components/inventory/inventory.component";
 import {AnalysisComponent} from "./app/components/analysis/analysis.component";
 import {DataComponent} from "./app/components/data/data.component";
@@ -36,6 +35,8 @@ import {PetRegistrationComponent} from "./app/components/treatment/front-desk/pe
 import {PetInfoComponent} from "./app/components/treatment/my-consulting-room/pet-info/pet-info.component";
 import {PetTreatmentComponent} from "./app/components/treatment/my-consulting-room/pet-treatment/pet-treatment.component";
 import {InventoryQueryComponent} from "./app/components/inventory/inventory-query/inventory-query.component";
+import {ProcurementManagementComponent} from "./app/components/procurement/procurement-management/procurement-management.component";
+import {ProcurementSettingsComponent} from "./app/components/procurement/procurement-settings/procurement-settings.component";
 
 
 const appRoutes: Routes = [
@@ -170,7 +171,11 @@ const appRoutes: Routes = [
       },
       {
         path: 'procurement',
-        component: ProcurementComponent
+        component: ProcurementManagementComponent
+      },
+      {
+        path: 'procurement-settings',
+        component: ProcurementSettingsComponent
       },
       {
         path: 'inventory',

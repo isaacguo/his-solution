@@ -18,7 +18,6 @@ import {DataComponent} from './components/data/data.component';
 import {SettingsComponent} from './components/settings/settings.component';
 import {TestingComponent} from './components/testing/testing.component';
 import {PharmacyComponent} from './components/pharmacy/pharmacy.component';
-import {ProcurementComponent} from './components/procurement/procurement.component';
 import {ImagesComponent} from './components/images/images.component';
 import {MembersComponent} from './components/members/members.component';
 import {LogoutComponent} from './components/logout/logout.component';
@@ -53,6 +52,8 @@ import {PetInfoComponent} from './components/treatment/my-consulting-room/pet-in
 import {PetTreatmentComponent} from './components/treatment/my-consulting-room/pet-treatment/pet-treatment.component';
 import {InventoryQueryComponent} from './components/inventory/inventory-query/inventory-query.component';
 import {TreeModule} from "angular-tree-component";
+import {ProcurementManagementComponent} from './components/procurement/procurement-management/procurement-management.component';
+import { ProcurementSettingsComponent } from './components/procurement/procurement-settings/procurement-settings.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -82,7 +83,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     SettingsComponent,
     TestingComponent,
     PharmacyComponent,
-    ProcurementComponent,
     ImagesComponent,
     MembersComponent,
     LogoutComponent,
@@ -102,7 +102,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PetRegistrationComponent,
     PetInfoComponent,
     PetTreatmentComponent,
-    InventoryQueryComponent
+    InventoryQueryComponent,
+    ProcurementManagementComponent,
+    ProcurementSettingsComponent,
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule, Ng2Bs3ModalModule, TreeModule
