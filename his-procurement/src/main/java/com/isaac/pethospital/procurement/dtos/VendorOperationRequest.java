@@ -1,23 +1,15 @@
-package com.isaac.pethospital.procurement.entities;
+package com.isaac.pethospital.procurement.dtos;
 
-import javax.persistence.*;
-import java.util.LinkedList;
-import java.util.List;
+import com.isaac.pethospital.procurement.entities.VendorEntity;
 
-@Entity
-public class VendorEntity {
+public class VendorOperationRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     String name;
     String address;
     String postcode;
-    String legalPerson; //法人
+    String legalPerson;
     String description;
-    @OneToMany
-    List<ContactEntity> contactList = new LinkedList<>();
 
     public Long getId() {
         return id;
@@ -67,16 +59,22 @@ public class VendorEntity {
         this.description = description;
     }
 
-    public List<ContactEntity> getContactList() {
-        return contactList;
+    public VendorEntity toVendor() {
+        VendorEntity vendor=new VendorEntity();
+        updateInternal(vendor);
+        return vendor;
     }
 
-    public void addContact(ContactEntity contact) {
-        if (contact == null)
-            throw new RuntimeException("Contact is null");
-
-        contact.setVendor(this);
-        this.contactList.add(contact);
+    private void updateInternal(VendorEntity vendor) {
+        vendor.setAddress(this.address);
+        vendor.setDescription(this.description);
+        vendor.setLegalPerson(this.legalPerson);
+        vendor.setName(this.name);
+        vendor.setPostcode(this.postcode);
     }
 
+    public void updateVendor(VendorEntity vendorEntity)
+    {
+        updateInternal(vendorEntity);
+    }
 }
