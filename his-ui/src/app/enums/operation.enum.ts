@@ -1,6 +1,6 @@
 export enum OperationEnum {
-  CREATE,
-  READ,
-  UPDATE,
-  DELETE
+  CREATE=<any>"CREATE",
+  READ=<any>"READ",
+  UPDATE=<any>"UPDATE",
+  DELETE=<any>"DELETE"
 }

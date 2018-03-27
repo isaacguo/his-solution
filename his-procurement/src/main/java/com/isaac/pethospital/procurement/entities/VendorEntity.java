@@ -16,6 +16,27 @@ public class VendorEntity {
     String postcode;
     String legalPerson; //法人
     String description;
+    String officialWebsiteLink;
+
+    public String getOfficialWebsiteLink() {
+        return officialWebsiteLink;
+    }
+
+    public void setOfficialWebsiteLink(String officialWebsiteLink) {
+        this.officialWebsiteLink = officialWebsiteLink;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    String email;
+
+
     @OneToMany
     List<ContactEntity> contactList = new LinkedList<>();
 

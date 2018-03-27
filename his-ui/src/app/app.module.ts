@@ -54,6 +54,8 @@ import {InventoryQueryComponent} from './components/inventory/inventory-query/in
 import {TreeModule} from "angular-tree-component";
 import {ProcurementManagementComponent} from './components/procurement/procurement-management/procurement-management.component';
 import { ProcurementSettingsComponent } from './components/procurement/procurement-settings/procurement-settings.component';
+import { VendorManagementComponent } from './components/procurement/procurement-management/vendor-management/vendor-management.component';
+import { VendorCreateUpdateComponent } from './components/procurement/procurement-management/vendor-create-update/vendor-create-update.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -105,6 +107,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     InventoryQueryComponent,
     ProcurementManagementComponent,
     ProcurementSettingsComponent,
+    VendorManagementComponent,
+    VendorCreateUpdateComponent,
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule, Ng2Bs3ModalModule, TreeModule

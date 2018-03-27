@@ -37,6 +37,8 @@ import {PetTreatmentComponent} from "./app/components/treatment/my-consulting-ro
 import {InventoryQueryComponent} from "./app/components/inventory/inventory-query/inventory-query.component";
 import {ProcurementManagementComponent} from "./app/components/procurement/procurement-management/procurement-management.component";
 import {ProcurementSettingsComponent} from "./app/components/procurement/procurement-settings/procurement-settings.component";
+import {VendorManagementComponent} from "./app/components/procurement/procurement-management/vendor-management/vendor-management.component";
+import {VendorCreateUpdateComponent} from "./app/components/procurement/procurement-management/vendor-create-update/vendor-create-update.component";
 
 
 const appRoutes: Routes = [
@@ -175,7 +177,21 @@ const appRoutes: Routes = [
       },
       {
         path: 'procurement-settings',
-        component: ProcurementSettingsComponent
+        component: ProcurementSettingsComponent,
+        children: [
+          {
+            path: 'vendors',
+            component: VendorManagementComponent
+          },
+          {
+            path: 'vendors/:operation',
+            component: VendorCreateUpdateComponent
+          },
+          {
+            path: 'vendors/:operation/:updateId',
+            component: VendorCreateUpdateComponent
+          },
+        ]
       },
       {
         path: 'inventory',
