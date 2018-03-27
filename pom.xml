@@ -17,6 +17,8 @@
         <module>his-authentication</module>
         <module>his-medicine</module>
         <module>his-common</module>
+        <module>his-treatment</module>
+        <module>his-procurement</module>
     </modules>
 
     <parent>

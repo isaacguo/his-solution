@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs ">
+  <!--
+  <li (click)="onViewLinkClicked(true)" role="presentation"><a href="javascript:void(0)">专家门诊</a></li>
+  <li (click)="onViewLinkClicked(false)" role="presentation"><a href="javascript:void(0)">普通门诊</a></li>
+  -->
+  <li routerLinkActive="active" >
+    <a routerLink="/doctor-registration/doctor-list-view/{{uuid}}" class="text-center">专家门诊</a>
+  </li>
+  <li routerLinkActive="active" >
+    <a routerLink="/doctor-registration/time-based-view/{{uuid}}" class="text-center">普通门诊</a>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>
+

@@ -8,8 +8,8 @@
     <version>0.5.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>his-employee-management</name>
-    <description>Demo project for Spring Boot</description>
+    <name>his-employee</name>
+    <description>His Employee Management</description>
 
     <parent>
         <groupId>com.isaac.pethospital</groupId>

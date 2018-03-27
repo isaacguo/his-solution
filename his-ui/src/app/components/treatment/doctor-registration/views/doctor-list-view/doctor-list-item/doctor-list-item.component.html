@@ -1,0 +1,32 @@
+<modal #confirmationModal (onClose)="onConfirmationModalClosed()">
+  <form #modalForm3="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body>
+      你是否确定预约<b>{{doctor.name}}</b>{{doctor.jobTitle}}的号?
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmationModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="confirmationModal"
+              (click)="confirmationModal.dismiss()">取消</button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div class="row doctor-info">
+  <div class="col-md-1 head-photo">
+    <img src="../../../../assets/images/male-profile.png">
+  </div>
+  <div class="col-md-8 doctor-details"><p class="doctor-name"> {{doctor.name}} <span
+    class="title"> {{doctor.jobTitle}} </span></p>
+    <p class="doctor-major"><span>{{doctor.selfIntroduction}}</span></p>
+  </div>
+  <div class="col-md-1 doctor-score">
+    <div class="stars"> {{doctor.rating}} 分
+    </div>
+  </div>
+  <div class="col-md-2 doctor-book">
+    <button (click)="onBookButtonClicked(confirmationModal)" class="btn btn-default">预约</button>
+  </div>
+</div>

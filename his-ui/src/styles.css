@@ -6,6 +6,7 @@
 
 .isaac-form-space {
   margin-left: 10px;
+  margin-top:5px;
 }
 
 .isaac-margin-top {
@@ -16,3 +17,57 @@
   font-size: 14px !important;
   color: #3c8dbc;
 }
+.head-photo
+{
+  text-align:center;
+  vertical-align: top;
+}
+.head-photo img
+{
+  height:70px;
+  border-radius: 50%;
+
+}
+.doctor-details
+{
+  vertical-align: top;
+}
+.doctor-score
+{
+  vertical-align: top;
+  text-align:center;
+  margin-top:25px;
+}
+.doctor-book
+{
+  vertical-align: top;
+  margin-top:25px;
+}
+
+.isaac-dropdown-button
+{
+  min-width: 160px;
+}
+.sidebar-2nd-level {
+  z-index: 1;
+  position: absolute;
+  width: 250px;
+}
+
+@media (min-width: 768px) {
+  .mysidebar {
+    max-width:250px;
+  }
+}
+
+@media (min-width: 768px) {
+  .subsidebar {
+    margin-top: 0px;
+  }
+}
+@media (min-width: 768px) {
+  .subsidebar2 {
+    margin-top: 250px;
+  }
+}
+

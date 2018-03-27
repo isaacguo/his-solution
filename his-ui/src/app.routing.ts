@@ -2,7 +2,6 @@ import {RouterModule, Routes} from "@angular/router";
 import {ModuleWithProviders} from "@angular/core";
 import {IndexComponent} from "./app/components/index/index.component";
 import {LoginComponent} from "./app/components/login/login.component";
-import {FrontDeskComponent} from "./app/components/front-desk/front-desk.component";
 import {TreatmentComponent} from "./app/components/treatment/treatment.component";
 import {TestingComponent} from "./app/components/testing/testing.component";
 import {ImagesComponent} from "./app/components/images/images.component";
@@ -11,7 +10,6 @@ import {ProfilesComponent} from "./app/components/profiles/profiles.component";
 import {MembersComponent} from "./app/components/members/members.component";
 import {PetsComponent} from "./app/components/pets/pets.component";
 import {BusinessComponent} from "./app/components/business/business.component";
-import {ProcurementComponent} from "./app/components/procurement/procurement.component";
 import {InventoryComponent} from "./app/components/inventory/inventory.component";
 import {AnalysisComponent} from "./app/components/analysis/analysis.component";
 import {DataComponent} from "./app/components/data/data.component";
@@ -27,12 +25,25 @@ import {EmployeeAdminComponent} from "./app/components/employee/employee-admin/e
 import {AdminGuard} from "./app/guards/admin.guard";
 import {FinanceComponent} from "./app/components/finance/finance.component";
 import {FinanceGuard} from "./app/guards/finance.guard";
+import {RegisterComponent} from "./app/components/treatment/register/register.component";
+import {DoctorRegistrationComponent} from "./app/components/treatment/doctor-registration/doctor-registration.component";
+import {DoctorListViewComponent} from "./app/components/treatment/doctor-registration/views/doctor-list-view/doctor-list-view.component";
+import {TimeBasedViewComponent} from "./app/components/treatment/doctor-registration/views/time-based-view/time-based-view.component";
+import {MyConsultingRoomComponent} from "./app/components/treatment/my-consulting-room/my-consulting-room.component";
+import {FrontDeskComponent} from "./app/components/treatment/front-desk/front-desk.component";
+import {PetRegistrationComponent} from "./app/components/treatment/front-desk/pet-registration/pet-registration.component";
+import {PetInfoComponent} from "./app/components/treatment/my-consulting-room/pet-info/pet-info.component";
+import {PetTreatmentComponent} from "./app/components/treatment/my-consulting-room/pet-treatment/pet-treatment.component";
+import {InventoryQueryComponent} from "./app/components/inventory/inventory-query/inventory-query.component";
+import {ProcurementManagementComponent} from "./app/components/procurement/procurement-management/procurement-management.component";
+import {ProcurementSettingsComponent} from "./app/components/procurement/procurement-settings/procurement-settings.component";
 
 
 const appRoutes: Routes = [
   {
     path: '',
     component: IndexComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -40,11 +51,62 @@ const appRoutes: Routes = [
       },
       {
         path: 'frontdesk',
-        component: FrontDeskComponent
+        component: FrontDeskComponent,
+        children: [
+          {
+            path: 'petreg',
+            component: PetRegistrationComponent
+          },
+          {
+            path: '**',
+            redirectTo: 'petreg',
+          }
+        ]
       },
       {
         path: 'treatment',
         component: TreatmentComponent
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      },
+      {
+        path: 'my-consulting-room',
+        component: MyConsultingRoomComponent,
+        children: [
+          {
+            path: 'pet-info',
+            component: PetInfoComponent,
+          },
+          {
+            path: 'pet-treatment',
+            component: PetTreatmentComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'pet-info'
+          }
+        ]
+      },
+      {
+        path: 'doctor-registration',
+        component: DoctorRegistrationComponent,
+        children: [
+          {
+            path: 'doctor-list-view/:uuid',
+            component: DoctorListViewComponent,
+          },
+          {
+            path: 'time-based-view/:uuid',
+            component: TimeBasedViewComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'doctor-list-view',
+
+          }
+        ]
       },
       {
         path: 'testing',
@@ -87,7 +149,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'employee-admin',
-        //canActivate: [AdminGuard],
+        canActivate: [AdminGuard],
         component: EmployeeAdminComponent
       },
       {
@@ -109,11 +171,20 @@ const appRoutes: Routes = [
       },
       {
         path: 'procurement',
-        component: ProcurementComponent
+        component: ProcurementManagementComponent
+      },
+      {
+        path: 'procurement-settings',
+        component: ProcurementSettingsComponent
       },
       {
         path: 'inventory',
         component: InventoryComponent
+      },
+      {
+        path: 'inventory-query',
+        component: InventoryQueryComponent
+
       },
       {
         path: 'analysis',
@@ -141,7 +212,6 @@ const appRoutes: Routes = [
 
   // otherwise redirect to home
   {path: '**', redirectTo: 'login'}
-
 
 ]
 

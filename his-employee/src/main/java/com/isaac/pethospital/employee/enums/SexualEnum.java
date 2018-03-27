@@ -5,9 +5,14 @@ public enum SexualEnum {
     MALE("男"),
     FEMALE("女");
 
-    SexualEnum(String desc) {
-
+    SexualEnum(String text) {
+        this.text = text;
     }
 
-    private String desc;
+    private String text;
+
+    @Override
+    public String toString() {
+        return text;
+    }
 }

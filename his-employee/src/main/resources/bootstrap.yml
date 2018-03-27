@@ -7,7 +7,7 @@ server:
 
 ---
 spring:
-  profiles: dev
+  profiles: dev,default
   cloud:
     config:
       uri: http://localhost:17601
