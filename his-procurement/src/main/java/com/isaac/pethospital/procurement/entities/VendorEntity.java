@@ -17,6 +17,9 @@ public class VendorEntity {
     String legalPerson; //法人
     String description;
     String officialWebsiteLink;
+    String email;
+    @OneToMany
+    List<ContactEntity> contactList = new LinkedList<>();
 
     public String getOfficialWebsiteLink() {
         return officialWebsiteLink;
@@ -33,12 +36,6 @@ public class VendorEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    String email;
-
-
-    @OneToMany
-    List<ContactEntity> contactList = new LinkedList<>();
 
     public Long getId() {
         return id;

@@ -1,6 +1,68 @@
 <p>
-  vendor-create-update works!
+  {{getOperationText()}}供应商
 </p>
-{{operation}}
-<br/>
-{{updateId}}
+
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">公司名称</label> <span color="red" class="text-danger"
+                                         [hidden]="formModel.controls.name.valid">*</span>
+    <input id="name" type="text" class="form-control" formControlName="name">
+    <small *ngIf="!formModel.controls.name.valid" class="text-danger">
+      公司名称不能为空
+    </small>
+  </div>
+
+  <div formArrayName="contacts">
+    <div *ngFor="let contact of formModel.controls.contacts.controls; let i=index">
+      <!-- address header, show remove button when more than one address available -->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div>
+            <span>联系人 {{i + 1}}</span>
+            <span class="glyphicon glyphicon-remove pull-right"  *ngIf="formModel.controls.contacts.controls.length > 1" (click)="removeContact(i)">
+                </span>
+          </div>
+        </div>
+
+        <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+        <div class="panel-body" [formGroupName]="i">
+          <!--street-->
+          <app-contact-create-update [contact]="contact"></app-contact-create-update>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="isaac-margin-top">
+    <a (click)="addContact()" style="cursor: default">
+      添加新联系人 +
+    </a>
+  </div>
+
+  <div class="form-group isaac-margin-15top">
+    <label for="address">公司地址:</label>
+    <input id="address" type="text" class="form-control" formControlName="address">
+  </div>
+  <div class="form-group">
+    <label for="postcode">邮编:</label>
+    <input id="postcode" type="text" class="form-control" formControlName="postcode">
+  </div>
+  <div class="form-group">
+    <label for="legalPerson">法人:</label>
+    <input id="legalPerson" type="text" class="form-control" formControlName="legalPerson">
+  </div>
+  <div class="form-group">
+    <label for="officialWebsiteLink">公司官网:</label>
+    <input id="officialWebsiteLink" type="text" class="form-control" formControlName="officialWebsiteLink">
+  </div>
+  <div class="form-group">
+    <label for="email">公司邮箱:</label>
+    <input id="email" type="text" class="form-control" formControlName="email">
+  </div>
+
+</form>
+
+<pre>{{formModel.value|json}}</pre>
+<pre>{{formModel.status|json}}</pre>

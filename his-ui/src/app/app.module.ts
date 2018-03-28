@@ -6,7 +6,7 @@ import {IndexComponent} from './components/index/index.component';
 import {LoginComponent} from './components/login/login.component';
 import {routing} from "../app.routing";
 import {Http, HttpModule, RequestOptions} from "@angular/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {TreatmentComponent} from './components/treatment/treatment.component';
 import {ProfilesComponent} from './components/profiles/profiles.component';
@@ -53,9 +53,10 @@ import {PetTreatmentComponent} from './components/treatment/my-consulting-room/p
 import {InventoryQueryComponent} from './components/inventory/inventory-query/inventory-query.component';
 import {TreeModule} from "angular-tree-component";
 import {ProcurementManagementComponent} from './components/procurement/procurement-management/procurement-management.component';
-import { ProcurementSettingsComponent } from './components/procurement/procurement-settings/procurement-settings.component';
-import { VendorManagementComponent } from './components/procurement/procurement-management/vendor-management/vendor-management.component';
-import { VendorCreateUpdateComponent } from './components/procurement/procurement-management/vendor-create-update/vendor-create-update.component';
+import {ProcurementSettingsComponent} from './components/procurement/procurement-settings/procurement-settings.component';
+import {VendorManagementComponent} from './components/procurement/procurement-management/vendor-management/vendor-management.component';
+import {VendorCreateUpdateComponent} from './components/procurement/procurement-management/vendor-create-update/vendor-create-update.component';
+import { ContactCreateUpdateComponent } from './components/procurement/procurement-management/vendor-create-update/contact-create-update/contact-create-update.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -109,9 +110,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementSettingsComponent,
     VendorManagementComponent,
     VendorCreateUpdateComponent,
+    ContactCreateUpdateComponent,
   ],
   imports: [
-    BrowserModule, routing, HttpModule, FormsModule, Ng2Bs3ModalModule, TreeModule
+    BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
