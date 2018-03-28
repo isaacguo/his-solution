@@ -35,6 +35,8 @@ export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent i
     })
   }
 
+  get contactsData() {return <FormArray>this.formModel.get('contacts');}
+
   initContacts()
   {
     return this.fb.group({

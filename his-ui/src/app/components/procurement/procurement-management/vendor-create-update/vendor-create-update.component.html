@@ -13,7 +13,7 @@
   </div>
 
   <div formArrayName="contacts">
-    <div *ngFor="let contact of formModel.controls.contacts.controls; let i=index">
+    <div *ngFor="let contact of contactsData.controls; let i=index">
       <!-- address header, show remove button when more than one address available -->
       <div class="panel panel-info">
         <div class="panel-heading">
