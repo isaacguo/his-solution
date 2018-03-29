@@ -24,7 +24,7 @@ public class ProcurementStatusRestController {
     @GetMapping("root")
     public ProcurementStatusEntity getRoot()
     {
-o       ProcurementStatusEntity procurementStatusEntity= this.procurementStatusService.getRoot();
+        ProcurementStatusEntity procurementStatusEntity= this.procurementStatusService.getRoot();
         List<ProcurementStatusEntity> all=this.procurementStatusService.findAll();
         return procurementStatusEntity;
     }

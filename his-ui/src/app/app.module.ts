@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+
 import {AppComponent} from './app.component';
 import {IndexComponent} from './components/index/index.component';
 import {LoginComponent} from './components/login/login.component';
@@ -60,6 +61,9 @@ import { ContactCreateUpdateComponent } from './components/procurement/procureme
 import {VendorService} from "./services/business/procurement/vendor.service";
 import {ProcurementStatusService} from "./services/business/procurement/procurement-status.service";
 import { ProcurementStatusComponent } from './components/procurement/procurement-management/procurement-status/procurement-status.component';
+import { ProcurementRequestComponent } from './components/procurement/procurement-request/procurement-request.component';
+import { ProcurementApprovalComponent } from './components/procurement/procurement-approval/procurement-approval.component';
+
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -115,6 +119,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     VendorCreateUpdateComponent,
     ContactCreateUpdateComponent,
     ProcurementStatusComponent,
+    ProcurementRequestComponent,
+    ProcurementApprovalComponent,
+
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule

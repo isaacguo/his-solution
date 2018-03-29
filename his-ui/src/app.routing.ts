@@ -40,6 +40,8 @@ import {ProcurementSettingsComponent} from "./app/components/procurement/procure
 import {VendorManagementComponent} from "./app/components/procurement/procurement-management/vendor-management/vendor-management.component";
 import {VendorCreateUpdateComponent} from "./app/components/procurement/procurement-management/vendor-create-update/vendor-create-update.component";
 import {ProcurementStatusComponent} from "./app/components/procurement/procurement-management/procurement-status/procurement-status.component";
+import {ProcurementRequestComponent} from "./app/components/procurement/procurement-request/procurement-request.component";
+import {ProcurementApprovalComponent} from "./app/components/procurement/procurement-approval/procurement-approval.component";
 
 
 const appRoutes: Routes = [
@@ -175,6 +177,14 @@ const appRoutes: Routes = [
       {
         path: 'procurement',
         component: ProcurementManagementComponent
+      },
+      {
+        path: 'procurement-request',
+        component: ProcurementRequestComponent
+      },
+      {
+        path: 'procurement-approval',
+        component: ProcurementApprovalComponent
       },
       {
         path: 'procurement-settings',

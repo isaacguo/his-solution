@@ -29,5 +29,4 @@ public class ProcurementEntity {
     LocalDateTime orderConfirmedTime; //订单确认时间
 
 
-
 }

@@ -22,5 +22,5 @@ public class ProcurementGoodEntity {
     double pricePerUnit; //单价
     double totalPrice;
 
-
 }
+
