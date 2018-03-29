@@ -58,6 +58,8 @@ import {VendorManagementComponent} from './components/procurement/procurement-ma
 import {VendorCreateUpdateComponent} from './components/procurement/procurement-management/vendor-create-update/vendor-create-update.component';
 import { ContactCreateUpdateComponent } from './components/procurement/procurement-management/vendor-create-update/contact-create-update/contact-create-update.component';
 import {VendorService} from "./services/business/procurement/vendor.service";
+import {ProcurementStatusService} from "./services/business/procurement/procurement-status.service";
+import { ProcurementStatusComponent } from './components/procurement/procurement-management/procurement-status/procurement-status.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -112,6 +114,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     VendorManagementComponent,
     VendorCreateUpdateComponent,
     ContactCreateUpdateComponent,
+    ProcurementStatusComponent,
   ],
   imports: [
     BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule
@@ -133,7 +136,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TreatmentEmployeeService,
     PetService,
     //procurement
-    VendorService
+    VendorService,
+    ProcurementStatusService
   ],
   bootstrap: [AppComponent]
 })

@@ -24,7 +24,10 @@ public class ProcurementEntity {
 
     @ManyToOne
     OperatorEntity operator;
-    LocalDateTime generatedTime; //制单时间
+    LocalDateTime orderGeneratedTime; //制单时间
+
+    LocalDateTime orderConfirmedTime; //订单确认时间
+
 
 
 }

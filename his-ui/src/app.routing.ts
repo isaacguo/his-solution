@@ -39,6 +39,7 @@ import {ProcurementManagementComponent} from "./app/components/procurement/procu
 import {ProcurementSettingsComponent} from "./app/components/procurement/procurement-settings/procurement-settings.component";
 import {VendorManagementComponent} from "./app/components/procurement/procurement-management/vendor-management/vendor-management.component";
 import {VendorCreateUpdateComponent} from "./app/components/procurement/procurement-management/vendor-create-update/vendor-create-update.component";
+import {ProcurementStatusComponent} from "./app/components/procurement/procurement-management/procurement-status/procurement-status.component";
 
 
 const appRoutes: Routes = [
@@ -191,6 +192,10 @@ const appRoutes: Routes = [
             path: 'vendors/:operation/:updateId',
             component: VendorCreateUpdateComponent
           },
+          {
+            path: 'procurement-status',
+            component:ProcurementStatusComponent
+          }
         ]
       },
       {
