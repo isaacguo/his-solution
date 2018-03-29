@@ -52,8 +52,20 @@ public class VendorServiceImpl implements VendorService {
             return vendorEntity;
     }
 
+
+
     @Override
     public List<VendorEntity> findAll() {
         return this.vendorRepository.findAll();
+    }
+
+    @Override
+    public VendorEntity findById(Long id) {
+        return this.vendorRepository.findOne(id);
+    }
+
+    @Override
+    public List<VendorEntity> findByNameContains(String keyword) {
+        return this.vendorRepository.findByNameContainsIgnoreCase(keyword);
     }
 }

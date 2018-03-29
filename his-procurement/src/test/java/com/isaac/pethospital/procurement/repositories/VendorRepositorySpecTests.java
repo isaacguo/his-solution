@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -29,12 +31,28 @@ public class VendorRepositorySpecTests {
     @Test
     public void givenTitleWhenFindByTitleThenReturnVendorEntity() throws Exception {
         //given
-        VendorEntity authorizationTopicEntity=new VendorEntity();
+        VendorEntity authorizationTopicEntity = new VendorEntity();
         authorizationTopicEntity.setName("Company1");
         this.entityManager.persist(authorizationTopicEntity);
         //when
         VendorEntity authorizationTopicEntity1 = this.repository.findByName("Company1");
         //then
         assertThat(authorizationTopicEntity1.getName()).isEqualToIgnoringCase("Company1");
+    }
+
+    @Test
+    public void givenKeywordWhenFindByNameContainsKeyswordShouldReturnAListOfEntity() {
+        //given
+        VendorEntity authorizationTopicEntity1 = new VendorEntity();
+        authorizationTopicEntity1.setName("Company1");
+        this.entityManager.persist(authorizationTopicEntity1);
+        VendorEntity authorizationTopicEntity2 = new VendorEntity();
+        authorizationTopicEntity2.setName("Company2");
+        this.entityManager.persist(authorizationTopicEntity2);
+
+        //when
+        List<VendorEntity> list = this.repository.findByNameContainsIgnoreCase("com");
+        //then
+        assertThat(list).hasSize(2);
     }
 }

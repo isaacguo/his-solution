@@ -57,6 +57,7 @@ import {ProcurementSettingsComponent} from './components/procurement/procurement
 import {VendorManagementComponent} from './components/procurement/procurement-management/vendor-management/vendor-management.component';
 import {VendorCreateUpdateComponent} from './components/procurement/procurement-management/vendor-create-update/vendor-create-update.component';
 import { ContactCreateUpdateComponent } from './components/procurement/procurement-management/vendor-create-update/contact-create-update/contact-create-update.component';
+import {VendorService} from "./services/business/procurement/vendor.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -130,7 +131,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PetOwnerService,
     RegistrationService,
     TreatmentEmployeeService,
-    PetService
+    PetService,
+    //procurement
+    VendorService
   ],
   bootstrap: [AppComponent]
 })

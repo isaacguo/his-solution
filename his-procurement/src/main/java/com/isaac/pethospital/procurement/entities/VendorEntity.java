@@ -1,5 +1,7 @@
 package com.isaac.pethospital.procurement.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,12 +16,12 @@ public class VendorEntity {
     String name;
     String address;
     String postcode;
-    String legalPerson; //法人
     String description;
     String officialWebsiteLink;
     String email;
-    @OneToMany
-    List<ContactEntity> contactList = new LinkedList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference("VendorEntity-ContactEntity")
+    List<ContactEntity> contacts = new LinkedList<>();
 
     public String getOfficialWebsiteLink() {
         return officialWebsiteLink;
@@ -69,13 +71,6 @@ public class VendorEntity {
         this.postcode = postcode;
     }
 
-    public String getLegalPerson() {
-        return legalPerson;
-    }
-
-    public void setLegalPerson(String legalPerson) {
-        this.legalPerson = legalPerson;
-    }
 
     public String getDescription() {
         return description;
@@ -85,8 +80,8 @@ public class VendorEntity {
         this.description = description;
     }
 
-    public List<ContactEntity> getContactList() {
-        return contactList;
+    public List<ContactEntity> getContacts() {
+        return contacts;
     }
 
     public void addContact(ContactEntity contact) {
@@ -94,7 +89,14 @@ public class VendorEntity {
             throw new RuntimeException("Contact is null");
 
         contact.setVendor(this);
-        this.contactList.add(contact);
+        this.contacts.add(contact);
+    }
+
+    public void deleteContact(ContactEntity contact) {
+        if (contact == null)
+            throw new RuntimeException("Contact is null");
+        this.contacts.remove(contact);
+        contact.setVendor(null);
     }
 
 }

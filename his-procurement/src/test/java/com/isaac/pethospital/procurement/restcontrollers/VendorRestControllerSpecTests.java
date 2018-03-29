@@ -22,10 +22,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.isaac.pethospital.common.test.TestHelper.asJsonString;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Matchers.anyListOf;
+import static org.hamcrest.CoreMatchers.startsWith;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -66,7 +66,7 @@ public class VendorRestControllerSpecTests {
         vendorEntity1.setName("abc");
         VendorEntity vendorEntity2 = new VendorEntity();
         vendorEntity2.setName("bcd");
-        List<VendorEntity> list=new LinkedList<>();
+        List<VendorEntity> list = new LinkedList<>();
         list.add(vendorEntity1);
         list.add(vendorEntity2);
 
@@ -151,5 +151,39 @@ public class VendorRestControllerSpecTests {
                 .andExpect(jsonPath("$.id", is(1)));
     }
 
+
+    @Test
+    public void whenFindByIdThenReturnVendor() throws Exception {
+
+        VendorEntity vendorEntity = new VendorEntity();
+        vendorEntity.setName("abc");
+        vendorEntity.setId(1L);
+
+        VendorOperationRequest request = new VendorOperationRequest();
+        request.setName("abc");
+
+        doReturn(vendorEntity).when(this.vendorService).findById(1L);
+
+        this.mockMvc.perform(get("/vendors/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.name", is("abc")));
+    }
+
+    @Test
+    public void whenFindByNameContains() throws Exception {
+
+        VendorEntity vendorEntity = new VendorEntity();
+        vendorEntity.setName("12com3");
+        vendorEntity.setId(1L);
+        List<VendorEntity> list=new LinkedList<>();
+        list.add(vendorEntity);
+
+        doReturn(list).when(this.vendorService).findByNameContains("com");
+        this.mockMvc.perform(get("/vendors/find-by-name-contains/com"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].name", containsString("com")));
+    }
 
 }

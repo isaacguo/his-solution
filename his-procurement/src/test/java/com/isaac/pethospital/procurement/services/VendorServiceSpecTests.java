@@ -5,6 +5,10 @@ import com.isaac.pethospital.procurement.entities.VendorEntity;
 import com.isaac.pethospital.procurement.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -60,7 +64,7 @@ public class VendorServiceSpecTests {
         verify(vendorRepository, times(1)).save(any(VendorEntity.class));
     }
 
-    @Test
+  @Test
     public void givenVendorOperationRequestThenFindVendorEntityByName() {
         //given
         VendorOperationRequest vendorOperationRequest = new VendorOperationRequest();
@@ -70,6 +74,18 @@ public class VendorServiceSpecTests {
         this.vendorService.findByName(vendorOperationRequest);
         //then
         verify(vendorRepository, times(1)).findByName("Company");
+    }
+
+
+    @Test
+    public void givenKeywordStringWhenFindByNameContainsKeywordThenReturnList() {
+        //given
+        String keyword="com";
+        doReturn(new LinkedList<VendorEntity>()).when(vendorRepository).findByNameContainsIgnoreCase("com");
+        //when
+        this.vendorService.findByNameContains(keyword);
+        //then
+        verify(vendorRepository, times(1)).findByNameContainsIgnoreCase("com");
     }
 
 }

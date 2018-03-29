@@ -2,6 +2,7 @@
   <div class="form-group">
     <label>姓名</label><span color="red" class="text-danger"
                            [hidden]="contact.controls.name.valid">*</span>
+    <input type="hidden" formControlName="id">
     <input class="form-control" type="text" formControlName="name">
     <small [hidden]="contact.controls.name.valid" class="text-danger">
       姓名不能为空

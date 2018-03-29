@@ -17,4 +17,8 @@ public interface VendorService {
     VendorEntity findByName(VendorOperationRequest request);
 
     List<VendorEntity> findAll();
+
+    VendorEntity findById(Long id);
+
+    List<VendorEntity>  findByNameContains(String keyword);
 }

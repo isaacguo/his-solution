@@ -27,9 +27,19 @@ public class VendorRestController {
     {
         return this.vendorService.findAll();
     }
+
+    @GetMapping("{id}")
+    public VendorEntity findById(@PathVariable("id") Long id)
+    {
+        return this.vendorService.findById(id);
+    }
     @PostMapping("find-vendor-by-name")
     public VendorEntity findByTitle(@RequestBody VendorOperationRequest request){
         return this.vendorService.findByName(request);
+    }
+    @GetMapping("find-by-name-contains/{keyword}")
+    public List<VendorEntity> findByNameContains(@PathVariable("keyword") String keyword){
+        return this.vendorService.findByNameContains(keyword);
     }
 
 

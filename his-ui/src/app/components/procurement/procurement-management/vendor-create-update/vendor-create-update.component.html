@@ -2,8 +2,23 @@
   {{getOperationText()}}供应商
 </p>
 
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()" >
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{vendorCreationResultText}}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
   <div class="form-group">
+    <input type="hidden" formControlName="id">
     <label for="name">公司名称</label> <span color="red" class="text-danger"
                                          [hidden]="formModel.controls.name.valid">*</span>
     <input id="name" type="text" class="form-control" formControlName="name">
@@ -42,25 +57,27 @@
   </div>
 
   <div class="form-group isaac-margin-15top">
-    <label for="address">公司地址:</label>
+    <label for="address">公司地址</label>
     <input id="address" type="text" class="form-control" formControlName="address">
   </div>
   <div class="form-group">
-    <label for="postcode">邮编:</label>
+    <label for="postcode">邮编</label>
     <input id="postcode" type="text" class="form-control" formControlName="postcode">
   </div>
   <div class="form-group">
-    <label for="legalPerson">法人:</label>
-    <input id="legalPerson" type="text" class="form-control" formControlName="legalPerson">
-  </div>
-  <div class="form-group">
-    <label for="officialWebsiteLink">公司官网:</label>
+    <label for="officialWebsiteLink">公司官网</label>
     <input id="officialWebsiteLink" type="text" class="form-control" formControlName="officialWebsiteLink">
   </div>
   <div class="form-group">
-    <label for="email">公司邮箱:</label>
+    <label for="email">公司邮箱</label>
     <input id="email" type="text" class="form-control" formControlName="email">
   </div>
+  <div class="form-group">
+    <label for="description">公司简介</label>
+    <input id="description" type="text" class="form-control" formControlName="description">
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
 
 </form>
 
