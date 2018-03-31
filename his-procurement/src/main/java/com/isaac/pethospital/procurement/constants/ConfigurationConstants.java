@@ -2,6 +2,6 @@ package com.isaac.pethospital.procurement.constants;
 
 public class ConfigurationConstants {
 
-    public static String OrderNumber="OrderNumber";
-    public static String OrderNumberLength="OrderNumberLength";
+    public static final String OrderNumber="OrderNumber";
+    public static final String OrderNumberLength="OrderNumberLength";
 }
