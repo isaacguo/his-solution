@@ -4,6 +4,7 @@ import com.isaac.pethospital.common.time.DatetimeGenerator;
 import com.isaac.pethospital.procurement.dtos.ProcurementOperation;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
+import com.isaac.pethospital.procurement.entities.ProcurementStatusEntity;
 import com.isaac.pethospital.procurement.repositories.ProcurementRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -70,7 +71,13 @@ public class ProcurementServiceSpecTests {
     {
         //given
         ProcurementRequestEntity pre=new ProcurementRequestEntity();
-        doReturn(new ProcurementEntity()).when(this.procurementRepository).findOne(1L);
+        ProcurementEntity pe=new ProcurementEntity();
+        ProcurementStatusEntity pse1=new ProcurementStatusEntity();
+        ProcurementStatusEntity pse2=new ProcurementStatusEntity();
+        pse1.addNext(pse2);
+
+        pe.setStatus(pse1);
+        doReturn(pe).when(this.procurementRepository).findOne(1L);
         //when
         this.procurementService.requestSubmitted(pre,1L);
         //then
