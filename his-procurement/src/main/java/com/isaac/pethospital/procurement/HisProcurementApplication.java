@@ -1,6 +1,9 @@
 package com.isaac.pethospital.procurement;
 
+import com.isaac.pethospital.procurement.constants.ConfigurationConstants;
+import com.isaac.pethospital.procurement.entities.ProcurementConfigurationEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementStatusEntity;
+import com.isaac.pethospital.procurement.repositories.ProcurementConfigurationRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementStatusRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,11 +27,29 @@ public class HisProcurementApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(ProcurementStatusRepository procurementStatusRepository) {
+    CommandLineRunner commandLineRunner(ProcurementStatusRepository procurementStatusRepository, ProcurementConfigurationRepository procurementConfigurationRepository) {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
 
+                initProcurementStatus();
+                initConfiguration();
+
+            }
+
+            private void initConfiguration() {
+                ProcurementConfigurationEntity pce1=new ProcurementConfigurationEntity();
+                pce1.setKey(ConfigurationConstants.OrderNumber);
+                pce1.setValue("1");
+                ProcurementConfigurationEntity pce2=new ProcurementConfigurationEntity();
+                pce2.setKey(ConfigurationConstants.OrderNumberLength);
+                pce2.setValue("8");
+
+                procurementConfigurationRepository.save(pce1);
+                procurementConfigurationRepository.save(pce2);
+            }
+
+            private void initProcurementStatus() {
                 ProcurementStatusEntity status0 = new ProcurementStatusEntity();
                 status0.setStatus("申请已创建");
                 ProcurementStatusEntity status1 = new ProcurementStatusEntity();

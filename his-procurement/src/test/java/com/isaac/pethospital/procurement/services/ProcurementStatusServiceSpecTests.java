@@ -24,7 +24,6 @@ public class ProcurementStatusServiceSpecTests {
     @Test
     public void whenGetRootThenGetRoot() {
         //given
-
         //when
         this.procurementStatusService.getRoot();
         //then

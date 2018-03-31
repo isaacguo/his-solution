@@ -11,10 +11,6 @@ public class ProcurementGoodEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JsonBackReference("ProcurementEntity-ProcurementGoodEntit")
-    ProcurementEntity procurement;
-
     String number; //个数
     String packageSpecification; //包装规格
     String packageUnit; //包装单位

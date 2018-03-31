@@ -1,32 +1,60 @@
 package com.isaac.pethospital.procurement.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 public class ProcurementEntity {
 
+    String orderNumber; //单号
+    @ManyToOne
+    VendorEntity vendor;
+    @ManyToOne
+    OperatorEntity operator;
+    @ManyToOne
+    ProcurementStatusEntity status;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    Long orderNumber; //单号
+    public ProcurementStatusEntity getStatus() {
+        return status;
+    }
 
-    @ManyToOne
-    VendorEntity vendor;
+    public void setStatus(ProcurementStatusEntity status) {
+        this.status = status;
+    }
 
-    @OneToMany
-    @JsonManagedReference("ProcurementEntity-ProcurementGoodEntit")
-    List<ProcurementGoodEntity> goods; //采购商品
+    public Long getId() {
+        return id;
+    }
 
-    @ManyToOne
-    OperatorEntity operator;
-    LocalDateTime orderGeneratedTime; //制单时间
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    LocalDateTime orderConfirmedTime; //订单确认时间
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public VendorEntity getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(VendorEntity vendor) {
+        this.vendor = vendor;
+    }
 
 
+    public OperatorEntity getOperator() {
+        return operator;
+    }
+
+    public void setOperator(OperatorEntity operator) {
+        this.operator = operator;
+    }
 }

@@ -55,14 +55,18 @@ import {InventoryQueryComponent} from './components/inventory/inventory-query/in
 import {TreeModule} from "angular-tree-component";
 import {ProcurementManagementComponent} from './components/procurement/procurement-management/procurement-management.component';
 import {ProcurementSettingsComponent} from './components/procurement/procurement-settings/procurement-settings.component';
-import {VendorManagementComponent} from './components/procurement/procurement-management/vendor-management/vendor-management.component';
-import {VendorCreateUpdateComponent} from './components/procurement/procurement-management/vendor-create-update/vendor-create-update.component';
-import { ContactCreateUpdateComponent } from './components/procurement/procurement-management/vendor-create-update/contact-create-update/contact-create-update.component';
+import {VendorManagementComponent} from './components/procurement/procurement-settings/vendor-management/vendor-management.component';
+import {VendorCreateUpdateComponent} from './components/procurement/procurement-settings/vendor-create-update/vendor-create-update.component';
+import { ContactCreateUpdateComponent } from './components/procurement/procurement-settings/vendor-create-update/contact-create-update/contact-create-update.component';
 import {VendorService} from "./services/business/procurement/vendor.service";
 import {ProcurementStatusService} from "./services/business/procurement/procurement-status.service";
-import { ProcurementStatusComponent } from './components/procurement/procurement-management/procurement-status/procurement-status.component';
+import { ProcurementStatusComponent } from './components/procurement/procurement-settings/procurement-status/procurement-status.component';
 import { ProcurementRequestComponent } from './components/procurement/procurement-request/procurement-request.component';
 import { ProcurementApprovalComponent } from './components/procurement/procurement-approval/procurement-approval.component';
+import { ProcurementWorkflowComponent } from './components/procurement/procurement-settings/procurement-workflow/procurement-workflow.component';
+import { ProcurementRequestListComponent } from './components/procurement/procurement-request/procurement-request-list/procurement-request-list.component';
+import { ProcurementRequestCreateUpdateComponent } from './components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component';
+import { ProcurementRequestDetailComponent } from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -121,6 +125,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementStatusComponent,
     ProcurementRequestComponent,
     ProcurementApprovalComponent,
+    ProcurementWorkflowComponent,
+    ProcurementRequestListComponent,
+    ProcurementRequestCreateUpdateComponent,
+    ProcurementRequestDetailComponent,
 
   ],
   imports: [

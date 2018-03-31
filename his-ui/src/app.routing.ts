@@ -37,11 +37,14 @@ import {PetTreatmentComponent} from "./app/components/treatment/my-consulting-ro
 import {InventoryQueryComponent} from "./app/components/inventory/inventory-query/inventory-query.component";
 import {ProcurementManagementComponent} from "./app/components/procurement/procurement-management/procurement-management.component";
 import {ProcurementSettingsComponent} from "./app/components/procurement/procurement-settings/procurement-settings.component";
-import {VendorManagementComponent} from "./app/components/procurement/procurement-management/vendor-management/vendor-management.component";
-import {VendorCreateUpdateComponent} from "./app/components/procurement/procurement-management/vendor-create-update/vendor-create-update.component";
-import {ProcurementStatusComponent} from "./app/components/procurement/procurement-management/procurement-status/procurement-status.component";
+import {VendorManagementComponent} from "./app/components/procurement/procurement-settings/vendor-management/vendor-management.component";
+import {VendorCreateUpdateComponent} from "./app/components/procurement/procurement-settings/vendor-create-update/vendor-create-update.component";
+import {ProcurementStatusComponent} from "./app/components/procurement/procurement-settings/procurement-status/procurement-status.component";
 import {ProcurementRequestComponent} from "./app/components/procurement/procurement-request/procurement-request.component";
 import {ProcurementApprovalComponent} from "./app/components/procurement/procurement-approval/procurement-approval.component";
+import {ProcurementWorkflowComponent} from "./app/components/procurement/procurement-settings/procurement-workflow/procurement-workflow.component";
+import {ProcurementRequestListComponent} from "./app/components/procurement/procurement-request/procurement-request-list/procurement-request-list.component";
+import {ProcurementRequestCreateUpdateComponent} from "./app/components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component";
 
 
 const appRoutes: Routes = [
@@ -180,7 +183,25 @@ const appRoutes: Routes = [
       },
       {
         path: 'procurement-request',
-        component: ProcurementRequestComponent
+        component: ProcurementRequestComponent,
+        children: [
+          {
+            path: 'list',
+            component: ProcurementRequestListComponent,
+          },
+          {
+            path: ':operation',
+            component: ProcurementRequestCreateUpdateComponent,
+          },
+          {
+            path: ':operation/:updateId',
+            component: ProcurementRequestCreateUpdateComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'list',
+          }
+        ]
       },
       {
         path: 'procurement-approval',
@@ -204,7 +225,11 @@ const appRoutes: Routes = [
           },
           {
             path: 'procurement-status',
-            component:ProcurementStatusComponent
+            component: ProcurementStatusComponent
+          },
+          {
+            path: 'procurement-workflow',
+            component: ProcurementWorkflowComponent
           }
         ]
       },
