@@ -1,6 +1,7 @@
 package com.isaac.pethospital.employee.restcontrollers;
 
 import com.isaac.pethospital.employee.dto.EmployeeCount;
+import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import com.isaac.pethospital.employee.services.EmployeeService;
@@ -50,5 +51,11 @@ public class EmployeeRestController {
     @GetMapping(value = "/{userAccount}/manager")
     public String getDirectManagerUserAccount(@PathVariable("userAccount") String userAccount) {
         return "linghuchong";
+    }
+
+    @PostMapping(value = "/find-by-title")
+    public String findByTitle(@RequestBody EmployeeOperationRequest request)
+    {
+        return "yuelingshan";
     }
 }

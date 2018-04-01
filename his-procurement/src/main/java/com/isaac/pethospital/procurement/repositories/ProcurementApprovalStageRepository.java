@@ -7,4 +7,5 @@ public interface ProcurementApprovalStageRepository extends JpaRepository<Procur
 
     ProcurementApprovalStageEntity findProcurementApprovalEntityByPreviousStageIsNull();
 
+    ProcurementApprovalStageEntity findByStage(String stage);
 }

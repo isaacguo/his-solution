@@ -1,12 +1,12 @@
 package com.isaac.pethospital.procurement.restcontrollers;
 
 import com.isaac.pethospital.common.security.AuthHelper;
+import com.isaac.pethospital.procurement.dtos.ProcurementApprovalOperationRequest;
 import com.isaac.pethospital.procurement.entities.ProcurementApprovalEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementApprovalStageEntity;
+import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.services.ProcurementApprovalService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,9 +28,17 @@ public class ProcurementApprovalRestController {
         return this.procurementApprovalService.getRoot();
     }
     @GetMapping("approvals")
-    public List<ProcurementApprovalEntity> findMyUnfinishedApprovals()
+    public List<ProcurementEntity> findMyUnfinishedApprovals()
     {
         String userAccount=authHelper.getUserAccount();
-        return this.procurementApprovalService.findMyUnfinishedApprovals(userAccount);
+        return this.procurementApprovalService.findMyUnfinishedApprovalProcurements(userAccount);
     }
+    @PostMapping("update")
+    public boolean updateApproval(@RequestBody ProcurementApprovalOperationRequest request)
+    {
+        String userAccount=authHelper.getUserAccount();
+        request.setUserAccount(userAccount);
+        return this.procurementApprovalService.approvalReceived(request);
+    }
+
 }

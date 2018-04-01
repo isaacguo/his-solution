@@ -1,5 +1,6 @@
 package com.isaac.pethospital.procurement.services;
 
+import com.isaac.pethospital.procurement.dtos.ProcurementApprovalOperationRequest;
 import com.isaac.pethospital.procurement.entities.ProcurementApprovalEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementApprovalStageEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
@@ -12,4 +13,8 @@ public interface ProcurementApprovalService {
     void procurementCreated(ProcurementEntity any);
 
     List<ProcurementApprovalEntity> findMyUnfinishedApprovals(String userAccount);
+
+    List<ProcurementEntity> findMyUnfinishedApprovalProcurements(String userAccount);
+
+    boolean approvalReceived(ProcurementApprovalOperationRequest request);
 }

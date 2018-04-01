@@ -45,6 +45,7 @@ import {ProcurementApprovalComponent} from "./app/components/procurement/procure
 import {ProcurementWorkflowComponent} from "./app/components/procurement/procurement-settings/procurement-workflow/procurement-workflow.component";
 import {ProcurementRequestListComponent} from "./app/components/procurement/procurement-request/procurement-request-list/procurement-request-list.component";
 import {ProcurementRequestCreateUpdateComponent} from "./app/components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component";
+import {ProcurementApprovalListComponent} from "./app/components/procurement/procurement-approval/procurement-approval-list/procurement-approval-list.component";
 
 
 const appRoutes: Routes = [
@@ -205,7 +206,17 @@ const appRoutes: Routes = [
       },
       {
         path: 'procurement-approval',
-        component: ProcurementApprovalComponent
+        component: ProcurementApprovalComponent,
+        children: [
+          {
+            path: 'list',
+            component: ProcurementApprovalListComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'list',
+          }
+        ]
       },
       {
         path: 'procurement-settings',

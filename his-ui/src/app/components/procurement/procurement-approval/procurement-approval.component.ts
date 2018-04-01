@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProcurementApprovalService} from "../../../services/procurement/procurement-approval.service";
 import {ProcurementApproval} from "../../../dto/procurement/procurement-approval.model";
+import {Procurement} from "../../../dto/procurement/procurement.model";
 
 @Component({
   selector: 'app-procurement-approval',
@@ -9,14 +10,13 @@ import {ProcurementApproval} from "../../../dto/procurement/procurement-approval
 })
 export class ProcurementApprovalComponent implements OnInit {
 
-  procurementApproval:ProcurementApproval[];
 
-  constructor(private procurementApprovalService:ProcurementApprovalService) { }
+
+  constructor() {
+  }
 
   ngOnInit() {
-    this.procurementApprovalService.findMyUnfinishedApprovals().subscribe(r=>{
-      this.procurementApproval=r;
-    });
   }
+
 
 }

@@ -14,12 +14,21 @@ public class ProcurementApprovalEntity {
     String stage;
     LocalDateTime reviewedDateTime;
     LocalDateTime createdDateTime;
+    boolean reviewResult;
     String comments;
     String reviewer;
     boolean reviewed;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public boolean isReviewResult() {
+        return reviewResult;
+    }
+
+    public void setReviewResult(boolean reviewResult) {
+        this.reviewResult = reviewResult;
+    }
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;

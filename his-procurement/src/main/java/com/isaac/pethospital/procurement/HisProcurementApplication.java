@@ -76,30 +76,34 @@ public class HisProcurementApplication {
                 ProcurementStatusEntity status1 = new ProcurementStatusEntity();
                 status1.setStatus("申请已提交");
                 ProcurementStatusEntity status2 = new ProcurementStatusEntity();
-                status2.setStatus("申请已批复");
+                status2.setStatus("申请批复中");
                 ProcurementStatusEntity status3 = new ProcurementStatusEntity();
-                status3.setStatus("申请已退回");
+                status3.setStatus("申请已通过");
                 ProcurementStatusEntity status4 = new ProcurementStatusEntity();
-                status4.setStatus("合同已订立");
+                status4.setStatus("申请已退回");
                 ProcurementStatusEntity status5 = new ProcurementStatusEntity();
-                status5.setStatus("合同已逾期");
+                status5.setStatus("采购中");
                 ProcurementStatusEntity status6 = new ProcurementStatusEntity();
-                status6.setStatus("货物已收到");
+                status6.setStatus("采购逾期");
                 ProcurementStatusEntity status7 = new ProcurementStatusEntity();
-                status7.setStatus("货物已退货");
+                status7.setStatus("采购已到货");
                 ProcurementStatusEntity status8 = new ProcurementStatusEntity();
-                status8.setStatus("货物已入库");
+                status8.setStatus("采购已退货");
+                ProcurementStatusEntity status9 = new ProcurementStatusEntity();
+                status9.setStatus("采购已入库");
 
                 status1.addNext(status2);
-                status1.addNext(status3);
 
+                status2.addNext(status3);
                 status2.addNext(status4);
-                status2.addNext(status5);
 
-                status4.addNext(status6);
-                status4.addNext(status7);
+                status3.addNext(status5);
+                status3.addNext(status6);
 
-                status6.addNext(status8);
+                status5.addNext(status7);
+                status5.addNext(status8);
+
+                status7.addNext(status9);
 
 
                 procurementStatusRepository.save(status1);
