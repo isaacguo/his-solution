@@ -53,7 +53,8 @@ public class ProcurementRequestServiceSpecTests {
         //when
         this.procurementRequestService.createRequest(pro);
         //then
-        verify(this.procurementService, times(1)).requestSubmitted(any(ProcurementRequestEntity.class),any(Long.class));
+        verify(this.procurementService, times(1))
+                .requestSubmitted(any(ProcurementRequestEntity.class));
     }
 
     private ProcurementRequestOperation initForSubmitRequestMethod() {

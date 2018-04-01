@@ -4,6 +4,7 @@ import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementGoodEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,9 +14,6 @@ public class ProcurementRequestOperation {
     Long id;
     String requester;
     List<ProcurementGoodEntity> goods = new LinkedList<>();
-    String vendorName;
-    String contact;
-    String contactTelephone;
     LocalDateTime submittedData;
     ProcurementEntity procurement;
 
@@ -43,29 +41,6 @@ public class ProcurementRequestOperation {
         this.goods = goods;
     }
 
-    public String getVendorName() {
-        return vendorName;
-    }
-
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public String getContactTelephone() {
-        return contactTelephone;
-    }
-
-    public void setContactTelephone(String contactTelephone) {
-        this.contactTelephone = contactTelephone;
-    }
 
     public LocalDateTime getSubmittedData() {
         return submittedData;
@@ -90,10 +65,9 @@ public class ProcurementRequestOperation {
     }
 
     private void assignValues(ProcurementRequestEntity pro) {
-        pro.setContact(this.contact);
-        pro.setVendorName(this.vendorName);
-        pro.setContactTelephone(this.contactTelephone);
-        pro.setGoods(this.goods);
+        this.goods.forEach(r->{
+            pro.addGood(r);
+        });
         pro.setRequester(this.requester);
     }
 }

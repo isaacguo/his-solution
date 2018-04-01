@@ -10,6 +10,17 @@ export abstract class AbstractCreateUpdateComponent {
 
   }
 
+  abstract invokeWhenCreate();
+  abstract invokeWhenUpdate();
+  onSubmit() {
+    if (this.operation === OperationEnum.CREATE) {
+      this.invokeWhenCreate();
+    }
+    else {
+      this.invokeWhenUpdate();
+    }
+  }
+
   protected process() {
     this.route.params.subscribe(params => {
       this.operation = OperationEnum[<string>params['operation']];

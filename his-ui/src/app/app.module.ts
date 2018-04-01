@@ -26,7 +26,7 @@ import {AuthConfig, AuthHttp} from "angular2-jwt";
 import {AuthGuard, LogoutGuardService} from "./guards/auth.guard";
 import {AuthenticationService} from "./services/common/authentication.service";
 import {EmployeeComponent} from './components/employee/employee.component';
-import {EmployeeService} from "./services/business/employee/employee.service";
+import {EmployeeService} from "./services/employee/employee.service";
 import {EmployeeProfileComponent} from './components/employee/employee-profile/employee-profile.component';
 import {EmployeeLeaveComponent} from './components/employee/employee-leave/employee-leave.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
@@ -58,8 +58,8 @@ import {ProcurementSettingsComponent} from './components/procurement/procurement
 import {VendorManagementComponent} from './components/procurement/procurement-settings/vendor-management/vendor-management.component';
 import {VendorCreateUpdateComponent} from './components/procurement/procurement-settings/vendor-create-update/vendor-create-update.component';
 import { ContactCreateUpdateComponent } from './components/procurement/procurement-settings/vendor-create-update/contact-create-update/contact-create-update.component';
-import {VendorService} from "./services/business/procurement/vendor.service";
-import {ProcurementStatusService} from "./services/business/procurement/procurement-status.service";
+import {VendorService} from "./services/procurement/vendor.service";
+import {ProcurementStatusService} from "./services/procurement/procurement-status.service";
 import { ProcurementStatusComponent } from './components/procurement/procurement-settings/procurement-status/procurement-status.component';
 import { ProcurementRequestComponent } from './components/procurement/procurement-request/procurement-request.component';
 import { ProcurementApprovalComponent } from './components/procurement/procurement-approval/procurement-approval.component';
@@ -67,6 +67,9 @@ import { ProcurementWorkflowComponent } from './components/procurement/procureme
 import { ProcurementRequestListComponent } from './components/procurement/procurement-request/procurement-request-list/procurement-request-list.component';
 import { ProcurementRequestCreateUpdateComponent } from './components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component';
 import { ProcurementRequestDetailComponent } from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail.component';
+import { RequestGoodComponent } from './components/procurement/procurement-request/procurement-request-create-update/request-good/request-good.component';
+import {ProcurementRequestService} from "./services/procurement/procurement-request.service";
+import {ProcurementService} from "./services/procurement/procurement.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -129,6 +132,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementRequestListComponent,
     ProcurementRequestCreateUpdateComponent,
     ProcurementRequestDetailComponent,
+    RequestGoodComponent,
 
   ],
   imports: [
@@ -152,7 +156,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PetService,
     //procurement
     VendorService,
-    ProcurementStatusService
+    ProcurementService,
+    ProcurementStatusService,
+    ProcurementRequestService
+
+
   ],
   bootstrap: [AppComponent]
 })

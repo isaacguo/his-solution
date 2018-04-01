@@ -28,7 +28,7 @@ public class ProcurementRequestServiceImpl implements ProcurementRequestService 
         ProcurementRequestEntity pre = pro.toProcurementRequestEntity();
         pre.setSubmittedData(datetimeGenerator.getNowLocalDateTime());
         ProcurementRequestEntity result= this.procurementRequestRepository.save(pre);
-        this.procurementService.requestSubmitted(result, pro.getProcurement().getId());
+        this.procurementService.requestSubmitted(result);
         return true;
     }
 }

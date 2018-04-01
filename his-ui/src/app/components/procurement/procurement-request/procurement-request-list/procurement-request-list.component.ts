@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {OperationEnum} from "../../../../enums/operation.enum";
+import {ProcurementService} from "../../../../services/procurement/procurement.service";
+import {Procurement} from "../../../../dto/procurement/procurement.model";
+import {Pet} from "../../../../dto/pet.model";
 
 @Component({
   selector: 'app-procurement-request-list',
@@ -9,12 +12,28 @@ import {OperationEnum} from "../../../../enums/operation.enum";
 })
 export class ProcurementRequestListComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  list: Procurement[];
+  selectedProcurement:Procurement;
+
+  constructor(private router: Router, private procurementService: ProcurementService) {
+  }
 
   ngOnInit() {
+    this.procurementService.getMyProcurements().subscribe(r => {
+      this.list = r
+      console.log(this.list);
+    });
   }
 
   onCreateNewRequestButtonClicked() {
     this.router.navigate(['procurement-request', OperationEnum.CREATE]);
+  }
+  onRowClicked(procurement:Procurement)
+  {
+    this.selectedProcurement=procurement;
+  }
+
+  isRowSelected(procurement:Procurement): boolean {
+    return this.selectedProcurement == procurement;
   }
 }

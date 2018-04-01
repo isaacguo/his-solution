@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProcurementRequest} from "../../../../dto/procurement/procurement-request.model";
+import {Procurement} from "../../../../dto/procurement/procurement.model";
 
 @Component({
   selector: 'app-procurement-request-detail',
@@ -9,7 +10,7 @@ import {ProcurementRequest} from "../../../../dto/procurement/procurement-reques
 export class ProcurementRequestDetailComponent implements OnInit {
 
   @Input()
-  procurementRequest:ProcurementRequest;
+  procurement:Procurement;
 
   constructor() { }
 

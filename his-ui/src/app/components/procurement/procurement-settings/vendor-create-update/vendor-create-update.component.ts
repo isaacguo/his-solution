@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AbstractCreateUpdateComponent} from "../../../common/abstract-create-update.component";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OperationEnum} from "../../../../enums/operation.enum";
-import {VendorService} from "../../../../services/business/procurement/vendor.service";
+import {VendorService} from "../../../../services/procurement/vendor.service";
 import {Contact} from "../../../../dto/procurement/contact.model";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
@@ -14,8 +14,9 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 })
 export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent implements OnInit {
 
-  formModel: FormGroup;
 
+
+  formModel: FormGroup;
   vendorCreationResultText: string;
   @ViewChild("confirmCreateModal") confirmCreateModal: ModalComponent;
 
@@ -111,17 +112,18 @@ export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent i
     control.removeAt(i);
   }
 
-  onSubmit() {
-    if (this.operation === OperationEnum.CREATE) {
-      this.vendorService.createVendor(this.formModel.value).subscribe(r => {
+
+  invokeWhenCreate() {
+    this.vendorService.createVendor(this.formModel.value).subscribe(r => {
         if (r.id > 0) {
           this.vendorCreationResultText = "供应商信息添加成功";
           this.confirmCreateModal.open();
         }
       });
-    }
-    else {
-      this.vendorService.updateVendor(this.formModel.value).subscribe(r=>{
+  }
+
+  invokeWhenUpdate() {
+    this.vendorService.updateVendor(this.formModel.value).subscribe(r=>{
         if (r.id > 0) {
           this.vendorCreationResultText = "供应商信息更新成功";
           this.confirmCreateModal.open();
@@ -129,9 +131,6 @@ export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent i
       },error=>{
         console.log(error);
       })
-
-    }
-
   }
 
   onConfirmCreateModalClosed() {

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ProcurementStatusService} from "../../../../services/business/procurement/procurement-status.service";
+import {ProcurementStatusService} from "../../../../services/procurement/procurement-status.service";
 import {ProcurementStatus} from "../../../../dto/procurement/procurement-status.model";
 
 @Component({

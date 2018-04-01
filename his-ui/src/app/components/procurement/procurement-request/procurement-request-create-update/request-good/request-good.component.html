@@ -1,0 +1,68 @@
+<div [formGroup]="good">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>产品名称</label><span color="red" class="text-danger"
+                                 [hidden]="good.controls.name.valid">*</span>
+        <input class="form-control" type="text" formControlName="name">
+        <small [hidden]="good.controls.name.valid" class="text-danger">
+          产品名称不能为空
+        </small>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>包装规格</label><span color="red" class="text-danger"
+                               [hidden]="good.controls.packageSpecification.valid">*</span>
+        <input class="form-control" type="text" formControlName="packageSpecification">
+        <small [hidden]="good.controls.packageSpecification.valid" class="text-danger">
+          包装规格不能为空
+        </small>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>包装单位</label><span color="red" class="text-danger"
+                               [hidden]="good.controls.packageUnit.valid">*</span>
+        <input class="form-control" type="text" formControlName="packageUnit">
+        <small [hidden]="good.controls.packageUnit.valid" class="text-danger">
+          包装单位不能为空
+        </small>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>数量</label><span color="red" class="text-danger"
+                               [hidden]="good.controls.number.valid">*</span>
+        <input class="form-control" type="text" formControlName="number">
+        <small [hidden]="good.controls.number.valid" class="text-danger">
+          数量不能为空
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>其他要求</label><span color="red" class="text-danger"
+                               [hidden]="good.controls.otherRequirements.valid">*</span>
+        <input class="form-control" type="text" formControlName="otherRequirements">
+        <small [hidden]="good.controls.otherRequirements.valid" class="text-danger">
+          要求采购完成或交付的时间
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>采购原因</label><span color="red" class="text-danger"
+                                 [hidden]="good.controls.reason.valid">*</span>
+        <input class="form-control" type="text" formControlName="reason">
+        <small [hidden]="good.controls.reason.valid" class="text-danger">
+          采购原因及其他情况说明
+        </small>
+      </div>
+    </div>
+  </div>
+</div>

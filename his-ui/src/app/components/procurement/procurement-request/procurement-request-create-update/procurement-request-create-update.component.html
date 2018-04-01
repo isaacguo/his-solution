@@ -1,9 +1,58 @@
 <div class="row">
-  <h1 class="page-header">
-    新建采购申请单
+  <h1 class="page-header text-center">
+    采购申请单
   </h1>
 </div>
 
-<form>
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()" >
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{requestCreationResultText}}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+
+  <input type="hidden" formControlName="id">
+
+  <div>
+    <label>申请采购商品或服务</label>
+    <div formArrayName="goods">
+      <div *ngFor="let good of goodsData.controls; let i=index">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <div>
+              <span>商品/服务 {{i + 1}}</span>
+              <span class="glyphicon glyphicon-remove pull-right" *ngIf="formModel.controls.goods.controls.length > 1"
+                    (click)="removeGood(i)">
+                </span>
+            </div>
+          </div>
+          <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+          <div class="panel-body" [formGroupName]="i">
+            <app-request-good [good]="good"></app-request-good>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="isaac-margin-top">
+    <a (click)="addGood()" style="cursor: default">
+      添加新商品 +
+    </a>
+  </div>
+
+  <button class="btn btn-primary isaac-margin-15top" type="submit" [disabled]="!formModel.valid">确认</button>
 
 </form>
+
+
+

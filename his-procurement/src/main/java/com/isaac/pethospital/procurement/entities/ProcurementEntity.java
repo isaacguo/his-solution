@@ -1,5 +1,7 @@
 package com.isaac.pethospital.procurement.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,21 +9,59 @@ import java.util.List;
 public class ProcurementEntity {
 
     String orderNumber; //单号
-    @ManyToOne
-    VendorEntity vendor;
+    String vendor;
+    String contact;
+    String contactTelephone;
     @ManyToOne
     OperatorEntity operator;
-    @ManyToOne
-    ProcurementStatusEntity status;
+    String status;
+    @OneToOne(mappedBy = "procurement")
+    @JsonManagedReference("ProcurementEntity-ProcurementRequestEntity")
+    ProcurementRequestEntity procurementRequest;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public ProcurementStatusEntity getStatus() {
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getContactTelephone() {
+        return contactTelephone;
+    }
+
+    public void setContactTelephone(String contactTelephone) {
+        this.contactTelephone = contactTelephone;
+    }
+
+    public ProcurementRequestEntity getProcurementRequest() {
+        return procurementRequest;
+    }
+
+    public void setProcurementRequest(ProcurementRequestEntity procurementRequest) {
+        if (procurementRequest == null)
+            throw new RuntimeException("Procurement Request is null");
+        procurementRequest.setProcurement(this);
+        this.procurementRequest = procurementRequest;
+    }
+
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(ProcurementStatusEntity status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -41,13 +81,7 @@ public class ProcurementEntity {
         this.orderNumber = orderNumber;
     }
 
-    public VendorEntity getVendor() {
-        return vendor;
-    }
 
-    public void setVendor(VendorEntity vendor) {
-        this.vendor = vendor;
-    }
 
 
     public OperatorEntity getOperator() {

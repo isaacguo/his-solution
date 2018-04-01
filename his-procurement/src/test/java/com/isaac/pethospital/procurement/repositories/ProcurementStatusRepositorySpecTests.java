@@ -1,19 +1,13 @@
 package com.isaac.pethospital.procurement.repositories;
 
-import com.isaac.pethospital.procurement.HisProcurementApplication;
 import com.isaac.pethospital.procurement.entities.ProcurementStatusEntity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -25,19 +19,17 @@ public class ProcurementStatusRepositorySpecTests {
     @Autowired
     private ProcurementStatusRepository repository;
 
-    ProcurementStatusEntity status0;
+    ProcurementStatusEntity status1;
 
     @Before
     public void init() {
 
-        status0 = new ProcurementStatusEntity();
-        status0.setStatus("申请已创建");
-        ProcurementStatusEntity status1 = new ProcurementStatusEntity();
+        status1 = new ProcurementStatusEntity();
         status1.setStatus("申请已提交");
         ProcurementStatusEntity status2 = new ProcurementStatusEntity();
         status2.setStatus("申请已批复");
         ProcurementStatusEntity status3 = new ProcurementStatusEntity();
-        status3.setStatus("申请已拒绝");
+        status3.setStatus("申请已退回");
         ProcurementStatusEntity status4 = new ProcurementStatusEntity();
         status4.setStatus("合同已订立");
         ProcurementStatusEntity status5 = new ProcurementStatusEntity();
@@ -49,7 +41,6 @@ public class ProcurementStatusRepositorySpecTests {
         ProcurementStatusEntity status8 = new ProcurementStatusEntity();
         status8.setStatus("货物已入库");
 
-        status0.addNext(status1);
 
         status1.addNext(status2);
         status1.addNext(status3);

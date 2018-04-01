@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
-import {Employee} from "../../../dto/employee.model";
-import {EmployeeCount} from "../../../dto/employee.count.model";
+import {Employee} from "../../dto/employee.model";
+import {EmployeeCount} from "../../dto/employee.count.model";
 
 
 @Injectable()

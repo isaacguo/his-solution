@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {OperationEnum} from "../../../../enums/operation.enum";
 import {Vendor} from "../../../../dto/procurement/vendor.model";
-import {VendorService} from "../../../../services/business/procurement/vendor.service";
+import {VendorService} from "../../../../services/procurement/vendor.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs/Observable";

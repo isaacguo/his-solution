@@ -1,26 +1,30 @@
 package com.isaac.pethospital.procurement.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.aspectj.apache.bcel.classfile.annotation.RuntimeTypeAnnos;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
+@Table(name = "ProcurementRequests")
 public class ProcurementRequestEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     String requester;
-    @OneToMany
+
+    @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
+    @JsonManagedReference("request-goods")
     List<ProcurementGoodEntity> goods = new LinkedList<>();
-    String vendorName;
-    String contact;
-    String contactTelephone;
     LocalDateTime submittedData;
     @OneToOne
+    @JsonBackReference("ProcurementEntity-ProcurementRequestEntity")
     ProcurementEntity procurement;
-
 
     public String getRequester() {
         return requester;
@@ -34,33 +38,13 @@ public class ProcurementRequestEntity {
         return goods;
     }
 
-    public void setGoods(List<ProcurementGoodEntity> goods) {
-        this.goods = goods;
+    public void addGood(ProcurementGoodEntity good) {
+        if (good == null)
+            throw new RuntimeException("Good is null.");
+        good.setRequest(this);
+        this.goods.add(good);
     }
 
-    public String getVendorName() {
-        return vendorName;
-    }
-
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public String getContactTelephone() {
-        return contactTelephone;
-    }
-
-    public void setContactTelephone(String contactTelephone) {
-        this.contactTelephone = contactTelephone;
-    }
 
     public LocalDateTime getSubmittedData() {
         return submittedData;

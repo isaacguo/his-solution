@@ -37,10 +37,12 @@ public class ProcurementServiceSpecTests {
     {
         //given
         ProcurementOperation po = new ProcurementOperation();
+        doReturn(new ProcurementEntity()).when(this.procurementRepository).save(any(ProcurementEntity.class));
+        doReturn(new ProcurementStatusEntity()).when(this.procurementStatusService).getRoot();
         //when
-        this.procurementService.createProcurement(po);
+        this.procurementService.createProcurement(new ProcurementRequestEntity());
         //then
-        verify(this.procurementRepository, times(1)).save(any(ProcurementEntity.class));
+        verify(this.procurementRepository, times(2)).save(any(ProcurementEntity.class));
     }
 
     @Test
@@ -48,11 +50,13 @@ public class ProcurementServiceSpecTests {
     {
         //given
         ProcurementOperation po = new ProcurementOperation();
+        doReturn(new ProcurementEntity()).when(this.procurementRepository).save(any(ProcurementEntity.class));
+        doReturn(new ProcurementStatusEntity()).when(this.procurementStatusService).getRoot();
         //when
-        this.procurementService.createProcurement(po);
+        this.procurementService.createProcurement(new ProcurementRequestEntity());
         //then
         verify(this.procurementConfigurationService,times(1)).getOrderNumber();
-        verify(this.procurementRepository, times(1)).save(any(ProcurementEntity.class));
+        verify(this.procurementRepository, times(2)).save(any(ProcurementEntity.class));
     }
 
     @Test
@@ -60,14 +64,16 @@ public class ProcurementServiceSpecTests {
     {
         //given
         ProcurementOperation po = new ProcurementOperation();
+        doReturn(new ProcurementEntity()).when(this.procurementRepository).save(any(ProcurementEntity.class));
+        doReturn(new ProcurementStatusEntity()).when(this.procurementStatusService).getRoot();
         //when
-        ProcurementEntity pe=this.procurementService.createProcurement(po);
+        ProcurementEntity pe=this.procurementService.createProcurement(new ProcurementRequestEntity());
         //then
         verify(this.procurementStatusService,times(1)).getRoot();
     }
 
     @Test
-    public void whenNotifiedThenChangeStatus()
+    public void whenGetNotifiedThenCreateProcurement()
     {
         //given
         ProcurementRequestEntity pre=new ProcurementRequestEntity();
@@ -76,12 +82,23 @@ public class ProcurementServiceSpecTests {
         ProcurementStatusEntity pse2=new ProcurementStatusEntity();
         pse1.addNext(pse2);
 
-        pe.setStatus(pse1);
+        pe.setStatus(pse1.getStatus());
         doReturn(pe).when(this.procurementRepository).findOne(1L);
+        doReturn(new ProcurementEntity()).when(this.procurementRepository).save(any(ProcurementEntity.class));
+        doReturn(new ProcurementStatusEntity()).when(this.procurementStatusService).getRoot();
         //when
-        this.procurementService.requestSubmitted(pre,1L);
+        this.procurementService.requestSubmitted(pre);
         //then
-        verify(this.procurementRepository,times(1)).save(any(ProcurementEntity.class));
+        verify(this.procurementRepository,times(2)).save(any(ProcurementEntity.class));
+    }
+    @Test
+    public void whenFindAllMyProcurementsThenFindThemByRequesterInRepository()
+    {
+        //when
+        this.procurementService.findAllMyProcurements("Isaac");
+        //then
+        verify(this.procurementRepository,times(1)).findByRequester("Isaac");
+
     }
 
 }

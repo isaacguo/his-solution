@@ -5,7 +5,10 @@ import com.isaac.pethospital.procurement.dtos.ProcurementOperation;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
 import com.isaac.pethospital.procurement.repositories.ProcurementRepository;
+import com.isaac.pethospital.procurement.repositories.ProcurementStatusRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProcurementServiceImpl implements ProcurementService {
@@ -27,22 +30,24 @@ public class ProcurementServiceImpl implements ProcurementService {
     }
 
     @Override
-    public void requestSubmitted(ProcurementRequestEntity request, Long procurementId) {
-        ProcurementEntity pe= this.procurementRepository.findOne(procurementId);
-        if(pe==null)
-            throw  new RuntimeException("Cannot find Procurement.");
-        if(pe.getStatus().getNext().size()!=1)
-            throw new RuntimeException("Procurement Next Status has multiple result.");
-        pe.setStatus(pe.getStatus().getNext().get(0));
-        this.procurementRepository.save(pe);
+    public void requestSubmitted(ProcurementRequestEntity request) {
+        this.createProcurement(request);
     }
 
     @Override
-    public ProcurementEntity createProcurement(ProcurementOperation po) {
+    public ProcurementEntity createProcurement(ProcurementRequestEntity request) {
         ProcurementEntity pe = new ProcurementEntity();
-        pe.setStatus(this.procurementStatusService.getRoot());
+        pe = this.procurementRepository.save(pe);
+        pe.setProcurementRequest(request);
+        pe.setStatus(this.procurementStatusService.getRoot().getStatus());
         String orderNumber = this.procurementConfigurationService.getOrderNumber();
         pe.setOrderNumber(orderNumber);
+
         return this.procurementRepository.save(pe);
+    }
+
+    @Override
+    public List<ProcurementEntity> findAllMyProcurements(String requester) {
+        return this.procurementRepository.findByRequester(requester);
     }
 }

@@ -4,9 +4,13 @@ import com.isaac.pethospital.procurement.dtos.ProcurementOperation;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
 
+import java.util.List;
+
 public interface ProcurementService {
 
-    void requestSubmitted(ProcurementRequestEntity request, Long procurementId);
+    void requestSubmitted(ProcurementRequestEntity request);
 
-    ProcurementEntity createProcurement(ProcurementOperation po);
+    ProcurementEntity createProcurement(ProcurementRequestEntity request);
+
+    List<ProcurementEntity> findAllMyProcurements(String requester);
 }
