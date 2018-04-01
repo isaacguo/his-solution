@@ -1,8 +1,10 @@
 package com.isaac.pethospital.procurement;
 
 import com.isaac.pethospital.procurement.constants.ConfigurationConstants;
+import com.isaac.pethospital.procurement.entities.ProcurementApprovalStageEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementConfigurationEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementStatusEntity;
+import com.isaac.pethospital.procurement.repositories.ProcurementApprovalStageRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementConfigurationRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementStatusRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -10,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -17,6 +20,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableEurekaClient
+@EnableFeignClients
 @ComponentScan(basePackages = {"com.isaac.pethospital"})
 @EntityScan(basePackages = {"com.isaac.pethospital"})
 @EnableJpaRepositories(basePackages = {"com.isaac.pethospital"})
@@ -27,14 +31,33 @@ public class HisProcurementApplication {
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(ProcurementStatusRepository procurementStatusRepository, ProcurementConfigurationRepository procurementConfigurationRepository) {
+    CommandLineRunner commandLineRunner(ProcurementStatusRepository procurementStatusRepository,
+                                        ProcurementConfigurationRepository procurementConfigurationRepository,
+                                        ProcurementApprovalStageRepository procurementApprovalStageRepository
+                                        ) {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
 
                 initProcurementStatus();
                 initConfiguration();
+                initApproval();
+            }
 
+            private void initApproval() {
+                ProcurementApprovalStageEntity procurementApprovalStageEntity1 =new ProcurementApprovalStageEntity();
+                procurementApprovalStageEntity1.setStage("申请人");
+
+                ProcurementApprovalStageEntity procurementApprovalStageEntity2 =new ProcurementApprovalStageEntity();
+                procurementApprovalStageEntity2.setStage("部门经理");
+
+                ProcurementApprovalStageEntity procurementApprovalStageEntity3 =new ProcurementApprovalStageEntity();
+                procurementApprovalStageEntity3.setStage("总经理");
+
+                procurementApprovalStageEntity1.setNextStage(procurementApprovalStageEntity2);
+                procurementApprovalStageEntity2.setNextStage(procurementApprovalStageEntity3);
+
+                procurementApprovalStageRepository.save(procurementApprovalStageEntity1);
             }
 
             private void initConfiguration() {

@@ -70,6 +70,7 @@ import { ProcurementRequestDetailComponent } from './components/procurement/proc
 import { RequestGoodComponent } from './components/procurement/procurement-request/procurement-request-create-update/request-good/request-good.component';
 import {ProcurementRequestService} from "./services/procurement/procurement-request.service";
 import {ProcurementService} from "./services/procurement/procurement.service";
+import {ProcurementApprovalService} from "./services/procurement/procurement-approval.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -158,8 +159,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     VendorService,
     ProcurementService,
     ProcurementStatusService,
-    ProcurementRequestService
-
+    ProcurementRequestService,
+    ProcurementApprovalService
 
   ],
   bootstrap: [AppComponent]

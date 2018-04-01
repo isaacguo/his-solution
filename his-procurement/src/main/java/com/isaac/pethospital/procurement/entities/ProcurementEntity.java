@@ -3,6 +3,7 @@ package com.isaac.pethospital.procurement.entities;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,10 @@ public class ProcurementEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(mappedBy = "procurement", cascade = CascadeType.ALL)
+    @JsonManagedReference("ProcurementEntity-ProcurementApprovalEntity")
+    List<ProcurementApprovalEntity> approvalList = new LinkedList<>();
 
     public String getVendor() {
         return vendor;
@@ -80,8 +85,6 @@ public class ProcurementEntity {
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
-
-
 
 
     public OperatorEntity getOperator() {

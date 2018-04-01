@@ -21,33 +21,34 @@ public class EmployeeRestController {
     }
 
     @GetMapping("/counts")
-    public EmployeeCount getTotalCounts()
-    {
-         long count=this.employeeService.getTotalCounts();
-         return new EmployeeCount(count);
+    public EmployeeCount getTotalCounts() {
+        long count = this.employeeService.getTotalCounts();
+        return new EmployeeCount(count);
     }
+
     @GetMapping(value = "/getMyInfo")
-    public EmployeeEntity getMyInfo()
-    {
+    public EmployeeEntity getMyInfo() {
         return this.employeeService.getMyInfo();
 
     }
 
     @GetMapping("/{uuid}/")
-    public EmployeeEntity getEmployeeInfoByEmployeeUuidId(@PathVariable("uuid") String uuid)
-    {
+    public EmployeeEntity getEmployeeInfoByEmployeeUuidId(@PathVariable("uuid") String uuid) {
         return this.employeeService.getEmployeeByUuid(uuid);
     }
 
     @PostMapping(value = "/create")
-    public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity employee)
-    {
+    public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity employee) {
         return this.employeeService.createEmployee(employee);
     }
 
     @GetMapping
-    public List<EmployeeEntity> getEmployees()
-    {
+    public List<EmployeeEntity> getEmployees() {
         return this.employeeRepository.findAll();
+    }
+
+    @GetMapping(value = "/{userAccount}/manager")
+    public String getDirectManagerUserAccount(@PathVariable("userAccount") String userAccount) {
+        return "linghuchong";
     }
 }

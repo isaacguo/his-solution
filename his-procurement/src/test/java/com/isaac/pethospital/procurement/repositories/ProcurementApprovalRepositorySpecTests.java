@@ -1,7 +1,6 @@
 package com.isaac.pethospital.procurement.repositories;
 
-import com.isaac.pethospital.procurement.entities.ProcurementEntity;
-import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
+import com.isaac.pethospital.procurement.entities.ProcurementApprovalEntity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,32 +20,43 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @ImportAutoConfiguration({RibbonAutoConfiguration.class, FeignRibbonClientAutoConfiguration.class, FeignAutoConfiguration.class})
-public class ProcurementRepositorySpecTests {
+public class ProcurementApprovalRepositorySpecTests {
+
     @Autowired
     private TestEntityManager entityManager;
     @Autowired
-    private ProcurementRepository repository;
+    private ProcurementApprovalRepository repository;
 
     @Before
     public void init() {
 
-
     }
 
-
     @Test
-    public void findByRequesterThenFindSetsByJoiningTwoTables() throws Exception {
+    public void whenFindByKeyThenReturnApprovalEntity() throws Exception {
+        //given
+        ProcurementApprovalEntity p1 = new ProcurementApprovalEntity();
+        p1.setReviewed(false);
+        p1.setReviewer("Isaac");
 
-        ProcurementEntity procurementEntity=new ProcurementEntity();
-        ProcurementRequestEntity procurementRequestEntity=new ProcurementRequestEntity();
-        procurementRequestEntity.setRequester("Isaac");
-        procurementEntity.setProcurementRequest(procurementRequestEntity);
+        ProcurementApprovalEntity p3 = new ProcurementApprovalEntity();
+        p3.setReviewed(true);
+        p3.setReviewer("Isaac");
 
-        entityManager.persist(procurementRequestEntity);
-        entityManager.persist(procurementEntity);
+        ProcurementApprovalEntity p2 = new ProcurementApprovalEntity();
+        p2.setReviewed(false);
+        p2.setReviewer("David");
+
+        this.entityManager.persist(p1);
+        this.entityManager.persist(p2);
+        this.entityManager.persist(p3);
+
+
         //when
-        List<ProcurementEntity> list= this.repository.findByRequester("Isaac");
+        List<ProcurementApprovalEntity> res = this.repository.findByReviewerAndReviewedIsFalse("Isaac");
         //then
-        assertThat(list).hasSize(1);
+        assertThat(res.size()).isEqualTo(1);
+
+
     }
 }

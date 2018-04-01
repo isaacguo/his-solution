@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProcurementApprovalService} from "../../../../services/procurement/procurement-approval.service";
 
 @Component({
   selector: 'app-procurement-workflow',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProcurementWorkflowComponent implements OnInit {
 
-  constructor() { }
+  approvalStages: String[]=[];
+
+  constructor(private procurementApprovalService: ProcurementApprovalService) {
+  }
 
   ngOnInit() {
+    this.procurementApprovalService.getRoot().subscribe(r => {
+      if(r!=null)
+        this.approvalStages.push(r.stage);
+      while (r.nextStage != null) {
+        r = r.nextStage;
+        this.approvalStages.push(r.stage);
+      }
+    });
   }
 
 }

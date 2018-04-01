@@ -18,20 +18,24 @@ public class ProcurementServiceImpl implements ProcurementService {
     private final DatetimeGenerator datetimeGenerator;
     private final ProcurementConfigurationService procurementConfigurationService;
     private final ProcurementStatusService procurementStatusService;
+    private final ProcurementApprovalService procurementApprovalService;
 
     public ProcurementServiceImpl(ProcurementRepository procurementRepository,
                                   DatetimeGenerator datetimeGenerator,
                                   ProcurementConfigurationService procurementConfigurationService,
-                                  ProcurementStatusService procurementStatusService) {
+                                  ProcurementStatusService procurementStatusService,
+                                  ProcurementApprovalService procurementApprovalService) {
         this.procurementRepository = procurementRepository;
         this.datetimeGenerator = datetimeGenerator;
         this.procurementConfigurationService = procurementConfigurationService;
         this.procurementStatusService = procurementStatusService;
+        this.procurementApprovalService = procurementApprovalService;
     }
 
     @Override
     public void requestSubmitted(ProcurementRequestEntity request) {
-        this.createProcurement(request);
+        ProcurementEntity pe=this.createProcurement(request);
+        this.procurementApprovalService.procurementCreated(pe);
     }
 
     @Override

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ProcurementApprovalService} from "../../../services/procurement/procurement-approval.service";
 
 @Component({
   selector: 'app-procurement-settings',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProcurementSettingsComponent implements OnInit {
 
+
+
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
 }
