@@ -74,6 +74,7 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
         pae.setReviewed(true);
         pae.setReviewedDateTime(LocalDateTime.now());
         pae.setReviewResult(request.isReviewResult());
+        pae.setComments(request.getComments());
         this.procurementApprovalRepository.save(pae);
 
         if (pae.getProcurement().getStatus().equals("申请已提交")) {

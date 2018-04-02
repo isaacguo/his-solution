@@ -6,6 +6,7 @@ export class ProcurementApproval {
   public reviewer?: string;
   public reviewed?: boolean;
   public id?: number;
+  public reviewResult:boolean;
 
   constructor() {
   }

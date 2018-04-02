@@ -11,10 +11,32 @@ export class ProcurementRequestDetailComponent implements OnInit {
 
   @Input()
   procurement:Procurement;
+  @Input()
+  approvalStages:string[];
+
+  isPanelview:boolean=false;
+
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  getStatusText():string {
+
+    const index=this.procurement.approvalList.findIndex(r=>r.reviewed==false);
+    if(index==-1)
+      return "审批流程已完成";
+    else {
+      return "等待"+this.procurement.approvalList[index].stage+"审批";
+    }
+  }
+
+  onShowPanelViewClicked() {
+    this.isPanelview=true;
+  }
+
+  onShowTableViewClicked() {
+    this.isPanelview=false;
+  }
 }

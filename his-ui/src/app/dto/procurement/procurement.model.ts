@@ -1,6 +1,7 @@
 import {Vendor} from "./vendor.model";
 import {ProcurementStatus} from "./procurement-status.model";
 import {ProcurementRequest} from "./procurement-request.model";
+import {ProcurementApproval} from "./procurement-approval.model";
 
 export class Procurement {
   public orderNumber: string; //单号
@@ -10,6 +11,8 @@ export class Procurement {
   public status: string;
   public procurementRequest: ProcurementRequest;
   public id: number;
+  public approvalList:ProcurementApproval[];
+
 
   constructor() {
   }

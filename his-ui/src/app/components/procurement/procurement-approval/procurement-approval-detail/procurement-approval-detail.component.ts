@@ -14,30 +14,40 @@ import {Router} from "@angular/router";
 export class ProcurementApprovalDetailComponent implements OnInit {
 
   @ViewChild("confirmCreateModal")
-  confirmCreateModal:ModalComponent;
-  approvalConfirmResultText:string;
+  confirmCreateModal: ModalComponent;
+  @ViewChild("commentModal")
+  commentModal: ModalComponent;
+
+  commentString:string;
+  approvalConfirmResultText: string;
 
   @Input()
-  procurement:Procurement;
+  procurement: Procurement;
 
-  constructor(private procurementApprovalService:ProcurementApprovalService, private router:Router, private procurementApprovalListComponent:ProcurementApprovalListComponent) { }
+  constructor(private procurementApprovalService: ProcurementApprovalService, private router: Router, private procurementApprovalListComponent: ProcurementApprovalListComponent) {
+  }
 
   ngOnInit() {
   }
 
   onPassButtonClicked() {
-    const request= new ProcurementApprovalOperationRequest();
-    request.reviewResult=true;
-    request.id=this.procurement.id;
-    this.procurementApprovalService.updateApproval(request).subscribe(r=>{
-      if(r===true)
-        this.approvalConfirmResultText="审核提交成功"
-        this.confirmCreateModal.open();
-    })
+    this.commentModal.open();
   }
 
-  onConfirmCreateModalClosed(){
-    //this.router.navigate(['procurement-approval','list']);
+  onConfirmCreateModalClosed() {
     this.procurementApprovalListComponent.procurementStatusChanged();
+  }
+
+  onCommentModalClosed() {
+    const request = new ProcurementApprovalOperationRequest();
+    request.reviewResult = true;
+    request.id = this.procurement.id;
+    request.comments=this.commentString;
+    this.commentString=null;
+    this.procurementApprovalService.updateApproval(request).subscribe(r => {
+      if (r === true)
+        this.approvalConfirmResultText = "审核提交成功"
+      this.confirmCreateModal.open();
+    })
   }
 }
