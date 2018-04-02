@@ -7,12 +7,9 @@ import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
 import com.isaac.pethospital.procurement.repositories.ProcurementApprovalRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementApprovalStageRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementRepository;
-import com.isaac.pethospital.procurement.repositories.ProcurementStatusRepository;
-import com.sun.jmx.remote.protocol.iiop.ProxyInputStream;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.persistence.Table;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -26,7 +23,8 @@ public class ProcurementApprovalServiceSpecTests {
     EmployeeFeignService employeeFeignService;
 
     ProcurementRepository procurementRepository;
-    ProcurementStatusRepository procurementStatusRepository;
+    //ProcurementStatusRepository procurementStatusService;
+    ProcurementStatusService procurementStatusService;
 
 
     @Before
@@ -35,12 +33,12 @@ public class ProcurementApprovalServiceSpecTests {
         this.employeeFeignService = mock(EmployeeFeignService.class);
         this.procurementApprovalRepository = mock(ProcurementApprovalRepository.class);
         this.procurementRepository = mock(ProcurementRepository.class);
-        this.procurementStatusRepository = mock(ProcurementStatusRepository.class);
+        this.procurementStatusService = mock(ProcurementStatusService.class);
         this.procurementApprovalService = spy(new ProcurementApprovalServiceImpl(this.procurementApprovalStageRepository,
                 this.employeeFeignService,
                 this.procurementApprovalRepository,
                 this.procurementRepository,
-                this.procurementStatusRepository));
+                this.procurementStatusService));
     }
 
     @Test
@@ -134,7 +132,7 @@ public class ProcurementApprovalServiceSpecTests {
         this.procurementApprovalService.approvalReceived(request);
         //then
         //verify(this.procurementApprovalStageRepository,times(1)).findByStage(any(String.class));
-        verify(this.procurementStatusRepository).findByStatus(any(String.class));
+        verify(this.procurementStatusService).findByStatus(any(String.class));
 
         verify(this.procurementRepository, times(1)).save(any(ProcurementEntity.class));
     }
@@ -150,7 +148,6 @@ public class ProcurementApprovalServiceSpecTests {
         verify(this.procurementApprovalStageRepository,times(1)).findByStage(any(String.class));
         verify(this.employeeFeignService,times(1)).findByTitle(any(EmployeeOperationRequest.class));
         verify(this.procurementApprovalRepository,times(2)).save(any(ProcurementApprovalEntity.class));
-
     }
 
     private ProcurementApprovalOperationRequest initForAprovalReceived() {
@@ -164,21 +161,63 @@ public class ProcurementApprovalServiceSpecTests {
         doReturn(pae).when(this.procurementApprovalRepository).findByProcurementAndReviewer(any(ProcurementEntity.class),any(String.class));
         ProcurementStatusEntity currentStatus = new ProcurementStatusEntity();
         currentStatus.addNext(new ProcurementStatusEntity());
-        doReturn(currentStatus).when(this.procurementStatusRepository).findByStatus(any(String.class));
+        doReturn(currentStatus).when(this.procurementStatusService).findByStatus(any(String.class));
         ProcurementApprovalStageEntity pase=new ProcurementApprovalStageEntity();
         pase.setNextStage(new ProcurementApprovalStageEntity());
         doReturn(pase).when(this.procurementApprovalStageRepository).findByStage(any(String.class));
 
+        return request;
+    }
+
+    private ProcurementApprovalOperationRequest initForAprovalReceivedWhenLastStageApproved() {
+        ProcurementApprovalOperationRequest request = new ProcurementApprovalOperationRequest();
+        request.setId(1L);
+        ProcurementApprovalEntity pae = new ProcurementApprovalEntity();
+
+        ProcurementEntity pe = new ProcurementEntity();
+        pe.setStatus("申请批复中");
+
+
+        pae.setProcurement(pe);
+        doReturn(pe).when(this.procurementRepository).findOne(any(Long.class));
+        doReturn(pae).when(this.procurementApprovalRepository).findByProcurementAndReviewer(any(ProcurementEntity.class),any(String.class));
+        ProcurementStatusEntity currentStatus = new ProcurementStatusEntity();
+        ProcurementStatusEntity nextStatus = new ProcurementStatusEntity();
+        nextStatus.setLastStatusResult(true);
+
+        currentStatus.addNext(new ProcurementStatusEntity());
+
+        currentStatus.addNext(new ProcurementStatusEntity());
+        doReturn(currentStatus).when(this.procurementStatusService).findByStatus(any(String.class));
+        ProcurementApprovalStageEntity pase=new ProcurementApprovalStageEntity();
+        doReturn(pase).when(this.procurementApprovalStageRepository).findByStage(any(String.class));
+        doReturn(new ProcurementStatusEntity()).when(this.procurementStatusService).getNextStatus(any(String.class),any(Boolean.class));
 
         return request;
     }
 
     @Test
+    public void givenLastApprovalPassedWhenApprovalReceivedThenChangeProcurementStatus() {
+
+        ProcurementApprovalOperationRequest request = initForAprovalReceivedWhenLastStageApproved();
+        request.setReviewResult(true);
+        //when
+        this.procurementApprovalService.approvalReceived(request);
+        //then
+        verify(this.procurementStatusService,times(1)).getNextStatus(any(String.class),any(Boolean.class));
+
+
+    }
+
+    @Test
     public void whenGetUnfinishedProcurementsThenFindInRepositoryByUserAccount() {
         //given
+
         //when
         this.procurementApprovalService.findMyUnfinishedApprovalProcurements("Isaac");
         //then
         verify(this.procurementApprovalRepository, times(1)).findByReviewerAndReviewedIsFalse("Isaac");
     }
+
+
 }

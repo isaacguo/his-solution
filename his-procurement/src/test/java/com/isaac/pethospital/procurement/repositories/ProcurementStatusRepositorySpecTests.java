@@ -33,18 +33,25 @@ public class ProcurementStatusRepositorySpecTests {
         status1.setStatus("申请已提交");
         ProcurementStatusEntity status2 = new ProcurementStatusEntity();
         status2.setStatus("申请已批复");
+        status2.setLastStatusResult(true);
         ProcurementStatusEntity status3 = new ProcurementStatusEntity();
         status3.setStatus("申请已退回");
+        status3.setLastStatusResult(false);
         ProcurementStatusEntity status4 = new ProcurementStatusEntity();
         status4.setStatus("合同已订立");
+        status4.setLastStatusResult(true);
         ProcurementStatusEntity status5 = new ProcurementStatusEntity();
         status5.setStatus("合同已逾期");
+        status5.setLastStatusResult(false);
         ProcurementStatusEntity status6 = new ProcurementStatusEntity();
         status6.setStatus("货物已收到");
+        status6.setLastStatusResult(true);
         ProcurementStatusEntity status7 = new ProcurementStatusEntity();
         status7.setStatus("货物已退货");
+        status7.setLastStatusResult(false);
         ProcurementStatusEntity status8 = new ProcurementStatusEntity();
         status8.setStatus("货物已入库");
+        status8.setLastStatusResult(true);
 
 
         status1.addNext(status2);

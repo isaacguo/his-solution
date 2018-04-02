@@ -1,9 +1,11 @@
 package com.isaac.pethospital.procurement.services;
 
+import com.isaac.pethospital.procurement.entities.ProcurementStatusEntity;
 import com.isaac.pethospital.procurement.repositories.ProcurementStatusRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -28,6 +30,16 @@ public class ProcurementStatusServiceSpecTests {
         this.procurementStatusService.getRoot();
         //then
         verify( procurementStatusRepository, times(1)).findProcurementStatusEntityByParentIsNull();
+    }
+
+    @Test
+    public void givenStatusAndStatusResultWhenGetNextThenReturnStatusEntity()
+    {
+        //when
+        this.procurementStatusService.getNextStatus("A",true);
+        //
+        verify(procurementStatusRepository,times(1)).findByParentAndLastStatusResult(any(ProcurementStatusEntity.class),any(Boolean.class));
+
     }
 
 

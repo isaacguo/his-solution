@@ -65,14 +65,13 @@ public class ProcurementApprovalRestControllerSpecTests {
     }
 
     @Test
-    public void whenGetUnfinishedApprovalThenReturnList() throws Exception
-    {
-        ProcurementEntity procurementEntity=new ProcurementEntity();
+    public void whenGetUnfinishedApprovalThenReturnList() throws Exception {
+        ProcurementEntity procurementEntity = new ProcurementEntity();
         procurementEntity.setOrderNumber("001");
-        ProcurementApprovalEntity procurementApprovalEntity=new ProcurementApprovalEntity();
+        ProcurementApprovalEntity procurementApprovalEntity = new ProcurementApprovalEntity();
         procurementApprovalEntity.setProcurement(procurementEntity);
 
-        List<ProcurementEntity> list=new LinkedList<>();
+        List<ProcurementEntity> list = new LinkedList<>();
         list.add(procurementEntity);
         doReturn("Isaac").when(authHelper).getUserAccount();
         doReturn(list).when(this.service).findMyUnfinishedApprovalProcurements("Isaac");
@@ -81,16 +80,17 @@ public class ProcurementApprovalRestControllerSpecTests {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].orderNumber", is("001")));
     }
-    @Test
-    public void whenUpdateApprovalThenDoIt() throws  Exception
-    {
 
-        ProcurementApprovalOperationRequest request=new ProcurementApprovalOperationRequest();
+    @Test
+    public void whenUpdateApprovalThenDoIt() throws Exception {
+        ProcurementApprovalOperationRequest request = new ProcurementApprovalOperationRequest();
         request.setComments("OK");
         request.setReviewResult(true);
         this.mockMvc.perform(post("/procurement-approval/update").content(asJsonString(request)).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+
 
 }
 

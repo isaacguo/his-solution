@@ -1,3 +1,18 @@
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()" >
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{approvalConfirmResultText}}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+
 <div *ngIf="procurement==null" class="isaac-margin-15top">
   <h4>请从申请单列表中选择具体申请单查看详细信息</h4>
 </div>

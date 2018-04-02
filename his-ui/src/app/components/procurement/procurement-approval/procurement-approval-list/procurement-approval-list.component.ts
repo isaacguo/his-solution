@@ -16,8 +16,18 @@ export class ProcurementApprovalListComponent implements OnInit {
   constructor(private procurementApprovalService:ProcurementApprovalService) { }
 
   ngOnInit() {
-    this.procurementApprovalService.findMyUnfinishedApprovals().subscribe(r=>{
-      this.procurements=r;
+    this.loadData();
+  }
+
+  public procurementStatusChanged()
+  {
+    this.loadData();
+  }
+
+  private loadData() {
+    this.selectedProcurement=null;
+    this.procurementApprovalService.findMyUnfinishedApprovals().subscribe(r => {
+      this.procurements = r;
     });
   }
 

@@ -21,14 +21,14 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
     private final EmployeeFeignService employeeFeignService;
     private final ProcurementApprovalRepository procurementApprovalRepository;
     private final ProcurementRepository procurementRepository;
-    private final ProcurementStatusRepository procurementStatusRepository;
+    private final ProcurementStatusService procurementStatusService;
 
-    public ProcurementApprovalServiceImpl(ProcurementApprovalStageRepository procurementApprovalStageRepository, EmployeeFeignService employeeFeignService, ProcurementApprovalRepository procurementApprovalRepository, ProcurementRepository procurementRepository, ProcurementStatusRepository procurementStatusRepository) {
+    public ProcurementApprovalServiceImpl(ProcurementApprovalStageRepository procurementApprovalStageRepository, EmployeeFeignService employeeFeignService, ProcurementApprovalRepository procurementApprovalRepository, ProcurementRepository procurementRepository, ProcurementStatusService procurementStatusService) {
         this.procurementApprovalStageRepository = procurementApprovalStageRepository;
         this.employeeFeignService = employeeFeignService;
         this.procurementApprovalRepository = procurementApprovalRepository;
         this.procurementRepository = procurementRepository;
-        this.procurementStatusRepository = procurementStatusRepository;
+        this.procurementStatusService = procurementStatusService;
     }
 
     @Override
@@ -68,21 +68,27 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
     @Override
     public boolean approvalReceived(ProcurementApprovalOperationRequest request) {
 
-        ProcurementEntity pe=this.procurementRepository.findOne(request.getId());
-        ProcurementApprovalEntity pae=this.procurementApprovalRepository.findByProcurementAndReviewer(pe,request.getUserAccount());
+        ProcurementEntity pe = this.procurementRepository.findOne(request.getId());
+        ProcurementApprovalEntity pae = this.procurementApprovalRepository.findByProcurementAndReviewer(pe, request.getUserAccount());
 
         pae.setReviewed(true);
         pae.setReviewedDateTime(LocalDateTime.now());
         pae.setReviewResult(request.isReviewResult());
         this.procurementApprovalRepository.save(pae);
 
+        if (pae.getProcurement().getStatus().equals("申请已提交")) {
+            ProcurementStatusEntity currentStatus = this.procurementStatusService.findByStatus(pae.getProcurement().getStatus());
+            pae.getProcurement().setStatus(currentStatus.getNext().get(0).getStatus());
+            this.procurementRepository.save(pae.getProcurement());
+        }
+
         ProcurementApprovalStageEntity pase = this.procurementApprovalStageRepository.findByStage(pae.getStage());
         if (request.isReviewResult() && pase.getNextStage() != null) {
-            EmployeeOperationRequest employeeOperationRequest=new EmployeeOperationRequest();
+            EmployeeOperationRequest employeeOperationRequest = new EmployeeOperationRequest();
             employeeOperationRequest.setSearchByTitle(pase.getNextStage().getStage());
 
             String userAccount = this.employeeFeignService.findByTitle(employeeOperationRequest);
-            ProcurementApprovalEntity nextPae=new ProcurementApprovalEntity();
+            ProcurementApprovalEntity nextPae = new ProcurementApprovalEntity();
             nextPae.setProcurement(pae.getProcurement());
             nextPae.setCreatedDateTime(LocalDateTime.now());
             nextPae.setReviewed(false);
@@ -90,14 +96,12 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
             nextPae.setReviewer(userAccount);
 
             this.procurementApprovalRepository.save(nextPae);
-        }
-
-
-        if (pae.getProcurement().getStatus().equals("申请已提交")) {
-            ProcurementStatusEntity currentStatus = this.procurementStatusRepository.findByStatus(pae.getProcurement().getStatus());
-            pae.getProcurement().setStatus(currentStatus.getNext().get(0).getStatus());
+        } else if (request.isReviewResult() && pase.getNextStage() == null) {
+            pae.getProcurement().setStatus(this.procurementStatusService.getNextStatus(pae.getProcurement().getStatus(), true).getStatus());
             this.procurementRepository.save(pae.getProcurement());
         }
+
+
 
 
         return true;

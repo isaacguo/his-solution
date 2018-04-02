@@ -77,20 +77,28 @@ public class HisProcurementApplication {
                 status1.setStatus("申请已提交");
                 ProcurementStatusEntity status2 = new ProcurementStatusEntity();
                 status2.setStatus("申请批复中");
+                status2.setLastStatusResult(true);
                 ProcurementStatusEntity status3 = new ProcurementStatusEntity();
                 status3.setStatus("申请已通过");
+                status3.setLastStatusResult(true);
                 ProcurementStatusEntity status4 = new ProcurementStatusEntity();
                 status4.setStatus("申请已退回");
+                status4.setLastStatusResult(false);
                 ProcurementStatusEntity status5 = new ProcurementStatusEntity();
                 status5.setStatus("采购中");
+                status5.setLastStatusResult(true);
                 ProcurementStatusEntity status6 = new ProcurementStatusEntity();
                 status6.setStatus("采购逾期");
+                status6.setLastStatusResult(false);
                 ProcurementStatusEntity status7 = new ProcurementStatusEntity();
                 status7.setStatus("采购已到货");
+                status7.setLastStatusResult(true);
                 ProcurementStatusEntity status8 = new ProcurementStatusEntity();
                 status8.setStatus("采购已退货");
+                status8.setLastStatusResult(false);
                 ProcurementStatusEntity status9 = new ProcurementStatusEntity();
                 status9.setStatus("采购已入库");
+                status9.setLastStatusResult(true);
 
                 status1.addNext(status2);
 

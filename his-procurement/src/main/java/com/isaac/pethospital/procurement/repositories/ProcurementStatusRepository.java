@@ -8,6 +8,7 @@ import java.util.List;
 public interface ProcurementStatusRepository extends JpaRepository<ProcurementStatusEntity,Long> {
 
     ProcurementStatusEntity findProcurementStatusEntityByParentIsNull();
+    ProcurementStatusEntity findByParentAndLastStatusResult(ProcurementStatusEntity parent, boolean lastStatusResult);
     ProcurementStatusEntity findByStatus(String status);
 
 

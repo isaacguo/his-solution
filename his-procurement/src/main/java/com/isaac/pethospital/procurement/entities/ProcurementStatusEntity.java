@@ -22,6 +22,16 @@ public class ProcurementStatusEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public boolean isLastStatusResult() {
+        return lastStatusResult;
+    }
+
+    public void setLastStatusResult(boolean lastStatusResult) {
+        this.lastStatusResult = lastStatusResult;
+    }
+
+    boolean lastStatusResult;
+
     public Long getId() {
         return id;
     }

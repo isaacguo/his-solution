@@ -9,5 +9,7 @@ public interface ProcurementStatusService {
     ProcurementStatusEntity getRoot();
 
     List<ProcurementStatusEntity> findAll();
+    ProcurementStatusEntity findByStatus(String status);
 
+    ProcurementStatusEntity getNextStatus(String status, boolean result);
 }
