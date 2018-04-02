@@ -73,6 +73,7 @@ import {ProcurementService} from "./services/procurement/procurement.service";
 import {ProcurementApprovalService} from "./services/procurement/procurement-approval.service";
 import { ProcurementApprovalListComponent } from './components/procurement/procurement-approval/procurement-approval-list/procurement-approval-list.component';
 import { ProcurementApprovalDetailComponent } from './components/procurement/procurement-approval/procurement-approval-detail/procurement-approval-detail.component';
+import { ProcurementTableListViewComponent } from './components/procurement/procurement-approval/procurement-table-list-view/procurement-table-list-view.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -138,6 +139,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RequestGoodComponent,
     ProcurementApprovalListComponent,
     ProcurementApprovalDetailComponent,
+    ProcurementTableListViewComponent,
 
   ],
   imports: [
