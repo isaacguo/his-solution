@@ -52,6 +52,34 @@ public class ProcurementServiceImpl implements ProcurementService {
         return this.procurementRepository.findByRequester(requester);
     }
 
+    @Override
+    public void purchaseSubmitted(Long procurementId, ProcurementPurchaseEntity purchase) {
+        ProcurementEntity pe = this.procurementRepository.findOne(procurementId);
+        if (pe == null)
+            throw new RuntimeException("Cannot find Procurement by given id:" + procurementId);
+
+        pe.setProcurementPurchase(purchase);
+        this.procurementRepository.save(pe);
+    }
+
+    @Override
+    public boolean changeStatus(ProcurementOperation po) {
+        ProcurementEntity pe = this.procurementRepository.findOne(po.getId());
+        if(pe==null)
+            throw new RuntimeException("Cannot find Procurement by given id:"+po.getId());
+        ProcurementStatusEntity statusToBeChangedTo=this.procurementStatusService.findByStatus(po.getStatus());
+        if(statusToBeChangedTo==null)
+            throw new RuntimeException("Cannot find status entity by given status:" + po.getStatus());
+
+        ProcurementStatusEntity currentStatus=this.procurementStatusService.findByStatus(pe.getStatus());
+
+        pe.setStatus(statusToBeChangedTo.getStatus());
+
+        procurementRepository.save(pe);
+
+        return true;
+    }
+
     /*
     @Override
     public ProcurementEntity addVendorInfo(ProcurementOperation po) {

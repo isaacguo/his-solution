@@ -19,13 +19,24 @@ public class ProcurementEntity {
     @OneToOne(mappedBy = "procurement")
     @JsonManagedReference("ProcurementEntity-ProcurementRequestEntity")
     ProcurementRequestEntity procurementRequest;
+
+    @OneToOne(mappedBy = "procurement")
+    @JsonManagedReference("ProcurementEntity-ProcurementPurchaseEntity")
+    ProcurementPurchaseEntity procurementPurchase;
+    @OneToMany(mappedBy = "procurement", cascade = CascadeType.ALL)
+    @JsonManagedReference("ProcurementEntity-ProcurementApprovalEntity")
+    List<ProcurementApprovalEntity> approvalList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "procurement", cascade = CascadeType.ALL)
-    @JsonManagedReference("ProcurementEntity-ProcurementApprovalEntity")
-    List<ProcurementApprovalEntity> approvalList = new LinkedList<>();
+    public ProcurementPurchaseEntity getProcurementPurchase() {
+        return procurementPurchase;
+    }
+
+    public void setProcurementPurchase(ProcurementPurchaseEntity procurementPurchase) {
+        this.procurementPurchase = procurementPurchase;
+    }
 
     public String getVendor() {
         return vendor;

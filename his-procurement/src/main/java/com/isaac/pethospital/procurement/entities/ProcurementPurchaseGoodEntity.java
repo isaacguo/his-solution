@@ -7,28 +7,23 @@ import javax.persistence.*;
 @Entity
 public class ProcurementPurchaseGoodEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @ManyToOne
     @JsonBackReference("ProcurementPurchaseEntity-ProcurementPurchaseGoodEntity")
     ProcurementPurchaseEntity procurementPurchase;
-
-
     @OneToOne
     ProcurementRequestGoodEntity procurementRequestGoodEntity;
-
     String vendor;
     String contact;
     String contactTelephone;
-
-    String number; //个数
+    double number; //个数
     String packageSpecification; //包装规格
     String packageUnit; //包装单位
     String otherRequirements;
     double pricePerUnit; //单价
     double totalPrice; //总价
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public Long getId() {
         return id;
@@ -70,11 +65,11 @@ public class ProcurementPurchaseGoodEntity {
         this.contactTelephone = contactTelephone;
     }
 
-    public String getNumber() {
+    public double getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(double number) {
         this.number = number;
     }
 

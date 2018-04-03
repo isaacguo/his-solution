@@ -13,7 +13,15 @@ public class ProcurementOperation {
     Long contactId;
 
     private Long id;
+    String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getVendorId() {
         return vendorId;

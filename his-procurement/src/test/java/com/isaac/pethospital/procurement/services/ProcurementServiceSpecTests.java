@@ -120,7 +120,32 @@ public class ProcurementServiceSpecTests {
         this.procurementApprovalService.procurementCreated(any(ProcurementEntity.class));
     }
 
-
+    @Test
+    public void whenPurchaseSubmittedThenAssociateItWithProcurement()
+    {
+        //given
+        ProcurementPurchaseEntity ppe=new ProcurementPurchaseEntity();
+        doReturn(new ProcurementEntity()).when(this.procurementRepository).findOne(1L);
+        //when
+        this.procurementService.purchaseSubmitted(1L,ppe);
+        //then
+        verify(this.procurementRepository,times(1)).findOne(1L);
+    }
+    @Test
+    public void whenChangeStatusThenChangeIt()
+    {
+        //given
+        ProcurementOperation po=new ProcurementOperation();
+        po.setStatus("ABC");
+        po.setId(1L);
+        doReturn(new ProcurementStatusEntity()).when(this.procurementStatusService).findByStatus(any(String.class));
+        doReturn(new ProcurementEntity()).when(this.procurementRepository).findOne(1L);
+        //when
+        this.procurementService.changeStatus(po);
+        //then
+        verify(this.procurementStatusService,times(2)).findByStatus(any(String.class));
+        verify(this.procurementRepository,times(1)).findOne(1L);
+    }
 
 
     /*

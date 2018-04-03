@@ -41,7 +41,6 @@ public class ProcurementRequestRestControllerSpecTests {
         mockMvc = MockMvcBuilders
                 .standaloneSetup(restController)
                 .build();
-
     }
 
     @Test
