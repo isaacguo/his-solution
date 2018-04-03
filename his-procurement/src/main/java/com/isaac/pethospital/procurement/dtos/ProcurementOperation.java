@@ -8,14 +8,34 @@ import com.isaac.pethospital.procurement.entities.VendorEntity;
 
 public class ProcurementOperation {
 
-    Long orderNumber; //单号
-    VendorEntity vendor;
-    OperatorEntity operator;
+
+    Long vendorId;
+    Long contactId;
+
     private Long id;
 
-    ProcurementStatusEntity status;
 
-    public ProcurementEntity toProcurementEntity() {
-        return  null;
+    public Long getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(Long vendorId) {
+        this.vendorId = vendorId;
+    }
+
+    public Long getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(Long contactId) {
+        this.contactId = contactId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

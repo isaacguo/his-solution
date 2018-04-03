@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 public class DepartmentEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,6 +18,31 @@ public class DepartmentEntity {
     @ManyToOne()
     @JsonBackReference("CompanyEntity-DepartmentEntity")
     private CompanyEntity company;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    List<DepartmentEntity> children=new LinkedList<>();
+
+    public List<DepartmentEntity> getChildren() {
+        return children;
+    }
+
+    public void addChild(DepartmentEntity child) {
+        if(child==null)
+            throw new RuntimeException("Department is null");
+        child.setParent(this);
+        this.children.add(child);
+    }
+
+    public DepartmentEntity getParent() {
+        return parent;
+    }
+
+    public void setParent(DepartmentEntity parent) {
+        this.parent = parent;
+    }
+
+    @ManyToOne
+    DepartmentEntity parent;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     @JsonManagedReference("DepartmentEntity-EmployeeEntity")

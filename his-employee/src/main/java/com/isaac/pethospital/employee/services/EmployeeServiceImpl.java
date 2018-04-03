@@ -5,6 +5,7 @@ import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -46,5 +47,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeEntity getEmployeeByUuid(String uuid) {
         return this.employeeRepository.findByUuid(uuid);
+    }
+
+    @Override
+    public List<String> getOrganizationNames() {
+        return null;
+    }
+
+    @Override
+    public List<String> getSupportedRelationships() {
+        return null;
     }
 }

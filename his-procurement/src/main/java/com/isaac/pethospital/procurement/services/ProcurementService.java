@@ -13,4 +13,6 @@ public interface ProcurementService {
     ProcurementEntity createProcurement(ProcurementRequestEntity request);
 
     List<ProcurementEntity> findAllMyProcurements(String requester);
+
+    ProcurementEntity addVendorInfo(ProcurementOperation po);
 }

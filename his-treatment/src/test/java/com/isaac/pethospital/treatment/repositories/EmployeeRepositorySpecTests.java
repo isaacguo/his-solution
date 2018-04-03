@@ -87,4 +87,5 @@ public class EmployeeRepositorySpecTests {
         List<EmployeeEntity> list = this.repository.findByEmployeeType(employeeTypeEntity2);
         assertThat(list.size()).isEqualTo(2);
     }
+
 }
