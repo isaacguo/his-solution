@@ -2,7 +2,6 @@ package com.isaac.pethospital.procurement.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.aspectj.apache.bcel.classfile.annotation.RuntimeTypeAnnos;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,7 +19,7 @@ public class ProcurementRequestEntity {
 
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
     @JsonManagedReference("request-goods")
-    List<ProcurementGoodEntity> goods = new LinkedList<>();
+    List<ProcurementRequestGoodEntity> goods = new LinkedList<>();
     LocalDateTime submittedData;
     @OneToOne
     @JsonBackReference("ProcurementEntity-ProcurementRequestEntity")
@@ -34,11 +33,11 @@ public class ProcurementRequestEntity {
         this.requester = requester;
     }
 
-    public List<ProcurementGoodEntity> getGoods() {
+    public List<ProcurementRequestGoodEntity> getGoods() {
         return goods;
     }
 
-    public void addGood(ProcurementGoodEntity good) {
+    public void addGood(ProcurementRequestGoodEntity good) {
         if (good == null)
             throw new RuntimeException("Good is null.");
         good.setRequest(this);

@@ -14,5 +14,5 @@ public interface ProcurementService {
 
     List<ProcurementEntity> findAllMyProcurements(String requester);
 
-    ProcurementEntity addVendorInfo(ProcurementOperation po);
+    //ProcurementEntity addVendorInfo(ProcurementOperation po);
 }

@@ -120,6 +120,10 @@ public class ProcurementServiceSpecTests {
         this.procurementApprovalService.procurementCreated(any(ProcurementEntity.class));
     }
 
+
+
+
+    /*
     @Test
     public void whenAddingVendorInfoThenInformationIsAdded() {
         //given
@@ -172,4 +176,5 @@ public class ProcurementServiceSpecTests {
         doReturn(ve).when(this.vendorRepository).findOne(any(Long.class));
         return po;
     }
+    */
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
-public class ProcurementGoodEntity {
+public class ProcurementRequestGoodEntity {
 
     String number; //个数
     String packageSpecification; //包装规格

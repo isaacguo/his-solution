@@ -1,10 +1,9 @@
 package com.isaac.pethospital.procurement.dtos;
 
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
-import com.isaac.pethospital.procurement.entities.ProcurementGoodEntity;
+import com.isaac.pethospital.procurement.entities.ProcurementRequestGoodEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +12,7 @@ public class ProcurementRequestOperation {
 
     Long id;
     String requester;
-    List<ProcurementGoodEntity> goods = new LinkedList<>();
+    List<ProcurementRequestGoodEntity> goods = new LinkedList<>();
     LocalDateTime submittedData;
     ProcurementEntity procurement;
 
@@ -33,11 +32,11 @@ public class ProcurementRequestOperation {
         this.requester = requester;
     }
 
-    public List<ProcurementGoodEntity> getGoods() {
+    public List<ProcurementRequestGoodEntity> getGoods() {
         return goods;
     }
 
-    public void setGoods(List<ProcurementGoodEntity> goods) {
+    public void setGoods(List<ProcurementRequestGoodEntity> goods) {
         this.goods = goods;
     }
 

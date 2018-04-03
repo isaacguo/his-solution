@@ -52,6 +52,7 @@ public class ProcurementServiceImpl implements ProcurementService {
         return this.procurementRepository.findByRequester(requester);
     }
 
+    /*
     @Override
     public ProcurementEntity addVendorInfo(ProcurementOperation po) {
         ProcurementEntity pe = this.procurementRepository.findOne(po.getId());
@@ -76,4 +77,5 @@ public class ProcurementServiceImpl implements ProcurementService {
 
         return this.procurementRepository.save(pe);
     }
+    */
 }
