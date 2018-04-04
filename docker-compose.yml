@@ -3,14 +3,12 @@ services:
 
   his-activemq:
     image: rmohr/activemq
-    restart: always
     ports:
       - "61616:61616"
       - "8161:8161"
 
   graphite:
     image: hopsoft/graphite-statsd
-    restart: always
     ports:
       - "8000:80"
       - "2003:2003"
@@ -21,7 +19,6 @@ services:
       - "8126:8126"
   grafana:
     image: grafana/grafana
-    restart: always
     ports:
       - "3000:3000"
     links:
@@ -47,14 +44,12 @@ services:
 
   his-config:
       image: isaacguo/his-config
-      restart: always
       ports:
         - "17601:17601"
       command: --spring.profiles.active=production
 
   his-eureka:
     image: isaacguo/his-eureka
-    restart: always
     ports:
       - "8761:8761"
     depends_on:
@@ -64,7 +59,6 @@ services:
 
   his-employee:
     image: isaacguo/his-employee
-    restart: always
     ports:
       - "8091:8080"
     depends_on:
@@ -74,7 +68,6 @@ services:
 
   his-treatment:
     image: isaacguo/his-treatment
-    restart: always
     ports:
       - "8092:8080"
     depends_on:
@@ -84,7 +77,6 @@ services:
 
   his-medicine:
     image: isaacguo/his-medicine
-    restart: always
     ports:
       - "8095:8080"
     depends_on:
@@ -94,7 +86,6 @@ services:
 
   his-procurement:
     image: isaacguo/his-procurement
-    restart: always
     ports:
       - "8096:8080"
     depends_on:
@@ -104,7 +95,6 @@ services:
 
   his-gateway:
     image: isaacguo/his-gateway
-    restart: always
     ports:
       - "8090:8080"
     depends_on:
