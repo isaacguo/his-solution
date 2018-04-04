@@ -4,6 +4,7 @@ import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.services.ProcurementService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +31,11 @@ public class ProcurementRestController {
     {
         String assignee = this.authHelper.getUserAccount();
         return this.procurementService.findMyProcurementsByPurchaseByAssignee(assignee);
+    }
+    @GetMapping("{id}")
+    public ProcurementEntity getProcurement(@PathVariable("id") Long id)
+    {
+        return this.procurementService.findOne(id);
     }
 
 }

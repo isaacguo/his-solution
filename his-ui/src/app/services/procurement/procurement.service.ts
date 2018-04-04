@@ -24,4 +24,8 @@ export class ProcurementService extends AbstractService {
   getMyProcurementsByAssignedPurchaseUrl(): Observable<Procurement[]> {
     return this.authHttp.get(this.myProcurementsByAssignedPurchaseUrl).map(this.extractData);
   }
+
+  findOneById(id: number) {
+    return this.authHttp.get(`${this.rootUrl}/${id}`).map(this.extractData);
+  }
 }

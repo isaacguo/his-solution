@@ -5,8 +5,10 @@ export class ProcurementGoods {
   public packageUnit: string; //包装单位
   public otherRequirements: string;
   public reason: string;
+  public name: string;
 
 
-  constructor(){}
+  constructor() {
+  }
 
 }
