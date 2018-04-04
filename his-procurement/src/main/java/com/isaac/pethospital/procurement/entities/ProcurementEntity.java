@@ -20,7 +20,7 @@ public class ProcurementEntity {
     @JsonManagedReference("ProcurementEntity-ProcurementRequestEntity")
     ProcurementRequestEntity procurementRequest;
 
-    @OneToOne(mappedBy = "procurement")
+    @OneToOne(mappedBy = "procurement", cascade = CascadeType.ALL)
     @JsonManagedReference("ProcurementEntity-ProcurementPurchaseEntity")
     ProcurementPurchaseEntity procurementPurchase;
     @OneToMany(mappedBy = "procurement", cascade = CascadeType.ALL)
@@ -35,6 +35,9 @@ public class ProcurementEntity {
     }
 
     public void setProcurementPurchase(ProcurementPurchaseEntity procurementPurchase) {
+        if(procurementPurchase==null)
+            throw new RuntimeException("Procurement Purchase is null");
+        procurementPurchase.setProcurement(this);
         this.procurementPurchase = procurementPurchase;
     }
 

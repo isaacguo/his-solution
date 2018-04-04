@@ -1,9 +1,11 @@
 package com.isaac.pethospital.procurement.services;
 
+import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.procurement.dtos.EmployeeOperationRequest;
 import com.isaac.pethospital.procurement.dtos.ProcurementApprovalOperationRequest;
 import com.isaac.pethospital.procurement.entities.*;
 import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
+import com.isaac.pethospital.procurement.jms.JmsProperties;
 import com.isaac.pethospital.procurement.repositories.ProcurementApprovalRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementApprovalStageRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementRepository;
@@ -22,13 +24,17 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
     private final ProcurementApprovalRepository procurementApprovalRepository;
     private final ProcurementRepository procurementRepository;
     private final ProcurementStatusService procurementStatusService;
+    private final JmsSender jmsSender;
+    private final JmsProperties jmsProperties;
 
-    public ProcurementApprovalServiceImpl(ProcurementApprovalStageRepository procurementApprovalStageRepository, EmployeeFeignService employeeFeignService, ProcurementApprovalRepository procurementApprovalRepository, ProcurementRepository procurementRepository, ProcurementStatusService procurementStatusService) {
+    public ProcurementApprovalServiceImpl(ProcurementApprovalStageRepository procurementApprovalStageRepository, EmployeeFeignService employeeFeignService, ProcurementApprovalRepository procurementApprovalRepository, ProcurementRepository procurementRepository, ProcurementStatusService procurementStatusService , JmsSender jmsSender, JmsProperties jmsProperties) {
         this.procurementApprovalStageRepository = procurementApprovalStageRepository;
         this.employeeFeignService = employeeFeignService;
         this.procurementApprovalRepository = procurementApprovalRepository;
         this.procurementRepository = procurementRepository;
         this.procurementStatusService = procurementStatusService;
+        this.jmsSender=jmsSender;
+        this.jmsProperties=jmsProperties;
     }
 
     @Override
@@ -68,20 +74,10 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
     @Override
     public boolean approvalReceived(ProcurementApprovalOperationRequest request) {
 
-        ProcurementEntity pe = this.procurementRepository.findOne(request.getId());
-        ProcurementApprovalEntity pae = this.procurementApprovalRepository.findByProcurementAndReviewer(pe, request.getUserAccount());
+        ProcurementApprovalEntity pae = updateApproval(request);
 
-        pae.setReviewed(true);
-        pae.setReviewedDateTime(LocalDateTime.now());
-        pae.setReviewResult(request.isReviewResult());
-        pae.setComments(request.getComments());
-        this.procurementApprovalRepository.save(pae);
+        changeProcurementStatus(pae);
 
-        if (pae.getProcurement().getStatus().equals("申请已提交")) {
-            ProcurementStatusEntity currentStatus = this.procurementStatusService.findByStatus(pae.getProcurement().getStatus());
-            pae.getProcurement().setStatus(currentStatus.getNext().get(0).getStatus());
-            this.procurementRepository.save(pae.getProcurement());
-        }
 
         ProcurementApprovalStageEntity pase = this.procurementApprovalStageRepository.findByStage(pae.getStage());
         if (request.isReviewResult() && pase.getNextStage() != null) {
@@ -100,12 +96,36 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
         } else if (request.isReviewResult() && pase.getNextStage() == null) {
             pae.getProcurement().setStatus(this.procurementStatusService.getNextStatus(pae.getProcurement().getStatus(), true).getStatus());
             this.procurementRepository.save(pae.getProcurement());
+
+
+            this.jmsSender.sendEvent(this.jmsProperties.getProcurementApprovalPassedTopic(), pae.getProcurement().getId());
+
+
         }
-
-
 
 
         return true;
 
+    }
+
+    private ProcurementApprovalEntity updateApproval(ProcurementApprovalOperationRequest request) {
+        ProcurementEntity pe = this.procurementRepository.findOne(request.getId());
+        ProcurementApprovalEntity pae = this.procurementApprovalRepository.findByProcurementAndReviewer(pe, request.getUserAccount());
+
+        pae.setReviewed(true);
+        pae.setReviewedDateTime(LocalDateTime.now());
+        pae.setReviewResult(request.isReviewResult());
+        pae.setComments(request.getComments());
+        this.procurementApprovalRepository.save(pae);
+        return pae;
+    }
+
+    private void changeProcurementStatus(ProcurementApprovalEntity pae) {
+        //change status
+        if (pae.getProcurement().getStatus().equals("申请已提交")) {
+            ProcurementStatusEntity currentStatus = this.procurementStatusService.findByStatus(pae.getProcurement().getStatus());
+            pae.getProcurement().setStatus(currentStatus.getNext().get(0).getStatus());
+            this.procurementRepository.save(pae.getProcurement());
+        }
     }
 }

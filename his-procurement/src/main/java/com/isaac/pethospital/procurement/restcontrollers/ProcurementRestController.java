@@ -25,5 +25,11 @@ public class ProcurementRestController {
         String requester = this.authHelper.getUserAccount();
         return this.procurementService.findAllMyProcurements(requester);
     }
+    @GetMapping("user/purchases")
+    public List<ProcurementEntity> findMyProcurementsByPurchaseByAssignee()
+    {
+        String assignee = this.authHelper.getUserAccount();
+        return this.procurementService.findMyProcurementsByPurchaseByAssignee(assignee);
+    }
 
 }

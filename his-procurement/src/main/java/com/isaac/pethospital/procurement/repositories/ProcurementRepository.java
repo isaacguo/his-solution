@@ -12,4 +12,7 @@ public interface ProcurementRepository extends JpaRepository<ProcurementEntity, 
     @Query("select p from ProcurementEntity p join p.procurementRequest r where r.requester = :requester")
     List<ProcurementEntity> findByRequester(@Param("requester") String requester);
 
+    @Query("select p from ProcurementEntity p join p.procurementPurchase r where r.assignTo = :assignee")
+    List<ProcurementEntity> findMyProcurementByPurchaseByAssignee(@Param("assignee") String assignee);
+
 }

@@ -1,16 +1,23 @@
 package com.isaac.pethospital.procurement.services;
 
 import com.isaac.pethospital.common.time.DatetimeGenerator;
+import com.isaac.pethospital.procurement.dtos.EmployeeOperationRequest;
 import com.isaac.pethospital.procurement.dtos.ProcurementOperation;
 import com.isaac.pethospital.procurement.entities.*;
+import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
 import com.isaac.pethospital.procurement.repositories.ProcurementRepository;
 import com.isaac.pethospital.procurement.repositories.VendorRepository;
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ProcurementServiceImpl implements ProcurementService {
+
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final ProcurementRepository procurementRepository;
 
@@ -19,14 +26,22 @@ public class ProcurementServiceImpl implements ProcurementService {
     private final ProcurementStatusService procurementStatusService;
     private final ProcurementApprovalService procurementApprovalService;
     private final VendorRepository vendorRepository;
+    private final EmployeeFeignService employeeFeignService;
 
-    public ProcurementServiceImpl(ProcurementRepository procurementRepository, DatetimeGenerator datetimeGenerator, ProcurementConfigurationService procurementConfigurationService, ProcurementStatusService procurementStatusService, ProcurementApprovalService procurementApprovalService, VendorRepository vendorRepository) {
+    public ProcurementServiceImpl(ProcurementRepository procurementRepository,
+                                  DatetimeGenerator datetimeGenerator,
+                                  ProcurementConfigurationService procurementConfigurationService,
+                                  ProcurementStatusService procurementStatusService,
+                                  ProcurementApprovalService procurementApprovalService,
+                                  VendorRepository vendorRepository,
+                                  EmployeeFeignService employeeFeignService) {
         this.procurementRepository = procurementRepository;
         this.datetimeGenerator = datetimeGenerator;
         this.procurementConfigurationService = procurementConfigurationService;
         this.procurementStatusService = procurementStatusService;
         this.procurementApprovalService = procurementApprovalService;
         this.vendorRepository = vendorRepository;
+        this.employeeFeignService=employeeFeignService;
     }
 
     @Override
@@ -80,30 +95,38 @@ public class ProcurementServiceImpl implements ProcurementService {
         return true;
     }
 
-    /*
+
     @Override
-    public ProcurementEntity addVendorInfo(ProcurementOperation po) {
-        ProcurementEntity pe = this.procurementRepository.findOne(po.getId());
-        if (pe == null)
-            throw new RuntimeException("Cannot find Procurement by given id:" + po.getId());
+    public void approvalPassed(Long procurementId) {
+        this.logger.info("in approvalPassed:" + procurementId);
+        ProcurementEntity pe = this.procurementRepository.findOne(procurementId);
+        ProcurementPurchaseEntity ppe = new ProcurementPurchaseEntity();
 
-        VendorEntity ve = this.vendorRepository.findOne(po.getVendorId());
-        if (ve == null)
-            throw new RuntimeException("Cannot find Vendor by given id:" + po.getVendorId());
-        ContactEntity ce = ve.getContacts().stream().filter(r -> r.getId() == po.getContactId()).findFirst().orElse(null);
-        if (ve == null)
-            throw new RuntimeException("Cannot find Contact by given id:" + po.getContactId());
+        String assignee = getAssignee();
+        ppe.setAssignTo(assignee);
+        pe.setProcurementPurchase(ppe);
 
-        pe.setVendor(ve.getName());
-        pe.setContact(ce.getName());
+        this.procurementRepository.save(pe);
 
-        ProcurementStatusEntity pse=this.procurementStatusService.getNextStatus(pe.getStatus(), true);
-        if(pse!=null)
-            pe.setStatus(pse.getStatus());
-        else
-            throw new RuntimeException("No success status after "+pe.getStatus());
-
-        return this.procurementRepository.save(pe);
     }
-    */
+
+    private String getAssignee() {
+        EmployeeOperationRequest eor = new EmployeeOperationRequest();
+        eor.setSearchByTitle("采购部");
+        String userAccount = this.employeeFeignService.findByTitle(eor);
+        if (StringUtils.isEmpty(userAccount))
+            throw new RuntimeException("Cannot get userAccount");
+        return userAccount;
+    }
+
+    @Override
+    public ProcurementEntity findOne(Long id) {
+        return this.procurementRepository.findOne(id);
+    }
+
+    @Override
+    public List<ProcurementEntity> findMyProcurementsByPurchaseByAssignee(String userAccount) {
+        return this.procurementRepository.findMyProcurementByPurchaseByAssignee(userAccount);
+    }
+
 }

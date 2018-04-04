@@ -1,14 +1,15 @@
 package com.isaac.pethospital.procurement.services;
 
 import com.isaac.pethospital.common.time.DatetimeGenerator;
+import com.isaac.pethospital.procurement.dtos.EmployeeOperationRequest;
 import com.isaac.pethospital.procurement.dtos.ProcurementOperation;
 import com.isaac.pethospital.procurement.entities.*;
+import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
 import com.isaac.pethospital.procurement.repositories.ProcurementRepository;
 import com.isaac.pethospital.procurement.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.annotation.processing.ProcessingEnvironment;
+import org.mockito.Mockito;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -23,6 +24,7 @@ public class ProcurementServiceSpecTests {
     ProcurementStatusService procurementStatusService;
     ProcurementApprovalService procurementApprovalService;
     VendorRepository vendorRepository;
+    EmployeeFeignService employeeFeignService;
 
     @Before
     public void before() {
@@ -31,6 +33,7 @@ public class ProcurementServiceSpecTests {
         this.procurementStatusService = mock(ProcurementStatusService.class);
         this.procurementApprovalService = mock(ProcurementApprovalService.class);
         this.vendorRepository=mock(VendorRepository.class);
+        this.employeeFeignService=mock(EmployeeFeignService.class);
         this.generator = mock(DatetimeGenerator.class);
 
         this.procurementService = spy(new ProcurementServiceImpl(this.procurementRepository,
@@ -38,7 +41,8 @@ public class ProcurementServiceSpecTests {
                 this.procurementConfigurationService,
                 this.procurementStatusService,
                 this.procurementApprovalService,
-                this.vendorRepository));
+                this.vendorRepository,
+                this.employeeFeignService));
     }
 
     @Test
@@ -145,6 +149,43 @@ public class ProcurementServiceSpecTests {
         //then
         verify(this.procurementStatusService,times(2)).findByStatus(any(String.class));
         verify(this.procurementRepository,times(1)).findOne(1L);
+    }
+
+    @Test
+    public void whenFindMyProcurementByPurchaseThenFindMyProcurementByPurchaseByAssignee()
+    {
+        //when
+        this.procurementService.findMyProcurementsByPurchaseByAssignee("Isaac");
+        //then
+        verify(this.procurementRepository, Mockito.times(1)).findMyProcurementByPurchaseByAssignee(any(String.class));
+
+    }
+
+
+    @Test
+    public void whenApprovalPassedThenAssociateProcurementPurchaseEntityToProcurementEntity() {
+        //given
+        initForApprovalPassed();
+        //when
+        this.procurementService.approvalPassed(1L);
+        //then
+        verify(this.procurementRepository, Mockito.times(1)).findOne(1L);
+        verify(this.procurementRepository, Mockito.times(1)).save(any(ProcurementEntity.class));
+    }
+
+    private void initForApprovalPassed() {
+        doReturn("ABC").when(this.employeeFeignService).findByTitle(any(EmployeeOperationRequest.class));
+        doReturn(new ProcurementEntity()).when(this.procurementRepository).findOne(any(Long.class));
+    }
+
+    @Test
+    public void whenApprovalPassedThenFindAssigneeByUsingEmployeeFeignClient() {
+        //given
+        initForApprovalPassed();
+        //when
+        this.procurementService.approvalPassed(1L);
+        //then
+        verify(this.employeeFeignService,times(1)).findByTitle(any(EmployeeOperationRequest.class));
     }
 
 

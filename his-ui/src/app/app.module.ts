@@ -74,6 +74,10 @@ import {ProcurementApprovalService} from "./services/procurement/procurement-app
 import { ProcurementApprovalListComponent } from './components/procurement/procurement-approval/procurement-approval-list/procurement-approval-list.component';
 import { ProcurementApprovalDetailComponent } from './components/procurement/procurement-approval/procurement-approval-detail/procurement-approval-detail.component';
 import { ProcurementTableListViewComponent } from './components/procurement/procurement-approval/procurement-table-list-view/procurement-table-list-view.component';
+import { ProcurementPurchaseComponent } from './components/procurement/procurement-purchase/procurement-purchase.component';
+import { ProcurementPurchaseListComponent } from './components/procurement/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component';
+import { ProcurementPurchaseCreateUpdateComponent } from './components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-create-update.component';
+import { ProcurementPurchaseGoodCreateUpdateComponent } from './components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-good-create-update/procurement-purchase-good-create-update.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -140,6 +144,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementApprovalListComponent,
     ProcurementApprovalDetailComponent,
     ProcurementTableListViewComponent,
+    ProcurementPurchaseComponent,
+    ProcurementPurchaseListComponent,
+    ProcurementPurchaseCreateUpdateComponent,
+    ProcurementPurchaseGoodCreateUpdateComponent,
 
   ],
   imports: [

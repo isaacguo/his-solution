@@ -16,6 +16,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jms.annotation.EnableJms;
 
 
 @SpringBootApplication
@@ -24,6 +25,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {"com.isaac.pethospital"})
 @EntityScan(basePackages = {"com.isaac.pethospital"})
 @EnableJpaRepositories(basePackages = {"com.isaac.pethospital"})
+@EnableJms
 public class HisProcurementApplication {
 
     public static void main(String[] args) {
@@ -85,7 +87,7 @@ public class HisProcurementApplication {
                 status4.setStatus("申请已退回");
                 status4.setLastStatusResult(false);
                 ProcurementStatusEntity status5 = new ProcurementStatusEntity();
-                status5.setStatus("采购中");
+                status5.setStatus("采购进行中");
                 status5.setLastStatusResult(true);
                 ProcurementStatusEntity status6 = new ProcurementStatusEntity();
                 status6.setStatus("采购逾期");

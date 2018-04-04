@@ -1,0 +1,65 @@
+<div class="row">
+  <form class="form-inline" role="form">
+    <div class="form-group isaac-form-space">
+      <label for="vendorName">供应商名称:</label>
+      <input id="vendorName" class="form-control" type="text">
+    </div>
+    <!--
+    <div class="form-group isaac-form-space">
+      <label for="contact">联系人: </label>
+      <input id="contact" class="form-control" type="text">
+    </div>
+    <div class="form-group isaac-form-space">
+      <label for="goodName">商品名称: </label>
+      <input id="goodName" class="form-control" type="text">
+    </div>
+    -->
+    <div class="form-group isaac-form-space">
+      <label for="startDate">起始日期: </label>
+      <input id="startDate" class="form-control" type="text">
+      <label for="endDate">结束日期: </label>
+      <input id="endDate" class="form-control" type="text">
+    </div>
+    <div class="form-group isaac-form-space">
+      <label for="patientRecordId">申请状态: </label>
+      <input id="patientRecordId" class="form-control" type="text">
+    </div>
+    <button type="btn btn-default">查询</button>
+    <button type="btn btn-default">清除</button>
+  </form>
+</div>
+
+<div class="row isaac-margin-15top">
+  <table class="table table-bordered table-responsive">
+    <thead>
+    <tr>
+      <th>编号</th>
+      <th>采购状态</th>
+      <th>供应商编号</th>
+      <th>供应商名称</th>
+      <th>总项数</th>
+      <th>订货总金额</th>
+      <th>制单时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let procurement of procurements">
+      <td>{{procurement.orderNumber}}</td>
+      <td>{{procurement.status}}</td>
+      <td></td>
+      <td></td>
+      <td>{{procurement.procurementPurchase?.goods.length}}</td>
+      <td></td>
+      <td>{{procurement.procurementPurchase?.generatedDateTime | date:'yyyy年MM月dd日 HH:mm:ss' }}</td>
+      <td>
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn btn-default"
+                  (click)="onUpdateButtonClicked(procurement)"><span
+            class="glyphicon glyphicon-pencil"></span></button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

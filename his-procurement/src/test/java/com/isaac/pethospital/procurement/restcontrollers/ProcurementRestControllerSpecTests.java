@@ -48,13 +48,12 @@ public class ProcurementRestControllerSpecTests {
     }
 
 
-
     @Test
     public void givenGetAllMyProcurementsThenReturnMyProcurements() throws Exception {
 
-        ProcurementEntity pe=new ProcurementEntity();
+        ProcurementEntity pe = new ProcurementEntity();
         pe.setOrderNumber("001");
-        List<ProcurementEntity> list=new LinkedList<>();
+        List<ProcurementEntity> list = new LinkedList<>();
         list.add(pe);
 
         doReturn("Isaac").when(authHelper).getUserAccount();
@@ -64,5 +63,24 @@ public class ProcurementRestControllerSpecTests {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].orderNumber", is("001")));
+    }
+
+    @Test
+    public void whenGetAllMyProcurementsByPurchaseAssigneeThenReturnListOfMyAssignedProcurements() throws Exception {
+
+
+        ProcurementEntity pe = new ProcurementEntity();
+        pe.setOrderNumber("001");
+        List<ProcurementEntity> list = new LinkedList<>();
+        list.add(pe);
+
+        doReturn("Isaac").when(authHelper).getUserAccount();
+        doReturn(list).when(this.service).findMyProcurementsByPurchaseByAssignee("Isaac");
+
+        this.mockMvc.perform(get("/procurements/user/purchases"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].orderNumber", is("001")));
+
     }
 }

@@ -18,6 +18,11 @@ public interface ProcurementService {
     void purchaseSubmitted(Long procurementId, ProcurementPurchaseEntity purchase);
 
     boolean changeStatus(ProcurementOperation po);
+    void approvalPassed(Long procurementId);
+
+    ProcurementEntity findOne(Long id);
+
+    List<ProcurementEntity> findMyProcurementsByPurchaseByAssignee(String userAccount);
 
     //ProcurementEntity addVendorInfo(ProcurementOperation po);
 }

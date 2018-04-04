@@ -18,10 +18,19 @@ public class ProcurementPurchaseEntity {
     @OneToMany
     @JsonManagedReference("ProcurementPurchaseEntity-ProcurementPurchaseGoodEntity")
     List<ProcurementPurchaseGoodEntity> goods = new LinkedList<>();
+    double totalPrice;
+    String assignTo;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    double totalPrice;
+
+    public String getAssignTo() {
+        return assignTo;
+    }
+
+    public void setAssignTo(String assignTo) {
+        this.assignTo = assignTo;
+    }
 
     public ProcurementEntity getProcurement() {
         return procurement;

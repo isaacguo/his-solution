@@ -46,6 +46,9 @@ import {ProcurementWorkflowComponent} from "./app/components/procurement/procure
 import {ProcurementRequestListComponent} from "./app/components/procurement/procurement-request/procurement-request-list/procurement-request-list.component";
 import {ProcurementRequestCreateUpdateComponent} from "./app/components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component";
 import {ProcurementApprovalListComponent} from "./app/components/procurement/procurement-approval/procurement-approval-list/procurement-approval-list.component";
+import {ProcurementPurchaseComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase.component";
+import {ProcurementPurchaseListComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component";
+import {ProcurementPurchaseCreateUpdateComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-create-update.component";
 
 
 const appRoutes: Routes = [
@@ -215,6 +218,28 @@ const appRoutes: Routes = [
           {
             path: '**',
             redirectTo: 'list',
+          }
+        ]
+      },
+      {
+        path:'procurement-purchase',
+        component:ProcurementPurchaseComponent,
+        children:[
+          {
+            path:'list',
+            component:ProcurementPurchaseListComponent
+          },
+          {
+            path:':operation',
+            component:ProcurementPurchaseCreateUpdateComponent
+          },
+          {
+            path: ':operation/:updateId',
+            component: ProcurementPurchaseCreateUpdateComponent,
+          },
+          {
+            path:'**',
+            redirectTo:'list'
           }
         ]
       },

@@ -3,9 +3,6 @@ package com.isaac.pethospital.procurement.dtos;
 import com.isaac.pethospital.common.math.DecimalHelper;
 import com.isaac.pethospital.procurement.entities.*;
 import com.isaac.pethospital.procurement.repositories.ProcurementRequestGoodRepository;
-import com.isaac.pethospital.procurement.repositories.ProcurementRequestRepository;
-import com.isaac.pethospital.procurement.services.ProcurementRequestService;
-import com.isaac.pethospital.procurement.services.ProcurementService;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -13,19 +10,18 @@ import java.util.List;
 
 public class ProcurementPurchaseOperationRequest {
 
-    private Long id;
     LocalDateTime generatedDateTime; //表单生成时间
-
-    public Long getPurchaseId() {
-        return purchaseId;
-    }
-
-    public void setPurchaseId(Long purchaseId) {
-        this.purchaseId = purchaseId;
-    }
-
-    Long purchaseId;
+    Long procurementId;
     List<ProcurementPurchaseGoodEntity> goods = new LinkedList<>();
+    private Long id;
+
+    public Long getProcurementId() {
+        return procurementId;
+    }
+
+    public void setProcurementId(Long procurementId) {
+        this.procurementId = procurementId;
+    }
 
     public ProcurementPurchaseEntity toProcurementPurchaseEntity(ProcurementRequestGoodRepository procurementRequestGoodRepository) {
         double totalPrice = 0;

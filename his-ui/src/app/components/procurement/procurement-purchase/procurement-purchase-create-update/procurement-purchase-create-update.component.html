@@ -1,0 +1,39 @@
+<div class="row">
+  <h1 class="page-header text-center">
+    采购单
+  </h1>
+</div>
+<div class="row">
+  <!--
+  <div class="form-group">
+    <label>当前采购状态</label>
+
+    <div class="btn-group" role="group">
+      <button type="button"
+              class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
+              data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+        {{selectedStatus}}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="javascript:void(0)" *ngFor="let status of availableProcurementStatus"
+               (click)="setSelectedStatus(status)">{{status}}</a></li>
+      </ul>
+    </div>
+  </div>
+  -->
+</div>
+
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <input type="hidden" formControlName="id">
+    <input type="hidden" formControlName="procurementId">
+  </div>
+  <div formArrayName="goods">
+    <div *ngFor="let good of goodsData.controls; let i=index">
+    </div>
+  </div>
+</form>
+
+
+<pre>{{formModel.value|json}}</pre>
