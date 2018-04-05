@@ -43,12 +43,12 @@ services:
           "
 
   his-config:
-      image: isaacguo/his-config
-      ports:
-        - "17601:17601"
-      command: --spring.profiles.active=production
-      environment:
-         - JAVA_OPTS=-Xmx128m -Xms64m
+    image: isaacguo/his-config
+    ports:
+      - "17601:17601"
+    command: --spring.profiles.active=production
+    environment:
+      - JAVA_OPTS=-Xmx128m -Xms64m
 
   his-eureka:
     image: isaacguo/his-eureka
@@ -58,9 +58,7 @@ services:
       - his-config
     command: --spring.profiles.active=production
     environment:
-             - JAVA_OPTS=-Xmx128m -Xms64m
-
-
+      - JAVA_OPTS=-Xmx128m -Xms64m
 
   his-employee:
     image: isaacguo/his-employee
@@ -71,7 +69,7 @@ services:
       - his-eureka
     command: --spring.profiles.active=production
     environment:
-             - JAVA_OPTS=-Xmx128m -Xms64m
+      - JAVA_OPTS=-Xmx128m -Xms64m
 
   his-treatment:
     image: isaacguo/his-treatment
@@ -82,7 +80,7 @@ services:
       - his-eureka
     command: --spring.profiles.active=production
     environment:
-             - JAVA_OPTS=-Xmx128m -Xms64m
+      - JAVA_OPTS=-Xmx128m -Xms64m
 
   his-medicine:
     image: isaacguo/his-medicine
@@ -93,7 +91,7 @@ services:
       - his-eureka
     command: --spring.profiles.active=production
     environment:
-             - JAVA_OPTS=-Xmx128m -Xms64m
+      - JAVA_OPTS=-Xmx128m -Xms64m
 
   his-procurement:
     image: isaacguo/his-procurement
@@ -104,7 +102,7 @@ services:
       - his-eureka
     command: --spring.profiles.active=production
     environment:
-             - JAVA_OPTS=-Xmx128m -Xms64m
+      - JAVA_OPTS=-Xmx128m -Xms64m
 
   his-gateway:
     image: isaacguo/his-gateway
@@ -117,5 +115,5 @@ services:
       - his-medicine
     command: --spring.profiles.active=production
     environment:
-             - JAVA_OPTS=-Xmx128m -Xms64m
+      - JAVA_OPTS=-Xmx128m -Xms64m
 
