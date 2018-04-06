@@ -1,6 +1,15 @@
+
+<td><input class="form-control" type="text" formControlName="name"></td>
+<td><input class="form-control" type="text" formControlName="packageSpecification"></td>
+<td><input class="form-control" type="text" formControlName="packageUnit"></td>
+<td><input class="form-control" type="text" formControlName="number"></td>
+<td><input class="form-control" type="text" formControlName="unitPrice"></td>
+<td><input class="form-control" type="text" formControlName="totalPrice"></td>
+
+<!--
 <div [formGroup]="good">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-2">
       <div class="form-group">
         <label>产品名称</label><span color="red" class="text-danger"
                                  [hidden]="good.controls.name.valid">*</span>
@@ -40,29 +49,26 @@
         </small>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-2">
       <div class="form-group">
-        <label>其他要求</label><span color="red" class="text-danger"
-                               [hidden]="good.controls.otherRequirements.valid">*</span>
-        <input class="form-control" type="text" formControlName="otherRequirements">
-        <small [hidden]="good.controls.otherRequirements.valid" class="text-danger">
-          要求采购完成或交付的时间
+        <label>单价</label><span color="red" class="text-danger"
+                               [hidden]="good.controls.number.valid">*</span>
+        <input class="form-control" type="text" formControlName="number">
+        <small [hidden]="good.controls.number.valid" class="text-danger">
+          数量不能为空
         </small>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-2">
       <div class="form-group">
-        <label>采购原因</label><span color="red" class="text-danger"
-                                 [hidden]="good.controls.reason.valid">*</span>
-        <input class="form-control" type="text" formControlName="reason">
-        <small [hidden]="good.controls.reason.valid" class="text-danger">
-          采购原因及其他情况说明
+        <label>总价</label><span color="red" class="text-danger"
+                               [hidden]="good.controls.number.valid">*</span>
+        <input class="form-control" type="text" formControlName="number">
+        <small [hidden]="good.controls.number.valid" class="text-danger">
+          数量不能为空
         </small>
       </div>
     </div>
   </div>
 </div>
+-->

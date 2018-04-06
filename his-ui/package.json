@@ -25,7 +25,7 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
-    "angular-split": "^0.2.7",
+    "angular-split": "^0.2.2",
     "angular-tree-component": "^7.0.2-beta1",
     "angular2-jwt": "^0.2.3",
     "bootstrap": "^3.3.7",

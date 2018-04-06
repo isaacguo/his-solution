@@ -137,6 +137,9 @@ export class ProcurementPurchaseCreateUpdateComponent extends AbstractCreateUpda
   onUnitChange(i: number) {
     this.calculatePriceForGood(i);
   }
+  onPerUnitChange(i: number) {
+    this.calculatePriceForGood(i);
+  }
 
   private calculatePriceForGood(i: number) {
     const goods = <FormArray>this.formModel.controls['goods'];
@@ -166,9 +169,7 @@ export class ProcurementPurchaseCreateUpdateComponent extends AbstractCreateUpda
     totalPrice.setValue(total);
   }
 
-  onPerUnitChange(i: number) {
-    this.calculatePriceForGood(i);
-  }
+
 
   onVendorSelected(vendor: Vendor) {
     this.selectedVendor = vendor;

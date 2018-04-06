@@ -1,33 +1,5 @@
 <div class="row">
-  <form class="form-inline" role="form">
-    <div class="form-group isaac-form-space">
-      <label for="vendorName">供应商名称:</label>
-      <input id="vendorName" class="form-control" type="text">
-    </div>
-    <!--
-    <div class="form-group isaac-form-space">
-      <label for="contact">联系人: </label>
-      <input id="contact" class="form-control" type="text">
-    </div>
-    <div class="form-group isaac-form-space">
-      <label for="goodName">商品名称: </label>
-      <input id="goodName" class="form-control" type="text">
-    </div>
-    -->
-    <div class="form-group isaac-form-space">
-      <label for="startDate">起始日期: </label>
-      <input id="startDate" class="form-control" type="text">
-      <label for="endDate">结束日期: </label>
-      <input id="endDate" class="form-control" type="text">
-    </div>
-    <div class="form-group isaac-form-space">
-      <label for="patientRecordId">申请状态: </label>
-      <input id="patientRecordId" class="form-control" type="text">
-    </div>
-    <button type="btn btn-default">查询</button>
-    <button type="btn btn-default">清除</button>
-    <button type="btn btn-default" (click)="onCreateNewRequestButtonClicked()">创建新的申请</button>
-  </form>
+  <button type="btn btn-default" (click)="onCreateNewRequestButtonClicked()">创建新的申请</button>
 </div>
 
 <div class="row">
@@ -35,13 +7,14 @@
 
     <table class="table">
       <thead>
-      <tr >
+      <tr>
         <th>编号</th>
         <th>状态</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let procurement of list" (click)="onRowClicked(procurement)"  [class.info]="isRowSelected(procurement)">
+      <tr *ngFor="let procurement of list" (click)="onRowClicked(procurement)"
+          [class.info]="isRowSelected(procurement)">
         <td>{{procurement.orderNumber}}</td>
         <td>{{procurement.status}}</td>
       </tr>
