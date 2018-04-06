@@ -60,9 +60,8 @@ export class ProcurementPurchaseCreateUpdateComponent extends AbstractCreateUpda
     this.formModel = this.fb.group({
       'id': [''],
       'procurementId': [''],
-      'goods': this.fb.array([
-        //this.initGood()
-      ])
+      'goods': this.fb.array([]),
+      'totalPrice': ['']
     })
   }
 
@@ -147,6 +146,24 @@ export class ProcurementPurchaseCreateUpdateComponent extends AbstractCreateUpda
     const totalPrice = <FormControl>good.controls['totalPrice'];
     if (number.value != null && pricePerUnit.value != null)
       totalPrice.setValue(<number>number.value * <number>pricePerUnit.value);
+
+    this.calculatePurchaseTotalPrice();
+  }
+
+  private calculatePurchaseTotalPrice() {
+    const totalPrice= <FormControl>this.formModel.controls['totalPrice'];
+    let total=0;
+    const goods = <FormArray>this.formModel.controls['goods'];
+    goods.controls.forEach(r => {
+      const good = <FormGroup>r;
+      const number = <FormControl>good.controls['number'];
+      const pricePerUnit = <FormControl>good.controls['pricePerUnit'];
+      const totalPrice = <FormControl>good.controls['totalPrice'];
+      if (totalPrice.value != null )
+        total+=<number>totalPrice.value;
+    })
+
+    totalPrice.setValue(total);
   }
 
   onPerUnitChange(i: number) {
@@ -161,9 +178,9 @@ export class ProcurementPurchaseCreateUpdateComponent extends AbstractCreateUpda
   onVendorListModalModalClosed() {
     const goods = <FormArray>this.formModel.controls['goods'];
 
-    goods.controls.forEach(r=>{
+    goods.controls.forEach(r => {
       console.log(r);
-      const good=<FormGroup>r;
+      const good = <FormGroup>r;
       good.controls['vendor'].setValue(this.selectedVendor.name);
     })
   }

@@ -1,11 +1,11 @@
-<modal #vendorListModal (onClose)="onVendorListModalModalClosed()" >
+<modal #vendorListModal (onClose)="onVendorListModalModalClosed()">
   <form #modalForm1="ngForm">
     <modal-header [show-close]="true">
       <h4 class="modal-title">信息</h4>
     </modal-header>
     <modal-body>
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let vendor of vendors" (click)="onVendorSelected(vendor)" >
+        <li class="list-group-item" *ngFor="let vendor of vendors" (click)="onVendorSelected(vendor)">
           {{vendor.name}}
         </li>
       </ul>
@@ -22,13 +22,15 @@
   </h1>
 </div>
 <div class="row">
-  <button (click)="onGenerateOrderButtonClicked()" type="btn btn-default">生成采购订单</button>
-  <button (click)="onSpecifyVendorButtonClicked()" type="btn btn-default">指定供应商</button>
+  <button class="btn btn-default" (click)="onGenerateOrderButtonClicked()" type="btn btn-default">生成采购订单</button>
+  <button class="btn btn-default" (click)="onSpecifyVendorButtonClicked()" type="btn btn-default">指定供应商</button>
 </div>
 
-<div class="row">
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
 
-  <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+
+  <div class="row">
+
     <div class="form-group">
       <input type="hidden" formControlName="id">
       <input type="hidden" formControlName="procurementId">
@@ -59,7 +61,7 @@
           <td><input type="text" class="form-control" formControlName="packageSpecification"></td>
           <td><input type="text" class="form-control" formControlName="packageUnit"></td>
           <td><input type="text" (change)="onPerUnitChange(i)" class="form-control" formControlName="pricePerUnit"></td>
-          <td><input type="text" (change)="onUnitChange(i)"  class="form-control" formControlName="number"></td>
+          <td><input type="text" (change)="onUnitChange(i)" class="form-control" formControlName="number"></td>
           <td><input type="text" class="form-control" formControlName="totalPrice"></td>
           <td><input type="text" class="form-control" formControlName="otherRequirements"></td>
         </tr>
@@ -72,8 +74,19 @@
 
       </table>
     </div>
-  </form>
-
-</div>
-
-<pre>{{formModel.value|json}}</pre>
+  </div>
+  <div class="row">
+    <div class="col-md-3 form-inline">
+      <div class="form-group">
+        <label>付款合计:</label>
+        <input type="text" class="form-control form-control-static form-control-noborder" formControlName="totalPrice" readonly>
+      </div>
+    </div>
+    <div class="col-md-3 form-inline">
+      <div class="form-group">
+        <label>大写:</label>
+        <input type="text" class="form-control form-control-static form-control-noborder" formControlName="totalPrice" readonly>
+      </div>
+    </div>
+  </div>
+</form>

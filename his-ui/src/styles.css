@@ -81,4 +81,11 @@
   text-align:center;
 }
 
-
+.form-control-noborder
+{
+  border-width: 0px;
+}
+.fixed-height
+{
+  height: 768px;
+}

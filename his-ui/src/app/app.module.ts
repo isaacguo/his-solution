@@ -57,27 +57,30 @@ import {ProcurementManagementComponent} from './components/procurement/procureme
 import {ProcurementSettingsComponent} from './components/procurement/procurement-settings/procurement-settings.component';
 import {VendorManagementComponent} from './components/procurement/procurement-settings/vendor-management/vendor-management.component';
 import {VendorCreateUpdateComponent} from './components/procurement/procurement-settings/vendor-create-update/vendor-create-update.component';
-import { ContactCreateUpdateComponent } from './components/procurement/procurement-settings/vendor-create-update/contact-create-update/contact-create-update.component';
+import {ContactCreateUpdateComponent} from './components/procurement/procurement-settings/vendor-create-update/contact-create-update/contact-create-update.component';
 import {VendorService} from "./services/procurement/vendor.service";
 import {ProcurementStatusService} from "./services/procurement/procurement-status.service";
-import { ProcurementStatusComponent } from './components/procurement/procurement-settings/procurement-status/procurement-status.component';
-import { ProcurementRequestComponent } from './components/procurement/procurement-request/procurement-request.component';
-import { ProcurementApprovalComponent } from './components/procurement/procurement-approval/procurement-approval.component';
-import { ProcurementWorkflowComponent } from './components/procurement/procurement-settings/procurement-workflow/procurement-workflow.component';
-import { ProcurementRequestListComponent } from './components/procurement/procurement-request/procurement-request-list/procurement-request-list.component';
-import { ProcurementRequestCreateUpdateComponent } from './components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component';
-import { ProcurementRequestDetailComponent } from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail.component';
-import { RequestGoodComponent } from './components/procurement/procurement-request/procurement-request-create-update/request-good/request-good.component';
+import {ProcurementStatusComponent} from './components/procurement/procurement-settings/procurement-status/procurement-status.component';
+import {ProcurementRequestComponent} from './components/procurement/procurement-request/procurement-request.component';
+import {ProcurementApprovalComponent} from './components/procurement/procurement-approval/procurement-approval.component';
+import {ProcurementWorkflowComponent} from './components/procurement/procurement-settings/procurement-workflow/procurement-workflow.component';
+import {ProcurementRequestListComponent} from './components/procurement/procurement-request/procurement-request-list/procurement-request-list.component';
+import {ProcurementRequestCreateUpdateComponent} from './components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component';
+import {ProcurementRequestDetailComponent} from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail.component';
+import {RequestGoodComponent} from './components/procurement/procurement-request/procurement-request-create-update/request-good/request-good.component';
 import {ProcurementRequestService} from "./services/procurement/procurement-request.service";
 import {ProcurementService} from "./services/procurement/procurement.service";
 import {ProcurementApprovalService} from "./services/procurement/procurement-approval.service";
-import { ProcurementApprovalListComponent } from './components/procurement/procurement-approval/procurement-approval-list/procurement-approval-list.component';
-import { ProcurementApprovalDetailComponent } from './components/procurement/procurement-approval/procurement-approval-detail/procurement-approval-detail.component';
-import { ProcurementTableListViewComponent } from './components/procurement/procurement-approval/procurement-table-list-view/procurement-table-list-view.component';
-import { ProcurementPurchaseComponent } from './components/procurement/procurement-purchase/procurement-purchase.component';
-import { ProcurementPurchaseListComponent } from './components/procurement/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component';
-import { ProcurementPurchaseCreateUpdateComponent } from './components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-create-update.component';
-import { ProcurementPurchaseGoodCreateUpdateComponent } from './components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-good-create-update/procurement-purchase-good-create-update.component';
+import {ProcurementApprovalListComponent} from './components/procurement/procurement-approval/procurement-approval-list/procurement-approval-list.component';
+import {ProcurementApprovalDetailComponent} from './components/procurement/procurement-approval/procurement-approval-detail/procurement-approval-detail.component';
+import {ProcurementTableListViewComponent} from './components/procurement/procurement-approval/procurement-table-list-view/procurement-table-list-view.component';
+import {ProcurementPurchaseComponent} from './components/procurement/procurement-purchase/procurement-purchase.component';
+import {ProcurementPurchaseListComponent} from './components/procurement/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component';
+import {ProcurementPurchaseCreateUpdateComponent} from './components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-create-update.component';
+import {ProcurementPurchaseGoodCreateUpdateComponent} from './components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-good-create-update/procurement-purchase-good-create-update.component';
+import {ProcurementPurchaseDetailComponent} from './components/procurement/procurement-purchase/procurement-purchase-detail/procurement-purchase-detail.component';
+import { ProcurementRequestDetailTableComponent } from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail-table/procurement-request-detail-table.component';
+import {AngularSplitModule} from "angular-split";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -148,10 +151,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementPurchaseListComponent,
     ProcurementPurchaseCreateUpdateComponent,
     ProcurementPurchaseGoodCreateUpdateComponent,
+    ProcurementPurchaseDetailComponent,
+    ProcurementRequestDetailTableComponent,
 
   ],
   imports: [
-    BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule
+    BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule, AngularSplitModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

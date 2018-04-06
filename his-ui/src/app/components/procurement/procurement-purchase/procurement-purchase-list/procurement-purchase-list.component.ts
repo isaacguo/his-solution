@@ -13,6 +13,7 @@ export class ProcurementPurchaseListComponent implements OnInit {
 
   procurements: Procurement[];
   selectedProcurement: Procurement;
+  direction: string = 'vertical';
 
 
   constructor(private router: Router, private procurementService: ProcurementService ) {
@@ -27,4 +28,15 @@ export class ProcurementPurchaseListComponent implements OnInit {
   onUpdateButtonClicked(procurement: Procurement) {
       this.router.navigate(['procurement-purchase', OperationEnum.UPDATE, procurement.id]);
   }
+
+  onRowClicked(procurement:Procurement)
+  {
+    this.selectedProcurement=procurement;
+  }
+
+  isRowSelected(procurement: Procurement): boolean {
+    return this.selectedProcurement == procurement;
+  }
+
+
 }
