@@ -56,6 +56,9 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
   get goodsData() {
     return <FormArray>this.formModel.get('goods');
   }
+  get vendorInfo(){
+    return <FormGroup>this.formModel.get('vendorInfo');
+  }
 
   addGood() {
     // add address to the list
