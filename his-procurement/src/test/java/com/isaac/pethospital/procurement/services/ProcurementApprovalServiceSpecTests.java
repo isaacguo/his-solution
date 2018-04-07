@@ -89,6 +89,10 @@ public class ProcurementApprovalServiceSpecTests {
         ProcurementRequestEntity requestEntity = new ProcurementRequestEntity();
         requestEntity.setRequester("Isaac");
         pe.setProcurementRequest(requestEntity);
+
+        doReturn("Isaac").when(this.employeeFeignService).findDirectReportManagerUserAccount(any(String.class));
+        doReturn(new EmployeeOperationRequest()).when(this.employeeFeignService).findUserNameByUserAccount(any(String.class));
+
         return pe;
     }
 
@@ -174,6 +178,9 @@ public class ProcurementApprovalServiceSpecTests {
         ProcurementApprovalStageEntity pase = new ProcurementApprovalStageEntity();
         pase.setNextStage(new ProcurementApprovalStageEntity());
         doReturn(pase).when(this.procurementApprovalStageRepository).findByStage(any(String.class));
+
+        doReturn("Isaac").when(this.employeeFeignService).findDirectReportManagerUserAccount(any(String.class));
+        doReturn(new EmployeeOperationRequest()).when(this.employeeFeignService).findUserNameByUserAccount(any(String.class));
 
         return request;
     }
