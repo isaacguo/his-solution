@@ -53,6 +53,7 @@ public class HisEmployeeManagementApplication {
                 employeeService.createEmployee(generateEmployee1());
                 employeeService.createEmployee(generateEmployee2());
                 employeeService.createEmployee(generateEmployee3());
+                employeeService.createEmployee(generateEmployee4());
                 /*
                 employeeRepository.save(generateEmployee1());
                 employeeRepository.save(generateEmployee2());
@@ -159,6 +160,44 @@ public class HisEmployeeManagementApplication {
                 ee.setEmploymentStatus(EmploymentStatusEnum.INTERN);
                 ee.setMaritalStatus(MaritalStatusEnum.SINGLE);
                 ee.setJoinedDate(joinedDate);
+                return ee;
+            }
+
+            private EmployeeEntity generateEmployee4() {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
+                LocalDateTime joinedDate = LocalDateTime.parse("2012-04-17 00:00:00", formatter);
+                ContactAddressEntity cae=new ContactAddressEntity();
+                cae.setAddress("昆仑山大酒店17层");
+                cae.setCity("北京");
+                cae.setCountry("大梁");
+                cae.setDistrict("崆峒路");
+                cae.setHomePhone("023-14942123");
+                cae.setMobilePhone("1341231675");
+                cae.setPersonalEmail("jing_guo@136.com");
+                cae.setWorkPhone("123577432");
+                cae.setPost("611000");
+
+                LeaveInfoEntity leaveInfo=new LeaveInfoEntity();
+                leaveInfo.setAnuualLeave(80L);
+                leaveInfo.setSickLeave(32L);
+                EmployeeEntity ee = new EmployeeEntity();
+                ee.setGivenName("靖");
+                ee.setSurname("郭");
+                ee.setContactAddress(cae);
+                ee.setWorkPhoneNumber("010-3391233");
+                ee.setLoginAccount("guojing");
+                ee.setDateOfBirth(dateOfBirth);
+                ee.setEmail("jing_guo@pethos.com");
+                ee.setEmployeeNumber("000004");
+                ee.setGender(SexualEnum.MALE);
+                ee.setEthnic("汉族");
+                ee.setNationality("中国");
+                ee.setJobTitle("办公室");
+                ee.setEmploymentStatus(EmploymentStatusEnum.FULL_TIME);
+                ee.setMaritalStatus(MaritalStatusEnum.MARRIED);
+                ee.setJoinedDate(joinedDate);
+                ee.setLeaveInfo(leaveInfo);
                 return ee;
             }
         };

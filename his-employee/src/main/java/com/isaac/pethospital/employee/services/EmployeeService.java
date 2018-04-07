@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee.services;
 
+import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +17,8 @@ public interface EmployeeService {
     EmployeeEntity getEmployeeByUuid(String uuid);
     List<String> getOrganizationNames();
     List<String> getSupportedRelationships();
+
+    EmployeeOperationRequest findUserNameByUserAccount(String userAccount);
+
+    List<EmployeeEntity> findAll();
 }

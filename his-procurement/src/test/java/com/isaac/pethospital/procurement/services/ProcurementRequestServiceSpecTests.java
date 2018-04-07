@@ -1,12 +1,15 @@
 package com.isaac.pethospital.procurement.services;
 
 import com.isaac.pethospital.common.time.DatetimeGenerator;
+import com.isaac.pethospital.procurement.dtos.EmployeeOperationRequest;
 import com.isaac.pethospital.procurement.dtos.ProcurementRequestOperation;
 import com.isaac.pethospital.procurement.dtos.VendorInfoOperationRequest;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestVendorInfoEntity;
+import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
 import com.isaac.pethospital.procurement.repositories.ProcurementRequestRepository;
+import org.apache.commons.collections.iterators.EmptyOrderedIterator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +21,7 @@ public class ProcurementRequestServiceSpecTests {
     ProcurementRequestRepository procurementRequestRepository;
     ProcurementRequestService procurementRequestService;
     ProcurementService procurementService;
+    EmployeeFeignService employeeFeignService;
     DatetimeGenerator generator;
 
     @Before
@@ -25,7 +29,11 @@ public class ProcurementRequestServiceSpecTests {
         this.procurementRequestRepository = mock(ProcurementRequestRepository.class);
         this.generator=mock(DatetimeGenerator.class);
         this.procurementService=mock(ProcurementService.class);
-        this.procurementRequestService = spy(new ProcurementRequestServiceImpl(this.procurementRequestRepository,this.generator, this.procurementService));
+        this.employeeFeignService=mock(EmployeeFeignService.class);
+        this.procurementRequestService = spy(new ProcurementRequestServiceImpl(this.procurementRequestRepository,
+                this.generator,
+                this.procurementService,
+                this.employeeFeignService));
     }
 
     @Test
@@ -66,11 +74,15 @@ public class ProcurementRequestServiceSpecTests {
         vendorInfoOperationRequest.setVendor("CED");
         vendorInfoOperationRequest.setVendorId("1");
         ProcurementRequestOperation pro = new ProcurementRequestOperation();
+        pro.setRequester("Isaac");
         pro.setVendorInfo(vendorInfoOperationRequest);
         ProcurementEntity procurementEntity=new ProcurementEntity();
         procurementEntity.setId(2L);
         pro.setProcurement(procurementEntity);
         doReturn(new ProcurementRequestEntity()).when(this.procurementRequestRepository).save(any(ProcurementRequestEntity.class));
+        EmployeeOperationRequest eor=new EmployeeOperationRequest();
+        eor.setFullName("郭靖");
+        doReturn(eor).when(employeeFeignService).findUserNameByUserAccount("Isaac");
         return pro;
     }
 

@@ -64,7 +64,6 @@ import {ProcurementStatusComponent} from './components/procurement/procurement-s
 import {ProcurementRequestComponent} from './components/procurement/procurement-request/procurement-request.component';
 import {ProcurementApprovalComponent} from './components/procurement/procurement-approval/procurement-approval.component';
 import {ProcurementWorkflowComponent} from './components/procurement/procurement-settings/procurement-workflow/procurement-workflow.component';
-import {ProcurementRequestListComponent} from './components/procurement/procurement-request/procurement-request-list/procurement-request-list.component';
 import {ProcurementRequestCreateUpdateComponent} from './components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component';
 import {ProcurementRequestDetailComponent} from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail.component';
 import {RequestGoodComponent} from './components/procurement/procurement-request/procurement-request-create-update/request-good/request-good.component';
@@ -140,7 +139,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementRequestComponent,
     ProcurementApprovalComponent,
     ProcurementWorkflowComponent,
-    ProcurementRequestListComponent,
     ProcurementRequestCreateUpdateComponent,
     ProcurementRequestDetailComponent,
     RequestGoodComponent,

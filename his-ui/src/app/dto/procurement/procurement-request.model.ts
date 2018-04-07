@@ -5,6 +5,7 @@ export class ProcurementRequest {
 
   public id: number;
   public requester: string;
+  public requesterFullName:string;
   public goods: ProcurementGoods[];
   public vendorInfo: ProcurementRequestVendorInfo;
   public explanation: string;

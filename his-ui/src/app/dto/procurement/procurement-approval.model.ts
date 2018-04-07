@@ -4,9 +4,10 @@ export class ProcurementApproval {
   public createdDateTime?: Date;
   public comments?: string;
   public reviewer?: string;
+  public reviewerFullName?: string;
   public reviewed?: boolean;
   public id?: number;
-  public reviewResult:boolean;
+  public reviewResult: boolean;
 
   constructor() {
   }

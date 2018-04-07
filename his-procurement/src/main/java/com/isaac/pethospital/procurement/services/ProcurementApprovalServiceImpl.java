@@ -56,7 +56,9 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
         procurementApprovalEntity.setCreatedDateTime(LocalDateTime.now());
 
         String reviewer = this.employeeFeignService.findDirectReportManagerUserAccount(procurementEntity.getProcurementRequest().getRequester());
+        String reviewerFullName=this.employeeFeignService.findUserNameByUserAccount(reviewer).getFullName();
         procurementApprovalEntity.setReviewer(reviewer);
+        procurementApprovalEntity.setReviewerFullName(reviewerFullName);
 
         this.procurementApprovalRepository.save(procurementApprovalEntity);
     }
@@ -85,10 +87,13 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
             employeeOperationRequest.setSearchByTitle(pase.getNextStage().getStage());
 
             String userAccount = this.employeeFeignService.findByTitle(employeeOperationRequest);
+            String reviewerFullName=this.employeeFeignService.findUserNameByUserAccount(userAccount).getFullName();
+
             ProcurementApprovalEntity nextPae = new ProcurementApprovalEntity();
             nextPae.setProcurement(pae.getProcurement());
             nextPae.setCreatedDateTime(LocalDateTime.now());
             nextPae.setReviewed(false);
+            nextPae.setReviewerFullName(reviewerFullName);
             nextPae.setStage(pase.getNextStage().getStage());
             nextPae.setReviewer(userAccount);
 

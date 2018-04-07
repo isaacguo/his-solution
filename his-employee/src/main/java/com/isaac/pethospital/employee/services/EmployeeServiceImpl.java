@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee.services;
 
+import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -57,5 +58,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<String> getSupportedRelationships() {
         return null;
+    }
+
+    @Override
+    public EmployeeOperationRequest findUserNameByUserAccount(String userAccount) {
+        EmployeeEntity ee = this.employeeRepository.findByLoginAccount(userAccount);
+        if (ee != null)
+        {
+            EmployeeOperationRequest eor=new EmployeeOperationRequest();
+            eor.setFullName(ee.getSurname()+ee.getGivenName());
+            return eor;
+        }
+        else
+            throw new RuntimeException("Cannot find UserAccount");
+    }
+
+    @Override
+    public List<EmployeeEntity> findAll() {
+        return this.employeeRepository.findAll();
     }
 }

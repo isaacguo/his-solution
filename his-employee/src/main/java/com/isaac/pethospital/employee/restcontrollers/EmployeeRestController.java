@@ -14,11 +14,9 @@ import java.util.List;
 public class EmployeeRestController {
 
     private final EmployeeService employeeService;
-    private final EmployeeRepository employeeRepository;
 
-    public EmployeeRestController(EmployeeService employeeService, EmployeeRepository employeeRepository) {
+    public EmployeeRestController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        this.employeeRepository = employeeRepository;
     }
 
     @GetMapping("/counts")
@@ -45,7 +43,7 @@ public class EmployeeRestController {
 
     @GetMapping
     public List<EmployeeEntity> getEmployees() {
-        return this.employeeRepository.findAll();
+        return this.employeeService.findAll();
     }
 
     @GetMapping(value = "/{userAccount}/manager")
@@ -62,4 +60,11 @@ public class EmployeeRestController {
         else
             return "";
     }
+    @GetMapping(value="/find-by-userAccount/{userAccount}")
+    public EmployeeOperationRequest findUserNameByUserAccount(@PathVariable("userAccount") String userAccount)
+    {
+        return this.employeeService.findUserNameByUserAccount(userAccount);
+    }
+
+
 }

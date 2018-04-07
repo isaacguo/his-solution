@@ -13,6 +13,7 @@ import java.util.List;
 public class ProcurementRequestEntity {
 
     String requester;
+    String requesterFullName;
     @OneToOne(mappedBy = "request", cascade = CascadeType.ALL)
     @JsonManagedReference("request-vendorInfo")
     ProcurementRequestVendorInfoEntity vendorInfo;
@@ -28,6 +29,14 @@ public class ProcurementRequestEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public String getRequesterFullName() {
+        return requesterFullName;
+    }
+
+    public void setRequesterFullName(String requesterFullName) {
+        this.requesterFullName = requesterFullName;
+    }
 
     public ProcurementRequestVendorInfoEntity getVendorInfo() {
         return vendorInfo;

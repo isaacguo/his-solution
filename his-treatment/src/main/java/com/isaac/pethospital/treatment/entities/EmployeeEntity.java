@@ -19,6 +19,7 @@ public class EmployeeEntity {
     @ManyToOne
     private EmployeeTypeEntity employeeType;
     private String name;
+    private String loginAccount;
 
     public String getLoginAccount() {
         return loginAccount;
@@ -27,8 +28,6 @@ public class EmployeeEntity {
     public void setLoginAccount(String loginAccount) {
         this.loginAccount = loginAccount;
     }
-
-    private String loginAccount;
 
     public EmployeeTypeEntity getEmployeeType() {
         return employeeType;

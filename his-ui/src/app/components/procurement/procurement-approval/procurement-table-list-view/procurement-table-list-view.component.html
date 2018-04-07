@@ -50,7 +50,7 @@
         <tbody>
         <tr *ngFor="let approval of approvalList">
           <td>{{approval.stage}}</td>
-          <td>{{approval.reviewer}}</td>
+          <td>{{approval.reviewerFullName}}</td>
           <td>{{getApprovalText(approval)}}</td>
           <td>{{approval.reviewedDateTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
           <td>{{approval.comments}}</td>

@@ -4,6 +4,15 @@ public class EmployeeOperationRequest {
 
     String userAccount;
     String searchByTitle;
+    String fullName;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public String getUserAccount() {
         return userAccount;

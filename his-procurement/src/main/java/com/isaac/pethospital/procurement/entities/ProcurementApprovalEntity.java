@@ -17,10 +17,19 @@ public class ProcurementApprovalEntity {
     boolean reviewResult;
     String comments;
     String reviewer;
+    String reviewerFullName;
     boolean reviewed;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public String getReviewerFullName() {
+        return reviewerFullName;
+    }
+
+    public void setReviewerFullName(String reviewerFullName) {
+        this.reviewerFullName = reviewerFullName;
+    }
 
     public boolean isReviewResult() {
         return reviewResult;
