@@ -18,7 +18,6 @@ public class ProcurementPurchaseGoodEntity {
     double number; //个数
     String packageSpecification; //包装规格
     String packageUnit; //包装单位
-    String otherRequirements;
     double pricePerUnit; //单价
     double totalPrice; //总价
     @Id
@@ -87,14 +86,6 @@ public class ProcurementPurchaseGoodEntity {
 
     public void setPackageUnit(String packageUnit) {
         this.packageUnit = packageUnit;
-    }
-
-    public String getOtherRequirements() {
-        return otherRequirements;
-    }
-
-    public void setOtherRequirements(String otherRequirements) {
-        this.otherRequirements = otherRequirements;
     }
 
     public double getPricePerUnit() {

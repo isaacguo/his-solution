@@ -2,8 +2,10 @@ package com.isaac.pethospital.procurement.services;
 
 import com.isaac.pethospital.common.time.DatetimeGenerator;
 import com.isaac.pethospital.procurement.dtos.ProcurementRequestOperation;
+import com.isaac.pethospital.procurement.dtos.VendorInfoOperationRequest;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
+import com.isaac.pethospital.procurement.entities.ProcurementRequestVendorInfoEntity;
 import com.isaac.pethospital.procurement.repositories.ProcurementRequestRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +60,13 @@ public class ProcurementRequestServiceSpecTests {
     }
 
     private ProcurementRequestOperation initForSubmitRequestMethod() {
+        VendorInfoOperationRequest vendorInfoOperationRequest=new VendorInfoOperationRequest();
+        vendorInfoOperationRequest.setContact("ABC");
+        vendorInfoOperationRequest.setContactTelephone("123");
+        vendorInfoOperationRequest.setVendor("CED");
+        vendorInfoOperationRequest.setVendorId("1");
         ProcurementRequestOperation pro = new ProcurementRequestOperation();
+        pro.setVendorInfo(vendorInfoOperationRequest);
         ProcurementEntity procurementEntity=new ProcurementEntity();
         procurementEntity.setId(2L);
         pro.setProcurement(procurementEntity);

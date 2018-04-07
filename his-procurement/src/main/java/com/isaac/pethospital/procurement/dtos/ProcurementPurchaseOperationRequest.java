@@ -33,7 +33,6 @@ public class ProcurementPurchaseOperationRequest {
             procurementPurchaseGoodEntity.setContactTelephone(r.getContactTelephone());
             procurementPurchaseGoodEntity.setVendor(r.getVendor());
             procurementPurchaseGoodEntity.setNumber(r.getNumber());
-            procurementPurchaseGoodEntity.setOtherRequirements(r.getOtherRequirements());
             procurementPurchaseGoodEntity.setPackageSpecification(r.getPackageSpecification());
             procurementPurchaseGoodEntity.setPackageUnit(r.getPackageUnit());
             procurementPurchaseGoodEntity.setPricePerUnit(r.getPricePerUnit());

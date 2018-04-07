@@ -3,18 +3,47 @@ package com.isaac.pethospital.procurement.dtos;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestGoodEntity;
 import com.isaac.pethospital.procurement.entities.ProcurementRequestEntity;
+import com.isaac.pethospital.procurement.entities.ProcurementRequestVendorInfoEntity;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+
 public class ProcurementRequestOperation {
 
     Long id;
     String requester;
+    VendorInfoOperationRequest vendorInfo;
     List<ProcurementRequestGoodEntity> goods = new LinkedList<>();
     LocalDateTime submittedData;
     ProcurementEntity procurement;
+    String explanation;
+    Double totalPrice;
+
+    public VendorInfoOperationRequest getVendorInfo() {
+        return vendorInfo;
+    }
+
+    public void setVendorInfo(VendorInfoOperationRequest vendorInfo) {
+        this.vendorInfo = vendorInfo;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public Long getId() {
         return id;
@@ -68,5 +97,14 @@ public class ProcurementRequestOperation {
             pro.addGood(r);
         });
         pro.setRequester(this.requester);
+        pro.setTotalPrice(this.totalPrice);
+        pro.setExplanation(this.explanation);
+
+        ProcurementRequestVendorInfoEntity procurementRequestVendorInfoEntity =new ProcurementRequestVendorInfoEntity();
+        procurementRequestVendorInfoEntity.setContact(this.vendorInfo.contact);
+        procurementRequestVendorInfoEntity.setContactTelephone(this.vendorInfo.contactTelephone);
+        procurementRequestVendorInfoEntity.setVendor(this.vendorInfo.vendor);
+        procurementRequestVendorInfoEntity.setVendorId(this.vendorInfo.vendorId);
+        pro.setVendorInfo(procurementRequestVendorInfoEntity);
     }
 }

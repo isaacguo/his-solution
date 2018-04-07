@@ -12,11 +12,12 @@ import java.util.List;
 @Table(name = "ProcurementRequests")
 public class ProcurementRequestEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     String requester;
-
+    @OneToOne(mappedBy = "request", cascade = CascadeType.ALL)
+    @JsonManagedReference("request-vendorInfo")
+    ProcurementRequestVendorInfoEntity vendorInfo;
+    String explanation;
+    Double totalPrice;
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
     @JsonManagedReference("request-goods")
     List<ProcurementRequestGoodEntity> goods = new LinkedList<>();
@@ -24,6 +25,36 @@ public class ProcurementRequestEntity {
     @OneToOne
     @JsonBackReference("ProcurementEntity-ProcurementRequestEntity")
     ProcurementEntity procurement;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    public ProcurementRequestVendorInfoEntity getVendorInfo() {
+        return vendorInfo;
+    }
+
+    public void setVendorInfo(ProcurementRequestVendorInfoEntity vendorInfo) {
+        if(vendorInfo==null)
+            throw new RuntimeException("Vendor Info is null.");
+        vendorInfo.setRequest(this);
+        this.vendorInfo = vendorInfo;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public String getRequester() {
         return requester;

@@ -6,9 +6,6 @@ import {ProcurementPurchase} from "./procurement-purchase.model";
 
 export class Procurement {
   public orderNumber?: string; //单号
-  public vendor?: string;
-  public contact?: string;
-  public contactTelephone?: string;
   public status?: string;
   public procurementRequest?: ProcurementRequest;
   public id?: number;

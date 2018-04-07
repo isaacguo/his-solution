@@ -186,28 +186,6 @@ const appRoutes: Routes = [
         component: ProcurementManagementComponent
       },
       {
-        path: 'procurement-request',
-        component: ProcurementRequestComponent,
-        children: [
-          {
-            path: 'list',
-            component: ProcurementRequestListComponent,
-          },
-          {
-            path: ':operation',
-            component: ProcurementRequestCreateUpdateComponent,
-          },
-          {
-            path: ':operation/:updateId',
-            component: ProcurementRequestCreateUpdateComponent,
-          },
-          {
-            path: '**',
-            redirectTo: 'list',
-          }
-        ]
-      },
-      {
         path: 'procurement-approval',
         component: ProcurementApprovalComponent,
         children: [
@@ -230,6 +208,11 @@ const appRoutes: Routes = [
             component:ProcurementPurchaseListComponent
           },
           {
+            path: ':operation',
+            component: ProcurementRequestCreateUpdateComponent,
+          },
+          /*
+          {
             path:':operation',
             component:ProcurementPurchaseCreateUpdateComponent
           },
@@ -237,6 +220,7 @@ const appRoutes: Routes = [
             path: ':operation/:updateId',
             component: ProcurementPurchaseCreateUpdateComponent,
           },
+          */
           {
             path:'**',
             redirectTo:'list'
@@ -300,10 +284,10 @@ const appRoutes: Routes = [
     path: 'logout',
     component: LogoutComponent,
     canActivate: [LogoutGuardService]
-  },
+  }
 
   // otherwise redirect to home
-  {path: '**', redirectTo: 'login'}
+  //{path: '**', redirectTo: 'login'}
 
 ]
 

@@ -113,7 +113,6 @@ export class ProcurementPurchaseCreateUpdateComponent extends AbstractCreateUpda
       'number': [good.number],
       'packageSpecification': [good.packageSpecification],
       'packageUnit': [good.packageUnit, [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
-      'otherRequirements': [good.otherRequirements],
       'pricePerUnit': ['', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
       'totalPrice': ['', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
     }));

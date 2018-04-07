@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {ProcurementService} from "../../../../services/procurement/procurement.service";
 import {Procurement} from "../../../../dto/procurement/procurement.model";
@@ -16,22 +16,26 @@ export class ProcurementPurchaseListComponent implements OnInit {
   direction: string = 'vertical';
 
 
-  constructor(private router: Router, private procurementService: ProcurementService ) {
+  constructor(private router: Router, private procurementService: ProcurementService) {
   }
 
   ngOnInit() {
-    this.procurementService.getMyProcurementsByAssignedPurchaseUrl().subscribe(r => {
+
+    this.procurementService.getMyProcurements().subscribe(r => {
       this.procurements = r
     });
   }
 
-  onUpdateButtonClicked(procurement: Procurement) {
-      this.router.navigate(['procurement-purchase', OperationEnum.UPDATE, procurement.id]);
+  onCreateNewRequestButtonClicked() {
+    this.router.navigate(['procurement-purchase', OperationEnum.CREATE]);
   }
 
-  onRowClicked(procurement:Procurement)
-  {
-    this.selectedProcurement=procurement;
+  onUpdateButtonClicked(procurement: Procurement) {
+    this.router.navigate(['procurement-purchase', OperationEnum.UPDATE, procurement.id]);
+  }
+
+  onRowClicked(procurement: Procurement) {
+    this.selectedProcurement = procurement;
   }
 
   isRowSelected(procurement: Procurement): boolean {
@@ -39,4 +43,12 @@ export class ProcurementPurchaseListComponent implements OnInit {
   }
 
 
+  getTotalPrice() {
+    let total: number = 0;
+    if (this.procurements != null && this.procurements.length > 0)
+      this.procurements.forEach(r => {
+        total += Number(r.procurementRequest.totalPrice);
+      })
+    return total;
+  }
 }

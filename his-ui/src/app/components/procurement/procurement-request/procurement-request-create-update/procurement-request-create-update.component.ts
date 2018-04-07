@@ -5,6 +5,9 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {OperationEnum} from "../../../../enums/operation.enum";
 import {ProcurementRequestService} from "../../../../services/procurement/procurement-request.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {VendorService} from "../../../../services/procurement/vendor.service";
+import {Vendor} from "../../../../dto/procurement/vendor.model";
+import {Contact} from "../../../../dto/procurement/contact.model";
 
 @Component({
   selector: 'app-procurement-request-create-update',
@@ -15,6 +18,8 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
 
   @ViewChild("confirmCreateModal")
   confirmCreateModal: ModalComponent;
+  vendors:Vendor[]=[];
+  selectedVendor:Vendor=null;
 
   formModel: FormGroup;
   requestCreationResultText: string;
@@ -23,7 +28,11 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
     return this.operation === OperationEnum.CREATE ? "创建" : "修改";
   }
 
-  constructor(public router: Router, public route: ActivatedRoute, private fb: FormBuilder, private procurementRequestService: ProcurementRequestService) {
+  constructor(public router: Router,
+              public route: ActivatedRoute,
+              private fb: FormBuilder,
+              private procurementRequestService: ProcurementRequestService,
+              private vendorService:VendorService) {
     super(route);
   }
 
@@ -31,14 +40,15 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
     this.formModel = this.fb.group({
       'id': [''],
       'vendorInfo': this.fb.group({
-        'vendorName': ['', Validators.required],
+        'vendorId':['',Validators.required],
+        'vendor': ['', Validators.required],
         'contact': ['', Validators.required],
-        'contactTelephone': ['', Validators.required],
       }),
       'goods': this.fb.array([
         this.initGood()
       ]),
-      'explanation': ['', Validators.required]
+      'explanation': ['', Validators.required],
+      'totalPrice':['0.00', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]]
     })
   }
 
@@ -48,15 +58,16 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
       'packageSpecification': ['', Validators.required],
       'packageUnit': ['', Validators.required],
       'number': ['0', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
-      'pricePerUnit': ['0.00',[Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
-      'totalPrice': ['']
+      'pricePerUnit': ['0.00', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
+      'totalPrice': ['0.00', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
     })
   }
 
   get goodsData() {
     return <FormArray>this.formModel.get('goods');
   }
-  get vendorInfo(){
+
+  get vendorInfo() {
     return <FormGroup>this.formModel.get('vendorInfo');
   }
 
@@ -70,6 +81,7 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
     // remove address from the list
     const control = <FormArray>this.formModel.controls['goods'];
     control.removeAt(i);
+    this.calculatePurchaseTotalPrice();
   }
 
 
@@ -86,7 +98,7 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
   }
 
   onConfirmCreateModalClosed() {
-    this.router.navigate(['procurement-request', 'list']);
+    this.router.navigate(['procurement-purchase', 'list']);
   }
 
   invokeWhenUpdate() {
@@ -103,8 +115,41 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
     const pricePerUnit = <FormControl>good.controls['pricePerUnit'];
     const totalPrice = <FormControl>good.controls['totalPrice'];
     if (number.value != null && pricePerUnit.value != null)
-      totalPrice.setValue(<number>number.value * <number>pricePerUnit.value);
+      totalPrice.setValue( this.roundTo(Number(number.value) * Number(pricePerUnit.value), 2));
 
+    this.calculatePurchaseTotalPrice();
+  }
+
+  private roundTo(n, digits):number {
+    var negative = false;
+    if (digits === undefined) {
+      digits = 0;
+    }
+    if( n < 0) {
+      negative = true;
+      n = n * -1;
+    }
+    var multiplicator = Math.pow(10, digits);
+    n = parseFloat((n * multiplicator).toFixed(11));
+    n = (Math.round(n) / multiplicator).toFixed(2);
+    if( negative ) {
+      n = (n * -1).toFixed(2);
+    }
+    return n;
+  }
+
+  private calculatePurchaseTotalPrice() {
+    const totalPrice = <FormControl>this.formModel.controls['totalPrice'];
+    let total:number = 0;
+    const goods = <FormArray>this.formModel.controls['goods'];
+    goods.controls.forEach(r => {
+      const good = <FormGroup>r;
+      const totalPrice = <FormControl>good.controls['totalPrice'];
+      if (totalPrice.value != null)
+        total += Number(totalPrice.value);
+    })
+
+    totalPrice.setValue(total);
   }
 
 
@@ -112,6 +157,23 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
     this.initForm();
 
     this.process();
+    this.vendorService.findAll().subscribe(r=>{
+      this.vendors=r;
+    })
   }
 
+  onVendorDropdownClicked(vendor: Vendor) {
+    this.selectedVendor=vendor;
+    this.formModel.get('vendorInfo').get('vendor').setValue(vendor.name);
+    this.formModel.get('vendorInfo').get('vendorId').setValue(vendor.id);
+    this.formModel.get('vendorInfo').get('contact').setValue("");
+  }
+
+  isVendorSelected():boolean {
+    return this.selectedVendor!=null?true:false;
+  }
+
+  onContactDropdownClicked(contact: Contact) {
+    this.formModel.get('vendorInfo').get('contact').setValue(contact.name);
+  }
 }

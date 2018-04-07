@@ -1,4 +1,4 @@
-<div class="isaac-margin-top">
+<div class=" isaac-margin-top">
   <div class="panel panel-default">
     <div class="panel-heading ">
       <div class="panel-title pull-left">
@@ -41,10 +41,9 @@
         <thead>
         <tr>
           <th>节点</th>
-          <th>审批人</th>
-          <th>意见</th>
-          <th>提交日期</th>
-          <th>审批日期</th>
+          <th>操作者</th>
+          <th>操作</th>
+          <th>时间</th>
           <th>备注</th>
         </tr>
         </thead>
@@ -53,7 +52,6 @@
           <td>{{approval.stage}}</td>
           <td>{{approval.reviewer}}</td>
           <td>{{getApprovalText(approval)}}</td>
-          <td>{{approval.createdDateTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
           <td>{{approval.reviewedDateTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
           <td>{{approval.comments}}</td>
         </tr>

@@ -48,6 +48,11 @@
                    type="text">
           </div>
           <div class="form-group isaac-form-space">
+            <label>申请人:</label>
+            <input readonly [ngModel]="procurement.procurementRequest.requester" name="requester" class="form-control"
+                   type="text">
+          </div>
+          <div class="form-group isaac-form-space">
             <label>状态: </label>
             <input readonly [ngModel]="procurement.status" name="procurementStatus" class="form-control" type="text">
           </div>
@@ -67,11 +72,13 @@
           <table class="table">
             <thead>
             <tr>
-              <th>序号</th>
-              <th>产品名称</th>
-              <th>包装规格</th>
-              <th>包装单位</th>
-              <th>数量</th>
+              <td>序号</td>
+              <td>产品名称</td>
+              <td>包装规格</td>
+              <td>包装单位</td>
+              <td>数量</td>
+              <td>单价</td>
+              <td>总价</td>
             </tr>
             </thead>
             <tbody>
@@ -81,9 +88,25 @@
               <td>{{good.packageSpecification}}</td>
               <td>{{good.packageUnit}}</td>
               <td>{{good.number}}</td>
+              <td>{{good.pricePerUnit}}</td>
+              <td>{{good.totalPrice}}</td>
             </tr>
             </tbody>
           </table>
+
+          <div class="isaac-margin-15top">
+            <div class="col-md-3 form-inline">
+              <div class="form-group">
+                <label>付款合计:</label>
+                <input name="totalPrice" [ngModel]="procurement.procurementRequest.totalPrice" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="isaac-margin-15top col-md-12">
+            <span><b>采购说明</b></span>
+            <textarea rows="10" class="form-control" [ngModel]="procurement.procurementRequest.explanation" readonly></textarea>
+          </div>
         </div>
       </div>
     </div>

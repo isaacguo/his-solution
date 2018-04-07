@@ -27,9 +27,7 @@ export class ProcurementRequestListComponent implements OnInit {
 
   }
 
-  onCreateNewRequestButtonClicked() {
-    this.router.navigate(['procurement-request', OperationEnum.CREATE]);
-  }
+
 
   onRowClicked(procurement: Procurement) {
     this.selectedProcurement = procurement;
