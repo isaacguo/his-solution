@@ -24,7 +24,7 @@ public class ProcurementOperation {
     @JsonSerialize(using = LocalDateSerializer.class)
     LocalDate endDate;
 
-    public String vendor;
+    String vendor;
 
     public String getVendor() {
         return vendor;
