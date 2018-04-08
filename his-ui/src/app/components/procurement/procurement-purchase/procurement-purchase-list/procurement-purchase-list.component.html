@@ -1,8 +1,33 @@
 <div class="row">
+    <div class="col-md-2">
+        <label for="vendor">供应商名称:</label>
+        <input id="vendor" name="vendor" [(ngModel)]="query.vendor" class="form-control" type="text">
+    </div>
+    <div class="col-md-2">
+      <label for="startDate">起始日期: </label>
+      <my-date-picker id="startDate" name="mydate" [options]="myDatePickerOptions"
+                      [(ngModel)]="startDate" required></my-date-picker>
+    </div>
+    <div class="col-md-2">
+      <label for="endDate">结束日期: </label>
+      <my-date-picker id="endDate" name="mydate" [options]="myDatePickerOptions"
+                      [(ngModel)]="endDate" required></my-date-picker>
+    </div>
+
+    <div class="col-md-2">
+      <label for="patientRecordId">申请状态: </label>
+      <input [(ngModel)]="query.status" id="patientRecordId" class="form-control" type="text">
+    </div>
+    <div class="col-md-4 btn-group isaac-margin-20top">
+      <button class="btn btn-default" (click)="onSearchButtonClicked()">查询</button>
+      <button class="btn btn-default isaac-align-bottom">清除</button>
+      <button class="btn btn-default isaac-align-bottom" (click)="onCreateNewRequestButtonClicked()">创建新的申请</button>
+    </div>
+
+
   <form class="form-inline" role="form">
     <div class="form-group isaac-form-space">
-      <label for="vendor">供应商名称:</label>
-      <input id="vendor" class="form-control" type="text">
+
     </div>
     <!--
     <div class="form-group isaac-form-space">
@@ -14,24 +39,13 @@
       <input id="goodName" class="form-control" type="text">
     </div>
     -->
-    <div class="form-group isaac-form-space">
-      <label for="startDate">起始日期: </label>
-      <input id="startDate" class="form-control" type="text">
-      <label for="endDate">结束日期: </label>
-      <input id="endDate" class="form-control" type="text">
-    </div>
-    <div class="form-group isaac-form-space">
-      <label for="patientRecordId">申请状态: </label>
-      <input id="patientRecordId" class="form-control" type="text">
-    </div>
-    <button type="btn btn-default">查询</button>
-    <button type="btn btn-default">清除</button>
-    <button type="btn btn-default" (click)="onCreateNewRequestButtonClicked()">创建新的申请</button>
+
+
   </form>
 </div>
 
 <div class="row isaac-margin-15top">
-  <label>共有{{procurements?.length}}笔订货单  订货总金额共{{getTotalPrice()}}元</label>
+  <label>共有{{procurements?.length}}笔订货单 订货总金额共{{getTotalPrice()}}元</label>
 </div>
 
 <div class="row fixed-height isaac-margin-15top">
@@ -66,7 +80,7 @@
       </table>
     </split-area>
     <split-area size="70">
-        <app-procurement-purchase-detail [procurement]="selectedProcurement"></app-procurement-purchase-detail>
+      <app-procurement-purchase-detail [procurement]="selectedProcurement"></app-procurement-purchase-detail>
     </split-area>
   </split>
 </div>

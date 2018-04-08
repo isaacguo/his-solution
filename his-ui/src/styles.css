@@ -8,12 +8,19 @@
   margin-left: 10px;
   margin-top:5px;
 }
+.isaac-datepicker-width{
+  max-width: 200px;
+  width:200px;
+}
 
 .isaac-margin-top {
   margin-top: 5px;
 }
 .isaac-margin-15top {
   margin-top: 15px;
+}
+.isaac-margin-20top {
+  margin-top: 20px;
 }
 
 .light-blue-label {
@@ -92,4 +99,14 @@
 .fixed-height
 {
   height: 768px;
+}
+
+.isaac-align-bottom{
+  display:table-cell;
+  vertical-align: bottom;
+}
+
+.isaac-badge{
+  font-size: 10px;
+  background-color: #fd0304;
 }

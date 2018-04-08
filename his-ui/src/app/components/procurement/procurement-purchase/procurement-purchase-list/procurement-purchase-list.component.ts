@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {ProcurementService} from "../../../../services/procurement/procurement.service";
 import {Procurement} from "../../../../dto/procurement/procurement.model";
 import {OperationEnum} from "../../../../enums/operation.enum";
+import {IMyDpOptions} from "mydatepicker";
+import {ProcurementOperationRequest} from "../../../../dto/procurement/procurement-operation-request.model";
 
 @Component({
   selector: 'app-procurement-purchase-list',
@@ -14,6 +16,14 @@ export class ProcurementPurchaseListComponent implements OnInit {
   procurements: Procurement[];
   selectedProcurement: Procurement;
   direction: string = 'vertical';
+  startDate: any;
+  endDate: any;
+  query:ProcurementOperationRequest={};
+
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'yyyy-mm-dd',
+  };
 
 
   constructor(private router: Router, private procurementService: ProcurementService) {
@@ -50,5 +60,17 @@ export class ProcurementPurchaseListComponent implements OnInit {
         total += Number(r.procurementRequest.totalPrice);
       })
     return total;
+  }
+
+  onSearchButtonClicked() {
+    const p = new ProcurementOperationRequest();
+    if (this.startDate != null)
+      this.query.startDate= this.startDate.formatted;
+    if (this.endDate != null)
+      this.query.endDate= this.endDate.formatted;
+
+    this.procurementService.findByQuery(this.query).subscribe(r => {
+      this.procurements = r;
+    });
   }
 }

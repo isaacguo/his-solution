@@ -64,8 +64,8 @@
           </div>
 
           <div class="btn-group">
-            <button type="btn btn-default">退回</button>
-            <button type="btn btn-default" (click)="onPassButtonClicked()">通过</button>
+            <button class="btn btn-default">退回</button>
+            <button class="btn btn-default" (click)="onPassButtonClicked()">通过</button>
           </div>
         </form>
         <div class="row">
@@ -98,7 +98,7 @@
             <div class="col-md-3 form-inline">
               <div class="form-group">
                 <label>付款合计:</label>
-                <input name="totalPrice" [ngModel]="procurement.procurementRequest.totalPrice" readonly>
+                <input class="form-control" name="totalPrice" [ngModel]="procurement.procurementRequest.totalPrice" readonly>
               </div>
             </div>
           </div>

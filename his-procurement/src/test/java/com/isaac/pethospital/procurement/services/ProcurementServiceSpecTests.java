@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import javax.persistence.EntityManager;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
@@ -25,6 +27,8 @@ public class ProcurementServiceSpecTests {
     ProcurementApprovalService procurementApprovalService;
     VendorRepository vendorRepository;
     EmployeeFeignService employeeFeignService;
+    EntityManager entityManager;
+
 
     @Before
     public void before() {
@@ -34,6 +38,7 @@ public class ProcurementServiceSpecTests {
         this.procurementApprovalService = mock(ProcurementApprovalService.class);
         this.vendorRepository=mock(VendorRepository.class);
         this.employeeFeignService=mock(EmployeeFeignService.class);
+        this.entityManager=mock(EntityManager.class);
         this.generator = mock(DatetimeGenerator.class);
 
         this.procurementService = spy(new ProcurementServiceImpl(this.procurementRepository,
@@ -42,7 +47,8 @@ public class ProcurementServiceSpecTests {
                 this.procurementStatusService,
                 this.procurementApprovalService,
                 this.vendorRepository,
-                this.employeeFeignService));
+                this.employeeFeignService,
+                this.entityManager));
     }
 
     @Test

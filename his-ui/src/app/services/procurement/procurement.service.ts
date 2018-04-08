@@ -4,12 +4,14 @@ import {AuthHttp} from "angular2-jwt";
 import {ProcurementStatus} from "../../dto/procurement/procurement-status.model";
 import {AbstractService} from "../abstract.service";
 import {Procurement} from "../../dto/procurement/procurement.model";
+import {ProcurementOperationRequest} from "../../dto/procurement/procurement-operation-request.model";
 
 @Injectable()
 export class ProcurementService extends AbstractService {
 
   rootUrl: string = "/api/hisprocurement/procurements";
   private myProcurementsUrl: string = `${this.rootUrl}/user`;
+  private findProcurementsByQueryUrl: string = `${this.rootUrl}/user/query`;
   private myProcurementsByAssignedPurchaseUrl: string = `${this.rootUrl}/user/purchases`;
 
 
@@ -28,4 +30,9 @@ export class ProcurementService extends AbstractService {
   findOneById(id: number) {
     return this.authHttp.get(`${this.rootUrl}/${id}`).map(this.extractData);
   }
+
+  findByQuery(request:ProcurementOperationRequest):Observable<Procurement[]>{
+    return this.authHttp.post(this.findProcurementsByQueryUrl,request).map(this.extractData);
+  }
+
 }

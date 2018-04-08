@@ -80,6 +80,7 @@ import {ProcurementPurchaseGoodCreateUpdateComponent} from './components/procure
 import {ProcurementPurchaseDetailComponent} from './components/procurement/procurement-purchase/procurement-purchase-detail/procurement-purchase-detail.component';
 import { ProcurementRequestDetailTableComponent } from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail-table/procurement-request-detail-table.component';
 import {AngularSplitModule} from "angular-split";
+import {MyDatePickerModule} from "mydatepicker";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -154,7 +155,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
   ],
   imports: [
-    BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule, AngularSplitModule
+    BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule, AngularSplitModule,MyDatePickerModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

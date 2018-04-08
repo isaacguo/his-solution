@@ -8,10 +8,15 @@ import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
 import com.isaac.pethospital.procurement.repositories.ProcurementRepository;
 import com.isaac.pethospital.procurement.repositories.VendorRepository;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +32,8 @@ public class ProcurementServiceImpl implements ProcurementService {
     private final ProcurementApprovalService procurementApprovalService;
     private final VendorRepository vendorRepository;
     private final EmployeeFeignService employeeFeignService;
+    @PersistenceContext
+    private final EntityManager entityManager;
 
     public ProcurementServiceImpl(ProcurementRepository procurementRepository,
                                   DatetimeGenerator datetimeGenerator,
@@ -34,14 +41,16 @@ public class ProcurementServiceImpl implements ProcurementService {
                                   ProcurementStatusService procurementStatusService,
                                   ProcurementApprovalService procurementApprovalService,
                                   VendorRepository vendorRepository,
-                                  EmployeeFeignService employeeFeignService) {
+                                  EmployeeFeignService employeeFeignService,
+                                  EntityManager entityManager) {
         this.procurementRepository = procurementRepository;
         this.datetimeGenerator = datetimeGenerator;
         this.procurementConfigurationService = procurementConfigurationService;
         this.procurementStatusService = procurementStatusService;
         this.procurementApprovalService = procurementApprovalService;
         this.vendorRepository = vendorRepository;
-        this.employeeFeignService=employeeFeignService;
+        this.employeeFeignService = employeeFeignService;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -68,6 +77,48 @@ public class ProcurementServiceImpl implements ProcurementService {
     }
 
     @Override
+    public List<ProcurementEntity> findByQuery(ProcurementOperation request) {
+
+        String sql = "select p from ProcurementEntity p join p.procurementRequest r join r.vendorInfo v";
+        List<String> whereClauses = new ArrayList<>();
+        if (!StringUtils.isEmpty(request.getVendor()))
+            whereClauses.add("v.vendor = :vendor");
+        if (request.getStartDate() != null)
+            whereClauses.add("r.submittedData >= :startDate");
+        if (request.getEndDate() != null)
+            whereClauses.add("r.submittedData <= :endDate");
+        if (!StringUtils.isEmpty(request.getStatus()))
+            whereClauses.add("p.status = :status");
+
+        String where = String.join(" and ", whereClauses);
+        if (!StringUtils.isEmpty(where))
+            sql += " where " + where;
+
+        Query q = this.entityManager.createQuery(sql);
+        if (!StringUtils.isEmpty(request.getVendor()))
+            q = q.setParameter("vendor", request.getVendor());
+        if (request.getStartDate() != null)
+            q = q.setParameter("startDate", request.getStartDate().atStartOfDay());
+        if (request.getEndDate() != null)
+            q = q.setParameter("endDate", request.getEndDate().atStartOfDay().plusDays(1));
+        if (!StringUtils.isEmpty(request.getStatus()))
+            q = q.setParameter("status", request.getStatus());
+
+        List<ProcurementEntity> list = (List<ProcurementEntity>) q.getResultList();
+        return list;
+
+        /*
+        List<ProcurementEntity> list = (List<ProcurementEntity>) this.entityManager.createQuery("select p from ProcurementEntity p join p.procurementRequest r where r.submittedData >= :startDate and r.submittedData <= :endDate")
+                .setParameter("startDate", request.getStartDate().atStartOfDay())
+                .setParameter("endDate", request.getEndDate().atStartOfDay().plusDays(1))
+                .getResultList();
+        this.entityManager.close();
+
+        return list;
+        */
+    }
+
+    @Override
     public void purchaseSubmitted(Long procurementId, ProcurementPurchaseEntity purchase) {
         ProcurementEntity pe = this.procurementRepository.findOne(procurementId);
         if (pe == null)
@@ -80,13 +131,13 @@ public class ProcurementServiceImpl implements ProcurementService {
     @Override
     public boolean changeStatus(ProcurementOperation po) {
         ProcurementEntity pe = this.procurementRepository.findOne(po.getId());
-        if(pe==null)
-            throw new RuntimeException("Cannot find Procurement by given id:"+po.getId());
-        ProcurementStatusEntity statusToBeChangedTo=this.procurementStatusService.findByStatus(po.getStatus());
-        if(statusToBeChangedTo==null)
+        if (pe == null)
+            throw new RuntimeException("Cannot find Procurement by given id:" + po.getId());
+        ProcurementStatusEntity statusToBeChangedTo = this.procurementStatusService.findByStatus(po.getStatus());
+        if (statusToBeChangedTo == null)
             throw new RuntimeException("Cannot find status entity by given status:" + po.getStatus());
 
-        ProcurementStatusEntity currentStatus=this.procurementStatusService.findByStatus(pe.getStatus());
+        ProcurementStatusEntity currentStatus = this.procurementStatusService.findByStatus(pe.getStatus());
 
         pe.setStatus(statusToBeChangedTo.getStatus());
 

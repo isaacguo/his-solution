@@ -148,7 +148,7 @@ public class EmployeeEntity {
     }
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
@@ -198,7 +198,7 @@ public class EmployeeEntity {
     }
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public LocalDate getJoinedDate() {
         return joinedDate;
     }

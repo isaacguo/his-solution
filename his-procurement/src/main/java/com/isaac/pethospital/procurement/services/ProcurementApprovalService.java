@@ -17,4 +17,7 @@ public interface ProcurementApprovalService {
     List<ProcurementEntity> findMyUnfinishedApprovalProcurements(String userAccount);
 
     boolean approvalReceived(ProcurementApprovalOperationRequest request);
+
+
+    Long findMyUnfinishedApprovalProcurementsCount(String userAccount);
 }

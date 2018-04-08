@@ -113,6 +113,12 @@ public class ProcurementApprovalServiceImpl implements ProcurementApprovalServic
 
     }
 
+    @Override
+    public Long findMyUnfinishedApprovalProcurementsCount(String userAccount) {
+        return this.procurementApprovalRepository.findMyUnfinishedApprovalProcurementsCount(userAccount);
+    }
+
+
     private ProcurementApprovalEntity updateApproval(ProcurementApprovalOperationRequest request) {
         ProcurementEntity pe = this.procurementRepository.findOne(request.getId());
         ProcurementApprovalEntity pae = this.procurementApprovalRepository.findByProcurementAndReviewer(pe, request.getUserAccount());

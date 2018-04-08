@@ -22,8 +22,8 @@
   </h1>
 </div>
 <div class="row">
-  <button class="btn btn-default" (click)="onGenerateOrderButtonClicked()" type="btn btn-default">生成采购订单</button>
-  <button class="btn btn-default" (click)="onSpecifyVendorButtonClicked()" type="btn btn-default">指定供应商</button>
+  <button class="btn btn-default" (click)="onGenerateOrderButtonClicked()" class="btn btn-default">生成采购订单</button>
+  <button class="btn btn-default" (click)="onSpecifyVendorButtonClicked()" class="btn btn-default">指定供应商</button>
 </div>
 
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">

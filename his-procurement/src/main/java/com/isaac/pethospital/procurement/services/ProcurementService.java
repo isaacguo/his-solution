@@ -14,6 +14,8 @@ public interface ProcurementService {
     ProcurementEntity createProcurement(ProcurementRequestEntity request);
 
     List<ProcurementEntity> findAllMyProcurements(String requester);
+    List<ProcurementEntity> findByQuery(ProcurementOperation request);
+
 
     void purchaseSubmitted(Long procurementId, ProcurementPurchaseEntity purchase);
 

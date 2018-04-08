@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ProcurementRepository extends JpaRepository<ProcurementEntity, Long> {
@@ -14,5 +16,8 @@ public interface ProcurementRepository extends JpaRepository<ProcurementEntity, 
 
     @Query("select p from ProcurementEntity p join p.procurementPurchase r where r.assignTo = :assignee")
     List<ProcurementEntity> findMyProcurementByPurchaseByAssignee(@Param("assignee") String assignee);
+
+    @Query("select p from ProcurementEntity p join p.procurementRequest r where r.submittedData >= :startDate and r.submittedData <= :endDate")
+    List<ProcurementEntity> findByQuery(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
 }

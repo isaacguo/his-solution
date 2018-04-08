@@ -2,6 +2,7 @@ package com.isaac.pethospital.procurement.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.isaac.pethospital.common.converter.LocalDateTimeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,6 +23,9 @@ public class ProcurementRequestEntity {
     @OneToMany(mappedBy = "request", cascade = CascadeType.ALL)
     @JsonManagedReference("request-goods")
     List<ProcurementRequestGoodEntity> goods = new LinkedList<>();
+
+
+    @Convert(converter = LocalDateTimeConverter.class)
     LocalDateTime submittedData;
     @OneToOne
     @JsonBackReference("ProcurementEntity-ProcurementRequestEntity")

@@ -12,8 +12,8 @@ ARG IMAGE_VERSION
 ADD target/${JAR_FILE} /usr/share/myservice/myservice.jar
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-
+ENTRYPOINT ["./entrypoint.sh"]
 LABEL version=${IMAGE_VERSION}
 
-ENTRYPOINT ["./entrypoint.sh"]
+
 

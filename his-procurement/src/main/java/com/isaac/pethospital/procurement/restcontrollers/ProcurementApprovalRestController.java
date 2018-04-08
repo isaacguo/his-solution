@@ -23,20 +23,25 @@ public class ProcurementApprovalRestController {
     }
 
     @GetMapping
-    public ProcurementApprovalStageEntity getRoot()
-    {
+    public ProcurementApprovalStageEntity getRoot() {
         return this.procurementApprovalService.getRoot();
     }
+
     @GetMapping("approvals")
-    public List<ProcurementEntity> findMyUnfinishedApprovals()
-    {
-        String userAccount=authHelper.getUserAccount();
+    public List<ProcurementEntity> findMyUnfinishedApprovals() {
+        String userAccount = authHelper.getUserAccount();
         return this.procurementApprovalService.findMyUnfinishedApprovalProcurements(userAccount);
     }
+
+    @GetMapping("count")
+    public Long findMyUnfinishedApprovalsCount() {
+        String userAccount = authHelper.getUserAccount();
+        return this.procurementApprovalService.findMyUnfinishedApprovalProcurementsCount(userAccount);
+    }
+
     @PostMapping("update")
-    public boolean updateApproval(@RequestBody ProcurementApprovalOperationRequest request)
-    {
-        String userAccount=authHelper.getUserAccount();
+    public boolean updateApproval(@RequestBody ProcurementApprovalOperationRequest request) {
+        String userAccount = authHelper.getUserAccount();
         request.setUserAccount(userAccount);
         return this.procurementApprovalService.approvalReceived(request);
     }

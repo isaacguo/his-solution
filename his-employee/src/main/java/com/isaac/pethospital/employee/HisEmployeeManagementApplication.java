@@ -66,9 +66,9 @@ public class HisEmployeeManagementApplication {
 
 
             private EmployeeOperationRequest generateEmployee1() {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDate dateOfBirth = LocalDate.parse("1900-04-01 00:00:00", formatter);
-                LocalDate joinedDate = LocalDate.parse("2015-10-01 00:00:00", formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate dateOfBirth = LocalDate.parse("1900-04-01", formatter);
+                LocalDate joinedDate = LocalDate.parse("2015-10-01", formatter);
                 ContactAddressEntity cae=new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店18层");
                 cae.setCity("北京");
@@ -106,9 +106,9 @@ public class HisEmployeeManagementApplication {
             }
 
             private EmployeeOperationRequest generateEmployee2() {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDate dateOfBirth = LocalDate.parse("1984-02-28 00:00:00", formatter);
-                LocalDate joinedDate = LocalDate.parse("2012-04-17 00:00:00", formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate dateOfBirth = LocalDate.parse("1984-02-28", formatter);
+                LocalDate joinedDate = LocalDate.parse("2012-04-17", formatter);
                 ContactAddressEntity cae=new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店17层");
                 cae.setCity("北京");
@@ -145,9 +145,9 @@ public class HisEmployeeManagementApplication {
             }
 
             private EmployeeOperationRequest generateEmployee3() {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDate dateOfBirth = LocalDate.parse("1984-02-28 00:00:00", formatter);
-                LocalDate joinedDate = LocalDate.parse("2012-04-17 00:00:00", formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate dateOfBirth = LocalDate.parse("1984-02-28", formatter);
+                LocalDate joinedDate = LocalDate.parse("2012-04-17", formatter);
 
                 EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("之桃");
@@ -166,9 +166,9 @@ public class HisEmployeeManagementApplication {
             }
 
             private EmployeeOperationRequest generateEmployee4() {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDate dateOfBirth = LocalDate.parse("1984-02-28 00:00:00", formatter);
-                LocalDate joinedDate = LocalDate.parse("2012-04-17 00:00:00", formatter);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate dateOfBirth = LocalDate.parse("1984-02-28", formatter);
+                LocalDate joinedDate = LocalDate.parse("2012-04-17", formatter);
                 ContactAddressEntity cae=new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店17层");
                 cae.setCity("北京");
