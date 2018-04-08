@@ -10,59 +10,62 @@ import {findNode} from "@angular/compiler";
   templateUrl: './procurement-purchase-detail.component.html',
   styleUrls: ['./procurement-purchase-detail.component.css']
 })
-export class ProcurementPurchaseDetailComponent implements OnInit {
+export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges {
 
-
-  /*
-  ngOnChanges(changes: SimpleChanges): void {
-    this.findNode(changes.procurement.currentValue);
-    console.log("ppp" + this.curP);
-
-    this.iterateP(this.curP);
-  }
-  */
+  curP:ProcurementStatus;
 
   pRoot: ProcurementStatus;
-  curP: ProcurementStatus;
   flatenP: ProcurementStatus[] = [];
-
+  selectedStatus:string;
   @Input()
-  procurement:Procurement;
-
+  procurement: Procurement;
 
   constructor(private procurementStatusService: ProcurementStatusService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+
+    if (this.pRoot == null) return;
+    this.selectedStatus=(<Procurement>changes.procurement.currentValue).status;
+    this.findNode(this.pRoot,this.selectedStatus);
+    this.flatenP=[];
+    this.iterateP(this.curP);
   }
 
   ngOnInit() {
     this.procurementStatusService.getRoot().subscribe(r => {
       this.pRoot = r;
-      console.log(this.pRoot);
     })
   }
 
-  findNode(p: ProcurementStatus) {
-    if (this.pRoot.status === p.status) {
-      this.curP = p;
+  findNode(p: ProcurementStatus, status: string) {
+    console.log(p.status);
+    console.log(status);
+    if (p.status === status) {
+      console.log("return");
+      this.curP=p;
       return;
     }
     else if (p.next != null && p.next.length > 0) {
+      console.log("in 50");
       p.next.forEach(r => {
-        this.findNode(r);
-      })
+        this.findNode(r, status);
+      });
     }
+  }
+
+  onStatusDropdownClicked(status:string) {
+    this.selectedStatus=status;
   }
 
   private iterateP(p: ProcurementStatus) {
-    this.flatenP.push(p.status);
-    if (p.next != null && p.next.length > 0) {
-      p.next.forEach(r => {
-        this.iterateP(r);
+
+    if(p.next!=null)
+    {
+      p.next.forEach(r=>{
+        this.flatenP.push(r.status);
       })
     }
-  }
-
-  onStatusDropdownClicked(status: ProcurementStatus) {
-
-
   }
 }
