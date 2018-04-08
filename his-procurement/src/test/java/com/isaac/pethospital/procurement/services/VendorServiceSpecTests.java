@@ -64,7 +64,7 @@ public class VendorServiceSpecTests {
         verify(vendorRepository, times(1)).save(any(VendorEntity.class));
     }
 
-  @Test
+    @Test
     public void givenVendorOperationRequestThenFindVendorEntityByName() {
         //given
         VendorOperationRequest vendorOperationRequest = new VendorOperationRequest();
@@ -80,7 +80,7 @@ public class VendorServiceSpecTests {
     @Test
     public void givenKeywordStringWhenFindByNameContainsKeywordThenReturnList() {
         //given
-        String keyword="com";
+        String keyword = "com";
         doReturn(new LinkedList<VendorEntity>()).when(vendorRepository).findByNameContainsIgnoreCase("com");
         //when
         this.vendorService.findByNameContains(keyword);

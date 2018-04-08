@@ -10,7 +10,7 @@ public interface EmployeeService {
      long getTotalCounts();
 
     EmployeeEntity getEmployeeById(long id);
-    EmployeeEntity createEmployee(EmployeeEntity employeeEntity);
+    EmployeeEntity createEmployee(EmployeeOperationRequest request);
 
     EmployeeEntity getMyInfo();
 
@@ -21,4 +21,12 @@ public interface EmployeeService {
     EmployeeOperationRequest findUserNameByUserAccount(String userAccount);
 
     List<EmployeeEntity> findAll();
+
+    boolean deleteEmployee(EmployeeOperationRequest employeeOperationRequest);
+
+    boolean updateEmployee(EmployeeOperationRequest employeeOperationRequest);
+
+    EmployeeEntity findBySurnameAndGivenName(EmployeeOperationRequest employeeOperationRequest);
+
+    boolean setReportTo(Long employeeId, Long managerId);
 }

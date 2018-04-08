@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee.restcontrollers;
 
+import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.employee.dto.EmployeeCount;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
@@ -14,9 +15,11 @@ import java.util.List;
 public class EmployeeRestController {
 
     private final EmployeeService employeeService;
+    private final AuthHelper authHelper;
 
-    public EmployeeRestController(EmployeeService employeeService) {
+    public EmployeeRestController(EmployeeService employeeService, AuthHelper authHelper) {
         this.employeeService = employeeService;
+        this.authHelper = authHelper;
     }
 
     @GetMapping("/counts")
@@ -37,8 +40,20 @@ public class EmployeeRestController {
     }
 
     @PostMapping(value = "/create")
-    public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity employee) {
-        return this.employeeService.createEmployee(employee);
+    public EmployeeEntity createNewEmployee(@RequestBody EmployeeOperationRequest request) {
+        return this.employeeService.createEmployee(request);
+    }
+
+
+    @PostMapping("delete")
+    public boolean deleteVendor(@RequestBody EmployeeOperationRequest request) {
+        return this.employeeService.deleteEmployee(request);
+    }
+
+
+    @PostMapping("update")
+    public boolean updateVendor(@RequestBody EmployeeOperationRequest request) {
+        return this.employeeService.updateEmployee(request);
     }
 
     @GetMapping
@@ -55,14 +70,14 @@ public class EmployeeRestController {
     public String findByTitle(@RequestBody EmployeeOperationRequest request) {
         if (request.getSearchByTitle().equals("总经理"))
             return "yuelingshan";
-        else if(request.getSearchByTitle().equals("采购部"))
+        else if (request.getSearchByTitle().equals("采购部"))
             return "guojing";
         else
             return "";
     }
-    @GetMapping(value="/find-by-userAccount/{userAccount}")
-    public EmployeeOperationRequest findUserNameByUserAccount(@PathVariable("userAccount") String userAccount)
-    {
+
+    @GetMapping(value = "/find-by-userAccount/{userAccount}")
+    public EmployeeOperationRequest findUserNameByUserAccount(@PathVariable("userAccount") String userAccount) {
         return this.employeeService.findUserNameByUserAccount(userAccount);
     }
 

@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee;
 
+import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.*;
 import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
 import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -63,10 +65,10 @@ public class HisEmployeeManagementApplication {
             }
 
 
-            private EmployeeEntity generateEmployee1() {
+            private EmployeeOperationRequest generateEmployee1() {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDateTime dateOfBirth = LocalDateTime.parse("1900-04-01 00:00:00", formatter);
-                LocalDateTime joinedDate = LocalDateTime.parse("2015-10-01 00:00:00", formatter);
+                LocalDate dateOfBirth = LocalDate.parse("1900-04-01 00:00:00", formatter);
+                LocalDate joinedDate = LocalDate.parse("2015-10-01 00:00:00", formatter);
                 ContactAddressEntity cae=new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店18层");
                 cae.setCity("北京");
@@ -82,7 +84,7 @@ public class HisEmployeeManagementApplication {
                 leaveInfo.setAnuualLeave(80L);
                 leaveInfo.setSickLeave(32L);
 
-                EmployeeEntity ee = new EmployeeEntity();
+                EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("狐冲");
                 ee.setSurname("令");
                 ee.setContactAddress(cae);
@@ -103,10 +105,10 @@ public class HisEmployeeManagementApplication {
                 return ee;
             }
 
-            private EmployeeEntity generateEmployee2() {
+            private EmployeeOperationRequest generateEmployee2() {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
-                LocalDateTime joinedDate = LocalDateTime.parse("2012-04-17 00:00:00", formatter);
+                LocalDate dateOfBirth = LocalDate.parse("1984-02-28 00:00:00", formatter);
+                LocalDate joinedDate = LocalDate.parse("2012-04-17 00:00:00", formatter);
                 ContactAddressEntity cae=new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店17层");
                 cae.setCity("北京");
@@ -122,7 +124,7 @@ public class HisEmployeeManagementApplication {
                 leaveInfo.setAnuualLeave(80L);
                 leaveInfo.setSickLeave(32L);
 
-                EmployeeEntity ee = new EmployeeEntity();
+                EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("灵珊");
                 ee.setSurname("岳");
                 ee.setContactAddress(cae);
@@ -142,12 +144,12 @@ public class HisEmployeeManagementApplication {
                 return ee;
             }
 
-            private EmployeeEntity generateEmployee3() {
+            private EmployeeOperationRequest generateEmployee3() {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
-                LocalDateTime joinedDate = LocalDateTime.parse("2012-04-17 00:00:00", formatter);
+                LocalDate dateOfBirth = LocalDate.parse("1984-02-28 00:00:00", formatter);
+                LocalDate joinedDate = LocalDate.parse("2012-04-17 00:00:00", formatter);
 
-                EmployeeEntity ee = new EmployeeEntity();
+                EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("之桃");
                 ee.setSurname("赵");
                 ee.setDateOfBirth(dateOfBirth);
@@ -163,10 +165,10 @@ public class HisEmployeeManagementApplication {
                 return ee;
             }
 
-            private EmployeeEntity generateEmployee4() {
+            private EmployeeOperationRequest generateEmployee4() {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
-                LocalDateTime joinedDate = LocalDateTime.parse("2012-04-17 00:00:00", formatter);
+                LocalDate dateOfBirth = LocalDate.parse("1984-02-28 00:00:00", formatter);
+                LocalDate joinedDate = LocalDate.parse("2012-04-17 00:00:00", formatter);
                 ContactAddressEntity cae=new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店17层");
                 cae.setCity("北京");
@@ -181,7 +183,7 @@ public class HisEmployeeManagementApplication {
                 LeaveInfoEntity leaveInfo=new LeaveInfoEntity();
                 leaveInfo.setAnuualLeave(80L);
                 leaveInfo.setSickLeave(32L);
-                EmployeeEntity ee = new EmployeeEntity();
+                EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("靖");
                 ee.setSurname("郭");
                 ee.setContactAddress(cae);

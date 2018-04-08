@@ -10,6 +10,7 @@ import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
 import com.isaac.pethospital.employee.enums.SexualEnum;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class EmployeeEntity {
     private String driverLicenseNumber;
 
 
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
     private SexualEnum gender;
     private String nationality;
@@ -38,7 +39,7 @@ public class EmployeeEntity {
     private String workPhoneNumber;
     @Enumerated(EnumType.STRING)
     private MaritalStatusEnum maritalStatus;
-    private LocalDateTime joinedDate;
+    private LocalDate joinedDate;
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference("employee-contact")
     private ContactAddressEntity contactAddress;
@@ -49,7 +50,7 @@ public class EmployeeEntity {
     private LeaveInfoEntity leaveInfo;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonManagedReference("employee-leaverecords")
-    private List<LeaveRecordEntity> leaveRecords=new LinkedList<>();
+    private List<LeaveRecordEntity> leaveRecords = new LinkedList<>();
     @ManyToOne()
     @JsonBackReference("directReportTo-teamMembers")
     private EmployeeEntity directReportTo;
@@ -74,11 +75,9 @@ public class EmployeeEntity {
         return leaveRecords;
     }
 
-    public void addLeaveRecord(LeaveRecordEntity leaveRecord)
-    {
-        if(leaveRecord==null) throw new RuntimeException("Leave Record is null");
-        if(leaveRecord!=null)
-        {
+    public void addLeaveRecord(LeaveRecordEntity leaveRecord) {
+        if (leaveRecord == null) throw new RuntimeException("Leave Record is null");
+        if (leaveRecord != null) {
             leaveRecord.setEmployee(this);
             this.leaveRecords.add(leaveRecord);
         }
@@ -150,11 +149,11 @@ public class EmployeeEntity {
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -200,11 +199,11 @@ public class EmployeeEntity {
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDateTime getJoinedDate() {
+    public LocalDate getJoinedDate() {
         return joinedDate;
     }
 
-    public void setJoinedDate(LocalDateTime joinedDate) {
+    public void setJoinedDate(LocalDate joinedDate) {
         this.joinedDate = joinedDate;
     }
 
@@ -246,7 +245,7 @@ public class EmployeeEntity {
         if (leaveInfo == null)
             throw new RuntimeException("Leave info should not be null");
         else {
-            this.leaveInfo=leaveInfo;
+            this.leaveInfo = leaveInfo;
             this.leaveInfo.setEmployee(this);
         }
     }
@@ -263,8 +262,18 @@ public class EmployeeEntity {
         return teamMembers;
     }
 
-    public void setTeamMembers(List<EmployeeEntity> teamMembers) {
-        this.teamMembers = teamMembers;
+    public void addTeamMember(EmployeeEntity teamMember) {
+        if (teamMember == null)
+            throw new RuntimeException("Team member is null");
+        teamMember.setDirectReportTo(this);
+        this.teamMembers.add(teamMember);
+    }
+
+    public void removeTeamMember(EmployeeEntity teamMember) {
+        if (teamMember == null)
+            throw new RuntimeException("Team member is null");
+        this.teamMembers.remove(teamMember);
+        teamMember.setDirectReportTo(null);
     }
 
     public DepartmentEntity getDepartment() {

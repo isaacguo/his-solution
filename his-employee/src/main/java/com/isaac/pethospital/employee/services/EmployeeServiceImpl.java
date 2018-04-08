@@ -33,10 +33,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeEntity createEmployee(EmployeeEntity employeeEntity) {
+    public EmployeeEntity createEmployee(EmployeeOperationRequest request) {
         String uuid = UUID.randomUUID().toString();
-        employeeEntity.setUuid(uuid);
-        return this.employeeRepository.save(employeeEntity);
+        EmployeeEntity ee = request.toEmployeeEntity();
+        ee.setUuid(uuid);
+        return this.employeeRepository.save(ee);
+
+
     }
 
     @Override
@@ -63,18 +66,60 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeOperationRequest findUserNameByUserAccount(String userAccount) {
         EmployeeEntity ee = this.employeeRepository.findByLoginAccount(userAccount);
-        if (ee != null)
-        {
-            EmployeeOperationRequest eor=new EmployeeOperationRequest();
-            eor.setFullName(ee.getSurname()+ee.getGivenName());
+        if (ee != null) {
+            EmployeeOperationRequest eor = new EmployeeOperationRequest();
+            eor.setFullName(ee.getSurname() + ee.getGivenName());
             return eor;
-        }
-        else
+        } else
             throw new RuntimeException("Cannot find UserAccount");
     }
 
     @Override
     public List<EmployeeEntity> findAll() {
         return this.employeeRepository.findAll();
+    }
+
+    @Override
+    public boolean deleteEmployee(EmployeeOperationRequest employeeOperationRequest) {
+
+        if(this.employeeRepository.exists(employeeOperationRequest.getId()))
+        {
+            this.employeeRepository.delete(employeeOperationRequest.getId());
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateEmployee(EmployeeOperationRequest request) {
+        if (!this.employeeRepository.exists(request.getId()))
+            throw new RuntimeException("Employee doesn't exist");
+
+        EmployeeEntity employeeEntity = this.employeeRepository.findOne(request.getId());
+        request.updateEmployee(employeeEntity);
+        this.employeeRepository.save(employeeEntity);
+        return true;
+    }
+
+    @Override
+    public EmployeeEntity findBySurnameAndGivenName(EmployeeOperationRequest request) {
+        return this.employeeRepository.findBySurnameAndGivenName(request.getSurname(),request.getGivenName());
+    }
+
+    @Override
+    public boolean setReportTo(Long employeeId, Long managerId) {
+        EmployeeEntity ee=this.employeeRepository.findOne(employeeId);
+        EmployeeEntity manager=this.employeeRepository.findOne(managerId);
+        if(ee==null)
+            throw new RuntimeException("Employee cannot be found");
+        if(manager==null)
+            throw new RuntimeException("Manager cannot be found");
+
+        if(ee.getDirectReportTo()!=null)
+        {
+            ee.getDirectReportTo().removeTeamMember(ee);
+        }
+        manager.addTeamMember(ee);
+        this.employeeRepository.save(manager);
+        return true;
     }
 }
