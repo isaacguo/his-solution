@@ -1,8 +1,9 @@
 export class ProcurementOperationRequest{
-  public startDate?:Date;
-  public endDate?:Date;
+  public startDate?:string;
+  public endDate?:string;
   public vendor?:string;
   public status?:string;
+  public id?:number;
 
   constructor(){}
 

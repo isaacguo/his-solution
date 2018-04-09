@@ -1,35 +1,50 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Procurement} from "../../../../dto/procurement/procurement.model";
 import {ProcurementStatusService} from "../../../../services/procurement/procurement-status.service";
 import {ProcurementStatus} from "../../../../dto/procurement/procurement-status.model";
 import {forEach} from "@angular/router/src/utils/collection";
 import {findNode} from "@angular/compiler";
+import {AuthenticationService, AuthInfo} from "../../../../services/common/authentication.service";
+import {Subscription} from "rxjs/Subscription";
+import {ProcurementService} from "../../../../services/procurement/procurement.service";
+import {ProcurementOperationRequest} from "../../../../dto/procurement/procurement-operation-request.model";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 @Component({
   selector: 'app-procurement-purchase-detail',
   templateUrl: './procurement-purchase-detail.component.html',
   styleUrls: ['./procurement-purchase-detail.component.css']
 })
-export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges {
+export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, OnDestroy {
 
-  curP:ProcurementStatus;
-
+  @ViewChild("confirmUpdatedModal")
+  confirmUpdatedModal:ModalComponent;
+  authInfo: AuthInfo;
+  curP: ProcurementStatus;
   pRoot: ProcurementStatus;
   flatenP: ProcurementStatus[] = [];
-  selectedStatus:string;
+  selectedStatus: string;
   @Input()
   procurement: Procurement;
+  private authChangeSubscription: Subscription;
 
-  constructor(private procurementStatusService: ProcurementStatusService) {
+  constructor(private procurementService:ProcurementService, private procurementStatusService: ProcurementStatusService, private authenticationService: AuthenticationService) {
+    this.authChangeSubscription = authenticationService.authChange.subscribe(
+      newAuthInfo =>
+        this.authInfo = newAuthInfo);
+  }
+
+  ngOnDestroy(): void {
+    this.authChangeSubscription.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
 
 
     if (this.pRoot == null) return;
-    this.selectedStatus=(<Procurement>changes.procurement.currentValue).status;
-    this.findNode(this.pRoot,this.selectedStatus);
-    this.flatenP=[];
+    this.selectedStatus = (<Procurement>changes.procurement.currentValue).status;
+    this.findNode(this.pRoot, this.selectedStatus);
+    this.flatenP = [];
     this.iterateP(this.curP);
   }
 
@@ -44,7 +59,7 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges {
     console.log(status);
     if (p.status === status) {
       console.log("return");
-      this.curP=p;
+      this.curP = p;
       return;
     }
     else if (p.next != null && p.next.length > 0) {
@@ -55,17 +70,38 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges {
     }
   }
 
-  onStatusDropdownClicked(status:string) {
-    this.selectedStatus=status;
+  onStatusDropdownClicked(status: string) {
+    this.selectedStatus = status;
+  }
+
+  hasAlterPermission(): boolean {
+    if(this.procurement.procurementPurchase==null) return false;
+    if(this.procurement.procurementPurchase.assignTo===this.authInfo.displayName)
+      return true;
+    else
+      return false;
   }
 
   private iterateP(p: ProcurementStatus) {
 
-    if(p.next!=null)
-    {
-      p.next.forEach(r=>{
+    if (p.next != null) {
+      p.next.forEach(r => {
         this.flatenP.push(r.status);
       })
     }
+  }
+
+  onUpdateStatusButtonClicked() {
+    const request=new ProcurementOperationRequest();
+    request.id=this.procurement.id;
+    request.status=this.selectedStatus;
+
+    this.procurementService.updateStatus(request).subscribe(r=>{
+      this.confirmUpdatedModal.open();
+    });
+  }
+
+  confirmUpdatedModalClosed() {
+
   }
 }

@@ -13,6 +13,7 @@ export class ProcurementService extends AbstractService {
   private myProcurementsUrl: string = `${this.rootUrl}/user`;
   private findProcurementsByQueryUrl: string = `${this.rootUrl}/user/query`;
   private myProcurementsByAssignedPurchaseUrl: string = `${this.rootUrl}/user/purchases`;
+  private updateStatusUrl: string = `${this.rootUrl}/updateStatus`;
 
 
   constructor(private authHttp: AuthHttp) {
@@ -31,8 +32,15 @@ export class ProcurementService extends AbstractService {
     return this.authHttp.get(`${this.rootUrl}/${id}`).map(this.extractData);
   }
 
-  findByQuery(request:ProcurementOperationRequest):Observable<Procurement[]>{
-    return this.authHttp.post(this.findProcurementsByQueryUrl,request).map(this.extractData);
+  findByQuery(request: ProcurementOperationRequest): Observable<Procurement[]> {
+    return this.authHttp.post(this.findProcurementsByQueryUrl, request).map(this.extractData);
+  }
+
+  updateStatus(request: ProcurementOperationRequest): Observable<boolean> {
+    return this.authHttp.post(this.updateStatusUrl, request).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+
   }
 
 }

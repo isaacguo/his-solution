@@ -7,6 +7,8 @@ export class ProcurementPurchase {
   public id?: number;
   public totalPrice?: number;
 
+  public assignTo:string;
+
   constructor() {
   }
 }

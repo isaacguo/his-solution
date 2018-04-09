@@ -180,4 +180,19 @@ public class ProcurementServiceImpl implements ProcurementService {
         return this.procurementRepository.findMyProcurementByPurchaseByAssignee(userAccount);
     }
 
+    @Override
+    public boolean updateProcurementStatus(Long procurementId, String status) {
+
+        ProcurementEntity pe=this.procurementRepository.findOne(procurementId);
+        if(pe==null)
+            throw new RuntimeException("Cannot find Procurement.");
+        ProcurementStatusEntity pse=this.procurementStatusService.findByStatus(status);
+        if(pse==null)
+        throw new RuntimeException("Cannot find Procurement Status.");
+
+        pe.setStatus(status);
+        this.procurementRepository.save(pe);
+        return true;
+    }
+
 }

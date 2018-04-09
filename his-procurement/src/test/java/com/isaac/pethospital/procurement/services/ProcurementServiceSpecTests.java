@@ -131,6 +131,20 @@ public class ProcurementServiceSpecTests {
     }
 
     @Test
+    public void whenUpdateStatus()
+    {
+        Long procurementId=1L;
+        String status="ABC";
+        doReturn(new ProcurementEntity()).when(this.procurementRepository).findOne(any(Long.class));
+        doReturn(new ProcurementStatusEntity()).when(this.procurementStatusService).findByStatus(any(String.class));
+
+        //when
+        this.procurementService.updateProcurementStatus(procurementId, status);
+        //then
+        verify(this.procurementRepository).save(any(ProcurementEntity.class));
+    }
+
+    @Test
     public void whenPurchaseSubmittedThenAssociateItWithProcurement()
     {
         //given

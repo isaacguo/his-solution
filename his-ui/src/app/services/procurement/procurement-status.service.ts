@@ -11,12 +11,34 @@ export class ProcurementStatusService extends AbstractService {
   rootUrl: string = "/api/hisprocurement/procurement-status";
   private procurementStatusRootUrl: string = `${this.rootUrl}/root`;
 
+  p: ProcurementStatus;
+  flatenP: ProcurementStatus[] = [];
+
   constructor(private authHttp: AuthHttp) {
     super();
   }
 
   getRoot(): Observable<ProcurementStatus> {
     return this.authHttp.get(this.procurementStatusRootUrl).map(this.extractData);
+  }
+
+  refresh() {
+    this.flatenP=[];
+    this.getRoot().subscribe(r => {
+      this.p = r;
+      this.iterateP(r);
+      console.log(this.flatenP);
+
+    })
+  }
+
+  private iterateP(p: ProcurementStatus) {
+    this.flatenP.push(p.status);
+    if (p.next != null && p.next.length > 0) {
+      p.next.forEach(r => {
+        this.iterateP(r);
+      })
+    }
   }
 
 }

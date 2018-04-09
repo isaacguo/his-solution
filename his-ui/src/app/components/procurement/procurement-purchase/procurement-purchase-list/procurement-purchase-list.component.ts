@@ -3,8 +3,10 @@ import {Router} from "@angular/router";
 import {ProcurementService} from "../../../../services/procurement/procurement.service";
 import {Procurement} from "../../../../dto/procurement/procurement.model";
 import {OperationEnum} from "../../../../enums/operation.enum";
-import {IMyDpOptions} from "mydatepicker";
+import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 import {ProcurementOperationRequest} from "../../../../dto/procurement/procurement-operation-request.model";
+import {ProcurementStatusService} from "../../../../services/procurement/procurement-status.service";
+import {ProcurementStatus} from "../../../../dto/procurement/procurement-status.model";
 
 @Component({
   selector: 'app-procurement-purchase-list',
@@ -13,12 +15,15 @@ import {ProcurementOperationRequest} from "../../../../dto/procurement/procureme
 })
 export class ProcurementPurchaseListComponent implements OnInit {
 
+  loading: boolean;
   procurements: Procurement[];
   selectedProcurement: Procurement;
   direction: string = 'vertical';
   startDate: any;
   endDate: any;
-  query:ProcurementOperationRequest={};
+  query: ProcurementOperationRequest = {};
+
+  flatenP: ProcurementStatus[] = [];
 
   public myDatePickerOptions: IMyDpOptions = {
     // other options...
@@ -26,10 +31,17 @@ export class ProcurementPurchaseListComponent implements OnInit {
   };
 
 
-  constructor(private router: Router, private procurementService: ProcurementService) {
+  constructor(private router: Router, private procurementService: ProcurementService, private procurementStatusService: ProcurementStatusService) {
   }
 
   ngOnInit() {
+
+    this.loadData();
+  }
+
+  private loadData() {
+    this.procurementStatusService.refresh();
+    this.flatenP = this.procurementStatusService.flatenP;
 
     this.procurementService.getMyProcurements().subscribe(r => {
       this.procurements = r
@@ -52,6 +64,9 @@ export class ProcurementPurchaseListComponent implements OnInit {
     return this.selectedProcurement == procurement;
   }
 
+  onStatusDropdownClicked(status: string) {
+    this.query.status = status;
+  }
 
   getTotalPrice() {
     let total: number = 0;
@@ -62,15 +77,55 @@ export class ProcurementPurchaseListComponent implements OnInit {
     return total;
   }
 
+  onClearButtonClicked() {
+    this.query.status = "";
+    this.query.vendor = "";
+    this.query.startDate = "";
+    this.query.endDate = "";
+  }
+
   onSearchButtonClicked() {
     const p = new ProcurementOperationRequest();
     if (this.startDate != null)
-      this.query.startDate= this.startDate.formatted;
+      this.query.startDate = this.startDate.formatted;
     if (this.endDate != null)
-      this.query.endDate= this.endDate.formatted;
+      this.query.endDate = this.endDate.formatted;
 
     this.procurementService.findByQuery(this.query).subscribe(r => {
       this.procurements = r;
     });
   }
+
+  onRefreshIconClicked() {
+
+    this.loadData();
+  }
+
+  getStatus() {
+
+    if (!this.loading)
+      return "pull-right fa fa-refresh fa-fw isaac-margin-10bottom";
+    else
+      return "pull-right fa fa-refresh fa-spin fa-fw isaac-margin-10bottom";
+  }
+
+
+  onDateChanged1(event: IMyDateModel) {
+    if (event.formatted !== '') {
+      this.query.startDate = event.formatted;
+    }
+    else {
+      this.query.startDate = '';
+    }
+  }
+
+  onDateChanged2(event: IMyDateModel) {
+    if (event.formatted !== '') {
+      this.query.endDate = event.formatted;
+    }
+    else {
+      this.query.endDate = '';
+    }
+  }
 }
+

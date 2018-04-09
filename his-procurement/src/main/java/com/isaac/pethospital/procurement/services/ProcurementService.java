@@ -27,4 +27,5 @@ public interface ProcurementService {
     List<ProcurementEntity> findMyProcurementsByPurchaseByAssignee(String userAccount);
 
     //ProcurementEntity addVendorInfo(ProcurementOperation po);
+    boolean updateProcurementStatus(Long procurementId, String status);
 }

@@ -31,9 +31,13 @@ public class ProcurementRestController {
     public List<ProcurementEntity> findByQuery(@RequestBody ProcurementOperation request) {
 
         return this.procurementService.findByQuery(request);
-
-
     }
+    @PostMapping("/updateStatus")
+    public boolean updateStatus(@RequestBody ProcurementOperation request)
+    {
+        return this.procurementService.updateProcurementStatus(request.getId(),request.getStatus());
+    }
+
 
     @GetMapping("user/purchases")
     public List<ProcurementEntity> findMyProcurementsByPurchaseByAssignee() {

@@ -2,6 +2,7 @@ package com.isaac.pethospital.procurement.restcontrollers;
 
 
 import com.isaac.pethospital.common.security.AuthHelper;
+import com.isaac.pethospital.procurement.dtos.ProcurementOperation;
 import com.isaac.pethospital.procurement.entities.ProcurementEntity;
 import com.isaac.pethospital.procurement.services.ProcurementService;
 import org.junit.Before;
@@ -82,5 +83,18 @@ public class ProcurementRestControllerSpecTests {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].orderNumber", is("001")));
 
+    }
+
+    @Test
+    public void updateStatus() throws Exception
+    {
+        ProcurementOperation po=new ProcurementOperation();
+        po.setId(1L);
+        po.setStatus("ABC");
+        doReturn(true).when(this.service).updateProcurementStatus(any(Long.class), any(String.class));
+        this.mockMvc.perform(post("/procurements/updateStatus").content(asJsonString(po)).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", is(true)));
     }
 }
