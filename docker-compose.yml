@@ -70,6 +70,9 @@ services:
     command: --spring.profiles.active=production
     environment:
       - JAVA_OPTS=-Xmx128m -Xms64m
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
   his-treatment:
     image: isaacguo/his-treatment
@@ -81,6 +84,9 @@ services:
     command: --spring.profiles.active=production
     environment:
       - JAVA_OPTS=-Xmx128m -Xms64m
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
   his-medicine:
     image: isaacguo/his-medicine
@@ -92,6 +98,9 @@ services:
     command: --spring.profiles.active=production
     environment:
       - JAVA_OPTS=-Xmx128m -Xms64m
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
   his-procurement:
     image: isaacguo/his-procurement
@@ -103,6 +112,9 @@ services:
     command: --spring.profiles.active=production
     environment:
       - JAVA_OPTS=-Xmx128m -Xms64m
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
   his-gateway:
     image: isaacguo/his-gateway
@@ -116,4 +128,7 @@ services:
     command: --spring.profiles.active=production
     environment:
       - JAVA_OPTS=-Xmx128m -Xms64m
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
