@@ -71,8 +71,8 @@
     <tr *ngFor="let vendor of vendors">
       <td>{{vendor.id}}</td>
       <td>{{vendor.name}}</td>
-      <td>{{vendor.contacts[0].name}} {{vendor.contacts.length>1?"(更多)":""}}</td>
-      <td>{{vendor.contacts[0].telephone}}</td>
+      <td>{{vendor.contacts[0]?.name}} {{vendor.contacts?.length>1?"(更多)":""}}</td>
+      <td>{{vendor.contacts[0]?.telephone}}</td>
       <td>{{vendor.description}}</td>
       <td>{{vendor.address}}</td>
       <td>{{vendor.postcode}}</td>

@@ -19,9 +19,33 @@ public class VendorEntity {
     String description;
     String officialWebsiteLink;
     String email;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JsonManagedReference("VendorEntity-ContactEntity")
     List<ContactEntity> contacts = new LinkedList<>();
+
+
+    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("VendorEntity-VendorProductCategoryEntity")
+    List<VendorProductCategoryEntity> productCategories = new LinkedList<>();
+
+    public List<VendorProductCategoryEntity> getProductCategories() {
+        return productCategories;
+    }
+
+    public void addProductCategory(VendorProductCategoryEntity productCategory) {
+        if (productCategory == null)
+            throw new RuntimeException("Product Category is null");
+        productCategory.setVendor(this);
+        this.productCategories.add(productCategory);
+    }
+
+    public void removeProductCategory(VendorProductCategoryEntity productCategory) {
+        if (productCategory == null)
+            throw new RuntimeException("Product Category is null");
+        productCategory.setVendor(null);
+        this.productCategories.remove(productCategory);
+    }
 
     public String getOfficialWebsiteLink() {
         return officialWebsiteLink;
@@ -92,7 +116,7 @@ public class VendorEntity {
         this.contacts.add(contact);
     }
 
-    public void deleteContact(ContactEntity contact) {
+    public void removeContact(ContactEntity contact) {
         if (contact == null)
             throw new RuntimeException("Contact is null");
         this.contacts.remove(contact);

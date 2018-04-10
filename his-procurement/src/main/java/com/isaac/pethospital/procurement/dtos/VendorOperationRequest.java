@@ -117,7 +117,7 @@ public class VendorOperationRequest {
             //delete
             for (int i = 0; i < vendor.getContacts().size(); i++) {
                 if (!interaction.contains(vendor.getContacts().get(i)))
-                    vendor.deleteContact(vendor.getContacts().get(i));
+                    vendor.removeContact(vendor.getContacts().get(i));
             }
             //create
             this.contacts.stream().filter(c -> c.id == null).forEach(r -> {

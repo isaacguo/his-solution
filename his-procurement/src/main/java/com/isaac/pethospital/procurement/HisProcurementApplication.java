@@ -1,12 +1,8 @@
 package com.isaac.pethospital.procurement;
 
 import com.isaac.pethospital.procurement.constants.ConfigurationConstants;
-import com.isaac.pethospital.procurement.entities.ProcurementApprovalStageEntity;
-import com.isaac.pethospital.procurement.entities.ProcurementConfigurationEntity;
-import com.isaac.pethospital.procurement.entities.ProcurementStatusEntity;
-import com.isaac.pethospital.procurement.repositories.ProcurementApprovalStageRepository;
-import com.isaac.pethospital.procurement.repositories.ProcurementConfigurationRepository;
-import com.isaac.pethospital.procurement.repositories.ProcurementStatusRepository;
+import com.isaac.pethospital.procurement.entities.*;
+import com.isaac.pethospital.procurement.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,25 +31,77 @@ public class HisProcurementApplication {
     @Bean
     CommandLineRunner commandLineRunner(ProcurementStatusRepository procurementStatusRepository,
                                         ProcurementConfigurationRepository procurementConfigurationRepository,
-                                        ProcurementApprovalStageRepository procurementApprovalStageRepository
-                                        ) {
+                                        ProcurementApprovalStageRepository procurementApprovalStageRepository,
+                                        VendorProductRepository vendorProductRepository,
+                                        VendorRepository vendorRepository,
+                                        VendorProductCategoryRepository vendorProductCategoryRepository
+    ) {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
 
-                initProcurementStatus();
-                initConfiguration();
-                initApproval();
+                //initProcurementStatus();
+                //initConfiguration();
+                //initApproval();
+
+
+                VendorProductEntity vpe1 = new VendorProductEntity();
+                vpe1.setOrderNumber("RF VT Set (Basic)");
+                vpe1.setProductEnglishName("VETTEST, N.AMERICA,RECERTIFIED");
+                vpe1.setProductChineseName("兽医专用生化分析仪(简配)");
+                vpe1.setPackageSpecification("套");
+                vpe1.setPackageUnit("套");
+                vpe1.setPricePerUnit(19900.00);
+                vpe1.setCurrency("RMB");
+                vpe1.setProductSet(true);
+
+                VendorProductEntity vpe2 = new VendorProductEntity();
+                vpe2.setOrderNumber("RF-20380-01");
+                vpe2.setProductEnglishName("VETTEST, N.AMERICA,RECERTIFIED");
+                vpe2.setProductChineseName("生化分析仪主机（展示机）");
+                vpe2.setPackageSpecification("台");
+                vpe2.setPackageUnit("1");
+
+                VendorProductEntity vpe3 = new VendorProductEntity();
+                vpe3.setOrderNumber("98-19792-00");
+                vpe3.setProductEnglishName("VETTEST SOFTWARE UPGRADE PACKET-INVENTOR");
+                vpe3.setProductChineseName("VETTEST软件升级包");
+                vpe3.setPackageSpecification("个");
+                vpe3.setPackageUnit("1");
+
+
+                vpe1.addChild(vpe2);
+                vpe1.addChild(vpe3);
+
+
+                //VendorProductEntity vpex = vendorProductRepository.save(vpe1);
+
+
+                VendorEntity ve = new VendorEntity();
+                ve.setName("IDEXX");
+                vendorRepository.save(ve);
+
+
+                VendorProductCategoryEntity vendorProductCategoryEntity1 = new VendorProductCategoryEntity();
+                vendorProductCategoryEntity1.setName("VetLab 实验室检验仪器");
+                vendorProductCategoryEntity1.setVendor(ve);
+                //vendorProductCategoryEntity1.addProduct(vpe1);
+                vendorProductCategoryRepository.save(vendorProductCategoryEntity1);
+
+
+                vpe1.setCategory(vendorProductCategoryEntity1);
+                vendorProductRepository.save(vpe1);
+
             }
 
             private void initApproval() {
-                ProcurementApprovalStageEntity procurementApprovalStageEntity1 =new ProcurementApprovalStageEntity();
+                ProcurementApprovalStageEntity procurementApprovalStageEntity1 = new ProcurementApprovalStageEntity();
                 procurementApprovalStageEntity1.setStage("申请人");
 
-                ProcurementApprovalStageEntity procurementApprovalStageEntity2 =new ProcurementApprovalStageEntity();
+                ProcurementApprovalStageEntity procurementApprovalStageEntity2 = new ProcurementApprovalStageEntity();
                 procurementApprovalStageEntity2.setStage("部门经理");
 
-                ProcurementApprovalStageEntity procurementApprovalStageEntity3 =new ProcurementApprovalStageEntity();
+                ProcurementApprovalStageEntity procurementApprovalStageEntity3 = new ProcurementApprovalStageEntity();
                 procurementApprovalStageEntity3.setStage("总经理");
 
                 procurementApprovalStageEntity1.setNextStage(procurementApprovalStageEntity2);
@@ -63,10 +111,10 @@ public class HisProcurementApplication {
             }
 
             private void initConfiguration() {
-                ProcurementConfigurationEntity pce1=new ProcurementConfigurationEntity();
+                ProcurementConfigurationEntity pce1 = new ProcurementConfigurationEntity();
                 pce1.setKey(ConfigurationConstants.OrderNumber);
                 pce1.setValue("1");
-                ProcurementConfigurationEntity pce2=new ProcurementConfigurationEntity();
+                ProcurementConfigurationEntity pce2 = new ProcurementConfigurationEntity();
                 pce2.setKey(ConfigurationConstants.OrderNumberLength);
                 pce2.setValue("8");
 

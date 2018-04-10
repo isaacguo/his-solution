@@ -58,12 +58,10 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
     console.log(p.status);
     console.log(status);
     if (p.status === status) {
-      console.log("return");
       this.curP = p;
       return;
     }
     else if (p.next != null && p.next.length > 0) {
-      console.log("in 50");
       p.next.forEach(r => {
         this.findNode(r, status);
       });
