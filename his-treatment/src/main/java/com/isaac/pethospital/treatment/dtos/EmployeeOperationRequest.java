@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class EmployeeOperationRequest {
 
     private Long departmentId;
-    private long id;
+    private Long id;
     private String selfIntroduction;
     private Long employeeTypeId;
     private String name;
@@ -21,11 +21,11 @@ public class EmployeeOperationRequest {
         this.departmentId = departmentId;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

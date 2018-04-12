@@ -13,7 +13,7 @@ public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     String role;
 
@@ -21,11 +21,11 @@ public class RoleEntity {
     @JsonManagedReference("Role-Permission")
     Set<PermissionEntity> permissions=new HashSet<>();
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

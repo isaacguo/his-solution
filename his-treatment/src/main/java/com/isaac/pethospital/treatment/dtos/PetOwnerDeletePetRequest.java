@@ -4,7 +4,7 @@ import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 
 public class PetOwnerDeletePetRequest {
     PetOwnerEntity petOwner;
-    private long id;
+    private Long id;
 
     public PetOwnerEntity getPetOwner() {
         return petOwner;
@@ -14,11 +14,11 @@ public class PetOwnerDeletePetRequest {
         this.petOwner = petOwner;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

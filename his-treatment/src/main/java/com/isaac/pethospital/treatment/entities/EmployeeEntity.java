@@ -13,7 +13,7 @@ public class EmployeeEntity {
     DepartmentEntity department;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private UUID uuid;
     private String selfIntroduction;
     @ManyToOne
@@ -45,11 +45,11 @@ public class EmployeeEntity {
         this.selfIntroduction = selfIntroduction;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

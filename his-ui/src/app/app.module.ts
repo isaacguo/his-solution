@@ -78,9 +78,12 @@ import {ProcurementPurchaseListComponent} from './components/procurement/procure
 import {ProcurementPurchaseCreateUpdateComponent} from './components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-create-update.component';
 import {ProcurementPurchaseGoodCreateUpdateComponent} from './components/procurement/procurement-purchase/procurement-purchase-create-update/procurement-purchase-good-create-update/procurement-purchase-good-create-update.component';
 import {ProcurementPurchaseDetailComponent} from './components/procurement/procurement-purchase/procurement-purchase-detail/procurement-purchase-detail.component';
-import { ProcurementRequestDetailTableComponent } from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail-table/procurement-request-detail-table.component';
+import {ProcurementRequestDetailTableComponent} from './components/procurement/procurement-request/procurement-request-detail/procurement-request-detail-table/procurement-request-detail-table.component';
 import {AngularSplitModule} from "angular-split";
 import {MyDatePickerModule} from "mydatepicker";
+import {AuthorizationManagementComponent} from './components/settings/authorization-management/authorization-management.component';
+import {SecurityOperationPanelComponent} from './components/settings/authorization-management/security-operation-panel/security-operation-panel.component';
+import {AuthorizationService} from "./services/common/authorization.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -152,10 +155,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementPurchaseGoodCreateUpdateComponent,
     ProcurementPurchaseDetailComponent,
     ProcurementRequestDetailTableComponent,
+    AuthorizationManagementComponent,
+    SecurityOperationPanelComponent,
 
   ],
   imports: [
-    BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule, AngularSplitModule,MyDatePickerModule
+    BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule, AngularSplitModule, MyDatePickerModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -167,6 +172,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FinanceGuard,
     LogoutGuardService,
     AuthenticationService,
+    AuthorizationService,
     EmployeeService,
     DepartmentService,
     PetOwnerService,

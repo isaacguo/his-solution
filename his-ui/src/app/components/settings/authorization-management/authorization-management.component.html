@@ -1,0 +1,9 @@
+<div class="row">
+  <h1 class="page-header">权限管理</h1>
+</div>
+
+
+<div *ngFor="let key of keys">
+  <app-security-operation-panel [key]="key" [authorizations]="assignmentMap.get(key)"> </app-security-operation-panel>
+</div>
+

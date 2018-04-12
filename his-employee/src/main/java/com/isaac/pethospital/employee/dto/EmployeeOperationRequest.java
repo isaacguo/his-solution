@@ -19,7 +19,7 @@ public class EmployeeOperationRequest {
 
     //from EmployeeEntity
     String uuid;
-    private long id;
+    private Long id;
     private String loginAccount;
     private String givenName;
     private String surname;
@@ -47,11 +47,11 @@ public class EmployeeOperationRequest {
         this.uuid = uuid;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

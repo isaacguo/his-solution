@@ -1,0 +1,62 @@
+<a href="javascript:void(0)"><i #spinner (click)="onRefreshIconClicked()" [ngClass]="getStatus()"></i></a>
+
+<h4>{{key[1]}}</h4>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th [rowSpan]="2">用户/组</th>
+    <th *ngFor="let topic of authorizationTopics" [colSpan]="topic.availableTopicOperationList?.length">
+      {{topic.name}}
+    </th>
+    <th [rowSpan]="2">操作</th>
+  </tr>
+  <tr>
+    <template ngFor let-topic [ngForOf]="authorizationTopics" let-j="index">
+      <template ngFor let-operation [ngForOf]="topic.availableTopicOperationList">
+        <th>{{operation.name}}</th>
+      </template>
+    </template>
+  </tr>
+  </thead>
+
+  <tbody>
+    <template ngFor let-authorization [ngForOf]="authorizations" let-i="index">
+      <tr>
+        <td> {{authorization.username}}</td>
+        <template ngFor let-assignment [ngForOf]="authorization?.authorizationAssignmentList" let-j="index">
+          <template ngFor let-op [ngForOf]="getAuthorizationTopicById(assignment.topic.id).availableTopicOperationList" let-k="index">
+            <td>
+              <input [checked]="isCheckedByDefault(assignment,op)" type="checkbox"
+                     (change)="onChange(authorization,assignment,op, $event.target.checked)">
+            </td>
+          </template>
+        </template>
+        <td>
+          <div class="btn-group-sm" role="group">
+            <button (click)="onCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
+              class="glyphicon glyphicon-check"></span></button>
+            <button (click)="onUnCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
+              class="glyphicon glyphicon-unchecked"></span></button>
+            <button (click)="onDeleteUserButtonClicked(i)" type="button" class="btn btn-default"><span
+              class="glyphicon glyphicon-remove"></span></button>
+          </div>
+        </td>
+      </tr>
+    </template>
+  </tbody>
+</table>
+
+
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+  <label for="newUser">Add User/Group:</label>
+  <input placeholder="user's NT account" formControlName="newUser" id="newUser" type="text">
+  <small [hidden]="formModel.controls.newUser.valid || formModel.controls.newUser.pristine" class="text-danger">
+    Name is required (minimum 5 characters).
+  </small>
+  <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">Add</button>
+  <button class="btn btn-primary" (click)="onSaveButtonClicked()">Save</button>
+</form>
+
+
+<pre>{{authorizations|json}}</pre>

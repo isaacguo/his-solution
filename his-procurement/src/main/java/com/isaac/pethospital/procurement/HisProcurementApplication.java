@@ -1,5 +1,12 @@
 package com.isaac.pethospital.procurement;
 
+import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
+import com.isaac.pethospital.common.entities.AuthorizationEntity;
+import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
+import com.isaac.pethospital.common.entities.TopicOperationEntity;
+import com.isaac.pethospital.common.repositories.AuthorizationRepository;
+import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
+import com.isaac.pethospital.common.services.AuthorizationTopicService;
 import com.isaac.pethospital.procurement.constants.ConfigurationConstants;
 import com.isaac.pethospital.procurement.entities.*;
 import com.isaac.pethospital.procurement.repositories.*;
@@ -34,7 +41,9 @@ public class HisProcurementApplication {
                                         ProcurementApprovalStageRepository procurementApprovalStageRepository,
                                         VendorProductRepository vendorProductRepository,
                                         VendorRepository vendorRepository,
-                                        VendorProductCategoryRepository vendorProductCategoryRepository
+                                        VendorProductCategoryRepository vendorProductCategoryRepository,
+                                        AuthorizationTopicRepository authorizationTopicRepository,
+                                        AuthorizationRepository authorizationRepository
     ) {
         return new CommandLineRunner() {
             @Override
@@ -43,8 +52,48 @@ public class HisProcurementApplication {
                 //initProcurementStatus();
                 //initConfiguration();
                 //initApproval();
+                initVendor();
+
+                AuthorizationTopicEntity topic1 = new AuthorizationTopicEntity();
+                topic1.setName("库存");
+                topic1.addAvailableTopicOperationByName("增加");
+                topic1.addAvailableTopicOperationByName("删除");
+                topic1.addAvailableTopicOperationByName("修改");
+                topic1.addAvailableTopicOperationByName("查看");
+                authorizationTopicRepository.save(topic1);
+
+                AuthorizationTopicEntity topic2 = new AuthorizationTopicEntity();
+                topic2.setName("库存价格");
+                topic2.addAvailableTopicOperationByName("增加");
+                topic2.addAvailableTopicOperationByName("删除");
+                topic2.addAvailableTopicOperationByName("修改");
+                topic2.addAvailableTopicOperationByName("查看");
+                authorizationTopicRepository.save(topic2);
+
+                AuthorizationEntity authorization = new AuthorizationEntity();
+
+                AuthorizationAssignmentEntity aae = new AuthorizationAssignmentEntity();
+                aae.setTopic(topic1);
+                aae.addAllowedOperation(topic1.getAvailableTopicOperationList().get(0));
+                aae.addAllowedOperation(topic1.getAvailableTopicOperationList().get(1));
+
+                AuthorizationAssignmentEntity aae2 = new AuthorizationAssignmentEntity();
+                aae2.setTopic(topic2);
+                aae2.addAllowedOperation(topic2.getAvailableTopicOperationList().get(2));
+                aae2.addAllowedOperation(topic2.getAvailableTopicOperationList().get(3));
+
+                authorization.setUsername("guojing");
+                authorization.addAuthorizationAssignment(aae);
+                authorization.addAuthorizationAssignment(aae2);
+
+                authorizationRepository.save(authorization);
 
 
+
+
+            }
+
+            private void initVendor() {
                 VendorProductEntity vpe1 = new VendorProductEntity();
                 vpe1.setOrderNumber("RF VT Set (Basic)");
                 vpe1.setProductEnglishName("VETTEST, N.AMERICA,RECERTIFIED");
@@ -91,7 +140,6 @@ public class HisProcurementApplication {
 
                 vpe1.setCategory(vendorProductCategoryEntity1);
                 vendorProductRepository.save(vpe1);
-
             }
 
             private void initApproval() {
