@@ -81,5 +81,9 @@ public class EmployeeRestController {
         return this.employeeService.findUserNameByUserAccount(userAccount);
     }
 
-
+    @GetMapping(value = "/search-by-name/{keyword}")
+    public List<EmployeeEntity> findEmployeesByKeywordInName(@PathVariable("keyword") String keyword)
+    {
+        return this.employeeService.findKeywordInName(keyword);
+    }
 }

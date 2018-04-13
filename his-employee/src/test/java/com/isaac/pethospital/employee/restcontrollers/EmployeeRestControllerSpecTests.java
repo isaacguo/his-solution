@@ -13,15 +13,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static com.isaac.pethospital.common.test.TestHelper.asJsonString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class EmployeeRestControllerSpecTests {
 
@@ -111,5 +112,22 @@ public class EmployeeRestControllerSpecTests {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", is(true)));
     }
+
+    @Test
+    public void findByKeyword() throws Exception {
+
+        EmployeeEntity ee=new EmployeeEntity();
+        ee.setGivenName("Isaac");
+        List<EmployeeEntity> list=new LinkedList<>();
+        list.add(ee);
+        doReturn(list).when(this.employeeService).findKeywordInName(any(String.class));
+
+        this.mockMvc.perform(get("/employees/search-by-name/isaac"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].givenName", is("Isaac")));
+    }
+
+
 
 }

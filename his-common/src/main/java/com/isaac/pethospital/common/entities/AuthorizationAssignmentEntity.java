@@ -22,7 +22,8 @@ public class AuthorizationAssignmentEntity {
 
     @ManyToOne
     AuthorizationTopicEntity topic;
-    @ManyToMany
+
+    @ManyToMany()
     @JsonManagedReference("AuthorizationAssignmentEntity-TopicOperationEntity")
     List<TopicOperationEntity> allowedOperations = new LinkedList<>();
 
@@ -56,7 +57,7 @@ public class AuthorizationAssignmentEntity {
     public void removeAllowedOperation(TopicOperationEntity allowedOperation) {
         if (allowedOperation == null)
             throw new RuntimeException("Allowed Operation is null");
-        allowedOperation.addAuthorizationAssignment(null);
+        allowedOperation.removeAuthorizationAssignment(this);
         this.allowedOperations.remove(allowedOperation);
     }
 

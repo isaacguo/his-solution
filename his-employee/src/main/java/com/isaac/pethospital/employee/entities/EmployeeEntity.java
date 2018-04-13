@@ -25,6 +25,16 @@ public class EmployeeEntity {
     private String loginAccount;
     private String givenName;
     private String surname;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    private String fullName;
     private String employeeNumber;
     private String idNumber;
     private String driverLicenseNumber;
@@ -299,6 +309,5 @@ public class EmployeeEntity {
     public void setEmergencyPhoneNumber(String emergencyPhoneNumber) {
         this.emergencyPhoneNumber = emergencyPhoneNumber;
     }
-
 
 }

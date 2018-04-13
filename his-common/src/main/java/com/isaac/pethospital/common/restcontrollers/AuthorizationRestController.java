@@ -1,10 +1,9 @@
 package com.isaac.pethospital.common.restcontrollers;
 
+import com.isaac.pethospital.common.dtos.AuthorizationOperationRequest;
 import com.isaac.pethospital.common.entities.AuthorizationEntity;
 import com.isaac.pethospital.common.services.AuthorizationService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +20,22 @@ public class AuthorizationRestController {
     @GetMapping
     public List<AuthorizationEntity> getAuthorizations() {
         return this.authorizationService.findAll();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public boolean deleteAuthorization(@PathVariable("id") Long id)
+    {
+        return this.authorizationService.deleteById(id);
+    }
+
+    @PostMapping("create")
+    public boolean createAuthorizationAssignment(@RequestBody AuthorizationOperationRequest request) {
+        //setUserAccount(request);
+        return this.authorizationService.createAuthorization(request);
+    }
+    @PutMapping("update")
+    public boolean updateAuthorization(@RequestBody AuthorizationOperationRequest request)
+    {
+        return this.authorizationService.updateAuthorization(request);
     }
 }

@@ -4,7 +4,9 @@ import {SexualEnum} from "../enums/sexual.enum";
 import {EmploymentStatusEnum} from "../enums/employment.status.enum";
 
 export class Employee {
-  constructor(public givenName?: number,
+  constructor(
+    public id?:number,
+    public givenName?: number,
               public surname?: string,
               public employeeNumber?: string,
               public idNumber?: string,

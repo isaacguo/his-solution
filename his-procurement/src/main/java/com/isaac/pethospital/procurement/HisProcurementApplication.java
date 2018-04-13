@@ -54,6 +54,14 @@ public class HisProcurementApplication {
                 //initApproval();
                 initVendor();
 
+                initAuthorization();
+
+
+
+
+            }
+
+            private void initAuthorization() {
                 AuthorizationTopicEntity topic1 = new AuthorizationTopicEntity();
                 topic1.setName("库存");
                 topic1.addAvailableTopicOperationByName("增加");
@@ -87,10 +95,6 @@ public class HisProcurementApplication {
                 authorization.addAuthorizationAssignment(aae2);
 
                 authorizationRepository.save(authorization);
-
-
-
-
             }
 
             private void initVendor() {

@@ -13,10 +13,10 @@ public class AuthorizationEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    String uid;
+    Long uid;
     String username;
 
-    @OneToMany(mappedBy = "authorization", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "authorization", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("AuthorizationEntity-AuthorizationAssignmentEntity")
     List<AuthorizationAssignmentEntity> authorizationAssignmentList = new LinkedList<>();
 
@@ -28,11 +28,11 @@ public class AuthorizationEntity {
         this.id = id;
     }
 
-    public String getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 

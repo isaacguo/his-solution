@@ -1,11 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthorizationTopic} from "../../../../dto/authorization/authorization-topic.model";
 import {UserAccountAuthorizationAssignmentItem} from "../../../../dto/authorization/user-account-authorization-assignment-item.model";
 import {AuthorizationAssignment} from "../../../../dto/authorization/authorization-assignment.model";
 import {AuthorizationService} from "../../../../services/common/authorization.service";
 import {Authorization} from "../../../../dto/authorization/authorization.model";
 import {TopicOperation} from "../../../../dto/authorization/topic-operation.model";
+import {EmployeeService} from "../../../../services/employee/employee.service";
+import {Employee} from "../../../../dto/employee.model";
+import {Observable} from "rxjs/Observable";
+import {AuthorizationOperationRequest} from "../../../../dto/authorization/authorization-operation-request.model";
+import {AuthorizationAssignmentOperationRequest} from "../../../../dto/authorization/authorization-assignment-operation-request.model";
 
 @Component({
   selector: 'app-security-operation-panel',
@@ -20,6 +25,8 @@ export class SecurityOperationPanelComponent implements OnInit {
   @Input()
   authorizations: Authorization[];
 
+  employees: Employee[] = [];
+
   loading: boolean;
   authorizationTopics: AuthorizationTopic[] = [];
 
@@ -28,25 +35,33 @@ export class SecurityOperationPanelComponent implements OnInit {
   //assignmentArray: UserAccountAuthorizationAssignmentItem[];
   formModel: FormGroup;
 
-  getAuthorizationTopicById(id: number): AuthorizationTopic {
-    let obj = this.authorizationTopics.find(r => {
+  searchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
-      return r.id === id;
-    });
 
-    console.log(obj);
-    return obj;
+  constructor(private employeeService: EmployeeService, private authorizationService: AuthorizationService, private fb: FormBuilder) {
 
+    this.searchInput.valueChanges
+      .debounceTime(200)
+      .switchMap(name => {
+
+        if (name === "") {
+          return Observable.of([]);
+        }
+        else {
+          return this.employeeService.findEmployeesByNameContains(name);
+        }
+      })
+      .subscribe(r => {
+        this.employees = r;
+      })
+
+    //this.initEmployeeArray();
   }
 
-
-  constructor(private authorizationService: AuthorizationService, private fb: FormBuilder) {
-
-
-    this.formModel = this.fb.group(
-      {
-        'newUser': ['', [Validators.required, Validators.minLength(5)]]
-      });
+  private initEmployeeArray() {
+    const e: Employee = {};
+    e.surname = "请输入人员关键字";
+    this.employees.push(e);
   }
 
   onCheckAllButtonClicked(authorization: Authorization) {
@@ -54,11 +69,20 @@ export class SecurityOperationPanelComponent implements OnInit {
     authorization.authorizationAssignmentList.forEach((r, index) => {
 
       r.allowedOperations = [];
-      this.getAuthorizationTopicById(r.id).availableTopicOperationList.forEach(op => {
+      this.getAuthorizationTopicById(r.topic.id).availableTopicOperationList.forEach(op => {
         r.allowedOperations.push(op);
       })
 
     })
+
+  }
+
+  getAuthorizationTopicById(id: number): AuthorizationTopic {
+    let obj = this.authorizationTopics.find(r => {
+
+      return r.id === id;
+    });
+    return obj;
 
   }
 
@@ -69,21 +93,42 @@ export class SecurityOperationPanelComponent implements OnInit {
   }
 
   onDeleteUserButtonClicked(index: number) {
-    /*
-        const request = new AuthorizationAssignmentRequest();
-        request.userAccount = this.assignmentArray[index].userAccount;
-        this.authorizationService.deleteAuthorizationAssignment(request).subscribe(r => {
-          this.loadData();
-        })
-        */
-
+    this.authorizationService.deleteAuthorization(this.key[0], this.authorizations[index].id).subscribe(r => {
+      this.loadData();
+    });
   }
 
+
+  onSaveButtonClicked(authorization: Authorization) {
+    const authorizationOperationRequest: AuthorizationOperationRequest = new AuthorizationOperationRequest();
+    authorizationOperationRequest.id = authorization.id;
+    authorizationOperationRequest.authorizationAssignmentList = [];
+
+    authorization.authorizationAssignmentList.forEach(r => {
+      const req: AuthorizationAssignmentOperationRequest = new AuthorizationAssignmentOperationRequest();
+      req.topicId = r.topic.id;
+      req.allowedOperationIds = r.allowedOperations.map(op => op.id);
+
+      authorizationOperationRequest.authorizationAssignmentList.push(req);
+    });
+
+    this.authorizationService.updateAuthorizationAssignment(this.key[0], authorizationOperationRequest).subscribe(r => {
+      this.loadData();
+    });
+  }
+
+
+  private loadData() {
+    this.authorizationService.getAuthorizations(this.key[0]).subscribe(z => {
+      this.authorizations = z;
+    });
+  }
 
   ngOnInit() {
     this.authorizationService.getAuthorizationTopics(this.key[0]).subscribe(r => {
       this.authorizationTopics = r;
     })
+
   }
 
 
@@ -101,7 +146,6 @@ export class SecurityOperationPanelComponent implements OnInit {
         assignment.allowedOperations.splice(index, 1);
       }
     }
-
   }
 
   isCheckedByDefault(assignment: AuthorizationAssignment, op: TopicOperation): boolean {
@@ -110,16 +154,12 @@ export class SecurityOperationPanelComponent implements OnInit {
   }
 
   onSubmit() {
-
+    //this.employeeService.
   }
 
-
-  onSaveButtonClicked() {
-
-  }
 
   onRefreshIconClicked() {
-
+    this.loadData();
   }
 
   getStatus() {
@@ -128,6 +168,21 @@ export class SecurityOperationPanelComponent implements OnInit {
       return "pull-right fa fa-refresh fa-fw isaac-margin-10bottom";
     else
       return "pull-right fa fa-refresh fa-spin fa-fw isaac-margin-10bottom";
+  }
+
+
+  stopPropagation($event) {
+    event.stopPropagation()
+  }
+
+
+  onEmployeeSelected(e: Employee) {
+
+    this.employees = [];
+    this.searchInput.setValue("");
+    this.authorizationService.createAuthorization(this.key[0], e.surname + e.givenName, e.id).subscribe(r => {
+      this.loadData();
+    })
   }
 
 

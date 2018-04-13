@@ -21,42 +21,75 @@
   </thead>
 
   <tbody>
-    <template ngFor let-authorization [ngForOf]="authorizations" let-i="index">
-      <tr>
-        <td> {{authorization.username}}</td>
-        <template ngFor let-assignment [ngForOf]="authorization?.authorizationAssignmentList" let-j="index">
-          <template ngFor let-op [ngForOf]="getAuthorizationTopicById(assignment.topic.id).availableTopicOperationList" let-k="index">
-            <td>
-              <input [checked]="isCheckedByDefault(assignment,op)" type="checkbox"
-                     (change)="onChange(authorization,assignment,op, $event.target.checked)">
-            </td>
-          </template>
+  <template ngFor let-authorization [ngForOf]="authorizations" let-i="index">
+    <tr>
+      <td> {{authorization.username}}</td>
+      <template ngFor let-assignment [ngForOf]="authorization?.authorizationAssignmentList" let-j="index">
+        <template ngFor let-op [ngForOf]="getAuthorizationTopicById(assignment.topic.id)?.availableTopicOperationList"
+                  let-k="index">
+          <td>
+            <input [checked]="isCheckedByDefault(assignment,op)" type="checkbox"
+                   (change)="onChange(authorization,assignment,op, $event.target.checked)">
+          </td>
         </template>
-        <td>
-          <div class="btn-group-sm" role="group">
-            <button (click)="onCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
-              class="glyphicon glyphicon-check"></span></button>
-            <button (click)="onUnCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
-              class="glyphicon glyphicon-unchecked"></span></button>
-            <button (click)="onDeleteUserButtonClicked(i)" type="button" class="btn btn-default"><span
-              class="glyphicon glyphicon-remove"></span></button>
-          </div>
-        </td>
-      </tr>
-    </template>
+      </template>
+      <td>
+        <div class="btn-group-sm" role="group">
+          <button (click)="onCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
+            class="glyphicon glyphicon-check"></span></button>
+          <button (click)="onUnCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
+            class="glyphicon glyphicon-unchecked"></span></button>
+          <button (click)="onSaveButtonClicked(authorization)" type="button" class="btn btn-default"><span
+            class="glyphicon glyphicon-floppy-disk"></span></button>
+          <button (click)="onDeleteUserButtonClicked(i)" type="button" class="btn btn-default"><span
+            class="glyphicon glyphicon-remove"></span></button>
+        </div>
+      </td>
+    </tr>
+  </template>
   </tbody>
 </table>
 
+<div class="form-inline">
+  <!--
+  <label for="searchInput">添加用户:</label>
+  <input id="searchInput" type="text" class="form-control" placeholder="用户姓名" [formControl]="searchInput">
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let e of employees">{{e.surname}}{{e.givenName}}</li>
+  </ul>
+  -->
+  <div>
+    <div class="dropdown" [class.open]="employees.length>0">
 
+      <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)" (focus)="stopPropagation($event)"
+             type="text" class="form-control dropdown-toggle"
+             placeholder="用户姓名" [formControl]="searchInput"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2"
+             >
+      <small [hidden]="searchInput.valid || searchInput.pristine" class="text-danger">
+        最少1个字符
+      </small>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li *ngFor="let e of employees">
+          <a href="javascript:void(0)" (click)="onEmployeeSelected(e)">{{e.surname}}{{e.givenName}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<!--
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
-  <label for="newUser">Add User/Group:</label>
-  <input placeholder="user's NT account" formControlName="newUser" id="newUser" type="text">
+  <label for="newUser">添加用户:</label>
+  <input placeholder="用户姓名" formControlName="newUser" id="newUser" type="text">
+  <input type="text" class="form-control" placeholder="用户姓名" [formControl]="searchInput">
   <small [hidden]="formModel.controls.newUser.valid || formModel.controls.newUser.pristine" class="text-danger">
-    Name is required (minimum 5 characters).
+   最少2个字符
   </small>
-  <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">Add</button>
-  <button class="btn btn-primary" (click)="onSaveButtonClicked()">Save</button>
+  <button class="btn btn-default" type="submit" [disabled]="!formModel.valid">添加</button>
+  <button class="btn btn-default" (click)="onSaveButtonClicked()">保存</button>
 </form>
+-->
 
 
-<pre>{{authorizations|json}}</pre>

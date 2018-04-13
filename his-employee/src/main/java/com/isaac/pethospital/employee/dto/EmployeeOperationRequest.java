@@ -290,6 +290,7 @@ public class EmployeeOperationRequest {
         ee.setSurname(this.surname);
         ee.setIdNumber(this.idNumber);
         ee.setDriverLicenseNumber(this.driverLicenseNumber);
+        ee.setFullName(this.fullName);
         ee.setDateOfBirth(this.dateOfBirth);
         ee.setGender(this.gender);
         ee.setNationality(this.nationality);

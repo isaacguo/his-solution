@@ -29,4 +29,6 @@ public interface EmployeeService {
     EmployeeEntity findBySurnameAndGivenName(EmployeeOperationRequest employeeOperationRequest);
 
     boolean setReportTo(Long employeeId, Long managerId);
+
+    List<EmployeeEntity> findKeywordInName(String any);
 }

@@ -1,5 +1,10 @@
 package com.isaac.pethospital.employee;
 
+import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
+import com.isaac.pethospital.common.entities.AuthorizationEntity;
+import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
+import com.isaac.pethospital.common.repositories.AuthorizationRepository;
+import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.*;
 import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
@@ -35,7 +40,12 @@ public class HisEmployeeManagementApplication {
 
 
     @Bean
-    CommandLineRunner commandLineRunner(CompanyRepository companyRepository, DepartmentRepository departmentRepository, EmployeeRepository employeeRepository, EmployeeService employeeService) {
+    CommandLineRunner commandLineRunner(CompanyRepository companyRepository,
+                                        DepartmentRepository departmentRepository,
+                                        EmployeeRepository employeeRepository,
+                                        EmployeeService employeeService,
+                                        AuthorizationTopicRepository authorizationTopicRepository,
+                                        AuthorizationRepository authorizationRepository) {
 
         return new CommandLineRunner() {
 
@@ -56,12 +66,45 @@ public class HisEmployeeManagementApplication {
                 employeeService.createEmployee(generateEmployee2());
                 employeeService.createEmployee(generateEmployee3());
                 employeeService.createEmployee(generateEmployee4());
+
+                initAuthorization();
+
+
+            }
+
+            private void initAuthorization() {
+                AuthorizationTopicEntity topic1 = new AuthorizationTopicEntity();
+                topic1.setName("工资");
+                topic1.addAvailableTopicOperationByName("增加");
+                topic1.addAvailableTopicOperationByName("删除");
+                topic1.addAvailableTopicOperationByName("修改");
+                topic1.addAvailableTopicOperationByName("查看");
+                authorizationTopicRepository.save(topic1);
+
+                AuthorizationTopicEntity topic2 = new AuthorizationTopicEntity();
+                topic2.setName("职位");
+                topic2.addAvailableTopicOperationByName("增加");
+                topic2.addAvailableTopicOperationByName("删除");
+                topic2.addAvailableTopicOperationByName("修改");
+                topic2.addAvailableTopicOperationByName("查看");
+                authorizationTopicRepository.save(topic2);
+
                 /*
-                employeeRepository.save(generateEmployee1());
-                employeeRepository.save(generateEmployee2());
-                employeeRepository.save(generateEmployee3());
+                AuthorizationEntity authorization = new AuthorizationEntity();
+
+                AuthorizationAssignmentEntity aae = new AuthorizationAssignmentEntity();
+                aae.setTopic(topic1);
+                aae.addAllowedOperation(topic1.getAvailableTopicOperationList().get(0));
+                aae.addAllowedOperation(topic1.getAvailableTopicOperationList().get(1));
+
+                AuthorizationAssignmentEntity aae2 = new AuthorizationAssignmentEntity();
+                aae2.setTopic(topic2);
+                aae2.addAllowedOperation(topic2.getAvailableTopicOperationList().get(2));
+                aae2.addAllowedOperation(topic2.getAvailableTopicOperationList().get(3));
                 */
 
+                authorizationTopicRepository.save(topic1);
+                authorizationTopicRepository.save(topic2);
             }
 
 
@@ -87,6 +130,7 @@ public class HisEmployeeManagementApplication {
                 EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("狐冲");
                 ee.setSurname("令");
+                ee.setFullName(ee.getSurname()+ee.getGivenName());
                 ee.setContactAddress(cae);
                 ee.setWorkPhoneNumber("010-3391232");
                 ee.setLoginAccount("linghuchong");
@@ -127,6 +171,7 @@ public class HisEmployeeManagementApplication {
                 EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("灵珊");
                 ee.setSurname("岳");
+                ee.setFullName(ee.getSurname()+ee.getGivenName());
                 ee.setContactAddress(cae);
                 ee.setWorkPhoneNumber("010-3391233");
                 ee.setLoginAccount("yuelingshan");
@@ -152,6 +197,7 @@ public class HisEmployeeManagementApplication {
                 EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("之桃");
                 ee.setSurname("赵");
+                ee.setFullName(ee.getSurname()+ee.getGivenName());
                 ee.setDateOfBirth(dateOfBirth);
                 ee.setEmail("zhidong_zhao@pethos.com");
                 ee.setEmployeeNumber("000005");
@@ -186,6 +232,7 @@ public class HisEmployeeManagementApplication {
                 EmployeeOperationRequest ee=new EmployeeOperationRequest();
                 ee.setGivenName("靖");
                 ee.setSurname("郭");
+                ee.setFullName(ee.getSurname()+ee.getGivenName());
                 ee.setContactAddress(cae);
                 ee.setWorkPhoneNumber("010-3391233");
                 ee.setLoginAccount("guojing");

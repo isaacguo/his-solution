@@ -122,4 +122,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository.save(manager);
         return true;
     }
+
+    @Override
+    public List<EmployeeEntity> findKeywordInName(String keyword) {
+        return this.employeeRepository.findDistinctByFullNameContains(keyword);
+    }
 }

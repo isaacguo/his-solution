@@ -85,4 +85,13 @@ public class EmployeeServiceSpecTests {
         verify(employeeRepository,times(1)).save(any(EmployeeEntity.class));
     }
 
+    @Test
+    public void ds()
+    {
+        //when
+        this.employeeService.findKeywordInName(any(String.class));
+        //then
+        verify(this.employeeRepository,times(1)).findDistinctByFullNameContains(any(String.class));
+    }
+
 }

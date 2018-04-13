@@ -9,6 +9,8 @@ import {EmployeeCount} from "../../dto/employee.count.model";
 @Injectable()
 export class EmployeeService {
 
+  rootUrl: string = "/api/hisemployee/employees";
+
   constructor(private authHttp: AuthHttp) {
   }
 
@@ -24,13 +26,20 @@ export class EmployeeService {
       .map(this.extractData);
   }
 
+  findEmployeesByNameContains(keyword: string): Observable<Employee[]> {
+
+    let url=`${this.rootUrl}/search-by-name/${keyword}`;
+
+    return this.authHttp.get(url).map(this.extractData);
+  }
+
   getMyInfo(): Observable<Employee> {
     let url = `/api/hisemployee/employees/getMyInfo`;
     return this.authHttp.get(url)
       .map(this.extractData);
   }
 
-  getEmployeeInfoByEmployeeUuid(uuid:string):Observable<Employee>{
+  getEmployeeInfoByEmployeeUuid(uuid: string): Observable<Employee> {
     let url = `/api/hisemployee/employees/${uuid}/`;
     return this.authHttp.get(url)
       .map(this.extractData);
