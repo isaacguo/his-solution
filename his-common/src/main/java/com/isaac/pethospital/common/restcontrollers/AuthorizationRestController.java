@@ -42,10 +42,10 @@ public class AuthorizationRestController {
         return this.authorizationService.updateAuthorization(request);
     }
 
-    @GetMapping("isAuthorized/{tid}/{oid}")
-    public boolean isAuthorized(@PathVariable("tid") Long tid, @PathVariable("oid") Long oid) {
+    @GetMapping("isAuthorized/{topic}/{operation}")
+    public boolean isAuthorized(@PathVariable("topic") String topic, @PathVariable("operation") String operation) {
         String userAccount = authHelper.getUserAccount();
 
-        return this.authorizationService.isAuthorized(userAccount, tid, oid);
+        return this.authorizationService.isAuthorized(userAccount, topic, operation);
     }
 }

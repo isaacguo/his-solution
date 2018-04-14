@@ -84,6 +84,7 @@ import {MyDatePickerModule} from "mydatepicker";
 import {AuthorizationManagementComponent} from './components/settings/authorization-management/authorization-management.component';
 import {SecurityOperationPanelComponent} from './components/settings/authorization-management/security-operation-panel/security-operation-panel.component';
 import {AuthorizationService} from "./services/common/authorization.service";
+import {ProcurementApprovalGuard} from "./guards/procurement-approval.guard";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -170,6 +171,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthGuard,
     AdminGuard,
     FinanceGuard,
+    ProcurementApprovalGuard,
     LogoutGuardService,
     AuthenticationService,
     AuthorizationService,

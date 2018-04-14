@@ -47,6 +47,7 @@ import {ProcurementApprovalListComponent} from "./app/components/procurement/pro
 import {ProcurementPurchaseComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase.component";
 import {ProcurementPurchaseListComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component";
 import {AuthorizationManagementComponent} from "./app/components/settings/authorization-management/authorization-management.component";
+import {ProcurementApprovalGuard} from "./app/guards/procurement-approval.guard";
 
 
 const appRoutes: Routes = [
@@ -186,6 +187,7 @@ const appRoutes: Routes = [
       {
         path: 'procurement-approval',
         component: ProcurementApprovalComponent,
+        canActivate: [ProcurementApprovalGuard],
         children: [
           {
             path: 'list',
@@ -274,6 +276,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'settings-authorization',
+        canActivate: [AdminGuard],
         component: AuthorizationManagementComponent
       }
     ]

@@ -18,5 +18,5 @@ public interface AuthorizationService {
 
     boolean updateAuthorization(AuthorizationOperationRequest request);
 
-    boolean isAuthorized(String userAccount, Long tid, Long oid);
+    boolean isAuthorized(String userAccount, String topic, String operation);
 }

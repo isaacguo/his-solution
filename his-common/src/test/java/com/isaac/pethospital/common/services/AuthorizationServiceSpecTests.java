@@ -134,8 +134,10 @@ public class AuthorizationServiceSpecTests {
         AuthorizationAssignmentEntity aae=new AuthorizationAssignmentEntity();
         AuthorizationTopicEntity topicEntity=new AuthorizationTopicEntity();
         topicEntity.setId(1L);
+        topicEntity.setName("ABC");
         TopicOperationEntity toe=new TopicOperationEntity();
         toe.setId(2L);
+        toe.setName("BCD");
 
         aae.setTopic(topicEntity);
         aae.addAllowedOperation(toe);
@@ -144,7 +146,7 @@ public class AuthorizationServiceSpecTests {
         doReturn(authorizationEntity).when(this.authorizationRepository).findByUserAccount("Isaac");
 
         //when
-        this.authorizationService.isAuthorized("Isaac", 1L, 2L);
+        this.authorizationService.isAuthorized("Isaac", "ABC", "BCD");
         //then
         verify(this.authorizationRepository, times(1)).findByUserAccount("Isaac");
     }

@@ -75,6 +75,28 @@ public class HisProcurementApplication {
                 topic2.addAvailableTopicOperationByName("查看");
                 authorizationTopicRepository.save(topic2);
 
+                AuthorizationTopicEntity topic3 = new AuthorizationTopicEntity();
+                topic3.setName("审批");
+                topic3.addAvailableTopicOperationByName("增加");
+                topic3.addAvailableTopicOperationByName("删除");
+                topic3.addAvailableTopicOperationByName("修改");
+                topic3.addAvailableTopicOperationByName("查看");
+                authorizationTopicRepository.save(topic3);
+
+                //供应商
+                AuthorizationTopicEntity topic4 = new AuthorizationTopicEntity();
+                topic4.setName("供应商管理");
+                topic4.addAvailableTopicOperationByName("增加");
+                topic4.addAvailableTopicOperationByName("删除");
+                topic4.addAvailableTopicOperationByName("修改");
+                topic4.addAvailableTopicOperationByName("查看");
+                authorizationTopicRepository.save(topic4);
+
+
+
+
+
+                /*
                 AuthorizationEntity authorization = new AuthorizationEntity();
 
                 AuthorizationAssignmentEntity aae = new AuthorizationAssignmentEntity();
@@ -92,7 +114,9 @@ public class HisProcurementApplication {
                 authorization.addAuthorizationAssignment(aae2);
 
                 authorizationRepository.save(authorization);
+                */
             }
+
 
             private void initVendor() {
                 VendorProductEntity vpe1 = new VendorProductEntity();

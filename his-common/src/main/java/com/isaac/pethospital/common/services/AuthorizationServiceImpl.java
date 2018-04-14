@@ -123,20 +123,20 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
-    public boolean isAuthorized(String userAccount, Long tid, Long oid) {
+    public boolean isAuthorized(String userAccount, String topicString, String operationString) {
 
         AuthorizationEntity ae = this.authorizationRepository.findByUserAccount(userAccount);
         if (ae == null)
-            throw new RuntimeException("Cannot find Authorization.");
+            return false;
 
-        AuthorizationAssignmentEntity aae = ae.getAuthorizationAssignmentList().stream().filter(t -> t.getTopic().getId() == tid).findFirst().orElse(null);
+        AuthorizationAssignmentEntity aae = ae.getAuthorizationAssignmentList().stream().filter(t -> t.getTopic().getName().equals(topicString)).findFirst().orElse(null);
         if(aae==null)
-            throw new RuntimeException("Authorization Assignment is Null.");
+            return false;
         AuthorizationTopicEntity topic = aae.getTopic();
         if (topic == null)
             throw new RuntimeException("Topic is null");
 
-        TopicOperationEntity toe= aae.getAllowedOperations().stream().filter(o->o.getId()==oid).findFirst().orElse(null);
+        TopicOperationEntity toe= aae.getAllowedOperations().stream().filter(o->o.getName().equals(operationString)).findFirst().orElse(null);
 
         if (toe == null)
             return false;

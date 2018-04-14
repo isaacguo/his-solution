@@ -101,7 +101,7 @@
           <li>
             <a href="javascript:void(0)" class="text-center"> 采购管理 <span class="badge isaac-badge ">{{getCount()}}</span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li>
+              <li *ngIf="showProcurementApproval">
                 <a routerLink="/procurement-approval" routerLinkActive="active" class="text-center">采购审批 <span class="badge isaac-badge">{{getCount()}}</span></a>
               </li>
               <li>
@@ -120,7 +120,7 @@
               </li>
             </ul>
           </li>
-          <li>
+          <li *ngIf="authInfo.isAdmin">
             <a routerLink="/settings" routerLinkActive="active" class="text-center"> 系统管理</a>
             <ul class="nav nav-second-level">
               <li>

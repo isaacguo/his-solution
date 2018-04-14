@@ -100,7 +100,7 @@ public class AuthorizationRestControllerSpecTests {
 
 
         doReturn("Isaac").when(authHelper).getUserAccount();
-        doReturn(true).when(this.authorizationService).isAuthorized("Isaac",2L,3L);
+        doReturn(true).when(this.authorizationService).isAuthorized(any(String.class),any(String.class),any(String.class));
 
         this.mockMvc.perform(get("/authorizations/isAuthorized/2/3"))
                 .andExpect(status().isOk())

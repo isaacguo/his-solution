@@ -11,10 +11,16 @@ export class AuthorizationService extends AbstractService {
 
   authorizationArray: [string, string][] = [];
 
+  static serviceMap:Map<string,string>=new Map<string, string>();
+
+
   constructor(private authHttp: AuthHttp) {
     super();
     this.authorizationArray.push(["/api/hisprocurement", "采购模块权限"]);
     this.authorizationArray.push(["/api/hisemployee", "人事模块权限"]);
+
+    AuthorizationService.serviceMap.set("Procurement", "/api/hisprocurement");
+
   }
 
   getAuthorizations(serviceUrl: string): Observable<Authorization[]> {
@@ -50,9 +56,10 @@ export class AuthorizationService extends AbstractService {
   }
 
   isAuthorized(serviceUrl: string, topic: string, operation: string): Observable<boolean> {
-    return this.authHttp.get(`${serviceUrl}/authorization-assignments/isAuthorized/${topic}/${operation}`).map(r => {
+    return this.authHttp.get(`${serviceUrl}/authorizations/isAuthorized/${topic}/${operation}`).map(r => {
       return this.extractTextData(r) === "true" ? true : false;
     });
   }
+
 
 }

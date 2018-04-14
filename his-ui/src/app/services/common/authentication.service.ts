@@ -25,7 +25,8 @@ export class AuthenticationService {
     let s_token = sessionStorage.getItem("id_token");
     if (s_token) {
       this.decoded = this.jwtHelper.decodeToken(s_token);
-      this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub));
+      //this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub));
+      this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub, this.decoded.isAdmin == 'true', this.decoded.isFinance=='true'));
     }
   }
 
