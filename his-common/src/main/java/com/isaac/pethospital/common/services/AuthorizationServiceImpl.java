@@ -130,6 +130,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             throw new RuntimeException("Cannot find Authorization.");
 
         AuthorizationAssignmentEntity aae = ae.getAuthorizationAssignmentList().stream().filter(t -> t.getTopic().getId() == tid).findFirst().orElse(null);
+        if(aae==null)
+            throw new RuntimeException("Authorization Assignment is Null.");
         AuthorizationTopicEntity topic = aae.getTopic();
         if (topic == null)
             throw new RuntimeException("Topic is null");
