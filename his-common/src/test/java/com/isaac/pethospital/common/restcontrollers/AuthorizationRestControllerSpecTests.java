@@ -2,6 +2,7 @@ package com.isaac.pethospital.common.restcontrollers;
 
 import com.isaac.pethospital.common.dtos.AuthorizationOperationRequest;
 import com.isaac.pethospital.common.entities.AuthorizationEntity;
+import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import javax.persistence.ManyToMany;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,6 +40,8 @@ public class AuthorizationRestControllerSpecTests {
 
     @Mock
     AuthorizationService authorizationService;
+    @Mock
+    AuthHelper authHelper;
 
     @InjectMocks
     AuthorizationRestController authorizationRestController;
@@ -90,4 +94,20 @@ public class AuthorizationRestControllerSpecTests {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", is(true)));
     }
+
+    @Test
+    public void isAuthorized() throws Exception{
+
+
+        doReturn("Isaac").when(authHelper).getUserAccount();
+        doReturn(true).when(this.authorizationService).isAuthorized("Isaac",2L,3L);
+
+        this.mockMvc.perform(get("/authorizations/isAuthorized/2/3"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", is(true)));
+
+
+    }
 }
+

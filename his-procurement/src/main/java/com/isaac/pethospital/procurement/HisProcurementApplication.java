@@ -49,14 +49,11 @@ public class HisProcurementApplication {
             @Override
             public void run(String... strings) throws Exception {
 
-                //initProcurementStatus();
-                //initConfiguration();
-                //initApproval();
+                initProcurementStatus();
+                initConfiguration();
+                initApproval();
                 initVendor();
-
                 initAuthorization();
-
-
 
 
             }

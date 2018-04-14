@@ -26,6 +26,7 @@ public class EmployeeEntity {
     private String givenName;
     private String surname;
 
+
     public String getFullName() {
         return fullName;
     }

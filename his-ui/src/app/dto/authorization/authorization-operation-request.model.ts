@@ -4,6 +4,7 @@ export class AuthorizationOperationRequest {
   public id:number;
   public uid: number;
   public username: string;
+  public userAccount:string;
   public authorizationAssignmentList: AuthorizationAssignmentOperationRequest[];
 
   constructor(){}

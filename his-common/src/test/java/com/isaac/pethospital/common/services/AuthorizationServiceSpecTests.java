@@ -2,14 +2,19 @@ package com.isaac.pethospital.common.converter.services;
 
 import com.isaac.pethospital.common.dtos.AuthorizationAssignmentOperationRequest;
 import com.isaac.pethospital.common.dtos.AuthorizationOperationRequest;
+import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
 import com.isaac.pethospital.common.entities.AuthorizationEntity;
+import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
+import com.isaac.pethospital.common.entities.TopicOperationEntity;
 import com.isaac.pethospital.common.repositories.AuthorizationAssignmentRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.common.services.AuthorizationServiceImpl;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 
 import java.util.LinkedList;
@@ -27,6 +32,9 @@ public class AuthorizationServiceSpecTests {
     AuthorizationAssignmentRepository authorizationAssignmentRepository;
     AuthorizationService authorizationService;
 
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     @Before
     public void before() {
@@ -46,11 +54,12 @@ public class AuthorizationServiceSpecTests {
         AuthorizationOperationRequest request = new AuthorizationOperationRequest();
         request.setUid(1L);
         request.setUsername("renwoxing");
+        request.setUserAccount("renwoxing");
         doReturn(null).when(authorizationRepository).findByUsername(any(String.class));
         //when
         this.authorizationService.createAuthorization(request);
         //then
-        verify(authorizationRepository, times(1)).findByUsername(any(String.class));
+        verify(authorizationRepository, times(1)).findByUserAccount(any(String.class));
         verify(authorizationRepository, times(1)).save(any(AuthorizationEntity.class));
     }
 
@@ -115,6 +124,29 @@ public class AuthorizationServiceSpecTests {
         request1.setTopicId(1L);
         request.setAuthorizationAssignmentList(aaor);
         return request;
+    }
+
+
+    @Test
+    public void whenIsAuthorizedInvokedThenGetTopic() {
+
+        AuthorizationEntity authorizationEntity=new AuthorizationEntity();
+        AuthorizationAssignmentEntity aae=new AuthorizationAssignmentEntity();
+        AuthorizationTopicEntity topicEntity=new AuthorizationTopicEntity();
+        topicEntity.setId(1L);
+        TopicOperationEntity toe=new TopicOperationEntity();
+        toe.setId(2L);
+
+        aae.setTopic(topicEntity);
+        aae.addAllowedOperation(toe);
+        authorizationEntity.addAuthorizationAssignment(aae);
+        authorizationEntity.setUserAccount("Isaac");
+        doReturn(authorizationEntity).when(this.authorizationRepository).findByUserAccount("Isaac");
+
+        //when
+        this.authorizationService.isAuthorized("Isaac", 1L, 2L);
+        //then
+        verify(this.authorizationRepository, times(1)).findByUserAccount("Isaac");
     }
 
 

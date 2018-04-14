@@ -36,14 +36,13 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Override
     public boolean createAuthorization(AuthorizationOperationRequest request) {
 
-        String username = request.getUsername();
-        if (this.authorizationRepository.findByUsername(username) != null)
-            throw new RuntimeException("User " + username + "has already exsited.");
+        String userAccount = request.getUserAccount();
+        if (this.authorizationRepository.findByUserAccount(userAccount) != null)
+            throw new RuntimeException("User " + userAccount + "has already exsited.");
         AuthorizationEntity ae = request.toAuthorizationEntity();
         this.authorizationTopicRepository.findAll().forEach(r -> {
             AuthorizationAssignmentEntity aae = new AuthorizationAssignmentEntity();
             aae.setTopic(r);
-
             ae.addAuthorizationAssignment(aae);
         });
 
@@ -72,14 +71,14 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     @Override
     public boolean deleteById(Long authorizationId) {
 
-        AuthorizationEntity ae= this.authorizationRepository.findOne(authorizationId);
+        AuthorizationEntity ae = this.authorizationRepository.findOne(authorizationId);
 
-        ae.getAuthorizationAssignmentList().forEach(r->{
-            int size=r.getAllowedOperations().size();
-            for(int i=0;i<size;i++)
+        ae.getAuthorizationAssignmentList().forEach(r -> {
+            int size = r.getAllowedOperations().size();
+            for (int i = 0; i < size; i++)
                 r.removeAllowedOperation(r.getAllowedOperations().get(0));
         });
-        int size=ae.getAuthorizationAssignmentList().size();
+        int size = ae.getAuthorizationAssignmentList().size();
         for (int i = 0; i < size; i++) {
             AuthorizationAssignmentEntity aae = ae.getAuthorizationAssignmentList().get(0);
             ae.removeAuthorizationAssignment(aae);
@@ -99,7 +98,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
             AuthorizationAssignmentOperationRequest aaor = request.getAuthorizationAssignmentList().stream().filter(req -> req.getTopicId() == authorizationAssignment.getTopic().getId()).findFirst().orElse(null);
             //aaor.getAllowedOperationIds().stream().filter(c->)
-            if(aaor==null) return;
+            if (aaor == null) return;
 
             List<Long> leftAll = authorizationAssignment.getAllowedOperations().stream().map(op -> op.getId()).collect(Collectors.toList());
             List<TopicOperationEntity> right = aaor.getAllowedOperationIds().stream().filter(id -> !leftAll.contains(id))
@@ -121,6 +120,26 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         return true;
 
+    }
+
+    @Override
+    public boolean isAuthorized(String userAccount, Long tid, Long oid) {
+
+        AuthorizationEntity ae = this.authorizationRepository.findByUserAccount(userAccount);
+        if (ae == null)
+            throw new RuntimeException("Cannot find Authorization.");
+
+        AuthorizationAssignmentEntity aae = ae.getAuthorizationAssignmentList().stream().filter(t -> t.getTopic().getId() == tid).findFirst().orElse(null);
+        AuthorizationTopicEntity topic = aae.getTopic();
+        if (topic == null)
+            throw new RuntimeException("Topic is null");
+
+        TopicOperationEntity toe= aae.getAllowedOperations().stream().filter(o->o.getId()==oid).findFirst().orElse(null);
+
+        if (toe == null)
+            return false;
+        else
+            return true;
     }
 
     private void notAGoodImplementation(AuthorizationOperationRequest request, AuthorizationEntity ae) {

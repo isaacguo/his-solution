@@ -28,7 +28,5 @@ export class AuthorizationManagementComponent implements OnInit {
         this.keys[index] = r;
       });
     });
-    console.log(this.keys);
   }
-
 }

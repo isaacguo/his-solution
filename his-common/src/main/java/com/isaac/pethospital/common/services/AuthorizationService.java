@@ -17,4 +17,6 @@ public interface AuthorizationService {
     boolean deleteById(Long authorizationId);
 
     boolean updateAuthorization(AuthorizationOperationRequest request);
+
+    boolean isAuthorized(String userAccount, Long tid, Long oid);
 }

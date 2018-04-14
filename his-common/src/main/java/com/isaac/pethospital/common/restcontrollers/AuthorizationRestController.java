@@ -2,6 +2,7 @@ package com.isaac.pethospital.common.restcontrollers;
 
 import com.isaac.pethospital.common.dtos.AuthorizationOperationRequest;
 import com.isaac.pethospital.common.entities.AuthorizationEntity;
+import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,11 @@ import java.util.List;
 public class AuthorizationRestController {
 
     private final AuthorizationService authorizationService;
+    private final AuthHelper authHelper;
 
-    public AuthorizationRestController(AuthorizationService authorizationService) {
+    public AuthorizationRestController(AuthorizationService authorizationService, AuthHelper authHelper) {
         this.authorizationService = authorizationService;
+        this.authHelper = authHelper;
     }
 
     @GetMapping
@@ -37,5 +40,12 @@ public class AuthorizationRestController {
     public boolean updateAuthorization(@RequestBody AuthorizationOperationRequest request)
     {
         return this.authorizationService.updateAuthorization(request);
+    }
+
+    @GetMapping("isAuthorized/{tid}/{oid}")
+    public boolean isAuthorized(@PathVariable("tid") Long tid, @PathVariable("oid") Long oid) {
+        String userAccount = authHelper.getUserAccount();
+
+        return this.authorizationService.isAuthorized(userAccount, tid, oid);
     }
 }

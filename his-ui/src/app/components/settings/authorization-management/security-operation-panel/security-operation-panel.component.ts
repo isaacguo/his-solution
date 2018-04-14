@@ -125,10 +125,11 @@ export class SecurityOperationPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authorizationService.getAuthorizationTopics(this.key[0]).subscribe(r => {
-      this.authorizationTopics = r;
-    })
-
+    if (this.key != null) {
+      this.authorizationService.getAuthorizationTopics(this.key[0]).subscribe(r => {
+        this.authorizationTopics = r;
+      })
+    }
   }
 
 
@@ -177,10 +178,9 @@ export class SecurityOperationPanelComponent implements OnInit {
 
 
   onEmployeeSelected(e: Employee) {
-
     this.employees = [];
     this.searchInput.setValue("");
-    this.authorizationService.createAuthorization(this.key[0], e.surname + e.givenName, e.id).subscribe(r => {
+    this.authorizationService.createAuthorization(this.key[0], e.loginAccount, e.surname + e.givenName, e.id).subscribe(r => {
       this.loadData();
     })
   }

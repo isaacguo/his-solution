@@ -31,18 +31,28 @@ export class AuthorizationService extends AbstractService {
     });
   }
 
-  createAuthorization(serviceUrl:string, username:string, uid:number  ):Observable<boolean>{
+  createAuthorization(serviceUrl: string, userAccount: string, username: string, uid: number): Observable<boolean> {
 
-    return this.authHttp.post(`${serviceUrl}/authorizations/create`, {'username':username, 'uid':uid}).map(r => {
+    return this.authHttp.post(`${serviceUrl}/authorizations/create`, {
+      'userAccount': userAccount,
+      'username': username,
+      'uid': uid
+    }).map(r => {
       return this.extractTextData(r) === "true" ? true : false;
     });
-
   }
 
-  updateAuthorizationAssignment(serviceUrl:string,request: AuthorizationOperationRequest):Observable<boolean> {
+  updateAuthorizationAssignment(serviceUrl: string, request: AuthorizationOperationRequest): Observable<boolean> {
 
     return this.authHttp.put(`${serviceUrl}/authorizations/update`, request).map(r => {
       return this.extractTextData(r) === "true" ? true : false;
     });
   }
+
+  isAuthorized(serviceUrl: string, topic: string, operation: string): Observable<boolean> {
+    return this.authHttp.get(`${serviceUrl}/authorization-assignments/isAuthorized/${topic}/${operation}`).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+
 }

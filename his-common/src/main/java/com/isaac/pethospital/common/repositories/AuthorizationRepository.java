@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthorizationRepository extends JpaRepository<AuthorizationEntity, Long> {
     AuthorizationEntity findByUsername(String userName);
+    AuthorizationEntity findByUserAccount(String userAccount);
 }
