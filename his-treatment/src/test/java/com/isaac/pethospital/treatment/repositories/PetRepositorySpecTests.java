@@ -2,12 +2,14 @@ package com.isaac.pethospital.treatment.repositories;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+import com.isaac.pethospital.treatment.PersistenceConfig;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@ContextConfiguration(classes = PersistenceConfig.class)
 public class PetRepositorySpecTests {
 
     @Autowired
