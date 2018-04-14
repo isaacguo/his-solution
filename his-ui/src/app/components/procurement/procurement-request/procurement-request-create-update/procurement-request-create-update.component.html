@@ -90,8 +90,6 @@
                   <td>包装规格</td>
                   <td>包装单位</td>
                   <td>数量</td>
-                  <td>单价</td>
-                  <td>总价</td>
                   <td>操作</td>
                 </tr>
                 </thead>
@@ -99,11 +97,32 @@
 
                 <tr *ngFor="let good of goodsData.controls; let i=index" [formGroupName]="i">
                   <td>{{i+1}}</td>
-                  <td><input class="form-control" type="text" formControlName="name">
+                  <td>
+
+                    <div class="dropdown" [class.open]="vendorProducts.length>0">
+
+                      <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+                             (focus)="stopPropagation($event)"
+                             type="text" class="form-control dropdown-toggle"
+                             placeholder="请输入商品名称" [formControl]="searchInput"
+                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu3"
+                      >
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li *ngFor="let vendorProduct of vendorProducts">
+                          <a href="javascript:void(0)" (click)="onEmployeeSelected(e)">{{e.surname}}{{e.givenName}}</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </td>
+                  <!--
+                  <td>
+                    <input class="form-control" type="text" formControlName="name">
                     <small [hidden]="good.controls.name.valid" class="text-danger">
                       产品名称不能为空
                     </small>
                   </td>
+                  -->
                   <td><input class="form-control" type="text" formControlName="packageSpecification">
                     <small [hidden]="good.controls.packageSpecification.valid" class="text-danger">
                       包装规格不能为空
@@ -119,14 +138,6 @@
                       数量不能为空
                     </small>
                   </td>
-                  <td><input (change)="onValueChanged(i)" class="form-control" type="text"
-                             formControlName="pricePerUnit">
-                    <small [hidden]="good.controls.pricePerUnit.valid" class="text-danger">
-                      单价不能为空
-                    </small>
-                  </td>
-                  <td><input class="form-control" type="text" formControlName="totalPrice" readonly>
-                  </td>
                   <td><span class="glyphicon glyphicon-remove"
                             (click)="removeGood(i)">
                 </span></td>
@@ -140,17 +151,6 @@
                 添加新商品 +
               </a>
             </div>
-            <div class="row isaac-margin-15top">
-              <div class="col-md-3 form-inline">
-                <div class="form-group">
-                  <label>付款合计:</label>
-                  <input type="text" class="form-control form-control-static form-control-noborder"
-                         formControlName="totalPrice"
-                         readonly>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
@@ -166,7 +166,7 @@
         </div>
         <div class="panel-body">
 
-          <textarea rows="10" class="form-control" formControlName="explanation"></textarea>
+          <textarea rows="5" class="form-control" formControlName="explanation"></textarea>
           <small [hidden]="formModel.controls.explanation.valid" class="text-danger">
             采购说明不能为空
           </small>

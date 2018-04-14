@@ -58,11 +58,6 @@ export class SecurityOperationPanelComponent implements OnInit {
     //this.initEmployeeArray();
   }
 
-  private initEmployeeArray() {
-    const e: Employee = {};
-    e.surname = "请输入人员关键字";
-    this.employees.push(e);
-  }
 
   onCheckAllButtonClicked(authorization: Authorization) {
 

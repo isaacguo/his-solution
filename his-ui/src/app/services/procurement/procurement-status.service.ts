@@ -27,7 +27,6 @@ export class ProcurementStatusService extends AbstractService {
     this.getRoot().subscribe(r => {
       this.p = r;
       this.iterateP(r);
-      console.log(this.flatenP);
 
     })
   }

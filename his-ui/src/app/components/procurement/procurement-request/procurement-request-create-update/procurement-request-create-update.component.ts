@@ -8,6 +8,8 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {VendorService} from "../../../../services/procurement/vendor.service";
 import {Vendor} from "../../../../dto/procurement/vendor.model";
 import {Contact} from "../../../../dto/procurement/contact.model";
+import {Observable} from "rxjs/Observable";
+import {VendorProduct} from "../../../../dto/procurement/vendor-product.model";
 
 @Component({
   selector: 'app-procurement-request-create-update',
@@ -22,7 +24,13 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
   selectedVendor:Vendor=null;
 
   formModel: FormGroup;
+  searchInput: FormControl = new FormControl('');
   requestCreationResultText: string;
+
+  vendorProducts:VendorProduct[]=[];
+
+
+
 
   getOperationText() {
     return this.operation === OperationEnum.CREATE ? "创建" : "修改";
@@ -34,6 +42,24 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
               private procurementRequestService: ProcurementRequestService,
               private vendorService:VendorService) {
     super(route);
+
+    this.searchInput.valueChanges
+      .debounceTime(200)
+      .switchMap(name => {
+
+        if (name === "") {
+          return Observable.of([]);
+        }
+        else {
+          //return this.employeeService.findEmployeesByNameContains(name);
+        }
+      })
+      .subscribe(r => {
+        //this.employees = r;
+      })
+  }
+  stopPropagation($event) {
+    event.stopPropagation()
   }
 
   private initForm() {
@@ -48,18 +74,15 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
         this.initGood()
       ]),
       'explanation': ['', Validators.required],
-      'totalPrice':['0.00', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]]
     })
   }
 
   initGood() {
     return this.fb.group({
-      'name': ['', Validators.required],
+      //'name': ['', Validators.required],
       'packageSpecification': ['', Validators.required],
       'packageUnit': ['', Validators.required],
       'number': ['0', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
-      'pricePerUnit': ['0.00', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
-      'totalPrice': ['0.00', [Validators.required, Validators.pattern(/^-?\d*(\.\d+)?$/)]],
     })
   }
 
@@ -176,4 +199,6 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
   onContactDropdownClicked(contact: Contact) {
     this.formModel.get('vendorInfo').get('contact').setValue(contact.name);
   }
+
+
 }

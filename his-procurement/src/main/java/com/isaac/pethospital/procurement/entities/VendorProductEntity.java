@@ -26,6 +26,14 @@ public class VendorProductEntity {
     @ManyToOne
     @JsonBackReference("parent-children")
     VendorProductEntity parent;
+    String productEnglishName;  //产品英文名
+    String productChineseName;  //产品中文名
+    String orderNumber;   //订货号
+    boolean productSet = false;
+    String currency;
+    String packageSpecification; //包装规格
+    String packageUnit; //销售单位
+    Double pricePerUnit;
 
     public VendorProductEntity getParent() {
         return parent;
@@ -48,17 +56,6 @@ public class VendorProductEntity {
         child.setParent(null);
         this.children.remove(child);
     }
-
-    String productEnglishName;  //产品英文名
-    String productChineseName;  //产品中文名
-    String orderNumber;   //订货号
-    boolean productSet = false;
-
-    String currency;
-
-    String packageSpecification; //包装规格
-    String packageUnit; //销售单位
-    Double pricePerUnit;
 
     public Long getId() {
         return id;

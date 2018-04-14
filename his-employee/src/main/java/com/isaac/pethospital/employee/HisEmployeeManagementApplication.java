@@ -49,20 +49,79 @@ public class HisEmployeeManagementApplication {
 
         return new CommandLineRunner() {
 
+            /*
+            岳灵珊	总经理	总经理
+
+
+            令狐冲	诊疗室	部门经理
+            仪琳	诊疗室	主治医师
+            黄蓉	诊疗室	主任医师
+
+            林震南	化验1室	部门经理
+            余沧海	化验1室	操作员
+            曲非烟	化验1室	操作员
+
+
+            上官云	药房	部门经理
+            向问天	药房	操作员
+
+            郭靖    办公室 	操作员
+
+            小龙女	财务室	财务经理
+            陆无双	财务室	会计
+            公孙止	财务室	出纳
+
+
+            赵敏	库房	库房经理
+            周芷若	库房	操作员
+
+             */
+
             @Override
             public void run(String... strings) throws Exception {
                 CompanyEntity companyEntity = new CompanyEntity();
                 companyEntity.setCompanyName("Pet Hospital1");
                 companyEntity.setCompanyLocation("Beijing ChaoYang");
 
+                DepartmentEntity departmentEntity0 = new DepartmentEntity();
+                departmentEntity0.setName("总经理");
+
+                DepartmentEntity departmentEntity01 = new DepartmentEntity();
+                departmentEntity01.setName("诊疗室");
+
                 DepartmentEntity departmentEntity1 = new DepartmentEntity();
-                departmentEntity1.setName("DE1");
-                companyEntity.addDepartment(departmentEntity1);
+                departmentEntity1.setName("化验1室");
+
+                DepartmentEntity departmentEntity11 = new DepartmentEntity();
+                departmentEntity11.setName("化验2室");
+
+                DepartmentEntity departmentEntity2 = new DepartmentEntity();
+                departmentEntity2.setName("药房");
+
+                DepartmentEntity departmentEntity3 = new DepartmentEntity();
+                departmentEntity3.setName("财务室");
+
+                DepartmentEntity departmentEntity4 = new DepartmentEntity();
+                departmentEntity4.setName("办公室");
+
+                DepartmentEntity departmentEntity5 = new DepartmentEntity();
+                departmentEntity5.setName("库房");
+
+                departmentEntity0.addChild(departmentEntity1);
+                departmentEntity0.addChild(departmentEntity01);
+                departmentEntity0.addChild(departmentEntity11);
+                departmentEntity0.addChild(departmentEntity2);
+                departmentEntity0.addChild(departmentEntity3);
+                departmentEntity0.addChild(departmentEntity4);
+                departmentEntity0.addChild(departmentEntity5);
+
+
+                companyEntity.addDepartment(departmentEntity0);
 
                 CompanyEntity savedCe1 = companyRepository.save(companyEntity);
-                DepartmentEntity savedDe1 = departmentRepository.findAll().get(0);
 
-                employeeService.createEmployee(generateEmployee1());
+
+                employeeService.createEmployee(generateEmployee1(departmentEntity01));
                 employeeService.createEmployee(generateEmployee2());
                 employeeService.createEmployee(generateEmployee3());
                 employeeService.createEmployee(generateEmployee4());
@@ -108,11 +167,11 @@ public class HisEmployeeManagementApplication {
             }
 
 
-            private EmployeeOperationRequest generateEmployee1() {
+            private EmployeeOperationRequest generateEmployee1(DepartmentEntity departmentEntity) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate dateOfBirth = LocalDate.parse("1900-04-01", formatter);
                 LocalDate joinedDate = LocalDate.parse("2015-10-01", formatter);
-                ContactAddressEntity cae=new ContactAddressEntity();
+                ContactAddressEntity cae = new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店18层");
                 cae.setCity("北京");
                 cae.setCountry("大梁");
@@ -123,14 +182,15 @@ public class HisEmployeeManagementApplication {
                 cae.setWorkPhone("123566332");
                 cae.setPost("911000");
 
-                LeaveInfoEntity leaveInfo=new LeaveInfoEntity();
+                LeaveInfoEntity leaveInfo = new LeaveInfoEntity();
                 leaveInfo.setAnuualLeave(80L);
                 leaveInfo.setSickLeave(32L);
 
-                EmployeeOperationRequest ee=new EmployeeOperationRequest();
+                EmployeeOperationRequest ee = new EmployeeOperationRequest();
                 ee.setGivenName("狐冲");
                 ee.setSurname("令");
-                ee.setFullName(ee.getSurname()+ee.getGivenName());
+                ee.setDepartment(departmentEntity);
+                ee.setFullName(ee.getSurname() + ee.getGivenName());
                 ee.setContactAddress(cae);
                 ee.setWorkPhoneNumber("010-3391232");
                 ee.setLoginAccount("linghuchong");
@@ -153,7 +213,7 @@ public class HisEmployeeManagementApplication {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate dateOfBirth = LocalDate.parse("1984-02-28", formatter);
                 LocalDate joinedDate = LocalDate.parse("2012-04-17", formatter);
-                ContactAddressEntity cae=new ContactAddressEntity();
+                ContactAddressEntity cae = new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店17层");
                 cae.setCity("北京");
                 cae.setCountry("大梁");
@@ -164,14 +224,14 @@ public class HisEmployeeManagementApplication {
                 cae.setWorkPhone("123577432");
                 cae.setPost("611000");
 
-                LeaveInfoEntity leaveInfo=new LeaveInfoEntity();
+                LeaveInfoEntity leaveInfo = new LeaveInfoEntity();
                 leaveInfo.setAnuualLeave(80L);
                 leaveInfo.setSickLeave(32L);
 
-                EmployeeOperationRequest ee=new EmployeeOperationRequest();
+                EmployeeOperationRequest ee = new EmployeeOperationRequest();
                 ee.setGivenName("灵珊");
                 ee.setSurname("岳");
-                ee.setFullName(ee.getSurname()+ee.getGivenName());
+                ee.setFullName(ee.getSurname() + ee.getGivenName());
                 ee.setContactAddress(cae);
                 ee.setWorkPhoneNumber("010-3391233");
                 ee.setLoginAccount("yuelingshan");
@@ -194,10 +254,10 @@ public class HisEmployeeManagementApplication {
                 LocalDate dateOfBirth = LocalDate.parse("1984-02-28", formatter);
                 LocalDate joinedDate = LocalDate.parse("2012-04-17", formatter);
 
-                EmployeeOperationRequest ee=new EmployeeOperationRequest();
+                EmployeeOperationRequest ee = new EmployeeOperationRequest();
                 ee.setGivenName("之桃");
                 ee.setSurname("赵");
-                ee.setFullName(ee.getSurname()+ee.getGivenName());
+                ee.setFullName(ee.getSurname() + ee.getGivenName());
                 ee.setDateOfBirth(dateOfBirth);
                 ee.setEmail("zhidong_zhao@pethos.com");
                 ee.setEmployeeNumber("000005");
@@ -215,7 +275,7 @@ public class HisEmployeeManagementApplication {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate dateOfBirth = LocalDate.parse("1984-02-28", formatter);
                 LocalDate joinedDate = LocalDate.parse("2012-04-17", formatter);
-                ContactAddressEntity cae=new ContactAddressEntity();
+                ContactAddressEntity cae = new ContactAddressEntity();
                 cae.setAddress("昆仑山大酒店17层");
                 cae.setCity("北京");
                 cae.setCountry("大梁");
@@ -226,13 +286,13 @@ public class HisEmployeeManagementApplication {
                 cae.setWorkPhone("123577432");
                 cae.setPost("611000");
 
-                LeaveInfoEntity leaveInfo=new LeaveInfoEntity();
+                LeaveInfoEntity leaveInfo = new LeaveInfoEntity();
                 leaveInfo.setAnuualLeave(80L);
                 leaveInfo.setSickLeave(32L);
-                EmployeeOperationRequest ee=new EmployeeOperationRequest();
+                EmployeeOperationRequest ee = new EmployeeOperationRequest();
                 ee.setGivenName("靖");
                 ee.setSurname("郭");
-                ee.setFullName(ee.getSurname()+ee.getGivenName());
+                ee.setFullName(ee.getSurname() + ee.getGivenName());
                 ee.setContactAddress(cae);
                 ee.setWorkPhoneNumber("010-3391233");
                 ee.setLoginAccount("guojing");

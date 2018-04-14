@@ -24,10 +24,29 @@ public class VendorEntity {
     @JsonManagedReference("VendorEntity-ContactEntity")
     List<ContactEntity> contacts = new LinkedList<>();
 
+    public List<VendorPermissionEntity> getPermissions() {
+        return permissions;
+    }
+
+    public void addPermission(VendorPermissionEntity permission) {
+        if (permission == null)
+            throw new RuntimeException("Permission is null");
+        this.permissions.add(permission);
+    }
+
+    public void removePermission(VendorPermissionEntity permission) {
+        if (permission == null)
+            throw new RuntimeException("Permission is null");
+        this.permissions.remove(permission);
+    }
 
     @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("VendorEntity-VendorProductCategoryEntity")
     List<VendorProductCategoryEntity> productCategories = new LinkedList<>();
+
+    @ManyToMany
+    List<VendorPermissionEntity> permissions = new LinkedList<>();
+
 
     public List<VendorProductCategoryEntity> getProductCategories() {
         return productCategories;

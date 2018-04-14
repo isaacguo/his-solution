@@ -20,7 +20,6 @@ export class ProcurementStatusComponent implements OnInit {
     this.procurementStatusService.getRoot().subscribe(r => {
       this.p = r;
       this.iterateP(r);
-      console.log(this.flatenP);
 
     })
   }
