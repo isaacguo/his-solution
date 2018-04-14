@@ -85,6 +85,7 @@ import {AuthorizationManagementComponent} from './components/settings/authorizat
 import {SecurityOperationPanelComponent} from './components/settings/authorization-management/security-operation-panel/security-operation-panel.component';
 import {AuthorizationService} from "./services/common/authorization.service";
 import {ProcurementApprovalGuard} from "./guards/procurement-approval.guard";
+import { VendorProductCategoryComponent } from './components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component';
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -158,6 +159,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementRequestDetailTableComponent,
     AuthorizationManagementComponent,
     SecurityOperationPanelComponent,
+    VendorProductCategoryComponent,
 
   ],
   imports: [

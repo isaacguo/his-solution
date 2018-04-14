@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
 import {Employee} from "../../dto/employee.model";
 import {EmployeeCount} from "../../dto/employee.count.model";
+import {EmployeeListItem} from "../../dto/employee/employee-list-item.model";
 
 
 @Injectable()
@@ -28,7 +29,7 @@ export class EmployeeService {
 
   findEmployeesByNameContains(keyword: string): Observable<Employee[]> {
 
-    let url=`${this.rootUrl}/search-by-name/${keyword}`;
+    let url = `${this.rootUrl}/search-by-name/${keyword}`;
 
     return this.authHttp.get(url).map(this.extractData);
   }
@@ -41,6 +42,12 @@ export class EmployeeService {
 
   getEmployeeInfoByEmployeeUuid(uuid: string): Observable<Employee> {
     let url = `/api/hisemployee/employees/${uuid}/`;
+    return this.authHttp.get(url)
+      .map(this.extractData);
+  }
+
+  getEmployeeList(): Observable<EmployeeListItem[]> {
+    let url = `/api/hisemployee/employees/employee-list`;
     return this.authHttp.get(url)
       .map(this.extractData);
   }

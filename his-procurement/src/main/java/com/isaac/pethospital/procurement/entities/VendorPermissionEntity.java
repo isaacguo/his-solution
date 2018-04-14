@@ -14,7 +14,7 @@ public class VendorPermissionEntity {
 
     String uid;
 
-    @ManyToMany(mappedBy = "permission")
+    @ManyToMany(mappedBy = "permissions")
     @JsonManagedReference("permission-vendor")
     List<VendorEntity> vendors;
 

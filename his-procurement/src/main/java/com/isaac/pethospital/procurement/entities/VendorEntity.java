@@ -1,5 +1,6 @@
 package com.isaac.pethospital.procurement.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -45,6 +46,7 @@ public class VendorEntity {
     List<VendorProductCategoryEntity> productCategories = new LinkedList<>();
 
     @ManyToMany
+    @JsonBackReference("permission-vendor")
     List<VendorPermissionEntity> permissions = new LinkedList<>();
 
 

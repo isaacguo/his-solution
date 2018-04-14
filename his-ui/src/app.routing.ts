@@ -48,6 +48,7 @@ import {ProcurementPurchaseComponent} from "./app/components/procurement/procure
 import {ProcurementPurchaseListComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component";
 import {AuthorizationManagementComponent} from "./app/components/settings/authorization-management/authorization-management.component";
 import {ProcurementApprovalGuard} from "./app/guards/procurement-approval.guard";
+import {VendorProductCategoryComponent} from "./app/components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component";
 
 
 const appRoutes: Routes = [
@@ -242,6 +243,10 @@ const appRoutes: Routes = [
           {
             path: 'vendors/:operation/:updateId',
             component: VendorCreateUpdateComponent
+          },
+          {
+            path:'vendor-product-category',
+            component:VendorProductCategoryComponent
           },
           {
             path: 'procurement-status',

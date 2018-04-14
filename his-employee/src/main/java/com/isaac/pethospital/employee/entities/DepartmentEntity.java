@@ -6,10 +6,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class DepartmentEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,14 +21,15 @@ public class DepartmentEntity {
     private CompanyEntity company;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-    List<DepartmentEntity> children=new LinkedList<>();
+            @JsonManagedReference("parent-children")
+    List<DepartmentEntity> children = new LinkedList<>();
 
     public List<DepartmentEntity> getChildren() {
         return children;
     }
 
     public void addChild(DepartmentEntity child) {
-        if(child==null)
+        if (child == null)
             throw new RuntimeException("Department is null");
         child.setParent(this);
         this.children.add(child);
@@ -42,11 +44,14 @@ public class DepartmentEntity {
     }
 
     @ManyToOne
+    @JsonBackReference("parent-children")
     DepartmentEntity parent;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     @JsonManagedReference("DepartmentEntity-EmployeeEntity")
     private List<EmployeeEntity> employees = new LinkedList<>();
+
+
 
     public Long getId() {
         return id;
@@ -76,7 +81,28 @@ public class DepartmentEntity {
         return employees;
     }
 
-    public void setEmployees(List<EmployeeEntity> employees) {
-        this.employees = employees;
+    public EmployeeEntity addEmployee(EmployeeEntity employee) {
+        if (employee == null)
+            throw new RuntimeException("Employee is null.");
+        employee.setDepartment(this);
+        this.employees.add(employee);
+        return employee;
+    }
+
+    public void removeEmployee(EmployeeEntity employee) {
+        if (employee == null)
+            throw new RuntimeException("Employee is null.");
+        employee.setDepartment(null);
+        this.employees.remove(employee);
+    }
+
+    public EmployeeEntity addEmployeeByName(String loginAccount,String name, String title, EmployeeEntity manager) {
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity.setFullName(name);
+        employeeEntity.setLoginAccount(loginAccount);
+        employeeEntity.setJobTitle(title);
+        employeeEntity.setDirectReportTo(manager);
+        employeeEntity.setUuid(UUID.randomUUID().toString());
+        return this.addEmployee(employeeEntity);
     }
 }

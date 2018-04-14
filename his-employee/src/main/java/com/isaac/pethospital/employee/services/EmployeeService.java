@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee.services;
 
+import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import org.springframework.stereotype.Service;
@@ -31,4 +32,6 @@ public interface EmployeeService {
     boolean setReportTo(Long employeeId, Long managerId);
 
     List<EmployeeEntity> findKeywordInName(String any);
+
+    List<EmployeeListItem> findEmployeesForEmployeeListItem();
 }

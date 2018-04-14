@@ -175,7 +175,7 @@ export class SecurityOperationPanelComponent implements OnInit {
   onEmployeeSelected(e: Employee) {
     this.employees = [];
     this.searchInput.setValue("");
-    this.authorizationService.createAuthorization(this.key[0], e.loginAccount, e.surname + e.givenName, e.id).subscribe(r => {
+    this.authorizationService.createAuthorization(this.key[0], e.loginAccount, e.fullName, e.id).subscribe(r => {
       this.loadData();
     })
   }

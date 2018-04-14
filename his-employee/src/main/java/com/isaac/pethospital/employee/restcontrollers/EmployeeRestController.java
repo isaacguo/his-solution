@@ -2,6 +2,7 @@ package com.isaac.pethospital.employee.restcontrollers;
 
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.employee.dto.EmployeeCount;
+import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
@@ -85,5 +86,11 @@ public class EmployeeRestController {
     public List<EmployeeEntity> findEmployeesByKeywordInName(@PathVariable("keyword") String keyword)
     {
         return this.employeeService.findKeywordInName(keyword);
+    }
+
+    @GetMapping(value = "/employee-list")
+    public List<EmployeeListItem> findEmployeesForEmployeeListItem()
+    {
+        return this.employeeService.findEmployeesForEmployeeListItem();
     }
 }

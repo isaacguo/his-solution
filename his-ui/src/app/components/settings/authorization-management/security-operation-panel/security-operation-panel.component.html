@@ -71,7 +71,7 @@
       </small>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
         <li *ngFor="let e of employees">
-          <a href="javascript:void(0)" (click)="onEmployeeSelected(e)">{{e.surname}}{{e.givenName}}</a>
+          <a href="javascript:void(0)" (click)="onEmployeeSelected(e)">{{e.fullName}}</a>
         </li>
       </ul>
     </div>

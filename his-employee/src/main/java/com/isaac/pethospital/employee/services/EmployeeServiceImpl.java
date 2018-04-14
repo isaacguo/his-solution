@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee.services;
 
+import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
@@ -126,5 +127,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<EmployeeEntity> findKeywordInName(String keyword) {
         return this.employeeRepository.findDistinctByFullNameContains(keyword);
+    }
+
+    @Override
+    public List<EmployeeListItem> findEmployeesForEmployeeListItem() {
+        return this.employeeRepository.findEmployeesForEmployeeListItem();
     }
 }

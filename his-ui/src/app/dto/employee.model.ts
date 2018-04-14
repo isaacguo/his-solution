@@ -8,6 +8,7 @@ export class Employee {
               public loginAccount?:string,
               public givenName?: number,
               public surname?: string,
+              public fullName?:string,
               public employeeNumber?: string,
               public idNumber?: string,
               public driverLicenseNumber?: string,
