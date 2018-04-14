@@ -144,6 +144,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             return true;
     }
 
+    /*
     private void notAGoodImplementation(AuthorizationOperationRequest request, AuthorizationEntity ae) {
         int size = ae.getAuthorizationAssignmentList().size();
         for (int i = 0; i < size; i++) {
@@ -171,4 +172,5 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         });
     }
+    */
 }
