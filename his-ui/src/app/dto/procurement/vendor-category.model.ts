@@ -7,7 +7,7 @@ export class VendorCategory {
 
   //List<VendorCategoryEntity> children = new LinkedList<>();
   public vendors: Vendor[];
-  public departments: VendorPermitDepartment
+  public departments: VendorPermitDepartment[];
 
   constructor() {
   }

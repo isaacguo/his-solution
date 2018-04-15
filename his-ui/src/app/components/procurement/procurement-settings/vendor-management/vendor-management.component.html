@@ -53,18 +53,19 @@
     </div>
     <div class="panel-body">
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let dep of departmentList">
+        <li class="list-group-item" *ngFor="let dep of departmentList, let i = index">
           <div>
             <div class=" pull-left">
               {{dep.name}}
             </div>
             <div class="pull-right">
-              <ui-switch size="small" [(ngModel)]="status"></ui-switch>
+              <ui-switch size="small" [ngModel]="this.vendorCategory.departments[i].permitted" (change)="onChange(dep,$event)"></ui-switch>
             </div>
             <div class="clearfix"></div>
           </div>
         </li>
       </ul>
+      <button (click)="onUpdatePermissionButtonClicked()" [disabled]="!isModified" class="btn btn-default">更新</button>
     </div>
   </div>
 </div>

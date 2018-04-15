@@ -24,7 +24,7 @@ public class VendorCategoryEntity {
     @OneToMany(mappedBy = "vendorCategory")
     @JsonManagedReference("VendorEntity-VendorCategoryEntity")
     List<VendorEntity> vendors = new LinkedList<>();
-    @ManyToMany(mappedBy = "vendorCategories")
+    @OneToMany(mappedBy = "vendorCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("VendorCategoryEntity-DepartmentPermissionEntity")
     List<DepartmentPermissionEntity> departments = new LinkedList<>();
 
@@ -53,7 +53,7 @@ public class VendorCategoryEntity {
     public void addDepartment(DepartmentPermissionEntity department) {
         if (department == null)
             throw new RuntimeException("Department is null");
-        department.addVendorCategory(this);
+        department.setVendorCategory(this);
         this.departments.add(department);
     }
 
@@ -61,7 +61,7 @@ public class VendorCategoryEntity {
     public void removeDepartment(DepartmentPermissionEntity department) {
         if (department == null)
             throw new RuntimeException("Department is null");
-        department.removeVendorCategory(this);
+        department.setVendorCategory(this);
         this.departments.remove(department);
     }
 

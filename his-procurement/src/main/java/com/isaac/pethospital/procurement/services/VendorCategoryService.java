@@ -1,5 +1,6 @@
 package com.isaac.pethospital.procurement.services;
 
+import com.isaac.pethospital.procurement.dtos.UpdateDepartmentPermissionOperationRequest;
 import com.isaac.pethospital.procurement.entities.VendorCategoryEntity;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface VendorCategoryService {
     List<VendorCategoryEntity> findVendorProductCategoryEntityByParentIsNull();
 
     VendorCategoryEntity findById(Long id);
+
+    boolean updateDepartmentPermission(UpdateDepartmentPermissionOperationRequest request);
 }

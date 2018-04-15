@@ -9,13 +9,14 @@ import {Observable} from "rxjs/Observable";
 import {DepartmentListItem} from "../../../../dto/employee/department-list-item.model";
 import {VendorCategoryService} from "../../../../services/procurement/vendor-category.service";
 import {VendorCategory} from "../../../../dto/procurement/vendor-category.model";
+import {VendorPermitDepartment} from "../../../../dto/employee/vendor-permit-department.model";
 
 @Component({
   selector: 'app-vendor-management',
   templateUrl: './vendor-management.component.html',
   styleUrls: ['./vendor-management.component.css']
 })
-export class VendorManagementComponent implements OnInit , OnChanges {
+export class VendorManagementComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.loadData();
   }
@@ -25,8 +26,7 @@ export class VendorManagementComponent implements OnInit , OnChanges {
   @Input()
   categoryId: number;
 
-  status: boolean;
-
+  isModified:boolean=false;
 
   @ViewChild("deleteResultModal") deleteResultModal: ModalComponent;
   @ViewChild("confirmDeletionModal") confirmDeletionModal: ModalComponent;
@@ -65,12 +65,17 @@ export class VendorManagementComponent implements OnInit , OnChanges {
     if (this.categoryId != undefined)
       this.vendorCategoryService.findVendorCategoryById(this.categoryId).subscribe(r => {
         this.vendorCategory = r;
+
+        this.departmentList.forEach(r => {
+          if (this.vendorCategory.departments.findIndex(d => d.departmentId === r.id) == -1) {
+            let vpd = new VendorPermitDepartment();
+            vpd.permitted = false;
+            vpd.departmentName = r.name;
+            vpd.departmentId = r.id;
+            this.vendorCategory.departments.push(vpd);
+          }
+        });
       })
-    /*
-    this.vendorService.findAll().subscribe(r => {
-      this.vendors = r;
-    })
-    */
   }
 
   onCreateNewVendorClicked() {
@@ -88,8 +93,6 @@ export class VendorManagementComponent implements OnInit , OnChanges {
 
     this.vendorToBeDeleted = vendor;
     this.confirmDeletionModal.open();
-
-
   }
 
   onConfirmDeletionModalClosed() {
@@ -108,7 +111,21 @@ export class VendorManagementComponent implements OnInit , OnChanges {
     })
   }
 
-  onFlagChange($event) {
+  onChange(dep: DepartmentListItem, event) {
+    this.isModified=true;
+    console.log(event);
+    let department = this.vendorCategory.departments.find(r => r.departmentId === dep.id);
+    if(department!=null)
+      department.permitted=event;
+    console.log(this.vendorCategory.departments);
 
+  }
+
+  onUpdatePermissionButtonClicked() {
+
+    this.vendorCategoryService.updateDepartmentPermission(this.vendorCategory.id, this.vendorCategory.departments).subscribe(r=>{
+
+      this.isModified=false;
+    });
   }
 }

@@ -11,7 +11,18 @@ public class DepartmentPermissionEntity {
     Long departmentId;
     String departmentName;
 
+    public boolean isPermitted() {
+        return permitted;
+    }
 
+    public void setPermitted(boolean permitted) {
+        this.permitted = permitted;
+    }
+
+    boolean permitted;
+    @ManyToOne
+    @JsonBackReference("VendorCategoryEntity-DepartmentPermissionEntity")
+    VendorCategoryEntity vendorCategory;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,25 +51,11 @@ public class DepartmentPermissionEntity {
         this.departmentName = departmentName;
     }
 
-
-    @ManyToMany
-    @JsonBackReference("VendorCategoryEntity-DepartmentPermissionEntity")
-    List<VendorCategoryEntity> vendorCategories = new LinkedList<>();
-
-    public List<VendorCategoryEntity> getVendorCategories() {
-        return vendorCategories;
+    public VendorCategoryEntity getVendorCategory() {
+        return vendorCategory;
     }
 
-    public void addVendorCategory(VendorCategoryEntity vendorCategory) {
-        if (vendorCategory == null)
-            throw new RuntimeException("VendorCategory is null");
-        this.vendorCategories.add(vendorCategory);
+    public void setVendorCategory(VendorCategoryEntity vendorCategory) {
+        this.vendorCategory = vendorCategory;
     }
-
-    public void removeVendorCategory(VendorCategoryEntity vendorCategory) {
-        if (vendorCategory == null)
-            throw new RuntimeException("VendorCategory is null");
-        this.vendorCategories.remove(vendorCategory);
-    }
-
 }

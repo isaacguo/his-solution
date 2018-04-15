@@ -37,7 +37,7 @@ public class HisProcurementApplication {
                                         ProcurementApprovalStageRepository procurementApprovalStageRepository,
                                         VendorProductRepository vendorProductRepository,
                                         VendorRepository vendorRepository,
-                                        VendorProductCategoryRepository vendorProductCategoryRepository,
+                                        VendorCategoryRepository vendorCategoryRepository,
                                         AuthorizationTopicRepository authorizationTopicRepository,
                                         AuthorizationRepository authorizationRepository
                                         ) {
@@ -167,14 +167,14 @@ public class HisProcurementApplication {
                 vendorCategoryEntity3.setName("办公采购");
                 vendorCategoryEntity3.addChildByName("办公用品");
 
-                vendorProductCategoryRepository.save(vendorCategoryEntity1);
+                vendorCategoryRepository.save(vendorCategoryEntity1);
 
                 vendorCategoryEntity2.addVendor(ve);
 
-                vendorProductCategoryRepository.save(vendorCategoryEntity2);
+                vendorCategoryRepository.save(vendorCategoryEntity2);
 
                 vendorRepository.save(ve);
-                vendorProductCategoryRepository.save(vendorCategoryEntity3);
+                vendorCategoryRepository.save(vendorCategoryEntity3);
 
 
 
@@ -183,7 +183,7 @@ public class HisProcurementApplication {
                 vendorProductCategoryEntity1.setName("VetLab 实验室检验仪器");
                 vendorProductCategoryEntity1.setVendor(ve);
                 //vendorProductCategoryEntity1.addProduct(vpe1);
-                vendorProductCategoryRepository.save(vendorProductCategoryEntity1);
+                vendorCategoryRepository.save(vendorProductCategoryEntity1);
 
 
                 vpe1.setCategory(vendorProductCategoryEntity1);
