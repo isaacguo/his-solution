@@ -2,8 +2,10 @@ package com.isaac.pethospital.procurement.restcontrollers;
 
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.procurement.dtos.UpdateDepartmentPermissionOperationRequest;
+import com.isaac.pethospital.procurement.dtos.UpdateVendorCategoryNameOperationRequest;
 import com.isaac.pethospital.procurement.entities.VendorCategoryEntity;
 import com.isaac.pethospital.procurement.services.VendorCategoryService;
+import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,8 +40,15 @@ public class VendorCategoryRestController {
     @PostMapping("updateDepartmentPermission")
     public boolean updateDepartmentPermission(@RequestBody UpdateDepartmentPermissionOperationRequest request)
     {
-
         return this.vendorCategoryService.updateDepartmentPermission(request);
-
     }
+
+    @PostMapping("updateVendorCategoryName")
+    public boolean updateVendorCategoryName(@RequestBody UpdateVendorCategoryNameOperationRequest request)
+    {
+        return this.vendorCategoryService.updateVendorCategoryName(request);
+    }
+
+
+
 }

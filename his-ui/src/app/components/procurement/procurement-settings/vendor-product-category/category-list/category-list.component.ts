@@ -39,7 +39,7 @@ export class CategoryListComponent implements OnInit {
   @ViewChild("confirmDeleteModal")
   confirmDeleteModal: ModalComponent;
   selectedNodeName: string;
-  selectedCategoryId:number;
+  selectedCategoryId: number;
 
   constructor(private vendorCategoryService: VendorCategoryService,
               private employeeDepartmentService: EmployeeDepartmentService) {
@@ -48,11 +48,16 @@ export class CategoryListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vendorCategoryService.findAllForList().subscribe(r => {
-      this.nodes = r;
-    });
+    this.loadData();
     this.employeeDepartmentService.getDepartmentList().subscribe(r => {
       this.departmentList = r;
+    });
+  }
+
+  private loadData() {
+    this.vendorCategoryService.findAllForList().subscribe(r => {
+      this.nodes = r;
+      this.tree.treeModel.update();
     });
   }
 
@@ -141,9 +146,12 @@ export class CategoryListComponent implements OnInit {
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
     let node = this.getMyTreeNodeById(nodeId);
-    node.name = this.categoryName.value;
 
-    this.tree.treeModel.update();
+    this.vendorCategoryService.updateVendorCategoryName(node.categoryId, this.categoryName.value).subscribe(r => {
+      this.loadData();
+
+    });
+
 
   }
 
@@ -176,7 +184,7 @@ export class CategoryListComponent implements OnInit {
       const nodeId = this.tree.treeModel.getActiveNode().id;
       let node = this.getMyTreeNodeById(nodeId);
       this.selectedNodeName = node.name;
-      this.selectedCategoryId=node.categoryId;
+      this.selectedCategoryId = node.categoryId;
     } else return "";
   }
 

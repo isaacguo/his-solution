@@ -25,9 +25,11 @@ public class VendorCategoryServiceSpecTests {
     public void whenUpdateDepartmentPermissionThenFindCategory()
     {
         //given
+        UpdateDepartmentPermissionOperationRequest request=new UpdateDepartmentPermissionOperationRequest();
+        request.setId(1L);
         doReturn(new VendorCategoryEntity()).when(this.vendorCategoryRepository).findOne(any(Long.class));
         //when
-        this.vendorCategoryService.updateDepartmentPermission(any(UpdateDepartmentPermissionOperationRequest.class));
+        this.vendorCategoryService.updateDepartmentPermission(request);
         //then
         verify(this.vendorCategoryRepository,times(1)).findOne(any(Long.class));
 

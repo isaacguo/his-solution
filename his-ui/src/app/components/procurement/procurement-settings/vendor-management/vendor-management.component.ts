@@ -113,12 +113,9 @@ export class VendorManagementComponent implements OnInit, OnChanges {
 
   onChange(dep: DepartmentListItem, event) {
     this.isModified=true;
-    console.log(event);
     let department = this.vendorCategory.departments.find(r => r.departmentId === dep.id);
     if(department!=null)
       department.permitted=event;
-    console.log(this.vendorCategory.departments);
-
   }
 
   onUpdatePermissionButtonClicked() {

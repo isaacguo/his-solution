@@ -17,6 +17,7 @@ export class VendorCategoryService extends AbstractService {
   rootUrl: string = "/api/hisprocurement/categories";
   private getListUrl: string = `${this.rootUrl}/list`;
   private updateDepartmentPermissionUrl: string = `${this.rootUrl}/updateDepartmentPermission`;
+  private updateVendorCategoryNameUrl: string = `${this.rootUrl}/updateVendorCategoryName`;
 
   constructor(private authHttp: AuthHttp) {
     super();
@@ -61,6 +62,16 @@ export class VendorCategoryService extends AbstractService {
     return this.authHttp.post(this.updateDepartmentPermissionUrl, {
       'id': id,
       'departments': departments
+    }).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+
+  updateVendorCategoryName(categoryId: number, name: string): Observable<boolean> {
+
+    return this.authHttp.post(this.updateVendorCategoryNameUrl, {
+      'categoryId': categoryId,
+      'name': name
     }).map(r => {
       return this.extractTextData(r) === "true" ? true : false;
     });

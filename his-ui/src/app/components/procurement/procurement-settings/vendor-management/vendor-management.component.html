@@ -59,7 +59,7 @@
               {{dep.name}}
             </div>
             <div class="pull-right">
-              <ui-switch size="small" [ngModel]="this.vendorCategory.departments[i].permitted" (change)="onChange(dep,$event)"></ui-switch>
+              <ui-switch size="small" [ngModel]="this.vendorCategory?.departments[i].permitted" (change)="onChange(dep,$event)"></ui-switch>
             </div>
             <div class="clearfix"></div>
           </div>

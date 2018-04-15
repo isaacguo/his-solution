@@ -1,6 +1,7 @@
 package com.isaac.pethospital.procurement.services;
 
 import com.isaac.pethospital.procurement.dtos.UpdateDepartmentPermissionOperationRequest;
+import com.isaac.pethospital.procurement.dtos.UpdateVendorCategoryNameOperationRequest;
 import com.isaac.pethospital.procurement.entities.DepartmentPermissionEntity;
 import com.isaac.pethospital.procurement.entities.VendorCategoryEntity;
 import com.isaac.pethospital.procurement.repositories.VendorCategoryRepository;
@@ -55,7 +56,7 @@ public class VendorCategoryServiceImpl implements VendorCategoryService {
 
         left.forEach(l -> vce.removeDepartment(l));
         right.forEach(r -> {
-            DepartmentPermissionEntity dep=new DepartmentPermissionEntity();
+            DepartmentPermissionEntity dep = new DepartmentPermissionEntity();
             dep.setDepartmentName(r.getDepartmentName());
             dep.setDepartmentId(r.getDepartmentId());
             dep.setPermitted(r.isPermitted());
@@ -65,6 +66,17 @@ public class VendorCategoryServiceImpl implements VendorCategoryService {
         //update
         this.vendorCategoryRepository.save(vce);
 
+        return true;
+    }
+
+    @Override
+    public boolean updateVendorCategoryName(UpdateVendorCategoryNameOperationRequest request) {
+
+        VendorCategoryEntity vce = this.vendorCategoryRepository.findOne(request.getCategoryId());
+        if (vce == null)
+            throw new RuntimeException("Vendor Category is null.");
+        vce.setName(request.getName());
+        this.vendorCategoryRepository.save(vce);
         return true;
     }
 }
