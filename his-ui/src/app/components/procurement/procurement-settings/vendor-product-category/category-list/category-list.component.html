@@ -66,12 +66,12 @@
         供应商分类
       </div>
       <div class="panel-body">
-        <tree-root #tree (activate)="onNodeActivated($event)" [nodes]="nodes" [options]="options"></tree-root>
+        <tree-root #tree (activate)="onNodeActivated($event)" [nodes]="nodes"></tree-root>
       </div>
     </div>
 
   </div>
   <div class="col-md-9">
-    <app-category-detail [departmentList]="departmentList"></app-category-detail>
+    <app-category-detail [categoryId]="selectedCategoryId" [departmentList]="departmentList"></app-category-detail>
   </div>
 </div>

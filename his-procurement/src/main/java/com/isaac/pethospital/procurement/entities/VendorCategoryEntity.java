@@ -21,12 +21,30 @@ public class VendorCategoryEntity {
     @ManyToOne
     @JsonBackReference("parent-children")
     VendorCategoryEntity parent;
-
-
-    /*
+    @OneToMany(mappedBy = "vendorCategory")
+    @JsonManagedReference("VendorEntity-VendorCategoryEntity")
+    List<VendorEntity> vendors = new LinkedList<>();
     @ManyToMany(mappedBy = "vendorCategories")
     @JsonManagedReference("VendorCategoryEntity-DepartmentPermissionEntity")
     List<DepartmentPermissionEntity> departments = new LinkedList<>();
+
+    public List<VendorEntity> getVendors() {
+        return vendors;
+    }
+
+    public void addVendor(VendorEntity vendor) {
+        if (vendor == null)
+            throw new RuntimeException("Vendor is null");
+        vendor.setVendorCategory(this);
+        this.vendors.add(vendor);
+    }
+
+    public void removeVendor(VendorEntity vendor) {
+        if (vendor == null)
+            throw new RuntimeException("Vendor is null");
+        vendor.setVendorCategory(null);
+        this.vendors.remove(vendor);
+    }
 
     public List<DepartmentPermissionEntity> getDepartments() {
         return departments;
@@ -46,13 +64,7 @@ public class VendorCategoryEntity {
         department.removeVendorCategory(this);
         this.departments.remove(department);
     }
-    */
 
-    public void addChildByName(String name) {
-        VendorCategoryEntity vendorCategoryEntity = new VendorCategoryEntity();
-        vendorCategoryEntity.setName(name);
-        this.addChild(vendorCategoryEntity);
-    }
 
     /*
     @OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
@@ -60,13 +72,11 @@ public class VendorCategoryEntity {
     List<VendorProductEntity> products = new LinkedList<>();
     */
 
-
-    /*
-    @OneToMany
-    @JsonManagedReference("VendorEntity-VendorCategoryEntity")
-    VendorEntity vendor;
-    */
-
+    public void addChildByName(String name) {
+        VendorCategoryEntity vendorCategoryEntity = new VendorCategoryEntity();
+        vendorCategoryEntity.setName(name);
+        this.addChild(vendorCategoryEntity);
+    }
 
     public String getName() {
         return name;

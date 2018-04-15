@@ -41,7 +41,6 @@ public class DepartmentPermissionEntity {
     }
 
 
-    /*
     @ManyToMany
     @JsonBackReference("VendorCategoryEntity-DepartmentPermissionEntity")
     List<VendorCategoryEntity> vendorCategories = new LinkedList<>();
@@ -61,6 +60,5 @@ public class DepartmentPermissionEntity {
             throw new RuntimeException("VendorCategory is null");
         this.vendorCategories.remove(vendorCategory);
     }
-    */
 
 }

@@ -85,12 +85,12 @@ import {AuthorizationManagementComponent} from './components/settings/authorizat
 import {SecurityOperationPanelComponent} from './components/settings/authorization-management/security-operation-panel/security-operation-panel.component';
 import {AuthorizationService} from "./services/common/authorization.service";
 import {ProcurementApprovalGuard} from "./guards/procurement-approval.guard";
-import { VendorProductCategoryComponent } from './components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component';
-import { CategoryListComponent } from './components/procurement/procurement-settings/vendor-product-category/category-list/category-list.component';
-import { CategoryDetailComponent } from './components/procurement/procurement-settings/vendor-product-category/category-detail/category-detail.component';
+import {VendorProductCategoryComponent} from './components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component';
+import {CategoryListComponent} from './components/procurement/procurement-settings/vendor-product-category/category-list/category-list.component';
+import {CategoryDetailComponent} from './components/procurement/procurement-settings/vendor-product-category/category-detail/category-detail.component';
 import {VendorCategoryService} from "./services/procurement/vendor-category.service";
 import {EmployeeDepartmentService} from "./services/employee/employee-department.service";
-
+import {UiSwitchModule} from "ngx-ui-switch";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -169,7 +169,16 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
   ],
   imports: [
-    BrowserModule, routing, HttpModule, FormsModule, ReactiveFormsModule, Ng2Bs3ModalModule, TreeModule, AngularSplitModule, MyDatePickerModule
+    BrowserModule,
+    routing,
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule,
+    Ng2Bs3ModalModule,
+    TreeModule,
+    AngularSplitModule,
+    MyDatePickerModule,
+    UiSwitchModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -197,7 +206,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementStatusService,
     ProcurementRequestService,
     ProcurementApprovalService,
-
 
 
   ],

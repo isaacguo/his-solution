@@ -8,6 +8,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
+import {VendorCategory} from "../../dto/procurement/vendor-category.model";
 
 @Injectable()
 export class VendorCategoryService extends AbstractService {
@@ -19,17 +20,21 @@ export class VendorCategoryService extends AbstractService {
     super();
   }
 
-  treeConverter(json: any, isLevelOne:boolean): MyTreeNode {
+  findVendorCategoryById(categoryId: number): Observable<VendorCategory> {
+      return this.authHttp.get(`${this.rootUrl}/${categoryId}`).map(this.extractData);
+  }
+
+  treeConverter(json: any, isLevelOne: boolean): MyTreeNode {
 
     let node = new MyTreeNode();
     node.name = json.name;
     node.categoryId = json.id;
-    node.isLevelOne=isLevelOne;
+    node.isLevelOne = isLevelOne;
 
     if (json.children != null && json.children.length > 0) {
       node.children = [];
       for (let child of json.children) {
-        node.children.push(this.treeConverter(child,false));
+        node.children.push(this.treeConverter(child, false));
       }
     }
 
@@ -43,31 +48,8 @@ export class VendorCategoryService extends AbstractService {
       .map(res => {
         return res.json().map(item => {
 
-          return this.treeConverter(item,true);
+          return this.treeConverter(item, true);
 
-          /*
-           let node = new MyTreeNode();
-           node.name = item.name;
-
-           while (item.children != null && item.children.length > 0) {
-
-
-           }
-
-
-           node.children = item.children;
-           node.id = item.id;
-
-           */
-          /*
-          return new MyTreeNode(
-            item.trackName,
-            item.artistName,
-            item.trackViewUrl,
-            item.artworkUrl30,
-            item.artistId
-          );
-          */
         });
       });
   }

@@ -28,6 +28,6 @@ public class VendorCategoryServiceImpl implements VendorCategoryService {
 
     @Override
     public VendorCategoryEntity findById(Long id) {
-        return null;
+        return this.vendorProductCategoryRepository.findOne(id);
     }
 }

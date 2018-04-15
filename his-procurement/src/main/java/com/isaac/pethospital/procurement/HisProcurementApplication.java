@@ -51,20 +51,7 @@ public class HisProcurementApplication {
                 initVendor();
                 initAuthorization();
 
-                VendorCategoryEntity vendorCategoryEntity1 = new VendorCategoryEntity();
-                vendorCategoryEntity1.setName("医疗用品及材料");
-                vendorCategoryEntity1.addChildByName("医疗用品");
-                vendorCategoryEntity1.addChildByName("材料");
-                VendorCategoryEntity vendorCategoryEntity2 = new VendorCategoryEntity();
-                vendorCategoryEntity2.setName("医疗影像");
-                vendorCategoryEntity2.addChildByName("医疗设备");
-                VendorCategoryEntity vendorCategoryEntity3 = new VendorCategoryEntity();
-                vendorCategoryEntity3.setName("办公采购");
-                vendorCategoryEntity3.addChildByName("办公用品");
 
-                vendorProductCategoryRepository.save(vendorCategoryEntity1);
-                vendorProductCategoryRepository.save(vendorCategoryEntity2);
-                vendorProductCategoryRepository.save(vendorCategoryEntity3);
 
             }
 
@@ -129,6 +116,9 @@ public class HisProcurementApplication {
 
 
             private void initVendor() {
+
+
+
                 VendorProductEntity vpe1 = new VendorProductEntity();
                 vpe1.setOrderNumber("RF VT Set (Basic)");
                 vpe1.setProductEnglishName("VETTEST, N.AMERICA,RECERTIFIED");
@@ -164,6 +154,28 @@ public class HisProcurementApplication {
                 VendorEntity ve = new VendorEntity();
                 ve.setName("IDEXX");
                 vendorRepository.save(ve);
+
+
+                VendorCategoryEntity vendorCategoryEntity1 = new VendorCategoryEntity();
+                vendorCategoryEntity1.setName("医疗用品及材料");
+                vendorCategoryEntity1.addChildByName("医疗用品");
+                vendorCategoryEntity1.addChildByName("材料");
+                VendorCategoryEntity vendorCategoryEntity2 = new VendorCategoryEntity();
+                vendorCategoryEntity2.setName("医疗影像");
+                vendorCategoryEntity2.addChildByName("医疗设备");
+                VendorCategoryEntity vendorCategoryEntity3 = new VendorCategoryEntity();
+                vendorCategoryEntity3.setName("办公采购");
+                vendorCategoryEntity3.addChildByName("办公用品");
+
+                vendorProductCategoryRepository.save(vendorCategoryEntity1);
+
+                vendorCategoryEntity2.addVendor(ve);
+
+                vendorProductCategoryRepository.save(vendorCategoryEntity2);
+
+                vendorRepository.save(ve);
+                vendorProductCategoryRepository.save(vendorCategoryEntity3);
+
 
 
                 /*

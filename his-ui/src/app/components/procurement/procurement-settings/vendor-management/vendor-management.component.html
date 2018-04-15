@@ -43,17 +43,26 @@
   </div>
 </div>
 
-<a class="btn btn-primary isaac-margin-15top" role="button" href="#collapsePanel" data-toggle="collapse" aria-expanded="false"
+<a class="btn btn-primary isaac-margin-15top" role="button" href="#collapsePanel" data-toggle="collapse"
+   aria-expanded="false"
    aria-controls="collapsePanel">查看采购权限</a>
 <div class="collapse" id="collapsePanel">
   <div class="panel panel-default isaac-margin-15top">
     <div class="panel-heading">
-     采购权限
+      采购权限
     </div>
     <div class="panel-body">
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let dep of departmentList">
-          {{dep.name}}
+          <div>
+            <div class=" pull-left">
+              {{dep.name}}
+            </div>
+            <div class="pull-right">
+              <ui-switch size="small" [(ngModel)]="status"></ui-switch>
+            </div>
+            <div class="clearfix"></div>
+          </div>
         </li>
       </ul>
     </div>
@@ -78,7 +87,7 @@
     </thead>
     <tbody>
 
-    <tr *ngFor="let vendor of vendors">
+    <tr *ngFor="let vendor of vendorCategory?.vendors">
       <td>{{vendor.id}}</td>
       <td>{{vendor.name}}</td>
       <td>{{vendor.contacts[0]?.name}} {{vendor.contacts?.length>1?"(更多)":""}}</td>

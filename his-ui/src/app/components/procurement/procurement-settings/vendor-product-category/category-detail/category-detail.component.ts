@@ -10,6 +10,8 @@ export class CategoryDetailComponent implements OnInit {
 
   @Input()
   departmentList: DepartmentListItem[];
+  @Input()
+  categoryId:number;
 
   constructor() { }
 

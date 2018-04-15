@@ -38,6 +38,8 @@ export class CategoryListComponent implements OnInit {
 
   @ViewChild("confirmDeleteModal")
   confirmDeleteModal: ModalComponent;
+  selectedNodeName: string;
+  selectedCategoryId:number;
 
   constructor(private vendorCategoryService: VendorCategoryService,
               private employeeDepartmentService: EmployeeDepartmentService) {
@@ -53,7 +55,6 @@ export class CategoryListComponent implements OnInit {
       this.departmentList = r;
     });
   }
-
 
   removeSelectedNode() {
 
@@ -170,13 +171,12 @@ export class CategoryListComponent implements OnInit {
 
   }
 
-  selectedNodeName: string;
-
   getSelectedNodeName() {
     if (this.tree.treeModel.getActiveNode() != null) {
       const nodeId = this.tree.treeModel.getActiveNode().id;
       let node = this.getMyTreeNodeById(nodeId);
       this.selectedNodeName = node.name;
+      this.selectedCategoryId=node.categoryId;
     } else return "";
   }
 
@@ -187,7 +187,6 @@ export class CategoryListComponent implements OnInit {
   private getMyTreeNodeById(nodeId: any) {
     let parentNode: any;
     for (let cnode of this.nodes) {
-      console.log(cnode);
       let found = cnode.findById(nodeId);
       if (found != null) {
         parentNode = found;

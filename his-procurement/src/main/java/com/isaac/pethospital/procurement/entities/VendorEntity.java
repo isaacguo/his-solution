@@ -25,6 +25,19 @@ public class VendorEntity {
     @JsonManagedReference("VendorEntity-ContactEntity")
     List<ContactEntity> contacts = new LinkedList<>();
 
+
+    public VendorCategoryEntity getVendorCategory() {
+        return vendorCategory;
+    }
+
+    public void setVendorCategory(VendorCategoryEntity vendorCategory) {
+        this.vendorCategory = vendorCategory;
+    }
+
+    @ManyToOne
+    @JsonBackReference("VendorEntity-VendorCategoryEntity")
+    VendorCategoryEntity vendorCategory;
+
     /*
     public List<VendorPermissionEntity> getPermissions() {
         return permissions;
