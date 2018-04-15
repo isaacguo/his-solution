@@ -2,37 +2,71 @@ package com.isaac.pethospital.procurement.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.isaac.pethospital.procurement.dtos.DepartmentIdAndName;
 
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class VendorProductCategoryEntity {
+public class VendorCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    String name;
+
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     @JsonManagedReference("parent-children")
-    List<VendorProductCategoryEntity> children = new LinkedList<>();
+    List<VendorCategoryEntity> children = new LinkedList<>();
     @ManyToOne
     @JsonBackReference("parent-children")
-    VendorProductCategoryEntity parent;
+    VendorCategoryEntity parent;
+
+
+    /*
+    @ManyToMany(mappedBy = "vendorCategories")
+    @JsonManagedReference("VendorCategoryEntity-DepartmentPermissionEntity")
+    List<DepartmentPermissionEntity> departments = new LinkedList<>();
+
+    public List<DepartmentPermissionEntity> getDepartments() {
+        return departments;
+    }
+
+    public void addDepartment(DepartmentPermissionEntity department) {
+        if (department == null)
+            throw new RuntimeException("Department is null");
+        department.addVendorCategory(this);
+        this.departments.add(department);
+    }
+
+
+    public void removeDepartment(DepartmentPermissionEntity department) {
+        if (department == null)
+            throw new RuntimeException("Department is null");
+        department.removeVendorCategory(this);
+        this.departments.remove(department);
+    }
+    */
+
+    public void addChildByName(String name) {
+        VendorCategoryEntity vendorCategoryEntity = new VendorCategoryEntity();
+        vendorCategoryEntity.setName(name);
+        this.addChild(vendorCategoryEntity);
+    }
+
+    /*
     @OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
     @JsonManagedReference("category-product")
     List<VendorProductEntity> products = new LinkedList<>();
-    @ManyToOne
-    @JsonBackReference("VendorEntity-VendorProductCategoryEntity")
+    */
+
+
+    /*
+    @OneToMany
+    @JsonManagedReference("VendorEntity-VendorCategoryEntity")
     VendorEntity vendor;
-    String name;
+    */
 
-    public VendorEntity getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(VendorEntity vendor) {
-        this.vendor = vendor;
-    }
 
     public String getName() {
         return name;
@@ -42,11 +76,11 @@ public class VendorProductCategoryEntity {
         this.name = name;
     }
 
-    public VendorProductCategoryEntity getParent() {
+    public VendorCategoryEntity getParent() {
         return parent;
     }
 
-    public void setParent(VendorProductCategoryEntity parent) {
+    public void setParent(VendorCategoryEntity parent) {
         this.parent = parent;
     }
 
@@ -58,11 +92,11 @@ public class VendorProductCategoryEntity {
         this.id = id;
     }
 
-    public List<VendorProductCategoryEntity> getChildren() {
+    public List<VendorCategoryEntity> getChildren() {
         return children;
     }
 
-    public void addChild(VendorProductCategoryEntity child) {
+    public void addChild(VendorCategoryEntity child) {
         if (child == null)
             throw new RuntimeException("Category Child is Null.");
         child.setParent(this);
@@ -70,13 +104,14 @@ public class VendorProductCategoryEntity {
         this.children.add(child);
     }
 
-    public void removeChild(VendorProductCategoryEntity child) {
+    public void removeChild(VendorCategoryEntity child) {
         if (child == null)
             throw new RuntimeException("Category Child is Null.");
         child.setParent(null);
         this.children.remove(child);
     }
 
+    /*
     public List<VendorProductEntity> getProducts() {
         return products;
     }
@@ -94,6 +129,7 @@ public class VendorProductCategoryEntity {
         product.setCategory(null);
         this.products.remove(product);
     }
+    */
 
 
 }

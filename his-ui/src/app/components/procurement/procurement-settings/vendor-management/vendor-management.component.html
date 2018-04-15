@@ -29,13 +29,7 @@
   </form>
 </modal>
 
-<div class="row">
-  <h4 class="page-header">供应商管理</h4>
-</div>
-
-<div class="row">
-
-
+<div>
 
   <div class="col-md-8 btn-group pull-right" role="group">
     <button (click)="onCreateNewVendorClicked()" class="btn btn-default">新建供应商</button>
@@ -47,10 +41,26 @@
       <button class="btn btn-default" type="button"> <span class="glyphicon glyphicon-search"></span></button>
     </span>
   </div>
-
 </div>
 
-<div class="row isaac-margin-15top">
+<a class="btn btn-primary isaac-margin-15top" role="button" href="#collapsePanel" data-toggle="collapse" aria-expanded="false"
+   aria-controls="collapsePanel">查看采购权限</a>
+<div class="collapse" id="collapsePanel">
+  <div class="panel panel-default isaac-margin-15top">
+    <div class="panel-heading">
+     采购权限
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let dep of departmentList">
+          {{dep.name}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class=" isaac-margin-15top">
   <table class="table table-bordered">
     <thead>
     <tr>

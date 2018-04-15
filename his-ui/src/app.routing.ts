@@ -233,10 +233,6 @@ const appRoutes: Routes = [
         component: ProcurementSettingsComponent,
         children: [
           {
-            path: 'vendors',
-            component: VendorManagementComponent
-          },
-          {
             path: 'vendors/:operation',
             component: VendorCreateUpdateComponent
           },
@@ -245,7 +241,7 @@ const appRoutes: Routes = [
             component: VendorCreateUpdateComponent
           },
           {
-            path:'vendor-product-category',
+            path:'vendors',
             component:VendorProductCategoryComponent
           },
           {

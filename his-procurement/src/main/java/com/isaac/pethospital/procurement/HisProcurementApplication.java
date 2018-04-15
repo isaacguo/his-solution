@@ -1,12 +1,8 @@
 package com.isaac.pethospital.procurement;
 
-import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
-import com.isaac.pethospital.common.entities.AuthorizationEntity;
 import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
-import com.isaac.pethospital.common.entities.TopicOperationEntity;
 import com.isaac.pethospital.common.repositories.AuthorizationRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
-import com.isaac.pethospital.common.services.AuthorizationTopicService;
 import com.isaac.pethospital.procurement.constants.ConfigurationConstants;
 import com.isaac.pethospital.procurement.entities.*;
 import com.isaac.pethospital.procurement.repositories.*;
@@ -44,7 +40,7 @@ public class HisProcurementApplication {
                                         VendorProductCategoryRepository vendorProductCategoryRepository,
                                         AuthorizationTopicRepository authorizationTopicRepository,
                                         AuthorizationRepository authorizationRepository
-    ) {
+                                        ) {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
@@ -55,6 +51,20 @@ public class HisProcurementApplication {
                 initVendor();
                 initAuthorization();
 
+                VendorCategoryEntity vendorCategoryEntity1 = new VendorCategoryEntity();
+                vendorCategoryEntity1.setName("医疗用品及材料");
+                vendorCategoryEntity1.addChildByName("医疗用品");
+                vendorCategoryEntity1.addChildByName("材料");
+                VendorCategoryEntity vendorCategoryEntity2 = new VendorCategoryEntity();
+                vendorCategoryEntity2.setName("医疗影像");
+                vendorCategoryEntity2.addChildByName("医疗设备");
+                VendorCategoryEntity vendorCategoryEntity3 = new VendorCategoryEntity();
+                vendorCategoryEntity3.setName("办公采购");
+                vendorCategoryEntity3.addChildByName("办公用品");
+
+                vendorProductCategoryRepository.save(vendorCategoryEntity1);
+                vendorProductCategoryRepository.save(vendorCategoryEntity2);
+                vendorProductCategoryRepository.save(vendorCategoryEntity3);
 
             }
 
@@ -156,7 +166,8 @@ public class HisProcurementApplication {
                 vendorRepository.save(ve);
 
 
-                VendorProductCategoryEntity vendorProductCategoryEntity1 = new VendorProductCategoryEntity();
+                /*
+                VendorCategoryEntity vendorProductCategoryEntity1 = new VendorCategoryEntity();
                 vendorProductCategoryEntity1.setName("VetLab 实验室检验仪器");
                 vendorProductCategoryEntity1.setVendor(ve);
                 //vendorProductCategoryEntity1.addProduct(vpe1);
@@ -165,8 +176,8 @@ public class HisProcurementApplication {
 
                 vpe1.setCategory(vendorProductCategoryEntity1);
                 vendorProductRepository.save(vpe1);
+                */
             }
-
             private void initApproval() {
                 ProcurementApprovalStageEntity procurementApprovalStageEntity1 = new ProcurementApprovalStageEntity();
                 procurementApprovalStageEntity1.setStage("申请人");

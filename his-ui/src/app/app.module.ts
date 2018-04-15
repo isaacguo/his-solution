@@ -86,6 +86,10 @@ import {SecurityOperationPanelComponent} from './components/settings/authorizati
 import {AuthorizationService} from "./services/common/authorization.service";
 import {ProcurementApprovalGuard} from "./guards/procurement-approval.guard";
 import { VendorProductCategoryComponent } from './components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component';
+import { CategoryListComponent } from './components/procurement/procurement-settings/vendor-product-category/category-list/category-list.component';
+import { CategoryDetailComponent } from './components/procurement/procurement-settings/vendor-product-category/category-detail/category-detail.component';
+import {VendorCategoryService} from "./services/procurement/vendor-category.service";
+import {EmployeeDepartmentService} from "./services/employee/employee-department.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -160,6 +164,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthorizationManagementComponent,
     SecurityOperationPanelComponent,
     VendorProductCategoryComponent,
+    CategoryListComponent,
+    CategoryDetailComponent,
 
   ],
   imports: [
@@ -178,6 +184,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthenticationService,
     AuthorizationService,
     EmployeeService,
+    EmployeeDepartmentService,
     DepartmentService,
     PetOwnerService,
     RegistrationService,
@@ -185,10 +192,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PetService,
     //procurement
     VendorService,
+    VendorCategoryService,
     ProcurementService,
     ProcurementStatusService,
     ProcurementRequestService,
-    ProcurementApprovalService
+    ProcurementApprovalService,
+
+
 
   ],
   bootstrap: [AppComponent]

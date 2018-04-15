@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-vendor-product-category',
@@ -9,7 +9,10 @@ export class VendorProductCategoryComponent implements OnInit {
 
   constructor() { }
 
+
   ngOnInit() {
   }
+
+
 
 }

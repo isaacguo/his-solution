@@ -5,6 +5,7 @@ import {AuthHttp} from "angular2-jwt";
 import {Employee} from "../../dto/employee.model";
 import {EmployeeCount} from "../../dto/employee.count.model";
 import {EmployeeListItem} from "../../dto/employee/employee-list-item.model";
+import {DepartmentListItem} from "../../dto/employee/department-list-item.model";
 
 
 @Injectable()
@@ -51,6 +52,7 @@ export class EmployeeService {
     return this.authHttp.get(url)
       .map(this.extractData);
   }
+
 
 
   private extractData(res: Response) {

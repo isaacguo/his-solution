@@ -17,7 +17,7 @@ public class VendorProductEntity {
 
     @ManyToOne
     @JsonBackReference("category-product")
-    VendorProductCategoryEntity category;
+    VendorCategoryEntity category;
 
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
@@ -65,11 +65,11 @@ public class VendorProductEntity {
         this.id = id;
     }
 
-    public VendorProductCategoryEntity getCategory() {
+    public VendorCategoryEntity getCategory() {
         return category;
     }
 
-    public void setCategory(VendorProductCategoryEntity category) {
+    public void setCategory(VendorCategoryEntity category) {
         this.category = category;
     }
 
