@@ -3,6 +3,7 @@ import {AuthenticationService, AuthInfo} from "../../services/common/authenticat
 import {Subscription} from "rxjs/Subscription";
 import {ProcurementApprovalService} from "../../services/procurement/procurement-approval.service";
 import {ProcurementApprovalGuard} from "../../guards/procurement-approval.guard";
+import {EmployeeService} from "../../services/employee/employee.service";
 
 @Component({
   selector: 'app-index',
@@ -12,6 +13,8 @@ import {ProcurementApprovalGuard} from "../../guards/procurement-approval.guard"
 export class IndexComponent implements OnInit, OnDestroy {
 
   authInfo: AuthInfo;
+  userName: string;
+
   private authChangeSubscription: Subscription;
   private unfinishedTaskCountSubscriptiion: Subscription;
   count: number = 0;
@@ -29,20 +32,29 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   constructor(private authenticationService: AuthenticationService, private  procurementApprovalService: ProcurementApprovalService,
-              public procurementApprovalGuard: ProcurementApprovalGuard) {
+              public procurementApprovalGuard: ProcurementApprovalGuard,
+              private  employeeService: EmployeeService) {
     this.authChangeSubscription = authenticationService.authChange.subscribe(
-      newAuthInfo =>
-        this.authInfo = newAuthInfo);
+      newAuthInfo => {
+        this.authInfo = newAuthInfo;
+        this.userName = this.authInfo.displayName;
+        this.employeeService.getMyInfo().subscribe(r => {
+          this.userName = r.fullName;
+        })
+      }
+    )
+    ;
 
     this.unfinishedTaskCountSubscriptiion = procurementApprovalService.unfinishedTasksChange.subscribe(
       r => this.count = r)
     this.procurementApprovalService.updateUnfinishedApprovalCount();
   }
 
-  showProcurementApproval:boolean=false;
+  showProcurementApproval: boolean = false;
+
   canShowApproval() {
-    this.procurementApprovalGuard.canActivate().subscribe(r=>{
-      this.showProcurementApproval=r;
+    this.procurementApprovalGuard.canActivate().subscribe(r => {
+      this.showProcurementApproval = r;
     });
   }
 

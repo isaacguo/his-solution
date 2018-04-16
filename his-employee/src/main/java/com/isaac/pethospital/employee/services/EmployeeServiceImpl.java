@@ -69,7 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeEntity ee = this.employeeRepository.findByLoginAccount(userAccount);
         if (ee != null) {
             EmployeeOperationRequest eor = new EmployeeOperationRequest();
-            eor.setFullName(ee.getSurname() + ee.getGivenName());
+            eor.setFullName(ee.getFullName());
             return eor;
         } else
             throw new RuntimeException("Cannot find UserAccount");
@@ -83,8 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public boolean deleteEmployee(EmployeeOperationRequest employeeOperationRequest) {
 
-        if(this.employeeRepository.exists(employeeOperationRequest.getId()))
-        {
+        if (this.employeeRepository.exists(employeeOperationRequest.getId())) {
             this.employeeRepository.delete(employeeOperationRequest.getId());
         }
         return true;
@@ -103,20 +102,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeEntity findBySurnameAndGivenName(EmployeeOperationRequest request) {
-        return this.employeeRepository.findBySurnameAndGivenName(request.getSurname(),request.getGivenName());
+        return this.employeeRepository.findBySurnameAndGivenName(request.getSurname(), request.getGivenName());
     }
 
     @Override
     public boolean setReportTo(Long employeeId, Long managerId) {
-        EmployeeEntity ee=this.employeeRepository.findOne(employeeId);
-        EmployeeEntity manager=this.employeeRepository.findOne(managerId);
-        if(ee==null)
+        EmployeeEntity ee = this.employeeRepository.findOne(employeeId);
+        EmployeeEntity manager = this.employeeRepository.findOne(managerId);
+        if (ee == null)
             throw new RuntimeException("Employee cannot be found");
-        if(manager==null)
+        if (manager == null)
             throw new RuntimeException("Manager cannot be found");
 
-        if(ee.getDirectReportTo()!=null)
-        {
+        if (ee.getDirectReportTo() != null) {
             ee.getDirectReportTo().removeTeamMember(ee);
         }
         manager.addTeamMember(ee);
@@ -132,5 +130,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<EmployeeListItem> findEmployeesForEmployeeListItem() {
         return this.employeeRepository.findEmployeesForEmployeeListItem();
+    }
+
+    @Override
+    public String getDirectManagerUserAccount(String userAccount) {
+
+        EmployeeEntity ee = this.employeeRepository.findByLoginAccount(userAccount);
+        return ee.getDirectReportTo().getLoginAccount();
+    }
+
+    @Override
+    public Long getDepartmentId(String userAccount) {
+        EmployeeEntity ee = this.employeeRepository.findByLoginAccount(userAccount);
+        if (ee == null) return -1L;
+        if (ee.getDepartment() == null)
+            return -2L;
+        return ee.getDepartment().getId();
     }
 }

@@ -62,9 +62,16 @@ public class EmployeeRestController {
         return this.employeeService.findAll();
     }
 
+    @GetMapping("/get-department-id/{userAccount}")
+    public Long getDepartmentId(@PathVariable("userAccount") String userAccount)
+    {
+        return this.employeeService.getDepartmentId(userAccount);
+
+    }
+
     @GetMapping(value = "/{userAccount}/manager")
     public String getDirectManagerUserAccount(@PathVariable("userAccount") String userAccount) {
-        return "linghuchong";
+        return this.employeeService.getDirectManagerUserAccount(userAccount);
     }
 
     @PostMapping(value = "/find-by-title")

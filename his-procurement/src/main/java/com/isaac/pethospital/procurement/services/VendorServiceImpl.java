@@ -2,6 +2,7 @@ package com.isaac.pethospital.procurement.services;
 
 import com.isaac.pethospital.procurement.dtos.VendorOperationRequest;
 import com.isaac.pethospital.procurement.entities.VendorEntity;
+import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
 import com.isaac.pethospital.procurement.repositories.VendorRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class VendorServiceImpl implements VendorService {
 
     private final VendorRepository vendorRepository;
+    private final EmployeeFeignService employeeFeignService;
 
-    public VendorServiceImpl(VendorRepository vendorRepository) {
+    public VendorServiceImpl(VendorRepository vendorRepository, EmployeeFeignService employeeFeignService) {
         this.vendorRepository = vendorRepository;
+        this.employeeFeignService = employeeFeignService;
     }
 
     @Override
@@ -67,5 +70,15 @@ public class VendorServiceImpl implements VendorService {
     @Override
     public List<VendorEntity> findByNameContains(String keyword) {
         return this.vendorRepository.findByNameContainsIgnoreCase(keyword);
+    }
+
+    @Override
+    public List<VendorEntity> findPermittedAll(String userAccount) {
+
+        Long departmentId=employeeFeignService.getDepartmentId(userAccount);
+        if(departmentId<0)
+            throw new RuntimeException("Departement cannot not be found. Error Code:" + departmentId);
+
+        return this.vendorRepository.findPermittedAll(departmentId);
     }
 }

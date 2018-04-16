@@ -16,5 +16,7 @@ public interface VendorCategoryService {
     boolean updateDepartmentPermission(UpdateDepartmentPermissionOperationRequest request);
 
     boolean updateVendorCategoryName(UpdateVendorCategoryNameOperationRequest request);
+
+    List<VendorCategoryEntity> findVendorCategoryEntityByDepartmentId(Long departmentId);
      
 }

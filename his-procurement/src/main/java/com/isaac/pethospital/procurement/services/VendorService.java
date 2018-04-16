@@ -6,8 +6,8 @@ import com.isaac.pethospital.procurement.entities.VendorEntity;
 import java.util.List;
 
 public interface VendorService {
-    
-    
+
+
     VendorEntity createVendor(VendorOperationRequest request);
 
     boolean deleteVendor(VendorOperationRequest request);
@@ -20,5 +20,7 @@ public interface VendorService {
 
     VendorEntity findById(Long id);
 
-    List<VendorEntity>  findByNameContains(String keyword);
+    List<VendorEntity> findByNameContains(String keyword);
+
+    List<VendorEntity> findPermittedAll(String userAccount);
 }

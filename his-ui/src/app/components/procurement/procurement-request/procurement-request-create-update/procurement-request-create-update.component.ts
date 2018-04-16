@@ -180,7 +180,7 @@ export class ProcurementRequestCreateUpdateComponent extends AbstractCreateUpdat
     this.initForm();
 
     this.process();
-    this.vendorService.findAll().subscribe(r=>{
+    this.vendorService.getPermittedVendors().subscribe(r=>{
       this.vendors=r;
     })
   }

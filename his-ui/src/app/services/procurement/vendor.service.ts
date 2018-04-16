@@ -16,6 +16,8 @@ export class VendorService extends AbstractService {
   private deleteVendorUrl: string = `${this.rootUrl}/delete-vendor`;
   private findByNameContainsUrl: string = `${this.rootUrl}/find-by-name-contains`;
 
+  private permittedVendorUrl: string = `${this.rootUrl}/permitted`;
+
 
   constructor(private authHttp: AuthHttp) {
     super();
@@ -23,6 +25,10 @@ export class VendorService extends AbstractService {
 
   createVendor(request: FormGroup): Observable<Vendor> {
     return this.authHttp.post(this.createVendorUrl, request).map(this.extractData);
+  }
+  getPermittedVendors():Observable<Vendor[]>
+  {
+    return this.authHttp.get(this.permittedVendorUrl).map(this.extractData);
   }
 
   updateVendor(request: FormGroup) {

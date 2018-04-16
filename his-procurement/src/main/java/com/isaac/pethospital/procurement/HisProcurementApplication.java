@@ -155,6 +155,10 @@ public class HisProcurementApplication {
                 ve.setName("IDEXX");
                 vendorRepository.save(ve);
 
+                VendorEntity ve1=new VendorEntity();
+                ve1.setName("得力");
+                vendorRepository.save(ve1);
+
 
                 VendorCategoryEntity vendorCategoryEntity1 = new VendorCategoryEntity();
                 vendorCategoryEntity1.setName("医疗用品及材料");
@@ -164,6 +168,7 @@ public class HisProcurementApplication {
                 vendorCategoryEntity2.setName("医疗影像");
                 vendorCategoryEntity2.addChildByName("医疗设备");
                 VendorCategoryEntity vendorCategoryEntity3 = new VendorCategoryEntity();
+
                 vendorCategoryEntity3.setName("办公采购");
                 vendorCategoryEntity3.addChildByName("办公用品");
 
@@ -174,7 +179,10 @@ public class HisProcurementApplication {
                 vendorCategoryRepository.save(vendorCategoryEntity2);
 
                 vendorRepository.save(ve);
+
+                vendorCategoryEntity3.addVendor(ve1);
                 vendorCategoryRepository.save(vendorCategoryEntity3);
+                vendorRepository.save(ve1);
 
 
 

@@ -79,4 +79,9 @@ public class VendorCategoryServiceImpl implements VendorCategoryService {
         this.vendorCategoryRepository.save(vce);
         return true;
     }
+
+    @Override
+    public List<VendorCategoryEntity> findVendorCategoryEntityByDepartmentId(Long departmentId) {
+        return this.vendorCategoryRepository.findVendorCategoryEntityByDepartmentId(departmentId);
+    }
 }

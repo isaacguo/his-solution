@@ -21,4 +21,7 @@ public interface EmployeeFeignService {
 
     @RequestMapping(method = RequestMethod.GET, value = "/departments/brief")
     List<DepartmentIdAndName> findIndexAndNameOnly();
+
+    @GetMapping("/employees/get-department-id/{userAccount}")
+    public Long getDepartmentId(@PathVariable("userAccount") String userAccount);
 }

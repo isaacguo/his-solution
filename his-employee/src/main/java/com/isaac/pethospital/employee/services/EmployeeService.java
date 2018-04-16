@@ -34,4 +34,8 @@ public interface EmployeeService {
     List<EmployeeEntity> findKeywordInName(String any);
 
     List<EmployeeListItem> findEmployeesForEmployeeListItem();
+
+    String getDirectManagerUserAccount(String userAccount);
+
+    Long getDepartmentId(String userAccount);
 }

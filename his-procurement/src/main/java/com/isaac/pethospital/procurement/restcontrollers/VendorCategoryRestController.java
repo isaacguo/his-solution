@@ -38,17 +38,19 @@ public class VendorCategoryRestController {
     }
 
     @PostMapping("updateDepartmentPermission")
-    public boolean updateDepartmentPermission(@RequestBody UpdateDepartmentPermissionOperationRequest request)
-    {
+    public boolean updateDepartmentPermission(@RequestBody UpdateDepartmentPermissionOperationRequest request) {
         return this.vendorCategoryService.updateDepartmentPermission(request);
     }
 
     @PostMapping("updateVendorCategoryName")
-    public boolean updateVendorCategoryName(@RequestBody UpdateVendorCategoryNameOperationRequest request)
-    {
+    public boolean updateVendorCategoryName(@RequestBody UpdateVendorCategoryNameOperationRequest request) {
         return this.vendorCategoryService.updateVendorCategoryName(request);
     }
 
+    @GetMapping("f/{id}")
+    public List<VendorCategoryEntity> findVendorCategoryEntityByDepartmentId(@PathVariable("id") Long departmentId) {
+        return this.vendorCategoryService.findVendorCategoryEntityByDepartmentId(departmentId);
+    }
 
 
 }

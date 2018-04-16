@@ -2,6 +2,7 @@ package com.isaac.pethospital.procurement.services;
 
 import com.isaac.pethospital.procurement.dtos.VendorOperationRequest;
 import com.isaac.pethospital.procurement.entities.VendorEntity;
+import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
 import com.isaac.pethospital.procurement.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +17,13 @@ public class VendorServiceSpecTests {
 
     VendorRepository vendorRepository;
     VendorService vendorService;
+    EmployeeFeignService employeeFeignService;
 
     @Before
     public void before() {
         this.vendorRepository = mock(VendorRepository.class);
-        this.vendorService = spy(new VendorServiceImpl(this.vendorRepository));
+        this.employeeFeignService = mock(EmployeeFeignService.class);
+        this.vendorService = spy(new VendorServiceImpl(this.vendorRepository, this.employeeFeignService));
     }
 
     @Test
