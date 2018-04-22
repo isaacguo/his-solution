@@ -10,6 +10,7 @@ import {DepartmentListItem} from "../../../../dto/employee/department-list-item.
 import {VendorCategoryService} from "../../../../services/procurement/vendor-category.service";
 import {VendorCategory} from "../../../../dto/procurement/vendor-category.model";
 import {VendorPermitDepartment} from "../../../../dto/employee/vendor-permit-department.model";
+import {MyTreeNode} from "../../../../dto/procurement/MyTreeNode";
 
 @Component({
   selector: 'app-vendor-management',
@@ -17,27 +18,23 @@ import {VendorPermitDepartment} from "../../../../dto/employee/vendor-permit-dep
   styleUrls: ['./vendor-management.component.css']
 })
 export class VendorManagementComponent implements OnInit, OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-    this.loadData();
-  }
-
   @Input()
   departmentList: DepartmentListItem[];
   @Input()
   categoryId: number;
-
-  isModified:boolean=false;
-
+  isModified: boolean = false;
   @ViewChild("deleteResultModal") deleteResultModal: ModalComponent;
   @ViewChild("confirmDeletionModal") confirmDeletionModal: ModalComponent;
-
+  @ViewChild("moveVendorModal") moveVendorModal: ModalComponent;
   deleteResultText: string;
-  vendorToBeDeleted: Vendor;
 
   searchInput: FormControl = new FormControl('');
-
   vendors: Vendor[];
   vendorCategory: VendorCategory;
+  vendorToBeDeleted: Vendor;
+  nodes: MyTreeNode[] = [];
+  selectedCategoryId: number;
+  selectedCategory: MyTreeNode;
 
   constructor(public router: Router, public route: ActivatedRoute,
               private vendorService: VendorService,
@@ -55,9 +52,12 @@ export class VendorManagementComponent implements OnInit, OnChanges {
       })
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadData();
+  }
+
   ngOnInit() {
 
-    console.log(this.categoryId);
     this.loadData();
   }
 
@@ -79,9 +79,8 @@ export class VendorManagementComponent implements OnInit, OnChanges {
   }
 
   onCreateNewVendorClicked() {
-    this.router.navigate(['procurement-settings', 'vendors', OperationEnum.CREATE]);
+    this.router.navigate(['procurement-settings', 'vendors', OperationEnum.CREATE, this.categoryId]);
   }
-
 
   onModifyVendorButtonClicked(vendor: Vendor) {
 
@@ -112,17 +111,50 @@ export class VendorManagementComponent implements OnInit, OnChanges {
   }
 
   onChange(dep: DepartmentListItem, event) {
-    this.isModified=true;
+    this.isModified = true;
     let department = this.vendorCategory.departments.find(r => r.departmentId === dep.id);
-    if(department!=null)
-      department.permitted=event;
+    if (department != null)
+      department.permitted = event;
   }
 
   onUpdatePermissionButtonClicked() {
 
-    this.vendorCategoryService.updateDepartmentPermission(this.vendorCategory.id, this.vendorCategory.departments).subscribe(r=>{
+    this.vendorCategoryService.updateDepartmentPermission(this.vendorCategory.id, this.vendorCategory.departments).subscribe(r => {
 
-      this.isModified=false;
+      this.isModified = false;
+    });
+  }
+
+  selectedVendorId: number;
+
+  onMoveVendorButtonClicked(vendor: Vendor) {
+    this.selectedVendorId=vendor.id;
+    this.loadVendorCategoryList();
+    this.moveVendorModal.open();
+  }
+
+  onMoveVendorModalClosed() {
+    this.vendorService.moveToCategory(this.selectedCategoryId, this.selectedVendorId).subscribe(r => {
+      this.loadData();
+    })
+  }
+
+  onItemClicked(category: MyTreeNode) {
+    this.selectedCategory = category;
+    this.selectedCategoryId = category.categoryId;
+  }
+
+  isRowSelected(category) {
+
+    if (this.selectedCategory === category)
+      return true;
+    else
+      return false;
+  }
+
+  private loadVendorCategoryList() {
+    this.vendorCategoryService.findAllForList().subscribe(r => {
+      this.nodes = r;
     });
   }
 }

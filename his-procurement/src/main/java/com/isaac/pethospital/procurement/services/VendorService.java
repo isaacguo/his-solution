@@ -23,4 +23,6 @@ public interface VendorService {
     List<VendorEntity> findByNameContains(String keyword);
 
     List<VendorEntity> findPermittedAll(String userAccount);
+
+    boolean moveVendor(VendorOperationRequest request);
 }

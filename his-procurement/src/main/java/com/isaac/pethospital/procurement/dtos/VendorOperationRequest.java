@@ -10,6 +10,16 @@ import java.util.stream.Collectors;
 
 public class VendorOperationRequest {
 
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    Long categoryId;
+
     Long id;
     @NotNull
     String name;

@@ -17,4 +17,6 @@ public interface VendorCategoryRepository extends JpaRepository<VendorCategoryEn
     List<VendorCategoryEntity> findVendorCategoryEntityByDepartmentId(@Param("departmentId") Long departmentId);
 
 
+    VendorCategoryEntity findByNameIgnoreCase(String name);
+
 }

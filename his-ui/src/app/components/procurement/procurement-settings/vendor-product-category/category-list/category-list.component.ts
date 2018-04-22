@@ -66,6 +66,10 @@ export class CategoryListComponent implements OnInit {
     const nodeId = this.tree.treeModel.getActiveNode().id;
     const index = this.tree.treeModel.getActiveNode().index;
     let cnode: MyTreeNode = this.getMyTreeNodeById(nodeId);
+    this.vendorCategoryService.deleteVendorCategory(cnode.categoryId).subscribe(r => {
+      this.loadData()
+    });
+    /*
     if (cnode.isLevelOne) {
       this.nodes.splice(index, 1);
     }
@@ -75,6 +79,7 @@ export class CategoryListComponent implements OnInit {
       pMyTreeNode.children.splice(index, 1);
     }
     this.tree.treeModel.update();
+    */
 
   }
 
@@ -158,7 +163,10 @@ export class CategoryListComponent implements OnInit {
   onEditNodeModalModalClosed() {
     switch (this.nodeOperation) {
       case CategoryListComponent.CREATE_HOME_NODE:
-        this.onCreateRootNode();
+        this.vendorCategoryService.createVendorCategory(this.categoryName.value).subscribe(r => {
+          this.loadData()
+        });
+        //this.onCreateRootNode();
         break;
       case CategoryListComponent.CREATE_SUB_NODE:
         this.onAddSubNode();

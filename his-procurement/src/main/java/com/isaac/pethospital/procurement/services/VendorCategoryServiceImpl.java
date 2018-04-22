@@ -84,4 +84,27 @@ public class VendorCategoryServiceImpl implements VendorCategoryService {
     public List<VendorCategoryEntity> findVendorCategoryEntityByDepartmentId(Long departmentId) {
         return this.vendorCategoryRepository.findVendorCategoryEntityByDepartmentId(departmentId);
     }
+
+    @Override
+    public boolean createRootVendorCategory(UpdateVendorCategoryNameOperationRequest request) {
+        VendorCategoryEntity vce = this.vendorCategoryRepository.findByNameIgnoreCase(request.getName());
+        if(vce!=null)
+            throw new RuntimeException("Vendor Category with name: "+request.getName()+" has existed");
+
+        VendorCategoryEntity vendorCategoryEntity=new VendorCategoryEntity();
+        vendorCategoryEntity.setName(request.getName());
+        vendorCategoryRepository.save(vendorCategoryEntity);
+        return true;
+    }
+
+    @Override
+    public boolean deleteVendorCategory(UpdateVendorCategoryNameOperationRequest request) {
+        VendorCategoryEntity vce = this.vendorCategoryRepository.findOne(request.getCategoryId());
+        if (vce == null)
+            throw new RuntimeException("Vendor Category with name: " + request.getName() + " Cannot be Found");
+        this.vendorCategoryRepository.delete(request.getCategoryId());
+        return true;
+    }
+
+
 }

@@ -8,7 +8,7 @@ export class Vendor {
   public postcode?: string;
   public description?: string;
   public officialWebsiteLink?: string;
-  public email:string;
+  public email?:string;
   public contacts?: Contact[];
 
   constructor() {

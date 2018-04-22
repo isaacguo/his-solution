@@ -19,6 +19,7 @@
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
   <div class="form-group">
     <input type="hidden" formControlName="id">
+    <input type="hidden" formControlName="categoryId">
     <label for="name">公司名称</label> <span color="red" class="text-danger"
                                          [hidden]="formModel.controls.name.valid">*</span>
     <input id="name" type="text" class="form-control" formControlName="name">

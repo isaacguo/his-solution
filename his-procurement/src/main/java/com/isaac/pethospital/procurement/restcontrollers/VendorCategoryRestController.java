@@ -52,5 +52,17 @@ public class VendorCategoryRestController {
         return this.vendorCategoryService.findVendorCategoryEntityByDepartmentId(departmentId);
     }
 
+    @PostMapping("create")
+    public boolean createRootVendorCategory(@RequestBody UpdateVendorCategoryNameOperationRequest request) {
+        return this.vendorCategoryService.createRootVendorCategory(request);
+    }
+
+    @DeleteMapping("delete/{categoryId}")
+    public boolean deleteVendorCategory(@PathVariable("categoryId") Long categoryId) {
+        UpdateVendorCategoryNameOperationRequest request = new UpdateVendorCategoryNameOperationRequest();
+        request.setCategoryId(categoryId);
+        return this.vendorCategoryService.deleteVendorCategory(request);
+    }
+
 
 }

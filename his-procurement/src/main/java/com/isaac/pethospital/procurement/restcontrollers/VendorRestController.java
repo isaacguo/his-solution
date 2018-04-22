@@ -64,6 +64,11 @@ public class VendorRestController {
     public VendorEntity updateVendor(@RequestBody VendorOperationRequest request) {
         return this.vendorService.updateVendor(request);
     }
+    @PutMapping("move-vendor")
+    public boolean moveVendor(@RequestBody VendorOperationRequest request )
+    {
+        return this.vendorService.moveVendor(request);
+    }
 
 
 

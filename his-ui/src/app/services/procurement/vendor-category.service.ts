@@ -18,6 +18,11 @@ export class VendorCategoryService extends AbstractService {
   private getListUrl: string = `${this.rootUrl}/list`;
   private updateDepartmentPermissionUrl: string = `${this.rootUrl}/updateDepartmentPermission`;
   private updateVendorCategoryNameUrl: string = `${this.rootUrl}/updateVendorCategoryName`;
+  private createVendorCategoryNameUrl: string = `${this.rootUrl}/create`;
+
+  private deleteVendorCategoryUrl: string = `${this.rootUrl}/delete`;
+
+  private moveVendorCategoryUrl: string = `${this.rootUrl}/move`;
 
   constructor(private authHttp: AuthHttp) {
     super();
@@ -76,4 +81,18 @@ export class VendorCategoryService extends AbstractService {
       return this.extractTextData(r) === "true" ? true : false;
     });
   }
+
+  createVendorCategory(name: string): Observable<boolean> {
+    return this.authHttp.post(this.createVendorCategoryNameUrl, {'name': name}).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+
+  deleteVendorCategory(categoryId: number): Observable<boolean> {
+    return this.authHttp.delete(`${this.deleteVendorCategoryUrl}/${categoryId}`).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+
+
 }

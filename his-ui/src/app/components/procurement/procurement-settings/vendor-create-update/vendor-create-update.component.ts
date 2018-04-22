@@ -15,7 +15,6 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent implements OnInit {
 
 
-
   formModel: FormGroup;
   vendorCreationResultText: string;
   @ViewChild("confirmCreateModal") confirmCreateModal: ModalComponent;
@@ -32,6 +31,7 @@ export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent i
 
   private initForm() {
     this.formModel = this.fb.group({
+      'categoryId':[''],
       'id': [''],
       'name': ['', [Validators.required]],
       'contacts': this.fb.array([
@@ -57,11 +57,19 @@ export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent i
     })
   }
 
+  categoryId: number;
+
   ngOnInit() {
 
     this.initForm();
 
     this.process();
+
+    if (this.operation === OperationEnum.CREATE) {
+      this.route.params.subscribe(params => {
+        this.categoryId = params['updateId'];
+      });
+    }
 
     if (this.operation === OperationEnum.UPDATE) {
       this.vendorService.findById(this.updateId).subscribe(r => {
@@ -114,23 +122,25 @@ export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent i
 
 
   invokeWhenCreate() {
+
+    this.formModel.controls['categoryId'].setValue(this.categoryId);
     this.vendorService.createVendor(this.formModel.value).subscribe(r => {
-        if (r.id > 0) {
-          this.vendorCreationResultText = "供应商信息添加成功";
-          this.confirmCreateModal.open();
-        }
-      });
+      if (r.id > 0) {
+        this.vendorCreationResultText = "供应商信息添加成功";
+        this.confirmCreateModal.open();
+      }
+    });
   }
 
   invokeWhenUpdate() {
-    this.vendorService.updateVendor(this.formModel.value).subscribe(r=>{
-        if (r.id > 0) {
-          this.vendorCreationResultText = "供应商信息更新成功";
-          this.confirmCreateModal.open();
-        }
-      },error=>{
-        console.log(error);
-      })
+    this.vendorService.updateVendor(this.formModel.value).subscribe(r => {
+      if (r.id > 0) {
+        this.vendorCreationResultText = "供应商信息更新成功";
+        this.confirmCreateModal.open();
+      }
+    }, error => {
+      console.log(error);
+    })
   }
 
   onConfirmCreateModalClosed() {

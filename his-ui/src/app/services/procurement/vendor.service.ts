@@ -14,6 +14,7 @@ export class VendorService extends AbstractService {
   private createVendorUrl: string = `${this.rootUrl}/create-vendor`;
   private updateVendorUrl: string = `${this.rootUrl}/update-vendor`
   private deleteVendorUrl: string = `${this.rootUrl}/delete-vendor`;
+  private moveVendorUrl: string = `${this.rootUrl}/move-vendor`;
   private findByNameContainsUrl: string = `${this.rootUrl}/find-by-name-contains`;
 
   private permittedVendorUrl: string = `${this.rootUrl}/permitted`;
@@ -51,5 +52,11 @@ export class VendorService extends AbstractService {
 
   findByNameContains(name: string):Observable<Vendor[]> {
     return this.authHttp.get(`${this.findByNameContainsUrl}/${name}`).map(this.extractData);
+  }
+
+  moveToCategory(selectedCategoryId: number, id: number | undefined) {
+    return this.authHttp.put(`${this.moveVendorUrl}`, {'categoryId':selectedCategoryId, 'id':id}).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 }

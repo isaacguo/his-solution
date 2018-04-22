@@ -18,5 +18,9 @@ public interface VendorCategoryService {
     boolean updateVendorCategoryName(UpdateVendorCategoryNameOperationRequest request);
 
     List<VendorCategoryEntity> findVendorCategoryEntityByDepartmentId(Long departmentId);
-     
+
+    boolean createRootVendorCategory(UpdateVendorCategoryNameOperationRequest request);
+
+    boolean deleteVendorCategory(UpdateVendorCategoryNameOperationRequest request);
+
 }

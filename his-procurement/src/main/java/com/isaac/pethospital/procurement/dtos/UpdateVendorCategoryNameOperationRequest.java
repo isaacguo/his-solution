@@ -1,6 +1,15 @@
 package com.isaac.pethospital.procurement.dtos;
 
 public class UpdateVendorCategoryNameOperationRequest {
+    public Long getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(Long vendorId) {
+        this.vendorId = vendorId;
+    }
+
+    Long vendorId;
     Long categoryId;
     String name;
 

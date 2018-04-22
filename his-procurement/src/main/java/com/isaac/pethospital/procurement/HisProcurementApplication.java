@@ -162,15 +162,15 @@ public class HisProcurementApplication {
 
                 VendorCategoryEntity vendorCategoryEntity1 = new VendorCategoryEntity();
                 vendorCategoryEntity1.setName("医疗用品及材料");
-                vendorCategoryEntity1.addChildByName("医疗用品");
-                vendorCategoryEntity1.addChildByName("材料");
+                //vendorCategoryEntity1.addChildByName("医疗用品");
+                //vendorCategoryEntity1.addChildByName("材料");
                 VendorCategoryEntity vendorCategoryEntity2 = new VendorCategoryEntity();
                 vendorCategoryEntity2.setName("医疗影像");
-                vendorCategoryEntity2.addChildByName("医疗设备");
+                //vendorCategoryEntity2.addChildByName("医疗设备");
                 VendorCategoryEntity vendorCategoryEntity3 = new VendorCategoryEntity();
 
                 vendorCategoryEntity3.setName("办公采购");
-                vendorCategoryEntity3.addChildByName("办公用品");
+                //vendorCategoryEntity3.addChildByName("办公用品");
 
                 vendorCategoryRepository.save(vendorCategoryEntity1);
 
