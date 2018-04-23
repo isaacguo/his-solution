@@ -22,6 +22,7 @@ export class VendorManagementComponent implements OnInit, OnChanges {
   departmentList: DepartmentListItem[];
   @Input()
   categoryId: number;
+
   isModified: boolean = false;
   @ViewChild("deleteResultModal") deleteResultModal: ModalComponent;
   @ViewChild("confirmDeletionModal") confirmDeletionModal: ModalComponent;
@@ -57,8 +58,6 @@ export class VendorManagementComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
-    this.loadData();
   }
 
   loadData() {
@@ -128,7 +127,7 @@ export class VendorManagementComponent implements OnInit, OnChanges {
   selectedVendorId: number;
 
   onMoveVendorButtonClicked(vendor: Vendor) {
-    this.selectedVendorId=vendor.id;
+    this.selectedVendorId = vendor.id;
     this.loadVendorCategoryList();
     this.moveVendorModal.open();
   }

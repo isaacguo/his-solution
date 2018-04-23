@@ -52,9 +52,6 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.procurementApprovalService.updateUnfinishedApprovalCount();
   }
 
-  showProcurementApproval: boolean = false;
-  showEmployeeManagement: boolean = false;
-
   canShowApproval(): boolean {
     return this.procurementApprovalGuard.canActivate();
   }

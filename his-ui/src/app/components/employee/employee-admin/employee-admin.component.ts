@@ -31,4 +31,8 @@ export class EmployeeAdminComponent implements OnInit {
     console.log(uuid);
     this.router.navigate(['employee-profile-edit', uuid]);
   }
+
+  onAddNewEmployeeButtonClicked() {
+    
+  }
 }

@@ -53,88 +53,94 @@
   </form>
 </modal>
 
-<div>
+<div *ngIf="categoryId=== undefined ">
+  请选择供应商分类
+</div>
+<div *ngIf="categoryId!== undefined">
 
-  <div class="col-md-8 btn-group pull-right" role="group">
-    <button (click)="onCreateNewVendorClicked()" class="btn btn-default">新建供应商</button>
-  </div>
+  <div>
 
-  <div class="col-md-4 input-group">
-    <input type="text" class="form-control" placeholder="查找供应商..." [formControl]="searchInput">
-    <span class="input-group-btn">
+    <div class="col-md-8 btn-group pull-right" role="group">
+      <button (click)="onCreateNewVendorClicked()" class="btn btn-default">新建供应商</button>
+    </div>
+
+    <div class="col-md-4 input-group">
+      <input type="text" class="form-control" placeholder="查找供应商..." [formControl]="searchInput">
+      <span class="input-group-btn">
       <button class="btn btn-default" type="button"> <span class="glyphicon glyphicon-search"></span></button>
     </span>
-  </div>
-</div>
-
-<a class="btn btn-primary isaac-margin-15top" role="button" href="#collapsePanel" data-toggle="collapse"
-   aria-expanded="false"
-   aria-controls="collapsePanel">查看采购权限</a>
-<div class="collapse" id="collapsePanel">
-  <div class="panel panel-default isaac-margin-15top">
-    <div class="panel-heading">
-      采购权限
     </div>
-    <div class="panel-body">
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let dep of departmentList, let i = index">
-          <div>
-            <div class=" pull-left">
-              {{dep.name}}
+  </div>
+
+  <a class="btn btn-primary isaac-margin-15top" role="button" href="#collapsePanel" data-toggle="collapse"
+     aria-expanded="false"
+     aria-controls="collapsePanel">查看采购权限</a>
+  <div class="collapse" id="collapsePanel">
+    <div class="panel panel-default isaac-margin-15top">
+      <div class="panel-heading">
+        采购权限
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let dep of departmentList, let i = index">
+            <div>
+              <div class=" pull-left">
+                {{dep.name}}
+              </div>
+              <div class="pull-right">
+                <ui-switch size="small" [ngModel]="this.vendorCategory?.departments[i].permitted"
+                           (change)="onChange(dep,$event)"></ui-switch>
+              </div>
+              <div class="clearfix"></div>
             </div>
-            <div class="pull-right">
-              <ui-switch size="small" [ngModel]="this.vendorCategory?.departments[i].permitted"
-                         (change)="onChange(dep,$event)"></ui-switch>
-            </div>
-            <div class="clearfix"></div>
+          </li>
+        </ul>
+        <button (click)="onUpdatePermissionButtonClicked()" [disabled]="!isModified" class="btn btn-default">更新</button>
+      </div>
+    </div>
+  </div>
+
+  <div class=" isaac-margin-15top">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>联系人</th>
+        <th>联系人电话</th>
+        <th>介绍</th>
+        <th>地址</th>
+        <th>邮政编码</th>
+        <th>官网</th>
+        <th>邮箱</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let vendor of vendorCategory?.vendors">
+        <td>{{vendor.id}}</td>
+        <td>{{vendor.name}}</td>
+        <td>{{vendor.contacts[0]?.name}} {{vendor.contacts?.length>1?"(更多)":""}}</td>
+        <td>{{vendor.contacts[0]?.telephone}}</td>
+        <td>{{vendor.description}}</td>
+        <td>{{vendor.address}}</td>
+        <td>{{vendor.postcode}}</td>
+        <td>{{vendor.officialWebsiteLink}}</td>
+        <td>{{vendor.email}}</td>
+        <td>
+          <div class="btn-group-sm" role="group">
+            <button (click)="onModifyVendorButtonClicked(vendor)" type="button" class="btn btn-default"><span
+              class="glyphicon glyphicon-pencil"></span></button>
+            <button (click)="onMoveVendorButtonClicked(vendor)" type="button" class="btn btn-default"><span
+              class="glyphicon glyphicon-sort"></span></button>
+            <button type="button" class="btn btn-default btn-s" (click)="onRemoveVendorButtonClicked(vendor)"><span
+              class="glyphicon glyphicon-remove"></span></button>
           </div>
-        </li>
-      </ul>
-      <button (click)="onUpdatePermissionButtonClicked()" [disabled]="!isModified" class="btn btn-default">更新</button>
-    </div>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
   </div>
-</div>
-
-<div class=" isaac-margin-15top">
-  <table class="table table-bordered">
-    <thead>
-    <tr>
-      <th>编号</th>
-      <th>名称</th>
-      <th>联系人</th>
-      <th>联系人电话</th>
-      <th>介绍</th>
-      <th>地址</th>
-      <th>邮政编码</th>
-      <th>官网</th>
-      <th>邮箱</th>
-      <th>操作</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr *ngFor="let vendor of vendorCategory?.vendors">
-      <td>{{vendor.id}}</td>
-      <td>{{vendor.name}}</td>
-      <td>{{vendor.contacts[0]?.name}} {{vendor.contacts?.length>1?"(更多)":""}}</td>
-      <td>{{vendor.contacts[0]?.telephone}}</td>
-      <td>{{vendor.description}}</td>
-      <td>{{vendor.address}}</td>
-      <td>{{vendor.postcode}}</td>
-      <td>{{vendor.officialWebsiteLink}}</td>
-      <td>{{vendor.email}}</td>
-      <td>
-        <div class="btn-group-sm" role="group">
-          <button (click)="onModifyVendorButtonClicked(vendor)" type="button" class="btn btn-default"><span
-            class="glyphicon glyphicon-pencil"></span></button>
-          <button (click)="onMoveVendorButtonClicked(vendor)" type="button" class="btn btn-default"><span
-            class="glyphicon glyphicon-sort"></span></button>
-          <button type="button" class="btn btn-default btn-s" (click)="onRemoveVendorButtonClicked(vendor)"><span
-            class="glyphicon glyphicon-remove"></span></button>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-
-  </table>
 </div>

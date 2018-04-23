@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DepartmentListItem} from "../../../../../dto/employee/department-list-item.model";
 
 @Component({
@@ -7,6 +7,8 @@ import {DepartmentListItem} from "../../../../../dto/employee/department-list-it
   styleUrls: ['./category-detail.component.css']
 })
 export class CategoryDetailComponent implements OnInit {
+
+
 
   @Input()
   departmentList: DepartmentListItem[];
