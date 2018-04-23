@@ -49,6 +49,8 @@ import {ProcurementPurchaseListComponent} from "./app/components/procurement/pro
 import {AuthorizationManagementComponent} from "./app/components/settings/authorization-management/authorization-management.component";
 import {ProcurementApprovalGuard} from "./app/guards/procurement-approval.guard";
 import {VendorProductCategoryComponent} from "./app/components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component";
+import {EmployeeManagementGuard} from "./app/guards/employee-management.guard";
+import {VendorGuard} from "./app/guards/procurement/vendor.guard";
 
 
 const appRoutes: Routes = [
@@ -161,7 +163,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'employee-admin',
-        canActivate: [AdminGuard],
+        canActivate: [EmployeeManagementGuard],
         component: EmployeeAdminComponent
       },
       {
@@ -242,7 +244,9 @@ const appRoutes: Routes = [
           },
           {
             path:'vendors',
-            component:VendorProductCategoryComponent
+            component:VendorProductCategoryComponent,
+            canActivate: [VendorGuard],
+
           },
           {
             path: 'procurement-status',

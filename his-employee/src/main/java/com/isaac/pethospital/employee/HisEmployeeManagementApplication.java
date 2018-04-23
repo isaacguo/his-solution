@@ -5,6 +5,7 @@ import com.isaac.pethospital.common.entities.AuthorizationEntity;
 import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
 import com.isaac.pethospital.common.repositories.AuthorizationRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
+import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.*;
 import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
@@ -46,9 +47,12 @@ public class HisEmployeeManagementApplication {
                                         EmployeeRepository employeeRepository,
                                         EmployeeService employeeService,
                                         AuthorizationTopicRepository authorizationTopicRepository,
-                                        AuthorizationRepository authorizationRepository) {
+                                        AuthorizationRepository authorizationRepository,
+                                        AuthorizationService authorizationService) {
 
         return new CommandLineRunner() {
+
+
 
             /*
             岳灵珊	总经理	总经理
@@ -80,6 +84,11 @@ public class HisEmployeeManagementApplication {
 
             @Override
             public void run(String... strings) throws Exception {
+
+
+                authorizationService.setDomainName("Employee");
+
+
                 CompanyEntity companyEntity = new CompanyEntity();
                 companyEntity.setCompanyName("Pet Hospital1");
                 companyEntity.setCompanyLocation("Beijing ChaoYang");
@@ -152,6 +161,12 @@ public class HisEmployeeManagementApplication {
 
             private void initAuthorization() {
                 AuthorizationTopicEntity topic1 = new AuthorizationTopicEntity();
+                topic1.setName("员工管理");
+                topic1.addAvailableTopicOperationByName("管理");
+                authorizationTopicRepository.save(topic1);
+
+                /*
+                AuthorizationTopicEntity topic1 = new AuthorizationTopicEntity();
                 topic1.setName("工资");
                 topic1.addAvailableTopicOperationByName("增加");
                 topic1.addAvailableTopicOperationByName("删除");
@@ -166,9 +181,10 @@ public class HisEmployeeManagementApplication {
                 topic2.addAvailableTopicOperationByName("修改");
                 topic2.addAvailableTopicOperationByName("查看");
                 authorizationTopicRepository.save(topic2);
+                */
 
                 authorizationTopicRepository.save(topic1);
-                authorizationTopicRepository.save(topic2);
+                //authorizationTopicRepository.save(topic2);
             }
 
 

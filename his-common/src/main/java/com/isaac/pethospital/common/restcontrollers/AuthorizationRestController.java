@@ -1,6 +1,8 @@
 package com.isaac.pethospital.common.restcontrollers;
 
+import com.isaac.pethospital.common.dtos.AuthorizationDomainAssignmentResponse;
 import com.isaac.pethospital.common.dtos.AuthorizationOperationRequest;
+import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
 import com.isaac.pethospital.common.entities.AuthorizationEntity;
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.common.services.AuthorizationService;
@@ -48,4 +50,15 @@ public class AuthorizationRestController {
 
         return this.authorizationService.isAuthorized(userAccount, topic, operation);
     }
+    @GetMapping("get-my-authorizations")
+    public AuthorizationDomainAssignmentResponse getMyAuthorization()
+    {
+        String userAccount = authHelper.getUserAccount();
+        AuthorizationDomainAssignmentResponse authorizationDomainAssignmentResponse=new AuthorizationDomainAssignmentResponse();
+        authorizationDomainAssignmentResponse.setName(this.authorizationService.getDomainName());
+        authorizationDomainAssignmentResponse.setAssignments(this.authorizationService.getMyAuthorization(userAccount));
+        return authorizationDomainAssignmentResponse;
+    }
+
+
 }

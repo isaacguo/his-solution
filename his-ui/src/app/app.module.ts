@@ -91,6 +91,8 @@ import {CategoryDetailComponent} from './components/procurement/procurement-sett
 import {VendorCategoryService} from "./services/procurement/vendor-category.service";
 import {EmployeeDepartmentService} from "./services/employee/employee-department.service";
 import {UiSwitchModule} from "ngx-ui-switch";
+import {EmployeeManagementGuard} from "./guards/employee-management.guard";
+import {VendorGuard} from "./guards/procurement/vendor.guard";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -188,7 +190,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthGuard,
     AdminGuard,
     FinanceGuard,
+    EmployeeManagementGuard,
     ProcurementApprovalGuard,
+    VendorGuard,
     LogoutGuardService,
     AuthenticationService,
     AuthorizationService,

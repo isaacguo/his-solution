@@ -4,6 +4,7 @@ import {Subscription} from "rxjs/Subscription";
 import {ProcurementApprovalService} from "../../services/procurement/procurement-approval.service";
 import {ProcurementApprovalGuard} from "../../guards/procurement-approval.guard";
 import {EmployeeService} from "../../services/employee/employee.service";
+import {EmployeeManagementGuard} from "../../guards/employee-management.guard";
 
 @Component({
   selector: 'app-index',
@@ -31,9 +32,11 @@ export class IndexComponent implements OnInit, OnDestroy {
       return this.count + "";
   }
 
-  constructor(private authenticationService: AuthenticationService, private  procurementApprovalService: ProcurementApprovalService,
+  constructor(private authenticationService: AuthenticationService,
+              private procurementApprovalService: ProcurementApprovalService,
               public procurementApprovalGuard: ProcurementApprovalGuard,
-              private  employeeService: EmployeeService) {
+              private employeeService: EmployeeService,
+              private employeeManagementGuard: EmployeeManagementGuard) {
     this.authChangeSubscription = authenticationService.authChange.subscribe(
       newAuthInfo => {
         this.authInfo = newAuthInfo;
@@ -42,8 +45,7 @@ export class IndexComponent implements OnInit, OnDestroy {
           this.userName = r.fullName;
         })
       }
-    )
-    ;
+    );
 
     this.unfinishedTaskCountSubscriptiion = procurementApprovalService.unfinishedTasksChange.subscribe(
       r => this.count = r)
@@ -51,16 +53,19 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   showProcurementApproval: boolean = false;
+  showEmployeeManagement: boolean = false;
 
-  canShowApproval() {
-    this.procurementApprovalGuard.canActivate().subscribe(r => {
-      this.showProcurementApproval = r;
-    });
+  canShowApproval(): boolean {
+    return this.procurementApprovalGuard.canActivate();
   }
 
+  canShowEmployeeManagement(): boolean {
+    return this.employeeManagementGuard.canActivate();
+  }
 
   ngOnInit() {
     this.canShowApproval();
+    this.canShowEmployeeManagement()
   }
 
   onLoginBtnClicked() {

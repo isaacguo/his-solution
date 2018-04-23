@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -130,18 +131,39 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             return false;
 
         AuthorizationAssignmentEntity aae = ae.getAuthorizationAssignmentList().stream().filter(t -> t.getTopic().getName().equals(topicString)).findFirst().orElse(null);
-        if(aae==null)
+        if (aae == null)
             return false;
         AuthorizationTopicEntity topic = aae.getTopic();
         if (topic == null)
             throw new RuntimeException("Topic is null");
 
-        TopicOperationEntity toe= aae.getAllowedOperations().stream().filter(o->o.getName().equals(operationString)).findFirst().orElse(null);
+        TopicOperationEntity toe = aae.getAllowedOperations().stream().filter(o -> o.getName().equals(operationString)).findFirst().orElse(null);
 
         if (toe == null)
             return false;
         else
             return true;
+    }
+
+    @Override
+    public List<AuthorizationAssignmentEntity> getMyAuthorization(String userAccount) {
+        AuthorizationEntity ae = this.authorizationRepository.findByUserAccount(userAccount);
+        if (ae == null)
+            return new LinkedList<>();
+        else
+            return ae.getAuthorizationAssignmentList();
+    }
+
+    String domainName;
+
+    @Override
+    public String getDomainName() {
+        return this.domainName;
+    }
+
+    @Override
+    public void setDomainName(String domainName) {
+        this.domainName=domainName;
     }
 
     /*

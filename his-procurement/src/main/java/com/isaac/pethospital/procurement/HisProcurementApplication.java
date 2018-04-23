@@ -3,6 +3,7 @@ package com.isaac.pethospital.procurement;
 import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
 import com.isaac.pethospital.common.repositories.AuthorizationRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
+import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.procurement.constants.ConfigurationConstants;
 import com.isaac.pethospital.procurement.entities.*;
 import com.isaac.pethospital.procurement.repositories.*;
@@ -39,11 +40,14 @@ public class HisProcurementApplication {
                                         VendorRepository vendorRepository,
                                         VendorCategoryRepository vendorCategoryRepository,
                                         AuthorizationTopicRepository authorizationTopicRepository,
-                                        AuthorizationRepository authorizationRepository
+                                        AuthorizationRepository authorizationRepository,
+                                        AuthorizationService authorizationService
                                         ) {
         return new CommandLineRunner() {
             @Override
             public void run(String... strings) throws Exception {
+
+                authorizationService.setDomainName("Procurement");
 
                 initProcurementStatus();
                 initConfiguration();
@@ -56,41 +60,9 @@ public class HisProcurementApplication {
             }
 
             private void initAuthorization() {
-                AuthorizationTopicEntity topic1 = new AuthorizationTopicEntity();
-                topic1.setName("库存");
-                topic1.addAvailableTopicOperationByName("增加");
-                topic1.addAvailableTopicOperationByName("删除");
-                topic1.addAvailableTopicOperationByName("修改");
-                topic1.addAvailableTopicOperationByName("查看");
-                authorizationTopicRepository.save(topic1);
 
-                AuthorizationTopicEntity topic2 = new AuthorizationTopicEntity();
-                topic2.setName("库存价格");
-                topic2.addAvailableTopicOperationByName("增加");
-                topic2.addAvailableTopicOperationByName("删除");
-                topic2.addAvailableTopicOperationByName("修改");
-                topic2.addAvailableTopicOperationByName("查看");
-                authorizationTopicRepository.save(topic2);
-
-                AuthorizationTopicEntity topic3 = new AuthorizationTopicEntity();
-                topic3.setName("审批");
-                topic3.addAvailableTopicOperationByName("增加");
-                topic3.addAvailableTopicOperationByName("删除");
-                topic3.addAvailableTopicOperationByName("修改");
-                topic3.addAvailableTopicOperationByName("查看");
-                authorizationTopicRepository.save(topic3);
-
-                //供应商
-                AuthorizationTopicEntity topic4 = new AuthorizationTopicEntity();
-                topic4.setName("供应商管理");
-                topic4.addAvailableTopicOperationByName("增加");
-                topic4.addAvailableTopicOperationByName("删除");
-                topic4.addAvailableTopicOperationByName("修改");
-                topic4.addAvailableTopicOperationByName("查看");
-                authorizationTopicRepository.save(topic4);
-
-
-
+                addAuthorizationTopicAndOperations("采购审批","管理");
+                addAuthorizationTopicAndOperations("供应商","管理");
 
 
                 /*
@@ -112,6 +84,16 @@ public class HisProcurementApplication {
 
                 authorizationRepository.save(authorization);
                 */
+            }
+
+            private void addAuthorizationTopicAndOperations(String topic, String... operations) {
+                AuthorizationTopicEntity topic1 = new AuthorizationTopicEntity();
+                topic1.setName(topic);
+                for(int i=0;i<operations.length;i++)
+                {
+                    topic1.addAvailableTopicOperationByName(operations[i]);
+                }
+                authorizationTopicRepository.save(topic1);
             }
 
 

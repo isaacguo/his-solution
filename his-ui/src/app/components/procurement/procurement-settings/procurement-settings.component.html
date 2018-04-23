@@ -6,7 +6,7 @@
   <div class="navbar-default sidebar-2nd-level" role="navigation">
     <div class="sidebar-nav navbar-collapse">
       <ul class="nav" id="side-menu">
-        <li><a routerLink="/procurement-settings/vendors" routerLinkActive="active">供应商管理</a></li>
+        <li *ngIf="canShowVendor()"><a routerLink="/procurement-settings/vendors" routerLinkActive="active">供应商管理</a></li>
         <li><a routerLink="/procurement-settings/procurement-status" routerLinkActive="active">采购流程管理</a></li>
         <li><a routerLink="/procurement-settings/procurement-workflow" routerLinkActive="active">审批流程管理</a></li>
       </ul>

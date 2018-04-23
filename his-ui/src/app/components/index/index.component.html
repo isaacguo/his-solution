@@ -87,7 +87,7 @@
             <a href="javascript:void(0)" class="text-center"> 人事管理<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <!--<li *ngIf="authInfo.isAdmin">-->
-              <li>
+              <li *ngIf="showEmployeeManagement || authInfo.isAdmin">
                 <a routerLink="/employee-admin" routerLinkActive="active" class="text-center"> 员工管理</a>
               </li>
               <li *ngIf="!authInfo.isAdmin">
@@ -101,7 +101,7 @@
           <li>
             <a href="javascript:void(0)" class="text-center"> 采购管理 <span class="badge isaac-badge ">{{getCount()}}</span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li *ngIf="showProcurementApproval">
+              <li *ngIf="canShowApproval()">
                 <a routerLink="/procurement-approval" routerLinkActive="active" class="text-center">采购审批 <span class="badge isaac-badge">{{getCount()}}</span></a>
               </li>
               <li>
