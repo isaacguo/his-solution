@@ -51,6 +51,7 @@ import {ProcurementApprovalGuard} from "./app/guards/procurement-approval.guard"
 import {VendorProductCategoryComponent} from "./app/components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component";
 import {EmployeeManagementGuard} from "./app/guards/employee-management.guard";
 import {VendorGuard} from "./app/guards/procurement/vendor.guard";
+import {EmployeeCreateUpdateComponent} from "./app/components/employee/employee-create-update/employee-create-update.component";
 
 
 const appRoutes: Routes = [
@@ -165,6 +166,10 @@ const appRoutes: Routes = [
         path: 'employee-admin',
         canActivate: [EmployeeManagementGuard],
         component: EmployeeAdminComponent
+      },
+      {
+        path: 'employee-operation/:operation',
+        component: EmployeeCreateUpdateComponent
       },
       {
         path: 'employee',

@@ -38,4 +38,6 @@ public interface EmployeeService {
     String getDirectManagerUserAccount(String userAccount);
 
     Long getDepartmentId(String userAccount);
+
+    List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(Long departmentId);
 }

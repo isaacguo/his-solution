@@ -147,4 +147,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             return -2L;
         return ee.getDepartment().getId();
     }
+
+    @Override
+    public List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(Long departmentId) {
+       return this.employeeRepository.findEmployeesForEmployeeListItemByDepartmentId(departmentId);
+    }
 }

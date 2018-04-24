@@ -136,8 +136,8 @@ public class HisEmployeeManagementApplication {
                 DepartmentEntity departmentEntity5 = new DepartmentEntity();
                 departmentEntity5.setName("库房");
 
-                ee = departmentEntity3.addEmployeeByName("zhaomin", "赵敏", "库房经理", boss);
-                departmentEntity3.addEmployeeByName("zhouzhiruo", "周芷若", "操作员", ee);
+                ee = departmentEntity5.addEmployeeByName("zhaomin", "赵敏", "库房经理", boss);
+                departmentEntity5.addEmployeeByName("zhouzhiruo", "周芷若", "操作员", ee);
 
 
                 departmentEntity0.addChild(departmentEntity1);

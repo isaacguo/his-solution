@@ -20,10 +20,6 @@ export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent i
   @ViewChild("confirmCreateModal") confirmCreateModal: ModalComponent;
 
 
-  getOperationText() {
-    return this.operation === OperationEnum.CREATE ? "创建" : "修改";
-  }
-
   constructor(public router: Router, public route: ActivatedRoute, private fb: FormBuilder, private vendorService: VendorService) {
     super(route);
 

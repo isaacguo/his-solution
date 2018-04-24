@@ -10,6 +10,10 @@ export abstract class AbstractCreateUpdateComponent {
 
   }
 
+  getOperationText() {
+    return this.operation === OperationEnum.CREATE ? "创建" : "修改";
+  }
+
   abstract invokeWhenCreate();
   abstract invokeWhenUpdate();
   onSubmit() {

@@ -95,9 +95,9 @@ public class EmployeeRestController {
         return this.employeeService.findKeywordInName(keyword);
     }
 
-    @GetMapping(value = "/employee-list")
-    public List<EmployeeListItem> findEmployeesForEmployeeListItem()
+    @GetMapping(value = "/{departmentId}/employee-list")
+    public List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(@PathVariable("departmentId") Long departmentId)
     {
-        return this.employeeService.findEmployeesForEmployeeListItem();
+        return this.employeeService.findEmployeesForEmployeeListItemByDepartmentId(departmentId);
     }
 }

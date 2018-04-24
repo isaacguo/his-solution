@@ -2,6 +2,8 @@ package com.isaac.pethospital.employee.restcontrollers;
 
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.employee.dto.DepartmentIdAndName;
+import com.isaac.pethospital.employee.dto.DepartmentIdAndNameAndChildren;
+import com.isaac.pethospital.employee.dto.MyDepartmentIdAndNameAndChildren;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.services.DepartmentService;
@@ -27,8 +29,16 @@ public class DepartmentRestController {
     @GetMapping
     public List<DepartmentEntity> getDepartments()
     {
-        return this.departmentService.findAll();
+        List<DepartmentEntity> all=this.departmentService.findAll();
+        return all;
     }
+
+    @GetMapping("root")
+    public MyDepartmentIdAndNameAndChildren findRootDepartment()
+    {
+        return this.departmentService.findRootDepartment();
+    }
+
 
     @GetMapping("brief")
     public List<DepartmentIdAndName> findIndexAndNameOnly()

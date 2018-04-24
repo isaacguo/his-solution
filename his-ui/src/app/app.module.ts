@@ -93,6 +93,9 @@ import {EmployeeDepartmentService} from "./services/employee/employee-department
 import {UiSwitchModule} from "ngx-ui-switch";
 import {EmployeeManagementGuard} from "./guards/employee-management.guard";
 import {VendorGuard} from "./guards/procurement/vendor.guard";
+import { EmployeeCreateUpdateComponent } from './components/employee/employee-create-update/employee-create-update.component';
+import { EmployeeAdminListComponent } from './components/employee/employee-admin/employee-admin-list/employee-admin-list.component';
+import { EmployeeAdminDetailComponent } from './components/employee/employee-admin/employee-admin-detail/employee-admin-detail.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -168,6 +171,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     VendorProductCategoryComponent,
     CategoryListComponent,
     CategoryDetailComponent,
+    EmployeeCreateUpdateComponent,
+    EmployeeAdminListComponent,
+    EmployeeAdminDetailComponent,
 
   ],
   imports: [

@@ -3,6 +3,7 @@ import {EmployeeService} from "../../../services/employee/employee.service";
 import {Employee} from "../../../dto/employee.model";
 import {Router} from "@angular/router";
 import {EmployeeListItem} from "../../../dto/employee/employee-list-item.model";
+import {OperationEnum} from "../../../enums/operation.enum";
 
 @Component({
   selector: 'app-employee-admin',
@@ -17,9 +18,11 @@ export class EmployeeAdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
     this.employeeService.getEmployeeList().subscribe(r => {
       this.emplyeeList = r;
     })
+    */
   }
 
   onViewButtonClicked(uuid: String) {
@@ -33,6 +36,7 @@ export class EmployeeAdminComponent implements OnInit {
   }
 
   onAddNewEmployeeButtonClicked() {
-    
+    this.router.navigate(['employee-operation', OperationEnum.CREATE]);
+
   }
 }

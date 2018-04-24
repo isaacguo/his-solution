@@ -47,12 +47,11 @@ export class EmployeeService {
       .map(this.extractData);
   }
 
-  getEmployeeList(): Observable<EmployeeListItem[]> {
-    let url = `/api/hisemployee/employees/employee-list`;
+  getEmployeeListByDepartmentId(departmentId: number): Observable<EmployeeListItem[]> {
+    let url = `/api/hisemployee/employees/${departmentId}/employee-list`;
     return this.authHttp.get(url)
       .map(this.extractData);
   }
-
 
 
   private extractData(res: Response) {

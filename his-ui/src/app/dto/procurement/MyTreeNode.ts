@@ -8,7 +8,7 @@ export class MyTreeNode {
   public isExpanded?: boolean;
   public categoryId?: number;
   public isLevelOne?: boolean;
-  public departments?: VendorPermitDepartment[];
+  //public departments?: VendorPermitDepartment[];
 
   constructor() {
   }
