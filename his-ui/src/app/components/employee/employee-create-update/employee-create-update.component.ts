@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractCreateUpdateComponent} from "../../common/abstract-create-update.component";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
+import {Employee} from "../../../dto/employee.model";
 
 @Component({
   selector: 'app-employee-create-update',
@@ -11,6 +12,7 @@ import {ActivatedRoute} from "@angular/router";
 export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent implements OnInit {
 
   formModel: FormGroup;
+  employee: Employee;
 
   constructor(public route: ActivatedRoute,
               private fb: FormBuilder) {
