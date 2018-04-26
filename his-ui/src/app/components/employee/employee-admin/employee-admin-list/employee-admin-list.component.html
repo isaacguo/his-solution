@@ -1,7 +1,6 @@
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-3">
 
-    <!--
     <modal #confirmDeleteModal (onClose)="onConfirmDeleteModalClosed()">
       <form #modalForm1="ngForm">
         <modal-header [show-close]="true">
@@ -22,7 +21,7 @@
     <modal #editNodeModal (onClose)="onEditNodeModalModalClosed()">
       <form #modalForm1="ngForm">
         <modal-header [show-close]="true">
-          <h4 class="modal-title">节点名称</h4>
+          <h4 class="modal-title">部门名称</h4>
         </modal-header>
         <modal-body>
           <input class="form-control" [formControl]="departmentName">
@@ -60,7 +59,6 @@
 
     </div>
 
-    -->
     <div class="row panel panel-default isaac-margin-15top">
       <div class="panel-heading">
         部门组织树形图
@@ -71,7 +69,7 @@
     </div>
 
   </div>
-  <div class="col-md-10">
+  <div class="col-md-9">
     <app-employee-admin-detail [departmentId]="selectedDepartmentId"></app-employee-admin-detail>
   </div>
 </div>

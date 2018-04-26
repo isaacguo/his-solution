@@ -42,6 +42,7 @@ export class EmployeeAdminListComponent implements OnInit {
   ngOnInit() {
     this.loadData();
 
+
   }
 
   private loadData() {
@@ -49,6 +50,8 @@ export class EmployeeAdminListComponent implements OnInit {
     this.employeeDepartmentService.getRootDepartment().subscribe(r => {
       this.nodes.push(r);
       this.tree.treeModel.update();
+
+      this.tree.treeModel.expandAll();
     });
   }
 
