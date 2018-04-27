@@ -19,6 +19,9 @@ export class EmployeeDepartmentService extends AbstractService {
   private getDepartmentListUrl: string = "/api/hisemployee/departments/brief";
 
   private getRootDepartmentUrl: string = "/api/hisemployee/departments/root";
+  private createDepartmentUrl: string = "/api/hisemployee/departments/create-department";
+  private deleteDepartmentUrl: string = "/api/hisemployee/departments/delete-department";
+  private renameDepartmentUrl: string = "/api/hisemployee/departments/rename-department";
 
 
   getDepartmentList(): Observable<DepartmentListItem[]> {
@@ -30,7 +33,6 @@ export class EmployeeDepartmentService extends AbstractService {
     return this.authHttp.get(this.getRootDepartmentUrl)
       .map(res => {
         let m: MyTreeNode = this.treeConverter(res.json(), true);
-        console.log(m);
         return m;
       });
   }
@@ -54,17 +56,23 @@ export class EmployeeDepartmentService extends AbstractService {
 
   }
 
-  deleteDepartment(categoryId: number | undefined): Observable<boolean> {
-
-    return of(true);
+  deleteDepartment(id: number | undefined): Observable<boolean> {
+    return this.authHttp.delete(`${this.deleteDepartmentUrl}/${id}`).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
-  createDepartment(value: any): Observable<boolean> {
-    return of(true);
+  createDepartment(parentId: number, name: string): Observable<boolean> {
+    return this.authHttp.post(this.createDepartmentUrl, {'name': name, 'parentId': parentId}).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
-  updateDepartmentName(departmentId: number | string[], value): Observable<boolean> {
-
-    return of(true);
+  renameDepartment(id: number, name: string): Observable<boolean> {
+    return this.authHttp.put(this.renameDepartmentUrl, {'name': name, 'id': id}).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
+
+
 }

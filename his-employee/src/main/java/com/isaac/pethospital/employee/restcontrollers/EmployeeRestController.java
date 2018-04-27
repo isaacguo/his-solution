@@ -46,9 +46,9 @@ public class EmployeeRestController {
     }
 
 
-    @PostMapping("delete")
-    public boolean deleteVendor(@RequestBody EmployeeOperationRequest request) {
-        return this.employeeService.deleteEmployee(request);
+    @DeleteMapping("delete/{id}")
+    public boolean deleteVendor(@PathVariable("id") Long id) {
+        return this.employeeService.deleteEmployee(id);
     }
 
 

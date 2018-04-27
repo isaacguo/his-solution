@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -87,7 +88,7 @@ public class EmployeeRestControllerSpecTests {
         //ee.setName("Isaac");
         doReturn("Isaac").when(authHelper).getUserAccount();
 
-        this.mockMvc.perform(post("/employees/delete")
+        this.mockMvc.perform(delete("/employees/delete/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(request)))
                 .andExpect(status().isOk());

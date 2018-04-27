@@ -81,10 +81,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public boolean deleteEmployee(EmployeeOperationRequest employeeOperationRequest) {
+    public boolean deleteEmployee(Long id) {
 
-        if (this.employeeRepository.exists(employeeOperationRequest.getId())) {
-            this.employeeRepository.delete(employeeOperationRequest.getId());
+        if (this.employeeRepository.exists(id)) {
+            this.employeeRepository.delete(id);
         }
         return true;
     }

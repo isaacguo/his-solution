@@ -23,7 +23,7 @@ public interface EmployeeService {
 
     List<EmployeeEntity> findAll();
 
-    boolean deleteEmployee(EmployeeOperationRequest employeeOperationRequest);
+    boolean deleteEmployee(Long id );
 
     boolean updateEmployee(EmployeeOperationRequest employeeOperationRequest);
 

@@ -1,8 +1,10 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {EmployeeListItem} from "../../../../dto/employee/employee-list-item.model";
 import {EmployeeService} from "../../../../services/employee/employee.service";
 import {Router} from "@angular/router";
 import {OperationEnum} from "../../../../enums/operation.enum";
+import {Employee} from "../../../../dto/employee.model";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 @Component({
   selector: 'app-employee-admin-detail',
@@ -11,6 +13,15 @@ import {OperationEnum} from "../../../../enums/operation.enum";
 })
 export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
 
+
+  @ViewChild("confirmDeletionModal")
+  confirmDeletionModal: ModalComponent;
+
+  onConfirmDeletionModalClosed() {
+    this.employeeService.deleteEmployee(this.toBeDeletedEmployee.id).subscribe(r => {
+      this.loadData();
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -49,7 +60,13 @@ export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
 
   onAddNewEmployeeButtonClicked() {
     this.router.navigate(['employee-operation', OperationEnum.CREATE]);
-
   }
 
+  toBeDeletedEmployee: Employee;
+
+  onRemoveButtonClicked(employee: Employee) {
+    console.log(employee);
+    this.toBeDeletedEmployee = employee;
+    this.confirmDeletionModal.open();
+  }
 }

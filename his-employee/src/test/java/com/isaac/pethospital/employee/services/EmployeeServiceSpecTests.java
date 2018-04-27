@@ -42,7 +42,7 @@ public class EmployeeServiceSpecTests {
         employeeOperationRequest.setId(1L);
         doReturn(true).when(employeeRepository).exists(1L);
         //when
-        this.employeeService.deleteEmployee(employeeOperationRequest);
+        this.employeeService.deleteEmployee(1L);
         //then
         verify(employeeRepository, times(1)).exists(1L);
         verify(employeeRepository, times(1)).delete(1L);

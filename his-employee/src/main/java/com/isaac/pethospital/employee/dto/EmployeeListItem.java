@@ -2,6 +2,7 @@ package com.isaac.pethospital.employee.dto;
 
 public interface EmployeeListItem {
 
+    Long getId();
     String getEmployeeNumber();
     String getWorkPhoneNumber();
     String getFullName();

@@ -2,6 +2,7 @@ package com.isaac.pethospital.employee.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -21,11 +22,19 @@ public class DepartmentEntity {
     private CompanyEntity company;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-            @JsonManagedReference("parent-children")
+    @JsonManagedReference("parent-children")
     List<DepartmentEntity> children = new LinkedList<>();
 
     public List<DepartmentEntity> getChildren() {
         return children;
+    }
+
+    public void addChildByName(String name) {
+        if (StringUtils.isEmpty(name))
+            throw new RuntimeException("Department name is null");
+        DepartmentEntity de=new DepartmentEntity();
+        de.setName(name);
+        this.addChild(de);
     }
 
     public void addChild(DepartmentEntity child) {
@@ -47,10 +56,9 @@ public class DepartmentEntity {
     @JsonBackReference("parent-children")
     DepartmentEntity parent;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "department", cascade = CascadeType.PERSIST)
     @JsonManagedReference("DepartmentEntity-EmployeeEntity")
     private List<EmployeeEntity> employees = new LinkedList<>();
-
 
 
     public Long getId() {
@@ -96,7 +104,7 @@ public class DepartmentEntity {
         this.employees.remove(employee);
     }
 
-    public EmployeeEntity addEmployeeByName(String loginAccount,String name, String title, EmployeeEntity manager) {
+    public EmployeeEntity addEmployeeByName(String loginAccount, String name, String title, EmployeeEntity manager) {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setFullName(name);
         employeeEntity.setLoginAccount(loginAccount);
@@ -105,4 +113,5 @@ public class DepartmentEntity {
         employeeEntity.setUuid(UUID.randomUUID().toString());
         return this.addEmployee(employeeEntity);
     }
+
 }

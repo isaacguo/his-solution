@@ -1,5 +1,22 @@
+<modal #confirmDeletionModal (onClose)="onConfirmDeletionModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body>
+      确定删除员工 <b>{{toBeDeletedEmployee?.fullName}}</b> 信息?
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmDeletionModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="confirmDeletionModal"
+              (click)="confirmDeletionModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
 <div *ngIf="departmentId=== undefined ">
-  请从列表中选择一个部门进行修改
+  请从列表中选择一个部门进行操作
 </div>
 <div *ngIf="departmentId!== undefined">
 
@@ -41,7 +58,7 @@
             class="glyphicon glyphicon-search"></span></button>
           <button type="button" class="btn btn-default btn-s" (click)="onEditButtonClicked(employee.uuid)"><span
             class="glyphicon glyphicon-pencil"></span></button>
-          <button type="button" class="btn btn-default btn-s"><span class="glyphicon glyphicon-remove"></span></button>
+          <button type="button" class="btn btn-default btn-s" (click)="onRemoveButtonClicked(employee)"><span class="glyphicon glyphicon-remove"></span></button>
         </div>
       </td>
     </tr>

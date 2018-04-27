@@ -41,16 +41,14 @@ export class EmployeeAdminListComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-
-
+    this.tree.treeModel.expandAll();
   }
 
   private loadData() {
-
     this.employeeDepartmentService.getRootDepartment().subscribe(r => {
+      this.nodes.splice(0,this.nodes.length);
       this.nodes.push(r);
       this.tree.treeModel.update();
-
       this.tree.treeModel.expandAll();
     });
   }
@@ -63,6 +61,9 @@ export class EmployeeAdminListComponent implements OnInit {
     this.employeeDepartmentService.deleteDepartment(cnode.categoryId).subscribe(r => {
       this.loadData()
     });
+
+
+    /*
     if (cnode.isLevelOne) {
       this.nodes.splice(index, 1);
     }
@@ -72,6 +73,7 @@ export class EmployeeAdminListComponent implements OnInit {
       pMyTreeNode.children.splice(index, 1);
     }
     this.tree.treeModel.update();
+    */
 
   }
 
@@ -109,6 +111,7 @@ export class EmployeeAdminListComponent implements OnInit {
     this.editNodeModal.open();
   }
 
+  /*
   onAddSubNode() {
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
@@ -126,6 +129,7 @@ export class EmployeeAdminListComponent implements OnInit {
     this.tree.treeModel.getActiveNode().expand();
 
   }
+  */
 
   addNodeToParent(parent: MyTreeNode) {
 
@@ -144,24 +148,22 @@ export class EmployeeAdminListComponent implements OnInit {
     const nodeId = this.tree.treeModel.getActiveNode().id;
     let node = this.getMyTreeNodeById(nodeId);
 
-    this.employeeDepartmentService.updateDepartmentName(node.categoryId, this.departmentName.value).subscribe(r => {
+    this.employeeDepartmentService.renameDepartment(node.categoryId, this.departmentName.value).subscribe(r => {
       this.loadData();
-
     });
-
 
   }
 
   onEditNodeModalModalClosed() {
     switch (this.nodeOperation) {
-      case TreeviewOperationEnum.CREATE_HOME_NODE:
-        this.employeeDepartmentService.createDepartment(this.departmentName.value).subscribe(r => {
+      //case TreeviewOperationEnum.CREATE_HOME_NODE:
+
+      //this.onCreateRootNode();
+      // break;
+      case TreeviewOperationEnum.CREATE_SUB_NODE:
+        this.employeeDepartmentService.createDepartment(this.selectedDepartmentId, this.departmentName.value).subscribe(r => {
           this.loadData()
         });
-        //this.onCreateRootNode();
-        break;
-      case TreeviewOperationEnum.CREATE_SUB_NODE:
-        this.onAddSubNode();
         break;
       case TreeviewOperationEnum.EDIT_NODE:
         this.onEditNode();

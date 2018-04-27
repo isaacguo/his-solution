@@ -22,4 +22,6 @@ public interface DepartmentRepository extends JpaRepository<DepartmentEntity,Lon
 
     @Query("select p.id as id, p.name as name from DepartmentEntity p where p.parent is null ")
     DepartmentIdAndName findRootDepartment();
+
+    DepartmentEntity findByName(String name);
 }

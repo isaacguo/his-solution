@@ -3,13 +3,12 @@ package com.isaac.pethospital.employee.restcontrollers;
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.employee.dto.DepartmentIdAndName;
 import com.isaac.pethospital.employee.dto.DepartmentIdAndNameAndChildren;
+import com.isaac.pethospital.employee.dto.DepartmentOperationRequest;
 import com.isaac.pethospital.employee.dto.MyDepartmentIdAndNameAndChildren;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.services.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Entity;
 import java.util.List;
@@ -44,5 +43,22 @@ public class DepartmentRestController {
     public List<DepartmentIdAndName> findIndexAndNameOnly()
     {
         return this.departmentService.findIndexAndNameOnly();
+    }
+
+
+    @PostMapping("create-department")
+    public boolean createDepartment(@RequestBody DepartmentOperationRequest request)
+    {
+        return this.departmentService.createDepartment(request);
+    }
+    @DeleteMapping("delete-department/{id}")
+    public boolean deleteDepartment(@PathVariable("id") Long id)
+    {
+        return this.departmentService.deleteDepartment(id);
+    }
+    @PutMapping("rename-department")
+    public boolean renameDepartment(@RequestBody DepartmentOperationRequest request)
+    {
+        return this.departmentService.renameDepartment(request);
     }
 }
