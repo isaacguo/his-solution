@@ -2,6 +2,7 @@ package com.isaac.pethospital.employee.services;
 
 import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
+import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,13 +15,15 @@ import java.util.UUID;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final DepartmentService departmentService;
 
     private String getUserAccount() {
         return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService) {
         this.employeeRepository = employeeRepository;
+        this.departmentService = departmentService;
     }
 
     @Override
@@ -38,7 +41,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         String uuid = UUID.randomUUID().toString();
         EmployeeEntity ee = request.toEmployeeEntity();
 
+        if (request.getDepartmentId() == null)
+            throw new RuntimeException("Department Id is null");
+        DepartmentEntity de = this.departmentService.findById(request.getDepartmentId());
+        if (de == null)
+            throw new RuntimeException("Department is null");
+
         ee.setUuid(uuid);
+        ee.setDepartment(de);
+
+        if (de.getManager() == null) {
+            ee.setDepartmentInCharge(de);
+            Long rootId=this.departmentService.findRootDepartment().getId();
+            DepartmentEntity root=this.departmentService.findById(rootId);
+            ee.setDirectReportTo(root.getManager());
+        }
+        else {
+            ee.setDirectReportTo(de.getManager());
+        }
+
         this.employeeRepository.save(ee);
         return true;
     }
@@ -150,6 +171,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(Long departmentId) {
-       return this.employeeRepository.findEmployeesForEmployeeListItemByDepartmentId(departmentId);
+        return this.employeeRepository.findEmployeesForEmployeeListItemByDepartmentId(departmentId);
     }
 }

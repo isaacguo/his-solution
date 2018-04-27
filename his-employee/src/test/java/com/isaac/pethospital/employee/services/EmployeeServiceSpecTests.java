@@ -1,6 +1,8 @@
 package com.isaac.pethospital.employee.services;
 
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
+import com.isaac.pethospital.employee.dto.MyDepartmentIdAndNameAndChildren;
+import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.enums.SexualEnum;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
@@ -14,11 +16,13 @@ public class EmployeeServiceSpecTests {
 
     EmployeeRepository employeeRepository;
     EmployeeService employeeService;
+    DepartmentService departmentService;
 
     @Before
     public void before() {
         this.employeeRepository = mock(EmployeeRepository.class);
-        this.employeeService = spy(new EmployeeServiceImpl(this.employeeRepository));
+        this.departmentService=mock(DepartmentService.class);
+        this.employeeService = spy(new EmployeeServiceImpl(this.employeeRepository,this.departmentService));
     }
 
     @Test
@@ -27,7 +31,14 @@ public class EmployeeServiceSpecTests {
         EmployeeOperationRequest employeeOperationRequest = new EmployeeOperationRequest();
         employeeOperationRequest.setSurname("Isaac");
         employeeOperationRequest.setGivenName("Guo");
-        //doReturn(null).when(employeeRepository).findBySurnameAndGivenName(any(String.class),any(String.class));
+        employeeOperationRequest.setDepartmentId(1L);
+        doReturn(new DepartmentEntity()).when(departmentService).findById(any(Long.class));
+        DepartmentEntity departmentEntity=new DepartmentEntity();
+        departmentEntity.setId(1L);
+        MyDepartmentIdAndNameAndChildren myDepartmentIdAndNameAndChildren=new MyDepartmentIdAndNameAndChildren();
+        myDepartmentIdAndNameAndChildren.setId(1L);
+        doReturn(myDepartmentIdAndNameAndChildren).when(this.departmentService).findRootDepartment();
+        doReturn(departmentEntity).when(this.departmentService).findById(1L);
         //when
         this.employeeService.createEmployee(employeeOperationRequest);
         //then

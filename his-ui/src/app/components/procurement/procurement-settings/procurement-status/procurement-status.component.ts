@@ -11,7 +11,7 @@ export class ProcurementStatusComponent implements OnInit {
 
 
   p: ProcurementStatus;
-  flatenP: ProcurementStatus[]=[];
+  flatenP: string[]=[];
 
   constructor(private procurementStatusService: ProcurementStatusService) {
   }

@@ -51,7 +51,7 @@ public class EmployeeRestController {
     }
 
 
-    @PostMapping("update")
+    @PutMapping("update")
     public boolean updateVendor(@RequestBody EmployeeOperationRequest request) {
         return this.employeeService.updateEmployee(request);
     }
@@ -62,8 +62,7 @@ public class EmployeeRestController {
     }
 
     @GetMapping("/get-department-id/{userAccount}")
-    public Long getDepartmentId(@PathVariable("userAccount") String userAccount)
-    {
+    public Long getDepartmentId(@PathVariable("userAccount") String userAccount) {
         return this.employeeService.getDepartmentId(userAccount);
 
     }
@@ -89,14 +88,12 @@ public class EmployeeRestController {
     }
 
     @GetMapping(value = "/search-by-name/{keyword}")
-    public List<EmployeeEntity> findEmployeesByKeywordInName(@PathVariable("keyword") String keyword)
-    {
+    public List<EmployeeEntity> findEmployeesByKeywordInName(@PathVariable("keyword") String keyword) {
         return this.employeeService.findKeywordInName(keyword);
     }
 
     @GetMapping(value = "/{departmentId}/employee-list")
-    public List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(@PathVariable("departmentId") Long departmentId)
-    {
+    public List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(@PathVariable("departmentId") Long departmentId) {
         return this.employeeService.findEmployeesForEmployeeListItemByDepartmentId(departmentId);
     }
 }

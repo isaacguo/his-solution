@@ -41,7 +41,6 @@ export class EmployeeAdminListComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.tree.treeModel.expandAll();
   }
 
   private loadData() {

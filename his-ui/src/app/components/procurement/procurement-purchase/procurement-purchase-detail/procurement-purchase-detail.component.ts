@@ -22,7 +22,7 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
   authInfo: AuthInfo;
   curP: ProcurementStatus;
   pRoot: ProcurementStatus;
-  flatenP: ProcurementStatus[] = [];
+  flatenP: string[] = [];
   selectedStatus: string;
   @Input()
   procurement: Procurement;

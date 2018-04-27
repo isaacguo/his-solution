@@ -18,6 +18,7 @@ import java.util.List;
 @Entity
 public class EmployeeEntity {
 
+
     //employee info
     private String employeeNumber;
     private String loginAccount;
@@ -70,6 +71,19 @@ public class EmployeeEntity {
     @ManyToOne
     @JsonBackReference("DepartmentEntity-EmployeeEntity")
     private DepartmentEntity department;
+
+    public DepartmentEntity getDepartmentInCharge() {
+        return departmentInCharge;
+    }
+
+    public void setDepartmentInCharge(DepartmentEntity departmentInCharge) {
+        this.departmentInCharge = departmentInCharge;
+    }
+
+    @OneToOne
+    @JsonBackReference("DepartmentEntity-EmployeeEntity-Manager")
+    private DepartmentEntity departmentInCharge;
+
     private String emergencyContact;
     private String emergencyPhoneNumber;
 

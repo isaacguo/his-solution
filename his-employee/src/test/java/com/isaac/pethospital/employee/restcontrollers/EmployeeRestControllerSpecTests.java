@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -67,7 +68,7 @@ public class EmployeeRestControllerSpecTests {
         //request.setName("Isaac");
         EmployeeEntity ee = new EmployeeEntity();
         ee.setId(1L);
-        doReturn(ee).when(this.employeeService).createEmployee(any(EmployeeOperationRequest.class));
+        doReturn(true).when(this.employeeService).createEmployee(any(EmployeeOperationRequest.class));
         doReturn("Isaac").when(authHelper).getUserAccount();
 
         this.mockMvc.perform(post("/employees/create")
@@ -75,7 +76,7 @@ public class EmployeeRestControllerSpecTests {
                 .content(asJsonString(request)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is(1)));
+                .andExpect(jsonPath("$", is(true)));
     }
 
     @Test
@@ -106,7 +107,7 @@ public class EmployeeRestControllerSpecTests {
         doReturn(true).when(this.employeeService).updateEmployee(any(EmployeeOperationRequest.class));
         doReturn("Isaac").when(authHelper).getUserAccount();
 
-        this.mockMvc.perform(post("/employees/update")
+        this.mockMvc.perform(put("/employees/update")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(request)))
                 .andExpect(status().isOk())

@@ -12,7 +12,7 @@ export class ProcurementStatusService extends AbstractService {
   private procurementStatusRootUrl: string = `${this.rootUrl}/root`;
 
   p: ProcurementStatus;
-  flatenP: ProcurementStatus[] = [];
+  flatenP: string[] = [];
 
   constructor(private authHttp: AuthHttp) {
     super();

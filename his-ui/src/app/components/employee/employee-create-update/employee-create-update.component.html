@@ -1,8 +1,27 @@
-<p>
-  {{getOperationText()}}员工
-</p>
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()" >
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{getOperationText()}}员工成功
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
 
+<div class="row">
+  <h1 class="page-header">
+    {{getOperationText()}}员工
+  </h1>
+</div>
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+
+  <input type="hidden" formControlName="id">
+
+  <input type="hidden" formControlName="departmentId">
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -32,20 +51,32 @@
           <div class="form-group">
             <label>入职日期</label>
             <my-date-picker id="joinedDate" name="joinedDate" [selDate]="formModel.controls.joinedDate.value"
-                            (dateChanged)="onJoinedDateChanged($event)"
+                            (dateChanged)="onDateChanged('joinedDate',$event)"
                             [options]="myDatePickerOptions"></my-date-picker>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <label>当前状态</label>
-            <input type="text" class="form-control" formControlName="employmentStatus">
+        <div class="col-md-2">
+          <label>当前状态</label>
+          <div class="btn-group" role="group">
+            <button type="button"
+                    class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
+                    data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              {{selectedStatusText}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="javascript:void(0)" *ngFor="let status of getEmployeeStatusList()"
+                     (click)="onStatusClicked(status[0])">
+                {{status[1]}}</a></li>
+            </ul>
             <small [hidden]="formModel.controls.employmentStatus.valid" class="text-danger">
               当前状态不能为空
             </small>
           </div>
         </div>
+      </div>
 
+      <div class="row">
         <div class="col-md-3">
           <div class="form-group">
             <label>职位</label>
@@ -111,19 +142,31 @@
           <div class="form-group">
             <label>出生日期</label>
             <my-date-picker id="dateOfBirth" name="dateOfBirth" [selDate]="formModel.controls.dateOfBirth.value"
-                            (dateChanged)="onDateOfBirthChanged($event)"
+                            (dateChanged)="onDateChanged('dateOfBirth',$event)"
                             [options]="myDatePickerOptions"></my-date-picker>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <label>性别</label>
-            <input type="text" class="form-control" formControlName="gender">
+
+        <div class="col-md-2">
+          <label>性别</label>
+          <div class="btn-group" role="group">
+            <button type="button"
+                    class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu2"
+                    data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              {{selectedGenderText}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><a href="javascript:void(0)" *ngFor="let sexual of getSexualList()"
+                     (click)="onSexualClicked(sexual[0])">
+                {{sexual[1]}}</a></li>
+            </ul>
             <small [hidden]="formModel.controls.gender.valid" class="text-danger">
-              性别不能为空
+              请选择性别
             </small>
           </div>
         </div>
+
       </div>
 
       <div class="row">

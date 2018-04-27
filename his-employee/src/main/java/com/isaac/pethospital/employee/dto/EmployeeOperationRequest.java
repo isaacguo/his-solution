@@ -295,6 +295,8 @@ public class EmployeeOperationRequest {
     private void updateInternal(EmployeeEntity ee,boolean isCreate)
     {
         ee.setLoginAccount(this.loginAccount);
+        ee.setEmployeeNumber(this.employeeNumber);
+        ee.setEmploymentStatus(this.employmentStatus);
         ee.setGivenName(this.givenName);
         ee.setSurname(this.surname);
         ee.setIdNumber(this.idNumber);

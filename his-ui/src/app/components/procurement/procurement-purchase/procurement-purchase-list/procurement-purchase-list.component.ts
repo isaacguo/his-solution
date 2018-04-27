@@ -23,7 +23,7 @@ export class ProcurementPurchaseListComponent implements OnInit {
   endDate: any;
   query: ProcurementOperationRequest = {};
 
-  flatenP: ProcurementStatus[] = [];
+  flatenP: string[] = [];
 
   public myDatePickerOptions: IMyDpOptions = {
     // other options...

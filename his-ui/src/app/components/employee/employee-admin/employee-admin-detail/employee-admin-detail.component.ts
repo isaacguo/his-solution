@@ -55,11 +55,12 @@ export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
 
   onEditButtonClicked(uuid: String) {
     console.log(uuid);
-    this.router.navigate(['employee-profile-edit', uuid]);
+    this.router.navigate(['employee-operation', OperationEnum.UPDATE, uuid]);
   }
 
   onAddNewEmployeeButtonClicked() {
-    this.router.navigate(['employee-operation', OperationEnum.CREATE]);
+    console.log(this.departmentId);
+    this.router.navigate(['employee-operation', OperationEnum.CREATE, this.departmentId]);
   }
 
   toBeDeletedEmployee: Employee;

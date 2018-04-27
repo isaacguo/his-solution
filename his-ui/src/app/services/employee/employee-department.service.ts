@@ -50,8 +50,6 @@ export class EmployeeDepartmentService extends AbstractService {
         node.children.push(this.treeConverter(child, false));
       }
     }
-
-    console.log(node);
     return node;
 
   }

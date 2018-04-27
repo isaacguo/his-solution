@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface DepartmentService {
     List<DepartmentEntity> findAll();
+    DepartmentEntity findById(Long id);
 
     List<DepartmentIdAndName> findIndexAndNameOnly();
     MyDepartmentIdAndNameAndChildren findRootDepartment();

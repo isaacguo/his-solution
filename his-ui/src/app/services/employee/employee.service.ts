@@ -17,6 +17,8 @@ export class EmployeeService extends AbstractService {
 
   private createEmployeeUrl: string = `${this.rootUrl}/create`;
 
+  private updateEmployeeUrl: string = `${this.rootUrl}/update`;
+
   constructor(private authHttp: AuthHttp) {
     super();
   }
@@ -67,5 +69,9 @@ export class EmployeeService extends AbstractService {
 
   createEmployee(value: any):Observable<boolean> {
     return this.authHttp.post(this.createEmployeeUrl, value).map(this.extractData);
+  }
+
+  updateEmployee(value: any) :Observable<boolean>{
+    return this.authHttp.put(this.updateEmployeeUrl, value).map(this.extractData);
   }
 }

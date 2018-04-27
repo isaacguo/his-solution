@@ -168,7 +168,7 @@ const appRoutes: Routes = [
         component: EmployeeAdminComponent
       },
       {
-        path: 'employee-operation/:operation',
+        path: 'employee-operation/:operation/:updateId',
         component: EmployeeCreateUpdateComponent
       },
       {

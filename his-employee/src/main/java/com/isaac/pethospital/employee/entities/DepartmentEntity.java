@@ -60,6 +60,20 @@ public class DepartmentEntity {
     @JsonManagedReference("DepartmentEntity-EmployeeEntity")
     private List<EmployeeEntity> employees = new LinkedList<>();
 
+    @OneToOne(mappedBy = "departmentInCharge")
+    @JsonManagedReference("DepartmentEntity-EmployeeEntity-Manager")
+    private EmployeeEntity manager;
+
+    public EmployeeEntity getManager() {
+        return manager;
+    }
+
+    public void setManager(EmployeeEntity manager) {
+        if(manager==null)
+            throw new RuntimeException("Manager is null");
+        manager.setDepartmentInCharge(this);
+        this.manager = manager;
+    }
 
     public Long getId() {
         return id;

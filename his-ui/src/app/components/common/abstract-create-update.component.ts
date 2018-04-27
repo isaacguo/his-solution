@@ -4,7 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 export abstract class AbstractCreateUpdateComponent {
 
   public operation: OperationEnum = OperationEnum.CREATE;
-  public updateId: number;
+  public updateId: any;
 
   constructor(public  route: ActivatedRoute) {
 

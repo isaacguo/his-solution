@@ -27,6 +27,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public DepartmentEntity findById(Long id) {
+        return this.departmentRepository.findOne(id);
+    }
+
+    @Override
     public List<DepartmentIdAndName> findIndexAndNameOnly() {
         return this.departmentRepository.findAllProjectedForDepartmentIdAndName();
     }
