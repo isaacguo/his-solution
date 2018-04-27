@@ -11,7 +11,7 @@ public interface EmployeeService {
      long getTotalCounts();
 
     EmployeeEntity getEmployeeById(long id);
-    EmployeeEntity createEmployee(EmployeeOperationRequest request);
+    boolean createEmployee(EmployeeOperationRequest request);
 
     EmployeeEntity getMyInfo();
 

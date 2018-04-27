@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AbstractCreateUpdateComponent} from "../../common/abstract-create-update.component";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {Employee} from "../../../dto/employee.model";
+import {IMyDateModel, IMyDpOptions} from "mydatepicker";
+import {EmployeeService} from "../../../services/employee/employee.service";
 
 @Component({
   selector: 'app-employee-create-update',
@@ -11,15 +12,23 @@ import {Employee} from "../../../dto/employee.model";
 })
 export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent implements OnInit {
 
+  @Input()
+  departmentId: number;
+
   formModel: FormGroup;
-  employee: Employee;
 
   constructor(public route: ActivatedRoute,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private employeeService: EmployeeService) {
     super(route);
   }
 
   invokeWhenCreate() {
+    this.employeeService.createEmployee(this.formModel.value).subscribe(r => {
+      console.log("OK");
+    });
+
+
   }
 
   invokeWhenUpdate() {
@@ -33,10 +42,35 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
   private initForm() {
     this.formModel = this.fb.group({
       'id': [''],
-      'procurementId': [''],
-      'goods': this.fb.array([]),
-      'totalPrice': ['']
+      'employeeNumber': ['', Validators.required],
+      'loginAccount': ['', [Validators.required, Validators.minLength(8)]],
+      'joinedDate': [''],
+      'jobTitle': [''],
+      'employmentStatus': ['', Validators.required],
+      'surname': ['', Validators.required],
+      'givenName': ['', Validators.required],
+      'fullName': [''],
+
+      'idNumber': ['', Validators.required],
+      'driverLicenseNumber': [''],
+      'dateOfBirth': [''],
+      'gender': [''],
+      'nationality': [''],
+      'ethnic': [''],
+      'email': [],
     })
   }
 
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'yyyy-mm-dd',
+  };
+
+  onJoinedDateChanged($event: IMyDateModel) {
+
+  }
+
+  onDateOfBirthChanged($event: IMyDateModel) {
+
+  }
 }

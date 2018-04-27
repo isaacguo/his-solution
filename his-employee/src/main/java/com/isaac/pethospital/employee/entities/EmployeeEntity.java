@@ -18,15 +18,26 @@ import java.util.List;
 @Entity
 public class EmployeeEntity {
 
+    //employee info
+    private String employeeNumber;
+    private String loginAccount;
+    private LocalDate joinedDate;
+    private String jobTitle;
+    private String workPhoneNumber;
+    private EmploymentStatusEnum employmentStatus;
+
+    //personal info
+    private String givenName;
+    private String surname;
+    private String fullName;
+
+
     String uuid;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String loginAccount;
-    private String givenName;
-    private String surname;
-    private String fullName;
-    private String employeeNumber;
+
+
     private String idNumber;
     private String driverLicenseNumber;
     private LocalDate dateOfBirth;
@@ -35,15 +46,15 @@ public class EmployeeEntity {
     private String nationality;
     private String ethnic;
     private String email;
-    private String workPhoneNumber;
+
     @Enumerated(EnumType.STRING)
     private MaritalStatusEnum maritalStatus;
-    private LocalDate joinedDate;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference("employee-contact")
     private ContactAddressEntity contactAddress;
-    private String jobTitle;
-    private EmploymentStatusEnum employmentStatus;
+
+
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonManagedReference("employee-leaveInfo")
     private LeaveInfoEntity leaveInfo;

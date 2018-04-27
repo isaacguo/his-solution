@@ -41,10 +41,9 @@ public class EmployeeRestController {
     }
 
     @PostMapping(value = "/create")
-    public EmployeeEntity createNewEmployee(@RequestBody EmployeeOperationRequest request) {
+    public boolean createNewEmployee(@RequestBody EmployeeOperationRequest request) {
         return this.employeeService.createEmployee(request);
     }
-
 
     @DeleteMapping("delete/{id}")
     public boolean deleteVendor(@PathVariable("id") Long id) {

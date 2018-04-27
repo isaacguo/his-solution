@@ -4,88 +4,164 @@
 
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
 
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      员工信息
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>员工编号</label>
+            <input type="text" class="form-control" formControlName="employeeNumber">
+            <small [hidden]="formModel.controls.employeeNumber.valid" class="text-danger">
+              员工编号不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>员工账户</label>
+            <input type="text" class="form-control" formControlName="loginAccount">
+            <small [hidden]="formModel.controls.loginAccount.valid" class="text-danger">
+              员工账户长度至少为8位
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>入职日期</label>
+            <my-date-picker id="joinedDate" name="joinedDate" [selDate]="formModel.controls.joinedDate.value"
+                            (dateChanged)="onJoinedDateChanged($event)"
+                            [options]="myDatePickerOptions"></my-date-picker>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>当前状态</label>
+            <input type="text" class="form-control" formControlName="employmentStatus">
+            <small [hidden]="formModel.controls.employmentStatus.valid" class="text-danger">
+              当前状态不能为空
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>职位</label>
+            <input type="text" class="form-control" formControlName="jobTitle">
+            <small [hidden]="formModel.controls.jobTitle.valid" class="text-danger">
+              当前职位不能为空
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      个人信息
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>姓</label>
+            <input type="text" class="form-control" formControlName="surname">
+            <small [hidden]="formModel.controls.surname.valid" class="text-danger">
+              姓氏不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>名</label>
+            <input type="text" class="form-control" formControlName="givenName">
+            <small [hidden]="formModel.controls.givenName.valid" class="text-danger">
+              名不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>全名</label>
+            <input readonly type="text" class="form-control" formControlName="fullName">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>身份证编号</label>
+            <input type="text" class="form-control" formControlName="idNumber">
+            <small [hidden]="formModel.controls.idNumber.valid" class="text-danger">
+              身份证编号不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>驾照编号</label>
+            <input type="text" class="form-control" formControlName="driverLicenseNumber">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>出生日期</label>
+            <my-date-picker id="dateOfBirth" name="dateOfBirth" [selDate]="formModel.controls.dateOfBirth.value"
+                            (dateChanged)="onDateOfBirthChanged($event)"
+                            [options]="myDatePickerOptions"></my-date-picker>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>性别</label>
+            <input type="text" class="form-control" formControlName="gender">
+            <small [hidden]="formModel.controls.gender.valid" class="text-danger">
+              性别不能为空
+            </small>
+          </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>国籍</label>
+            <input type="text" class="form-control" formControlName="nationality">
+            <small [hidden]="formModel.controls.nationality.valid" class="text-danger">
+              国籍不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>民族</label>
+            <input type="text" class="form-control" formControlName="ethnic">
+            <small [hidden]="formModel.controls.ethnic.valid" class="text-danger">
+              民族不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>个人电子邮箱</label>
+            <input type="text" class="form-control" formControlName="email">
+            <small [hidden]="formModel.controls.email.valid" class="text-danger">
+              个人电子邮箱不能为空
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
 </form>
 
 
-
-<div class="form">
-  <div class="form-group">
-    <label for="surname" class="control-label">姓</label>
-    <input type="text" class="form-control" id="surname" name="surname" required [(ngModel)]="employee.surname">
-  </div>
-  <div class="form-group">
-    <label for="givenname" class="control-label">名</label>
-    <input type="text" class="form-control" id="givenname" name="givenname" required [(ngModel)]="employee.givenName">
-  </div>
-  <div class="form-group">
-    <label for="employeeNumber" class="control-label">员工编号</label>
-    <input id="employeeNumber" #employeeNumber type="text" class="form-control" placeholder="员工编号"  [(ngModel)]="employee.employeeNumber">
-  </div>
-  <div class="form-group">
-    <label for="workPhoneNumber" class="control-label">工作电话</label>
-    <input id="workPhoneNumber" #workPhoneNumber type="text" class="form-control" placeholder="工作电话" [(ngModel)]="employee.workPhoneNumber">
-  </div>
-  <div class="form-group">
-    <label for="idNumber" class="control-label">身份证号码</label>
-    <input id="idNumber" #idNumber type="text" class="form-control" placeholder="身份证号码" [(ngModel)]="employee.idNumber">
-  </div>
-  <div class="form-group">
-    <label for="driverLicenseNumber" class="control-label">驾驶执照编号</label>
-    <input id="driverLicenseNumber" #driverLicenseNumber type="text" class="form-control" placeholder="驾驶执照编号" [(ngModel)]="employee.driverLicenseNumber">
-  </div>
-  <div class="form-group">
-    <label for="dateOfBirth" class="control-label">出生日期</label>
-    <input id="dateOfBirth" #dateOfBirth type="text" class="form-control" placeholder="出生日期" [(ngModel)]="employee.dateOfBirth">
-  </div>
-  <div class="form-group">
-    <label for="gender" class="control-label">性别</label>
-    <input id="gender" #gender type="text" class="form-control" placeholder="性别" [(ngModel)]="employee.gender">
-  </div>
-  <div class="form-group">
-    <label for="nationality" class="control-label">国籍</label>
-    <input id="nationality" #nationality type="text" class="form-control" placeholder="国籍" [(ngModel)]="employee.nationality">
-  </div>
-  <div class="form-group">
-    <label for="ethnic" class="control-label">民族</label>
-    <input id="ethnic" #ethnic type="text" class="form-control" placeholder="民族" [(ngModel)]="employee.ethnic">
-  </div>
-  <div class="form-group">
-    <label for="email" class="control-label">电子邮件</label>
-    <input id="email" #email type="text" class="form-control" placeholder="电子邮件" [(ngModel)]="employee.email">
-  </div>
-  <div class="form-group">
-    <label for="maritalStatus" class="control-label">婚姻状态</label>
-    <input id="maritalStatus" #maritalStatus type="text" class="form-control" placeholder="婚姻状态" [(ngModel)]="employee.maritalStatus">
-  </div>
-  <div class="form-group">
-    <label for="joinedDate" class="control-label">加入公司日期</label>
-    <input id="joinedDate" #joinedDate type="text" class="form-control" placeholder="加入公司日期" [(ngModel)]="employee.joinedDate">
-  </div>
-  <div class="form-group">
-    <label for="jobTitle" class="control-label">职位名称</label>
-    <input id="jobTitle" #jobTitle type="text" class="form-control" placeholder="职位名称" [(ngModel)]="employee.jobTitle">
-  </div>
-  <div class="form-group">
-    <label for="employmentStatus" class="control-label">雇员状态</label>
-    <input id="employmentStatus" #employmentStatus type="text" class="form-control" placeholder="雇员状态" [(ngModel)]="employee.employmentStatus">
-  </div>
-  <div class="form-group">
-    <label for="directReportTo" class="control-label">直接汇报</label>
-    <input id="directReportTo" #employmentStatus type="text" class="form-control" placeholder="直接汇报" [(ngModel)]="employee.directReportTo">
-  </div>
-  <div class="form-group">
-    <label for="department" class="control-label">所属部门</label>
-    <input id="department" #department type="text" class="form-control" placeholder="所属部门" [(ngModel)]="employee.department.name">
-  </div>
-  <div class="form-group">
-    <label for="emergencyContact" class="control-label">紧急联系人</label>
-    <input id="emergencyContact" #emergencyContact type="text" class="form-control" placeholder="紧急联系人" [(ngModel)]="employee.emergencyContact">
-  </div>
-  <div class="form-group">
-    <label for="emergencyPhoneNumber" class="control-label">紧急联系人电话</label>
-    <input id="emergencyPhoneNumber" #emergencyPhoneNumber type="text" class="form-control" placeholder="紧急联系人电话" [(ngModel)]="employee.emergencyPhoneNumber">
-  </div>
-</div>

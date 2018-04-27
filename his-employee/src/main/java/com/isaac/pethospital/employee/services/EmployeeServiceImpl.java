@@ -34,13 +34,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeEntity createEmployee(EmployeeOperationRequest request) {
+    public boolean createEmployee(EmployeeOperationRequest request) {
         String uuid = UUID.randomUUID().toString();
         EmployeeEntity ee = request.toEmployeeEntity();
+
         ee.setUuid(uuid);
-        return this.employeeRepository.save(ee);
-
-
+        this.employeeRepository.save(ee);
+        return true;
     }
 
     @Override

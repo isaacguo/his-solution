@@ -10,6 +10,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EmployeeOperationRequest {
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    Long departmentId;
 
     //Used By other services(procurement)
     String userAccount;
@@ -290,7 +299,7 @@ public class EmployeeOperationRequest {
         ee.setSurname(this.surname);
         ee.setIdNumber(this.idNumber);
         ee.setDriverLicenseNumber(this.driverLicenseNumber);
-        ee.setFullName(this.fullName);
+        ee.setFullName(this.surname+this.givenName);
         ee.setDateOfBirth(this.dateOfBirth);
         ee.setGender(this.gender);
         ee.setNationality(this.nationality);

@@ -15,6 +15,8 @@ export class EmployeeService extends AbstractService {
   private rootUrl: string = "/api/hisemployee/employees";
   private deleteEmployeeUrl: string = `${this.rootUrl}/delete`;
 
+  private createEmployeeUrl: string = `${this.rootUrl}/create`;
+
   constructor(private authHttp: AuthHttp) {
     super();
   }
@@ -61,5 +63,9 @@ export class EmployeeService extends AbstractService {
     return this.authHttp.delete(`${this.deleteEmployeeUrl}/${id}`).map(r => {
       return this.extractTextData(r) === "true" ? true : false;
     });
+  }
+
+  createEmployee(value: any):Observable<boolean> {
+    return this.authHttp.post(this.createEmployeeUrl, value).map(this.extractData);
   }
 }
