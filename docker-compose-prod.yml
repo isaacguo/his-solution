@@ -47,8 +47,6 @@ services:
     ports:
       - "17601:17601"
     command: --spring.profiles.active=production
-    environment:
-      - JAVA_OPTS=-Xmx128m -Xms64m
 
   his-eureka:
     image: isaacguo/his-eureka
@@ -57,8 +55,6 @@ services:
     depends_on:
       - his-config
     command: --spring.profiles.active=production
-    environment:
-      - JAVA_OPTS=-Xmx128m -Xms64m
 
   his-employee:
     image: isaacguo/his-employee
@@ -68,8 +64,6 @@ services:
       - his-config
       - his-eureka
     command: --spring.profiles.active=production
-    environment:
-      - JAVA_OPTS=-Xmx128m -Xms64m
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
@@ -82,8 +76,6 @@ services:
       - his-config
       - his-eureka
     command: --spring.profiles.active=production
-    environment:
-      - JAVA_OPTS=-Xmx128m -Xms64m
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
@@ -96,8 +88,6 @@ services:
       - his-config
       - his-eureka
     command: --spring.profiles.active=production
-    environment:
-      - JAVA_OPTS=-Xmx128m -Xms64m
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
@@ -110,8 +100,6 @@ services:
       - his-config
       - his-eureka
     command: --spring.profiles.active=production
-    environment:
-      - JAVA_OPTS=-Xmx128m -Xms64m
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
@@ -126,8 +114,6 @@ services:
       - his-employee
       - his-medicine
     command: --spring.profiles.active=production
-    environment:
-      - JAVA_OPTS=-Xmx128m -Xms64m
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"

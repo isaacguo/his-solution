@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from "../../services/employee/employee.service";
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,8 +11,9 @@ export class DashboardComponent implements OnInit {
 
   employeeCount: number;
 
-
   constructor(private employeeService: EmployeeService) {
+
+
   }
 
   ngOnInit() {
