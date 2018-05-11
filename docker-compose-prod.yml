@@ -32,11 +32,11 @@ services:
         image: bash
         depends_on:
           - his-config
-          - his-employee-db:
-          - his-treatment-db:
-          - his-medicine-db:
-          - his-procurement-db:
-          - his-gateway-db:
+          - his-employee-db
+          - his-treatment-db
+          - his-medicine-db
+          - his-procurement-db
+          - his-gateway-db
         command: >
           /usr/local/bin/bash -c "
             while ! nc -z his-config 17601;
@@ -68,17 +68,18 @@ services:
     depends_on:
       - his-config
       - his-eureka
+      - his-employee-db
     command: --spring.profiles.active=production
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
 
-   his-employee-db:
-      image: mysql:5.7.21
-      environment:
-        MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
-      volumes:
-        - his-employee-db-volume:/var/lib/mysql
+  his-employee-db:
+    image: mysql:5.7.21
+    environment:
+      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
+    volumes:
+      - his-employee-db-volume:/var/lib/mysql
 
   his-treatment:
     image: isaacguo/his-treatment
@@ -93,12 +94,12 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
 
-   his-treatment-db:
-     image: mysql:5.7.21
-     environment:
-       MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
-     volumes:
-       - his-treatment-db-volume:/var/lib/mysql
+  his-treatment-db:
+    image: mysql:5.7.21
+    environment:
+      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
+    volumes:
+      - his-treatment-db-volume:/var/lib/mysql
 
   his-medicine:
     image: isaacguo/his-medicine
