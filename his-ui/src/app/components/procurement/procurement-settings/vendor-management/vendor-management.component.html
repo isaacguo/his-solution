@@ -1,0 +1,146 @@
+<modal #moveVendorModal (onClose)="onMoveVendorModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body>
+      <table class="table">
+        <tbody>
+        <tr (click)="onItemClicked(category)" *ngFor="let category of nodes"
+            [class.info]="isRowSelected(category)">
+          <td>{{category.name}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="moveVendorModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="moveVendorModal"
+              (click)="moveVendorModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<modal #confirmDeletionModal (onClose)="onConfirmDeletionModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body>
+      确定删除此供应商 <b>{{vendorToBeDeleted?.name}}</b>信息?
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmDeletionModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="confirmDeletionModal"
+              (click)="confirmDeletionModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<modal #deleteResultModal>
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{deleteResultText}}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="deleteResultModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div *ngIf="categoryId=== undefined ">
+  请选择供应商分类
+</div>
+<div *ngIf="categoryId!== undefined">
+
+  <div>
+
+    <div class="col-md-8 btn-group pull-right" role="group">
+      <button (click)="onCreateNewVendorClicked()" class="btn btn-default">新建供应商</button>
+    </div>
+
+    <div class="col-md-4 input-group">
+      <input type="text" class="form-control" placeholder="查找供应商..." [formControl]="searchInput">
+      <span class="input-group-btn">
+      <button class="btn btn-default" type="button"> <span class="glyphicon glyphicon-search"></span></button>
+    </span>
+    </div>
+  </div>
+
+  <a class="btn btn-primary isaac-margin-15top" role="button" href="#collapsePanel" data-toggle="collapse"
+     aria-expanded="false"
+     aria-controls="collapsePanel">查看采购权限</a>
+  <div class="collapse" id="collapsePanel">
+    <div class="panel panel-default isaac-margin-15top">
+      <div class="panel-heading">
+        采购权限
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let dep of departmentList, let i = index">
+            <div>
+              <div class=" pull-left">
+                {{dep.name}}
+              </div>
+              <div class="pull-right">
+                <ui-switch size="small" [ngModel]="this.vendorCategory?.departments[i].permitted"
+                           (change)="onChange(dep,$event)"></ui-switch>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </li>
+        </ul>
+        <button (click)="onUpdatePermissionButtonClicked()" [disabled]="!isModified" class="btn btn-default">更新</button>
+      </div>
+    </div>
+  </div>
+
+  <div class=" isaac-margin-15top">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>联系人</th>
+        <th>联系人电话</th>
+        <th>介绍</th>
+        <th>地址</th>
+        <th>邮政编码</th>
+        <th>官网</th>
+        <th>邮箱</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let vendor of vendorCategory?.vendors">
+        <td>{{vendor.id}}</td>
+        <td>{{vendor.name}}</td>
+        <td>{{vendor.contacts[0]?.name}} {{vendor.contacts?.length>1?"(更多)":""}}</td>
+        <td>{{vendor.contacts[0]?.telephone}}</td>
+        <td>{{vendor.description}}</td>
+        <td>{{vendor.address}}</td>
+        <td>{{vendor.postcode}}</td>
+        <td>{{vendor.officialWebsiteLink}}</td>
+        <td>{{vendor.email}}</td>
+        <td>
+          <div class="btn-group-sm" role="group">
+            <button (click)="onModifyVendorButtonClicked(vendor)" type="button" class="btn btn-default"><span
+              class="glyphicon glyphicon-pencil"></span></button>
+            <button (click)="onMoveVendorButtonClicked(vendor)" type="button" class="btn btn-default"><span
+              class="glyphicon glyphicon-sort"></span></button>
+            <button type="button" class="btn btn-default btn-s" (click)="onRemoveVendorButtonClicked(vendor)"><span
+              class="glyphicon glyphicon-remove"></span></button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

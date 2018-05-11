@@ -1,0 +1,120 @@
+version: "3"
+services:
+
+  his-activemq:
+    image: rmohr/activemq
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+
+  graphite:
+    image: hopsoft/graphite-statsd
+    ports:
+      - "8000:80"
+      - "2003:2003"
+      - "2004:2004"
+      - "2023:2023"
+      - "2024:2024"
+      - "8125:8125/udp"
+      - "8126:8126"
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    links:
+      - graphite
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+
+  his_start_his-config:
+        image: bash
+        depends_on:
+          - his-config
+        command: >
+          /usr/local/bin/bash -c "
+            while ! nc -z his-config 17601;
+            do
+              echo sleeping;
+              sleep 1;
+            done;
+            echo Connected!;
+          "
+
+  his-config:
+    image: isaacguo/his-config
+    ports:
+      - "17601:17601"
+    command: --spring.profiles.active=staging
+
+  his-eureka:
+    image: isaacguo/his-eureka
+    ports:
+      - "8761:8761"
+    depends_on:
+      - his-config
+    command: --spring.profiles.active=staging
+
+  his-employee:
+    image: isaacguo/his-employee
+    ports:
+      - "8091:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+    command: --spring.profiles.active=staging
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+  his-treatment:
+    image: isaacguo/his-treatment
+    ports:
+      - "8092:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+    command: --spring.profiles.active=staging
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+  his-medicine:
+    image: isaacguo/his-medicine
+    ports:
+      - "8095:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+    command: --spring.profiles.active=staging
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+  his-procurement:
+    image: isaacguo/his-procurement
+    ports:
+      - "8096:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+    command: --spring.profiles.active=staging
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+  his-gateway:
+    image: isaacguo/his-gateway
+    ports:
+      - "8090:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+      - his-employee
+      - his-medicine
+    command: --spring.profiles.active=staging
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+

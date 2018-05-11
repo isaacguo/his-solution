@@ -4,8 +4,11 @@ import {SexualEnum} from "../enums/sexual.enum";
 import {EmploymentStatusEnum} from "../enums/employment.status.enum";
 
 export class Employee {
-  constructor(public givenName?: number,
+  constructor(public id?: number,
+              public loginAccount?:string,
+              public givenName?: number,
               public surname?: string,
+              public fullName?:string,
               public employeeNumber?: string,
               public idNumber?: string,
               public driverLicenseNumber?: string,
@@ -22,9 +25,9 @@ export class Employee {
               public teamMembers?: Employee[],
               public department?: Department,
               public emergencyContact?: string,
-              public workPhoneNumber?:string,
-              public contactAddress?:ContactAddress,
+              public workPhoneNumber?: string,
+              public contactAddress?: ContactAddress,
               public emergencyPhoneNumber?: string,
-              public uuid?:string) {
+              public uuid?: string) {
   }
 }

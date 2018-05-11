@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map'
 import {AuthHttp, JwtHelper} from "angular2-jwt";
 import {Router} from "@angular/router";
 import "rxjs/add/operator/catch";
+import {AuthorizationService} from "./authorization.service";
 
 @Injectable()
 export class AuthenticationService {
@@ -25,7 +26,8 @@ export class AuthenticationService {
     let s_token = sessionStorage.getItem("id_token");
     if (s_token) {
       this.decoded = this.jwtHelper.decodeToken(s_token);
-      this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub));
+      //this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub));
+      this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub, this.decoded.isAdmin == 'true', this.decoded.isFinance == 'true'));
     }
   }
 
@@ -40,7 +42,6 @@ export class AuthenticationService {
         if (token) {
           sessionStorage.setItem("id_token", token);
           this.decoded = this.jwtHelper.decodeToken(token);
-          console.log(this.decoded);
 
           return true;
         }
@@ -48,21 +49,21 @@ export class AuthenticationService {
           return false;
         }
       })
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error')).subscribe(r => {
-      if (r) {
-        console.log(this.decoded);
-        this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub, this.decoded.isAdmin == 'true', this.decoded.isFinance=='true'));
-        this.router.navigate(['/dashboard']);
-      }
-      else {
-        this.setAuthState(new AuthInfo(AuthState.LoginFailed, ""));
-      }
-    }, (err) => {
-      if (err === "Unauthorized")
-        this.setAuthState(new AuthInfo(AuthState.LoginFailed, ""));
-      else
-        this.setAuthState(new AuthInfo(AuthState.ServerError, ""));
-    })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+      .subscribe(r => {
+        if (r) {
+          this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub, this.decoded.isAdmin == 'true', this.decoded.isFinance == 'true'));
+          //this.router.navigate(['/dashboard']);
+        }
+        else {
+          this.setAuthState(new AuthInfo(AuthState.LoginFailed, ""));
+        }
+      }, (err) => {
+        if (err === "Unauthorized")
+          this.setAuthState(new AuthInfo(AuthState.LoginFailed, ""));
+        else
+          this.setAuthState(new AuthInfo(AuthState.ServerError, ""));
+      })
 
   }
 

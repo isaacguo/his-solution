@@ -26,7 +26,7 @@ public class TreatmentCaseEntity {
     PetEntity pet;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String uuid;
     @Enumerated(EnumType.STRING)
     private TreatmentCaseStatusEnum treatmentCaseStatus;
@@ -56,11 +56,11 @@ public class TreatmentCaseEntity {
     }
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

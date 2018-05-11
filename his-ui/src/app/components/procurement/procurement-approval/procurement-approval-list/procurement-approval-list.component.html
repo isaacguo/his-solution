@@ -1,0 +1,53 @@
+<div class="row">
+  <form class="form-inline" role="form">
+    <div class="form-group isaac-form-space">
+      <label for="vendor">供应商名称:</label>
+      <input id="vendor" class="form-control" type="text">
+    </div>
+    <!--
+    <div class="form-group isaac-form-space">
+      <label for="contact">联系人: </label>
+      <input id="contact" class="form-control" type="text">
+    </div>
+    <div class="form-group isaac-form-space">
+      <label for="goodName">商品名称: </label>
+      <input id="goodName" class="form-control" type="text">
+    </div>
+    -->
+    <div class="form-group isaac-form-space">
+      <label for="startDate">起始日期: </label>
+      <input id="startDate" class="form-control" type="text">
+      <label for="endDate">结束日期: </label>
+      <input id="endDate" class="form-control" type="text">
+    </div>
+    <div class="form-group isaac-form-space">
+      <label for="patientRecordId">申请状态: </label>
+      <input id="patientRecordId" class="form-control" type="text">
+    </div>
+    <button class="btn btn-default">查询</button>
+    <button class="btn btn-default">清除</button>
+  </form>
+</div>
+
+<div class="row">
+  <div class="col-lg-2">
+
+    <table class="table">
+      <thead>
+      <tr >
+        <th>编号</th>
+        <th>状态</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let procurement of procurements" (click)="onRowClicked(procurement)"  [class.info]="isRowSelected(procurement)">
+        <td>{{procurement.orderNumber}}</td>
+        <td>{{procurement.status}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-10">
+    <app-procurement-approval-detail [procurement]="selectedProcurement"></app-procurement-approval-detail>
+  </div>
+</div>

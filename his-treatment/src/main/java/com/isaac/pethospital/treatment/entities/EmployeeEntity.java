@@ -13,12 +13,13 @@ public class EmployeeEntity {
     DepartmentEntity department;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private UUID uuid;
     private String selfIntroduction;
     @ManyToOne
     private EmployeeTypeEntity employeeType;
     private String name;
+    private String loginAccount;
 
     public String getLoginAccount() {
         return loginAccount;
@@ -27,8 +28,6 @@ public class EmployeeEntity {
     public void setLoginAccount(String loginAccount) {
         this.loginAccount = loginAccount;
     }
-
-    private String loginAccount;
 
     public EmployeeTypeEntity getEmployeeType() {
         return employeeType;
@@ -46,11 +45,11 @@ public class EmployeeEntity {
         this.selfIntroduction = selfIntroduction;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

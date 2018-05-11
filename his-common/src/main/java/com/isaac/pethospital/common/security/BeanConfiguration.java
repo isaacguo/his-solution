@@ -33,21 +33,30 @@ class BeanConfiguration {
 
                 applicationUserRepository.save(applicationUser);
 
-                ApplicationUser applicationUser2=new ApplicationUser();
-                applicationUser2.setUsername("linghuchong");
-                applicationUser2.setPassword(bCryptPasswordEncoder.encode("linghuchong_1"));
+                generateTempUsernameAndPassword("linzhennan");
+                generateTempUsernameAndPassword("yucanghai");
+                generateTempUsernameAndPassword("qufeiyan");
+                generateTempUsernameAndPassword("linghuchong");
+                generateTempUsernameAndPassword("yilin");
+                generateTempUsernameAndPassword("huangrong");
+                generateTempUsernameAndPassword("shangguanyun");
+                generateTempUsernameAndPassword("xiangwentian");
+                generateTempUsernameAndPassword("xiaolongnv");
+                generateTempUsernameAndPassword("luwushuang");
+                generateTempUsernameAndPassword("gongsunzhi");
+                generateTempUsernameAndPassword("zhaomin");
+                generateTempUsernameAndPassword("zhouzhiruo");
+                generateTempUsernameAndPassword("guojing");
+                generateTempUsernameAndPassword("yuelingshan");
+
+
+            }
+
+            private void generateTempUsernameAndPassword(String username) {
+                ApplicationUser applicationUser2 = new ApplicationUser();
+                applicationUser2.setUsername(username);
+                applicationUser2.setPassword(bCryptPasswordEncoder.encode(username + "_1"));
                 applicationUserRepository.save(applicationUser2);
-
-                ApplicationUser applicationUser3=new ApplicationUser();
-                applicationUser3.setUsername("yuelingshan");
-                applicationUser3.setPassword(bCryptPasswordEncoder.encode("yuelingshan_1"));
-                applicationUserRepository.save(applicationUser3);
-
-                ApplicationUser applicationUser4=new ApplicationUser();
-                applicationUser4.setUsername("doctor1");
-                applicationUser4.setPassword(bCryptPasswordEncoder.encode("doctor1"));
-                applicationUserRepository.save(applicationUser4);
-
             }
         };
     }

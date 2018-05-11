@@ -20,18 +20,18 @@ public class PetTypeEntity {
     PetTypeEntity parent;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToMany(mappedBy = "petType", cascade = CascadeType.ALL)
     @JsonManagedReference("petType-pet")
     private List<PetEntity> pets=new LinkedList<>();
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

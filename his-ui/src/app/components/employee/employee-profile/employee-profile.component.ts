@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {EmployeeService} from "../../../services/business/employee/employee.service";
+import {EmployeeService} from "../../../services/employee/employee.service";
 import {Employee} from "../../../dto/employee.model";
 import {SexualEnum} from "../../../enums/sexual.enum";
 import {EmploymentStatusEnum} from "../../../enums/employment.status.enum";
+import {OperationEnum} from "../../../enums/operation.enum";
 
 @Component({
   selector: 'app-employee-profile',
@@ -23,8 +24,8 @@ export class EmployeeProfileComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.uuid = params['uuid'];
       if (this.uuid != null) {
-        this.employeeService.getEmployeeInfoByEmployeeUuid(this.uuid).subscribe(r=>{
-          this.employee=r;
+        this.employeeService.getEmployeeInfoByEmployeeUuid(this.uuid).subscribe(r => {
+          this.employee = r;
         })
       }
       else {
@@ -45,7 +46,7 @@ export class EmployeeProfileComponent implements OnInit {
   }
 
   onEditProfileButtonClicked() {
-    this.router.navigate(['employee-profile-edit',this.employee.uuid]);
+    this.router.navigate(['employee-operation', OperationEnum.UPDATE, this.employee.uuid]);
   }
 
 }

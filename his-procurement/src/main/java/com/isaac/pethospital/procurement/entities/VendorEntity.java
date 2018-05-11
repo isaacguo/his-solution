@@ -1,5 +1,8 @@
 package com.isaac.pethospital.procurement.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,10 +17,87 @@ public class VendorEntity {
     String name;
     String address;
     String postcode;
-    String legalPerson; //法人
     String description;
-    @OneToMany
-    List<ContactEntity> contactList = new LinkedList<>();
+    String officialWebsiteLink;
+    String email;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference("VendorEntity-ContactEntity")
+    List<ContactEntity> contacts = new LinkedList<>();
+
+
+    public VendorCategoryEntity getVendorCategory() {
+        return vendorCategory;
+    }
+
+    public void setVendorCategory(VendorCategoryEntity vendorCategory) {
+        this.vendorCategory = vendorCategory;
+    }
+
+    @ManyToOne
+    @JsonBackReference("VendorEntity-VendorCategoryEntity")
+    VendorCategoryEntity vendorCategory;
+
+    /*
+    public List<VendorPermissionEntity> getPermissions() {
+        return permissions;
+    }
+
+    public void addPermission(VendorPermissionEntity permission) {
+        if (permission == null)
+            throw new RuntimeException("Permission is null");
+        this.permissions.add(permission);
+    }
+
+    public void removePermission(VendorPermissionEntity permission) {
+        if (permission == null)
+            throw new RuntimeException("Permission is null");
+        this.permissions.remove(permission);
+    }
+
+    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("VendorEntity-VendorCategoryEntity")
+    List<VendorCategoryEntity> productCategories = new LinkedList<>();
+
+    @ManyToMany
+    @JsonBackReference("permission-vendor")
+    List<VendorPermissionEntity> permissions = new LinkedList<>();
+
+
+    public List<VendorCategoryEntity> getProductCategories() {
+        return productCategories;
+    }
+
+    public void addProductCategory(VendorCategoryEntity productCategory) {
+        if (productCategory == null)
+            throw new RuntimeException("Product Category is null");
+        productCategory.setVendor(this);
+        this.productCategories.add(productCategory);
+    }
+
+    public void removeProductCategory(VendorCategoryEntity productCategory) {
+        if (productCategory == null)
+            throw new RuntimeException("Product Category is null");
+        productCategory.setVendor(null);
+        this.productCategories.remove(productCategory);
+    }
+    */
+
+    public String getOfficialWebsiteLink() {
+        return officialWebsiteLink;
+    }
+
+    public void setOfficialWebsiteLink(String officialWebsiteLink) {
+        this.officialWebsiteLink = officialWebsiteLink;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
@@ -51,13 +131,6 @@ public class VendorEntity {
         this.postcode = postcode;
     }
 
-    public String getLegalPerson() {
-        return legalPerson;
-    }
-
-    public void setLegalPerson(String legalPerson) {
-        this.legalPerson = legalPerson;
-    }
 
     public String getDescription() {
         return description;
@@ -67,8 +140,8 @@ public class VendorEntity {
         this.description = description;
     }
 
-    public List<ContactEntity> getContactList() {
-        return contactList;
+    public List<ContactEntity> getContacts() {
+        return contacts;
     }
 
     public void addContact(ContactEntity contact) {
@@ -76,7 +149,14 @@ public class VendorEntity {
             throw new RuntimeException("Contact is null");
 
         contact.setVendor(this);
-        this.contactList.add(contact);
+        this.contacts.add(contact);
+    }
+
+    public void removeContact(ContactEntity contact) {
+        if (contact == null)
+            throw new RuntimeException("Contact is null");
+        this.contacts.remove(contact);
+        contact.setVendor(null);
     }
 
 }

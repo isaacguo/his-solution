@@ -4,12 +4,14 @@ import {AuthenticationService, AuthState} from "../services/common/authenticatio
 import {Subscription} from "rxjs/Subscription";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/take";
+import {AuthorizationService} from "../services/common/authorization.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  //must import AuthorizationService
+  constructor(private authorizationService: AuthorizationService, private authenticationService: AuthenticationService, private router: Router) {
 
   }
 

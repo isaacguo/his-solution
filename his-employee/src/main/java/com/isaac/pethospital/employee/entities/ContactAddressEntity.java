@@ -9,7 +9,7 @@ public class ContactAddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String country;
     private String city;
@@ -32,11 +32,11 @@ public class ContactAddressEntity {
         this.personalEmail = personalEmail;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

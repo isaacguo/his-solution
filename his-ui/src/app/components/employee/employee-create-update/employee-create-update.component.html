@@ -1,0 +1,210 @@
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()" >
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{getOperationText()}}员工成功
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div class="row">
+  <h1 class="page-header">
+    {{getOperationText()}}员工
+  </h1>
+</div>
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+
+  <input type="hidden" formControlName="id">
+
+  <input type="hidden" formControlName="departmentId">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      员工信息
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>员工编号</label>
+            <input type="text" class="form-control" formControlName="employeeNumber">
+            <small [hidden]="formModel.controls.employeeNumber.valid" class="text-danger">
+              员工编号不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>员工账户</label>
+            <input type="text" class="form-control" formControlName="loginAccount">
+            <small [hidden]="formModel.controls.loginAccount.valid" class="text-danger">
+              员工账户长度至少为8位
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>入职日期</label>
+            <my-date-picker id="joinedDate" name="joinedDate" [selDate]="formModel.controls.joinedDate.value"
+                            (dateChanged)="onDateChanged('joinedDate',$event)"
+                            [options]="myDatePickerOptions"></my-date-picker>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <label>当前状态</label>
+          <div class="btn-group" role="group">
+            <button type="button"
+                    class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
+                    data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              {{selectedStatusText}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="javascript:void(0)" *ngFor="let status of getEmployeeStatusList()"
+                     (click)="onStatusClicked(status[0])">
+                {{status[1]}}</a></li>
+            </ul>
+            <small [hidden]="formModel.controls.employmentStatus.valid" class="text-danger">
+              当前状态不能为空
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>职位</label>
+            <input type="text" class="form-control" formControlName="jobTitle">
+            <small [hidden]="formModel.controls.jobTitle.valid" class="text-danger">
+              当前职位不能为空
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      个人信息
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>姓</label>
+            <input type="text" class="form-control" formControlName="surname">
+            <small [hidden]="formModel.controls.surname.valid" class="text-danger">
+              姓氏不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>名</label>
+            <input type="text" class="form-control" formControlName="givenName">
+            <small [hidden]="formModel.controls.givenName.valid" class="text-danger">
+              名不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>全名</label>
+            <input readonly type="text" class="form-control" formControlName="fullName">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>身份证编号</label>
+            <input type="text" class="form-control" formControlName="idNumber">
+            <small [hidden]="formModel.controls.idNumber.valid" class="text-danger">
+              身份证编号不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>驾照编号</label>
+            <input type="text" class="form-control" formControlName="driverLicenseNumber">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>出生日期</label>
+            <my-date-picker id="dateOfBirth" name="dateOfBirth" [selDate]="formModel.controls.dateOfBirth.value"
+                            (dateChanged)="onDateChanged('dateOfBirth',$event)"
+                            [options]="myDatePickerOptions"></my-date-picker>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <label>性别</label>
+          <div class="btn-group" role="group">
+            <button type="button"
+                    class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu2"
+                    data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              {{selectedGenderText}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><a href="javascript:void(0)" *ngFor="let sexual of getSexualList()"
+                     (click)="onSexualClicked(sexual[0])">
+                {{sexual[1]}}</a></li>
+            </ul>
+            <small [hidden]="formModel.controls.gender.valid" class="text-danger">
+              请选择性别
+            </small>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>国籍</label>
+            <input type="text" class="form-control" formControlName="nationality">
+            <small [hidden]="formModel.controls.nationality.valid" class="text-danger">
+              国籍不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>民族</label>
+            <input type="text" class="form-control" formControlName="ethnic">
+            <small [hidden]="formModel.controls.ethnic.valid" class="text-danger">
+              民族不能为空
+            </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>个人电子邮箱</label>
+            <input type="text" class="form-control" formControlName="email">
+            <small [hidden]="formModel.controls.email.valid" class="text-danger">
+              个人电子邮箱不能为空
+            </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
+</form>
+
+

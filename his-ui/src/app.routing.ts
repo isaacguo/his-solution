@@ -37,6 +37,21 @@ import {PetTreatmentComponent} from "./app/components/treatment/my-consulting-ro
 import {InventoryQueryComponent} from "./app/components/inventory/inventory-query/inventory-query.component";
 import {ProcurementManagementComponent} from "./app/components/procurement/procurement-management/procurement-management.component";
 import {ProcurementSettingsComponent} from "./app/components/procurement/procurement-settings/procurement-settings.component";
+import {VendorManagementComponent} from "./app/components/procurement/procurement-settings/vendor-management/vendor-management.component";
+import {VendorCreateUpdateComponent} from "./app/components/procurement/procurement-settings/vendor-create-update/vendor-create-update.component";
+import {ProcurementStatusComponent} from "./app/components/procurement/procurement-settings/procurement-status/procurement-status.component";
+import {ProcurementApprovalComponent} from "./app/components/procurement/procurement-approval/procurement-approval.component";
+import {ProcurementWorkflowComponent} from "./app/components/procurement/procurement-settings/procurement-workflow/procurement-workflow.component";
+import {ProcurementRequestCreateUpdateComponent} from "./app/components/procurement/procurement-request/procurement-request-create-update/procurement-request-create-update.component";
+import {ProcurementApprovalListComponent} from "./app/components/procurement/procurement-approval/procurement-approval-list/procurement-approval-list.component";
+import {ProcurementPurchaseComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase.component";
+import {ProcurementPurchaseListComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component";
+import {AuthorizationManagementComponent} from "./app/components/settings/authorization-management/authorization-management.component";
+import {ProcurementApprovalGuard} from "./app/guards/procurement-approval.guard";
+import {VendorProductCategoryComponent} from "./app/components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component";
+import {EmployeeManagementGuard} from "./app/guards/employee-management.guard";
+import {VendorGuard} from "./app/guards/procurement/vendor.guard";
+import {EmployeeCreateUpdateComponent} from "./app/components/employee/employee-create-update/employee-create-update.component";
 
 
 const appRoutes: Routes = [
@@ -149,8 +164,12 @@ const appRoutes: Routes = [
       },
       {
         path: 'employee-admin',
-        canActivate: [AdminGuard],
+        canActivate: [EmployeeManagementGuard],
         component: EmployeeAdminComponent
+      },
+      {
+        path: 'employee-operation/:operation/:updateId',
+        component: EmployeeCreateUpdateComponent
       },
       {
         path: 'employee',
@@ -174,8 +193,75 @@ const appRoutes: Routes = [
         component: ProcurementManagementComponent
       },
       {
+        path: 'procurement-approval',
+        component: ProcurementApprovalComponent,
+        canActivate: [ProcurementApprovalGuard],
+        children: [
+          {
+            path: 'list',
+            component: ProcurementApprovalListComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'list',
+          }
+        ]
+      },
+      {
+        path:'procurement-purchase',
+        component:ProcurementPurchaseComponent,
+        children:[
+          {
+            path:'list',
+            component:ProcurementPurchaseListComponent
+          },
+          {
+            path: ':operation',
+            component: ProcurementRequestCreateUpdateComponent,
+          },
+          /*
+          {
+            path:':operation',
+            component:ProcurementPurchaseCreateUpdateComponent
+          },
+          {
+            path: ':operation/:updateId',
+            component: ProcurementPurchaseCreateUpdateComponent,
+          },
+          */
+          {
+            path:'**',
+            redirectTo:'list'
+          }
+        ]
+      },
+      {
         path: 'procurement-settings',
-        component: ProcurementSettingsComponent
+        component: ProcurementSettingsComponent,
+        children: [
+          {
+            path: 'vendors/:operation',
+            component: VendorCreateUpdateComponent
+          },
+          {
+            path: 'vendors/:operation/:updateId',
+            component: VendorCreateUpdateComponent
+          },
+          {
+            path:'vendors',
+            component:VendorProductCategoryComponent,
+            canActivate: [VendorGuard],
+
+          },
+          {
+            path: 'procurement-status',
+            component: ProcurementStatusComponent
+          },
+          {
+            path: 'procurement-workflow',
+            component: ProcurementWorkflowComponent
+          }
+        ]
       },
       {
         path: 'inventory',
@@ -196,7 +282,12 @@ const appRoutes: Routes = [
       },
       {
         path: 'settings',
-        component: SettingsComponent
+        component: SettingsComponent,
+      },
+      {
+        path: 'settings-authorization',
+        canActivate: [AdminGuard],
+        component: AuthorizationManagementComponent
       }
     ]
   },
@@ -208,10 +299,10 @@ const appRoutes: Routes = [
     path: 'logout',
     component: LogoutComponent,
     canActivate: [LogoutGuardService]
-  },
+  }
 
   // otherwise redirect to home
-  {path: '**', redirectTo: 'login'}
+  //{path: '**', redirectTo: 'login'}
 
 ]
 

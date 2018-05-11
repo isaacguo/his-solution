@@ -13,6 +13,10 @@ export class AbstractService {
     let body = res.json();
     return body || {};
   }
+  protected extractTextData(res: Response) {
+    let body = res.text();
+    return body;
+  }
 
   protected handleError(error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
