@@ -317,7 +317,7 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/**
 # !tools/packages.config
-
+/*.sql
 his-ui/tools/
 his-gateway/src/main/resources/static/
 his-deploy/
