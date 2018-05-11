@@ -1,6 +1,21 @@
 {
-  "/his": {
-    "target": "http://localhost:80",
+  "/api/hisemployee": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/histreatment": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/hisprocurement": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/": {
+    "target": "http://localhost:8080",
     "secure": false,
     "logLevel": "debug"
   }

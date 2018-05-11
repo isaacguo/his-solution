@@ -4,15 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.isaac</groupId>
+    <groupId>com.isaac.pethospital</groupId>
     <artifactId>his-solution</artifactId>
-    <version>0.5.7.RELEASE</version>
+    <version>0.5.8.RELEASE</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>his-config-server</module>
+        <module>his-config</module>
         <module>his-eureka</module>
-        <module>his-employee-management</module>
+        <module>his-employee</module>
+        <module>his-gateway</module>
+        <module>his-authentication</module>
+        <module>his-medicine</module>
+        <module>his-common</module>
+        <module>his-treatment</module>
+        <module>his-procurement</module>
     </modules>
 
     <parent>
@@ -35,40 +41,53 @@
         <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
         <sonar.groovy.binaries>target/classes</sonar.groovy.binaries>
         <docker.image.prefix>isaacguo</docker.image.prefix>
-        <git.commit.shortRev>git-${git.commit.id.abbrev}</git.commit.shortRev>
+        <git.commit.shortRev>git-${git.branch}-${git.commit.id.abbrev}</git.commit.shortRev>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/pl.project13.maven/git-commit-id-plugin -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
 
-
+        <!--
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        -->
     </dependencies>
 
 
     <build>
-        <resources>
-            <resource>
-                <directory>${project.basedir}</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/Dockerfile</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
         <pluginManagement>
             <plugins>
                 <plugin>

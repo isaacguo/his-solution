@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: HisGateway
+
+server:
+  port: 8080
+
+---
+spring:
+  profiles: dev,default
+  cloud:
+    config:
+      uri: http://localhost:17601
+---
+spring:
+  profiles: production
+  cloud:
+    config:
+      uri: http://his-config:17601
