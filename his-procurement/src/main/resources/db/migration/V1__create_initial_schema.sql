@@ -9,7 +9,7 @@ create table department_permission_entity (id bigint not null auto_increment, de
 create table operator_entity (id bigint not null auto_increment, primary key (id)) ENGINE=InnoDB;
 create table procurement_approval_entity (id bigint not null auto_increment, comments varchar(255), created_date_time datetime, review_result bit not null, reviewed bit not null, reviewed_date_time datetime, reviewer varchar(255), reviewer_full_name varchar(255), stage varchar(255), procurement_id bigint, primary key (id)) ENGINE=InnoDB;
 create table procurement_approval_stage_entity (id bigint not null auto_increment, stage varchar(255), previous_stage_id bigint, primary key (id)) ENGINE=InnoDB;
-create table procurement_configuration_entity (id bigint not null auto_increment, key varchar(255), value varchar(255), primary key (id)) ENGINE=InnoDB;
+create table procurement_configuration_entity (id bigint not null auto_increment, conf_key varchar(255), conf_value varchar(255), primary key (id)) ENGINE=InnoDB;
 create table procurement_entity (id bigint not null auto_increment, order_number varchar(255), status varchar(255), operator_id bigint, primary key (id)) ENGINE=InnoDB;
 create table procurement_log_entity (id bigint not null auto_increment, comment varchar(255), submitted_data datetime, procurement_id bigint, primary key (id)) ENGINE=InnoDB;
 create table procurement_purchase_entity (id bigint not null auto_increment, assign_to varchar(255), generated_date_time datetime, total_price double precision not null, procurement_id bigint, primary key (id)) ENGINE=InnoDB;

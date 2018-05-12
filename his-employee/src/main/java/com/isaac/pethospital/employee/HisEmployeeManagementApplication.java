@@ -1,16 +1,12 @@
 package com.isaac.pethospital.employee;
 
-import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
-import com.isaac.pethospital.common.entities.AuthorizationEntity;
 import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
 import com.isaac.pethospital.common.repositories.AuthorizationRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
 import com.isaac.pethospital.common.services.AuthorizationService;
-import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
-import com.isaac.pethospital.employee.entities.*;
-import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
-import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
-import com.isaac.pethospital.employee.enums.SexualEnum;
+import com.isaac.pethospital.employee.entities.CompanyEntity;
+import com.isaac.pethospital.employee.entities.DepartmentEntity;
+import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.CompanyRepository;
 import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
@@ -26,10 +22,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import javax.crypto.ExemptionMechanismException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
