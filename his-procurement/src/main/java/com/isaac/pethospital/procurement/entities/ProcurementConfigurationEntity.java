@@ -8,11 +8,27 @@ import javax.persistence.Id;
 @Entity
 public class ProcurementConfigurationEntity {
 
-    String key;
-    String value;
+    String confKey;
+    String confValue;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public String getConfKey() {
+        return confKey;
+    }
+
+    public void setConfKey(String confKey) {
+        this.confKey = confKey;
+    }
+
+    public String getConfValue() {
+        return confValue;
+    }
+
+    public void setConfValue(String confValue) {
+        this.confValue = confValue;
+    }
 
     public Long getId() {
         return id;
@@ -20,21 +36,5 @@ public class ProcurementConfigurationEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

@@ -16,11 +16,11 @@ public class ProcurementConfigurationServiceImpl implements ProcurementConfigura
 
     @Override
     public String getOrderNumber() {
-        ProcurementConfigurationEntity pce1 = this.procurementConfigurationRepository.findByKey(ConfigurationConstants.OrderNumber);
-        String length = this.procurementConfigurationRepository.findByKey(ConfigurationConstants.OrderNumberLength).getValue();
-        Long orderNumberLong = Long.parseLong(pce1.getValue());
+        ProcurementConfigurationEntity pce1 = this.procurementConfigurationRepository.findByConfKey(ConfigurationConstants.OrderNumber);
+        String length = this.procurementConfigurationRepository.findByConfKey(ConfigurationConstants.OrderNumberLength).getConfValue();
+        Long orderNumberLong = Long.parseLong(pce1.getConfValue());
         String formatString = String.format("%%0%sd", length);
-        pce1.setValue(Long.toString(orderNumberLong + 1));
+        pce1.setConfValue(Long.toString(orderNumberLong + 1));
         this.procurementConfigurationRepository.save(pce1);
 
         return String.format(formatString, orderNumberLong);

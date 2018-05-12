@@ -7,26 +7,6 @@ services:
       - "61616:61616"
       - "8161:8161"
 
-  graphite:
-    image: hopsoft/graphite-statsd
-    ports:
-      - "8000:80"
-      - "2003:2003"
-      - "2004:2004"
-      - "2023:2023"
-      - "2024:2024"
-      - "8125:8125/udp"
-      - "8126:8126"
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3000:3000"
-    links:
-      - graphite
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=secret
-    volumes:
-      - ./grafana/data:/var/lib/grafana
 
   his_start_his-config:
         image: bash

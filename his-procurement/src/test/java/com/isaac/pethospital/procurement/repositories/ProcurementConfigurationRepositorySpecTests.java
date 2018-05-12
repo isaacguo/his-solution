@@ -37,14 +37,14 @@ public class ProcurementConfigurationRepositorySpecTests {
     @Test
     public void whenFindByKeyThenReturnConfigurationEntity() throws Exception {
         ProcurementConfigurationEntity pce = new ProcurementConfigurationEntity();
-        pce.setKey("OrderNumber");
-        pce.setValue("0");
+        pce.setConfKey("OrderNumber");
+        pce.setConfValue("0");
         entityManager.persist(pce);
 
         //when
-        ProcurementConfigurationEntity res = this.repository.findByKey("OrderNumber");
+        ProcurementConfigurationEntity res = this.repository.findByConfKey("OrderNumber");
         //then
-        assertThat(res.getValue()).isEqualToIgnoringCase("0");
+        assertThat(res.getConfValue()).isEqualToIgnoringCase("0");
 
 
     }

@@ -30,22 +30,22 @@ public class ProcurementConfigurationServiceSpecTests {
         //when
         String orderNumber=this.procurementConfigurationService.getOrderNumber();
         //then
-        verify(this.procurementConfigurationRepository,times(1)).findByKey("OrderNumber");
-        verify(this.procurementConfigurationRepository,times(1)).findByKey("OrderNumberLength");
+        verify(this.procurementConfigurationRepository,times(1)).findByConfKey("OrderNumber");
+        verify(this.procurementConfigurationRepository,times(1)).findByConfKey("OrderNumberLength");
         assertThat(orderNumber).isEqualToIgnoringCase("00000002");
     }
 
     private void initForGetNextOrderNumber() {
         ProcurementConfigurationEntity pce1=new ProcurementConfigurationEntity();
-        pce1.setKey(ConfigurationConstants.OrderNumber);
-        pce1.setValue("2");
+        pce1.setConfKey(ConfigurationConstants.OrderNumber);
+        pce1.setConfValue("2");
 
         ProcurementConfigurationEntity pce2=new ProcurementConfigurationEntity();
-        pce2.setKey(ConfigurationConstants.OrderNumberLength);
-        pce2.setValue("8");
+        pce2.setConfKey(ConfigurationConstants.OrderNumberLength);
+        pce2.setConfValue("8");
 
-        doReturn(pce1).when(this.procurementConfigurationRepository).findByKey(ConfigurationConstants.OrderNumber);
-        doReturn(pce2).when(this.procurementConfigurationRepository).findByKey(ConfigurationConstants.OrderNumberLength);
+        doReturn(pce1).when(this.procurementConfigurationRepository).findByConfKey(ConfigurationConstants.OrderNumber);
+        doReturn(pce2).when(this.procurementConfigurationRepository).findByConfKey(ConfigurationConstants.OrderNumberLength);
     }
 
     @Test

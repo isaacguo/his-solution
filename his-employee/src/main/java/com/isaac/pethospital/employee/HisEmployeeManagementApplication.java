@@ -15,6 +15,7 @@ import com.isaac.pethospital.employee.repositories.CompanyRepository;
 import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import com.isaac.pethospital.employee.services.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,12 +23,15 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.crypto.ExemptionMechanismException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -41,6 +45,8 @@ public class HisEmployeeManagementApplication {
     }
 
 
+    @Autowired
+    private Environment environment;
     @Bean
     CommandLineRunner commandLineRunner(CompanyRepository companyRepository,
                                         DepartmentRepository departmentRepository,
@@ -51,6 +57,16 @@ public class HisEmployeeManagementApplication {
                                         AuthorizationService authorizationService) {
 
         return new CommandLineRunner() {
+
+            private boolean shouldCreateDatabase() {
+
+                List<String> profiles = Arrays.asList(environment.getActiveProfiles());
+                if (profiles.size() == 0 || profiles.contains("dev") || profiles.contains("default") || profiles.contains("staging"))
+                    return true;
+                else {
+                    return environment.getProperty("createDatabase", Boolean.class, false);
+                }
+            }
 
 
 
@@ -86,7 +102,11 @@ public class HisEmployeeManagementApplication {
             public void run(String... strings) throws Exception {
 
 
+
+
                 authorizationService.setDomainName("Employee");
+
+                if (!shouldCreateDatabase()) return;
 
 
                 CompanyEntity companyEntity = new CompanyEntity();

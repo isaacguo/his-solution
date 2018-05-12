@@ -7,6 +7,7 @@ import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.procurement.constants.ConfigurationConstants;
 import com.isaac.pethospital.procurement.entities.*;
 import com.isaac.pethospital.procurement.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,8 +16,12 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jms.annotation.EnableJms;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -32,6 +37,9 @@ public class HisProcurementApplication {
         SpringApplication.run(HisProcurementApplication.class, args);
     }
 
+    @Autowired
+    private Environment environment;
+
     @Bean
     CommandLineRunner commandLineRunner(ProcurementStatusRepository procurementStatusRepository,
                                         ProcurementConfigurationRepository procurementConfigurationRepository,
@@ -44,10 +52,23 @@ public class HisProcurementApplication {
                                         AuthorizationService authorizationService
                                         ) {
         return new CommandLineRunner() {
+
+            private boolean shouldCreateDatabase() {
+
+                List<String> profiles = Arrays.asList(environment.getActiveProfiles());
+                if (profiles.size() == 0 || profiles.contains("dev") || profiles.contains("default") || profiles.contains("staging"))
+                    return true;
+                else {
+                    return environment.getProperty("createDatabase", Boolean.class, false);
+                }
+            }
+
             @Override
             public void run(String... strings) throws Exception {
 
                 authorizationService.setDomainName("Procurement");
+
+                if (!shouldCreateDatabase()) return;
 
                 initProcurementStatus();
                 initConfiguration();
@@ -198,11 +219,11 @@ public class HisProcurementApplication {
 
             private void initConfiguration() {
                 ProcurementConfigurationEntity pce1 = new ProcurementConfigurationEntity();
-                pce1.setKey(ConfigurationConstants.OrderNumber);
-                pce1.setValue("1");
+                pce1.setConfKey(ConfigurationConstants.OrderNumber);
+                pce1.setConfValue("1");
                 ProcurementConfigurationEntity pce2 = new ProcurementConfigurationEntity();
-                pce2.setKey(ConfigurationConstants.OrderNumberLength);
-                pce2.setValue("8");
+                pce2.setConfKey(ConfigurationConstants.OrderNumberLength);
+                pce2.setConfValue("8");
 
                 procurementConfigurationRepository.save(pce1);
                 procurementConfigurationRepository.save(pce2);

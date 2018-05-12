@@ -1,9 +1,11 @@
 package com.isaac.pethospital.treatment;
 
+import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.treatment.entities.*;
 import com.isaac.pethospital.treatment.repositories.*;
 import com.isaac.pethospital.treatment.services.DepartmentService;
 import org.apache.tomcat.jni.Local;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,10 +13,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -28,17 +33,35 @@ public class HisTreatmentManagementApplication {
         SpringApplication.run(HisTreatmentManagementApplication.class, args);
     }
 
+    @Autowired
+    private Environment environment;
     @Bean
     CommandLineRunner commandLineRunner(PetTypeRepository petTypeRepository,
                                         PetOwnerRepository petOwnerRepository,
                                         EmployeeRepository employeeRepository,
                                         DepartmentRepository departmentRepository,
-                                        DepartmentService departmentService) {
+                                        DepartmentService departmentService,
+                                        AuthorizationService authorizationService) {
 
         return new CommandLineRunner() {
 
+            private boolean shouldCreateDatabase() {
+
+                List<String> profiles = Arrays.asList(environment.getActiveProfiles());
+                if (profiles.size() == 0 || profiles.contains("dev") || profiles.contains("default") || profiles.contains("staging"))
+                    return true;
+                else {
+                    return environment.getProperty("createDatabase", Boolean.class, false);
+                }
+            }
+
             @Override
             public void run(String... strings) throws Exception {
+
+
+                authorizationService.setDomainName("Treatment");
+                if (!shouldCreateDatabase()) return;
+
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 PetTypeEntity p1 = new PetTypeEntity();
                 p1.setRoot(true);
