@@ -84,18 +84,20 @@ import {MyDatePickerModule} from "mydatepicker";
 import {AuthorizationManagementComponent} from './components/settings/authorization-management/authorization-management.component';
 import {SecurityOperationPanelComponent} from './components/settings/authorization-management/security-operation-panel/security-operation-panel.component';
 import {AuthorizationService} from "./services/common/authorization.service";
-import {ProcurementApprovalGuard} from "./guards/procurement-approval.guard";
 import {VendorProductCategoryComponent} from './components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component';
 import {CategoryListComponent} from './components/procurement/procurement-settings/vendor-product-category/category-list/category-list.component';
 import {CategoryDetailComponent} from './components/procurement/procurement-settings/vendor-product-category/category-detail/category-detail.component';
 import {VendorCategoryService} from "./services/procurement/vendor-category.service";
 import {EmployeeDepartmentService} from "./services/employee/employee-department.service";
 import {UiSwitchModule} from "ngx-ui-switch";
-import {EmployeeManagementGuard} from "./guards/employee-management.guard";
 import {VendorGuard} from "./guards/procurement/vendor.guard";
 import { EmployeeCreateUpdateComponent } from './components/employee/employee-create-update/employee-create-update.component';
 import { EmployeeAdminListComponent } from './components/employee/employee-admin/employee-admin-list/employee-admin-list.component';
 import { EmployeeAdminDetailComponent } from './components/employee/employee-admin/employee-admin-detail/employee-admin-detail.component';
+import {EmployeeManagementGuard} from "./guards/employee/employee-management.guard";
+import {ProcurementApprovalGuard} from "./guards/procurement/procurement-approval.guard";
+import { FactoryResetComponent } from './components/settings/factory-reset/factory-reset.component';
+import {FactoryResetService} from "./services/settings/factory-reset.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -174,6 +176,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EmployeeCreateUpdateComponent,
     EmployeeAdminListComponent,
     EmployeeAdminDetailComponent,
+    FactoryResetComponent,
 
   ],
   imports: [
@@ -200,8 +203,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementApprovalGuard,
     VendorGuard,
     LogoutGuardService,
-    AuthenticationService,
-    AuthorizationService,
     EmployeeService,
     EmployeeDepartmentService,
     DepartmentService,
@@ -217,6 +218,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementRequestService,
     ProcurementApprovalService,
 
+    //settings
+    FactoryResetService,
+    AuthenticationService,
+    AuthorizationService,
 
   ],
   bootstrap: [AppComponent]

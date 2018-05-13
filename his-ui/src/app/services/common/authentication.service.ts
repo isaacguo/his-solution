@@ -31,7 +31,7 @@ export class AuthenticationService {
     }
   }
 
-  login(username: string, password: string) {
+  login(username: string, password: string,returnUrl:string) {
 
     this.setAuthState(new AuthInfo(AuthState.Logging, ""));
 
@@ -54,6 +54,7 @@ export class AuthenticationService {
         if (r) {
           this.setAuthState(new AuthInfo(AuthState.LoggedIn, this.decoded.sub, this.decoded.isAdmin == 'true', this.decoded.isFinance == 'true'));
           //this.router.navigate(['/dashboard']);
+          this.router.navigateByUrl(returnUrl);
         }
         else {
           this.setAuthState(new AuthInfo(AuthState.LoginFailed, ""));

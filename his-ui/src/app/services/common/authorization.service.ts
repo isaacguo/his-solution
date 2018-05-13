@@ -10,6 +10,7 @@ import {AuthenticationService, AuthInfo, AuthState} from "./authentication.servi
 import {Subscription} from "rxjs/Subscription";
 import {forkJoin} from "rxjs/observable/forkJoin";
 import {Router} from "@angular/router";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class AuthorizationService extends AbstractService implements OnDestroy {
@@ -19,14 +20,20 @@ export class AuthorizationService extends AbstractService implements OnDestroy {
   authorizationAssignmentArray: Map<string, AuthorizationAssignment[]> = new Map<string, AuthorizationAssignment[]>();
   authInfo: AuthInfo;
   private authChangeSubscription: Subscription;
+  private authorizationSubjectManager:BehaviorSubject<AuthorizationInfo>=new BehaviorSubject<AuthorizationInfo>(new AuthorizationInfo(this.authorizationAssignmentArray));
+  authorizationChange:Observable<AuthorizationInfo>;
 
   constructor(private router: Router,private authHttp: AuthHttp, private authenticationService: AuthenticationService) {
     super();
+    this.authorizationChange=this.authorizationSubjectManager.asObservable();
+
     this.authorizationArray.push(["/api/hisprocurement", "采购模块权限"]);
     this.authorizationArray.push(["/api/hisemployee", "人事模块权限"]);
 
+    /*
     AuthorizationService.serviceMap.set("Procurement", "/api/hisprocurement");
     AuthorizationService.serviceMap.set("Employee", "/api/hisemployee");
+    */
 
     this.authChangeSubscription = authenticationService.authChange.subscribe(
       newAuthInfo => {
@@ -96,22 +103,27 @@ export class AuthorizationService extends AbstractService implements OnDestroy {
 
   getMyAuthorizations() {
 
-    var sou = Observable.from(Array.from(AuthorizationService.serviceMap.entries()));
+    var sou = Observable.from(Array.from(this.authorizationArray));
 
-    sou.mergeMap(entry => this.authHttp.get(`${entry[1]}/authorizations/get-my-authorizations`).map(this.extractData))
+    sou.mergeMap(entry => this.authHttp.get(`${entry[0]}/authorizations/get-my-authorizations`).map(this.extractData))
       .subscribe(r => {
         this.authorizationAssignmentArray.set(r.name, r.assignments);
-      },(err)=>{},()=>{
-        this.router.navigate(['/dashboard']);
+        this.emitAuthorizationState();
+
+      }, (err) => {
+      }, () => {
       });
+  }
 
 
-    /*
-        AuthorizationService.serviceMap.forEach((value: string, key: string) => {
-          this.authHttp.get(`${value}/authorizations/get-my-authorizations`).map(this.extractData).subscribe(r => {
-            this.authorizationAssignmentArray.set(key, r);
-          });
-        });
-        */
+  emitAuthorizationState(): void {
+    this.authorizationSubjectManager.next(new AuthorizationInfo(this.authorizationAssignmentArray));
+  }
+}
+
+export class AuthorizationInfo{
+  constructor(public authorizationAssignmentArray: Map<string, AuthorizationAssignment[]>)
+  {
+
   }
 }

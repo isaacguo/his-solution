@@ -47,11 +47,12 @@ import {ProcurementApprovalListComponent} from "./app/components/procurement/pro
 import {ProcurementPurchaseComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase.component";
 import {ProcurementPurchaseListComponent} from "./app/components/procurement/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component";
 import {AuthorizationManagementComponent} from "./app/components/settings/authorization-management/authorization-management.component";
-import {ProcurementApprovalGuard} from "./app/guards/procurement-approval.guard";
 import {VendorProductCategoryComponent} from "./app/components/procurement/procurement-settings/vendor-product-category/vendor-product-category.component";
-import {EmployeeManagementGuard} from "./app/guards/employee-management.guard";
 import {VendorGuard} from "./app/guards/procurement/vendor.guard";
 import {EmployeeCreateUpdateComponent} from "./app/components/employee/employee-create-update/employee-create-update.component";
+import {EmployeeManagementGuard} from "./app/guards/employee/employee-management.guard";
+import {ProcurementApprovalGuard} from "./app/guards/procurement/procurement-approval.guard";
+import {FactoryResetComponent} from "./app/components/settings/factory-reset/factory-reset.component";
 
 
 const appRoutes: Routes = [
@@ -282,12 +283,18 @@ const appRoutes: Routes = [
       },
       {
         path: 'settings',
+        canActivate: [AdminGuard],
         component: SettingsComponent,
       },
       {
         path: 'settings-authorization',
         canActivate: [AdminGuard],
         component: AuthorizationManagementComponent
+      },
+      {
+        path:'settings-factory-reset',
+        canActivate:[AdminGuard],
+        component:FactoryResetComponent
       }
     ]
   },

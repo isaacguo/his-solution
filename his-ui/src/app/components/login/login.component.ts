@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthenticationService, AuthInfo, AuthState} from "../../services/common/authentication.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 
 @Component({
@@ -18,18 +18,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   private authChangeSubscription: Subscription;
   public username: string;
   public password: string;
+  returnUrl:string;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  constructor(private route:ActivatedRoute,private router: Router, private authenticationService: AuthenticationService) {
     this.authChangeSubscription = authenticationService.authChange.subscribe(
       newAuthInfo =>
         this.authInfo = newAuthInfo);
   }
 
   ngOnInit() {
+    this.returnUrl=this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   login(): void {
-    this.authenticationService.login(this.username, this.password);
+    this.authenticationService.login(this.username, this.password, this.returnUrl);
   }
 
   onLoginBtnClicked() {

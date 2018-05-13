@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthenticationService, AuthInfo} from "../../services/common/authentication.service";
 import {Subscription} from "rxjs/Subscription";
 import {ProcurementApprovalService} from "../../services/procurement/procurement-approval.service";
-import {ProcurementApprovalGuard} from "../../guards/procurement-approval.guard";
 import {EmployeeService} from "../../services/employee/employee.service";
-import {EmployeeManagementGuard} from "../../guards/employee-management.guard";
+import {ProcurementApprovalGuard} from "../../guards/procurement/procurement-approval.guard";
+import {EmployeeManagementGuard} from "../../guards/employee/employee-management.guard";
 
 @Component({
   selector: 'app-index',

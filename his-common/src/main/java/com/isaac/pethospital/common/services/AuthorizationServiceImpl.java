@@ -54,6 +54,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
+    public void deleteAll() {
+        this.authorizationRepository.deleteAll();
+    }
+
+    @Override
     public boolean deleteAuthorization(AuthorizationEntity request) {
         if (this.authorizationRepository.exists(request.getId()))
             this.authorizationRepository.delete(request.getId());

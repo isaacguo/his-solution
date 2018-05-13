@@ -12,6 +12,7 @@ public interface AuthorizationService {
 
     boolean createAuthorization(AuthorizationOperationRequest request);
 
+    void deleteAll();
     boolean deleteAuthorization(AuthorizationEntity request);
 
     AuthorizationEntity findByUsername(AuthorizationEntity any);

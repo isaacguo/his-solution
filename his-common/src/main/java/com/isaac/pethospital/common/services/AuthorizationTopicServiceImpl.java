@@ -19,4 +19,21 @@ public class AuthorizationTopicServiceImpl implements AuthorizationTopicService 
     public List<AuthorizationTopicEntity> findAll() {
         return authorizationTopicRepository.findAll();
     }
+
+    @Override
+    public void addAuthorizationTopicAndOperations(String topic, String... operations) {
+        AuthorizationTopicEntity topic1 = new AuthorizationTopicEntity();
+        topic1.setName(topic);
+        for (int i = 0; i < operations.length; i++) {
+            topic1.addAvailableTopicOperationByName(operations[i]);
+        }
+        authorizationTopicRepository.save(topic1);
+    }
+
+
+    @Override
+    public void deleteAll() {
+        this.authorizationTopicRepository.deleteAll();
+
+    }
 }

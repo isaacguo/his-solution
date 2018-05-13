@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AuthorizationTopicService {
     List<AuthorizationTopicEntity> findAll();
+    void addAuthorizationTopicAndOperations(String topic, String... operations);
+    void deleteAll();
 }

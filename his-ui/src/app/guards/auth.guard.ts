@@ -1,5 +1,5 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {Router, CanActivate} from '@angular/router';
+import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
 import {AuthenticationService, AuthState} from "../services/common/authentication.service";
 import {Subscription} from "rxjs/Subscription";
 import {Observable} from "rxjs/Observable";
@@ -15,11 +15,11 @@ export class AuthGuard implements CanActivate {
 
   }
 
-  canActivate(): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.authenticationService.authChange.map(
       authInfo => {
         if (authInfo.authState != AuthState.LoggedIn)
-          this.router.navigate((['/login']));
+          this.router.navigate(['login'], {queryParams: {returnUrl: state.url}});
         else
           return true;
       }).take(1);

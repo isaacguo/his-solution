@@ -2,21 +2,16 @@ import {CanActivate, Router} from "@angular/router";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {AuthorizationService} from "../../services/common/authorization.service";
+import {AbstractGuard} from "../abstract.guard";
 
 @Injectable()
-export class VendorGuard implements CanActivate {
+export class VendorGuard extends AbstractGuard implements CanActivate {
 
-  private static TOPIC: string = "供应商";
-  private static OPERATION: string = "管理";
-
-  constructor(private authorizationService: AuthorizationService) {
-
+  constructor(authorizationService: AuthorizationService) {
+    super("Procurement", "Vendor", "Admin", authorizationService);
   }
 
   canActivate(): boolean {
-    return this.authorizationService
-      .isAuthorized("Procurement",
-        VendorGuard.TOPIC,
-        VendorGuard.OPERATION);
+    return this.isAuthorized();
   }
 }
