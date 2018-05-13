@@ -16,37 +16,49 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     private final AuthorizationService authorizationService;
     private final AuthorizationTopicService authorizationTopicService;
     private final ProcurementStatusRepository procurementStatusRepository;
+    private final ProcurementStatusService procurementStatusService;
     private final ProcurementConfigurationRepository procurementConfigurationRepository;
     private final ProcurementApprovalStageRepository procurementApprovalStageRepository;
+    private final ProcurementApprovalService procurementApprovalService;
     private final VendorRepository vendorRepository;
+    private final VendorCategoryRepository vendorCategoryRepository;
 
-    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, ProcurementStatusRepository procurementStatusRepository, ProcurementConfigurationRepository procurementConfigurationRepository, ProcurementApprovalStageRepository procurementApprovalStageRepository, VendorRepository vendorRepository, VendorCategoryRepository vendorCategoryRepository) {
+    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, ProcurementStatusRepository procurementStatusRepository, ProcurementStatusService procurementStatusService, ProcurementConfigurationRepository procurementConfigurationRepository, ProcurementApprovalStageRepository procurementApprovalStageRepository, ProcurementApprovalService procurementApprovalService, VendorRepository vendorRepository, VendorCategoryRepository vendorCategoryRepository) {
         this.authorizationService = authorizationService;
         this.authorizationTopicService = authorizationTopicService;
         this.procurementStatusRepository = procurementStatusRepository;
+        this.procurementStatusService = procurementStatusService;
         this.procurementConfigurationRepository = procurementConfigurationRepository;
         this.procurementApprovalStageRepository = procurementApprovalStageRepository;
+        this.procurementApprovalService = procurementApprovalService;
         this.vendorRepository = vendorRepository;
         this.vendorCategoryRepository = vendorCategoryRepository;
     }
 
-    private final VendorCategoryRepository vendorCategoryRepository;
-
-    @Transactional
     @Override
     public void reset() {
 
-        this.procurementStatusRepository.deleteAll();
-        this.procurementConfigurationRepository.deleteAll();
-        this.procurementApprovalStageRepository.deleteAll();
-        this.vendorRepository.deleteAll();
+        this.cleanDb();
+        this.init();
+    }
 
+    @Transactional
+    void cleanDb() {
+        if (this.procurementStatusService.getRoot() != null)
+            this.procurementStatusRepository.delete(this.procurementStatusService.getRoot());
+        this.procurementConfigurationRepository.deleteAll();
+        if(this.procurementApprovalService.getRoot()!=null)
+        this.procurementApprovalStageRepository.delete(this.procurementApprovalService.getRoot());
+        this.vendorRepository.deleteAll();
         authorizationService.deleteAll();
         authorizationTopicService.deleteAll();
-        authorizationService.setDomainName("Procurement");
-        authorizationTopicService.addAuthorizationTopicAndOperations("ProcurementApproval","Admin");
-        authorizationTopicService.addAuthorizationTopicAndOperations("Vendor","Admin");
+    }
 
+    @Transactional
+    void init() {
+        authorizationService.setDomainName("Procurement");
+        authorizationTopicService.addAuthorizationTopicAndOperations("ProcurementApproval", "Admin");
+        authorizationTopicService.addAuthorizationTopicAndOperations("Vendor", "Admin");
     }
 
     @Override
@@ -98,7 +110,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         ve.setName("IDEXX");
         vendorRepository.save(ve);
 
-        VendorEntity ve1=new VendorEntity();
+        VendorEntity ve1 = new VendorEntity();
         ve1.setName("得力");
         vendorRepository.save(ve1);
 
@@ -141,6 +153,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
                 vendorProductRepository.save(vpe1);
                 */
     }
+
     private void initApproval() {
         ProcurementApprovalStageEntity procurementApprovalStageEntity1 = new ProcurementApprovalStageEntity();
         procurementApprovalStageEntity1.setStage("申请人");

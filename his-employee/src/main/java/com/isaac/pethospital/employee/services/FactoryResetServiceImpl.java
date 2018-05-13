@@ -7,6 +7,7 @@ import com.isaac.pethospital.employee.entities.CompanyEntity;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.CompanyRepository;
+import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,27 +19,36 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     private final AuthorizationService authorizationService;
     private final AuthorizationTopicService authorizationTopicService;
     private final CompanyRepository companyRepository;
+    private final EmployeeRepository employeeRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, CompanyRepository companyRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, CompanyRepository companyRepository, EmployeeRepository employeeRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.authorizationService = authorizationService;
         this.authorizationTopicService = authorizationTopicService;
         this.companyRepository = companyRepository;
+        this.employeeRepository = employeeRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    @Transactional
     @Override
     public void reset() {
 
+        this.cleanDb();
+        this.init();
+    }
+
+    @Transactional
+    void cleanDb() {
         authorizationService.deleteAll();
         authorizationTopicService.deleteAll();
+        employeeRepository.deleteAll();
+        companyRepository.deleteAll();
+    }
+
+    @Transactional
+    void init() {
         authorizationService.setDomainName("Employee");
         authorizationTopicService.addAuthorizationTopicAndOperations("Management", "Admin");
-
-        companyRepository.deleteAll();
-
-
     }
 
     @Override

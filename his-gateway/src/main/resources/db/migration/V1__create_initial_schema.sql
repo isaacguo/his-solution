@@ -1,10 +1,9 @@
-create table application_user (id bigint not null auto_increment, password varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table authorization_assignment_entity (id bigint not null auto_increment, authorization_id bigint, topic_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table authorization_assignment_entity_allowed_operations (authorization_assignment_entity_id bigint not null, allowed_operations_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table authorization_entity (id bigint not null auto_increment, uid bigint, user_account varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table authorization_topic_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table topic_operation_entity (id bigint not null auto_increment, name varchar(255), authorization_topic_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table topic_operation_entity_authorization_assignment_list (topic_operation_entity_id bigint not null, authorization_assignment_list_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table authorization_assignment_entity (id bigint not null auto_increment, authorization_id bigint, topic_id bigint, primary key (id)) ENGINE=InnoDB;
+create table authorization_assignment_entity_allowed_operations (authorization_assignment_entity_id bigint not null, allowed_operations_id bigint not null) ENGINE=InnoDB;
+create table authorization_entity (id bigint not null auto_increment, uid bigint, user_account varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB;
+create table authorization_topic_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB;
+create table topic_operation_entity (id bigint not null auto_increment, name varchar(255), authorization_topic_id bigint, primary key (id)) ENGINE=InnoDB;
+create table topic_operation_entity_authorization_assignment_list (topic_operation_entity_id bigint not null, authorization_assignment_list_id bigint not null) ENGINE=InnoDB;
 alter table authorization_assignment_entity add constraint FKedjwiuan814a19bi4yy07tdph foreign key (authorization_id) references authorization_entity (id);
 alter table authorization_assignment_entity add constraint FK8dqq1kc7jp0clkstctpnjtl2y foreign key (topic_id) references authorization_topic_entity (id);
 alter table authorization_assignment_entity_allowed_operations add constraint FK5vwid8n1jmi0r5h2fxxnbvbgn foreign key (allowed_operations_id) references topic_operation_entity (id);
