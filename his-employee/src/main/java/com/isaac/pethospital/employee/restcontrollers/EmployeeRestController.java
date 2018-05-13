@@ -5,7 +5,6 @@ import com.isaac.pethospital.employee.dto.EmployeeCount;
 import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
-import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import com.isaac.pethospital.employee.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,6 +79,11 @@ public class EmployeeRestController {
             return "guojing";
         else
             return "";
+    }
+
+    @GetMapping(value = "/find-by-loginAccount/{loginAccount}")
+    public EmployeeOperationRequest findUserNameByLoginAccount(@PathVariable("loginAccount") String loginAccount) {
+        return this.employeeService.findUserNameByLoginAccount(loginAccount);
     }
 
     @GetMapping(value = "/find-by-userAccount/{userAccount}")

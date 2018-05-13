@@ -6,6 +6,7 @@ import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +17,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final DepartmentService departmentService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private String getUserAccount() {
         return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.employeeRepository = employeeRepository;
         this.departmentService = departmentService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -40,6 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean createEmployee(EmployeeOperationRequest request) {
         String uuid = UUID.randomUUID().toString();
         EmployeeEntity ee = request.toEmployeeEntity();
+        ee.setPassword(bCryptPasswordEncoder.encode(request.getLoginAccount()));
 
         if (request.getDepartmentId() == null)
             throw new RuntimeException("Department Id is null");
@@ -83,6 +87,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<String> getSupportedRelationships() {
         return null;
+    }
+
+    @Override
+    public EmployeeOperationRequest findUserNameByLoginAccount(String loginAccount) {
+        EmployeeEntity ee = this.employeeRepository.findByLoginAccount(loginAccount);
+        if (ee != null) {
+            EmployeeOperationRequest eor = new EmployeeOperationRequest();
+            eor.setLoginAccount(ee.getLoginAccount());
+            eor.setPassword(ee.getPassword());
+            return eor;
+        } else
+            return null;
     }
 
     @Override
@@ -173,4 +189,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(Long departmentId) {
         return this.employeeRepository.findEmployeesForEmployeeListItemByDepartmentId(departmentId);
     }
+
+
 }

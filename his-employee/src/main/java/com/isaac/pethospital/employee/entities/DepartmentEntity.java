@@ -118,9 +118,10 @@ public class DepartmentEntity {
         this.employees.remove(employee);
     }
 
-    public EmployeeEntity addEmployeeByName(String loginAccount, String name, String title, EmployeeEntity manager) {
+    public EmployeeEntity addEmployeeByName(String loginAccount, String password, String name, String title, EmployeeEntity manager) {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setFullName(name);
+        employeeEntity.setPassword(password);
         employeeEntity.setLoginAccount(loginAccount);
         employeeEntity.setJobTitle(title);
         employeeEntity.setDirectReportTo(manager);

@@ -8,6 +8,7 @@ import com.isaac.pethospital.employee.enums.SexualEnum;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -17,12 +18,14 @@ public class EmployeeServiceSpecTests {
     EmployeeRepository employeeRepository;
     EmployeeService employeeService;
     DepartmentService departmentService;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Before
     public void before() {
         this.employeeRepository = mock(EmployeeRepository.class);
         this.departmentService=mock(DepartmentService.class);
-        this.employeeService = spy(new EmployeeServiceImpl(this.employeeRepository,this.departmentService));
+        this.bCryptPasswordEncoder=mock(BCryptPasswordEncoder.class);
+        this.employeeService = spy(new EmployeeServiceImpl(this.employeeRepository,this.departmentService,this.bCryptPasswordEncoder));
     }
 
     @Test

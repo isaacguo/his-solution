@@ -32,6 +32,8 @@ public class EmployeeEntity {
     private String surname;
     private String fullName;
 
+    private String password;
+
 
     String uuid;
     @Id
@@ -332,4 +334,11 @@ public class EmployeeEntity {
         this.emergencyPhoneNumber = emergencyPhoneNumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

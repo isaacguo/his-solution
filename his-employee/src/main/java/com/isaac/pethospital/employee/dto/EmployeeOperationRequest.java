@@ -4,12 +4,18 @@ import com.isaac.pethospital.employee.entities.*;
 import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
 import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
 import com.isaac.pethospital.employee.enums.SexualEnum;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
 public class EmployeeOperationRequest {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     public Long getDepartmentId() {
         return departmentId;
     }
@@ -24,6 +30,16 @@ public class EmployeeOperationRequest {
     String userAccount;
     String searchByTitle;
     String fullName;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    String password;
 
 
     //from EmployeeEntity

@@ -75,7 +75,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   his-employee-db:
-    image: mysql:5.7.21
+    image: isaacguo/mysql-5-utf8
     environment:
       MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
     volumes:
@@ -95,7 +95,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   his-treatment-db:
-    image: mysql:5.7.21
+    image: isaacguo/mysql-5-utf8
     environment:
       MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
     volumes:
@@ -115,7 +115,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   his-medicine-db:
-    image: mysql:5.7.21
+    image: isaacguo/mysql-5-utf8
     environment:
       MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
     volumes:
@@ -135,7 +135,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   his-procurement-db:
-    image: mysql:5.7.21
+    image: isaacguo/mysql-5-utf8
     environment:
       MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
     volumes:
@@ -157,7 +157,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   his-gateway-db:
-    image: mysql:5.7.21
+    image: isaacguo/mysql-5-utf8
     environment:
       MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
     volumes:

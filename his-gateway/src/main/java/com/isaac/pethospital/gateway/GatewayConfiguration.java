@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 //@EnableConfigurationProperties({JmsProperties.class})
@@ -27,5 +28,10 @@ public class GatewayConfiguration {
     public JmsSender getJmsSender(JmsTemplate jmsTemplate)
     {
         return new JmsSender(jmsTemplate);
+    }
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

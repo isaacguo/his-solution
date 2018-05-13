@@ -40,4 +40,6 @@ public interface EmployeeService {
     Long getDepartmentId(String userAccount);
 
     List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(Long departmentId);
+
+    EmployeeOperationRequest findUserNameByLoginAccount(String loginAccount);
 }

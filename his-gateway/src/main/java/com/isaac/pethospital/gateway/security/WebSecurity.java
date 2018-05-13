@@ -1,9 +1,7 @@
 package com.isaac.pethospital.gateway.security;
 
-import com.isaac.pethospital.common.security.JWTAuthenticationFilter;
 import com.isaac.pethospital.common.security.JWTAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

@@ -1,7 +1,7 @@
-package com.isaac.pethospital.common.security;
+package com.isaac.pethospital.gateway.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.isaac.pethospital.common.entities.ApplicationUser;
+import com.isaac.pethospital.gateway.dtos.ApplicationUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -58,7 +58,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = Jwts.builder().setSubject(((User) authResult.getPrincipal()).getUsername())
                 .setIssuer("his-authentication")
                 .claim("isAdmin", loginAccount.equals("admin") ? "true" : "false")
-                .claim("isFinance", loginAccount.equals("yuelingshan")?"true":"false")
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
