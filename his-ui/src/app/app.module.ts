@@ -98,6 +98,8 @@ import {EmployeeManagementGuard} from "./guards/employee/employee-management.gua
 import {ProcurementApprovalGuard} from "./guards/procurement/procurement-approval.guard";
 import { FactoryResetComponent } from './components/settings/factory-reset/factory-reset.component';
 import {FactoryResetService} from "./services/settings/factory-reset.service";
+import {FrontdeskGuard} from "./guards/treatment/frontdesk.guard";
+import {MyConsultingRoomGuard} from "./guards/treatment/my.consulting.room.guard";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -217,6 +219,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementStatusService,
     ProcurementRequestService,
     ProcurementApprovalService,
+
+    //treatment
+    FrontdeskGuard,
+    MyConsultingRoomGuard,
 
     //settings
     FactoryResetService,

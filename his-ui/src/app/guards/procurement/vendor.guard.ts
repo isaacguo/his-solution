@@ -8,7 +8,7 @@ import {AbstractGuard} from "../abstract.guard";
 export class VendorGuard extends AbstractGuard implements CanActivate {
 
   constructor(authorizationService: AuthorizationService) {
-    super("Procurement", "Vendor", "Admin", authorizationService);
+    super("Procurement", "供应商管理", "操作", authorizationService);
   }
 
   canActivate(): boolean {

@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
 import {AbstractService} from "../abstract.service";
 import {Observable} from "rxjs/Observable";
+import {AuthorizationService} from "../common/authorization.service";
 
 @Injectable()
 export class FactoryResetService extends AbstractService {
 
   serviceArray: [string, string][] = [];
 
-  constructor(private authHttp: AuthHttp) {
+  constructor(private authHttp: AuthHttp, public authorizationService:AuthorizationService) {
     super();
-    this.serviceArray.push(["/api/hisprocurement", "采购模块"]);
-    this.serviceArray.push(["/api/hisemployee", "人事模块"]);
+
   }
 
 

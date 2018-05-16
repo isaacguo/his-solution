@@ -6,10 +6,10 @@ import {AbstractGuard} from "../abstract.guard";
 import {AuthorizationService} from "../../services/common/authorization.service";
 
 @Injectable()
-export class EmployeeManagementGuard extends AbstractGuard implements CanActivate {
+export class MyConsultingRoomGuard extends AbstractGuard implements CanActivate {
 
   constructor(authorizationService: AuthorizationService) {
-    super("Employee","员工管理","操作",authorizationService);
+    super("Treatment","我的诊室","操作",authorizationService);
   }
 
   canActivate(): boolean {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FactoryResetService} from "../../../services/settings/factory-reset.service";
+import {AuthorizationService} from "../../../services/common/authorization.service";
 
 @Component({
   selector: 'app-factory-reset',
@@ -8,7 +9,7 @@ import {FactoryResetService} from "../../../services/settings/factory-reset.serv
 })
 export class FactoryResetComponent implements OnInit {
 
-  constructor(private factoryResetService:FactoryResetService) { }
+  constructor(private factoryResetService:FactoryResetService, public authorizationService:AuthorizationService) { }
   serviceArray: [string, string][] = [];
 
   ngOnInit() {
@@ -17,7 +18,7 @@ export class FactoryResetComponent implements OnInit {
 
   private loadData() {
 
-    this.serviceArray=this.factoryResetService.serviceArray;
+    this.serviceArray=this.authorizationService.authorizationArray;
   }
 
   onResetButtonClicked(serviceUrl:string) {

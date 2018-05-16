@@ -7,7 +7,7 @@ import {AuthorizationService} from "../../services/common/authorization.service"
 export class ProcurementApprovalGuard extends AbstractGuard implements CanActivate {
 
   constructor(authorizationService: AuthorizationService) {
-    super("Procurement","ProcurementApproval","Admin",authorizationService);
+    super("Procurement","采购审批","操作",authorizationService);
   }
 
   canActivate(): boolean {

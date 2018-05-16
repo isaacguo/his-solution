@@ -5,6 +5,8 @@ import {ProcurementApprovalService} from "../../services/procurement/procurement
 import {EmployeeService} from "../../services/employee/employee.service";
 import {ProcurementApprovalGuard} from "../../guards/procurement/procurement-approval.guard";
 import {EmployeeManagementGuard} from "../../guards/employee/employee-management.guard";
+import {MyConsultingRoomGuard} from "../../guards/treatment/my.consulting.room.guard";
+import {FrontdeskGuard} from "../../guards/treatment/frontdesk.guard";
 
 @Component({
   selector: 'app-index',
@@ -35,6 +37,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   constructor(private authenticationService: AuthenticationService,
               private procurementApprovalService: ProcurementApprovalService,
               public procurementApprovalGuard: ProcurementApprovalGuard,
+              public myConsultingRoomGuard: MyConsultingRoomGuard,
+              public frontdeskGuard: FrontdeskGuard,
               private employeeService: EmployeeService,
               private employeeManagementGuard: EmployeeManagementGuard) {
     this.authChangeSubscription = authenticationService.authChange.subscribe(
@@ -58,6 +62,15 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   canShowEmployeeManagement(): boolean {
     return this.employeeManagementGuard.canActivate();
+  }
+
+  canShowFrontdesk(): boolean {
+    return this.frontdeskGuard.canActivate();
+  }
+
+  canShowMyConsultingRoom(): boolean
+  {
+    return this.myConsultingRoomGuard.canActivate();
   }
 
   ngOnInit() {

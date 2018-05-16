@@ -57,13 +57,15 @@
               class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <!--<li *ngIf="authInfo.isAdmin">-->
-              <li>
+              <li *ngIf="canShowFrontdesk()">
                 <a routerLink="/frontdesk" routerLinkActive="active" class="text-center"> 前台服务</a>
               </li>
+              <!--
               <li>
                 <a routerLink="/register" routerLinkActive="active" class="text-center"> 看病挂号</a>
               </li>
-              <li>
+              -->
+              <li *ngIf="canShowMyConsultingRoom()" >
                 <a routerLink="/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室</a>
               </li>
             </ul>
@@ -107,14 +109,6 @@
               <li>
                 <a routerLink="/procurement-purchase" routerLinkActive="active" class="text-center">经销订货</a>
               </li>
-              <!--
-              <li>
-                <a href="javascript:void(0)" routerLinkActive="active" class="text-center">经销入库</a>
-              </li>
-              <li>
-                <a href="javascript:void(0)" routerLinkActive="active" class="text-center">经销退货</a>
-              </li>
-              -->
               <li>
                 <a routerLink="/procurement-settings" routerLinkActive="active" class="text-center">其他管理</a>
               </li>
