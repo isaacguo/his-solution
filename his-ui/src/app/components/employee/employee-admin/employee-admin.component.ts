@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from "../../../services/employee/employee.service";
-import {Employee} from "../../../dto/employee.model";
+import {Employee} from "../../../dto/employee/employee.model";
 import {Router} from "@angular/router";
 import {EmployeeListItem} from "../../../dto/employee/employee-list-item.model";
 import {OperationEnum} from "../../../enums/operation.enum";

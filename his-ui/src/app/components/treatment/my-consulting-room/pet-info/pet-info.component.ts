@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {MyConsultingRoomComponent} from "../my-consulting-room.component";
-import {PetOwner} from "../../../../dto/pet-owner.model";
-import {Pet} from "../../../../dto/pet.model";
+import {PetOwner} from "../../../../dto/treatment/pet-owner.model";
+import {Pet} from "../../../../dto/treatment/pet.model";
 import {PetInfo, PetService} from "../../../../services/treatment/pet.service";
 import {Subscription} from "rxjs/Subscription";
 

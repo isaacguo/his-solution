@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DepartmentService} from "../../../services/treatment/department.service";
-import {Department} from "../../../dto/department.model";
+import {Department} from "../../../dto/treatment/department.model";
 import {Router} from "@angular/router";
 
 @Component({
@@ -17,9 +17,11 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
     this.departmentService.getDepartments().subscribe(r => {
       this.departments = r;
     })
+    */
   }
 
 

@@ -1,4 +1,4 @@
-import {GenderEnum} from "../enums/gender.enum";
+import {GenderEnum} from "../../enums/gender.enum";
 import {Pet} from "./pet.model";
 
 export class PetOwner {

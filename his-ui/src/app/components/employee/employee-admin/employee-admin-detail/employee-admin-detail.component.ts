@@ -3,7 +3,7 @@ import {EmployeeListItem} from "../../../../dto/employee/employee-list-item.mode
 import {EmployeeService} from "../../../../services/employee/employee.service";
 import {Router} from "@angular/router";
 import {OperationEnum} from "../../../../enums/operation.enum";
-import {Employee} from "../../../../dto/employee.model";
+import {Employee} from "../../../../dto/employee/employee.model";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 @Component({

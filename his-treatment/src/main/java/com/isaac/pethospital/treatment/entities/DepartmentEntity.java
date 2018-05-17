@@ -8,16 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class DepartmentEntity {
 
-    /*
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @JsonManagedReference("DepartmentEntity-TreatmentCaseEntity")
-    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
-    */
-    /*
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @JsonManagedReference("DepartmentEntity-EmployeeEntity")
-    List<EmployeeEntity> doctorList = new LinkedList<>();
-    */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

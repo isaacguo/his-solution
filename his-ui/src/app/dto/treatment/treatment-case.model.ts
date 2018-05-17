@@ -2,7 +2,7 @@ import {Department} from "./department.model";
 import {Doctor} from "./doctor.model";
 import {PetOwner} from "./pet-owner.model";
 import {Pet} from "./pet.model";
-import {TreatmentCaseStatusEnum} from "../enums/treatment-case-status.enum";
+import {TreatmentCaseStatusEnum} from "../../enums/treatment-case-status.enum";
 
 export class TreatmentCase {
 

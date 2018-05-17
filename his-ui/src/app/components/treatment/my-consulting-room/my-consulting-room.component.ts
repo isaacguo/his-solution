@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {RegistrationService} from "../../../services/treatment/registration.service";
-import {TreatmentRegistrationModel} from "../../../dto/treatment.registration.model";
+import {TreatmentRegistrationModel} from "../../../dto/treatment/treatment.registration.model";
 import {PetOwnerService} from "../../../services/treatment/pet-owner.service";
 import {DepartmentService} from "../../../services/treatment/department.service";
 import {TreatmentEmployeeService} from "../../../services/treatment/treatment-employee.service";
 import {PetInfo, PetService} from "../../../services/treatment/pet.service";
-import {PetOperationRequest} from "../../../dto/pet.operation.request";
-import {Pet} from "../../../dto/pet.model";
-import {PetOwner} from "../../../dto/pet-owner.model";
+import {PetOperationRequest} from "../../../dto/treatment/pet.operation.request";
 
 @Component({
   selector: 'app-my-consulting-room',

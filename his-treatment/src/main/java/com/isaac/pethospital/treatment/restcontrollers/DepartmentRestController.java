@@ -21,12 +21,13 @@ public class DepartmentRestController {
     {
         return this.departmentService.getDepartments();
     }
-    /*
-    @GetMapping(value = "/getDoctorsInDepartmentByUuid/{uuid}/")
-    public List<EmployeeEntity> getDoctorsInDepartmentByUuid(@PathVariable("uuid") String uuid)
+    @GetMapping(value = "/getDepartmentByUuid/{uuid}/")
+    public DepartmentEntity getDepartmentByUuid(@PathVariable("uuid") String uuid)
     {
-        return this.departmentSerivce.getDoctorsInDepartmentByUuid(uuid);
+        return this.departmentService.getDepartmentByUuid(uuid);
     }
+
+    /*
 
     @PostMapping(value = "/book")
     public TreatmentCaseEntity createTreatmentCase(@RequestBody TreatmentCaseEntity treatmentCase)

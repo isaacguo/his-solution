@@ -12,18 +12,25 @@ import java.util.UUID;
 @Entity
 public class DepartmentEntity {
 
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @JsonManagedReference("parent-children")
+    List<DepartmentEntity> children = new LinkedList<>();
+    @ManyToOne
+    @JsonBackReference("parent-children")
+    DepartmentEntity parent;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
     @ManyToOne()
     @JsonBackReference("CompanyEntity-DepartmentEntity")
     private CompanyEntity company;
-
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-    @JsonManagedReference("parent-children")
-    List<DepartmentEntity> children = new LinkedList<>();
+    @OneToMany(mappedBy = "department", cascade = CascadeType.PERSIST)
+    @JsonManagedReference("DepartmentEntity-EmployeeEntity")
+    private List<EmployeeEntity> employees = new LinkedList<>();
+    @OneToOne(mappedBy = "departmentInCharge")
+    @JsonManagedReference("DepartmentEntity-EmployeeEntity-Manager")
+    private EmployeeEntity manager;
 
     public List<DepartmentEntity> getChildren() {
         return children;
@@ -51,18 +58,6 @@ public class DepartmentEntity {
     public void setParent(DepartmentEntity parent) {
         this.parent = parent;
     }
-
-    @ManyToOne
-    @JsonBackReference("parent-children")
-    DepartmentEntity parent;
-
-    @OneToMany(mappedBy = "department", cascade = CascadeType.PERSIST)
-    @JsonManagedReference("DepartmentEntity-EmployeeEntity")
-    private List<EmployeeEntity> employees = new LinkedList<>();
-
-    @OneToOne(mappedBy = "departmentInCharge")
-    @JsonManagedReference("DepartmentEntity-EmployeeEntity-Manager")
-    private EmployeeEntity manager;
 
     public EmployeeEntity getManager() {
         return manager;

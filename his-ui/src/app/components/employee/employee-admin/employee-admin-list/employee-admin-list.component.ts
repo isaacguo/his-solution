@@ -16,10 +16,6 @@ export class EmployeeAdminListComponent implements OnInit {
 
 
   nodeOperation: TreeviewOperationEnum;
-  departmentList: DepartmentListItem[] = [];
-
-  isExpanded: boolean = false;
-  isCreateNewNode: boolean = true;
 
   nodes: MyTreeNode[] = [];
 

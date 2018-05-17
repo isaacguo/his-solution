@@ -2,8 +2,9 @@ import {Injectable} from "@angular/core";
 import {Headers, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
-import {Department} from "../../dto/department.model";
+import {Department} from "../../dto/treatment/department.model";
 import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
+import {TreeNodeService} from "../common/tree-node.service";
 
 @Injectable()
 export class DepartmentService {
@@ -11,17 +12,19 @@ export class DepartmentService {
 
   rootUrl: string = "/api/histreatment/departments";
 
-  constructor(private authHttp: AuthHttp) {
+  constructor(private authHttp: AuthHttp, private treeNodeService:TreeNodeService ) {
   }
 
-  getDepartments(): Observable<Department[]> {
+
+  getDepartments(): Observable<MyTreeNode> {
 
     //let url = `/api/histreatment/departments`;
     return this.authHttp.get(`${this.rootUrl}`)
-      .map(this.extractData);
+      .map(res => {
+        let m: MyTreeNode = this.treeNodeService.treeConverter(res.json(), true);
+        return m;
+      });
   }
-
-
 
 
   /*

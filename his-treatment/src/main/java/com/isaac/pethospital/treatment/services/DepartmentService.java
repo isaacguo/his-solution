@@ -8,4 +8,5 @@ public interface DepartmentService {
     List<DepartmentEntity> getDepartments();
     DepartmentEntity createDepartment(DepartmentEntity departmentEntity);
 
+    DepartmentEntity getDepartmentByUuid(String uuid);
 }

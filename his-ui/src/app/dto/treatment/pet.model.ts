@@ -1,6 +1,6 @@
 import {PetOwner} from "./pet-owner.model";
-import {PetColorEnum} from "../enums/pet.color.enum";
-import {PetGenderEnum} from "../enums/pet.gender.enum";
+import {PetColorEnum} from "../../enums/pet.color.enum";
+import {PetGenderEnum} from "../../enums/pet.gender.enum";
 import {PetType} from "./pet.type.model";
 
 export class Pet {

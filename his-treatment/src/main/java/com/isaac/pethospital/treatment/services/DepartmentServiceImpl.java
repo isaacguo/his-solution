@@ -32,5 +32,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         return this.departmentRepository.save(departmentEntity);
     }
 
-
+    @Override
+    public DepartmentEntity getDepartmentByUuid(String uuid) {
+       DepartmentEntity de= this.departmentRepository.findByUuid(uuid);
+       if(de!=null)
+        return de;
+       else
+       {
+           DepartmentEntity newDe=new DepartmentEntity();
+           newDe.setUuid(uuid);
+           return newDe;
+       }
+    }
 }

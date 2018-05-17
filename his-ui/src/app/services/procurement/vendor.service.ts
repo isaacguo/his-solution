@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AbstractService} from "../abstract.service";
 import {AuthHttp} from "angular2-jwt";
-import {PetOwner} from "../../dto/pet-owner.model";
 import {Observable} from "rxjs/Rx";
-import {PetOperationRequest} from "../../dto/pet.operation.request";
 import {FormGroup} from "@angular/forms";
 import {Vendor} from "../../dto/procurement/vendor.model";
 

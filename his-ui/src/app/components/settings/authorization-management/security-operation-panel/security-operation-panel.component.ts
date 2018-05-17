@@ -7,7 +7,7 @@ import {AuthorizationService} from "../../../../services/common/authorization.se
 import {Authorization} from "../../../../dto/authorization/authorization.model";
 import {TopicOperation} from "../../../../dto/authorization/topic-operation.model";
 import {EmployeeService} from "../../../../services/employee/employee.service";
-import {Employee} from "../../../../dto/employee.model";
+import {Employee} from "../../../../dto/employee/employee.model";
 import {Observable} from "rxjs/Observable";
 import {AuthorizationOperationRequest} from "../../../../dto/authorization/authorization-operation-request.model";
 import {AuthorizationAssignmentOperationRequest} from "../../../../dto/authorization/authorization-assignment-operation-request.model";

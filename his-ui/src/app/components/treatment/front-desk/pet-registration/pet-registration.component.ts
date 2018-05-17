@@ -1,15 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {Pet} from "../../../../dto/pet.model";
-import {PetOwner} from "../../../../dto/pet-owner.model";
+import {Pet} from "../../../../dto/treatment/pet.model";
+import {PetOwner} from "../../../../dto/treatment/pet-owner.model";
 import {PetOwnerService} from "../../../../services/treatment/pet-owner.service";
 import {OperationEnum} from "../../../../enums/operation.enum";
 import {DepartmentService} from "../../../../services/treatment/department.service";
-import {Department} from "../../../../dto/department.model";
+import {Department} from "../../../../dto/treatment/department.model";
 import {TreatmentEmployeeService} from "../../../../services/treatment/treatment-employee.service";
-import {TreatmentEmployeeModel} from "../../../../dto/treatment.employee.model";
+import {TreatmentEmployeeModel} from "../../../../dto/treatment/treatment.employee.model";
 import {RegistrationService} from "../../../../services/treatment/registration.service";
-import {TreatmentRegistrationModel} from "../../../../dto/treatment.registration.model";
+import {TreatmentRegistrationModel} from "../../../../dto/treatment/treatment.registration.model";
 
 @Component({
   selector: 'app-pet-registration',
@@ -44,9 +44,11 @@ export class PetRegistrationComponent implements OnInit {
   ngOnInit() {
     this.selectedDepartment.name = "请选择科室";
     this.selectedDoctor.name = "请先选择科室";
+    /*
     this.departmentService.getDepartments().subscribe(r => {
       this.departments = r;
     })
+    */
   }
 
 

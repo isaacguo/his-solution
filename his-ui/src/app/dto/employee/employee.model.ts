@@ -1,7 +1,7 @@
-import {Department} from "./department.model";
 import {ContactAddress} from "./employee.contact.model";
-import {SexualEnum} from "../enums/sexual.enum";
-import {EmploymentStatusEnum} from "../enums/employment.status.enum";
+import {SexualEnum} from "../../enums/sexual.enum";
+import {EmploymentStatusEnum} from "../../enums/employment.status.enum";
+import {EmployeeDepartment} from "./employee-department.model";
 
 export class Employee {
   constructor(public id?: number,
@@ -23,7 +23,7 @@ export class Employee {
               public employmentStatus?: EmploymentStatusEnum,
               public directReportTo?: Employee,
               public teamMembers?: Employee[],
-              public department?: Department,
+              public department?: EmployeeDepartment,
               public emergencyContact?: string,
               public workPhoneNumber?: string,
               public contactAddress?: ContactAddress,
