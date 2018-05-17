@@ -24,4 +24,8 @@ export class TreatmentRoomListComponent implements OnInit {
     });
   }
 
+
+  onNodeActivated($event) {
+    //this.getSelectedNodeName();
+  }
 }
