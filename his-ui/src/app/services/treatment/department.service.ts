@@ -3,6 +3,7 @@ import {Headers, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
 import {Department} from "../../dto/department.model";
+import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
 
 @Injectable()
 export class DepartmentService {
@@ -19,6 +20,9 @@ export class DepartmentService {
     return this.authHttp.get(`${this.rootUrl}`)
       .map(this.extractData);
   }
+
+
+
 
   /*
     getDoctorsInDepartmentByUuid(uuid: string): Observable<Doctor[]> {

@@ -53,6 +53,8 @@ import {EmployeeCreateUpdateComponent} from "./app/components/employee/employee-
 import {EmployeeManagementGuard} from "./app/guards/employee/employee-management.guard";
 import {ProcurementApprovalGuard} from "./app/guards/procurement/procurement-approval.guard";
 import {FactoryResetComponent} from "./app/components/settings/factory-reset/factory-reset.component";
+import {TreatmentSettingsComponent} from "./app/components/treatment/treatment-settings/treatment-settings.component";
+import {TreatmentSettingsRoomComponent} from "./app/components/treatment/treatment-settings/treatment-settings-room/treatment-settings-room.component";
 
 
 const appRoutes: Routes = [
@@ -103,6 +105,18 @@ const appRoutes: Routes = [
             path: '**',
             redirectTo: 'pet-info'
           }
+        ]
+      },
+      {
+        path: 'treatment-settings',
+        component: TreatmentSettingsComponent,
+        children: [
+          {
+            path:'treatment-room',
+            component: TreatmentSettingsRoomComponent
+          }
+
+
         ]
       },
       {

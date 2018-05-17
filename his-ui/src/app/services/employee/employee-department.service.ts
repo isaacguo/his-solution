@@ -6,12 +6,13 @@ import {AuthHttp} from "angular2-jwt";
 import {of} from "rxjs/observable/of";
 import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
 import 'rxjs/add/operator/map';
+import {TreeNodeService} from "../common/tree-node.service";
 
 
 @Injectable()
 export class EmployeeDepartmentService extends AbstractService {
 
-  constructor(private authHttp: AuthHttp) {
+  constructor(private authHttp: AuthHttp,public treeNodeService:TreeNodeService) {
     super();
   }
 
@@ -32,27 +33,12 @@ export class EmployeeDepartmentService extends AbstractService {
   getRootDepartment(): Observable<MyTreeNode> {
     return this.authHttp.get(this.getRootDepartmentUrl)
       .map(res => {
-        let m: MyTreeNode = this.treeConverter(res.json(), true);
+        let m: MyTreeNode = this.treeNodeService.treeConverter(res.json(), true);
         return m;
       });
   }
 
-  treeConverter(json: any, isLevelOne: boolean): MyTreeNode {
 
-    let node = new MyTreeNode();
-    node.name = json.name;
-    node.categoryId = json.id;
-    node.isLevelOne = isLevelOne;
-
-    if (json.children != null && json.children.length > 0) {
-      node.children = [];
-      for (let child of json.children) {
-        node.children.push(this.treeConverter(child, false));
-      }
-    }
-    return node;
-
-  }
 
   deleteDepartment(id: number | undefined): Observable<boolean> {
     return this.authHttp.delete(`${this.deleteDepartmentUrl}/${id}`).map(r => {

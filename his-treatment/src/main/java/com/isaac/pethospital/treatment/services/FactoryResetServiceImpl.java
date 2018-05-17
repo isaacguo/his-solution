@@ -90,7 +90,6 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         petOwnerRepository.save(petOwnerEntity);
 
 
-
         //doctor1.setJobTitle("主任医师");
         //doctor1.setRating(4);
 

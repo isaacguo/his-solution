@@ -22,8 +22,6 @@ node {
         }
 
 
-
-
         stage('Build and Push Docker Image') {
             notifyBuild("In Build and Push Docker Image")
             echo 'Build Docker Image'

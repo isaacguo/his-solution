@@ -100,6 +100,11 @@ import { FactoryResetComponent } from './components/settings/factory-reset/facto
 import {FactoryResetService} from "./services/settings/factory-reset.service";
 import {FrontdeskGuard} from "./guards/treatment/frontdesk.guard";
 import {MyConsultingRoomGuard} from "./guards/treatment/my.consulting.room.guard";
+import { TreatmentSettingsComponent } from './components/treatment/treatment-settings/treatment-settings.component';
+import { TreatmentSettingsRoomComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-settings-room.component';
+import { TreatmentRoomListComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-list/treatment-room-list.component';
+import { TreatmentRoomDetailComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-detail.component';
+import {TreeNodeService} from "./services/common/tree-node.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -179,6 +184,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EmployeeAdminListComponent,
     EmployeeAdminDetailComponent,
     FactoryResetComponent,
+    TreatmentSettingsComponent,
+    TreatmentSettingsRoomComponent,
+    TreatmentRoomListComponent,
+    TreatmentRoomDetailComponent,
 
   ],
   imports: [
@@ -228,6 +237,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FactoryResetService,
     AuthenticationService,
     AuthorizationService,
+
+    //common
+    TreeNodeService
 
   ],
   bootstrap: [AppComponent]
