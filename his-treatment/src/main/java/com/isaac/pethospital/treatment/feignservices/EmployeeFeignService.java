@@ -1,6 +1,7 @@
 package com.isaac.pethospital.treatment.feignservices;
 
 import com.isaac.pethospital.treatment.dtos.DepartmentIdAndName;
+import com.isaac.pethospital.treatment.dtos.EmployeeListItem;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,9 @@ public interface EmployeeFeignService {
 
     @RequestMapping(method = RequestMethod.GET, value = "/departments/brief")
     List<DepartmentIdAndName> findIndexAndNameOnly();
+
+    @GetMapping(value = "/employees/{departmentId}/employee-list")
+    List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(@PathVariable("departmentId") Long departmentId);
 
     /*
     @GetMapping("/employees/get-department-id/{userAccount}")

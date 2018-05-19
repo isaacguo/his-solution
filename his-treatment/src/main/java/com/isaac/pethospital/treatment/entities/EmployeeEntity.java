@@ -14,12 +14,21 @@ public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private UUID uuid;
+    private Long empId;
     private String selfIntroduction;
+    private boolean canBeRegistered;
     @ManyToOne
     private EmployeeTypeEntity employeeType;
     private String name;
     private String loginAccount;
+
+    public boolean isCanBeRegistered() {
+        return canBeRegistered;
+    }
+
+    public void setCanBeRegistered(boolean canBeRegistered) {
+        this.canBeRegistered = canBeRegistered;
+    }
 
     public String getLoginAccount() {
         return loginAccount;
@@ -53,12 +62,12 @@ public class EmployeeEntity {
         this.id = id;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public Long getEmpId() {
+        return empId;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setEmpId(Long empId) {
+        this.empId = empId;
     }
 
     public String getName() {

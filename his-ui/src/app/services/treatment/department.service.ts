@@ -5,14 +5,18 @@ import {AuthHttp} from "angular2-jwt";
 import {Department} from "../../dto/treatment/department.model";
 import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
 import {TreeNodeService} from "../common/tree-node.service";
+import {DepartmentOperationRequest} from "../../dto/treatment/department.operation.request.model";
+import {AbstractService} from "../abstract.service";
+import {TreatmentEmployeeModel} from "../../dto/treatment/treatment.employee.model";
 
 @Injectable()
-export class DepartmentService {
+export class DepartmentService extends AbstractService {
 
 
   rootUrl: string = "/api/histreatment/departments";
 
-  constructor(private authHttp: AuthHttp, private treeNodeService:TreeNodeService ) {
+  constructor(private authHttp: AuthHttp, private treeNodeService: TreeNodeService) {
+    super();
   }
 
 
@@ -45,38 +49,28 @@ export class DepartmentService {
     }
     */
 
-  getDepartmentByUuid(uuid: string): Observable<Department> {
-    let url = `${this.rootUrl}/getDepartmentByUuid/${uuid}/`;
+  getDepartmentByDepId(depId: number): Observable<Department> {
+    let url = `${this.rootUrl}/getDepartmentByDepId/${depId}/`;
     return this.authHttp.get(url)
       .map(this.extractData);
 
   }
 
+  setDepartmentOpenToFrontDeskValue(departmentId: number, state: boolean): Observable<boolean> {
 
-  private getOptions() {
-    let headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON
-    let options = new RequestOptions({headers: headers});
-    return options;
-  }
+    const request: DepartmentOperationRequest = new DepartmentOperationRequest();
+    request.openToFrontDesk = state;
+    request.depId = departmentId;
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body || {};
-  }
-
-  private handleError(error: Response | any) {
-    // In a real world app, we might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+    let url = `${this.rootUrl}/setDepartmentOpenToFrontDeskValue`;
+    return this.authHttp.post(url, request).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
 
+  getEmployeeListByDepartmentId(departmentId: string): Observable<TreatmentEmployeeModel[]> {
+    let url = `${this.rootUrl}/getEmployeesByDepartmentId/${departmentId}`;
+    return this.authHttp.get(url).map(this.extractData);
+  }
 }

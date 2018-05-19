@@ -14,14 +14,27 @@ export class TreatmentEmployeeService extends AbstractService {
   }
 
 
-  findByEmployeeType(employeeTypeId:number): Observable<TreatmentEmployeeModel> {
+  findByEmpId(empId: number): Observable<TreatmentEmployeeModel> {
+    let url = `${this.rootUrl}/findByEmpId/${empId}`;
+    return this.authHttp.get(url).map(this.extractData);
+  }
+
+  setCanBeRegisteredValue(treatmentEmployee: TreatmentEmployeeModel) {
+
+    let url = `${this.rootUrl}/setCanBeRegisteredValue`;
+    return this.authHttp.post(url, treatmentEmployee).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+
+  findByEmployeeType(employeeTypeId: number): Observable<TreatmentEmployeeModel> {
     let url = `${this.rootUrl}/find-by-employee-type`;
     return this.authHttp.post(url, JSON.stringify({employeeTypeId: employeeTypeId})).map(this.extractData);
   }
 
-  findByDepartment(departmentId:number): Observable<TreatmentEmployeeModel[]> {
+  findByDepartment(departmentId: number): Observable<TreatmentEmployeeModel[]> {
     let url = `${this.rootUrl}/find-by-department`;
-   return this.authHttp.post(url,JSON.stringify({departmentId: departmentId})).map(this.extractData);
+    return this.authHttp.post(url, JSON.stringify({departmentId: departmentId})).map(this.extractData);
   }
 
 

@@ -1,12 +1,13 @@
 <div *ngIf="departmentId=== undefined ">
   请从列表中选择一个部门进行操作
 </div>
-<div>
-</div>
+
+
 <div *ngIf="departmentId!== undefined">
+
   <div class="panel panel-default">
     <div class="panel-heading">
-      设置
+      <label>设置 <b>{{this.departmentName}}</b></label>
     </div>
     <div class="panel-body">
       <ul class="list-group">
@@ -17,7 +18,8 @@
             </div>
             <div class="pull-right">
               <ui-switch size="small"
-              [ngModel]="this.department?.exposeToPublic"
+                         [ngModel]="this.department?.openToFrontDesk"
+                         (change)="onOpenToFrontDesk($event)"
               ></ui-switch>
               <!-- [ngModel]="this.vendorCategory?.departments[i].permitted"
                (change)="onChange(dep,$event)" -->
@@ -27,8 +29,9 @@
         </li>
       </ul>
     </div>
-
   </div>
 
-
+  <div *ngIf="this.department?.openToFrontDesk">
+    <app-treatment-room-employee-list [departmentId]="departmentId"></app-treatment-room-employee-list>
+  </div>
 </div>

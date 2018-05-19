@@ -52,7 +52,7 @@
           <li>
             <a routerLink="/dashboard" routerLinkActive="active" class="text-center"> 快捷方式</a>
           </li>
-          <li>
+          <li *ngIf="canShowFrontdesk() || canShowMyConsultingRoom() || canShowTreatmentSettings()">
             <a href="javascript:void(0)" routerLinkActive="active" class="text-center"> 医院就诊<span
               class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
@@ -68,8 +68,8 @@
               <li *ngIf="canShowMyConsultingRoom()" >
                 <a routerLink="/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室</a>
               </li>
-              <li>
-                <a routerLink="/treatment-settings" routerLinkActive="active" class="text-center"> 诊疗管理</a>
+              <li *ngIf="canShowTreatmentSettings()">
+                <a routerLink="/treatment-settings" routerLinkActive="active" class="text-center"> 就诊设置</a>
               </li>
             </ul>
           </li>

@@ -1,0 +1,18 @@
+import {CanActivate, Router} from "@angular/router";
+import {Injectable, OnDestroy} from "@angular/core";
+import {Observable} from "rxjs/Observable";
+import {Subscription} from "rxjs/Subscription";
+import {AbstractGuard} from "../abstract.guard";
+import {AuthorizationService} from "../../services/common/authorization.service";
+
+@Injectable()
+export class TreatmentSettingsGuard extends AbstractGuard implements CanActivate {
+
+  constructor(authorizationService: AuthorizationService) {
+    super("Treatment","就诊设置","操作",authorizationService);
+  }
+
+  canActivate(): boolean {
+    return this.isAuthorized();
+  }
+}

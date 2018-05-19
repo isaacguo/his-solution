@@ -55,6 +55,9 @@ import {ProcurementApprovalGuard} from "./app/guards/procurement/procurement-app
 import {FactoryResetComponent} from "./app/components/settings/factory-reset/factory-reset.component";
 import {TreatmentSettingsComponent} from "./app/components/treatment/treatment-settings/treatment-settings.component";
 import {TreatmentSettingsRoomComponent} from "./app/components/treatment/treatment-settings/treatment-settings-room/treatment-settings-room.component";
+import {TreatmentSettingsGuard} from "./app/guards/treatment/treatment-settings.guard";
+import {MyConsultingRoomGuard} from "./app/guards/treatment/my-consulting-room.guard";
+import {FrontdeskGuard} from "./app/guards/treatment/frontdesk.guard";
 
 
 const appRoutes: Routes = [
@@ -69,6 +72,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'frontdesk',
+        canActivate:[FrontdeskGuard],
         component: FrontDeskComponent,
         children: [
           {
@@ -86,11 +90,13 @@ const appRoutes: Routes = [
         component: TreatmentComponent
       },
       {
+        //看病挂号,暂时不用
         path: 'register',
         component: RegisterComponent
       },
       {
         path: 'my-consulting-room',
+        canActivate:[MyConsultingRoomGuard],
         component: MyConsultingRoomComponent,
         children: [
           {
@@ -109,7 +115,9 @@ const appRoutes: Routes = [
       },
       {
         path: 'treatment-settings',
+        canActivate: [TreatmentSettingsGuard],
         component: TreatmentSettingsComponent,
+
         children: [
           {
             path:'treatment-room',

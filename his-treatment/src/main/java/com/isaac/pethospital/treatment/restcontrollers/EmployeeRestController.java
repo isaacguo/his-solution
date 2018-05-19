@@ -3,10 +3,7 @@ package com.isaac.pethospital.treatment.restcontrollers;
 import com.isaac.pethospital.treatment.dtos.EmployeeOperationRequest;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.services.EmployeeService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,18 @@ public class EmployeeRestController {
     @PostMapping("find-by-department")
     public List<EmployeeEntity> findByDepartment(@RequestBody EmployeeOperationRequest employeeOperationRequest) {
         return this.employeeService.findByDepartment(employeeOperationRequest);
+    }
+
+    @GetMapping("findByEmpId/{empId}")
+    public EmployeeEntity findByEmpId(@PathVariable("empId") Long empId)
+    {
+        return this.employeeService.findByEmpId(empId);
+    }
+
+    @PostMapping("setCanBeRegisteredValue")
+    public boolean setCanBeRegisteredValue(@RequestBody EmployeeOperationRequest request)
+    {
+        return this.employeeService.setCanBeRegisteredValue(request);
     }
 
 

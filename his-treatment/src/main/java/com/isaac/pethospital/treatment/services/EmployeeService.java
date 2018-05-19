@@ -1,6 +1,7 @@
 package com.isaac.pethospital.treatment.services;
 
 import com.isaac.pethospital.treatment.dtos.EmployeeOperationRequest;
+import com.isaac.pethospital.treatment.entities.DepartmentEntity;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 
 import java.util.List;
@@ -20,4 +21,8 @@ public interface EmployeeService {
     List<EmployeeEntity> findByEmployeeType(EmployeeOperationRequest employeeOperationRequest);
 
     EmployeeEntity findByLoginAccount(String loginAccount);
+
+    boolean setCanBeRegisteredValue(EmployeeOperationRequest request);
+
+    EmployeeEntity findByEmpId(Long empId);
 }

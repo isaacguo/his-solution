@@ -12,7 +12,7 @@ import {TreeComponent} from "angular-tree-component";
 })
 export class TreatmentRoomListComponent implements OnInit {
 
-  constructor(public departmentService:DepartmentService, public treeNodeService:TreeNodeService,private employeeDepartmentService: EmployeeDepartmentService ) { }
+  constructor(public treeNodeService:TreeNodeService,private employeeDepartmentService: EmployeeDepartmentService ) { }
 
   nodes: MyTreeNode[] = [];
   selectedRoomId: number;

@@ -2,6 +2,9 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {DepartmentListItem} from "../../../../../dto/employee/department-list-item.model";
 import {DepartmentService} from "../../../../../services/treatment/department.service";
 import {Department} from "../../../../../dto/treatment/department.model";
+import {EmployeeService} from "../../../../../services/employee/employee.service";
+import {EmployeeListItem} from "../../../../../dto/employee/employee-list-item.model";
+import {Employee} from "../../../../../dto/employee/employee.model";
 
 @Component({
   selector: 'app-treatment-room-detail',
@@ -11,7 +14,9 @@ import {Department} from "../../../../../dto/treatment/department.model";
 export class TreatmentRoomDetailComponent implements OnChanges {
 
   @Input()
-  departmentId: string;
+  departmentId: number;
+  @Input()
+  departmentName: string;
 
   department: Department;
 
@@ -25,19 +30,19 @@ export class TreatmentRoomDetailComponent implements OnChanges {
   }
 
   loadData() {
-    this.departmentService.getDepartmentByUuid(this.departmentId).subscribe(r => {
-      this.department=r;
+    if (this.departmentId != undefined)
+      this.departmentService.getDepartmentByDepId(this.departmentId).subscribe(r => {
+        this.department = r;
+      });
+
+  }
+
+  onOpenToFrontDesk(event: boolean) {
+
+    this.departmentService.setDepartmentOpenToFrontDeskValue(this.departmentId, event).subscribe(r => {
+      this.loadData();
     });
   }
 
-
-  onChange(dep: DepartmentListItem, event) {
-    /*
-    this.isModified = true;
-    let department = this.vendorCategory.departments.find(r => r.departmentId === dep.id);
-    if (department != null)
-      department.permitted = event;
-      */
-  }
 
 }

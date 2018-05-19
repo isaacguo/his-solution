@@ -99,12 +99,15 @@ import {ProcurementApprovalGuard} from "./guards/procurement/procurement-approva
 import { FactoryResetComponent } from './components/settings/factory-reset/factory-reset.component';
 import {FactoryResetService} from "./services/settings/factory-reset.service";
 import {FrontdeskGuard} from "./guards/treatment/frontdesk.guard";
-import {MyConsultingRoomGuard} from "./guards/treatment/my.consulting.room.guard";
+import {MyConsultingRoomGuard} from "./guards/treatment/my-consulting-room.guard";
 import { TreatmentSettingsComponent } from './components/treatment/treatment-settings/treatment-settings.component';
 import { TreatmentSettingsRoomComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-settings-room.component';
 import { TreatmentRoomListComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-list/treatment-room-list.component';
 import { TreatmentRoomDetailComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-detail.component';
 import {TreeNodeService} from "./services/common/tree-node.service";
+import {TreatmentSettingsGuard} from "./guards/treatment/treatment-settings.guard";
+import { TreatmentRoomEmployeeListComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-list.component';
+import { TreatmentRoomEmployeeDetailComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-detail/treatment-room-employee-detail.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -188,6 +191,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TreatmentSettingsRoomComponent,
     TreatmentRoomListComponent,
     TreatmentRoomDetailComponent,
+    TreatmentRoomEmployeeListComponent,
+    TreatmentRoomEmployeeDetailComponent,
 
   ],
   imports: [
@@ -232,6 +237,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     //treatment
     FrontdeskGuard,
     MyConsultingRoomGuard,
+    TreatmentSettingsGuard,
 
     //settings
     FactoryResetService,
