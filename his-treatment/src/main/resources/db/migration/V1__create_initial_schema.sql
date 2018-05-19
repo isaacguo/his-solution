@@ -1,10 +1,9 @@
-create table application_user (id bigint not null auto_increment, password varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_assignment_entity (id bigint not null auto_increment, authorization_id bigint, topic_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_assignment_entity_allowed_operations (authorization_assignment_entity_id bigint not null, allowed_operations_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_entity (id bigint not null auto_increment, uid bigint, user_account varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_topic_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table department_entity (id bigint not null auto_increment, description varchar(255), expose_to_public bit not null, name varchar(255), uuid varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table employee_entity (id bigint not null auto_increment, login_account varchar(255), name varchar(255), self_introduction varchar(255), uuid binary(255), department_id bigint, employee_type_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table department_entity (id bigint not null auto_increment, dep_id bigint, description varchar(255), expose_to_public bit not null, name varchar(255), open_to_front_desk bit not null, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table employee_entity (id bigint not null auto_increment, can_be_registered bit not null, emp_id bigint, login_account varchar(255), name varchar(255), self_introduction varchar(255), department_id bigint, employee_type_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table employee_type_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table expense_entity (id bigint not null auto_increment, pet_owner_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table pet_entity (id bigint not null auto_increment, age integer not null, color integer, date_of_birth datetime, gender integer, name varchar(255), sterilized bit not null, uuid binary(255), pet_owner_id bigint, pet_type_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
