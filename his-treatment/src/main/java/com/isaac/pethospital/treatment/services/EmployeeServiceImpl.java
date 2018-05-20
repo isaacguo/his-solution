@@ -80,8 +80,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public boolean setCanBeRegisteredValue(EmployeeOperationRequest request) {
         DepartmentEntity de=checkDepartment(request);
-        if(de==null)
-            throw new RuntimeException("Cannot find Department Info");
         EmployeeEntity ee = employeeRepository.findByEmpId(request.getEmpId());
         if (ee == null) {
             ee = new EmployeeEntity();
