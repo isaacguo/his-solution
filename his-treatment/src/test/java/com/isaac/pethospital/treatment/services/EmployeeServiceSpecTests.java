@@ -69,8 +69,9 @@ public class EmployeeServiceSpecTests {
         EmployeeOperationRequest employeeOperationRequest = new EmployeeOperationRequest();
         employeeOperationRequest.setDepartmentId(1L);
         employeeOperationRequest.setName("任我行");
+        employeeOperationRequest.setDepartmentId(1L);
 
-        doReturn(new DepartmentEntity()).when(departmentRepository).findOne(employeeOperationRequest.getDepartmentId());
+        doReturn(new DepartmentEntity()).when(departmentRepository).findByDepId(employeeOperationRequest.getDepartmentId());
         //when
         this.employeeService.createEmployee(employeeOperationRequest);
         //then
@@ -168,7 +169,7 @@ public class EmployeeServiceSpecTests {
         EmployeeOperationRequest employeeOperationRequest = new EmployeeOperationRequest();
         employeeOperationRequest.setDepartmentId(1L);
         employeeOperationRequest.setName("任我行");
-        doReturn(departmentEntity).when(departmentRepository).findOne(1L);
+        doReturn(departmentEntity).when(departmentRepository).findByDepId(1L);
         doReturn(list).when(employeeRepository).findByDepartment(departmentEntity);
         //when
         this.employeeService.findByDepartment(employeeOperationRequest);
