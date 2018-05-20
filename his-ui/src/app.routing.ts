@@ -62,6 +62,7 @@ import {MedicalTestQueryComponent} from "./app/components/medical-test/medical-t
 import {MedicalTestSettingsComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings.component";
 import {MedicalTestSettingsReportComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component";
 import {MedicalTestSettingsReportCreateUpdateComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component";
+import {MedicalTestReportCreateUpdateComponent} from "./app/components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component";
 
 
 const appRoutes: Routes = [
@@ -76,7 +77,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'frontdesk',
-        canActivate:[FrontdeskGuard],
+        canActivate: [FrontdeskGuard],
         component: FrontDeskComponent,
         children: [
           {
@@ -100,7 +101,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'my-consulting-room',
-        canActivate:[MyConsultingRoomGuard],
+        canActivate: [MyConsultingRoomGuard],
         component: MyConsultingRoomComponent,
         children: [
           {
@@ -124,11 +125,11 @@ const appRoutes: Routes = [
 
         children: [
           {
-            path:'treatment-room',
+            path: 'treatment-room',
             component: TreatmentSettingsRoomComponent
           },
           {
-            path:'medical-test-settings',
+            path: 'medical-test-settings',
             component: MedicalTestSettingsComponent
           }
         ]
@@ -157,13 +158,17 @@ const appRoutes: Routes = [
         component: MedicalTestQueryComponent
       },
       {
+        path: 'medical-test-report/:operation/:reportType',
+        component: MedicalTestReportCreateUpdateComponent
+      },
+      {
 
         path: 'medical-test-settings',
         component: MedicalTestSettingsComponent,
-        children:[
+        children: [
           {
-            path:'reports',
-            component:MedicalTestSettingsReportComponent
+            path: 'reports',
+            component: MedicalTestSettingsReportComponent
           },
           {
             path: 'reports/:operation',
@@ -256,12 +261,12 @@ const appRoutes: Routes = [
         ]
       },
       {
-        path:'procurement-purchase',
-        component:ProcurementPurchaseComponent,
-        children:[
+        path: 'procurement-purchase',
+        component: ProcurementPurchaseComponent,
+        children: [
           {
-            path:'list',
-            component:ProcurementPurchaseListComponent
+            path: 'list',
+            component: ProcurementPurchaseListComponent
           },
           {
             path: ':operation',
@@ -278,8 +283,8 @@ const appRoutes: Routes = [
           },
           */
           {
-            path:'**',
-            redirectTo:'list'
+            path: '**',
+            redirectTo: 'list'
           }
         ]
       },
@@ -296,8 +301,8 @@ const appRoutes: Routes = [
             component: VendorCreateUpdateComponent
           },
           {
-            path:'vendors',
-            component:VendorProductCategoryComponent,
+            path: 'vendors',
+            component: VendorProductCategoryComponent,
             canActivate: [VendorGuard],
 
           },
@@ -339,9 +344,9 @@ const appRoutes: Routes = [
         component: AuthorizationManagementComponent
       },
       {
-        path:'settings-factory-reset',
-        canActivate:[AdminGuard],
-        component:FactoryResetComponent
+        path: 'settings-factory-reset',
+        canActivate: [AdminGuard],
+        component: FactoryResetComponent
       }
     ]
   },

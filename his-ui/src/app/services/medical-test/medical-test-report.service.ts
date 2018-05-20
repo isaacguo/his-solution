@@ -27,7 +27,7 @@ export class MedicalTestReportService extends AbstractService {
     return this.authHttp.get(this.rootUrl).map(this.extractData);
   }
 
-  findById(updateId: number) {
+  findById(updateId: number):Observable<any> {
    return this.authHttp.get(`${this.rootUrl}/${updateId}`).map(this.extractData);
   }
 

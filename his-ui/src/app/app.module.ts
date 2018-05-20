@@ -115,6 +115,7 @@ import {MedicalTestSettingsComponent} from "./components/medical-test/medical-te
 import { MedicalTestSettingsReportComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component';
 import { MedicalTestSettingsReportCreateUpdateComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component';
 import {MedicalTestReportService} from "./services/medical-test/medical-test-report.service";
+import { MedicalTestReportCreateUpdateComponent } from './components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -206,6 +207,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestQueryComponent,
     MedicalTestSettingsReportComponent,
     MedicalTestSettingsReportCreateUpdateComponent,
+    MedicalTestReportCreateUpdateComponent,
 
   ],
   imports: [

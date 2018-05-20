@@ -1,3 +1,34 @@
+<modal #chooseReportTypeModal (onClose)="onChooseReportTypeModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请选择化验报告类型</h4>
+    </modal-header>
+    <modal-body>
+      <table class="table table-bordered table-responsive">
+        <tbody>
+        <tr [class.info]="isRowSelected(report)" *ngFor="let report of reports" (click)="onReportTypeSelected(report)">
+          <td>
+            {{report.reportName}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </modal-body>
+    <modal-footer>
+      <button [disabled]="selectedReportType===null" type="button" class="btn btn-primary" (click)="chooseReportTypeModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="confirmDeleteModal"
+              (click)="chooseReportTypeModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
 <div class="row">
   <h1 class="page-header">化验查询</h1>
 </div>
+
+<div role="group">
+  <button (click)="onCreateNewReport()" class="btn btn-default">新建化验报告</button>
+</div>
+
+
