@@ -19,5 +19,5 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     EmployeeEntity findByEmpId(Long empId);
 
-
+    List<EmployeeEntity> findByDepartmentAndCanBeRegisteredIsTrue(DepartmentEntity departmentEntity);
 }

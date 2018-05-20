@@ -44,11 +44,9 @@ export class PetRegistrationComponent implements OnInit {
   ngOnInit() {
     this.selectedDepartment.name = "请选择科室";
     this.selectedDoctor.name = "请先选择科室";
-    /*
     this.departmentService.getDepartments().subscribe(r => {
       this.departments = r;
     })
-    */
   }
 
 
@@ -138,7 +136,7 @@ export class PetRegistrationComponent implements OnInit {
 
   setSelectedDepartment(department: Department) {
     this.selectedDepartment = department;
-    this.treatmentEmployeeService.findByDepartment(department.id).subscribe(r => {
+    this.treatmentEmployeeService.findByDepartmentAndCanBeRegisteredIsTrue(department.depId).subscribe(r => {
       this.availableDoctors = r;
       this.selectedDoctor.name = "请选择医生";
     })

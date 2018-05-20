@@ -16,6 +16,16 @@ public class EmployeeEntity {
     private Long id;
     private Long empId;
     private String selfIntroduction;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    private String uuid;
     private boolean canBeRegistered;
     @ManyToOne
     private EmployeeTypeEntity employeeType;

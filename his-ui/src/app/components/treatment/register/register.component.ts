@@ -26,6 +26,6 @@ export class RegisterComponent implements OnInit {
 
 
   onDepartmentClicked(department: Department) {
-    this.router.navigate(['doctor-registration','doctor-list-view',department.uuid]);
+    this.router.navigate(['doctor-registration','doctor-list-view',department.depId]);
   }
 }

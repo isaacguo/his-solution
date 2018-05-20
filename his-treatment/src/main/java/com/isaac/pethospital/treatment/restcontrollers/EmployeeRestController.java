@@ -27,6 +27,11 @@ public class EmployeeRestController {
         return this.employeeService.findByDepartment(employeeOperationRequest);
     }
 
+    @PostMapping("find-by-department-and-can-be-registered")
+    public List<EmployeeEntity> findByOpenToFrontDeskDepartment(@RequestBody EmployeeOperationRequest employeeOperationRequest) {
+        return this.employeeService.findByDepartmentAndCanBeRegisteredIsTrue(employeeOperationRequest);
+    }
+
     @GetMapping("findByEmpId/{empId}")
     public EmployeeEntity findByEmpId(@PathVariable("empId") Long empId)
     {
@@ -38,8 +43,5 @@ public class EmployeeRestController {
     {
         return this.employeeService.setCanBeRegisteredValue(request);
     }
-
-
-
 
 }

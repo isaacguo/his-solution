@@ -25,8 +25,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<DepartmentEntity> getDepartments() {
-        return this.departmentRepository.findAll();
+    public List<DepartmentEntity> getOpenToFrontDeskDepartments() {
+        return this.departmentRepository.findByOpenToFrontDeskIsTrue();
     }
 
 
@@ -56,6 +56,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             de = new DepartmentEntity();
         de.setOpenToFrontDesk(department.isOpenToFrontDesk());
         de.setDepId(department.getDepId());
+        de.setName(department.getName());
         this.departmentRepository.save(de);
         return true;
     }

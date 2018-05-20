@@ -19,15 +19,11 @@ export class DepartmentService extends AbstractService {
     super();
   }
 
-
-  getDepartments(): Observable<MyTreeNode> {
+  getDepartments(): Observable<Department[]> {
 
     //let url = `/api/histreatment/departments`;
     return this.authHttp.get(`${this.rootUrl}`)
-      .map(res => {
-        let m: MyTreeNode = this.treeNodeService.treeConverter(res.json(), true);
-        return m;
-      });
+      .map(this.extractData);
   }
 
 
@@ -56,10 +52,11 @@ export class DepartmentService extends AbstractService {
 
   }
 
-  setDepartmentOpenToFrontDeskValue(departmentId: number, state: boolean): Observable<boolean> {
+  setDepartmentOpenToFrontDeskValue(departmentId: number, departmentName:string, state: boolean): Observable<boolean> {
 
     const request: DepartmentOperationRequest = new DepartmentOperationRequest();
     request.openToFrontDesk = state;
+    request.name=departmentName;
     request.depId = departmentId;
 
     let url = `${this.rootUrl}/setDepartmentOpenToFrontDeskValue`;

@@ -15,7 +15,7 @@ import {PetOperationRequest} from "../../../dto/treatment/pet.operation.request"
 export class MyConsultingRoomComponent implements OnInit {
 
   myRegistrations: TreatmentRegistrationModel[];
-  selectedRegistration: TreatmentRegistrationModel = {};
+  selectedRegistration: TreatmentRegistrationModel;
 
   constructor(public petOwnerService: PetOwnerService, public petService: PetService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService: RegistrationService) {
 
@@ -26,7 +26,7 @@ export class MyConsultingRoomComponent implements OnInit {
     this.registrationService.findMyRegistrationToday().subscribe(r => {
       this.myRegistrations = r;
     })
-    this.petService.clearPetInfo();
+    //this.petService.clearPetInfo();
   }
 
   onRowClicked(registration: TreatmentRegistrationModel) {
@@ -37,7 +37,6 @@ export class MyConsultingRoomComponent implements OnInit {
 
       let petInfo = new PetInfo(this.selectedRegistration.pet, r);
       this.petService.setPetInfo(petInfo);
-
 
     });
   }

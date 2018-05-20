@@ -6,7 +6,7 @@ import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import java.util.List;
 
 public interface DepartmentService {
-    List<DepartmentEntity> getDepartments();
+    List<DepartmentEntity> getOpenToFrontDeskDepartments();
     DepartmentEntity createDepartment(DepartmentEntity departmentEntity);
 
     DepartmentEntity getDepartmentByDepId(Long depId);

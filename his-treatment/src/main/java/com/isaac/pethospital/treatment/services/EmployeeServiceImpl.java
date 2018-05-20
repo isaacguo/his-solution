@@ -79,12 +79,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean setCanBeRegisteredValue(EmployeeOperationRequest request) {
+        DepartmentEntity de=checkDepartment(request);
+        if(de==null)
+            throw new RuntimeException("Cannot find Department Info");
         EmployeeEntity ee = employeeRepository.findByEmpId(request.getEmpId());
         if (ee == null) {
             ee = new EmployeeEntity();
             ee.setEmpId(request.getEmpId());
             ee.setLoginAccount(request.getLoginAccount());
             ee.setName(request.getName());
+            ee.setUuid(request.getUuid());
+            ee.setLoginAccount(request.getLoginAccount());
+            ee.setDepartment(de);
         }
         ee.setCanBeRegistered(request.isCanBeRegistered());
         employeeRepository.save(ee);
@@ -100,6 +106,12 @@ public class EmployeeServiceImpl implements EmployeeService {
             return ee;
     }
 
+    @Override
+    public List<EmployeeEntity> findByDepartmentAndCanBeRegisteredIsTrue(EmployeeOperationRequest employeeOperationRequest) {
+        DepartmentEntity departmentEntity = checkDepartment(employeeOperationRequest);
+        return this.employeeRepository.findByDepartmentAndCanBeRegisteredIsTrue(departmentEntity);
+    }
+
     private EmployeeTypeEntity checkEmployeeType(EmployeeOperationRequest employeeOperationRequest) {
         if (employeeOperationRequest.getEmployeeTypeId() == null)
             throw new RuntimeException("No EmployeeType Info.");
@@ -112,7 +124,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private DepartmentEntity checkDepartment(EmployeeOperationRequest employeeOperationRequest) {
         if (employeeOperationRequest.getDepartmentId() == null)
             throw new RuntimeException("No Department Info.");
-        DepartmentEntity departmentEntity = departmentRepository.findOne(employeeOperationRequest.getDepartmentId());
+        DepartmentEntity departmentEntity = departmentRepository.findByDepId(employeeOperationRequest.getDepartmentId());
         if (departmentEntity == null)
             throw new RuntimeException("Cannot Find Department.");
         return departmentEntity;

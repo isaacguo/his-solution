@@ -39,7 +39,7 @@ export class TreatmentRoomDetailComponent implements OnChanges {
 
   onOpenToFrontDesk(event: boolean) {
 
-    this.departmentService.setDepartmentOpenToFrontDeskValue(this.departmentId, event).subscribe(r => {
+    this.departmentService.setDepartmentOpenToFrontDeskValue(this.departmentId, this.departmentName, event).subscribe(r => {
       this.loadData();
     });
   }

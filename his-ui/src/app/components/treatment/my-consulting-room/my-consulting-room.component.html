@@ -42,22 +42,11 @@
       </tbody>
     </table>
   </div>
+
+
   <div class="col-lg-10">
-    <ul class="nav nav-tabs ">
-      <li routerLinkActive="active">
-        <a routerLink="/my-consulting-room/pet-info" class="text-center">宠物资料</a>
-      </li>
-      <li routerLinkActive="active">
-        <a routerLink="/my-consulting-room/pet-treatment" class="text-center">宠物病历</a>
-      </li>
-      <li routerLinkActive="active">
-        <a class="text-center">化验记录</a>
-      </li>
-      <li routerLinkActive="active">
-        <a class="text-center">影像记录</a>
-      </li>
-    </ul>
-    <router-outlet></router-outlet>
+    <app-my-consulting-room-registration-list
+      [registration]="selectedRegistration"></app-my-consulting-room-registration-list>
   </div>
 
 </div>

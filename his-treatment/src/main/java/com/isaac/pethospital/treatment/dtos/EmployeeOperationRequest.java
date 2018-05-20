@@ -9,11 +9,21 @@ public class EmployeeOperationRequest {
 
     private Long departmentId;
     private Long id;
+    private String uuid;
     private String selfIntroduction;
     private boolean canBeRegistered;
     private Long employeeTypeId;
     private Long empId;
     private String loginAccount;
+    private String name;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getLoginAccount() {
         return loginAccount;
@@ -22,8 +32,6 @@ public class EmployeeOperationRequest {
     public void setLoginAccount(String loginAccount) {
         this.loginAccount = loginAccount;
     }
-
-    private String name;
 
     public Long getEmpId() {
         return empId;

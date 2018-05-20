@@ -108,6 +108,8 @@ import {TreeNodeService} from "./services/common/tree-node.service";
 import {TreatmentSettingsGuard} from "./guards/treatment/treatment-settings.guard";
 import { TreatmentRoomEmployeeListComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-list.component';
 import { TreatmentRoomEmployeeDetailComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-detail/treatment-room-employee-detail.component';
+import { MyConsultingRoomRegistrationListComponent } from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-list.component';
+import { MyConsultingRoomRegistrationDetailComponent } from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-detail/my-consulting-room-registration-detail.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -193,6 +195,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TreatmentRoomDetailComponent,
     TreatmentRoomEmployeeListComponent,
     TreatmentRoomEmployeeDetailComponent,
+    MyConsultingRoomRegistrationListComponent,
+    MyConsultingRoomRegistrationDetailComponent,
 
   ],
   imports: [

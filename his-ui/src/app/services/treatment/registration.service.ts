@@ -26,4 +26,5 @@ export class RegistrationService extends AbstractService {
     return this.authHttp.get(url).map(this.extractData);
   }
 
+
 }

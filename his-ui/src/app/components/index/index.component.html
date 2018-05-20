@@ -66,7 +66,7 @@
               </li>
               -->
               <li *ngIf="canShowMyConsultingRoom()" >
-                <a routerLink="/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室</a>
+                <a routerLink="/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室 <span class="badge isaac-badge ">{{getCount()}}</span></a>
               </li>
               <li *ngIf="canShowTreatmentSettings()">
                 <a routerLink="/treatment-settings" routerLinkActive="active" class="text-center"> 就诊设置</a>

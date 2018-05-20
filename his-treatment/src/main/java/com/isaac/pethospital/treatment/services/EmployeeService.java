@@ -25,4 +25,6 @@ public interface EmployeeService {
     boolean setCanBeRegisteredValue(EmployeeOperationRequest request);
 
     EmployeeEntity findByEmpId(Long empId);
+
+    List<EmployeeEntity> findByDepartmentAndCanBeRegisteredIsTrue(EmployeeOperationRequest employeeOperationRequest);
 }

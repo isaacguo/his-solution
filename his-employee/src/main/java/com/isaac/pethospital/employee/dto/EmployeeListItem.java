@@ -11,4 +11,5 @@ public interface EmployeeListItem {
     String getDirectReportTo();
     String getJobTitle();
     String getUuid();
+    String getLoginAccount();
 }

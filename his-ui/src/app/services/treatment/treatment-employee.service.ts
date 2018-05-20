@@ -32,10 +32,8 @@ export class TreatmentEmployeeService extends AbstractService {
     return this.authHttp.post(url, JSON.stringify({employeeTypeId: employeeTypeId})).map(this.extractData);
   }
 
-  findByDepartment(departmentId: number): Observable<TreatmentEmployeeModel[]> {
-    let url = `${this.rootUrl}/find-by-department`;
+  findByDepartmentAndCanBeRegisteredIsTrue(departmentId: number): Observable<TreatmentEmployeeModel[]> {
+    let url = `${this.rootUrl}/find-by-department-and-can-be-registered`;
     return this.authHttp.post(url, JSON.stringify({departmentId: departmentId})).map(this.extractData);
   }
-
-
 }

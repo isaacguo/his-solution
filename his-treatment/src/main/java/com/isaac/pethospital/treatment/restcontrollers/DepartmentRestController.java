@@ -18,9 +18,9 @@ public class DepartmentRestController {
     }
 
     @GetMapping
-    public List<DepartmentEntity> getDepartments()
+    public List<DepartmentEntity> getOpenToFrontDeskDepartments()
     {
-        return this.departmentService.getDepartments();
+        return this.departmentService.getOpenToFrontDeskDepartments();
     }
     @GetMapping(value = "/getDepartmentByDepId/{depId}")
     public DepartmentEntity getDepartmentByDepId(@PathVariable("depId") Long depId)
