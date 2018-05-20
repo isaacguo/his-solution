@@ -91,25 +91,26 @@ import {VendorCategoryService} from "./services/procurement/vendor-category.serv
 import {EmployeeDepartmentService} from "./services/employee/employee-department.service";
 import {UiSwitchModule} from "ngx-ui-switch";
 import {VendorGuard} from "./guards/procurement/vendor.guard";
-import { EmployeeCreateUpdateComponent } from './components/employee/employee-create-update/employee-create-update.component';
-import { EmployeeAdminListComponent } from './components/employee/employee-admin/employee-admin-list/employee-admin-list.component';
-import { EmployeeAdminDetailComponent } from './components/employee/employee-admin/employee-admin-detail/employee-admin-detail.component';
+import {EmployeeCreateUpdateComponent} from './components/employee/employee-create-update/employee-create-update.component';
+import {EmployeeAdminListComponent} from './components/employee/employee-admin/employee-admin-list/employee-admin-list.component';
+import {EmployeeAdminDetailComponent} from './components/employee/employee-admin/employee-admin-detail/employee-admin-detail.component';
 import {EmployeeManagementGuard} from "./guards/employee/employee-management.guard";
 import {ProcurementApprovalGuard} from "./guards/procurement/procurement-approval.guard";
-import { FactoryResetComponent } from './components/settings/factory-reset/factory-reset.component';
+import {FactoryResetComponent} from './components/settings/factory-reset/factory-reset.component';
 import {FactoryResetService} from "./services/settings/factory-reset.service";
 import {FrontdeskGuard} from "./guards/treatment/frontdesk.guard";
 import {MyConsultingRoomGuard} from "./guards/treatment/my-consulting-room.guard";
-import { TreatmentSettingsComponent } from './components/treatment/treatment-settings/treatment-settings.component';
-import { TreatmentSettingsRoomComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-settings-room.component';
-import { TreatmentRoomListComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-list/treatment-room-list.component';
-import { TreatmentRoomDetailComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-detail.component';
+import {TreatmentSettingsComponent} from './components/treatment/treatment-settings/treatment-settings.component';
+import {TreatmentSettingsRoomComponent} from './components/treatment/treatment-settings/treatment-settings-room/treatment-settings-room.component';
+import {TreatmentRoomListComponent} from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-list/treatment-room-list.component';
+import {TreatmentRoomDetailComponent} from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-detail.component';
 import {TreeNodeService} from "./services/common/tree-node.service";
 import {TreatmentSettingsGuard} from "./guards/treatment/treatment-settings.guard";
-import { TreatmentRoomEmployeeListComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-list.component';
-import { TreatmentRoomEmployeeDetailComponent } from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-detail/treatment-room-employee-detail.component';
-import { MyConsultingRoomRegistrationListComponent } from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-list.component';
-import { MyConsultingRoomRegistrationDetailComponent } from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-detail/my-consulting-room-registration-detail.component';
+import {TreatmentRoomEmployeeListComponent} from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-list.component';
+import {TreatmentRoomEmployeeDetailComponent} from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-detail/treatment-room-employee-detail.component';
+import {MyConsultingRoomRegistrationListComponent} from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-list.component';
+import {MyConsultingRoomRegistrationDetailComponent} from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-detail/my-consulting-room-registration-detail.component';
+import {MedicalTestSettingsComponent} from './components/treatment/treatment-settings/medical-test-settings/medical-test-settings.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -197,6 +198,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TreatmentRoomEmployeeDetailComponent,
     MyConsultingRoomRegistrationListComponent,
     MyConsultingRoomRegistrationDetailComponent,
+    MedicalTestSettingsComponent,
 
   ],
   imports: [

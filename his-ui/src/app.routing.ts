@@ -58,6 +58,7 @@ import {TreatmentSettingsRoomComponent} from "./app/components/treatment/treatme
 import {TreatmentSettingsGuard} from "./app/guards/treatment/treatment-settings.guard";
 import {MyConsultingRoomGuard} from "./app/guards/treatment/my-consulting-room.guard";
 import {FrontdeskGuard} from "./app/guards/treatment/frontdesk.guard";
+import {MedicalTestSettingsComponent} from "./app/components/treatment/treatment-settings/medical-test-settings/medical-test-settings.component";
 
 
 const appRoutes: Routes = [
@@ -122,9 +123,11 @@ const appRoutes: Routes = [
           {
             path:'treatment-room',
             component: TreatmentSettingsRoomComponent
+          },
+          {
+            path:'medical-test-settings',
+            component: MedicalTestSettingsComponent
           }
-
-
         ]
       },
       {

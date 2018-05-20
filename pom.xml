@@ -19,6 +19,7 @@
         <module>his-common</module>
         <module>his-treatment</module>
         <module>his-procurement</module>
+        <module>his-medical-test</module>
     </modules>
 
     <parent>

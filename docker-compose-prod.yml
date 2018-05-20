@@ -37,6 +37,7 @@ services:
           - his-medicine-db
           - his-procurement-db
           - his-gateway-db
+          - his-medical-test-db
         command: >
           /usr/local/bin/bash -c "
             while ! nc -z his-config 17601;
@@ -141,6 +142,27 @@ services:
     volumes:
       - his-procurement-db-volume:/var/lib/mysql
 
+
+  his-medical-test:
+    image: isaacguo/his-medical-test
+    ports:
+      - "8097:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+      - his-medical-test-db
+    command: --spring.profiles.active=production
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+  his-medical-test-db:
+    image: isaacguo/mysql-5-utf8
+    environment:
+      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
+    volumes:
+      - his-medical-test-db-volume:/var/lib/mysql
+
   his-gateway:
     image: isaacguo/his-gateway
     ports:
@@ -169,3 +191,4 @@ volumes:
   his-medicine-db-volume:
   his-procurement-db-volume:
   his-gateway-db-volume:
+  his-medical-test-db-volume:
