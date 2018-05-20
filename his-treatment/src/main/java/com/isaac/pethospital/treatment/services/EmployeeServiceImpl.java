@@ -86,7 +86,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             ee.setEmpId(request.getEmpId());
             ee.setLoginAccount(request.getLoginAccount());
             ee.setName(request.getName());
-            ee.setUuid(request.getUuid());
             ee.setLoginAccount(request.getLoginAccount());
             ee.setDepartment(de);
         }
