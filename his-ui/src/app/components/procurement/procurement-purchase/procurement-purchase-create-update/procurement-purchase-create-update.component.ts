@@ -86,9 +86,6 @@ export class ProcurementPurchaseCreateUpdateComponent extends AbstractCreateUpda
   invokeWhenUpdate() {
   }
 
-  onSubmit() {
-
-  }
 
   addGood() {
     // add good to the list

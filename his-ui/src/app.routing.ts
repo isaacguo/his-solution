@@ -61,6 +61,7 @@ import {FrontdeskGuard} from "./app/guards/treatment/frontdesk.guard";
 import {MedicalTestQueryComponent} from "./app/components/medical-test/medical-test-query/medical-test-query.component";
 import {MedicalTestSettingsComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings.component";
 import {MedicalTestSettingsReportComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component";
+import {MedicalTestSettingsReportCreateUpdateComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component";
 
 
 const appRoutes: Routes = [
@@ -163,9 +164,16 @@ const appRoutes: Routes = [
           {
             path:'reports',
             component:MedicalTestSettingsReportComponent
+          },
+          {
+            path: 'reports/:operation',
+            component: MedicalTestSettingsReportCreateUpdateComponent
+          },
+          {
+            path: 'reports/:operation/:updateId',
+            component: MedicalTestSettingsReportCreateUpdateComponent
           }
         ]
-
       },
       {
         path: 'images',

@@ -113,6 +113,8 @@ import {MyConsultingRoomRegistrationDetailComponent} from './components/treatmen
 import { MedicalTestQueryComponent } from './components/medical-test/medical-test-query/medical-test-query.component';
 import {MedicalTestSettingsComponent} from "./components/medical-test/medical-test-settings/medical-test-settings.component";
 import { MedicalTestSettingsReportComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component';
+import { MedicalTestSettingsReportCreateUpdateComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component';
+import {MedicalTestReportService} from "./services/medical-test/medical-test-report.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -203,6 +205,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestSettingsComponent,
     MedicalTestQueryComponent,
     MedicalTestSettingsReportComponent,
+    MedicalTestSettingsReportCreateUpdateComponent,
 
   ],
   imports: [
@@ -249,6 +252,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MyConsultingRoomGuard,
     TreatmentSettingsGuard,
 
+
+    //medical test
+    MedicalTestReportService,
+
+
+
     //settings
     FactoryResetService,
     AuthenticationService,
@@ -256,6 +265,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     //common
     TreeNodeService
+
 
   ],
   bootstrap: [AppComponent]

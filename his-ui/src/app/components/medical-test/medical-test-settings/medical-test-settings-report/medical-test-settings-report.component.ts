@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {OperationEnum} from "../../../../enums/operation.enum";
+import {Router} from "@angular/router";
+import {MedicalTestReportService} from "../../../../services/medical-test/medical-test-report.service";
+import {MedicalTestReport} from "../../../../dto/medical-test/medical-test-report.model";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 @Component({
   selector: 'app-medical-test-settings-report',
@@ -7,9 +12,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicalTestSettingsReportComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild("confirmDeletionModal") confirmDeletionModal: ModalComponent;
+  medicalTestReports: MedicalTestReport[];
 
-  ngOnInit() {
+  constructor(public router: Router, private medicalTestReportService: MedicalTestReportService) {
+
   }
 
+  ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    this.medicalTestReportService.findAll().subscribe(r => {
+      this.medicalTestReports = r;
+    })
+  }
+
+  onCreateNewReportClicked() {
+    this.router.navigate(['medical-test-settings', 'reports', OperationEnum.CREATE]);
+  }
+
+
+  onEditButtonClicked(report:MedicalTestReport) {
+    this.router.navigate(['medical-test-settings', 'reports', OperationEnum.UPDATE, report.id]);
+  }
+
+  reportToBeDeleted:MedicalTestReport;
+  removeReport(report: MedicalTestReport) {
+
+    this.reportToBeDeleted = report;
+    this.confirmDeletionModal.open();
+  }
+
+  onConfirmDeletionModalClosed()
+  {
+    this.medicalTestReportService.deleteById(this.reportToBeDeleted.id).subscribe(r=>{
+      this.loadData();
+    })
+  }
 }
