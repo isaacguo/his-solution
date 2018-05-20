@@ -65,11 +65,23 @@
                 <a routerLink="/register" routerLinkActive="active" class="text-center"> 看病挂号</a>
               </li>
               -->
-              <li *ngIf="canShowMyConsultingRoom()" >
-                <a routerLink="/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室 <span class="badge isaac-badge ">{{getCount()}}</span></a>
+              <li *ngIf="canShowMyConsultingRoom()">
+                <a routerLink="/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室</a>
               </li>
               <li *ngIf="canShowTreatmentSettings()">
                 <a routerLink="/treatment-settings" routerLinkActive="active" class="text-center"> 就诊设置</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="javascript:void(0)" routerLinkActive="active" class="text-center"> 化验管理<span
+              class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a routerLink="/medical-test-query" routerLinkActive="active" class="text-center"> 化验查询</a>
+              </li>
+              <li>
+                <a routerLink="/medical-test-settings" routerLinkActive="active" class="text-center"> 模块设置</a>
               </li>
             </ul>
           </li>
@@ -104,10 +116,12 @@
             </ul>
           </li>
           <li>
-            <a href="javascript:void(0)" class="text-center"> 采购管理 <span class="badge isaac-badge ">{{getCount()}}</span><span class="fa arrow"></span></a>
+            <a href="javascript:void(0)" class="text-center"> 采购管理 <span
+              class="badge isaac-badge ">{{getCount()}}</span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li *ngIf="canShowApproval()">
-                <a routerLink="/procurement-approval" routerLinkActive="active" class="text-center">采购审批 <span class="badge isaac-badge">{{getCount()}}</span></a>
+                <a routerLink="/procurement-approval" routerLinkActive="active" class="text-center">采购审批 <span
+                  class="badge isaac-badge">{{getCount()}}</span></a>
               </li>
               <li>
                 <a routerLink="/procurement-purchase" routerLinkActive="active" class="text-center">经销订货</a>

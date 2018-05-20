@@ -110,7 +110,9 @@ import {TreatmentRoomEmployeeListComponent} from './components/treatment/treatme
 import {TreatmentRoomEmployeeDetailComponent} from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-detail/treatment-room-employee-detail.component';
 import {MyConsultingRoomRegistrationListComponent} from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-list.component';
 import {MyConsultingRoomRegistrationDetailComponent} from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-detail/my-consulting-room-registration-detail.component';
-import {MedicalTestSettingsComponent} from './components/treatment/treatment-settings/medical-test-settings/medical-test-settings.component';
+import { MedicalTestQueryComponent } from './components/medical-test/medical-test-query/medical-test-query.component';
+import {MedicalTestSettingsComponent} from "./components/medical-test/medical-test-settings/medical-test-settings.component";
+import { MedicalTestSettingsReportComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -199,6 +201,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MyConsultingRoomRegistrationListComponent,
     MyConsultingRoomRegistrationDetailComponent,
     MedicalTestSettingsComponent,
+    MedicalTestQueryComponent,
+    MedicalTestSettingsReportComponent,
 
   ],
   imports: [

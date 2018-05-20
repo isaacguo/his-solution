@@ -85,7 +85,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
 
   his-medical-test:
-    image: isaacguo/his-medicaltest
+    image: isaacguo/his-medical-test
     ports:
       - "8097:8080"
     depends_on:

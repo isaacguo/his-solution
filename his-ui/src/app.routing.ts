@@ -58,7 +58,9 @@ import {TreatmentSettingsRoomComponent} from "./app/components/treatment/treatme
 import {TreatmentSettingsGuard} from "./app/guards/treatment/treatment-settings.guard";
 import {MyConsultingRoomGuard} from "./app/guards/treatment/my-consulting-room.guard";
 import {FrontdeskGuard} from "./app/guards/treatment/frontdesk.guard";
-import {MedicalTestSettingsComponent} from "./app/components/treatment/treatment-settings/medical-test-settings/medical-test-settings.component";
+import {MedicalTestQueryComponent} from "./app/components/medical-test/medical-test-query/medical-test-query.component";
+import {MedicalTestSettingsComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings.component";
+import {MedicalTestSettingsReportComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component";
 
 
 const appRoutes: Routes = [
@@ -150,8 +152,20 @@ const appRoutes: Routes = [
         ]
       },
       {
-        path: 'testing',
-        component: TestingComponent
+        path: 'medical-test-query',
+        component: MedicalTestQueryComponent
+      },
+      {
+
+        path: 'medical-test-settings',
+        component: MedicalTestSettingsComponent,
+        children:[
+          {
+            path:'reports',
+            component:MedicalTestSettingsReportComponent
+          }
+        ]
+
       },
       {
         path: 'images',
