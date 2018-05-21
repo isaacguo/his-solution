@@ -36,6 +36,7 @@ node {
 
         }
 
+        /*
         stage('Deploy to Staging Server') {
             notifyBuild("In Deploy to Staging Server")
             def workspaceInfSlave = pwd()
@@ -47,6 +48,7 @@ node {
             notifyBuild("In User Acceptance Test")
             echo 'User Acceptance Test'
         }
+        */
 
         stage('Deploy to Production Server') {
                 notifyBuild("In Deploy to Production Server")
