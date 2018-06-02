@@ -7,38 +7,11 @@ services:
       - "61616:61616"
       - "8161:8161"
 
-
-#  graphite:
-#    image: hopsoft/graphite-statsd
-#    ports:
-#      - "8000:80"
-#      - "2003:2003"
-#      - "2004:2004"
-#      - "2023:2023"
-#      - "2024:2024"
-#      - "8125:8125/udp"
-#      - "8126:8126"
-#  grafana:
-#    image: grafana/grafana
-#    ports:
-#      - "3000:3000"
-#    links:
-#      - graphite
-#    environment:
-#      - GF_SECURITY_ADMIN_PASSWORD=secret
-#    volumes:
-#      - ./grafana/data:/var/lib/grafana
-
   his_start_his-config:
         image: bash
         depends_on:
           - his-config
-          - his-employee-db
-          - his-treatment-db
-          - his-medicine-db
-          - his-procurement-db
-          - his-gateway-db
-          - his-medical-test-db
+          - his-db
         command: >
           /usr/local/bin/bash -c "
             while ! nc -z his-config 17601;
@@ -55,6 +28,13 @@ services:
       - "17601:17601"
     command: --spring.profiles.active=production
 
+  his-db:
+    image: isaacguo/mysql-5-utf8
+    environment:
+      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
+    volumes:
+      - his-db-volume:/var/lib/mysql
+
   his-eureka:
     image: isaacguo/his-eureka
     ports:
@@ -70,18 +50,11 @@ services:
     depends_on:
       - his-config
       - his-eureka
-      - his-employee-db
+      - his-db
     command: --spring.profiles.active=production
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-
-  his-employee-db:
-    image: isaacguo/mysql-5-utf8
-    environment:
-      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
-    volumes:
-      - his-employee-db-volume:/var/lib/mysql
 
   his-treatment:
     image: isaacguo/his-treatment
@@ -90,18 +63,12 @@ services:
     depends_on:
       - his-config
       - his-eureka
-      - his-treatment-db
+      - his-db
     command: --spring.profiles.active=production
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
 
-  his-treatment-db:
-    image: isaacguo/mysql-5-utf8
-    environment:
-      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
-    volumes:
-      - his-treatment-db-volume:/var/lib/mysql
 
   his-medicine:
     image: isaacguo/his-medicine
@@ -110,18 +77,11 @@ services:
     depends_on:
       - his-config
       - his-eureka
-      - his-medicine-db
+      - his-db
     command: --spring.profiles.active=production
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-
-  his-medicine-db:
-    image: isaacguo/mysql-5-utf8
-    environment:
-      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
-    volumes:
-      - his-medicine-db-volume:/var/lib/mysql
 
   his-procurement:
     image: isaacguo/his-procurement
@@ -130,18 +90,12 @@ services:
     depends_on:
       - his-config
       - his-eureka
-      - his-procurement-db
+      - his-db
     command: --spring.profiles.active=production
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
 
-  his-procurement-db:
-    image: isaacguo/mysql-5-utf8
-    environment:
-      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
-    volumes:
-      - his-procurement-db-volume:/var/lib/mysql
 
 
   his-medical-test:
@@ -151,18 +105,11 @@ services:
     depends_on:
       - his-config
       - his-eureka
-      - his-medical-test-db
+      - his-db
     command: --spring.profiles.active=production
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
-
-  his-medical-test-db:
-    image: isaacguo/mysql-5-utf8
-    environment:
-      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
-    volumes:
-      - his-medical-test-db-volume:/var/lib/mysql
 
   his-gateway:
     image: isaacguo/his-gateway
@@ -173,23 +120,11 @@ services:
       - his-eureka
       - his-employee
       - his-medicine
-      - his-gateway-db
+      - his-db
     command: --spring.profiles.active=production
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
 
-  his-gateway-db:
-    image: isaacguo/mysql-5-utf8
-    environment:
-      MYSQL_ROOT_PASSWORD: His_Solution_p4ssw0rd
-    volumes:
-      - his-gateway-db-volume:/var/lib/mysql
-
 volumes:
-  his-employee-db-volume:
-  his-treatment-db-volume:
-  his-medicine-db-volume:
-  his-procurement-db-volume:
-  his-gateway-db-volume:
-  his-medical-test-db-volume:
+   his-db-volume:
