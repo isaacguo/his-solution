@@ -34,7 +34,6 @@ import {EmployeeProfileEditComponent} from './components/employee/employee-profi
 import {EmployeeAdminComponent} from './components/employee/employee-admin/employee-admin.component';
 import {AdminGuard} from "./guards/admin.guard";
 import {FinanceComponent} from './components/finance/finance.component';
-import {FinanceGuard} from "./guards/finance.guard";
 import {RegisterComponent} from './components/treatment/register/register.component';
 import {DoctorRegistrationComponent} from './components/treatment/doctor-registration/doctor-registration.component';
 import {DoctorListViewComponent} from './components/treatment/doctor-registration/views/doctor-list-view/doctor-list-view.component';
@@ -116,6 +115,7 @@ import { MedicalTestSettingsReportComponent } from './components/medical-test/me
 import { MedicalTestSettingsReportCreateUpdateComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component';
 import {MedicalTestReportService} from "./services/medical-test/medical-test-report.service";
 import { MedicalTestReportCreateUpdateComponent } from './components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component';
+import {FinanceManagementGuard} from "./guards/finance/finance-management.guard";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -229,7 +229,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     },
     AuthGuard,
     AdminGuard,
-    FinanceGuard,
     EmployeeManagementGuard,
     ProcurementApprovalGuard,
     VendorGuard,
@@ -253,6 +252,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FrontdeskGuard,
     MyConsultingRoomGuard,
     TreatmentSettingsGuard,
+
+    //finance
+    FinanceManagementGuard,
 
 
     //medical test

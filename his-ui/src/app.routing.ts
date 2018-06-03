@@ -24,7 +24,6 @@ import {EmployeeProfileEditComponent} from "./app/components/employee/employee-p
 import {EmployeeAdminComponent} from "./app/components/employee/employee-admin/employee-admin.component";
 import {AdminGuard} from "./app/guards/admin.guard";
 import {FinanceComponent} from "./app/components/finance/finance.component";
-import {FinanceGuard} from "./app/guards/finance.guard";
 import {RegisterComponent} from "./app/components/treatment/register/register.component";
 import {DoctorRegistrationComponent} from "./app/components/treatment/doctor-registration/doctor-registration.component";
 import {DoctorListViewComponent} from "./app/components/treatment/doctor-registration/views/doctor-list-view/doctor-list-view.component";
@@ -63,6 +62,7 @@ import {MedicalTestSettingsComponent} from "./app/components/medical-test/medica
 import {MedicalTestSettingsReportComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component";
 import {MedicalTestSettingsReportCreateUpdateComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component";
 import {MedicalTestReportCreateUpdateComponent} from "./app/components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component";
+import {FinanceManagementGuard} from "./app/guards/finance/finance-management.guard";
 
 
 const appRoutes: Routes = [
@@ -186,7 +186,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'finance',
-        canActivate: [FinanceGuard],
+        canActivate: [FinanceManagementGuard],
         component: FinanceComponent
       },
       {

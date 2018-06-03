@@ -8,6 +8,7 @@ import {EmployeeManagementGuard} from "../../guards/employee/employee-management
 import {MyConsultingRoomGuard} from "../../guards/treatment/my-consulting-room.guard";
 import {FrontdeskGuard} from "../../guards/treatment/frontdesk.guard";
 import {TreatmentSettingsGuard} from "../../guards/treatment/treatment-settings.guard";
+import {FinanceManagementGuard} from "../../guards/finance/finance-management.guard";
 
 @Component({
   selector: 'app-index',
@@ -40,9 +41,10 @@ export class IndexComponent implements OnInit, OnDestroy {
               public procurementApprovalGuard: ProcurementApprovalGuard,
               public myConsultingRoomGuard: MyConsultingRoomGuard,
               public frontdeskGuard: FrontdeskGuard,
-              public treatmentSettingsGuard:TreatmentSettingsGuard,
+              public treatmentSettingsGuard: TreatmentSettingsGuard,
               private employeeService: EmployeeService,
-              private employeeManagementGuard: EmployeeManagementGuard) {
+              private employeeManagementGuard: EmployeeManagementGuard,
+              private financeManagementGuard: FinanceManagementGuard) {
     this.authChangeSubscription = authenticationService.authChange.subscribe(
       newAuthInfo => {
         this.authInfo = newAuthInfo;
@@ -70,8 +72,11 @@ export class IndexComponent implements OnInit, OnDestroy {
     return this.frontdeskGuard.canActivate();
   }
 
-  canShowMyConsultingRoom(): boolean
-  {
+  canShowFinanceManagement(): boolean {
+    return this.financeManagementGuard.canActivate();
+  }
+
+  canShowMyConsultingRoom(): boolean {
     return this.myConsultingRoomGuard.canActivate();
   }
 
