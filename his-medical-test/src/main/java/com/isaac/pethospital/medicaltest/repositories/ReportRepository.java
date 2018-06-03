@@ -1,4 +1,4 @@
-package com.isaac.pethospital.medicaltest;
+package com.isaac.pethospital.medicaltest.repositories;
 
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

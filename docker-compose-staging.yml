@@ -96,6 +96,19 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
 
+
+  his-finance:
+    image: isaacguo/his-finance
+    ports:
+      - "8098:8080"
+    depends_on:
+      - his-config
+      - his-eureka
+    command: --spring.profiles.active=staging
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
   his-gateway:
     image: isaacguo/his-gateway
     ports:

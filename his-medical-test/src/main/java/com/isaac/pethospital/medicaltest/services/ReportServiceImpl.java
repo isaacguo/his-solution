@@ -1,6 +1,6 @@
 package com.isaac.pethospital.medicaltest.services;
 
-import com.isaac.pethospital.medicaltest.ReportRepository;
+import com.isaac.pethospital.medicaltest.repositories.ReportRepository;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 import org.springframework.stereotype.Service;

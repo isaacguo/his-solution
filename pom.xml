@@ -20,6 +20,7 @@
         <module>his-treatment</module>
         <module>his-procurement</module>
         <module>his-medical-test</module>
+        <module>his-finance</module>
     </modules>
 
     <parent>
