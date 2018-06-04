@@ -73,13 +73,12 @@
               </li>
             </ul>
           </li>
-          <li>
-            <a href="javascript:void(0)" routerLinkActive="active" class="text-center"> 住院管理<span
+          <li *ngIf="canShowInpatientManagement()">
+            <a routerLink="/inpatient"  routerLinkActive="active" class="text-center"> 住院管理<span
               class="fa arrow"></span></a>
           </li>
-          <li>
-            <a href="javascript:void(0)" routerLinkActive="active" class="text-center"> 化验管理<span
-              class="fa arrow"></span></a>
+          <li *ngIf="canShowMedicalTestManagement()">
+            <a href="javascript:void(0)" routerLinkActive="active" class="text-center"> 化验管理<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
                 <a routerLink="/medical-test-query" routerLinkActive="active" class="text-center"> 化验查询</a>
@@ -89,18 +88,21 @@
               </li>
             </ul>
           </li>
-          <li>
-            <a class="text-center"> 药品管理<span class="fa arrow"></span></a>
+
+          <li *ngIf="canShowMedicineManagement()">
+            <a href="javascript:void(0)" routerLinkActive="active" class="text-center"> 药品管理<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <!--<li *ngIf="authInfo.isAdmin">-->
               <li>
                 <a routerLink="/inventory-query" routerLinkActive="active" class="text-center"> 药品查询</a>
               </li>
             </ul>
           </li>
+
+          <!--
           <li>
             <a routerLink="/profiles" routerLinkActive="active" class="text-center"> 病历管理</a>
           </li>
+          -->
           <li *ngIf="canShowFinanceManagement()">
             <a routerLink="/finance" routerLinkActive="active" class="text-center"> 财务管理</a>
           </li>
@@ -119,7 +121,7 @@
               </li>
             </ul>
           </li>
-          <li>
+          <li *ngIf="canShowProcurementManagement()">
             <a href="javascript:void(0)" class="text-center"> 采购管理 <span
               class="badge isaac-badge ">{{getCount()}}</span><span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">

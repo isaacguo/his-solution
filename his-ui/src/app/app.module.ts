@@ -116,6 +116,11 @@ import { MedicalTestSettingsReportCreateUpdateComponent } from './components/med
 import {MedicalTestReportService} from "./services/medical-test/medical-test-report-template.service";
 import { MedicalTestReportCreateUpdateComponent } from './components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component';
 import {FinanceManagementGuard} from "./guards/finance/finance-management.guard";
+import {InpatientManagementGuard} from "./guards/treatment/inpatient-management.guard";
+import {MedicineManagementGuard} from "./guards/medicine/medicine-management.guard";
+import {InpatientComponent} from "./components/inpatient/inpatient.component";
+import {MedicalTestManagementGuard} from "./guards/medical-test/medical-test-management.guard";
+import {ProcurementManagementGuard} from "./guards/procurement/procurement-management.guard";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -208,6 +213,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestSettingsReportComponent,
     MedicalTestSettingsReportCreateUpdateComponent,
     MedicalTestReportCreateUpdateComponent,
+    InpatientComponent,
 
   ],
   imports: [
@@ -247,11 +253,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProcurementStatusService,
     ProcurementRequestService,
     ProcurementApprovalService,
+    ProcurementManagementGuard,
 
     //treatment
     FrontdeskGuard,
     MyConsultingRoomGuard,
     TreatmentSettingsGuard,
+    InpatientManagementGuard,
 
     //finance
     FinanceManagementGuard,
@@ -259,7 +267,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     //medical test
     MedicalTestReportService,
+    MedicalTestManagementGuard,
 
+    //medicine
+    MedicineManagementGuard,
 
 
     //settings

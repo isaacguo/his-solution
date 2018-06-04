@@ -63,6 +63,7 @@ import {MedicalTestSettingsReportComponent} from "./app/components/medical-test/
 import {MedicalTestSettingsReportCreateUpdateComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component";
 import {MedicalTestReportCreateUpdateComponent} from "./app/components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component";
 import {FinanceManagementGuard} from "./app/guards/finance/finance-management.guard";
+import {InpatientComponent} from "./app/components/inpatient/inpatient.component";
 
 
 const appRoutes: Routes = [
@@ -183,6 +184,10 @@ const appRoutes: Routes = [
       {
         path: 'images',
         component: ImagesComponent
+      },
+      {
+        path: 'inpatient',
+        component: InpatientComponent
       },
       {
         path: 'finance',

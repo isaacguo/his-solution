@@ -9,6 +9,10 @@ import {MyConsultingRoomGuard} from "../../guards/treatment/my-consulting-room.g
 import {FrontdeskGuard} from "../../guards/treatment/frontdesk.guard";
 import {TreatmentSettingsGuard} from "../../guards/treatment/treatment-settings.guard";
 import {FinanceManagementGuard} from "../../guards/finance/finance-management.guard";
+import {InpatientManagementGuard} from "../../guards/treatment/inpatient-management.guard";
+import {MedicineManagementGuard} from "../../guards/medicine/medicine-management.guard";
+import {MedicalTestManagementGuard} from "../../guards/medical-test/medical-test-management.guard";
+import {ProcurementManagementGuard} from "../../guards/procurement/procurement-management.guard";
 
 @Component({
   selector: 'app-index',
@@ -44,7 +48,12 @@ export class IndexComponent implements OnInit, OnDestroy {
               public treatmentSettingsGuard: TreatmentSettingsGuard,
               private employeeService: EmployeeService,
               private employeeManagementGuard: EmployeeManagementGuard,
-              private financeManagementGuard: FinanceManagementGuard) {
+              private financeManagementGuard: FinanceManagementGuard,
+              private inpatientManagementGuard: InpatientManagementGuard,
+              private medicineManagementGuard: MedicineManagementGuard,
+              private medicalTestManagementGuard: MedicalTestManagementGuard,
+              private procurementManagementGuard:ProcurementManagementGuard) {
+
     this.authChangeSubscription = authenticationService.authChange.subscribe(
       newAuthInfo => {
         this.authInfo = newAuthInfo;
@@ -72,12 +81,27 @@ export class IndexComponent implements OnInit, OnDestroy {
     return this.frontdeskGuard.canActivate();
   }
 
+  canShowMedicineManagement(): boolean {
+    return this.medicineManagementGuard.canActivate();
+  }
+
+  canShowInpatientManagement(): boolean {
+    return this.inpatientManagementGuard.canActivate();
+  }
+
+  canShowMedicalTestManagement(): boolean {
+    return this.medicalTestManagementGuard.canActivate();
+  }
+
   canShowFinanceManagement(): boolean {
     return this.financeManagementGuard.canActivate();
   }
 
   canShowMyConsultingRoom(): boolean {
     return this.myConsultingRoomGuard.canActivate();
+  }
+  canShowProcurementManagement():boolean{
+    return this.procurementManagementGuard.canActivate();
   }
 
   ngOnInit() {

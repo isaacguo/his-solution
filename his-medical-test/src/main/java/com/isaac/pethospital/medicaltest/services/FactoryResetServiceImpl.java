@@ -69,6 +69,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     @Transactional
     void init() {
         authorizationService.setDomainName("MedicalTest");
+        authorizationTopicService.addAuthorizationTopicAndOperations("化验管理", "操作");
         authorizationTopicService.addAuthorizationTopicAndOperations("化验设置", "操作");
 
     }
