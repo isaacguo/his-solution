@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
+import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report-template.service";
 import {Router} from "@angular/router";
 import {OperationEnum} from "../../../enums/operation.enum";
 

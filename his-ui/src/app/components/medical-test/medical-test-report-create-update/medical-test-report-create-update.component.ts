@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractCreateUpdateComponent} from "../../common/abstract-create-update.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
+import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report-template.service";
 import {OperationEnum} from "../../../enums/operation.enum";
 import {observable} from "rxjs/symbol/observable";
-import {MedicalTestReport} from "../../../dto/medical-test/medical-test-report.model";
+import {MedicalTestReportTemplate} from "../../../dto/medical-test/medical-test-report-template.model";
 
 @Component({
   selector: 'app-medical-test-report-create-update',
@@ -52,7 +52,7 @@ export class MedicalTestReportCreateUpdateComponent extends AbstractCreateUpdate
     })
   }
 
-  reportTemplate: MedicalTestReport;
+  reportTemplate: MedicalTestReportTemplate;
 
   protected process() {
 

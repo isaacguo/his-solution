@@ -3,14 +3,13 @@ import {AuthHttp} from "angular2-jwt";
 import {FormGroup} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import {AbstractService} from "../abstract.service";
-import {MedicalTestReportItem} from "../../dto/medical-test/medical-test-report-item.model";
-import {MedicalTestReport} from "../../dto/medical-test/medical-test-report.model";
+import {MedicalTestReportTemplate} from "../../dto/medical-test/medical-test-report-template.model";
 
 @Injectable()
 export class MedicalTestReportService extends AbstractService {
 
 
-  rootUrl: string = "/api/hismedicaltest/reports";
+  rootUrl: string = "/api/hismedicaltest/report-templates";
   createReportUrl: string = `${this.rootUrl}/create`;
 
   //private procurementStatusRootUrl: string = `${this.rootUrl}/`;
@@ -19,11 +18,11 @@ export class MedicalTestReportService extends AbstractService {
     super();
   }
 
-  createReport(request: FormGroup): Observable<MedicalTestReport> {
+  createReport(request: FormGroup): Observable<MedicalTestReportTemplate> {
     return this.authHttp.post(this.createReportUrl, request).map(this.extractData);
   }
 
-  findAll(): Observable<MedicalTestReport[]> {
+  findAll(): Observable<MedicalTestReportTemplate[]> {
     return this.authHttp.get(this.rootUrl).map(this.extractData);
   }
 

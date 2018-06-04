@@ -1,4 +1,4 @@
-export class MedicalTestReportItem {
+export class MedicalTestReportTemplateItem {
   public id: number;
   public itemName: string;
   public itemUnit: string;

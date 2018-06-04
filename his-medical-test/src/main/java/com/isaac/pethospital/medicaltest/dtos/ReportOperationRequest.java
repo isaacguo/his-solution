@@ -1,22 +1,22 @@
 package com.isaac.pethospital.medicaltest.dtos;
 
-import com.isaac.pethospital.medicaltest.entities.ReportEntity;
-import com.isaac.pethospital.medicaltest.entities.ReportItemEntity;
+import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
+import com.isaac.pethospital.medicaltest.entities.ReportTemplateItemEntity;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class ReportOperationRequest {
 
-    List<ReportItemEntity> reportItems = new LinkedList<>();
+    List<ReportTemplateItemEntity> reportItems = new LinkedList<>();
     private Long id;
     private String reportName;
 
-    public List<ReportItemEntity> getReportItems() {
+    public List<ReportTemplateItemEntity> getReportItems() {
         return reportItems;
     }
 
-    public void setReportItems(List<ReportItemEntity> reportItems) {
+    public void setReportItems(List<ReportTemplateItemEntity> reportItems) {
         this.reportItems = reportItems;
     }
 
@@ -36,20 +36,20 @@ public class ReportOperationRequest {
         this.reportName = reportName;
     }
 
-    public ReportEntity toReport() {
-        ReportEntity reportEntity = new ReportEntity();
-        reportEntity.setReportName(this.reportName);
+    public ReportTemplateEntity toReport() {
+        ReportTemplateEntity reportTemplateEntity = new ReportTemplateEntity();
+        reportTemplateEntity.setReportName(this.reportName);
 
         this.reportItems.forEach(r -> {
-            ReportItemEntity reportItemEntity = new ReportItemEntity();
-            reportItemEntity.setItemName(r.getItemName());
-            reportItemEntity.setItemUnit(r.getItemUnit());
-            reportItemEntity.setReferenceLowLimitValue(r.getReferenceLowLimitValue());
-            reportItemEntity.setReferenceHighLimitValue(r.getReferenceHighLimitValue());
-            reportItemEntity.setComments(r.getComments());
-            reportEntity.addReportItem(reportItemEntity);
+            ReportTemplateItemEntity reportTemplateItemEntity = new ReportTemplateItemEntity();
+            reportTemplateItemEntity.setItemName(r.getItemName());
+            reportTemplateItemEntity.setItemUnit(r.getItemUnit());
+            reportTemplateItemEntity.setReferenceLowLimitValue(r.getReferenceLowLimitValue());
+            reportTemplateItemEntity.setReferenceHighLimitValue(r.getReferenceHighLimitValue());
+            reportTemplateItemEntity.setComments(r.getComments());
+            reportTemplateEntity.addReportTemplateItem(reportTemplateItemEntity);
         });
 
-        return reportEntity;
+        return reportTemplateEntity;
     }
 }

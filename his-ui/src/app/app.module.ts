@@ -113,7 +113,7 @@ import { MedicalTestQueryComponent } from './components/medical-test/medical-tes
 import {MedicalTestSettingsComponent} from "./components/medical-test/medical-test-settings/medical-test-settings.component";
 import { MedicalTestSettingsReportComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component';
 import { MedicalTestSettingsReportCreateUpdateComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component';
-import {MedicalTestReportService} from "./services/medical-test/medical-test-report.service";
+import {MedicalTestReportService} from "./services/medical-test/medical-test-report-template.service";
 import { MedicalTestReportCreateUpdateComponent } from './components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component';
 import {FinanceManagementGuard} from "./guards/finance/finance-management.guard";
 

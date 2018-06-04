@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {OperationEnum} from "../../../../enums/operation.enum";
 import {Router} from "@angular/router";
-import {MedicalTestReportService} from "../../../../services/medical-test/medical-test-report.service";
-import {MedicalTestReport} from "../../../../dto/medical-test/medical-test-report.model";
+import {MedicalTestReportService} from "../../../../services/medical-test/medical-test-report-template.service";
+import {MedicalTestReportTemplate} from "../../../../dto/medical-test/medical-test-report-template.model";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 
 @Component({
@@ -13,7 +13,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 export class MedicalTestSettingsReportComponent implements OnInit {
 
   @ViewChild("confirmDeletionModal") confirmDeletionModal: ModalComponent;
-  medicalTestReports: MedicalTestReport[];
+  medicalTestReports: MedicalTestReportTemplate[];
 
   constructor(public router: Router, private medicalTestReportService: MedicalTestReportService) {
 
@@ -34,12 +34,12 @@ export class MedicalTestSettingsReportComponent implements OnInit {
   }
 
 
-  onEditButtonClicked(report:MedicalTestReport) {
+  onEditButtonClicked(report:MedicalTestReportTemplate) {
     this.router.navigate(['medical-test-settings', 'reports', OperationEnum.UPDATE, report.id]);
   }
 
-  reportToBeDeleted:MedicalTestReport;
-  removeReport(report: MedicalTestReport) {
+  reportToBeDeleted:MedicalTestReportTemplate;
+  removeReport(report: MedicalTestReportTemplate) {
 
     this.reportToBeDeleted = report;
     this.confirmDeletionModal.open();

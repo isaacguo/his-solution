@@ -2,11 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractCreateUpdateComponent} from "../../../common/abstract-create-update.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MedicalTestReportService} from "../../../../services/medical-test/medical-test-report.service";
+import {MedicalTestReportService} from "../../../../services/medical-test/medical-test-report-template.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {OperationEnum} from "../../../../enums/operation.enum";
 import {Contact} from "../../../../dto/procurement/contact.model";
-import {MedicalTestReportItem} from "../../../../dto/medical-test/medical-test-report-item.model";
+import {MedicalTestReportTemplateItem} from "../../../../dto/medical-test/medical-test-report-template-item.model";
 
 @Component({
   selector: 'app-medical-test-settings-report-create-update',
@@ -54,7 +54,7 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
       this.medicalTestReportService.findById(this.updateId).subscribe(r => {
         this.inflatFormModelWithValues(r);
         this.clearReportItems();
-        r.reportItems.forEach(contact => {
+        r.reportTemplateItems.forEach(contact => {
           this.inflateReportItem(contact);
         })
       })
@@ -72,7 +72,7 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
     control.controls = [];
   }
 
-  inflateReportItem(reportItem: MedicalTestReportItem) {
+  inflateReportItem(reportItem: MedicalTestReportTemplateItem) {
     const control = <FormArray>this.formModel.controls['reportItems'];
 
     control.push(this.fb.group({

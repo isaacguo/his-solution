@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
-public class ReportItemEntity {
+public class ReportTemplateItemEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +18,8 @@ public class ReportItemEntity {
     private String comments;
 
     @ManyToOne
-    @JsonBackReference("report-reportItem")
-    private ReportEntity report;
+    @JsonBackReference("reportTemplate-reportTemplateItem")
+    private ReportTemplateEntity reportTemplate;
 
     public Long getId() {
         return id;
@@ -69,11 +69,11 @@ public class ReportItemEntity {
         this.comments = comments;
     }
 
-    public ReportEntity getReport() {
-        return report;
+    public ReportTemplateEntity getReportTemplate() {
+        return reportTemplate;
     }
 
-    public void setReport(ReportEntity report) {
-        this.report = report;
+    public void setReportTemplate(ReportTemplateEntity reportTemplate) {
+        this.reportTemplate = reportTemplate;
     }
 }
