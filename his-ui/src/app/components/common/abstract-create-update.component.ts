@@ -14,6 +14,10 @@ export abstract class AbstractCreateUpdateComponent {
     return this.operation === OperationEnum.CREATE ? "创建" : "修改";
   }
 
+  isCreateMode():boolean
+  {
+    return this.operation===OperationEnum.CREATE;
+  }
   abstract invokeWhenCreate();
   abstract invokeWhenUpdate();
   onSubmit() {

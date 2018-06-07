@@ -25,6 +25,6 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
     List<EmployeeListItem> findEmployeesForEmployeeListItem();
 
 
-    @Query("select e.loginAccount as loginAccount, e.id as id, e.uuid as uuid, e.jobTitle as jobTitle, e.employeeNumber as employeeNumber, e.workPhoneNumber as workPhoneNumber, e.fullName as fullName, e.gender as gender, r.fullName as directReportTo, d.name as departmentName from EmployeeEntity e join e.department d join e.directReportTo r where d.id=:departmentId")
+    @Query("select e.loginAccount as loginAccount, e.id as id, e.uuid as uuid, e.jobTitle as jobTitle, e.employeeNumber as employeeNumber, e.workPhoneNumber as workPhoneNumber, e.fullName as fullName, e.gender as gender,  d.name as departmentName from EmployeeEntity e join e.department d  where d.id=:departmentId")
     List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(@Param("departmentId") Long departmentId);
 }

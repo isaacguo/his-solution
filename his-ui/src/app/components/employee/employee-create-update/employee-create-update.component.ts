@@ -9,6 +9,7 @@ import {EmploymentStatusEnum} from "../../../enums/employment.status.enum";
 import {SexualEnum} from "../../../enums/sexual.enum";
 import {GenderEnum} from "../../../enums/gender.enum";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {Employee} from "../../../dto/employee/employee.model";
 
 @Component({
   selector: 'app-employee-create-update',
@@ -17,13 +18,23 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 })
 export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent implements OnInit {
 
-  //@Input()
-  //departmentId: number;
+  employee:Employee;
+
+  changeLoginAccountModel:FormGroup;
+
+  passwordFormModel:FormGroup;
 
   formModel: FormGroup;
 
   @ViewChild("confirmCreateModal")
   confirmCreateModal: ModalComponent;
+  @ViewChild("changePasswordModal")
+  changePasswordModal:ModalComponent;
+  @ViewChild("changeAccountModal")
+  changeAccountModal:ModalComponent;
+  @ViewChild("changeAccountWarningModal")
+  changeAccountWarningModal:ModalComponent;
+
 
   constructor(private router: Router,
               public route: ActivatedRoute,
@@ -62,13 +73,13 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
     else {
 
       this.employeeService.getEmployeeInfoByEmployeeUuid(this.updateId).subscribe(r => {
-        this.inflatFormModelWithValues(r);
+        this.employee=r;
+        this.inflatFormModelWithValues(this.employee);
       });
     }
   }
 
   private inflatFormModelWithValues(r) {
-    console.log(r);
     this.formModel.controls['departmentId'].setValue("0");
     this.formModel.controls['id'].setValue(r.id);
     this.formModel.controls['employeeNumber'].setValue(r.employeeNumber);
@@ -93,18 +104,23 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
   }
 
   private initForm() {
+    this.changeLoginAccountModel=this.fb.group({
+      'loginAccount': ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^[a-z0-9]*$/)]],
+    })
+    this.passwordFormModel=this.fb.group({
+      'password':['',Validators.required]
+    });
     this.formModel = this.fb.group({
       'id': [''],
       'departmentId': ['', Validators.required],
       'employeeNumber': ['', Validators.required],
-      'loginAccount': ['', [Validators.required, Validators.minLength(8)]],
+      'loginAccount': ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^[a-z0-9]*$/)]],
       'joinedDate': [''],
       'jobTitle': [''],
       'employmentStatus': ['', Validators.required],
       'surname': ['', Validators.required],
       'givenName': ['', Validators.required],
       'fullName': [''],
-
       'idNumber': ['', Validators.required],
       'driverLicenseNumber': [''],
       'dateOfBirth': [''],
@@ -164,4 +180,24 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
     this.formModel.controls['gender'].setValue(gender);
   }
 
+  onChangePasswordModalClosed() {
+
+  }
+
+  onChangePasswordLinkClicked() {
+    this.changePasswordModal.open();
+  }
+
+  onChangeAccountWarningModalClosed() {
+    this.changeAccountModal.open();
+  }
+
+  onChangeLoginAccountButtonClicked() {
+    this.changeAccountWarningModal.open();
+  }
+
+  onChangeAccountModalClosed() {
+
+
+  }
 }
