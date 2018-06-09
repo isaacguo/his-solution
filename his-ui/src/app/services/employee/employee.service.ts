@@ -18,6 +18,8 @@ export class EmployeeService extends AbstractService {
   private createEmployeeUrl: string = `${this.rootUrl}/create`;
 
   private updateEmployeeUrl: string = `${this.rootUrl}/update`;
+  private updateEmployeeLoginAccountUrl: string = `${this.rootUrl}/updateLoginAccount`;
+  private updateEmployeePasswordUrl: string = `${this.rootUrl}/updatePassword`;
 
   constructor(private authHttp: AuthHttp) {
     super();
@@ -67,11 +69,20 @@ export class EmployeeService extends AbstractService {
     });
   }
 
-  createEmployee(value: any):Observable<boolean> {
+  createEmployee(value: any): Observable<boolean> {
     return this.authHttp.post(this.createEmployeeUrl, value).map(this.extractData);
   }
 
-  updateEmployee(value: any) :Observable<boolean>{
+  updateEmployee(value: any): Observable<boolean> {
     return this.authHttp.put(this.updateEmployeeUrl, value).map(this.extractData);
   }
+
+  updateEmployeeLoginAccount(value: any): Observable<boolean> {
+    return this.authHttp.put(this.updateEmployeeLoginAccountUrl, value).map(this.extractData);
+  }
+
+  updatePassword(value: any): Observable<boolean> {
+    return this.authHttp.put(this.updateEmployeePasswordUrl, value).map(this.extractData);
+  }
+
 }

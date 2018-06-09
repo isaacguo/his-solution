@@ -101,6 +101,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             return null;
     }
 
+
+
     @Override
     public EmployeeOperationRequest findUserNameByUserAccount(String userAccount) {
         EmployeeEntity ee = this.employeeRepository.findByLoginAccount(userAccount);
@@ -136,6 +138,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository.save(employeeEntity);
         return true;
     }
+
+    @Override
+    public boolean updateLoginAccount(EmployeeOperationRequest request) {
+        if (!this.employeeRepository.exists(request.getId()))
+            throw new RuntimeException("Employee doesn't exist");
+
+        EmployeeEntity employeeEntity = this.employeeRepository.findOne(request.getId());
+        employeeEntity.setLoginAccount(request.getLoginAccount());
+        this.employeeRepository.save(employeeEntity);
+        return true;
+
+    }
+
+    @Override
+    public boolean updatePassword(EmployeeOperationRequest request) {
+        if (!this.employeeRepository.exists(request.getId()))
+            throw new RuntimeException("Employee doesn't exist");
+
+        EmployeeEntity employeeEntity = this.employeeRepository.findOne(request.getId());
+        employeeEntity.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
+        this.employeeRepository.save(employeeEntity);
+        return true;
+    }
+
 
     @Override
     public EmployeeEntity findBySurnameAndGivenName(EmployeeOperationRequest request) {

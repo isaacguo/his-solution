@@ -7,6 +7,7 @@
       <label>现员工账户</label>
       <input type="text" class="form-control" readonly [ngModel]="employee?.loginAccount" name="loginAccount">
       <form [formGroup]="changeLoginAccountModel">
+        <input type="hidden" formControlName="id">
         <div class="form-group">
           <label>新员工账户</label>
           <input type="text" class="form-control" formControlName="loginAccount">
@@ -18,7 +19,7 @@
 
     </modal-body>
     <modal-footer>
-      <button type="button" class="btn btn-primary" [disabled]="!changeAccountModal.valid"
+      <button type="button" class="btn btn-primary" [disabled]="!changeLoginAccountModel.valid"
               (click)="changeAccountModal.close()">确定
       </button>
       <button type="button" class="btn btn-default" data-dismiss="changeAccountModal"
@@ -53,15 +54,23 @@
     </modal-header>
     <modal-body>
       <form [formGroup]="passwordFormModel">
+        <input type="hidden" formControlName="id">
         <p>拥有 <b>员工管理</b> 权限的人员可以修改员工的密码。若密码在之前已经设置，则此处修改将覆盖原密码。</p>
         <p>通常在创建新员工或为现有员工忘记密码而需要重置时使用</p>
-        <div class="form-group">
-          <label>登录密码</label>
-          <input type="text" class="form-control" formControlName="password">
-          <small [hidden]="passwordFormModel.controls.password.valid" class="text-danger">
-            密码不能为空
-          </small>
+
+        <div formGroupName="passwordsGroup">
+          <div>
+            <label>密码</label>
+            <input type="password" class="form-control" formControlName="password">
+            <small class="text-danger" [hidden]="!passwordFormModel.hasError('minlength', ['passwordsGroup', 'password'])">密码至少8位，且是字母与数字的组合</small>
+          </div>
+          <div>
+            <label>再次输入一次</label>
+            <input class="form-control" type="password" formControlName="pconfirm">
+            <small class="text-danger" [hidden]="!passwordFormModel.hasError('equal', 'passwordsGroup')">两次输入的密码不相同</small>
+          </div>
         </div>
+
       </form>
     </modal-body>
     <modal-footer>
@@ -309,4 +318,4 @@
   <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
 </form>
 
-
+<pre>{{passwordFormModel.value|json}}</pre>

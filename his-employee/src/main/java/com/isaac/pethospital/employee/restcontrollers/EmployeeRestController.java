@@ -43,6 +43,15 @@ public class EmployeeRestController {
     public boolean createNewEmployee(@RequestBody EmployeeOperationRequest request) {
         return this.employeeService.createEmployee(request);
     }
+    @PutMapping(value = "/updateLoginAccount")
+    public boolean updateLoginAccount(@RequestBody EmployeeOperationRequest request) {
+        return this.employeeService.updateLoginAccount(request);
+    }
+
+    @PutMapping(value = "/updatePassword")
+    public boolean updatePassword(@RequestBody EmployeeOperationRequest request) {
+        return this.employeeService.updatePassword(request);
+    }
 
     @DeleteMapping("delete/{id}")
     public boolean deleteVendor(@PathVariable("id") Long id) {

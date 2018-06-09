@@ -42,4 +42,8 @@ public interface EmployeeService {
     List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(Long departmentId);
 
     EmployeeOperationRequest findUserNameByLoginAccount(String loginAccount);
+
+    boolean updateLoginAccount(EmployeeOperationRequest request);
+
+    boolean updatePassword(EmployeeOperationRequest request);
 }

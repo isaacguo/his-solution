@@ -11,6 +11,18 @@ import {GenderEnum} from "../../../enums/gender.enum";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Employee} from "../../../dto/employee/employee.model";
 
+
+/**
+ * Returns `true` if all FormControls in the specified FormGroup have exactly
+ * the same value. Otherwise returns `false`.
+ */
+function equalValidator({value}: FormGroup): { [key: string]: any } {
+  const [first, ...rest] = Object.keys(value || {});
+  const valid = rest.every(v => value[v] === value[first]);
+  return valid ? null : {equal: true};
+}
+
+
 @Component({
   selector: 'app-employee-create-update',
   templateUrl: './employee-create-update.component.html',
@@ -18,22 +30,22 @@ import {Employee} from "../../../dto/employee/employee.model";
 })
 export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent implements OnInit {
 
-  employee:Employee;
+  employee: Employee;
 
-  changeLoginAccountModel:FormGroup;
+  changeLoginAccountModel: FormGroup;
 
-  passwordFormModel:FormGroup;
+  passwordFormModel: FormGroup;
 
   formModel: FormGroup;
 
   @ViewChild("confirmCreateModal")
   confirmCreateModal: ModalComponent;
   @ViewChild("changePasswordModal")
-  changePasswordModal:ModalComponent;
+  changePasswordModal: ModalComponent;
   @ViewChild("changeAccountModal")
-  changeAccountModal:ModalComponent;
+  changeAccountModal: ModalComponent;
   @ViewChild("changeAccountWarningModal")
-  changeAccountWarningModal:ModalComponent;
+  changeAccountWarningModal: ModalComponent;
 
 
   constructor(private router: Router,
@@ -71,15 +83,18 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
       this.formModel.controls['departmentId'].setValue(this.updateId);
     }
     else {
-
-      this.employeeService.getEmployeeInfoByEmployeeUuid(this.updateId).subscribe(r => {
-        this.employee=r;
-        this.inflatFormModelWithValues(this.employee);
-      });
+      this.loadData();
     }
   }
 
-  private inflatFormModelWithValues(r) {
+  private loadData() {
+    this.employeeService.getEmployeeInfoByEmployeeUuid(this.updateId).subscribe(r => {
+      this.employee = r;
+      this.inflateFormModelWithValues(this.employee);
+    });
+  }
+
+  private inflateFormModelWithValues(r) {
     this.formModel.controls['departmentId'].setValue("0");
     this.formModel.controls['id'].setValue(r.id);
     this.formModel.controls['employeeNumber'].setValue(r.employeeNumber);
@@ -103,18 +118,25 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
     this.formModel.controls['email'].setValue(r.email);
   }
 
+
   private initForm() {
-    this.changeLoginAccountModel=this.fb.group({
-      'loginAccount': ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^[a-z0-9]*$/)]],
+    this.changeLoginAccountModel = this.fb.group({
+      'id': [''],
+      'loginAccount': ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-z0-9]*$/)]],
     })
-    this.passwordFormModel=this.fb.group({
-      'password':['',Validators.required]
+    this.passwordFormModel = this.fb.group({
+      'id': [''],
+      'passwordsGroup': this.fb.group({
+        'password': ['', [Validators.minLength(8), Validators.pattern(/^[a-zA-Z0-9]*$/)]],
+        'pconfirm': ['']
+      }, {validator: equalValidator})
     });
+
     this.formModel = this.fb.group({
       'id': [''],
       'departmentId': ['', Validators.required],
       'employeeNumber': ['', Validators.required],
-      'loginAccount': ['', [Validators.required, Validators.minLength(8),Validators.pattern(/^[a-z0-9]*$/)]],
+      'loginAccount': ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^[a-z0-9]*$/)]],
       'joinedDate': [''],
       'jobTitle': [''],
       'employmentStatus': ['', Validators.required],
@@ -182,9 +204,25 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
 
   onChangePasswordModalClosed() {
 
+    this.employeeService.updatePassword({
+      'id': this.passwordFormModel.controls['id'].value,
+      'password': this.passwordFormModel.get('passwordsGroup').get('password').value
+    }).subscribe(r => {
+      this.loadData();
+    });
+
+    /*
+      this.employeeService.updatePassword(this.passwordFormModel.value).subscribe(r=>{
+        this.loadData();
+      })
+      */
+
   }
 
   onChangePasswordLinkClicked() {
+
+    this.passwordFormModel.reset();
+    this.passwordFormModel.controls['id'].setValue(this.employee.id);
     this.changePasswordModal.open();
   }
 
@@ -193,11 +231,14 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
   }
 
   onChangeLoginAccountButtonClicked() {
+
+    this.changeLoginAccountModel.controls['id'].setValue(this.employee.id);
     this.changeAccountWarningModal.open();
   }
 
   onChangeAccountModalClosed() {
-
-
+    this.employeeService.updateEmployeeLoginAccount(this.changeLoginAccountModel.value).subscribe(r => {
+      this.loadData();
+    })
   }
 }
