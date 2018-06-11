@@ -23,7 +23,7 @@
   <tbody>
   <template ngFor let-authorization [ngForOf]="authorizations" let-i="index">
     <tr>
-      <td> {{authorization.username}}</td>
+      <td> {{authorization.username}}({{authorization.userAccount}})</td>
       <template ngFor let-assignment [ngForOf]="authorization?.authorizationAssignmentList" let-j="index">
         <template ngFor let-op [ngForOf]="getAuthorizationTopicById(assignment.topic.id)?.availableTopicOperationList"
                   let-k="index">

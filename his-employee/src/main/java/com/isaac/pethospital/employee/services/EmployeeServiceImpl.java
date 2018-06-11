@@ -1,5 +1,9 @@
 package com.isaac.pethospital.employee.services;
 
+import com.isaac.pethospital.common.dtos.JmsEmployeeOperationRequest;
+import com.isaac.pethospital.common.enums.OperationEnum;
+import com.isaac.pethospital.common.jms.JmsAuthorizationProperties;
+import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
@@ -18,15 +22,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final DepartmentService departmentService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final JmsSender jmsSender;
+    private final JmsAuthorizationProperties jmsAuthorizationProperties;
 
     private String getUserAccount() {
         return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService, BCryptPasswordEncoder bCryptPasswordEncoder, JmsSender jmsSender, JmsAuthorizationProperties jmsAuthorizationProperties) {
         this.employeeRepository = employeeRepository;
         this.departmentService = departmentService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.jmsSender = jmsSender;
+        this.jmsAuthorizationProperties = jmsAuthorizationProperties;
     }
 
     @Override
@@ -56,11 +64,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         if (de.getManager() == null) {
             ee.setDepartmentInCharge(de);
-            Long rootId=this.departmentService.findRootDepartment().getId();
-            DepartmentEntity root=this.departmentService.findById(rootId);
+            Long rootId = this.departmentService.findRootDepartment().getId();
+            DepartmentEntity root = this.departmentService.findById(rootId);
             ee.setDirectReportTo(root.getManager());
-        }
-        else {
+        } else {
             ee.setDirectReportTo(de.getManager());
         }
 
@@ -102,7 +109,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-
     @Override
     public EmployeeOperationRequest findUserNameByUserAccount(String userAccount) {
         EmployeeEntity ee = this.employeeRepository.findByLoginAccount(userAccount);
@@ -121,10 +127,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public boolean deleteEmployee(Long id) {
+        EmployeeEntity ee = null;
 
         if (this.employeeRepository.exists(id)) {
+            ee = this.employeeRepository.findOne(id);
             this.employeeRepository.delete(id);
+
+            JmsEmployeeOperationRequest jmsEmployeeOperationRequest = new JmsEmployeeOperationRequest(OperationEnum.DELETE, ee.getId(), ee.getFullName(), ee.getLoginAccount());
+            this.jmsSender.sendEvent(this.jmsAuthorizationProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
         }
+
         return true;
     }
 
@@ -136,6 +148,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeEntity employeeEntity = this.employeeRepository.findOne(request.getId());
         request.updateEmployee(employeeEntity);
         this.employeeRepository.save(employeeEntity);
+
+        JmsEmployeeOperationRequest jmsEmployeeOperationRequest = new JmsEmployeeOperationRequest(OperationEnum.UPDATE, employeeEntity.getId(), employeeEntity.getFullName(), employeeEntity.getLoginAccount());
+        this.jmsSender.sendEvent(this.jmsAuthorizationProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
+
         return true;
     }
 
@@ -147,7 +163,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeEntity employeeEntity = this.employeeRepository.findOne(request.getId());
         employeeEntity.setLoginAccount(request.getLoginAccount());
         this.employeeRepository.save(employeeEntity);
+
+
+        JmsEmployeeOperationRequest jmsEmployeeOperationRequest = new JmsEmployeeOperationRequest(OperationEnum.UPDATE, employeeEntity.getId(), employeeEntity.getFullName(), employeeEntity.getLoginAccount());
+        this.jmsSender.sendEvent(this.jmsAuthorizationProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
         return true;
+
 
     }
 

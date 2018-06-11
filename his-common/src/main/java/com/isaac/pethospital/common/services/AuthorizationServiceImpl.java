@@ -2,16 +2,19 @@ package com.isaac.pethospital.common.services;
 
 import com.isaac.pethospital.common.dtos.AuthorizationAssignmentOperationRequest;
 import com.isaac.pethospital.common.dtos.AuthorizationOperationRequest;
+import com.isaac.pethospital.common.dtos.JmsEmployeeOperationRequest;
 import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
 import com.isaac.pethospital.common.entities.AuthorizationEntity;
 import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
 import com.isaac.pethospital.common.entities.TopicOperationEntity;
+import com.isaac.pethospital.common.enums.OperationEnum;
 import com.isaac.pethospital.common.repositories.AuthorizationAssignmentRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.transaction.Transactional;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -168,7 +171,26 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public void setDomainName(String domainName) {
-        this.domainName=domainName;
+        this.domainName = domainName;
+    }
+
+    @Override
+    @Transactional
+    public void onUserChanged(JmsEmployeeOperationRequest request) {
+
+        AuthorizationEntity entity = this.authorizationRepository.findByUid(request.getUid());
+        if (entity != null) {
+            if (request.getOperation() == OperationEnum.UPDATE) {
+                entity.setUserAccount(request.getUserAccount());
+                entity.setUsername(request.getUsername());
+                this.authorizationRepository.save(entity);
+            }
+            else if(request.getOperation()==OperationEnum.DELETE)
+            {
+                this.deleteById(entity.getId());
+            }
+        }
+
     }
 
     /*

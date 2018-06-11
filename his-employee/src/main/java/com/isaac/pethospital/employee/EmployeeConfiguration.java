@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee;
 
+import com.isaac.pethospital.common.jms.JmsAuthorizationProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.common.time.DatetimeGenerator;
@@ -10,7 +11,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-//@EnableConfigurationProperties({JmsProperties.class})
+@EnableConfigurationProperties({JmsAuthorizationProperties.class})
 public class EmployeeConfiguration {
 
     @Bean

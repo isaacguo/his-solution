@@ -1,6 +1,7 @@
 package com.isaac.pethospital.common.services;
 
 import com.isaac.pethospital.common.dtos.AuthorizationOperationRequest;
+import com.isaac.pethospital.common.dtos.JmsEmployeeOperationRequest;
 import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
 import com.isaac.pethospital.common.entities.AuthorizationEntity;
 
@@ -27,4 +28,6 @@ public interface AuthorizationService {
 
     String getDomainName();
     void setDomainName(String domainName);
+
+    void onUserChanged(JmsEmployeeOperationRequest request);
 }

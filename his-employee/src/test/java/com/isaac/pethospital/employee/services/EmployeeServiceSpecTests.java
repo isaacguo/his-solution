@@ -1,5 +1,7 @@
 package com.isaac.pethospital.employee.services;
 
+import com.isaac.pethospital.common.jms.JmsAuthorizationProperties;
+import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.dto.MyDepartmentIdAndNameAndChildren;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
@@ -19,13 +21,17 @@ public class EmployeeServiceSpecTests {
     EmployeeService employeeService;
     DepartmentService departmentService;
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    JmsSender jmsSender;
+    JmsAuthorizationProperties jmsAuthorizationProperties;
 
     @Before
     public void before() {
         this.employeeRepository = mock(EmployeeRepository.class);
-        this.departmentService=mock(DepartmentService.class);
-        this.bCryptPasswordEncoder=mock(BCryptPasswordEncoder.class);
-        this.employeeService = spy(new EmployeeServiceImpl(this.employeeRepository,this.departmentService,this.bCryptPasswordEncoder));
+        this.departmentService = mock(DepartmentService.class);
+        this.bCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
+        this.jmsSender=mock(JmsSender.class);
+        this.jmsAuthorizationProperties=mock(JmsAuthorizationProperties.class);
+        this.employeeService = spy(new EmployeeServiceImpl(this.employeeRepository, this.departmentService, this.bCryptPasswordEncoder,jmsSender,jmsAuthorizationProperties));
     }
 
     @Test
@@ -36,9 +42,9 @@ public class EmployeeServiceSpecTests {
         employeeOperationRequest.setGivenName("Guo");
         employeeOperationRequest.setDepartmentId(1L);
         doReturn(new DepartmentEntity()).when(departmentService).findById(any(Long.class));
-        DepartmentEntity departmentEntity=new DepartmentEntity();
+        DepartmentEntity departmentEntity = new DepartmentEntity();
         departmentEntity.setId(1L);
-        MyDepartmentIdAndNameAndChildren myDepartmentIdAndNameAndChildren=new MyDepartmentIdAndNameAndChildren();
+        MyDepartmentIdAndNameAndChildren myDepartmentIdAndNameAndChildren = new MyDepartmentIdAndNameAndChildren();
         myDepartmentIdAndNameAndChildren.setId(1L);
         doReturn(myDepartmentIdAndNameAndChildren).when(this.departmentService).findRootDepartment();
         doReturn(departmentEntity).when(this.departmentService).findById(1L);
@@ -55,6 +61,7 @@ public class EmployeeServiceSpecTests {
         EmployeeOperationRequest employeeOperationRequest = new EmployeeOperationRequest();
         employeeOperationRequest.setId(1L);
         doReturn(true).when(employeeRepository).exists(1L);
+        doReturn(new EmployeeEntity()).when(employeeRepository).findOne(1L);
         //when
         this.employeeService.deleteEmployee(1L);
         //then
@@ -84,28 +91,26 @@ public class EmployeeServiceSpecTests {
         //when
         this.employeeService.findBySurnameAndGivenName(employeeOperationRequest);
         //then
-        verify(employeeRepository, times(1)).findBySurnameAndGivenName(any(String.class),any(String.class));
+        verify(employeeRepository, times(1)).findBySurnameAndGivenName(any(String.class), any(String.class));
     }
 
     @Test
-    public void givenTwoIdWhenSetEmployeeReportToRelationshipThenDoIt()
-    {
+    public void givenTwoIdWhenSetEmployeeReportToRelationshipThenDoIt() {
         //given
         doReturn(new EmployeeEntity()).when(this.employeeRepository).findOne(any(Long.class));
         //when
-        this.employeeService.setReportTo(any(Long.class),any(Long.class));
+        this.employeeService.setReportTo(any(Long.class), any(Long.class));
         //then
-        verify(employeeRepository,times(2)).findOne(any(Long.class));
-        verify(employeeRepository,times(1)).save(any(EmployeeEntity.class));
+        verify(employeeRepository, times(2)).findOne(any(Long.class));
+        verify(employeeRepository, times(1)).save(any(EmployeeEntity.class));
     }
 
     @Test
-    public void ds()
-    {
+    public void ds() {
         //when
         this.employeeService.findKeywordInName(any(String.class));
         //then
-        verify(this.employeeRepository,times(1)).findDistinctByFullNameContains(any(String.class));
+        verify(this.employeeRepository, times(1)).findDistinctByFullNameContains(any(String.class));
     }
 
 }
