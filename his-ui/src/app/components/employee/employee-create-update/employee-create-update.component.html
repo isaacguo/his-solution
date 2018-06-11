@@ -67,7 +67,7 @@
           <div>
             <label>再次输入一次</label>
             <input class="form-control" type="password" formControlName="pconfirm">
-            <small class="text-danger" [hidden]="!passwordFormModel.hasError('equal', 'passwordsGroup')">两次输入的密码不相同</small>
+            <small class="text-danger" [hidden]="!passwordFormModel.hasError('equal', ['passwordsGroup'])">两次输入的密码不相同</small>
           </div>
         </div>
 
