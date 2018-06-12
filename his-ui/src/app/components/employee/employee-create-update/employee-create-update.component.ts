@@ -30,7 +30,7 @@ function equalValidator({value}: FormGroup): { [key: string]: any } {
 })
 export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent implements OnInit {
 
-  employee: Employee;
+  employee: any;
 
   changeLoginAccountModel: FormGroup;
 

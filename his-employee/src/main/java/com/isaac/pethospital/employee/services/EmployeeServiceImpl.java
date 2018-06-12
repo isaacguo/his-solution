@@ -76,14 +76,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeEntity getMyInfo() {
+    public EmployeeOperationRequest getMyInfo() {
         String userAccount = this.getUserAccount();
-        return this.employeeRepository.findByLoginAccount(userAccount);
+        EmployeeEntity ee = this.employeeRepository.findByLoginAccount(userAccount);
+        if (ee == null)
+            throw new RuntimeException("Cannot find Employee by uuid");
+        return EmployeeOperationRequest.convertToDto(ee);
     }
 
     @Override
-    public EmployeeEntity getEmployeeByUuid(String uuid) {
-        return this.employeeRepository.findByUuid(uuid);
+    public EmployeeOperationRequest getEmployeeByUuid(String uuid) {
+        EmployeeEntity ee = this.employeeRepository.findByUuid(uuid);
+        if (ee == null)
+            throw new RuntimeException("Cannot find Employee by uuid");
+        return EmployeeOperationRequest.convertToDto(ee);
     }
 
     @Override

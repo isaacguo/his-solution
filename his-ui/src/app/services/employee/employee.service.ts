@@ -44,13 +44,13 @@ export class EmployeeService extends AbstractService {
     return this.authHttp.get(url).map(this.extractData);
   }
 
-  getMyInfo(): Observable<Employee> {
+  getMyInfo(): Observable<any> {
     let url = `/api/hisemployee/employees/getMyInfo`;
     return this.authHttp.get(url)
       .map(this.extractData);
   }
 
-  getEmployeeInfoByEmployeeUuid(uuid: string): Observable<Employee> {
+  getEmployeeInfoByEmployeeUuid(uuid: string): Observable<any> {
     let url = `/api/hisemployee/employees/${uuid}/`;
     return this.authHttp.get(url)
       .map(this.extractData);

@@ -13,37 +13,16 @@ import java.util.List;
 
 public class EmployeeOperationRequest {
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public Long getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Long departmentId) {
-        this.departmentId = departmentId;
-    }
-
     Long departmentId;
-
     //Used By other services(procurement)
     String userAccount;
     String searchByTitle;
     String fullName;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     String password;
-
-
     //from EmployeeEntity
     String uuid;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
     private Long id;
     private String loginAccount;
     private String givenName;
@@ -51,8 +30,6 @@ public class EmployeeOperationRequest {
     private String employeeNumber;
     private String idNumber;
     private String driverLicenseNumber;
-
-
     private LocalDate dateOfBirth;
     private SexualEnum gender;
     private String nationality;
@@ -63,6 +40,70 @@ public class EmployeeOperationRequest {
     private LocalDate joinedDate;
     private ContactAddressEntity contactAddress;
     private String jobTitle;
+    private EmploymentStatusEnum employmentStatus;
+    private LeaveInfoEntity leaveInfo;
+    private List<LeaveRecordEntity> leaveRecords = new LinkedList<>();
+    private List<EmployeeEntity> teamMembers = new LinkedList<>();
+    private DepartmentEntity department;
+    private String emergencyContact;
+    private String emergencyPhoneNumber;
+
+    private String directReportToFullName;
+
+    public String getDirectReportToFullName() {
+        return directReportToFullName;
+    }
+
+    public void setDirectReportToFullName(String directReportToFullName) {
+        this.directReportToFullName = directReportToFullName;
+    }
+
+    public static EmployeeOperationRequest convertToDto(EmployeeEntity ee)
+    {
+        EmployeeOperationRequest employeeOperationRequest=new EmployeeOperationRequest();
+
+        employeeOperationRequest.setId(ee.getId());
+        employeeOperationRequest.setLoginAccount(ee.getLoginAccount());
+        employeeOperationRequest.setEmployeeNumber(ee.getEmployeeNumber());
+        employeeOperationRequest.setEmploymentStatus(ee.getEmploymentStatus());
+        employeeOperationRequest.setGivenName(ee.getGivenName());
+        employeeOperationRequest.setSurname(ee.getSurname());
+        employeeOperationRequest.setIdNumber(ee.getIdNumber());
+        employeeOperationRequest.setDriverLicenseNumber(ee.getDriverLicenseNumber());
+        employeeOperationRequest.setFullName(ee.getFullName());
+        employeeOperationRequest.setDateOfBirth(ee.getDateOfBirth());
+        employeeOperationRequest.setGender(ee.getGender());
+        employeeOperationRequest.setNationality(ee.getNationality());
+        employeeOperationRequest.setEthnic(ee.getEthnic());
+        employeeOperationRequest.setEmail(ee.getEmail());
+        employeeOperationRequest.setWorkPhoneNumber(ee.getWorkPhoneNumber());
+        employeeOperationRequest.setMaritalStatus(ee.getMaritalStatus());
+        employeeOperationRequest.setJoinedDate(ee.getJoinedDate());
+        employeeOperationRequest.setJobTitle(ee.getJobTitle());
+
+        if(ee.getDirectReportTo()!=null)
+        employeeOperationRequest.setDirectReportToFullName(ee.getDirectReportTo().getFullName());
+
+
+        return employeeOperationRequest;
+
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getUuid() {
         return uuid;
@@ -264,15 +305,6 @@ public class EmployeeOperationRequest {
         this.emergencyPhoneNumber = emergencyPhoneNumber;
     }
 
-    private EmploymentStatusEnum employmentStatus;
-    private LeaveInfoEntity leaveInfo;
-    private List<LeaveRecordEntity> leaveRecords = new LinkedList<>();
-    private List<EmployeeEntity> teamMembers = new LinkedList<>();
-    private DepartmentEntity department;
-    private String emergencyContact;
-    private String emergencyPhoneNumber;
-
-
     public String getUserAccount() {
         return userAccount;
     }
@@ -327,5 +359,6 @@ public class EmployeeOperationRequest {
         ee.setMaritalStatus(this.maritalStatus);
         ee.setJoinedDate(this.joinedDate);
         ee.setJobTitle(this.jobTitle);
+
     }
 }

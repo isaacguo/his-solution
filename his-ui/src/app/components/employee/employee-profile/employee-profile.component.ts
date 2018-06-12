@@ -14,7 +14,7 @@ import {OperationEnum} from "../../../enums/operation.enum";
 export class EmployeeProfileComponent implements OnInit {
 
   uuid: string;
-  employee: Employee = {};
+  employee: any;
 
   constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {
 

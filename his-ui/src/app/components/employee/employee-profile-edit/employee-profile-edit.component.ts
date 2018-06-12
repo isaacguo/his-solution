@@ -12,7 +12,7 @@ import {error} from "util";
 export class EmployeeProfileEditComponent implements OnInit {
 
   uuid: string;
-  employee: Employee;
+  employee: any;
 
   constructor(private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute) {
 

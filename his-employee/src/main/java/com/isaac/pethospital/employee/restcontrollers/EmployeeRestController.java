@@ -29,13 +29,13 @@ public class EmployeeRestController {
     }
 
     @GetMapping(value = "/getMyInfo")
-    public EmployeeEntity getMyInfo() {
+    public EmployeeOperationRequest getMyInfo() {
         return this.employeeService.getMyInfo();
 
     }
 
     @GetMapping("/{uuid}/")
-    public EmployeeEntity getEmployeeInfoByEmployeeUuidId(@PathVariable("uuid") String uuid) {
+    public EmployeeOperationRequest getEmployeeInfoByEmployeeUuidId(@PathVariable("uuid") String uuid) {
         return this.employeeService.getEmployeeByUuid(uuid);
     }
 

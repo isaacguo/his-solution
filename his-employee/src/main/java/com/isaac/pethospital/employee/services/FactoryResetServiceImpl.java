@@ -60,7 +60,11 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
         DepartmentEntity departmentEntity0 = new DepartmentEntity();
         departmentEntity0.setName("总经理");
-        EmployeeEntity ee = departmentEntity0.addEmployeeByName("sunzong", bCryptPasswordEncoder.encode("sunzong_1"), "孙总", "总经理", null);
+
+        EmployeeEntity root=new EmployeeEntity();
+        employeeRepository.save(root);
+
+        EmployeeEntity ee = departmentEntity0.addEmployeeByName("sunzong", bCryptPasswordEncoder.encode("sunzong_1"), "孙总", "总经理", root);
         departmentEntity0.setManager(ee);
         departmentEntity0.addEmployeeByName("zhangzong",bCryptPasswordEncoder.encode("zhangzong_1"),"张总","总经理", ee);
         EmployeeEntity boss = ee;

@@ -13,9 +13,9 @@ public interface EmployeeService {
     EmployeeEntity getEmployeeById(long id);
     boolean createEmployee(EmployeeOperationRequest request);
 
-    EmployeeEntity getMyInfo();
+    EmployeeOperationRequest getMyInfo();
 
-    EmployeeEntity getEmployeeByUuid(String uuid);
+    EmployeeOperationRequest getEmployeeByUuid(String uuid);
     List<String> getOrganizationNames();
     List<String> getSupportedRelationships();
 
