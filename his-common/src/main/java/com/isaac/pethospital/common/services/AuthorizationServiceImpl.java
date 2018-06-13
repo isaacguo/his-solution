@@ -1,23 +1,24 @@
 package com.isaac.pethospital.common.services;
 
+import com.isaac.pethospital.common.constants.AuthorizationConstants;
 import com.isaac.pethospital.common.dtos.AuthorizationAssignmentOperationRequest;
 import com.isaac.pethospital.common.dtos.AuthorizationOperationRequest;
 import com.isaac.pethospital.common.dtos.JmsEmployeeOperationRequest;
-import com.isaac.pethospital.common.entities.AuthorizationAssignmentEntity;
-import com.isaac.pethospital.common.entities.AuthorizationEntity;
-import com.isaac.pethospital.common.entities.AuthorizationTopicEntity;
-import com.isaac.pethospital.common.entities.TopicOperationEntity;
+import com.isaac.pethospital.common.entities.*;
 import com.isaac.pethospital.common.enums.OperationEnum;
 import com.isaac.pethospital.common.repositories.AuthorizationAssignmentRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
+import com.isaac.pethospital.common.repositories.CommonConfigurationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.security.auth.login.Configuration;
 import javax.transaction.Transactional;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CompletionException;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,11 +26,13 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final AuthorizationRepository authorizationRepository;
     private final AuthorizationTopicRepository authorizationTopicRepository;
     private final AuthorizationAssignmentRepository authorizationAssignmentRepository;
+    private final CommonConfigurationRepository commonConfigurationRepository;
 
-    public AuthorizationServiceImpl(AuthorizationRepository authorizationRepository, AuthorizationTopicRepository authorizationTopicRepository, AuthorizationAssignmentRepository authorizationAssignmentRepository) {
+    public AuthorizationServiceImpl(AuthorizationRepository authorizationRepository, AuthorizationTopicRepository authorizationTopicRepository, AuthorizationAssignmentRepository authorizationAssignmentRepository, CommonConfigurationRepository commonConfigurationRepository) {
         this.authorizationRepository = authorizationRepository;
         this.authorizationTopicRepository = authorizationTopicRepository;
         this.authorizationAssignmentRepository = authorizationAssignmentRepository;
+        this.commonConfigurationRepository = commonConfigurationRepository;
     }
 
     @Override
@@ -162,16 +165,20 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             return ae.getAuthorizationAssignmentList();
     }
 
-    String domainName;
-
     @Override
     public String getDomainName() {
-        return this.domainName;
+        return this.commonConfigurationRepository.findByConfKey(AuthorizationConstants.DOMAIN_NAME).getConfValue();
     }
 
     @Override
     public void setDomainName(String domainName) {
-        this.domainName = domainName;
+        CommonConfigurationEntity cce= this.commonConfigurationRepository.findByConfKey(AuthorizationConstants.DOMAIN_NAME);
+        if(cce!=null)
+            this.commonConfigurationRepository.delete(cce);
+        cce=new CommonConfigurationEntity();
+        cce.setConfKey(AuthorizationConstants.DOMAIN_NAME);
+        cce.setConfValue(domainName);
+        this.commonConfigurationRepository.save(cce);
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.isaac.pethospital.common.entities.TopicOperationEntity;
 import com.isaac.pethospital.common.repositories.AuthorizationAssignmentRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationRepository;
 import com.isaac.pethospital.common.repositories.AuthorizationTopicRepository;
+import com.isaac.pethospital.common.repositories.CommonConfigurationRepository;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.common.services.AuthorizationServiceImpl;
 import org.junit.Before;
@@ -31,6 +32,7 @@ public class AuthorizationServiceSpecTests {
     AuthorizationTopicRepository authorizationTopicRepository;
     AuthorizationAssignmentRepository authorizationAssignmentRepository;
     AuthorizationService authorizationService;
+    CommonConfigurationRepository commonConfigurationRepository;
 
 
     @Rule
@@ -41,8 +43,9 @@ public class AuthorizationServiceSpecTests {
         this.authorizationRepository = mock(AuthorizationRepository.class);
         this.authorizationTopicRepository = mock(AuthorizationTopicRepository.class);
         this.authorizationAssignmentRepository = mock(AuthorizationAssignmentRepository.class);
+        this.commonConfigurationRepository=mock(CommonConfigurationRepository.class);
         this.authorizationService = spy(new AuthorizationServiceImpl(this.authorizationRepository, this.authorizationTopicRepository,
-                this.authorizationAssignmentRepository));
+                this.authorizationAssignmentRepository,this.commonConfigurationRepository));
     }
 
     @Test
