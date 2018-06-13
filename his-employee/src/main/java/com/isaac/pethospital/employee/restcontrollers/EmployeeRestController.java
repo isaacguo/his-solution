@@ -109,4 +109,17 @@ public class EmployeeRestController {
     public List<EmployeeListItem> findEmployeesForEmployeeListItemByDepartmentId(@PathVariable("departmentId") Long departmentId) {
         return this.employeeService.findEmployeesForEmployeeListItemByDepartmentId(departmentId);
     }
+
+    @PutMapping(value = "/move-employee-to-department")
+    public boolean moveEmployeeToDepartment(@RequestBody EmployeeOperationRequest request)
+    {
+       return this.employeeService.moveEmployeeToDepartment(request.getId(), request.getDepartmentId());
+    }
+
+    @PutMapping(value="/set-as-manager")
+    public boolean setAsManager(@RequestBody EmployeeOperationRequest request)
+    {
+       return this.employeeService.setAsManager(request.getId());
+    }
+
 }

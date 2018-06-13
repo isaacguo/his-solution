@@ -309,6 +309,11 @@ public class EmployeeEntity {
         this.teamMembers.remove(teamMember);
         teamMember.setDirectReportTo(null);
     }
+    public void removeAllTeamMembers()
+    {
+        this.teamMembers.forEach(r->{r.setDirectReportTo(null);});
+        this.teamMembers=new LinkedList<>();
+    }
 
     public DepartmentEntity getDepartment() {
         return department;

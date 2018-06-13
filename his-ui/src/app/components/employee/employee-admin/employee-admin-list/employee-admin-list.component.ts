@@ -6,6 +6,7 @@ import {DepartmentListItem} from "../../../../dto/employee/department-list-item.
 import {EmployeeDepartmentService} from "../../../../services/employee/employee-department.service";
 import {MyTreeNode} from "../../../../dto/procurement/MyTreeNode";
 import {TreeviewOperationEnum} from "../../../../enums/treeview-operation.enum";
+import {TreeNodeService} from "../../../../services/common/tree-node.service";
 
 @Component({
   selector: 'app-employee-admin-list',
@@ -32,7 +33,7 @@ export class EmployeeAdminListComponent implements OnInit {
   selectedNodeName: string;
   selectedDepartmentId: number;
 
-  constructor(private employeeDepartmentService: EmployeeDepartmentService) {
+  constructor(private employeeDepartmentService: EmployeeDepartmentService, private treeNodeService: TreeNodeService) {
   }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class EmployeeAdminListComponent implements OnInit {
 
   private loadData() {
     this.employeeDepartmentService.getRootDepartment().subscribe(r => {
-      this.nodes.splice(0,this.nodes.length);
+      this.nodes.splice(0, this.nodes.length);
       this.nodes.push(r);
       this.tree.treeModel.update();
       this.tree.treeModel.expandAll();
@@ -52,7 +53,7 @@ export class EmployeeAdminListComponent implements OnInit {
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
     const index = this.tree.treeModel.getActiveNode().index;
-    let cnode: MyTreeNode = this.getMyTreeNodeById(nodeId);
+    let cnode: MyTreeNode = this.treeNodeService.getMyTreeNodeById(this.nodes, nodeId);
     this.employeeDepartmentService.deleteDepartment(cnode.categoryId).subscribe(r => {
       this.loadData()
     });
@@ -100,7 +101,7 @@ export class EmployeeAdminListComponent implements OnInit {
     this.nodeOperation = TreeviewOperationEnum.EDIT_NODE;
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
-    let node = this.getMyTreeNodeById(nodeId);
+    let node = this.treeNodeService.getMyTreeNodeById(this.nodes, nodeId);
     this.departmentName.setValue(node.name);
 
     this.editNodeModal.open();
@@ -141,7 +142,7 @@ export class EmployeeAdminListComponent implements OnInit {
   onEditNode() {
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
-    let node = this.getMyTreeNodeById(nodeId);
+    let node = this.treeNodeService.getMyTreeNodeById(this.nodes, nodeId);
 
     this.employeeDepartmentService.renameDepartment(node.categoryId, this.departmentName.value).subscribe(r => {
       this.loadData();
@@ -179,7 +180,7 @@ export class EmployeeAdminListComponent implements OnInit {
   getSelectedNodeName() {
     if (this.tree.treeModel.getActiveNode() != null) {
       const nodeId = this.tree.treeModel.getActiveNode().id;
-      let node = this.getMyTreeNodeById(nodeId);
+      let node = this.treeNodeService.getMyTreeNodeById(this.nodes, nodeId);
       this.selectedNodeName = node.name;
       this.selectedDepartmentId = node.categoryId;
     } else return "";
@@ -187,18 +188,6 @@ export class EmployeeAdminListComponent implements OnInit {
 
   onPreRemoveNodeButtonClicked() {
     this.confirmDeleteModal.open();
-  }
-
-  private getMyTreeNodeById(nodeId: any) {
-    let parentNode: any;
-    for (let cnode of this.nodes) {
-      let found = cnode.findById(nodeId);
-      if (found != null) {
-        parentNode = found;
-        break;
-      }
-    }
-    return parentNode;
   }
 
 }

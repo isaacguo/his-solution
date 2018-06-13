@@ -20,6 +20,8 @@ export class EmployeeService extends AbstractService {
   private updateEmployeeUrl: string = `${this.rootUrl}/update`;
   private updateEmployeeLoginAccountUrl: string = `${this.rootUrl}/updateLoginAccount`;
   private updateEmployeePasswordUrl: string = `${this.rootUrl}/updatePassword`;
+  private moveEmployeeToDepartmentUrl:string= `${this.rootUrl}/move-employee-to-department`;
+  private setAsManagerUrl:string=`${this.rootUrl}/set-as-manager`;
 
   constructor(private authHttp: AuthHttp) {
     super();
@@ -70,19 +72,37 @@ export class EmployeeService extends AbstractService {
   }
 
   createEmployee(value: any): Observable<boolean> {
-    return this.authHttp.post(this.createEmployeeUrl, value).map(this.extractData);
+    return this.authHttp.post(this.createEmployeeUrl, value).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
   updateEmployee(value: any): Observable<boolean> {
-    return this.authHttp.put(this.updateEmployeeUrl, value).map(this.extractData);
+    return this.authHttp.put(this.updateEmployeeUrl, value).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
   updateEmployeeLoginAccount(value: any): Observable<boolean> {
-    return this.authHttp.put(this.updateEmployeeLoginAccountUrl, value).map(this.extractData);
+    return this.authHttp.put(this.updateEmployeeLoginAccountUrl, value).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
   updatePassword(value: any): Observable<boolean> {
-    return this.authHttp.put(this.updateEmployeePasswordUrl, value).map(this.extractData);
+    return this.authHttp.put(this.updateEmployeePasswordUrl, value).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+  moveEmployeeToDepartment(empId:number, depId:string):Observable<boolean>{
+    return this.authHttp.put(this.moveEmployeeToDepartmentUrl, {'id':empId, 'departmentId':depId}).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+  setAsManager(empId:number):Observable<boolean>{
+    return this.authHttp.put(this.setAsManagerUrl, {'id':empId}).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
 }

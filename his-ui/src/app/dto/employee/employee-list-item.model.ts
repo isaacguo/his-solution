@@ -1,5 +1,6 @@
 export class EmployeeListItem {
 
+  public id:string;
   public uuid:string;
   public employeeNumber: string;
   public workPhoneNumber: string;

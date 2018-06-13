@@ -1,5 +1,43 @@
-<modal #confirmDeletionModal (onClose)="onConfirmDeletionModalClosed()">
+<modal #setAsManagerConfirmationModal (onClose)="onSetAsManagerConfirmationModalClosed()">
   <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">调整部门</h4>
+    </modal-header>
+    <modal-body>
+      确定将<b>{{toBeManager?.fullName}}</b>设置为部门主管？
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="setAsManagerConfirmationModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="setAsManagerConfirmationModal"
+              (click)="setAsManagerConfirmationModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<modal #adjustDepartmentModal (onClose)="onAdjustDepartmentModalClosed()">
+  <form #modalForm2="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">调整部门</h4>
+    </modal-header>
+    <modal-body>
+
+      <label>请选择部门: {{selectedNodeName}}</label>
+      <tree-root #tree (activate)="onNodeActivated($event)"  [nodes]="nodes"></tree-root>
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="adjustDepartmentModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="adjustDepartmentModal"
+              (click)="adjustDepartmentModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<modal #confirmDeletionModal (onClose)="onConfirmDeletionModalClosed()">
+  <form #modalForm3="ngForm">
     <modal-header [show-close]="true">
       <h4 class="modal-title">请确认</h4>
     </modal-header>
@@ -45,20 +83,27 @@
       <img
         [src]="employee?.gender==='MALE'?'../../../../assets/images/male-profile.png':'../../../../assets/images/female-profile.png'"
         style="width:45px;height: 45px;" alt="User Image">
-      <td>{{employee.employeeNumber}}</td>
+      <td>{{employee?.employeeNumber}}</td>
       <td>{{employee?.fullName}}</td>
-      <td>{{employee.jobTitle}}</td>
-      <td>{{employee.workPhoneNumber}}</td>
+      <td>{{employee?.jobTitle}}</td>
+      <td>{{employee?.workPhoneNumber}}</td>
       <td>{{employee?.departmentName}}</td>
       <td>{{employee?.gender==='MALE'?'男':'女'}}</td>
       <td>{{employee?.directReportTo}}</td>
       <td>
         <div class="button-group">
-          <button type="button" class="btn btn-default btn-s" (click)="onViewButtonClicked(employee.uuid)"><span
+          <button title="查看员工信息" type="button" class="btn btn-default btn-s"
+                  (click)="onViewButtonClicked(employee.uuid)"><span
             class="glyphicon glyphicon-search"></span></button>
-          <button type="button" class="btn btn-default btn-s" (click)="onEditButtonClicked(employee.uuid)"><span
+          <button title="修改员工信息" type="button" class="btn btn-default btn-s"
+                  (click)="onEditButtonClicked(employee.uuid)"><span
             class="glyphicon glyphicon-pencil"></span></button>
-          <button type="button" class="btn btn-default btn-s" (click)="onRemoveButtonClicked(employee)"><span class="glyphicon glyphicon-remove"></span></button>
+          <button title="删除员工" type="button" class="btn btn-default btn-s" (click)="onRemoveButtonClicked(employee)">
+            <span class="glyphicon glyphicon-remove"></span></button>
+          <button title="调整部门" type="button" (click)="onAdjustDepartment(employee)" class="btn btn-default btn-s"><span
+            class="glyphicon glyphicon-briefcase"></span></button>
+          <button title="设置为部门主管" type="button" (click)="onSetAsManager(employee)" class="btn btn-default btn-s"><span
+            class="glyphicon glyphicon-upload"></span></button>
         </div>
       </td>
     </tr>

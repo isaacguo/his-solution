@@ -22,6 +22,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public DepartmentRepository getDepartmentRepository() {
+        return this.departmentRepository;
+    }
+
+    @Override
     public List<DepartmentEntity> findAll() {
         return this.departmentRepository.findAll();
     }

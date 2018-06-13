@@ -49,6 +49,11 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     void init() {
         authorizationService.setDomainName("Employee");
         authorizationTopicService.addAuthorizationTopicAndOperations("员工管理", "操作");
+
+
+
+        EmployeeEntity sentinel = new EmployeeEntity();
+        employeeRepository.save(sentinel);
     }
 
     @Override
@@ -61,12 +66,12 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         DepartmentEntity departmentEntity0 = new DepartmentEntity();
         departmentEntity0.setName("总经理");
 
-        EmployeeEntity root=new EmployeeEntity();
-        employeeRepository.save(root);
+        EmployeeEntity root = employeeRepository.getSentinelEmployee();
+
 
         EmployeeEntity ee = departmentEntity0.addEmployeeByName("sunzong", bCryptPasswordEncoder.encode("sunzong_1"), "孙总", "总经理", root);
         departmentEntity0.setManager(ee);
-        departmentEntity0.addEmployeeByName("zhangzong",bCryptPasswordEncoder.encode("zhangzong_1"),"张总","总经理", ee);
+        departmentEntity0.addEmployeeByName("zhangzong", bCryptPasswordEncoder.encode("zhangzong_1"), "张总", "总经理", ee);
         EmployeeEntity boss = ee;
 
         DepartmentEntity departmentEntity01 = new DepartmentEntity();

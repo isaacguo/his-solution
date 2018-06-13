@@ -1,10 +1,23 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
 
 @Injectable()
 export class TreeNodeService {
 
-  constructor() { }
+  constructor() {
+  }
+
+  getMyTreeNodeById(nodes: MyTreeNode[], nodeId: any) {
+    let parentNode: any;
+    for (let cnode of nodes) {
+      let found = cnode.findById(nodeId);
+      if (found != null) {
+        parentNode = found;
+        break;
+      }
+    }
+    return parentNode;
+  }
 
   treeConverter(json: any, isLevelOne: boolean): MyTreeNode {
 

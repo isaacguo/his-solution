@@ -8,6 +8,7 @@ import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
+import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,16 +61,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException("Department is null");
 
         ee.setUuid(uuid);
-        ee.setDepartment(de);
 
-        if (de.getManager() == null) {
-            ee.setDepartmentInCharge(de);
-            Long rootId = this.departmentService.findRootDepartment().getId();
-            DepartmentEntity root = this.departmentService.findById(rootId);
-            ee.setDirectReportTo(root.getManager());
-        } else {
-            ee.setDirectReportTo(de.getManager());
-        }
+        moveToTargetDepartmentInternal(de, ee);
 
         this.employeeRepository.save(ee);
         return true;
@@ -189,6 +182,102 @@ public class EmployeeServiceImpl implements EmployeeService {
         return true;
     }
 
+    @Override
+    public boolean moveEmployeeToDepartment(Long empId, Long depId) {
+
+        boolean isManager = false;
+        DepartmentEntity targetDepartment = this.departmentService.findById(depId);
+        if (targetDepartment == null)
+            throw new RuntimeException("Cannot Find Department");
+
+        EmployeeEntity ee = employeeRepository.findOne(empId);
+        if (ee == null)
+            throw new RuntimeException("Cannot Find Employee");
+
+        if (ee.getDepartment() == targetDepartment)
+            return true;
+
+        DepartmentEntity departmentInCharge = ee.getDepartmentInCharge();
+        if (departmentInCharge != null) {                            //if this employee is the manager of the old department and the last one of it, then move it
+            if (departmentInCharge.getEmployees().size() == 1) {
+                departmentInCharge.removeManager(ee);
+                departmentService.getDepartmentRepository().save(departmentInCharge);
+            } else {
+                throw new RuntimeException("Manager cannot move");
+            }
+        }
+
+
+        moveToTargetDepartmentInternal(targetDepartment, ee);
+
+
+
+        employeeRepository.save(ee);
+
+
+        return true;
+    }
+
+    private void moveToTargetDepartmentInternal(DepartmentEntity targetDepartment, EmployeeEntity ee) {
+        if (targetDepartment.getManager() == null)  {     //the first employee of current department
+
+            if(targetDepartment.getParent()==null)        // the root department
+                ee.setDirectReportTo(this.getSentinelEmployee());
+            else                            // not the first employee created
+                ee.setDirectReportTo(targetDepartment.getParent().getManager());
+            ee.setDepartmentInCharge(targetDepartment);
+        } else {                             // not the first employee to be created
+            ee.setDirectReportTo(targetDepartment.getManager());
+        }
+
+        ee.setDepartment(targetDepartment);
+    }
+
+    @Override
+    public boolean setAsManager(Long id) {
+
+        EmployeeEntity employeeEntity = this.employeeRepository.findOne(id);
+        if (employeeEntity == null)
+            throw new RuntimeException("Cannot find employee");
+
+        DepartmentEntity department = employeeEntity.getDepartment();
+
+        EmployeeEntity manager = employeeEntity.getDepartment().getManager();
+        if (manager == null)
+            throw new RuntimeException("Cannot find employee's manager");
+
+        EmployeeEntity director = manager.getDirectReportTo();
+        if (director == null)
+            throw new RuntimeException("Cannot find employee's manager's director");
+
+        if (employeeEntity == manager)
+            return true;
+
+        List<EmployeeEntity> teams = manager.getTeamMembers();
+
+        manager.removeAllTeamMembers();
+        manager.setDepartmentInCharge(null);
+
+        employeeEntity.setDirectReportTo(director);
+
+        teams.forEach(r -> {
+            if (r != employeeEntity) {
+                employeeEntity.addTeamMember(r);
+                employeeRepository.save(r);
+            }
+        });
+        employeeEntity.addTeamMember(manager);
+        employeeRepository.save(manager);
+        employeeRepository.save(employeeEntity);
+
+        department.setManager(employeeEntity);
+
+        departmentService.getDepartmentRepository().save(department);
+
+
+        return false;
+    }
+
 
     @Override
     public EmployeeEntity findBySurnameAndGivenName(EmployeeOperationRequest request) {
@@ -244,4 +333,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
+    public EmployeeEntity getSentinelEmployee() {
+        return this.employeeRepository.getSentinelEmployee();
+    }
 }

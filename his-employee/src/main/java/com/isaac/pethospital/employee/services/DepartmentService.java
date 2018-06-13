@@ -5,10 +5,13 @@ import com.isaac.pethospital.employee.dto.DepartmentIdAndNameAndChildren;
 import com.isaac.pethospital.employee.dto.DepartmentOperationRequest;
 import com.isaac.pethospital.employee.dto.MyDepartmentIdAndNameAndChildren;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
+import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 
 import java.util.List;
 
 public interface DepartmentService {
+
+    DepartmentRepository getDepartmentRepository();
     List<DepartmentEntity> findAll();
     DepartmentEntity findById(Long id);
 

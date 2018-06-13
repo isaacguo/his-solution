@@ -46,4 +46,8 @@ public interface EmployeeService {
     boolean updateLoginAccount(EmployeeOperationRequest request);
 
     boolean updatePassword(EmployeeOperationRequest request);
+
+    boolean moveEmployeeToDepartment(Long empId, Long depId);
+
+    boolean setAsManager(Long id);
 }

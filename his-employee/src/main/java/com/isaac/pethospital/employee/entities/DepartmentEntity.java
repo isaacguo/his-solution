@@ -69,6 +69,13 @@ public class DepartmentEntity {
         manager.setDepartmentInCharge(this);
         this.manager = manager;
     }
+    public void removeManager(EmployeeEntity manager)
+    {
+        if(manager==null)
+            throw new RuntimeException("Manager is null");
+        manager.setDepartmentInCharge(null);
+        this.manager =null;
+    }
 
     public Long getId() {
         return id;
