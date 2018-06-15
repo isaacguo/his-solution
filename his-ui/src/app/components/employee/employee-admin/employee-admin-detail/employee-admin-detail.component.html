@@ -1,3 +1,19 @@
+<modal #setAsManagerResultModal>
+  <form #modalForm4="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">调整部门</h4>
+    </modal-header>
+    <modal-body>
+      人员职位已调整完毕。接下来，请手动修改相关人员的职位信息。
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" data-dismiss="setAsManagerResultModal"
+              (click)="setAsManagerResultModal.dismiss()">确定
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
 <modal #setAsManagerConfirmationModal (onClose)="onSetAsManagerConfirmationModalClosed()">
   <form #modalForm1="ngForm">
     <modal-header [show-close]="true">
@@ -79,6 +95,32 @@
     </tr>
     </thead>
     <tbody role="alert" aria-live="polite" aria-relevant="all">
+    <tr *ngIf="manager!=null">
+      <img
+        [src]="manager?.gender==='MALE'?'../../../../assets/images/male-profile.png':'../../../../assets/images/female-profile.png'"
+        style="width:45px;height: 45px;" alt="User Image">
+      <td>{{manager?.employeeNumber}}</td>
+      <td>{{manager?.fullName}}</td>
+      <td>{{manager?.jobTitle}}</td>
+      <td>{{manager?.workPhoneNumber}}</td>
+      <td>{{manager?.departmentName}}</td>
+      <td>{{manager?.gender==='MALE'?'男':'女'}}</td>
+      <td>{{manager?.directReportTo}}</td>
+      <td>
+        <div class="button-group">
+          <button title="查看员工信息" type="button" class="btn btn-default btn-s"
+                  (click)="onViewButtonClicked(manager.uuid)"><span
+            class="glyphicon glyphicon-search"></span></button>
+          <button title="修改员工信息" type="button" class="btn btn-default btn-s"
+                  (click)="onEditButtonClicked(manager.uuid)"><span
+            class="glyphicon glyphicon-pencil"></span></button>
+          <button *ngIf="emplyeeList.length===0" title="删除员工" type="button" class="btn btn-default btn-s" (click)="onRemoveButtonClicked(manager)">
+            <span class="glyphicon glyphicon-remove"></span></button>
+          <button *ngIf="emplyeeList.length===0" title="调整部门" type="button" (click)="onAdjustDepartment(manager)" class="btn btn-default btn-s"><span
+            class="glyphicon glyphicon-briefcase"></span></button>
+        </div>
+      </td>
+    </tr>
     <tr *ngFor="let employee of emplyeeList">
       <img
         [src]="employee?.gender==='MALE'?'../../../../assets/images/male-profile.png':'../../../../assets/images/female-profile.png'"

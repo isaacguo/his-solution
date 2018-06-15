@@ -8,6 +8,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {MyTreeNode} from "../../../../dto/procurement/MyTreeNode";
 import {TreeComponent} from "angular-tree-component";
 import {TreeNodeService} from "../../../../services/common/tree-node.service";
+import {EmployeeDepartmentService} from "../../../../services/employee/employee-department.service";
 
 @Component({
   selector: 'app-employee-admin-detail',
@@ -15,6 +16,9 @@ import {TreeNodeService} from "../../../../services/common/tree-node.service";
   styleUrls: ['./employee-admin-detail.component.css']
 })
 export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
+
+  @ViewChild("setAsManagerResultModal")
+  setAsManagerResultModal:ModalComponent;
 
   @ViewChild("adjustDepartmentModal")
   adjustDepartmentModal: ModalComponent;
@@ -27,7 +31,7 @@ export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
   @ViewChild(TreeComponent)
   tree: TreeComponent;
   @ViewChild("setAsManagerConfirmationModal")
-  setAsManagerConfirmationModal:ModalComponent;
+  setAsManagerConfirmationModal: ModalComponent;
 
 
   @Input()
@@ -37,7 +41,10 @@ export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
   toBeDeletedEmployee: Employee;
   toBeMovedEmployee: Employee;
 
-  constructor(private router: Router, private employeeService: EmployeeService, private treeNodeService: TreeNodeService) {
+  managerUuid: string;
+  manager: EmployeeListItem;
+
+  constructor(private departmentService: EmployeeDepartmentService, private router: Router, private employeeService: EmployeeService, private treeNodeService: TreeNodeService) {
   }
 
   onConfirmDeletionModalClosed() {
@@ -55,17 +62,14 @@ export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
   }
 
   onViewButtonClicked(uuid: String) {
-    console.log(uuid);
     this.router.navigate(['employee-profile', uuid]);
   }
 
   onEditButtonClicked(uuid: String) {
-    console.log(uuid);
     this.router.navigate(['employee-operation', OperationEnum.UPDATE, uuid]);
   }
 
   onAddNewEmployeeButtonClicked() {
-    console.log(this.departmentId);
     this.router.navigate(['employee-operation', OperationEnum.CREATE, this.departmentId]);
   }
 
@@ -92,10 +96,30 @@ export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
   }
 
   private loadData() {
+
+    this.manager=null;
+
     if (this.departmentId !== undefined) {
-      this.employeeService.getEmployeeListByDepartmentId(this.departmentId).subscribe(r => {
-        this.emplyeeList = r;
-      });
+      this.departmentService.findManager(this.departmentId).subscribe(
+        r => {
+          this.managerUuid = r.uuid;
+
+          this.employeeService.getEmployeeListByDepartmentId(this.departmentId).subscribe(r => {
+            this.emplyeeList = r;
+
+            if (this.emplyeeList.length > 0) {
+
+              let index = r.findIndex(m => {
+                return m.uuid === this.managerUuid;
+              });
+
+              if (index > -1) {
+                this.manager = r.splice(index,1)[0];
+              }
+            }
+          });
+        }
+      )
     }
   }
 
@@ -125,7 +149,9 @@ export class EmployeeAdminDetailComponent implements OnInit, OnChanges {
 
   onSetAsManagerConfirmationModalClosed() {
     this.employeeService.setAsManager(this.toBeManager.id).subscribe(r => {
+
       this.loadData();
+      this.setAsManagerResultModal.open();
     });
   }
 }

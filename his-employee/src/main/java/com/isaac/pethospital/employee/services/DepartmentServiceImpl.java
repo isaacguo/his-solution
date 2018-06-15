@@ -1,9 +1,6 @@
 package com.isaac.pethospital.employee.services;
 
-import com.isaac.pethospital.employee.dto.DepartmentIdAndName;
-import com.isaac.pethospital.employee.dto.DepartmentIdAndNameAndChildren;
-import com.isaac.pethospital.employee.dto.DepartmentOperationRequest;
-import com.isaac.pethospital.employee.dto.MyDepartmentIdAndNameAndChildren;
+import com.isaac.pethospital.employee.dto.*;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import org.apache.commons.lang.StringUtils;
@@ -94,6 +91,64 @@ public class DepartmentServiceImpl implements DepartmentService {
         de.setName(request.getName());
         this.departmentRepository.save(de);
         return true;
+    }
+
+    @Override
+    public EmployeeListItem findManager(Long departmentId) {
+        EmployeeListItem employeeListItem= this.departmentRepository.findManager(departmentId);
+        if(employeeListItem==null)
+            return new EmployeeListItem() {
+                @Override
+                public Long getId() {
+                    return null;
+                }
+
+                @Override
+                public String getEmployeeNumber() {
+                    return null;
+                }
+
+                @Override
+                public String getWorkPhoneNumber() {
+                    return null;
+                }
+
+                @Override
+                public String getFullName() {
+                    return null;
+                }
+
+                @Override
+                public String getGender() {
+                    return null;
+                }
+
+                @Override
+                public String getDepartmentName() {
+                    return null;
+                }
+
+                @Override
+                public String getDirectReportTo() {
+                    return null;
+                }
+
+                @Override
+                public String getJobTitle() {
+                    return null;
+                }
+
+                @Override
+                public String getUuid() {
+                    return null;
+                }
+
+                @Override
+                public String getLoginAccount() {
+                    return null;
+                }
+            };
+        return employeeListItem;
     }
 
     private MyDepartmentIdAndNameAndChildren toMyDepartmentIdAndNameAndChildren(DepartmentIdAndName departmentIdAndName) {

@@ -65,8 +65,8 @@ public class EmployeeRestController {
     }
 
     @GetMapping
-    public List<EmployeeEntity> getEmployees() {
-        return this.employeeService.findAll();
+    public List<EmployeeListItem> getEmployees() {
+        return this.employeeService.findEmployeesForEmployeeListItem();
     }
 
     @GetMapping("/get-department-id/{userAccount}")

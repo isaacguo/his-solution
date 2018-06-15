@@ -1,0 +1,11 @@
+.linemarging{
+  margin-bottom: 10px;
+}
+.verlinktop {
+  display:inline-block;
+  vertical-align: top;
+}
+
+.verlink {
+  display:inline-block;
+}

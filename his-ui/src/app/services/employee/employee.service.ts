@@ -12,6 +12,7 @@ import {AbstractService} from "../abstract.service";
 @Injectable()
 export class EmployeeService extends AbstractService {
 
+
   private rootUrl: string = "/api/hisemployee/employees";
   private deleteEmployeeUrl: string = `${this.rootUrl}/delete`;
 
@@ -22,6 +23,17 @@ export class EmployeeService extends AbstractService {
   private updateEmployeePasswordUrl: string = `${this.rootUrl}/updatePassword`;
   private moveEmployeeToDepartmentUrl:string= `${this.rootUrl}/move-employee-to-department`;
   private setAsManagerUrl:string=`${this.rootUrl}/set-as-manager`;
+
+  private _showEmployeeView:boolean=false;
+
+  get showEmployeeView(): boolean {
+    return this._showEmployeeView;
+  }
+
+  set showEmployeeView(value: boolean) {
+    this._showEmployeeView = value;
+  }
+
 
   constructor(private authHttp: AuthHttp) {
     super();

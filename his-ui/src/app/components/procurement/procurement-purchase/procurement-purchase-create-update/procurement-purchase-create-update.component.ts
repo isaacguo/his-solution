@@ -176,7 +176,6 @@ export class ProcurementPurchaseCreateUpdateComponent extends AbstractCreateUpda
     const goods = <FormArray>this.formModel.controls['goods'];
 
     goods.controls.forEach(r => {
-      console.log(r);
       const good = <FormGroup>r;
       good.controls['vendor'].setValue(this.selectedVendor.name);
     })

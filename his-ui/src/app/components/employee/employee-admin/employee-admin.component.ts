@@ -18,25 +18,27 @@ export class EmployeeAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*
-    this.employeeService.getEmployeeList().subscribe(r => {
-      this.emplyeeList = r;
-    })
-    */
+
   }
 
   onViewButtonClicked(uuid: String) {
-    console.log(uuid);
     this.router.navigate(['employee-profile', uuid]);
   }
 
   onEditButtonClicked(uuid: String) {
-    console.log(uuid);
     this.router.navigate(['employee-profile-edit', uuid]);
   }
 
   onAddNewEmployeeButtonClicked() {
     this.router.navigate(['employee-operation', OperationEnum.CREATE]);
 
+  }
+
+  get showEmployeeView(): boolean {
+    return this.employeeService.showEmployeeView;
+  }
+
+  onShowEmployeeViewEnabled(event: boolean) {
+    this.employeeService.showEmployeeView=event;
   }
 }

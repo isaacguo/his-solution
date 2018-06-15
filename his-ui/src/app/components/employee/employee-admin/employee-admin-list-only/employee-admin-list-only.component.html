@@ -1,0 +1,40 @@
+<div class="row">
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th></th>
+      <th>员工编号</th>
+      <th>姓名</th>
+      <th>职位</th>
+      <th>工作电话</th>
+      <th>部门</th>
+      <th>性别</th>
+      <th>直接汇报</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of employeeList">
+      <img
+        [src]="employee?.gender==='MALE'?'../../../../../assets/images/male-profile.png':'../../../../../assets/images/female-profile.png'"
+        style="width:45px;height: 45px;" alt="User Image">
+      <td>{{employee.employeeNumber}}</td>
+      <td>{{employee.fullName}}</td>
+      <td>{{employee.jobTitle}}</td>
+      <td>{{employee.workPhoneNumber}}</td>
+      <td>{{employee.departmentName}}</td>
+      <td>{{employee.gender==='MALE'?'男':'女'}}</td>
+      <td>{{employee.directReportTo}}</td>
+      <td>
+        <div class="button-group">
+          <button type="button" class="btn btn-default btn-s" (click)="onViewButtonClicked(employee.uuid)"><span
+            class="glyphicon glyphicon-search"></span></button>
+          <button type="button" class="btn btn-default btn-s" (click)="onEditButtonClicked(employee.uuid)"><span
+            class="glyphicon glyphicon-pencil" ></span></button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

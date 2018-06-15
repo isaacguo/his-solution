@@ -109,18 +109,19 @@ import {TreatmentRoomEmployeeListComponent} from './components/treatment/treatme
 import {TreatmentRoomEmployeeDetailComponent} from './components/treatment/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-detail/treatment-room-employee-detail.component';
 import {MyConsultingRoomRegistrationListComponent} from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-list.component';
 import {MyConsultingRoomRegistrationDetailComponent} from './components/treatment/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-detail/my-consulting-room-registration-detail.component';
-import { MedicalTestQueryComponent } from './components/medical-test/medical-test-query/medical-test-query.component';
+import {MedicalTestQueryComponent} from './components/medical-test/medical-test-query/medical-test-query.component';
 import {MedicalTestSettingsComponent} from "./components/medical-test/medical-test-settings/medical-test-settings.component";
-import { MedicalTestSettingsReportComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component';
-import { MedicalTestSettingsReportCreateUpdateComponent } from './components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component';
+import {MedicalTestSettingsReportComponent} from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component';
+import {MedicalTestSettingsReportCreateUpdateComponent} from './components/medical-test/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component';
 import {MedicalTestReportService} from "./services/medical-test/medical-test-report-template.service";
-import { MedicalTestReportCreateUpdateComponent } from './components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component';
+import {MedicalTestReportCreateUpdateComponent} from './components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component';
 import {FinanceManagementGuard} from "./guards/finance/finance-management.guard";
 import {InpatientManagementGuard} from "./guards/treatment/inpatient-management.guard";
 import {MedicineManagementGuard} from "./guards/medicine/medicine-management.guard";
 import {InpatientComponent} from "./components/inpatient/inpatient.component";
 import {MedicalTestManagementGuard} from "./guards/medical-test/medical-test-management.guard";
 import {ProcurementManagementGuard} from "./guards/procurement/procurement-management.guard";
+import {EmployeeAdminListOnlyComponent} from './components/employee/employee-admin/employee-admin-list-only/employee-admin-list-only.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -214,6 +215,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestSettingsReportCreateUpdateComponent,
     MedicalTestReportCreateUpdateComponent,
     InpatientComponent,
+    EmployeeAdminListOnlyComponent,
 
   ],
   imports: [

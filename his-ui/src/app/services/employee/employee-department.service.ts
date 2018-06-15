@@ -57,6 +57,10 @@ export class EmployeeDepartmentService extends AbstractService {
       return this.extractTextData(r) === "true" ? true : false;
     });
   }
+  findManager(depId: number): Observable<any> {
+    let url = `${this.rootUrl}/find-manager/${depId}`;
+    return this.authHttp.get(url).map(this.extractData);
+  }
 
 
 }

@@ -52,11 +52,11 @@ export class DepartmentService extends AbstractService {
 
   }
 
-  setDepartmentOpenToFrontDeskValue(departmentId: number, departmentName:string, state: boolean): Observable<boolean> {
+  setDepartmentOpenToFrontDeskValue(departmentId: number, departmentName: string, state: boolean): Observable<boolean> {
 
     const request: DepartmentOperationRequest = new DepartmentOperationRequest();
     request.openToFrontDesk = state;
-    request.name=departmentName;
+    request.name = departmentName;
     request.depId = departmentId;
 
     let url = `${this.rootUrl}/setDepartmentOpenToFrontDeskValue`;
@@ -70,4 +70,6 @@ export class DepartmentService extends AbstractService {
     let url = `${this.rootUrl}/getEmployeesByDepartmentId/${departmentId}`;
     return this.authHttp.get(url).map(this.extractData);
   }
+
+
 }
