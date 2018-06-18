@@ -168,15 +168,15 @@ const appRoutes: Routes = [
         component: MedicalTestSettingsComponent,
         children: [
           {
-            path: 'reports',
+            path: 'report-templates',
             component: MedicalTestSettingsReportComponent
           },
           {
-            path: 'reports/:operation',
+            path: 'report-templates/:operation',
             component: MedicalTestSettingsReportCreateUpdateComponent
           },
           {
-            path: 'reports/:operation/:updateId',
+            path: 'report-templates/:operation/:updateId',
             component: MedicalTestSettingsReportCreateUpdateComponent
           }
         ]

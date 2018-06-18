@@ -1,7 +1,9 @@
 package com.isaac.pethospital.medicaltest.dtos;
 
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
+import com.isaac.pethospital.medicaltest.entities.ReportTemplateInfoEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateItemEntity;
+import com.isaac.pethospital.medicaltest.enums.ReportSectionEnum;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,8 +11,17 @@ import java.util.List;
 public class ReportOperationRequest {
 
     List<ReportTemplateItemEntity> reportItems = new LinkedList<>();
+    List<ReportTemplateInfoEntity> reportInfo=new LinkedList<>();
     private Long id;
     private String reportName;
+
+    public List<ReportTemplateInfoEntity> getReportInfo() {
+        return reportInfo;
+    }
+
+    public void setReportInfo(List<ReportTemplateInfoEntity> reportInfo) {
+        this.reportInfo = reportInfo;
+    }
 
     public List<ReportTemplateItemEntity> getReportItems() {
         return reportItems;
@@ -50,6 +61,12 @@ public class ReportOperationRequest {
             reportTemplateEntity.addReportTemplateItem(reportTemplateItemEntity);
         });
 
+        this.reportInfo.forEach(r->{
+            ReportTemplateInfoEntity reportTemplateInfoEntity=new ReportTemplateInfoEntity();
+            reportTemplateInfoEntity.setReportKey(r.getReportKey());
+            reportTemplateInfoEntity.setReportSection(ReportSectionEnum.HEADER);
+            reportTemplateEntity.addReportTemplateInfo(reportTemplateInfoEntity);
+        });
         return reportTemplateEntity;
     }
 }

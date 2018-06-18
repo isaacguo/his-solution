@@ -30,24 +30,24 @@ export class MedicalTestSettingsReportComponent implements OnInit {
   }
 
   onCreateNewReportClicked() {
-    this.router.navigate(['medical-test-settings', 'reports', OperationEnum.CREATE]);
+    this.router.navigate(['medical-test-settings', 'report-templates', OperationEnum.CREATE]);
   }
 
 
-  onEditButtonClicked(report:MedicalTestReportTemplate) {
-    this.router.navigate(['medical-test-settings', 'reports', OperationEnum.UPDATE, report.id]);
+  onEditButtonClicked(report: MedicalTestReportTemplate) {
+    this.router.navigate(['medical-test-settings', 'report-templates', OperationEnum.UPDATE, report.id]);
   }
 
-  reportToBeDeleted:MedicalTestReportTemplate;
+  reportToBeDeleted: MedicalTestReportTemplate;
+
   removeReport(report: MedicalTestReportTemplate) {
 
     this.reportToBeDeleted = report;
     this.confirmDeletionModal.open();
   }
 
-  onConfirmDeletionModalClosed()
-  {
-    this.medicalTestReportService.deleteById(this.reportToBeDeleted.id).subscribe(r=>{
+  onConfirmDeletionModalClosed() {
+    this.medicalTestReportService.deleteById(this.reportToBeDeleted.id).subscribe(r => {
       this.loadData();
     })
   }

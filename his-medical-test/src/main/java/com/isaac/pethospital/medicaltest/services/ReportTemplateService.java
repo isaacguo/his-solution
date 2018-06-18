@@ -13,4 +13,6 @@ public interface ReportTemplateService {
     ReportTemplateEntity findById(Long rid);
 
     boolean deleteById(Long rid);
+
+    ReportTemplateEntity updateReportTemplate(ReportOperationRequest request);
 }

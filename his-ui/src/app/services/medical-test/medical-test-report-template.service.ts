@@ -11,6 +11,7 @@ export class MedicalTestReportService extends AbstractService {
 
   rootUrl: string = "/api/hismedicaltest/report-templates";
   createReportUrl: string = `${this.rootUrl}/create`;
+  updateReportUrl: string = `${this.rootUrl}/update`;
 
   //private procurementStatusRootUrl: string = `${this.rootUrl}/`;
 
@@ -20,6 +21,12 @@ export class MedicalTestReportService extends AbstractService {
 
   createReport(request: FormGroup): Observable<MedicalTestReportTemplate> {
     return this.authHttp.post(this.createReportUrl, request).map(this.extractData);
+  }
+
+
+  updateReport(request: any):Observable<any>{
+    return this.authHttp.post(this.updateReportUrl, request).map(this.extractData);
+
   }
 
   findAll(): Observable<MedicalTestReportTemplate[]> {

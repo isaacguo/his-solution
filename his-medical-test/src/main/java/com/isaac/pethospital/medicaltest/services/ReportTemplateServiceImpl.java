@@ -23,6 +23,20 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
     }
 
     @Override
+    public ReportTemplateEntity updateReportTemplate(ReportOperationRequest request) {
+        Long id = request.getId();
+        if (id == null)
+            throw new RuntimeException("Id is null");
+        ReportTemplateEntity reportTemplateEntity = reportTemplateRepository.findOne(id);
+        if (reportTemplateEntity == null)
+            throw new RuntimeException("Cannot find ReportTemplate");
+        reportTemplateRepository.delete(reportTemplateEntity);
+
+        return this.createReportTemplate(request);
+
+    }
+
+    @Override
     public List<ReportTemplateEntity> findAll() {
         return this.reportTemplateRepository.findAll();
     }
@@ -37,4 +51,5 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
         this.reportTemplateRepository.delete(rid);
         return true;
     }
+
 }

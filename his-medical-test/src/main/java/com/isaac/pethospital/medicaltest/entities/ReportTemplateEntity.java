@@ -1,6 +1,7 @@
 package com.isaac.pethospital.medicaltest.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -12,10 +13,33 @@ public class ReportTemplateEntity {
     @OneToMany(mappedBy = "reportTemplate", cascade = CascadeType.ALL)
     @JsonManagedReference("reportTemplate-reportTemplateItem")
     List<ReportTemplateItemEntity> reportTemplateItems = new LinkedList<>();
+
+    @OneToMany(mappedBy = "reportTemplate", cascade = CascadeType.ALL)
+    @JsonManagedReference("reportTemplate-reportTemplateInfo")
+    List<ReportTemplateInfoEntity> reportTemplateInfoList = new LinkedList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String reportName;
+
+    public List<ReportTemplateInfoEntity> getReportTemplateInfoList() {
+        return reportTemplateInfoList;
+    }
+
+    public void addReportTemplateInfo(ReportTemplateInfoEntity reportTemplateInfo) {
+        if (reportTemplateInfo == null)
+            throw new RuntimeException("Report Template Info is null");
+        reportTemplateInfo.setReportTemplate(this);
+        this.reportTemplateInfoList.add(reportTemplateInfo);
+    }
+
+    public void removeReportTemplateInfo(ReportTemplateInfoEntity reportTemplateInfo) {
+        if (reportTemplateInfo == null)
+            throw new RuntimeException("Report Template Info is null");
+        reportTemplateInfo.setReportTemplate(null);
+        this.reportTemplateInfoList.remove(reportTemplateInfo);
+    }
 
     public Long getId() {
         return id;

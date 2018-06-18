@@ -4,7 +4,9 @@ import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.common.services.AuthorizationTopicService;
 import com.isaac.pethospital.common.services.FactoryResetService;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
+import com.isaac.pethospital.medicaltest.entities.ReportTemplateInfoEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateItemEntity;
+import com.isaac.pethospital.medicaltest.enums.ReportSectionEnum;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +44,22 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         addReportItem("红细胞分布宽度", "%", "10", "16", reportTemplateEntity);
         addReportItem("血红蛋白浓度(HGB)", "g/L", "120", "160", reportTemplateEntity);
 
+        addReportInfoItem("宠物名字", reportTemplateEntity);
+        addReportInfoItem("主人姓名", reportTemplateEntity);
+        addReportInfoItem("宠物年龄", reportTemplateEntity);
+        addReportInfoItem("宠物性别", reportTemplateEntity);
+        addReportInfoItem("申请科室", reportTemplateEntity);
+        addReportInfoItem("送检医师", reportTemplateEntity);
+        addReportInfoItem("临床诊断", reportTemplateEntity);
         this.reportTemplateRepository.save(reportTemplateEntity);
 
+    }
+
+    private void addReportInfoItem(String key,ReportTemplateEntity reportTemplateEntity) {
+        ReportTemplateInfoEntity reportTemplateInfoEntity=new ReportTemplateInfoEntity();
+        reportTemplateInfoEntity.setReportSection(ReportSectionEnum.HEADER);
+        reportTemplateInfoEntity.setReportKey(key);
+        reportTemplateEntity.addReportTemplateInfo(reportTemplateInfoEntity);
     }
 
     private void addReportItem(String name, String unit, String lowerLimit, String upperLimit, ReportTemplateEntity reportTemplateEntity) {
@@ -51,8 +67,9 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         ReportTemplateItemEntity reportTemplateItemEntity1 = new ReportTemplateItemEntity();
         reportTemplateItemEntity1.setItemName(name);
         reportTemplateItemEntity1.setItemUnit(unit);
-        reportTemplateItemEntity1.setReferenceHighLimitValue(lowerLimit);
-        reportTemplateItemEntity1.setReferenceLowLimitValue(upperLimit);
+        reportTemplateItemEntity1.setReferenceHighLimitValue(upperLimit);
+        reportTemplateItemEntity1.setReferenceLowLimitValue(lowerLimit);
+
 
         reportTemplateEntity.addReportTemplateItem(reportTemplateItemEntity1);
     }

@@ -27,6 +27,14 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
     super(route);
   }
 
+  get reportData() {
+    return <FormArray>this.formModel.get('reportItems');
+  }
+
+  get reportInfoData() {
+    return <FormArray>this.formModel.get('reportInfo');
+  }
+
   invokeWhenCreate() {
     this.medicalTestReportService.createReport(this.formModel.value).subscribe(r => {
       if (r.id > 0) {
@@ -38,10 +46,17 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
   }
 
   onConfirmCreateModalClosed() {
-    this.router.navigate(['medical-test-settings', 'reports']);
+    this.router.navigate(['medical-test-settings', 'report-templates']);
   }
 
   invokeWhenUpdate() {
+    this.medicalTestReportService.updateReport(this.formModel.value).subscribe(r=>{
+      if(r.id>0)
+      {
+        this.reportCreationResultText = "化验报告模板信息更新成功";
+        this.confirmCreateModal.open();
+      }
+    })
 
 
   }
@@ -56,20 +71,30 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
         this.clearReportItems();
         r.reportTemplateItems.forEach(contact => {
           this.inflateReportItem(contact);
-        })
+        });
+        r.reportTemplateInfoList.forEach(infoItem => {
+          this.inflateReportInfo(infoItem);
+        });
       })
 
     }
   }
 
-  private inflatFormModelWithValues(r) {
-    this.formModel.controls['id'].setValue(r.id);
-    this.formModel.controls['reportName'].setValue(r.reportName);
-  }
-
   clearReportItems() {
     const control = <FormArray>this.formModel.controls['reportItems'];
     control.controls = [];
+
+    const control1 = <FormArray>this.formModel.controls['reportInfo'];
+    control1.controls = [];
+  }
+
+
+  private inflateReportInfo(infoItem: any) {
+    const control = <FormArray>this.formModel.controls['reportInfo'];
+
+    control.push(this.fb.group({
+      'reportKey': [infoItem.reportKey, Validators.required],
+    }));
   }
 
   inflateReportItem(reportItem: MedicalTestReportTemplateItem) {
@@ -84,13 +109,49 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
     }));
   }
 
+  addReportItem() {
+    const control = <FormArray>this.formModel.controls['reportItems'];
+    control.push(this.initReportItem());
+  }
+
+  addReportInfoItem() {
+    const control = <FormArray>this.formModel.controls['reportInfo'];
+    control.push(this.initReportInfoItem());
+  }
+
+  removeReportItem(i) {
+    const control = <FormArray>this.formModel.controls['reportItems'];
+    control.removeAt(i);
+  }
+
+
+  removeReportInfoItem(i) {
+    const control = <FormArray>this.formModel.controls['reportInfo'];
+    control.removeAt(i);
+  }
+
+  private inflatFormModelWithValues(r) {
+    this.formModel.controls['id'].setValue(r.id);
+    this.formModel.controls['reportName'].setValue(r.reportName);
+  }
+
   private initForm() {
     this.formModel = this.fb.group({
       'id': [''],
       'reportName': ['', Validators.required],
+      'reportInfo':this.fb.array([
+        this.initReportInfoItem()
+      ]),
       'reportItems': this.fb.array([
         this.initReportItem()
       ]),
+    })
+  }
+
+  private initReportInfoItem() {
+    return this.fb.group({
+      'id': [''],
+      'reportKey': ['', Validators.required]
     })
   }
 
@@ -105,20 +166,5 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
     })
   }
 
-  addReportItem() {
-    const control = <FormArray>this.formModel.controls['reportItems'];
-    control.push(this.initReportItem());
-  }
-
-
-  get reportData() {
-    return <FormArray>this.formModel.get('reportItems');
-  }
-
-  removeReportItem(i) {
-    // remove address from the list
-    const control = <FormArray>this.formModel.controls['reportItems'];
-    control.removeAt(i);
-  }
 
 }

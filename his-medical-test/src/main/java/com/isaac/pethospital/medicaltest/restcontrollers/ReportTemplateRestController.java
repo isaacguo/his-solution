@@ -36,7 +36,12 @@ public class ReportTemplateRestController {
     @PostMapping("create")
     public ReportTemplateEntity createReport(@RequestBody ReportOperationRequest request) {
         return this.reportTemplateService.createReportTemplate(request);
+    }
 
+
+    @PostMapping("update")
+    public ReportTemplateEntity updateReport(@RequestBody ReportOperationRequest request) {
+        return this.reportTemplateService.updateReportTemplate(request);
     }
 
 }
