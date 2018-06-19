@@ -10,8 +10,13 @@ export class AbstractService {
   }
 
   protected extractData(res: Response) {
-    let body = res.json();
+    let body = res.json() ;
     return body || {};
+  }
+
+  protected extractArrayData(res: Response) {
+    let body = res.json() as any[];
+    return body || [];
   }
   protected extractTextData(res: Response) {
     let body = res.text();

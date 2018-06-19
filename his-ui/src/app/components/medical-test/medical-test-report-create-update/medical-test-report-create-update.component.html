@@ -4,21 +4,29 @@
 
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
 
-  <div class="panel panel-default" formArrayName="reportInfoList">
+  <div class="panel panel-default">
     <div class="panel-heading">
       基本信息
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-md-3" *ngFor="let infoItem of reportInfoData.controls; let i=index" [formGroupName]="i">
+        <div class="col-md-3">
           <div class="form-group">
-            <label>{{reportInfoData.controls[i].controls['reportKey'].value}}</label>
-            <!--<label>{{reportTemplate.reportInfoList[i].reportKey}}</label>-->
-            <input type="hidden" formControlName="reportKey">
-            <input type="text" class="form-control" formControlName="reportValue">
-            <small [hidden]="reportInfoData.controls[i].controls['reportValue'].valid" class="text-danger">
-              此报告项名称不可为空
-            </small>
+            <label>化验报告名称</label>
+            <input readonly type="text" class="form-control" formControlName="reportName">
+          </div>
+        </div>
+        <div formArrayName="reportInfoList">
+          <div class="col-md-3" *ngFor="let infoItem of reportInfoData.controls; let i=index" [formGroupName]="i">
+            <div class="form-group">
+              <label>{{reportInfoData.controls[i].controls['reportKey'].value}}</label>
+              <!--<label>{{reportTemplate.reportInfoList[i].reportKey}}</label>-->
+              <input type="hidden" formControlName="reportKey">
+              <input type="text" class="form-control" formControlName="reportValue" [readonly]="!isCreateMode()">
+              <small [hidden]="reportInfoData.controls[i].controls['reportValue'].valid" class="text-danger">
+                此报告项名称不可为空
+              </small>
+            </div>
           </div>
         </div>
       </div>
@@ -26,7 +34,7 @@
   </div>
 
 
-  <div class="isaac-margin-15top" formArrayName="reportItems">
+  <div *ngIf="!isCreateMode()" class="isaac-margin-15top" formArrayName="reportItems">
     <label>检查项目</label>
     <table class="table table-bordered">
       <thead>

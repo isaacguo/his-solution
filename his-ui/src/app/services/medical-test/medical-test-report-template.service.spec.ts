@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { MedicalTestReportService } from './medical-test-report-template.service';
+import { MedicalTestReportTemplateService } from './medical-test-report-template.service';
 
-describe('MedicalTestReportService', () => {
+describe('MedicalTestReportTemplateService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MedicalTestReportService]
+      providers: [MedicalTestReportTemplateService]
     });
   });
 
-  it('should be created', inject([MedicalTestReportService], (service: MedicalTestReportService) => {
+  it('should be created', inject([MedicalTestReportTemplateService], (service: MedicalTestReportTemplateService) => {
     expect(service).toBeTruthy();
   }));
 });

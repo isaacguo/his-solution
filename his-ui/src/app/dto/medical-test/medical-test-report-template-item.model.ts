@@ -4,6 +4,7 @@ export class MedicalTestReportTemplateItem {
   public itemUnit: string;
   public referenceLowLimitValue: string;
   public referenceHighLimitValue: string;
+  public result:string;
   public comments: string;
 
   constructor() {

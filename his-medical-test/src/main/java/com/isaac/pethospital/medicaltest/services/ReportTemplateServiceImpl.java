@@ -1,7 +1,7 @@
 package com.isaac.pethospital.medicaltest.services;
 
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
-import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
+import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +17,13 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
     }
 
     @Override
-    public ReportTemplateEntity createReportTemplate(ReportOperationRequest request) {
+    public ReportTemplateEntity createReportTemplate(ReportTemplateOperationRequest request) {
         ReportTemplateEntity reportTemplateEntity = request.toReport();
         return reportTemplateRepository.save(reportTemplateEntity);
     }
 
     @Override
-    public ReportTemplateEntity updateReportTemplate(ReportOperationRequest request) {
+    public ReportTemplateEntity updateReportTemplate(ReportTemplateOperationRequest request) {
         Long id = request.getId();
         if (id == null)
             throw new RuntimeException("Id is null");

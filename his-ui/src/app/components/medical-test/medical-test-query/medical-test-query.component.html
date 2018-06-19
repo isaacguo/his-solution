@@ -6,16 +6,19 @@
     <modal-body>
       <table class="table table-bordered table-responsive">
         <tbody>
-        <tr [class.info]="isRowSelected(report)" *ngFor="let report of reports" (click)="onReportTypeSelected(report)">
+        <tr [class.info]="isRowSelected(reportTemplate)" *ngFor="let reportTemplate of reportTemplates"
+            (click)="onReportTypeSelected(reportTemplate)">
           <td>
-            {{report.reportName}}
+            {{reportTemplate.reportName}}
           </td>
         </tr>
         </tbody>
       </table>
     </modal-body>
     <modal-footer>
-      <button [disabled]="selectedReportType===null" type="button" class="btn btn-primary" (click)="chooseReportTypeModal.close()">确定</button>
+      <button [disabled]="selectedReportType===null" type="button" class="btn btn-primary"
+              (click)="chooseReportTypeModal.close()">确定
+      </button>
       <button type="button" class="btn btn-default" data-dismiss="confirmDeleteModal"
               (click)="chooseReportTypeModal.dismiss()">取消
       </button>
@@ -29,6 +32,49 @@
 
 <div role="group">
   <button (click)="onCreateNewReport()" class="btn btn-default">新建化验报告</button>
+</div>
+
+<div>
+  <table class="table table-bordered isaac-margin-top">
+    <thead>
+    <tr>
+      <th>序号</th>
+      <th>病历号</th>
+      <th>宠物名称</th>
+      <th>卡号</th>
+      <th>主人姓名</th>
+      <th>接诊医师</th>
+      <th>化验项目</th>
+      <th>开单时间</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let report of reports; let i=index">
+      <td>{{i+1}}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>{{report.reportName}}</td>
+      <td></td>
+      <td>
+        <div class="button-group">
+          <button title="修改报告" type="button" class="btn btn-default btn-s"
+                  (click)="onModifyButtonClicked(report)"><span
+            class="glyphicon glyphicon-search"></span></button>
+          <button title="修改报告状态" type="button" class="btn btn-default btn-s"
+                  (click)="onModifyStatusButtonClicked(report)"><span
+            class="glyphicon glyphicon-pencil"></span></button>
+          <button title="删除化验报告" type="button" class="btn btn-default btn-s"
+                  (click)="onRemoveButtonClicked(report)">
+            <span class="glyphicon glyphicon-remove"></span></button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 
 

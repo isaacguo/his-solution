@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicaltest.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.medicaltest.enums.ReportSectionEnum;
 import org.springframework.jms.annotation.EnableJms;
@@ -14,7 +15,7 @@ public class ReportInfoEntity {
     @Enumerated(EnumType.STRING)
     ReportSectionEnum reportSection;
     @ManyToOne
-    @JsonManagedReference("report-reportInfo")
+    @JsonBackReference("report-reportInfo")
     ReportEntity report;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,26 +1,72 @@
 package com.isaac.pethospital.medicaltest.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.isaac.pethospital.medicaltest.enums.ReportStatusEnum;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 public class ReportEntity {
 
+    @OneToMany(mappedBy = "report", cascade = CascadeType.ALL)
+    @JsonManagedReference("report-reportInfo")
+    List<ReportInfoEntity> reportInfoList = new LinkedList<>();
+    @OneToMany(mappedBy = "report", cascade = CascadeType.ALL)
+    @JsonManagedReference("report-reportItem")
+    List<ReportItemEntity> reportItems = new LinkedList<>();
+    LocalDateTime createdDateTime;
+    LocalDateTime paidDateTime;
+    LocalDateTime finishedDateTime;
+    ReportStatusEnum reportStatus;
+
+    private String reportName;
+
+    public String getReportName() {
+        return reportName;
+    }
+
+    public void setReportName(String reportName) {
+        this.reportName = reportName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
-    @JsonManagedReference("report-reportInfo")
-    List<ReportInfoEntity> reportInfoList = new LinkedList<>();
+    public LocalDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
 
-    @OneToMany(mappedBy = "report", cascade = CascadeType.ALL)
-    @JsonManagedReference("report-reportItem")
-    List<ReportItemEntity> reportItems = new LinkedList<>();
+    public void setCreatedDateTime(LocalDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+    }
+
+    public LocalDateTime getPaidDateTime() {
+        return paidDateTime;
+    }
+
+    public void setPaidDateTime(LocalDateTime paidDateTime) {
+        this.paidDateTime = paidDateTime;
+    }
+
+    public LocalDateTime getFinishedDateTime() {
+        return finishedDateTime;
+    }
+
+    public void setFinishedDateTime(LocalDateTime finishedDateTime) {
+        this.finishedDateTime = finishedDateTime;
+    }
+
+    public ReportStatusEnum getReportStatus() {
+        return reportStatus;
+    }
+
+    public void setReportStatus(ReportStatusEnum reportStatus) {
+        this.reportStatus = reportStatus;
+    }
 
     public Long getId() {
         return id;
@@ -48,7 +94,6 @@ public class ReportEntity {
         reportInfo.setReport(null);
         this.reportInfoList.remove(reportInfo);
     }
-
 
     public List<ReportItemEntity> getReportItems() {
         return reportItems;

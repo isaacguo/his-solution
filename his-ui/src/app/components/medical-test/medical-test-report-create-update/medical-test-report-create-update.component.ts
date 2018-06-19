@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractCreateUpdateComponent} from "../../common/abstract-create-update.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report-template.service";
+import {MedicalTestReportTemplateService} from "../../../services/medical-test/medical-test-report-template.service";
 import {OperationEnum} from "../../../enums/operation.enum";
 import {observable} from "rxjs/symbol/observable";
 import {MedicalTestReportTemplate} from "../../../dto/medical-test/medical-test-report-template.model";
 import {MedicalTestReportTemplateItem} from "../../../dto/medical-test/medical-test-report-template-item.model";
+import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
 
 @Component({
   selector: 'app-medical-test-report-create-update',
@@ -20,16 +21,22 @@ export class MedicalTestReportCreateUpdateComponent extends AbstractCreateUpdate
   reportType: number;
 
   invokeWhenCreate() {
-
+    this.medicalTestReportService.createReport(this.formModel.value).subscribe(r => {
+      this.router.navigate(['medical-test-query']);
+    });
 
   }
 
   invokeWhenUpdate() {
+    this.medicalTestReportService.updateReport(this.formModel.value).subscribe(r => {
+      this.router.navigate(['medical-test-query']);
+    });
   }
 
   constructor(public route: ActivatedRoute,
               private fb: FormBuilder,
               public router: Router,
+              private medicalTestReportTemplateService: MedicalTestReportTemplateService,
               private medicalTestReportService: MedicalTestReportService) {
     super(route);
   }
@@ -43,11 +50,10 @@ export class MedicalTestReportCreateUpdateComponent extends AbstractCreateUpdate
   private initForm() {
     this.formModel = this.fb.group({
       'id': [''],
-      'reportInfoList': this.fb.array([
-      ]),
+      'reportName': ['', Validators.required],
+      'reportInfoList': this.fb.array([]),
       //'reportType': ['', Validators.required],
-      'reportItems': this.fb.array([
-      ]),
+      'reportItems': this.fb.array([]),
     })
   }
 
@@ -55,7 +61,7 @@ export class MedicalTestReportCreateUpdateComponent extends AbstractCreateUpdate
     return this.fb.group({
       'id': [''],
       'reportKey': ['', Validators.required],
-      'reportValue':['',Validators.required]
+      'reportValue': ['', Validators.required]
     })
   }
 
@@ -65,19 +71,35 @@ export class MedicalTestReportCreateUpdateComponent extends AbstractCreateUpdate
 
     this.route.params.subscribe(params => {
       this.operation = OperationEnum[<string>params['operation']];
+      this.reportType = params['reportType'];
       if (this.operation === OperationEnum.CREATE) {
-        this.reportType = params['reportType'];
 
-        this.medicalTestReportService.findById(this.reportType).subscribe(r => {
-
-          console.log(r);
+        this.medicalTestReportTemplateService.findById(this.reportType).subscribe(r => {
           this.reportTemplate = r;
 
-          r.reportTemplateItems.forEach( item=> {
+          this.formModel.controls['reportName'].setValue(r.reportName);
+
+          r.reportTemplateItems.forEach(item => {
             this.inflateReportItem(item);
           });
+
           r.reportTemplateInfoList.forEach(infoItem => {
             this.inflateReportInfo(infoItem);
+          });
+        });
+      }
+      else { //Update
+        this.medicalTestReportService.findById(this.reportType).subscribe(r => {
+
+          this.formModel.controls['id'].setValue(r.id);
+          this.formModel.controls['reportName'].setValue(r.reportName);
+
+          r.reportInfoList.forEach(infoItem => {
+            this.inflateReportInfo(infoItem, infoItem.reportValue);
+          });
+
+          r.reportItems.forEach(item => {
+            this.inflateReportItem(item);
           });
 
         });
@@ -85,34 +107,45 @@ export class MedicalTestReportCreateUpdateComponent extends AbstractCreateUpdate
     });
   }
 
-  get reportInfoData()
-  {
+  get reportInfoData() {
     return <FormArray>this.formModel.get('reportInfoList');
   }
+
   get reportData() {
     return <FormArray>this.formModel.get('reportItems');
   }
 
 
-  private inflateReportInfo(infoItem: any) {
+  private inflateReportInfo(infoItem: any, rv: string = '') {
     const control = <FormArray>this.formModel.controls['reportInfoList'];
     control.push(this.fb.group({
       'reportKey': [infoItem.reportKey, Validators.required],
-      'reportValue':['',Validators.required]
+      'reportValue': [rv, Validators.required]
     }));
   }
 
   private inflateReportItem(reportItem: MedicalTestReportTemplateItem) {
     const control = <FormArray>this.formModel.controls['reportItems'];
 
-    control.push(this.fb.group({
-      'itemName': [reportItem.itemName, Validators.required],
-      'itemUnit': [reportItem.itemUnit, Validators.required],
-      'referenceLowLimitValue': [reportItem.referenceLowLimitValue, Validators.required],
-      'referenceHighLimitValue': [reportItem.referenceHighLimitValue, Validators.required],
-      'result':['',Validators.required],
-      'comments': [reportItem.comments],
-    }));
-
+    if (this.isCreateMode()) {
+      control.push(this.fb.group({
+        'itemName': [reportItem.itemName, Validators.required],
+        'itemUnit': [reportItem.itemUnit, Validators.required],
+        'referenceLowLimitValue': [reportItem.referenceLowLimitValue, Validators.required],
+        'referenceHighLimitValue': [reportItem.referenceHighLimitValue, Validators.required],
+        'comments': [reportItem.comments],
+      }));
+    }
+    else {
+      control.push(this.fb.group({
+        'id':[reportItem.id, Validators.required],
+        'itemName': [reportItem.itemName, Validators.required],
+        'itemUnit': [reportItem.itemUnit, Validators.required],
+        'referenceLowLimitValue': [reportItem.referenceLowLimitValue, Validators.required],
+        'referenceHighLimitValue': [reportItem.referenceHighLimitValue, Validators.required],
+        'result': [reportItem.result ? reportItem.result : "", Validators.required],
+        'comments': [reportItem.comments],
+      }));
+    }
   }
 }

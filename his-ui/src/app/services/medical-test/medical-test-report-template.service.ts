@@ -6,7 +6,7 @@ import {AbstractService} from "../abstract.service";
 import {MedicalTestReportTemplate} from "../../dto/medical-test/medical-test-report-template.model";
 
 @Injectable()
-export class MedicalTestReportService extends AbstractService {
+export class MedicalTestReportTemplateService extends AbstractService {
 
 
   rootUrl: string = "/api/hismedicaltest/report-templates";

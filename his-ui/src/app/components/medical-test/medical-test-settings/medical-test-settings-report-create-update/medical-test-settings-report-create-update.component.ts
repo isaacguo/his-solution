@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractCreateUpdateComponent} from "../../../common/abstract-create-update.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MedicalTestReportService} from "../../../../services/medical-test/medical-test-report-template.service";
+import {MedicalTestReportTemplateService} from "../../../../services/medical-test/medical-test-report-template.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {OperationEnum} from "../../../../enums/operation.enum";
 import {Contact} from "../../../../dto/procurement/contact.model";
@@ -23,7 +23,7 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
   constructor(public route: ActivatedRoute,
               private fb: FormBuilder,
               public router: Router,
-              private medicalTestReportService: MedicalTestReportService) {
+              private medicalTestReportService: MedicalTestReportTemplateService) {
     super(route);
   }
 
