@@ -12,6 +12,11 @@ public class DepartmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long depId;
+    private String name;
+    private String description;
+    private boolean exposeToPublic;
+    private boolean openToFrontDesk;
 
     public Long getDepId() {
         return depId;
@@ -20,12 +25,6 @@ public class DepartmentEntity {
     public void setDepId(Long depId) {
         this.depId = depId;
     }
-
-    private Long depId;
-    private String name;
-    private String description;
-    private boolean exposeToPublic;
-    private boolean openToFrontDesk;
 
     public boolean isOpenToFrontDesk() {
         return openToFrontDesk;
@@ -58,7 +57,6 @@ public class DepartmentEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
 
 
     public String getName() {

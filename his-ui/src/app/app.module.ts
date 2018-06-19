@@ -123,6 +123,11 @@ import {MedicalTestManagementGuard} from "./guards/medical-test/medical-test-man
 import {ProcurementManagementGuard} from "./guards/procurement/procurement-management.guard";
 import {EmployeeAdminListOnlyComponent} from './components/employee/employee-admin/employee-admin-list-only/employee-admin-list-only.component';
 import {MedicalTestReportService} from "./services/medical-test/medical-test-report.service";
+import { MedicalTestSettingsDepartmentComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department.component';
+import { MedicalTestSettingsDepartmentListComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-list/medical-test-settings-department-list.component';
+import { MedicalTestSettingsDepartmentDetailComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-detail/medical-test-settings-department-detail.component';
+import {MedicalTestDepartmentService} from "./services/medical-test/medical-test-department.service";
+import { MedicalTestSettingsDepartmentReportTemplatesComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-detail/medical-test-settings-department-report-templates/medical-test-settings-department-report-templates.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -217,6 +222,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestReportCreateUpdateComponent,
     InpatientComponent,
     EmployeeAdminListOnlyComponent,
+    MedicalTestSettingsDepartmentComponent,
+    MedicalTestSettingsDepartmentListComponent,
+    MedicalTestSettingsDepartmentDetailComponent,
+    MedicalTestSettingsDepartmentReportTemplatesComponent,
 
   ],
   imports: [
@@ -272,6 +281,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestReportService,
     MedicalTestReportTemplateService,
     MedicalTestManagementGuard,
+    MedicalTestDepartmentService,
 
 
     //medicine

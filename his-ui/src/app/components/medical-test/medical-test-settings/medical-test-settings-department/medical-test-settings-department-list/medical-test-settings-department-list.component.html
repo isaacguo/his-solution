@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-3">
+
+    <div class="row panel panel-default isaac-margin-15top">
+      <div class="panel-heading">
+        科室列表
+      </div>
+      <div class="panel-body">
+        <tree-root #tree (activate)="onNodeActivated($event)" [nodes]="nodes"></tree-root>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-9">
+    <app-medical-test-settings-department-detail [departmentName]="selectedNodeName" [departmentId]="selectedDepartmentId"></app-medical-test-settings-department-detail>
+  </div>
+</div>

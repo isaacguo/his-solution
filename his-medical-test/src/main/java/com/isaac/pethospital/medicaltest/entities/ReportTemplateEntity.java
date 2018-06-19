@@ -1,7 +1,7 @@
 package com.isaac.pethospital.medicaltest.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -17,6 +17,26 @@ public class ReportTemplateEntity {
     @OneToMany(mappedBy = "reportTemplate", cascade = CascadeType.ALL)
     @JsonManagedReference("reportTemplate-reportTemplateInfo")
     List<ReportTemplateInfoEntity> reportTemplateInfoList = new LinkedList<>();
+
+    public List<DepartmentEntity> getDepartmentList() {
+        return departmentList;
+    }
+
+    public void addDepartment(DepartmentEntity department) {
+        if(department==null)
+            throw  new RuntimeException("Department is null");
+        this.departmentList.add(department);
+    }
+
+    public void removeDepartment(DepartmentEntity department) {
+        if(department==null)
+            throw  new RuntimeException("Department is null");
+        this.departmentList.remove(department);
+    }
+
+    @ManyToMany
+    @JsonBackReference("department-reportTemplates")
+    List<DepartmentEntity> departmentList = new LinkedList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

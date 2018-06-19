@@ -64,6 +64,7 @@ import {MedicalTestSettingsReportCreateUpdateComponent} from "./app/components/m
 import {MedicalTestReportCreateUpdateComponent} from "./app/components/medical-test/medical-test-report-create-update/medical-test-report-create-update.component";
 import {FinanceManagementGuard} from "./app/guards/finance/finance-management.guard";
 import {InpatientComponent} from "./app/components/inpatient/inpatient.component";
+import {MedicalTestSettingsDepartmentComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department.component";
 
 
 const appRoutes: Routes = [
@@ -129,10 +130,7 @@ const appRoutes: Routes = [
             path: 'treatment-room',
             component: TreatmentSettingsRoomComponent
           },
-          {
-            path: 'medical-test-settings',
-            component: MedicalTestSettingsComponent
-          }
+
         ]
       },
       {
@@ -178,6 +176,10 @@ const appRoutes: Routes = [
           {
             path: 'report-templates/:operation/:updateId',
             component: MedicalTestSettingsReportCreateUpdateComponent
+          },
+          {
+            path:'departments',
+            component:MedicalTestSettingsDepartmentComponent
           }
         ]
       },
