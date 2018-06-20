@@ -11,7 +11,7 @@ import java.util.List;
 public class ReportTemplateOperationRequest {
 
     List<ReportTemplateItemEntity> reportItems = new LinkedList<>();
-    List<ReportTemplateInfoEntity> reportInfo=new LinkedList<>();
+    List<ReportTemplateInfoEntity> reportInfo = new LinkedList<>();
     private Long id;
     private String reportName;
 
@@ -61,8 +61,8 @@ public class ReportTemplateOperationRequest {
             reportTemplateEntity.addReportTemplateItem(reportTemplateItemEntity);
         });
 
-        this.reportInfo.forEach(r->{
-            ReportTemplateInfoEntity reportTemplateInfoEntity=new ReportTemplateInfoEntity();
+        this.reportInfo.forEach(r -> {
+            ReportTemplateInfoEntity reportTemplateInfoEntity = new ReportTemplateInfoEntity();
             reportTemplateInfoEntity.setReportKey(r.getReportKey());
             reportTemplateInfoEntity.setReportSection(ReportSectionEnum.HEADER);
             reportTemplateEntity.addReportTemplateInfo(reportTemplateInfoEntity);

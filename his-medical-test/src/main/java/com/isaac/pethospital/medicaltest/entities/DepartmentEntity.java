@@ -17,8 +17,8 @@ public class DepartmentEntity {
     private String description;
     private boolean enable;
 
-    @ManyToMany
-    @JsonManagedReference("department-reportTemplates")
+    @ManyToMany(mappedBy = "departmentList")
+    //@JsonManagedReference("department-reportTemplates")
     List<ReportTemplateEntity> supportedReportTemplates = new LinkedList<>();
 
     public List<ReportTemplateEntity> getSupportedReportTemplates() {

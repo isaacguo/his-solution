@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AbstractService} from "../abstract.service";
 import {Observable} from "rxjs/Rx";
 import {Department} from "../../dto/treatment/department.model";
@@ -8,7 +8,7 @@ import {TreatmentEmployeeModel} from "../../dto/treatment/treatment.employee.mod
 import {AuthHttp} from "angular2-jwt";
 
 @Injectable()
-export class MedicalTestDepartmentService extends AbstractService  {
+export class MedicalTestDepartmentService extends AbstractService {
 
   rootUrl: string = "/api/hismedicaltest/departments";
 
@@ -32,7 +32,7 @@ export class MedicalTestDepartmentService extends AbstractService  {
 
   setDepartmentEnable(departmentId: number, departmentName: string, state: boolean): Observable<boolean> {
 
-    let request:any={};
+    let request: any = {};
     request.enable = state;
     request.name = departmentName;
     request.depId = departmentId;
@@ -43,4 +43,27 @@ export class MedicalTestDepartmentService extends AbstractService  {
     });
   }
 
+  addSupportedTestReportTemplate(depId: number, testReportTemplateId: number) {
+
+    let request: any = {};
+    request.depId = depId;
+    request.testReportTemplateId = testReportTemplateId;
+
+    let url = `${this.rootUrl}/addSupportedTestReportTemplate`;
+    return this.authHttp.post(url, request).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+
+  removeSupportedTestReportTemplate(depId: number, testReportTemplateId: number) {
+
+    let request: any = {};
+    request.depId = depId;
+    request.testReportTemplateId = testReportTemplateId;
+
+    let url = `${this.rootUrl}/removeSupportedTestReportTemplate`;
+    return this.authHttp.post(url, request).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
 }

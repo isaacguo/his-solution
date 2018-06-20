@@ -17,6 +17,14 @@ public class ReportTemplateEntity {
     @OneToMany(mappedBy = "reportTemplate", cascade = CascadeType.ALL)
     @JsonManagedReference("reportTemplate-reportTemplateInfo")
     List<ReportTemplateInfoEntity> reportTemplateInfoList = new LinkedList<>();
+    @ManyToMany
+    //@JsonBackReference("department-reportTemplates")
+    @JsonBackReference()
+    List<DepartmentEntity> departmentList = new LinkedList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String reportName;
 
     public List<DepartmentEntity> getDepartmentList() {
         return departmentList;
@@ -33,15 +41,6 @@ public class ReportTemplateEntity {
             throw  new RuntimeException("Department is null");
         this.departmentList.remove(department);
     }
-
-    @ManyToMany
-    @JsonBackReference("department-reportTemplates")
-    List<DepartmentEntity> departmentList = new LinkedList<>();
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String reportName;
 
     public List<ReportTemplateInfoEntity> getReportTemplateInfoList() {
         return reportTemplateInfoList;
