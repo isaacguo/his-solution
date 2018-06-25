@@ -50,4 +50,6 @@ public interface EmployeeService {
     boolean moveEmployeeToDepartment(Long empId, Long depId);
 
     boolean setAsManager(Long id);
+
+    String findByTitle(EmployeeOperationRequest request);
 }

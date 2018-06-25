@@ -82,12 +82,8 @@ public class EmployeeRestController {
 
     @PostMapping(value = "/find-by-title")
     public String findByTitle(@RequestBody EmployeeOperationRequest request) {
-        if (request.getSearchByTitle().equals("总经理"))
-            return "yuelingshan";
-        else if (request.getSearchByTitle().equals("采购部"))
-            return "guojing";
-        else
-            return "";
+        return this.employeeService.findByTitle(request);
+
     }
 
     @GetMapping(value = "/find-by-loginAccount/{loginAccount}")

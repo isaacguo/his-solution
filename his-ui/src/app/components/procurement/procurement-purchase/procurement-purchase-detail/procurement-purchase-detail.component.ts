@@ -18,7 +18,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild("confirmUpdatedModal")
-  confirmUpdatedModal:ModalComponent;
+  confirmUpdatedModal: ModalComponent;
   authInfo: AuthInfo;
   curP: ProcurementStatus;
   pRoot: ProcurementStatus;
@@ -28,7 +28,7 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
   procurement: Procurement;
   private authChangeSubscription: Subscription;
 
-  constructor(private procurementService:ProcurementService, private procurementStatusService: ProcurementStatusService, private authenticationService: AuthenticationService) {
+  constructor(private procurementService: ProcurementService, private procurementStatusService: ProcurementStatusService, private authenticationService: AuthenticationService) {
     this.authChangeSubscription = authenticationService.authChange.subscribe(
       newAuthInfo =>
         this.authInfo = newAuthInfo);
@@ -40,6 +40,7 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
 
   ngOnChanges(changes: SimpleChanges): void {
 
+    console.log(this.procurement);
 
     if (this.pRoot == null) return;
     this.selectedStatus = (<Procurement>changes.procurement.currentValue).status;
@@ -49,6 +50,7 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
   }
 
   ngOnInit() {
+
     this.procurementStatusService.getRoot().subscribe(r => {
       this.pRoot = r;
     })
@@ -73,11 +75,14 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
   }
 
   hasAlterPermission(): boolean {
+    return true;
+    /*
     if(this.procurement.procurementPurchase==null) return false;
     if(this.procurement.procurementPurchase.assignTo===this.authInfo.displayName)
       return true;
     else
       return false;
+      */
   }
 
   private iterateP(p: ProcurementStatus) {
@@ -90,11 +95,11 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
   }
 
   onUpdateStatusButtonClicked() {
-    const request=new ProcurementOperationRequest();
-    request.id=this.procurement.id;
-    request.status=this.selectedStatus;
+    const request = new ProcurementOperationRequest();
+    request.id = this.procurement.id;
+    request.status = this.selectedStatus;
 
-    this.procurementService.updateStatus(request).subscribe(r=>{
+    this.procurementService.updateStatus(request).subscribe(r => {
       this.confirmUpdatedModal.open();
     });
   }

@@ -211,7 +211,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         moveToTargetDepartmentInternal(targetDepartment, ee);
 
 
-
         employeeRepository.save(ee);
 
 
@@ -219,9 +218,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private void moveToTargetDepartmentInternal(DepartmentEntity targetDepartment, EmployeeEntity ee) {
-        if (targetDepartment.getManager() == null)  {     //the first employee of current department
+        if (targetDepartment.getManager() == null) {     //the first employee of current department
 
-            if(targetDepartment.getParent()==null)        // the root department
+            if (targetDepartment.getParent() == null)        // the root department
                 ee.setDirectReportTo(this.getSentinelEmployee());
             else                            // not the first employee created
                 ee.setDirectReportTo(targetDepartment.getParent().getManager());
@@ -276,6 +275,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
         return false;
+    }
+
+    @Override
+    public String findByTitle(EmployeeOperationRequest request) {
+
+        if (request.getSearchByTitle().equals("总经理"))
+            return this.departmentService.findById(this.departmentService.findRootDepartment().getId()).getManager().getLoginAccount();
+        else
+            throw new RuntimeException("Error to find manager");
     }
 
 
