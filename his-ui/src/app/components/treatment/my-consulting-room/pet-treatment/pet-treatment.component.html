@@ -1,3 +1,43 @@
-<p>
-  pet-treatment works!
-</p>
+<div class="btn-group isaac-margin-15top">
+  <button class="btn btn-default" (click)="onCreateTreatmentCase()">+新建病历</button>
+</div>
+<div class="row fixed-height-500 isaac-margin-15top">
+  <split [direction]="'vertical'">
+    <split-area size="30">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>序号</th>
+          <th>病历日期</th>
+          <th>医师</th>
+          <th>主人描述</th>
+          <th>临床检查</th>
+          <th>医生诊断</th>
+          <th>医嘱</th>
+          <th>最后修改时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let treatmentCase of treatmentCases;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{treatmentCase.treatmentDate|date:'yyyy年MM月dd日'}}</td>
+          <td>{{treatmentCase.doctor?.name}}</td>
+          <td>{{treatmentCase.petOwnerDescription}}</td>
+          <td>{{treatmentCase.clinicSituation}}</td>
+          <td>{{treatmentCase.doctorDiagnose}}</td>
+          <td>{{treatmentCase.doctorAdvice}}</td>
+          <td>{{treatmentCase.lastModifiedDateTime| date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </split-area>
+    <split-area size="70">
+      <!--
+      <app-procurement-purchase-detail [procurement]="selectedProcurement"></app-procurement-purchase-detail>
+      -->
+    </split-area>
+  </split>
+</div>
+
+
+

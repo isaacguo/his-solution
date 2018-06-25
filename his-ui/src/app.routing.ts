@@ -65,6 +65,7 @@ import {MedicalTestReportCreateUpdateComponent} from "./app/components/medical-t
 import {FinanceManagementGuard} from "./app/guards/finance/finance-management.guard";
 import {InpatientComponent} from "./app/components/inpatient/inpatient.component";
 import {MedicalTestSettingsDepartmentComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department.component";
+import {PetMedicalTestComponent} from "./app/components/treatment/my-consulting-room/pet-medical-test/pet-medical-test.component";
 
 
 const appRoutes: Routes = [
@@ -113,6 +114,11 @@ const appRoutes: Routes = [
           {
             path: 'pet-treatment',
             component: PetTreatmentComponent,
+          },
+          {
+            path:'pet-medical-test',
+            component:PetMedicalTestComponent,
+
           },
           {
             path: '**',

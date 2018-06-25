@@ -5,25 +5,28 @@ import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class TreatmentCaseEntity {
 
-    boolean createResult;
     LocalDateTime treatmentDate;
     LocalDateTime createdDate;
-    @ManyToOne
-    @JsonBackReference("DepartmentEntity-TreatmentCaseEntity")
-    DepartmentEntity department;
+    LocalDateTime lastModifiedDateTime;
+
+    String petOwnerDescription;
+    String doctorDiagnose;
+    String clinicSituation;
+    String doctorAdvice;
     @ManyToOne
     @JsonBackReference("EmployeeEntity-TreatmentCaseEntity")
     EmployeeEntity doctor;
     @ManyToOne
-    @JsonBackReference("PetOwnerEntity-TreatmentCaseEntity")
-    PetOwnerEntity petOwner;
-    @ManyToOne
     @JsonBackReference("PetEntity-TreatmentCaseEntity")
     PetEntity pet;
+    @ElementCollection
+    List<Long> medicalTestReportIdList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,21 +34,58 @@ public class TreatmentCaseEntity {
     @Enumerated(EnumType.STRING)
     private TreatmentCaseStatusEnum treatmentCaseStatus;
 
-    public boolean isCreateResult() {
-        return createResult;
+    public String getDoctorAdvice() {
+        return doctorAdvice;
     }
 
-    public void setCreateResult(boolean createResult) {
-        this.createResult = createResult;
+    public void setDoctorAdvice(String doctorAdvice) {
+        this.doctorAdvice = doctorAdvice;
     }
 
-    public PetOwnerEntity getPetOwner() {
-        return petOwner;
+    public String getClinicSituation() {
+
+        return clinicSituation;
     }
 
-    public void setPetOwner(PetOwnerEntity petOwner) {
-        this.petOwner = petOwner;
+    public void setClinicSituation(String clinicSituation) {
+        this.clinicSituation = clinicSituation;
     }
+
+    public String getDoctorDiagnose() {
+        return doctorDiagnose;
+    }
+
+    public void setDoctorDiagnose(String doctorDiagnose) {
+        this.doctorDiagnose = doctorDiagnose;
+    }
+
+
+
+    public String getPetOwnerDescription() {
+        return petOwnerDescription;
+    }
+
+    public void setPetOwnerDescription(String petOwnerDescription) {
+        this.petOwnerDescription = petOwnerDescription;
+    }
+    public List<Long> getMedicalTestReportIdList() {
+        return medicalTestReportIdList;
+    }
+
+    public void addMedicalTestReportId(Long medicalTestReportId) {
+        if (medicalTestReportId == null)
+            throw new RuntimeException("Medical Test Id is null");
+        this.medicalTestReportIdList.add(medicalTestReportId);
+    }
+
+    public LocalDateTime getLastModifiedDateTime() {
+        return lastModifiedDateTime;
+    }
+
+    public void setLastModifiedDateTime(LocalDateTime lastModifiedDateTime) {
+        this.lastModifiedDateTime = lastModifiedDateTime;
+    }
+
 
     public PetEntity getPet() {
         return pet;
@@ -96,13 +136,6 @@ public class TreatmentCaseEntity {
         this.createdDate = createdDate;
     }
 
-    public DepartmentEntity getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(DepartmentEntity department) {
-        this.department = department;
-    }
 
     public EmployeeEntity getDoctor() {
         return doctor;

@@ -113,6 +113,11 @@
   height: 768px;
 }
 
+.fixed-height-500
+{
+  height: 700px;
+}
+
 .isaac-align-bottom{
   display:table-cell;
   vertical-align: bottom;

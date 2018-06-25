@@ -66,4 +66,10 @@ public class ReportServiceImpl implements ReportService {
     public ReportEntity findOne(Long rid) {
         return this.reportRepository.findOne(rid);
     }
+
+    @Override
+    public List<ReportEntity> getReportsByIds(ReportOperationRequest request) {
+        List<Long> ids=request.getReportIdLists();
+        return this.reportRepository.findAll(ids);
+    }
 }

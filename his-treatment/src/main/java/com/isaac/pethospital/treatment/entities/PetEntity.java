@@ -15,11 +15,6 @@ import java.util.UUID;
 @Entity
 public class PetEntity {
 
-    /*
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
-    @JsonManagedReference("PetEntity-RegistrationEntity")
-    List<RegistrationEntity> registrationList = new LinkedList<>();
-    */
     @ManyToOne
     @JsonBackReference("PetOwnerEntity-PetEntity")
     PetOwnerEntity petOwner;

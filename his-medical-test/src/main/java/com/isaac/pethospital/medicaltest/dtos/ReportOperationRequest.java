@@ -21,6 +21,16 @@ public class ReportOperationRequest {
     LocalDateTime finishedDateTime;
     ReportStatusEnum reportStatus;
 
+    public List<Long> getReportIdLists() {
+        return reportIdLists;
+    }
+
+    public void setReportIdLists(List<Long> reportIdLists) {
+        this.reportIdLists = reportIdLists;
+    }
+
+    List<Long> reportIdLists=new LinkedList<>();
+
     public String getReportName() {
         return reportName;
     }

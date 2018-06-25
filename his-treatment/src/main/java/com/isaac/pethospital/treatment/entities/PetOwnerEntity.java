@@ -17,9 +17,6 @@ public class PetOwnerEntity {
     @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
     @JsonManagedReference("PetOwnerEntity-PetEntity")
     List<PetEntity> petList = new LinkedList<>();
-    @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
-    @JsonManagedReference("PetOwnerEntity-TreatmentCaseEntity")
-    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

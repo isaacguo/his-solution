@@ -7,10 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsTemplate;
 
-//import com.isaac.pethospital.procurement.jms.JmsProperties;
-
 @Configuration
-//@EnableConfigurationProperties({JmsProperties.class})
 public class TreatmentConfiguration {
 
     @Bean

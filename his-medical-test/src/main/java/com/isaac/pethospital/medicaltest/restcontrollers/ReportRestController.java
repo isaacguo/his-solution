@@ -24,6 +24,12 @@ public class ReportRestController {
         return this.reportService.findOne(rid);
     }
 
+    @PostMapping("get-reports-by-ids")
+    public List<ReportEntity> getReportsByIds(@RequestBody ReportOperationRequest request)
+    {
+        return this.reportService.getReportsByIds(request);
+    }
+
     @GetMapping
     public List<ReportEntity> findAll()
     {

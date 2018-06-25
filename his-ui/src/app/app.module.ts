@@ -128,6 +128,8 @@ import { MedicalTestSettingsDepartmentListComponent } from './components/medical
 import { MedicalTestSettingsDepartmentDetailComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-detail/medical-test-settings-department-detail.component';
 import {MedicalTestDepartmentService} from "./services/medical-test/medical-test-department.service";
 import { MedicalTestSettingsDepartmentReportTemplatesComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-detail/medical-test-settings-department-report-templates/medical-test-settings-department-report-templates.component';
+import { PetMedicalTestComponent } from './components/treatment/my-consulting-room/pet-medical-test/pet-medical-test.component';
+import {TreatmentCaseService} from "./services/treatment/treatment-case.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -226,6 +228,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestSettingsDepartmentListComponent,
     MedicalTestSettingsDepartmentDetailComponent,
     MedicalTestSettingsDepartmentReportTemplatesComponent,
+    PetMedicalTestComponent,
 
   ],
   imports: [
@@ -272,6 +275,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MyConsultingRoomGuard,
     TreatmentSettingsGuard,
     InpatientManagementGuard,
+    TreatmentCaseService,
 
     //finance
     FinanceManagementGuard,

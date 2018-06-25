@@ -15,4 +15,6 @@ public interface ReportService {
     List<ReportEntity> findAll();
 
     ReportEntity findOne(Long rid);
+
+    List<ReportEntity> getReportsByIds(ReportOperationRequest request);
 }
