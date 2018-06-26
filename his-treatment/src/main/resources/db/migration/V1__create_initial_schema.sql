@@ -2,6 +2,7 @@ create table authorization_assignment_entity (id bigint not null auto_increment,
 create table authorization_assignment_entity_allowed_operations (authorization_assignment_entity_id bigint not null, allowed_operations_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_entity (id bigint not null auto_increment, uid bigint, user_account varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_topic_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table common_configuration_entity (id bigint not null auto_increment, conf_key varchar(255), conf_value varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table department_entity (id bigint not null auto_increment, dep_id bigint, description varchar(255), expose_to_public bit not null, name varchar(255), open_to_front_desk bit not null, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table employee_entity (id bigint not null auto_increment, can_be_registered bit not null, emp_id bigint, login_account varchar(255), name varchar(255), self_introduction varchar(255), department_id bigint, employee_type_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table employee_type_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -13,7 +14,8 @@ create table registration_entity (id bigint not null auto_increment, book_date d
 create table registration_number_entity (id bigint not null auto_increment, date date, number integer, doctor_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table topic_operation_entity (id bigint not null auto_increment, name varchar(255), authorization_topic_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table topic_operation_entity_authorization_assignment_list (topic_operation_entity_id bigint not null, authorization_assignment_list_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table treatment_case_entity (id bigint not null auto_increment, create_result bit not null, created_date datetime, treatment_case_status varchar(255), treatment_date datetime, uuid varchar(255), department_id bigint, doctor_id bigint, pet_id bigint, pet_owner_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table treatment_case_entity (id bigint not null auto_increment, clinic_situation varchar(255), created_date datetime, doctor_advice varchar(255), doctor_diagnose varchar(255), last_modified_date_time datetime, pet_owner_description varchar(255), treatment_case_status varchar(255), treatment_date datetime, uuid varchar(255), doctor_id bigint, pet_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table treatment_case_entity_medical_test_report_id_list (treatment_case_entity_id bigint not null, medical_test_report_id_list bigint) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table authorization_assignment_entity add constraint FKedjwiuan814a19bi4yy07tdph foreign key (authorization_id) references authorization_entity (id);
 alter table authorization_assignment_entity add constraint FK8dqq1kc7jp0clkstctpnjtl2y foreign key (topic_id) references authorization_topic_entity (id);
 alter table authorization_assignment_entity_allowed_operations add constraint FK5vwid8n1jmi0r5h2fxxnbvbgn foreign key (allowed_operations_id) references topic_operation_entity (id);
@@ -31,7 +33,6 @@ alter table registration_number_entity add constraint FKo8r0g185lhfwqou89casipod
 alter table topic_operation_entity add constraint FKoec3nr2ausdy7u53qubpxopo8 foreign key (authorization_topic_id) references authorization_topic_entity (id);
 alter table topic_operation_entity_authorization_assignment_list add constraint FKtmjvf3170d9xr73l2i2sy705t foreign key (authorization_assignment_list_id) references authorization_assignment_entity (id);
 alter table topic_operation_entity_authorization_assignment_list add constraint FK4y6aqtertcn95oyqdiba3jdbf foreign key (topic_operation_entity_id) references topic_operation_entity (id);
-alter table treatment_case_entity add constraint FKgau0hin3ms4oooht1l898a4cb foreign key (department_id) references department_entity (id);
 alter table treatment_case_entity add constraint FK66k2f9imb7mfetn3habawq81b foreign key (doctor_id) references employee_entity (id);
 alter table treatment_case_entity add constraint FKp7mrx9givae5w86lcv6fty4cl foreign key (pet_id) references pet_entity (id);
-alter table treatment_case_entity add constraint FK2ihoeg1wimgbb2rkkobw3sujk foreign key (pet_owner_id) references pet_owner_entity (id);
+alter table treatment_case_entity_medical_test_report_id_list add constraint FKk5iimbb4v51yo7ugh95wr0nod foreign key (treatment_case_entity_id) references treatment_case_entity (id);
