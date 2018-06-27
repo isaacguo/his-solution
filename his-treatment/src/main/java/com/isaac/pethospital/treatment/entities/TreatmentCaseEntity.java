@@ -1,6 +1,7 @@
 package com.isaac.pethospital.treatment.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
 
 import javax.persistence.*;
@@ -19,20 +20,47 @@ public class TreatmentCaseEntity {
     String doctorDiagnose;
     String clinicSituation;
     String doctorAdvice;
+
     @ManyToOne
     @JsonBackReference("EmployeeEntity-TreatmentCaseEntity")
     EmployeeEntity doctor;
     @ManyToOne
     @JsonBackReference("PetEntity-TreatmentCaseEntity")
     PetEntity pet;
-    @ElementCollection
-    List<Long> medicalTestReportIdList = new LinkedList<>();
+    //@ElementCollection
+    //List<Long> medicalTestReportIdList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String uuid;
     @Enumerated(EnumType.STRING)
     private TreatmentCaseStatusEnum treatmentCaseStatus;
+
+    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.PERSIST)
+    @JsonManagedReference("TreatmentCaseEntity-PrescriptionEntity")
+    private List<PrescriptionEntity> prescriptionList = new LinkedList<>();
+
+
+    public void setPrescriptionList(List<PrescriptionEntity> prescriptionList) {
+        this.prescriptionList = prescriptionList;
+    }
+
+    public List<PrescriptionEntity> getPrescriptionList() {
+        return prescriptionList;
+    }
+
+    public void addPrescription(PrescriptionEntity prescription) {
+        if (prescription == null)
+            throw new RuntimeException("Prescription is null");
+        prescription.setTreatmentCase(this);
+        this.prescriptionList.add(prescription);
+    }
+    public void removePrescription(PrescriptionEntity prescription) {
+        if (prescription == null)
+            throw new RuntimeException("Prescription is null");
+        prescription.setTreatmentCase(null);
+        this.prescriptionList.remove(prescription);
+    }
 
     public String getDoctorAdvice() {
         return doctorAdvice;
@@ -60,7 +88,6 @@ public class TreatmentCaseEntity {
     }
 
 
-
     public String getPetOwnerDescription() {
         return petOwnerDescription;
     }
@@ -68,6 +95,7 @@ public class TreatmentCaseEntity {
     public void setPetOwnerDescription(String petOwnerDescription) {
         this.petOwnerDescription = petOwnerDescription;
     }
+    /*
     public List<Long> getMedicalTestReportIdList() {
         return medicalTestReportIdList;
     }
@@ -77,6 +105,7 @@ public class TreatmentCaseEntity {
             throw new RuntimeException("Medical Test Id is null");
         this.medicalTestReportIdList.add(medicalTestReportId);
     }
+    */
 
     public LocalDateTime getLastModifiedDateTime() {
         return lastModifiedDateTime;

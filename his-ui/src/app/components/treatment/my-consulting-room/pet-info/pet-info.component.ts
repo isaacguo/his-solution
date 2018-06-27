@@ -32,8 +32,8 @@ export class PetInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.currentPetOwner = this.petService.selectedPetOwner;
-    this.selectedPet = this.petService.selectedPet;
+    this.currentPetOwner = this.petInfo.petOwner;
+    this.selectedPet = this.petInfo.pet;
   }
 
   onModifyOwnerButtonClicked(createPetOwnerModal)

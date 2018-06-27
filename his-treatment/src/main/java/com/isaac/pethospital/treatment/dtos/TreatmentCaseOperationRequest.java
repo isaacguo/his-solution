@@ -111,7 +111,7 @@ public class TreatmentCaseOperationRequest {
         treatmentCaseEntity.setUuid(this.uuid);
         treatmentCaseEntity.setTreatmentCaseStatus(this.treatmentCaseStatus);
         this.medicalTestReportIdList.forEach(r->{
-            treatmentCaseEntity.addMedicalTestReportId(r);
+            tgetOnereatmentCaseEntity.addMedicalTestReportId(r);
         });
         */
 

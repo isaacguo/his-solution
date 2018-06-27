@@ -73,7 +73,8 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public VendorEntity findById(Long id) {
-        return this.vendorRepository.findOne(id);
+        VendorEntity ve= this.vendorRepository.findOne(id);
+        return ve;
     }
 
     @Override

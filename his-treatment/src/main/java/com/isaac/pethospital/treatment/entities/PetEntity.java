@@ -1,6 +1,7 @@
 package com.isaac.pethospital.treatment.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.common.enums.GenderEnum;
 import com.isaac.pethospital.common.enums.PetColorEnum;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@JsonIgnoreProperties({"treatmentCaseList"})
 public class PetEntity {
 
     @ManyToOne

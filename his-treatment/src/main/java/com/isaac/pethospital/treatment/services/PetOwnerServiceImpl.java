@@ -28,7 +28,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 
     @Override
     public List<PetOwnerEntity> findByName(String name) {
-        return this.petOwnerRepository.findByName(name);
+        return this.petOwnerRepository.findByNameLike(name);
     }
 
     @Override

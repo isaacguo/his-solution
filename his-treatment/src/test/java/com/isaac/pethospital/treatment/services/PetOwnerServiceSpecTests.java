@@ -127,11 +127,11 @@ public class PetOwnerServiceSpecTests {
         List<PetOwnerEntity> list = new LinkedList<>();
         list.add(petOwnerEntity);
         //given
-        doReturn(list).when(petOwnerRepository).findByName("刘备");
+        doReturn(list).when(petOwnerRepository).findByNameLike("刘备");
         //when
         this.petOwnerService.findByName("刘备");
         //then
-        verify(petOwnerRepository, times(1)).findByName("刘备");
+        verify(petOwnerRepository, times(1)).findByNameLike("刘备");
     }
 
     @Test

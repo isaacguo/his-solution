@@ -13,8 +13,14 @@ public interface TreatmentCaseQueryResponse {
     LocalDateTime getLastModifiedDateTime();
 
     String getDoctor();
+    String getClinicSituation();
 
-    List<Long> getMedicalTestReportIdList();
+
+    String getPetOwnerDescription();
+    String getDoctorDiagnose();
+    String getDoctorAdvice();
+
+    //List<Long> getMedicalTestReportIdList();
 
     Long getId();
 }

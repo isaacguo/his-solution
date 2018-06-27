@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PetOwnerRepository extends JpaRepository<PetOwnerEntity,Long> {
 
-    List<PetOwnerEntity> findByName(String name);
+    List<PetOwnerEntity> findByNameLike(String name);
     PetOwnerEntity findByMemberNumber(String s);
     PetOwnerEntity findByPetListContains(PetEntity petEntity);
 

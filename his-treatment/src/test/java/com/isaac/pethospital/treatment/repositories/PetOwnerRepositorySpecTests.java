@@ -31,7 +31,7 @@ public class PetOwnerRepositorySpecTests {
     public void givenPetOwnerRepositoryWhenFindByNameReturnList() throws Exception {
         PetOwnerEntity petOwner = getPetOwnerEntity();
         this.entityManager.persist(petOwner);
-        List<PetOwnerEntity> owners = this.repository.findByName("刘备");
+        List<PetOwnerEntity> owners = this.repository.findByNameLike("刘备");
         assertThat(owners.size()).isEqualTo(1);
     }
     @Test
@@ -48,7 +48,7 @@ public class PetOwnerRepositorySpecTests {
     public void givenPetOwnerRepositoryWhenFindByNameReturnPetOwner() throws Exception {
         PetOwnerEntity petOwner = getPetOwnerEntity();
         this.entityManager.persist(petOwner);
-        List<PetOwnerEntity> owners = this.repository.findByName("刘备");
+        List<PetOwnerEntity> owners = this.repository.findByNameLike("刘备");
         assertThat(owners.get(0).getName()).isEqualTo("刘备");
     }
 

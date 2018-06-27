@@ -54,7 +54,7 @@
 
 <div class="row fixed-height isaac-margin-15top">
   <split [direction]="direction">
-    <split-area size="30">
+    <split-area [size]="30">
       <table class="table table-bordered table-responsive">
         <thead>
         <tr>
@@ -83,7 +83,7 @@
         </tbody>
       </table>
     </split-area>
-    <split-area size="70">
+    <split-area [size]="70">
       <app-procurement-purchase-detail [procurement]="selectedProcurement"></app-procurement-purchase-detail>
     </split-area>
   </split>

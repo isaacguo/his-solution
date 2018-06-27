@@ -1,6 +1,7 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
+import com.isaac.pethospital.treatment.dtos.RegistrationResponse;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
 import com.isaac.pethospital.treatment.services.EmployeeService;
@@ -36,7 +37,7 @@ public class RegistrationRestController {
     }
 
     @GetMapping("find-my-registration-today")
-    public List<RegistrationEntity> findMyRegistrationToday() {
+    public List<RegistrationResponse> findMyRegistrationToday() {
         EmployeeEntity doctor= this.employeeService.findByLoginAccount(getUserAccount());
         RegistrationOperationRequest request=new RegistrationOperationRequest();
         request.setDoctorId(doctor.getId());
@@ -49,7 +50,7 @@ public class RegistrationRestController {
     }
 
     @PostMapping("find-by-doctor-and-bookdate-after")
-    public List<RegistrationEntity> findByDoctorAndBookdateAfter(@Valid @RequestBody RegistrationOperationRequest request) {
+    public List<RegistrationResponse> findByDoctorAndBookdateAfter(@Valid @RequestBody RegistrationOperationRequest request) {
         return this.registrationService.findByDoctorAndBookDateAfter(request);
     }
 

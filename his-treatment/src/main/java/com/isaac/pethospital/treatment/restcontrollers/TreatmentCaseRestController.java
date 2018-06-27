@@ -1,9 +1,11 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
 import com.isaac.pethospital.common.security.AuthHelper;
+import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
+import com.isaac.pethospital.treatment.entities.PrescriptionEntity;
 import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
 import com.isaac.pethospital.treatment.services.EmployeeService;
 import com.isaac.pethospital.treatment.services.TreatmentCaseService;
@@ -29,17 +31,29 @@ public class TreatmentCaseRestController {
     public List<TreatmentCaseQueryResponse> findAll(@PathVariable("pId") Long pid) {
         return this.treatmentCaseService.findAll(pid);
     }
+    @GetMapping("/{tId}")
+    public TreatmentCaseEntity findOne(@PathVariable("tId") Long tid) {
+        return this.treatmentCaseService.findOne(tid);
+    }
+
+    @GetMapping("/{tId}/prescriptions")
+    public List<PrescriptionEntity> getPrescriptions(@PathVariable("tId") Long tid) {
+        return this.treatmentCaseService.getPrescriptionList(tid);
+    }
 
     @PostMapping
-    public TreatmentCaseEntity create(@RequestBody TreatmentCaseOperationRequest request)
-    {
-        String userAccount=authHelper.getUserAccount();
-        EmployeeEntity doctor= this.employeeService.findByLoginAccount(userAccount);
+    public TreatmentCaseEntity create(@RequestBody TreatmentCaseOperationRequest request) {
+        String userAccount = authHelper.getUserAccount();
+        EmployeeEntity doctor = this.employeeService.findByLoginAccount(userAccount);
         request.setDoctor(doctor);
 
         return this.treatmentCaseService.createTreatmentCase(request);
     }
 
+    @DeleteMapping("/{tid}")
+    public OperationResponse deleteOne(@PathVariable("tid") Long tid) {
+        return this.treatmentCaseService.deleteOne(tid);
+    }
 
 
 }

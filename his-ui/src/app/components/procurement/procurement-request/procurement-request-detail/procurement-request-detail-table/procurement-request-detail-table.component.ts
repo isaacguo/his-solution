@@ -12,6 +12,11 @@ export class ProcurementRequestDetailTableComponent implements OnInit {
   @Input()
   procurement:Procurement;
 
+  getSubmittedData():Date
+  {
+    return new Date(this.procurement.procurementRequest.submittedData);
+  }
+
   constructor() { }
 
   ngOnInit() {

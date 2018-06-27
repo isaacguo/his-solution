@@ -30,6 +30,11 @@ export class ProcurementApprovalDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  getSubmittedData(procurement:any):Date
+  {
+    return new Date(procurement.procurementRequest.submittedData+'Z');
+  }
+
   onPassButtonClicked() {
     this.commentModal.open();
   }

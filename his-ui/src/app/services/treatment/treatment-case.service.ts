@@ -18,4 +18,8 @@ export class TreatmentCaseService extends CrudService {
     return this.authHttp.get(`${this.rootUrl}/find-all-by-pet/${pid}`).map(this.extractData);
   }
 
+  getPrescriptions(tid:number):Observable<any[]>{
+    return this.authHttp.get(`${this.rootUrl}/${tid}/prescriptions`).map(this.extractData);
+  }
+
 }

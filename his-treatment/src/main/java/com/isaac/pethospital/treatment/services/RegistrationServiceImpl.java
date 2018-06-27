@@ -1,6 +1,7 @@
 package com.isaac.pethospital.treatment.services;
 
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
+import com.isaac.pethospital.treatment.dtos.RegistrationResponse;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
@@ -30,13 +31,13 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public List<RegistrationEntity> findByDoctorAndBookDateAfter(RegistrationOperationRequest registrationOperationRequest) {
+    public List<RegistrationResponse> findByDoctorAndBookDateAfter(RegistrationOperationRequest registrationOperationRequest) {
         EmployeeEntity doctor = getEmployeeById(registrationOperationRequest.getDoctorId());
         return this.findByDoctorAndBookDateAfter(doctor, registrationOperationRequest.getBookDate());
     }
 
-    public List<RegistrationEntity> findByDoctorAndBookDateAfter(EmployeeEntity employeeEntity, LocalDateTime localDateTime) {
-        return this.registrationRepository.findByDoctorAndBookDateAfter(employeeEntity, localDateTime);
+    public List<RegistrationResponse> findByDoctorAndBookDateAfter(EmployeeEntity employeeEntity, LocalDateTime localDateTime) {
+        return this.registrationRepository.customFindByDoctorAndBookDateAfter(employeeEntity, localDateTime);
     }
 
     @Override

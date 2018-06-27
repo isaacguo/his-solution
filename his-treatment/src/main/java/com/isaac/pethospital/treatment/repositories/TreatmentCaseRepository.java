@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface TreatmentCaseRepository extends JpaRepository<TreatmentCaseEntity, Long> {
 
-    @Query("select t.id as id,t.treatmentDate as treatmentDate, t.createdDate as createdDate, t.clinicSituation as clinicSituation, d.name as doctor from TreatmentCaseEntity t join t.doctor d where t.pet=:pet ")
-    List<TreatmentCaseQueryResponse> findTreatmentCaseEntitiesByPet(@Param("pet") PetEntity pet);
+
+    @Query("select t.doctorAdvice as doctorAdvice, t.petOwnerDescription as petOwnerDescription, t.doctorDiagnose as doctorDiagnose, t.id as id,t.treatmentDate as treatmentDate, t.createdDate as createdDate, t.clinicSituation as clinicSituation, d.name as doctor from TreatmentCaseEntity t join t.doctor d where t.pet=:pet ")
+    List<TreatmentCaseQueryResponse> customFindTreatmentCaseEntitiesByPet(@Param("pet") PetEntity pet);
 }

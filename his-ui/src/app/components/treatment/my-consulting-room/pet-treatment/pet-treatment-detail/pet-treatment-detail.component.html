@@ -1,0 +1,45 @@
+<div *ngIf="treatmentCase==null" class="isaac-margin-15top">
+  <h4>请从病历列表中选择具体病历查看详细信息</h4>
+</div>
+
+<div *ngIf="treatmentCase!=null" class="isaac-margin-15top">
+  <div class="btn-group">
+    <button class="btn btn-default">化验</button>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      开药详情
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>编号</th>
+          <th>品名</th>
+          <th>规格</th>
+          <th>销售单位</th>
+          <th>销售价格</th>
+          <th>销售数量</th>
+          <th>处方单位</th>
+          <th>组别</th>
+          <th>用法</th>
+          <th>备注</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let prescription of prescriptions">
+          <td>{{prescription.medicineNumber}}</td>
+          <td>{{prescription.medicineName}}</td>
+          <td>{{prescription.medicineSpecification}}</td>
+          <td>{{prescription.medicinePrice}}</td>
+          <td>{{prescription.medicineCount}}</td>
+          <td>{{prescription.unit}}</td>
+          <td>{{prescription.group}}</td>
+          <td>{{prescription.usage}}</td>
+          <td>{{prescription.comment}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

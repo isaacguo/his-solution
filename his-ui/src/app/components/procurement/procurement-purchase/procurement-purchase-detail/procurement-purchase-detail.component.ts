@@ -2,8 +2,6 @@ import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild
 import {Procurement} from "../../../../dto/procurement/procurement.model";
 import {ProcurementStatusService} from "../../../../services/procurement/procurement-status.service";
 import {ProcurementStatus} from "../../../../dto/procurement/procurement-status.model";
-import {forEach} from "@angular/router/src/utils/collection";
-import {findNode} from "@angular/compiler";
 import {AuthenticationService, AuthInfo} from "../../../../services/common/authentication.service";
 import {Subscription} from "rxjs/Subscription";
 import {ProcurementService} from "../../../../services/procurement/procurement.service";
