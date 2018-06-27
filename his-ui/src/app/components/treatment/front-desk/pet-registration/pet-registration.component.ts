@@ -18,7 +18,8 @@ import {TreatmentRegistrationModel} from "../../../../dto/treatment/treatment.re
 })
 export class PetRegistrationComponent implements OnInit {
 
-  @ViewChild('registrationResultModal') registrationResultModal:ModalComponent;
+  @ViewChild("findByNameResultModal") findByNameResultModal: ModalComponent;
+  @ViewChild('registrationResultModal') registrationResultModal: ModalComponent;
 
   ownerModalTitle: string;
   ownerOperationMode: OperationEnum;
@@ -36,9 +37,9 @@ export class PetRegistrationComponent implements OnInit {
   selectedDepartment: Department = {};
   selectedDoctor: TreatmentEmployeeModel = {};
   availableDoctors: TreatmentEmployeeModel[];
-  returnedRegistration:TreatmentRegistrationModel={};
+  returnedRegistration: TreatmentRegistrationModel = {};
 
-  constructor(public petOwnerService: PetOwnerService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService:RegistrationService) {
+  constructor(public petOwnerService: PetOwnerService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService: RegistrationService) {
   }
 
   ngOnInit() {
@@ -94,11 +95,18 @@ export class PetRegistrationComponent implements OnInit {
     });
   }
 
+  findByNameResult: any[] = [];
+
   onFindPetOwnerButtonClicked() {
     if (this.findByPetOwnerNameText) {
       this.petOwnerService.findPetOwnerByName(this.findByPetOwnerNameText).subscribe(r => {
-        if (r.length == 1)
+        if (r.length == 1) {
           this.currentPetOwner = r[0];
+        }
+        else {
+          this.findByNameResult = r;
+          this.findByNameResultModal.open();
+        }
       });
     }
     else {
@@ -112,9 +120,9 @@ export class PetRegistrationComponent implements OnInit {
     this.selectedDoctor.name = "请先选择科室";
     this.selectedDepartment = {};
     this.selectedDepartment.name = "请选择科室";
-    this.availableDoctors=[];
-    this.selectedPet={};
-    this.currentPetOwner={};
+    this.availableDoctors = [];
+    this.selectedPet = {};
+    this.currentPetOwner = {};
   }
 
   onRemovePetButtonClicked(pet: Pet) {
@@ -146,18 +154,31 @@ export class PetRegistrationComponent implements OnInit {
     this.selectedDoctor = doctor;
   }
 
-  onRegistrationButtonClicked(confirmRegistrationModal:ModalComponent) {
+  onRegistrationButtonClicked(confirmRegistrationModal: ModalComponent) {
     confirmRegistrationModal.open();
   }
 
   onConfirmRegistrationModalClosed() {
-    this.registrationService.createRegistration(this.selectedDoctor.id,1,this.selectedPet.id).subscribe(r=>{
-      this.returnedRegistration=r;
+    this.registrationService.createRegistration(this.selectedDoctor.id, 1, this.selectedPet.id).subscribe(r => {
+      this.returnedRegistration = r;
       this.registrationResultModal.open();
     });
   }
 
   onRegistrationResultModalClosed() {
 
+  }
+
+  onFindByNameResultModalClosed() {
+
+  }
+
+  onPetOwnerSelected(queryResult: any) {
+    this.currentPetOwner = queryResult;
+  }
+
+
+  isOwnerSelected(queryResult: any):boolean {
+    return this.currentPetOwner == queryResult;
   }
 }

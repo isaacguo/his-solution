@@ -6,7 +6,6 @@ import com.isaac.pethospital.treatment.dtos.PetOwnerDeletePetRequest;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.repositories.PetOwnerRepository;
-import com.isaac.pethospital.treatment.repositories.PetRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 
     @Override
     public List<PetOwnerEntity> findByName(String name) {
-        return this.petOwnerRepository.findByNameLike(name);
+        return this.petOwnerRepository.findByNameContains(name);
     }
 
     @Override

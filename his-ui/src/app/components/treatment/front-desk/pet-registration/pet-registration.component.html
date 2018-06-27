@@ -1,3 +1,33 @@
+<modal #findByNameResultModal (onClose)="onFindByNameResultModalClosed()">
+  <form #modalForm2="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">已成功</h4>
+    </modal-header>
+    <modal-body>
+      <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+          <th>会员号</th>
+          <th>主人姓名</th>
+          <th>电话</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr [class.info]="isOwnerSelected(queryResult)" *ngFor="let queryResult of findByNameResult"
+            (click)="onPetOwnerSelected(queryResult)">
+          <td>{{queryResult.memberNumber}}</td>
+          <td>{{queryResult.name}}</td>
+          <td>{{queryResult.cellPhone}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="findByNameResultModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
 <modal #registrationResultModal (onClose)="onRegistrationResultModalClosed()">
   <form #modalForm1="ngForm">
     <modal-header [show-close]="true">
@@ -18,7 +48,8 @@
       <h4 class="modal-title">请确认</h4>
     </modal-header>
     <modal-body>
-      确定为 <b>{{currentPetOwner.name}}</b> 的宠物 <b>{{selectedPet.name}}</b> <br/>挂 <b>{{selectedDepartment.name}}</b> 科室 <b>{{selectedDoctor.name}}</b> 今日的号么？
+      确定为 <b>{{currentPetOwner.name}}</b> 的宠物 <b>{{selectedPet.name}}</b> <br/>挂 <b>{{selectedDepartment.name}}</b> 科室
+      <b>{{selectedDoctor.name}}</b> 今日的号么？
     </modal-body>
     <modal-footer>
       <button type="button" class="btn btn-primary" (click)="confirmRegistrationModal.close()">确定</button>
@@ -286,7 +317,8 @@
         </div>
         <div class="form-group isaac-form-space">
           <label>种类: </label>
-          <input readonly [ngModel]="selectedPet.petType?.name" name="selectedPetPetTypeName" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet.petType?.name" name="selectedPetPetTypeName" class="form-control"
+                 type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>品种: </label>
@@ -342,7 +374,8 @@
           <input readonly class="form-control" type="text">
         </div>
         <div class="btn-group" role="group">
-          <button [disabled]="selectedDoctor.id==null" (click)="onRegistrationButtonClicked(confirmRegistrationModal)" class="btn btn-default">
+          <button [disabled]="selectedDoctor.id==null" (click)="onRegistrationButtonClicked(confirmRegistrationModal)"
+                  class="btn btn-default">
             挂号
           </button>
         </div>
