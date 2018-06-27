@@ -105,15 +105,15 @@
         </div>
         <div class="form-group isaac-form-space">
           <label>品种: </label>
-          <input class="form-control" type="text">
+          <input readonly class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>绝育: </label>
-          <input [(ngModel)]="newPet.sterilized" name="newPetSterilized" class="form-control" type="text">
+          <input readonly [ngModel]="newPet.sterilized" name="newPetSterilized" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>病历: </label>
-          <input class="form-control" type="text">
+          <input readonly class="form-control" type="text">
         </div>
       </form>
     </modal-body>
@@ -266,27 +266,27 @@
       <form class="form-inline" role="form">
         <div class="form-group isaac-form-space">
           <label>编号:</label>
-          <input [(ngModel)]="selectedPet.id" name="selectedPetId" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet.id" name="selectedPetId" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>名称: </label>
-          <input [(ngModel)]="selectedPet.name" name="selectedPetName" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet.name" name="selectedPetName" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>性别: </label>
-          <input [(ngModel)]="selectedPet.gender" name="selectedPetGender" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet.gender" name="selectedPetGender" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>年龄: </label>
-          <input [(ngModel)]="selectedPet.age" name="selectedPetAge" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet.age" name="selectedPetAge" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>颜色: </label>
-          <input [(ngModel)]="selectedPet.color" name="selectedPetColor" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet.color" name="selectedPetColor" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>种类: </label>
-          <input [ngModel]="selectedPet.petType?.name" name="selectedPetPetTypeName" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet.petType?.name" name="selectedPetPetTypeName" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>品种: </label>
