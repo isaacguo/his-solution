@@ -1,11 +1,84 @@
+
 <div *ngIf="treatmentCase==null" class="isaac-margin-15top">
   <h4>请从病历列表中选择具体病历查看详细信息</h4>
 </div>
 
 <div *ngIf="treatmentCase!=null" class="isaac-margin-15top">
-  <div class="btn-group">
-    <button class="btn btn-default">化验</button>
+
+
+  <div class="panel panel-info isaac-margin-15top">
+    <div class="panel-heading">
+      基本信息
+    </div>
+    <div class="panel-body">
+
+      <div class="isaac-margin-15top col-md-12">
+        <span><b>主人描述</b></span>
+        <textarea rows="3" class="form-control"></textarea>
+      </div>
+
+      <div class="isaac-margin-15top col-md-12">
+        <span><b>临床检查</b></span>
+        <textarea rows="3" class="form-control"></textarea>
+      </div>
+
+      <div class="isaac-margin-15top col-md-12">
+        <span><b>医生诊断</b></span>
+        <textarea rows="3" class="form-control"></textarea>
+      </div>
+
+      <div class="isaac-margin-15top col-md-12">
+        <span><b>医嘱</b></span>
+        <textarea rows="3" class="form-control"></textarea>
+      </div>
+    </div>
   </div>
+
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      化验详情
+    </div>
+    <div class="panel-body">
+
+      <div class="btn-group">
+        <div class="dropdown" [class.open]="medicalTestReportTemplates.length>0">
+
+          <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)" (focus)="stopPropagation($event)"
+                 type="text" class="form-control dropdown-toggle"
+                 placeholder="输入化验报告名称关键字" [formControl]="searchInput"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2"
+          >
+          <small [hidden]="
+          searchInput.valid || searchInput.pristine" class="text-danger">
+            最少1个字符
+          </small>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li *ngFor="let medicalTestReportTemplate of medicalTestReportTemplates">
+              <a href="javascript:void(0)" (click)="onMedicalTestReportTemplateSelected(medicalTestReportTemplate)">{{medicalTestReportTemplate.reportName}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>序号</th>
+          <th>化验名称</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let medicalTestReport of detailedTreatmentCase.medicalTestReportIdList">
+          <td></td>
+        </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
   <div class="panel panel-info">
     <div class="panel-heading">
       开药详情

@@ -1,8 +1,9 @@
 package com.isaac.pethospital.medicaltest.services;
 
+import com.isaac.pethospital.medicaltest.dtos.ReportTemplateIdAndNameResponse;
+import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
 import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
-import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,11 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
 
         return this.createReportTemplate(request);
 
+    }
+
+    @Override
+    public List<ReportTemplateEntity> findTemplateByNameContains(String name) {
+        return this.reportTemplateRepository.findByReportNameContains(name);
     }
 
     @Override

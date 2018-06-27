@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Rx";
 import {TreatmentRegistrationModel} from "../../dto/treatment/treatment.registration.model";
 import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
 import {TreatmentRegistrationOperationRequestModel} from "../../dto/treatment/treatment.registration.operation.request.model";
+import {RegistrationStatusEnum} from "../../enums/registration-status.enum";
 
 @Injectable()
 export class RegistrationService extends AbstractService {
@@ -15,9 +16,9 @@ export class RegistrationService extends AbstractService {
     super();
   }
 
-  createRegistration(doctorId: number, operatorId: number, petId: number, bookDate?: Date): Observable<TreatmentRegistrationModel> {
+  createRegistration(doctorId: number, operatorId: number, petId: number, bookDate?: Date, status?:string): Observable<TreatmentRegistrationModel> {
     let url = `${this.rootUrl}/create-registration`;
-    let operationRequest = new TreatmentRegistrationOperationRequestModel(doctorId, operatorId, petId, null);
+    let operationRequest = new TreatmentRegistrationOperationRequestModel(doctorId, operatorId, petId, null,status);
     return this.authHttp.post(url, operationRequest).map(this.extractData);
   }
 

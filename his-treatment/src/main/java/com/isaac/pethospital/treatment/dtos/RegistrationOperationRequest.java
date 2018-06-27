@@ -25,6 +25,16 @@ public class RegistrationOperationRequest {
     @NotNull
     private Long petId;
 
+    private RegistrationStatusEnum registrationStatus;
+
+    public RegistrationStatusEnum getRegistrationStatus() {
+        return registrationStatus;
+    }
+
+    public void setRegistrationStatus(RegistrationStatusEnum registrationStatus) {
+        this.registrationStatus = registrationStatus;
+    }
+
     public int getIndexOfDay() {
         return indexOfDay;
     }
@@ -80,7 +90,7 @@ public class RegistrationOperationRequest {
         registrationEntity.setOperator(operator);
         registrationEntity.setPet(pet);
         registrationEntity.setCreatedDate(LocalDateTime.now());
-        registrationEntity.setRegistrationStatus(RegistrationStatusEnum.BOOKED);
+        registrationEntity.setRegistrationStatus(this.registrationStatus);
         return registrationEntity;
     }
 

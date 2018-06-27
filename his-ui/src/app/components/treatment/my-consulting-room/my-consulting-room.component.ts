@@ -6,6 +6,7 @@ import {DepartmentService} from "../../../services/treatment/department.service"
 import {TreatmentEmployeeService} from "../../../services/treatment/treatment-employee.service";
 import {PetInfo, PetService} from "../../../services/treatment/pet.service";
 import {PetOperationRequest} from "../../../dto/treatment/pet.operation.request";
+import {RegistrationStatusEnum} from "../../../enums/registration-status.enum";
 
 @Component({
   selector: 'app-my-consulting-room',
@@ -14,7 +15,7 @@ import {PetOperationRequest} from "../../../dto/treatment/pet.operation.request"
 })
 export class MyConsultingRoomComponent implements OnInit {
 
-  myRegistrations: TreatmentRegistrationModel[];
+  myRegistrations: any[];
   selectedRegistration: any;
 
   constructor(public petOwnerService: PetOwnerService, public petService: PetService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService: RegistrationService) {
@@ -42,6 +43,11 @@ export class MyConsultingRoomComponent implements OnInit {
 
   isRowSelected(registration: any): boolean {
     return this.selectedRegistration == registration;
+  }
+
+  getRegistrationStatusString(reg:RegistrationStatusEnum):string
+  {
+    return RegistrationStatusEnum[reg];
   }
 
 

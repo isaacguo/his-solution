@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicaltest.services;
 
+import com.isaac.pethospital.medicaltest.dtos.ReportTemplateIdAndNameResponse;
 import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 
@@ -15,4 +16,6 @@ public interface ReportTemplateService {
     boolean deleteById(Long rid);
 
     ReportTemplateEntity updateReportTemplate(ReportTemplateOperationRequest request);
+
+    List<ReportTemplateEntity> findTemplateByNameContains(String name);
 }

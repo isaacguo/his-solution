@@ -26,31 +26,44 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-2">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>就诊号</th>
-        <th>宠物名称</th>
-        <th>主人姓名</th>
-        <th>挂号状态</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr (click)="onRowClicked(registration)" *ngFor="let registration of myRegistrations" [class.info]="isRowSelected(registration)">
-        <td>{{registration.indexOfDay}}</td>
-        <td>{{registration.petName}}</td>
-        <td>{{registration.petOwnerName}}</td>
-        <td>{{registration.registrationStatus}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+
+  <!--
+  <split [direction]="'horizontal'">
+    <split-area [size]="20">
+
+    </split-area>
+    <split-area [size]="80" style="padding: 20px;">
+    </split-area>
+  </split>
+  -->
+
+    <div class="col-lg-2">
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th>就诊号</th>
+          <th>宠物名称</th>
+          <th>主人姓名</th>
+          <th>挂号状态</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr (click)="onRowClicked(registration)" *ngFor="let registration of myRegistrations"
+            [class.info]="isRowSelected(registration)">
+          <td>{{registration.indexOfDay}}</td>
+          <td>{{registration.petName}}</td>
+          <td>{{registration.petOwnerName}}</td>
+          <td>{{getRegistrationStatusString(registration.registrationStatus)}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
 
-  <div class="col-lg-10">
-    <app-my-consulting-room-registration-list
-      [registration]="selectedRegistration"></app-my-consulting-room-registration-list>
-  </div>
+    <div class="col-lg-10">
 
+        <app-my-consulting-room-registration-list
+          [registration]="selectedRegistration"></app-my-consulting-room-registration-list>
+    </div>
 </div>

@@ -10,6 +10,7 @@ import {TreatmentEmployeeService} from "../../../../services/treatment/treatment
 import {TreatmentEmployeeModel} from "../../../../dto/treatment/treatment.employee.model";
 import {RegistrationService} from "../../../../services/treatment/registration.service";
 import {TreatmentRegistrationModel} from "../../../../dto/treatment/treatment.registration.model";
+import {RegistrationStatusEnum} from "../../../../enums/registration-status.enum";
 
 @Component({
   selector: 'app-pet-registration',
@@ -159,7 +160,7 @@ export class PetRegistrationComponent implements OnInit {
   }
 
   onConfirmRegistrationModalClosed() {
-    this.registrationService.createRegistration(this.selectedDoctor.id, 1, this.selectedPet.id).subscribe(r => {
+    this.registrationService.createRegistration(this.selectedDoctor.id, 1, this.selectedPet.id,null, "WAITING").subscribe(r => {
       this.returnedRegistration = r;
       this.registrationResultModal.open();
     });

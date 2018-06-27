@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicaltest.restcontrollers;
 
+import com.isaac.pethospital.medicaltest.dtos.ReportTemplateIdAndNameResponse;
 import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import com.isaac.pethospital.medicaltest.services.ReportTemplateService;
@@ -16,19 +17,26 @@ public class ReportTemplateRestController {
     public ReportTemplateRestController(ReportTemplateService reportTemplateService) {
         this.reportTemplateService = reportTemplateService;
     }
+
     @GetMapping()
-    public List<ReportTemplateEntity> findAll()
-    {
+    public List<ReportTemplateEntity> findAll() {
         return this.reportTemplateService.findAll();
     }
+
     @GetMapping("{rid}")
-    public ReportTemplateEntity findById(@PathVariable("rid") Long rid )
-    {
+    public ReportTemplateEntity findById(@PathVariable("rid") Long rid) {
         return this.reportTemplateService.findById(rid);
     }
-    @DeleteMapping("{rid}")
-    public boolean deleteById(@PathVariable("rid") Long rid )
+
+    @GetMapping("findTemplateByNameContains/{name}")
+    public List<ReportTemplateEntity> findTemplateByNameContains(@PathVariable("name") String name)
     {
+        return this.reportTemplateService.findTemplateByNameContains(name);
+    }
+
+    @DeleteMapping("{rid}")
+
+    public boolean deleteById(@PathVariable("rid") Long rid) {
         return this.reportTemplateService.deleteById(rid);
     }
 

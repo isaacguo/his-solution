@@ -44,4 +44,8 @@ export class MedicalTestReportTemplateService extends AbstractService {
   }
 
 
+  findMedicalTestReportTemplateByNameContains(name: any):Observable<any[]> {
+
+    return this.authHttp.get(`${this.rootUrl}/findTemplateByNameContains/${name}`).map(this.extractData);
+  }
 }

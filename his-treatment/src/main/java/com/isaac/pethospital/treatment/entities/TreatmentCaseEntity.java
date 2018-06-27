@@ -27,8 +27,8 @@ public class TreatmentCaseEntity {
     @ManyToOne
     @JsonBackReference("PetEntity-TreatmentCaseEntity")
     PetEntity pet;
-    //@ElementCollection
-    //List<Long> medicalTestReportIdList = new LinkedList<>();
+    @ElementCollection
+    List<Long> medicalTestReportIdList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -95,7 +95,6 @@ public class TreatmentCaseEntity {
     public void setPetOwnerDescription(String petOwnerDescription) {
         this.petOwnerDescription = petOwnerDescription;
     }
-    /*
     public List<Long> getMedicalTestReportIdList() {
         return medicalTestReportIdList;
     }
@@ -105,7 +104,6 @@ public class TreatmentCaseEntity {
             throw new RuntimeException("Medical Test Id is null");
         this.medicalTestReportIdList.add(medicalTestReportId);
     }
-    */
 
     public LocalDateTime getLastModifiedDateTime() {
         return lastModifiedDateTime;
