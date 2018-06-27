@@ -181,4 +181,9 @@ export class PetRegistrationComponent implements OnInit {
   isOwnerSelected(queryResult: any):boolean {
     return this.currentPetOwner == queryResult;
   }
+
+  onFindByNameResultModalDismissed() {
+    this.currentPetOwner=null;
+    this.selectedPet=null;
+  }
 }

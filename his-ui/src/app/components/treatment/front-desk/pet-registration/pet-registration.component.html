@@ -1,7 +1,7 @@
-<modal #findByNameResultModal (onClose)="onFindByNameResultModalClosed()">
+<modal #findByNameResultModal (onClose)="onFindByNameResultModalClosed()" (onDismiss)="onFindByNameResultModalDismissed()">
   <form #modalForm2="ngForm">
     <modal-header [show-close]="true">
-      <h4 class="modal-title">已成功</h4>
+      <h4 class="modal-title">请选择</h4>
     </modal-header>
     <modal-body>
       <table class="table table-bordered table-responsive">
@@ -24,6 +24,9 @@
     </modal-body>
     <modal-footer>
       <button type="button" class="btn btn-primary" (click)="findByNameResultModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="findByNameResultModal"
+              (click)="findByNameResultModal.dismiss()">取消
+      </button>
     </modal-footer>
   </form>
 </modal>
@@ -48,8 +51,8 @@
       <h4 class="modal-title">请确认</h4>
     </modal-header>
     <modal-body>
-      确定为 <b>{{currentPetOwner.name}}</b> 的宠物 <b>{{selectedPet.name}}</b> <br/>挂 <b>{{selectedDepartment.name}}</b> 科室
-      <b>{{selectedDoctor.name}}</b> 今日的号么？
+      确定为 <b>{{currentPetOwner?.name}}</b> 的宠物 <b>{{selectedPet?.name}}</b> <br/>挂 <b>{{selectedDepartment?.name}}</b> 科室
+      <b>{{selectedDoctor?.name}}</b> 今日的号么？
     </modal-body>
     <modal-footer>
       <button type="button" class="btn btn-primary" (click)="confirmRegistrationModal.close()">确定</button>
@@ -194,36 +197,36 @@
       <form class="form-inline" role="form">
         <div class="form-group isaac-form-space">
           <label>编号:</label>
-          <input readonly [ngModel]="currentPetOwner.id" name="currentPetOwnerId" class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner?.id" name="currentPetOwnerId" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>姓名: </label>
-          <input readonly [ngModel]="currentPetOwner.name" name="currentPetOwnerName" class="form-control" type="text">
+          <input readonly [ngModel]="currentPetOwner?.name" name="currentPetOwnerName" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>性别: </label>
-          <input readonly [ngModel]="currentPetOwner.gender" name="currentPetOwnerGender" class="form-control"
+          <input readonly [ngModel]="currentPetOwner?.gender" name="currentPetOwnerGender" class="form-control"
                  type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>生日: </label>
-          <input readonly [ngModel]="currentPetOwner.dateOfBirth | date:'yyyy年MM月dd日' "
+          <input readonly [ngModel]="currentPetOwner?.dateOfBirth | date:'yyyy年MM月dd日' "
                  name="currentPetOwnerDateOfBirth" class="form-control"
                  type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>手机: </label>
-          <input readonly [ngModel]="currentPetOwner.cellPhone" name="currentPetOwnerCellPhone" class="form-control"
+          <input readonly [ngModel]="currentPetOwner?.cellPhone" name="currentPetOwnerCellPhone" class="form-control"
                  type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>电话: </label>
-          <input readonly [ngModel]="currentPetOwner.homePhone" name="currentPetOwnerHomePhone" class="form-control"
+          <input readonly [ngModel]="currentPetOwner?.homePhone" name="currentPetOwnerHomePhone" class="form-control"
                  type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>邮箱: </label>
-          <input readonly [ngModel]="currentPetOwner.email" name="currentPetOwnerEmail" class="form-control"
+          <input readonly [ngModel]="currentPetOwner?.email" name="currentPetOwnerEmail" class="form-control"
                  type="text">
         </div>
         <div class="form-group isaac-form-space">
@@ -232,12 +235,12 @@
         </div>
         <div class="form-group isaac-form-space">
           <label>住址: </label>
-          <input readonly [ngModel]="currentPetOwner.address" name="currentPetOwnerAddress" class="form-control"
+          <input readonly [ngModel]="currentPetOwner?.address" name="currentPetOwnerAddress" class="form-control"
                  type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>卡号: </label>
-          <input readonly [ngModel]="currentPetOwner.memberNumber" name="currentPetOwnerMemberNumber"
+          <input readonly [ngModel]="currentPetOwner?.memberNumber" name="currentPetOwnerMemberNumber"
                  class="form-control" type="text">
         </div>
       </form>
@@ -261,7 +264,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr (click)="onRowClicked(pet)" *ngFor="let pet of currentPetOwner.petList;let petIndex=index"
+          <tr (click)="onRowClicked(pet)" *ngFor="let pet of currentPetOwner?.petList;let petIndex=index"
               [class.info]="isRowSelected(pet)">
             <td>{{petIndex+1}}</td>
             <td>{{pet.name}}</td>
@@ -297,27 +300,27 @@
       <form class="form-inline" role="form">
         <div class="form-group isaac-form-space">
           <label>编号:</label>
-          <input readonly [ngModel]="selectedPet.id" name="selectedPetId" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet?.id" name="selectedPetId" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>名称: </label>
-          <input readonly [ngModel]="selectedPet.name" name="selectedPetName" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet?.name" name="selectedPetName" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>性别: </label>
-          <input readonly [ngModel]="selectedPet.gender" name="selectedPetGender" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet?.gender" name="selectedPetGender" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>年龄: </label>
-          <input readonly [ngModel]="selectedPet.age" name="selectedPetAge" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet?.age" name="selectedPetAge" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>颜色: </label>
-          <input readonly [ngModel]="selectedPet.color" name="selectedPetColor" class="form-control" type="text">
+          <input readonly [ngModel]="selectedPet?.color" name="selectedPetColor" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>种类: </label>
-          <input readonly [ngModel]="selectedPet.petType?.name" name="selectedPetPetTypeName" class="form-control"
+          <input readonly [ngModel]="selectedPet?.petType?.name" name="selectedPetPetTypeName" class="form-control"
                  type="text">
         </div>
         <div class="form-group isaac-form-space">
@@ -326,7 +329,7 @@
         </div>
         <div class="form-group isaac-form-space">
           <label>绝育: </label>
-          <input [ngModel]="selectedPet.sterilized" name="selectedPetSterilized" class="form-control" type="text">
+          <input [ngModel]="selectedPet?.sterilized" name="selectedPetSterilized" class="form-control" type="text">
         </div>
         <div class="form-group isaac-form-space">
           <label>病历: </label>
@@ -344,7 +347,7 @@
     <div class="panel-body">
       <form class="form-inline" role="form">
         <div class="btn-group" role="group">
-          <button [disabled]="selectedPet.id==null" type="button"
+          <button [disabled]="selectedPet?.id==null" type="button"
                   class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
                   data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
