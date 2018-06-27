@@ -54,11 +54,11 @@ public class RegistrationServiceSpecTests {
         doReturn(new EmployeeEntity()).when(employeeRepository).findOne(20L);
 
         //given
-        doReturn(list).when(registrationRepository).findByDoctorAndBookDateAfter(doctor, localDateTime);
+        doReturn(list).when(registrationRepository).customFindByDoctorAndBookDateAfter(doctor, localDateTime);
         //when
         this.registrationService.findByDoctorAndBookDateAfter(registrationOperationRequest);
         //then
-        verify(registrationRepository, times(1)).findByDoctorAndBookDateAfter(any(EmployeeEntity.class), any(LocalDateTime.class));
+        verify(registrationRepository, times(1)).customFindByDoctorAndBookDateAfter(any(EmployeeEntity.class), any(LocalDateTime.class));
     }
 
     @Test
