@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicaltest.dtos;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateInfoEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateItemEntity;
@@ -14,6 +15,7 @@ public class ReportTemplateOperationRequest {
     List<ReportTemplateInfoEntity> reportInfo = new LinkedList<>();
     private Long id;
     private String reportName;
+    private String reportNameHanYuPinYin;
 
     public List<ReportTemplateInfoEntity> getReportInfo() {
         return reportInfo;
@@ -47,9 +49,10 @@ public class ReportTemplateOperationRequest {
         this.reportName = reportName;
     }
 
-    public ReportTemplateEntity toReport() {
+    public ReportTemplateEntity toReport(HanyuPinyinConverter converter) {
         ReportTemplateEntity reportTemplateEntity = new ReportTemplateEntity();
         reportTemplateEntity.setReportName(this.reportName);
+        reportTemplateEntity.setReportNameHanYuPinYin(converter.toHanyuPinyin(this.reportName));
 
         this.reportItems.forEach(r -> {
             ReportTemplateItemEntity reportTemplateItemEntity = new ReportTemplateItemEntity();

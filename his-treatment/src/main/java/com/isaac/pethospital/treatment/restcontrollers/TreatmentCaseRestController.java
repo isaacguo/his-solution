@@ -41,6 +41,16 @@ public class TreatmentCaseRestController {
         return this.treatmentCaseService.getPrescriptionList(tid);
     }
 
+    @PutMapping("/{tId}/add-medical-test/{medicalReportTemplateId}")
+    public boolean addMedicalReportTemplate(@PathVariable("tId") Long tId, @PathVariable("medicalReportTemplateId") Long medicalReportTemplateId){
+        return this.treatmentCaseService.addMedicalReportTemplate(tId,medicalReportTemplateId);
+    }
+
+    @DeleteMapping("/{tId}/add-medical-test/{medicalReportTemplateId}")
+    public boolean removeMedicalReportTemplate(@PathVariable("tId") Long tId, @PathVariable("medicalReportTemplateId") Long medicalReportTemplateId){
+        return this.treatmentCaseService.removeMedicalReportTemplate(tId,medicalReportTemplateId);
+    }
+
     @PostMapping
     public TreatmentCaseEntity create(@RequestBody TreatmentCaseOperationRequest request) {
         String userAccount = authHelper.getUserAccount();

@@ -25,6 +25,15 @@ public class ReportTemplateEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String reportName;
+    private String reportNameHanYuPinYin;
+
+    public String getReportNameHanYuPinYin() {
+        return reportNameHanYuPinYin;
+    }
+
+    public void setReportNameHanYuPinYin(String reportNameHanYuPinYin) {
+        this.reportNameHanYuPinYin = reportNameHanYuPinYin;
+    }
 
     public List<DepartmentEntity> getDepartmentList() {
         return departmentList;

@@ -19,14 +19,13 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public boolean createReport(ReportOperationRequest request) {
+    public ReportEntity createReport(ReportOperationRequest request) {
         ReportEntity reportEntity = request.toReport();
         reportEntity.setReportStatus(ReportStatusEnum.CREATED);
         reportEntity.setCreatedDateTime(LocalDateTime.now());
 
-        this.reportRepository.save(reportEntity);
+        return this.reportRepository.save(reportEntity);
 
-        return true;
     }
 
     @Override

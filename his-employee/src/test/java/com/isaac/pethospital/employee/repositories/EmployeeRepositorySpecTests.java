@@ -37,16 +37,18 @@ public class EmployeeRepositorySpecTests {
         e1.setGivenName("郭");
         e1.setSurname("文李");
         e1.setFullName(e1.getSurname() + e1.getGivenName());
+        e1.setFullNameHanYuPinYin("guowenli");
 
         EmployeeEntity e2 = new EmployeeEntity();
         e2.setGivenName("李");
         e2.setSurname("文明");
         e2.setFullName(e2.getSurname() + e2.getGivenName());
+        e2.setFullNameHanYuPinYin("liwenming");
 
         this.entityManager.persist(e1);
         this.entityManager.persist(e2);
 
-        List<EmployeeEntity> list = this.repository.findDistinctByFullNameContains("李");
+        List<EmployeeEntity> list = this.repository.findDistinctByFullNameHanYuPinYinContains("li");
         assertThat(list.size()).isEqualTo(2);
 
 

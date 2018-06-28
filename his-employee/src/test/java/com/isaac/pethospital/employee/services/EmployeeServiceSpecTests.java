@@ -110,7 +110,7 @@ public class EmployeeServiceSpecTests {
         //when
         this.employeeService.findKeywordInName(any(String.class));
         //then
-        verify(this.employeeRepository, times(1)).findDistinctByFullNameContains(any(String.class));
+        verify(this.employeeRepository, times(1)).findDistinctByFullNameHanYuPinYinContains(any(String.class));
     }
 
 }

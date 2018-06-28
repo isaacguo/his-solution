@@ -19,4 +19,7 @@ public interface TreatmentCaseService {
     List<PrescriptionEntity> getPrescriptionList(Long tid);
 
     TreatmentCaseEntity findOne(Long tid);
+
+    boolean addMedicalReportTemplate(Long tId, Long medicalReportTemplateId);
+    boolean removeMedicalReportTemplate(Long tid, Long medicalReportTemplateId);
 }

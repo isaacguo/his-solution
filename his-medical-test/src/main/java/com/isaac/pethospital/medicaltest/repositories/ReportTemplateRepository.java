@@ -11,4 +11,6 @@ import java.util.List;
 public interface ReportTemplateRepository extends JpaRepository<ReportTemplateEntity,Long> {
 
     List<ReportTemplateEntity> findByReportNameContains(@Param("name") String name);
+
+    List<ReportTemplateEntity> findByReportNameHanYuPinYinContains(@Param("name") String name);
 }

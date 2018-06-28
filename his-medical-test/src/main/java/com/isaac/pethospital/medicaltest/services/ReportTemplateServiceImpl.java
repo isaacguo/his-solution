@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicaltest.services;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.medicaltest.dtos.ReportTemplateIdAndNameResponse;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
@@ -12,14 +13,16 @@ import java.util.List;
 public class ReportTemplateServiceImpl implements ReportTemplateService {
 
     private final ReportTemplateRepository reportTemplateRepository;
+    private final HanyuPinyinConverter converter;
 
-    public ReportTemplateServiceImpl(ReportTemplateRepository reportTemplateRepository) {
+    public ReportTemplateServiceImpl(ReportTemplateRepository reportTemplateRepository, HanyuPinyinConverter converter) {
         this.reportTemplateRepository = reportTemplateRepository;
+        this.converter = converter;
     }
 
     @Override
     public ReportTemplateEntity createReportTemplate(ReportTemplateOperationRequest request) {
-        ReportTemplateEntity reportTemplateEntity = request.toReport();
+        ReportTemplateEntity reportTemplateEntity = request.toReport(this.converter);
         return reportTemplateRepository.save(reportTemplateEntity);
     }
 
@@ -39,7 +42,7 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
 
     @Override
     public List<ReportTemplateEntity> findTemplateByNameContains(String name) {
-        return this.reportTemplateRepository.findByReportNameContains(name);
+        return this.reportTemplateRepository.findByReportNameHanYuPinYinContains(name);
     }
 
     @Override

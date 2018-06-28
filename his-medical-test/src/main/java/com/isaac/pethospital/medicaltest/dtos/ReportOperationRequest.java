@@ -29,7 +29,7 @@ public class ReportOperationRequest {
         this.reportIdLists = reportIdLists;
     }
 
-    List<Long> reportIdLists=new LinkedList<>();
+    List<Long> reportIdLists = new LinkedList<>();
 
     public String getReportName() {
         return reportName;
@@ -133,9 +133,8 @@ public class ReportOperationRequest {
         for (ReportItemEntity rie : this.reportItems)
             map.put(rie.getId(), rie);
 
-        reportEntity.getReportItems().forEach(r-> {
-            if (map.containsKey(r.getId()))
-            {
+        reportEntity.getReportItems().forEach(r -> {
+            if (map.containsKey(r.getId())) {
                 r.setResult(map.get(r.getId()).getResult());
                 r.setComments(map.get(r.getId()).getComments());
             }

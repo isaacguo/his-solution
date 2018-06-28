@@ -64,18 +64,40 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
     @Override
     public List<PrescriptionEntity> getPrescriptionList(Long tid) {
-        if(tid==null)
+        TreatmentCaseEntity tce = getTreatmentCase(tid);
+        return tce.getPrescriptionList();
+    }
+
+    private TreatmentCaseEntity getTreatmentCase(Long tid) {
+        if (tid == null)
             throw new RuntimeException("treatment case id is null");
-        TreatmentCaseEntity tce=this.treatmentCaseRepository.findOne(tid);
+        TreatmentCaseEntity tce = this.treatmentCaseRepository.findOne(tid);
         if (tce == null) {
             throw new RuntimeException("treatment case is null");
         }
-        return tce.getPrescriptionList();
+        return tce;
     }
 
     @Override
     public TreatmentCaseEntity findOne(Long tid) {
         TreatmentCaseEntity tce= this.treatmentCaseRepository.findOne(tid);
         return tce;
+    }
+
+    @Override
+    public boolean addMedicalReportTemplate(Long tid, Long medicalReportTemplateId) {
+        TreatmentCaseEntity tce = getTreatmentCase(tid);
+        tce.addMedicalTestReportId(medicalReportTemplateId);
+        this.treatmentCaseRepository.save(tce);
+        return false;
+    }
+
+
+    @Override
+    public boolean removeMedicalReportTemplate(Long tid, Long medicalReportTemplateId) {
+        TreatmentCaseEntity tce = getTreatmentCase(tid);
+        tce.removeMedicalTestReportId(medicalReportTemplateId);
+        this.treatmentCaseRepository.save(tce);
+        return false;
     }
 }

@@ -1,0 +1,1 @@
+ALTER TABLE employee_entity ADD full_name_han_yu_pin_yin VARCHAR(255) AFTER full_name;

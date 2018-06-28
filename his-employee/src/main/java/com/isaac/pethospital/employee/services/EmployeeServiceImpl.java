@@ -311,7 +311,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeEntity> findKeywordInName(String keyword) {
-        return this.employeeRepository.findDistinctByFullNameContains(keyword);
+        return this.employeeRepository.findDistinctByFullNameHanYuPinYinContains(keyword);
     }
 
     @Override

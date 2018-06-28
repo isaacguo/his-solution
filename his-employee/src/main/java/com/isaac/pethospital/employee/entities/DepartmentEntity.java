@@ -2,6 +2,7 @@ package com.isaac.pethospital.employee.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
@@ -120,7 +121,7 @@ public class DepartmentEntity {
         this.employees.remove(employee);
     }
 
-    public EmployeeEntity addEmployeeByName(String loginAccount, String password, String name, String title, EmployeeEntity manager) {
+    public EmployeeEntity addEmployeeByName(HanyuPinyinConverter converter, String loginAccount, String password, String name, String title, EmployeeEntity manager) {
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setFullName(name);
         employeeEntity.setPassword(password);
@@ -128,6 +129,7 @@ public class DepartmentEntity {
         employeeEntity.setJobTitle(title);
         employeeEntity.setDirectReportTo(manager);
         employeeEntity.setUuid(UUID.randomUUID().toString());
+        employeeEntity.setFullNameHanYuPinYin(converter.toHanyuPinyin(name));
         return this.addEmployee(employeeEntity);
     }
 

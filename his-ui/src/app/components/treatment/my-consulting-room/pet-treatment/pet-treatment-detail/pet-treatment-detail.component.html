@@ -1,3 +1,55 @@
+<modal cssClass="modal-x1" #createMedicalTestReportModal (onClose)="onCreateMedicalTestReportModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body style="padding: 10px">
+
+      <h1 class="page-header">新建化验报告</h1>
+
+      <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            基本信息
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>化验报告名称</label>
+                  <input readonly type="text" class="form-control" formControlName="reportName">
+                </div>
+              </div>
+              <div formArrayName="reportInfoList">
+                <div class="col-md-3" *ngFor="let infoItem of reportInfoData.controls; let i=index" [formGroupName]="i">
+                  <div class="form-group">
+                    <label>{{reportInfoData.controls[i].controls['reportKey'].value}}</label>
+                    <!--<label>{{reportTemplate.reportInfoList[i].reportKey}}</label>-->
+                    <input type="hidden" formControlName="reportKey">
+                    <input type="text" class="form-control" formControlName="reportValue">
+                    <small [hidden]="reportInfoData.controls[i].controls['reportValue'].valid" class="text-danger">
+                      此报告项名称不可为空
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" [disabled]="!formModel.valid"
+              (click)="createMedicalTestReportModal.close()">确定
+      </button>
+      <button type="button" class="btn btn-default" data-dismiss="createMedicalTestReportModal"
+              (click)="createMedicalTestReportModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
 
 <div *ngIf="treatmentCase==null" class="isaac-margin-15top">
   <h4>请从病历列表中选择具体病历查看详细信息</h4>
@@ -44,9 +96,10 @@
       <div class="btn-group">
         <div class="dropdown" [class.open]="medicalTestReportTemplates.length>0">
 
-          <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)" (focus)="stopPropagation($event)"
+          <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+                 (focus)="stopPropagation($event)"
                  type="text" class="form-control dropdown-toggle"
-                 placeholder="输入化验报告名称关键字" [formControl]="searchInput"
+                 placeholder="输入化验报告名称关键字汉语拼音" [formControl]="searchInput"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2"
           >
           <small [hidden]="
@@ -65,11 +118,15 @@
         <tr>
           <th>序号</th>
           <th>化验名称</th>
+          <th>状态</th>
           <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let medicalTestReport of detailedTreatmentCase.medicalTestReportIdList">
+        <tr *ngFor="let medicalTestReport of medicalTestReportList;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{medicalTestReport.reportName}}</td>
+          <td></td>
           <td></td>
         </tr>
         </tbody>

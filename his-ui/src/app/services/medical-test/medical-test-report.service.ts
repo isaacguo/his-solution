@@ -20,10 +20,8 @@ export class MedicalTestReportService extends AbstractService {
     super();
   }
 
-  createReport(request: any): Observable<boolean> {
-    return this.authHttp.post(this.createReportUrl, request).map(r => {
-      return this.extractTextData(r) === "true" ? true : false;
-    });
+  createReport(request: any): Observable<any> {
+    return this.authHttp.post(this.createReportUrl, request).map(this.extractData);
   }
 
   updateReport(request: any): Observable<any> {

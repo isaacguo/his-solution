@@ -104,7 +104,7 @@ export class PetRegistrationComponent implements OnInit {
         if (r.length == 1) {
           this.currentPetOwner = r[0];
         }
-        else {
+        else if (r.length > 1) {
           this.findByNameResult = r;
           this.findByNameResultModal.open();
         }
@@ -160,7 +160,7 @@ export class PetRegistrationComponent implements OnInit {
   }
 
   onConfirmRegistrationModalClosed() {
-    this.registrationService.createRegistration(this.selectedDoctor.id, 1, this.selectedPet.id,null, "WAITING").subscribe(r => {
+    this.registrationService.createRegistration(this.selectedDoctor.id, 1, this.selectedPet.id, null, "WAITING").subscribe(r => {
       this.returnedRegistration = r;
       this.registrationResultModal.open();
     });
@@ -179,12 +179,12 @@ export class PetRegistrationComponent implements OnInit {
   }
 
 
-  isOwnerSelected(queryResult: any):boolean {
+  isOwnerSelected(queryResult: any): boolean {
     return this.currentPetOwner == queryResult;
   }
 
   onFindByNameResultModalDismissed() {
-    this.currentPetOwner=null;
-    this.selectedPet=null;
+    this.currentPetOwner = null;
+    this.selectedPet = null;
   }
 }

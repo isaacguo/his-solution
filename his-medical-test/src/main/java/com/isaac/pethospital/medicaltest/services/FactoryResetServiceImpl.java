@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicaltest.services;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.common.services.AuthorizationTopicService;
 import com.isaac.pethospital.common.services.FactoryResetService;
@@ -18,11 +19,13 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     private final AuthorizationService authorizationService;
     private final AuthorizationTopicService authorizationTopicService;
     private final ReportTemplateRepository reportTemplateRepository;
+    private final HanyuPinyinConverter converter;
 
-    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, ReportTemplateRepository reportTemplateRepository) {
+    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, ReportTemplateRepository reportTemplateRepository, HanyuPinyinConverter converter) {
         this.authorizationService = authorizationService;
         this.authorizationTopicService = authorizationTopicService;
         this.reportTemplateRepository = reportTemplateRepository;
+        this.converter = converter;
     }
 
     @Transactional
@@ -37,6 +40,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
         ReportTemplateEntity reportTemplateEntity = new ReportTemplateEntity();
         reportTemplateEntity.setReportName("血常规");
+        reportTemplateEntity.setReportNameHanYuPinYin(converter.toHanyuPinyin(reportTemplateEntity.getReportName()));
 
         addReportItem("红细胞计数(RBC)", "10^12/L", "4.0", "5.5", reportTemplateEntity);
         addReportItem("红细胞压积(HCT)", "%", "40", "50", reportTemplateEntity);

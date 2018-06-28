@@ -31,6 +31,16 @@ public class EmployeeEntity {
     private String givenName;
     private String surname;
     private String fullName;
+    private String fullNameHanYuPinYin;
+
+    public String getFullNameHanYuPinYin()
+    {
+        return fullNameHanYuPinYin;
+    }
+
+    public void setFullNameHanYuPinYin(String fullNameHanYuPinYin) {
+        this.fullNameHanYuPinYin = fullNameHanYuPinYin;
+    }
 
     private String password;
 

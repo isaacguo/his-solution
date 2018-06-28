@@ -22,4 +22,7 @@ export class TreatmentCaseService extends CrudService {
     return this.authHttp.get(`${this.rootUrl}/${tid}/prescriptions`).map(this.extractData);
   }
 
+  addMedicalTestReport(tid: number, medicalReportTemplateId: number):Observable<any> {
+    return this.authHttp.put(`${this.rootUrl}/${tid}/add-medical-test/${medicalReportTemplateId}`,{}).map(this.extractData);
+  }
 }

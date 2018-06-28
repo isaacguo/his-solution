@@ -6,7 +6,8 @@ import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 import java.util.List;
 
 public interface ReportService {
-    boolean createReport(ReportOperationRequest request);
+    ReportEntity createReport(ReportOperationRequest request);
+
 
     boolean updateReportStatus(ReportOperationRequest reportOperationRequest);
 

@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.common.jms.JmsAuthorizationProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.security.AuthHelper;
@@ -14,6 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableConfigurationProperties({JmsAuthorizationProperties.class})
 public class EmployeeConfiguration {
 
+    @Bean
+    public HanyuPinyinConverter getHanyuPinyinConverter()
+    {
+        return new HanyuPinyinConverter();
+    }
     @Bean
     public AuthHelper getAuthHelper() {
         return new AuthHelper();

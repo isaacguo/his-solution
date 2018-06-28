@@ -105,6 +105,12 @@ public class TreatmentCaseEntity {
         this.medicalTestReportIdList.add(medicalTestReportId);
     }
 
+    public void removeMedicalTestReportId(Long medicalTestReportId) {
+        if (medicalTestReportId == null)
+            throw new RuntimeException("Medical Test Id is null");
+        this.medicalTestReportIdList.remove(medicalTestReportId);
+    }
+
     public LocalDateTime getLastModifiedDateTime() {
         return lastModifiedDateTime;
     }

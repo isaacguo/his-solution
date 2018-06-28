@@ -18,7 +18,8 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     EmployeeEntity findByUuid(String uuid);
 
-    List<EmployeeEntity> findDistinctByFullNameContains(String keyword);
+    //List<EmployeeEntity> findDistinctByFullNameContains(String keyword);
+    List<EmployeeEntity> findDistinctByFullNameHanYuPinYinContains(String keyword);
 
 
     @Query("select e.loginAccount as loginAccount, e.uuid as uuid, e.jobTitle as jobTitle, e.employeeNumber as employeeNumber, e.workPhoneNumber as workPhoneNumber, e.fullName as fullName, e.gender as gender, r.fullName as directReportTo, d.name as departmentName from EmployeeEntity e join e.department d join e.directReportTo r ")

@@ -35,7 +35,6 @@ public class ReportTemplateRestController {
     }
 
     @DeleteMapping("{rid}")
-
     public boolean deleteById(@PathVariable("rid") Long rid) {
         return this.reportTemplateService.deleteById(rid);
     }

@@ -63,7 +63,7 @@
 
       <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)" (focus)="stopPropagation($event)"
              type="text" class="form-control dropdown-toggle"
-             placeholder="用户姓名" [formControl]="searchInput"
+             placeholder="用户姓名汉语拼音" [formControl]="searchInput"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2"
              >
       <small [hidden]="searchInput.valid || searchInput.pristine" class="text-danger">

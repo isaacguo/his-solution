@@ -37,7 +37,7 @@ public class ReportRestController {
     }
 
     @PostMapping
-    public boolean createReport(@RequestBody ReportOperationRequest request) {
+    public ReportEntity createReport(@RequestBody ReportOperationRequest request) {
         return this.reportService.createReport(request);
     }
 

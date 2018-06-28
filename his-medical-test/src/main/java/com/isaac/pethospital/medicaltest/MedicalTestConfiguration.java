@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicaltest;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.common.time.DatetimeGenerator;
@@ -13,6 +14,11 @@ import org.springframework.jms.core.JmsTemplate;
 //@EnableConfigurationProperties({JmsProperties.class})
 public class MedicalTestConfiguration {
 
+    @Bean
+    public HanyuPinyinConverter getHanyuPinyinConverter()
+    {
+        return new HanyuPinyinConverter();
+    }
     @Bean
     public AuthHelper getAuthHelper() {
         return new AuthHelper();
