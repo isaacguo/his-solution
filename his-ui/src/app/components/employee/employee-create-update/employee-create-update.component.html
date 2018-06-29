@@ -62,12 +62,15 @@
           <div>
             <label>密码</label>
             <input type="password" class="form-control" formControlName="password">
-            <small class="text-danger" [hidden]="!passwordFormModel.hasError('minlength', ['passwordsGroup', 'password'])">密码至少8位，且是字母与数字的组合</small>
+            <small class="text-danger"
+                   [hidden]="!passwordFormModel.hasError('minlength', ['passwordsGroup', 'password'])">密码至少8位，且是字母与数字的组合
+            </small>
           </div>
           <div>
             <label>再次输入一次</label>
             <input class="form-control" type="password" formControlName="pconfirm">
-            <small class="text-danger" [hidden]="!passwordFormModel.hasError('equal', ['passwordsGroup'])">两次输入的密码不相同</small>
+            <small class="text-danger" [hidden]="!passwordFormModel.hasError('equal', ['passwordsGroup'])">两次输入的密码不相同
+            </small>
           </div>
         </div>
 
@@ -230,6 +233,19 @@
           <div class="form-group">
             <label>全名</label>
             <input readonly type="text" class="form-control" formControlName="fullName">
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>全名汉语拼音</label>
+            <div class="input-group">
+              <input type="text" class="form-control" formControlName="fullNameHanYuPinYin">
+              <span class="input-group-btn">
+              <button [disabled]="!formModel.controls.surname.valid || !formModel.controls.givenName.valid " class="btn btn-default" type="button" (click)="onGetHanYuPinYinButtonClicked()"><span
+                class="glyphicon glyphicon-font"></span></button>
+            </span>
+            </div>
           </div>
         </div>
       </div>

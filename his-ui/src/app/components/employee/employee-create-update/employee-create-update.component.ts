@@ -107,6 +107,7 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
     this.formModel.controls['surname'].setValue(r.surname);
     this.formModel.controls['givenName'].setValue(r.givenName);
     this.formModel.controls['fullName'].setValue(r.fullName);
+    this.formModel.controls['fullNameHanYuPinYin'].setValue(r.fullNameHanYuPinYin);
 
     this.formModel.controls['idNumber'].setValue(r.idNumber);
     this.formModel.controls['driverLicenseNumber'].setValue(r.driverLicenseNumber);
@@ -143,6 +144,7 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
       'surname': ['', Validators.required],
       'givenName': ['', Validators.required],
       'fullName': [''],
+      'fullNameHanYuPinYin':[''],
       'idNumber': ['', Validators.required],
       'driverLicenseNumber': [''],
       'dateOfBirth': [''],
@@ -239,6 +241,12 @@ export class EmployeeCreateUpdateComponent extends AbstractCreateUpdateComponent
   onChangeAccountModalClosed() {
     this.employeeService.updateEmployeeLoginAccount(this.changeLoginAccountModel.value).subscribe(r => {
       this.loadData();
+    })
+  }
+
+  onGetHanYuPinYinButtonClicked() {
+    this.employeeService.getHanYuPinYin(this.formModel.controls['surname'].value+ this.formModel.controls['givenName'].value).subscribe(r=>{
+      this.formModel.controls['fullNameHanYuPinYin'].setValue(r);
     })
   }
 }

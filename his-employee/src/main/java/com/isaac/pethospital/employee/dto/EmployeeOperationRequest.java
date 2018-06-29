@@ -1,11 +1,14 @@
 package com.isaac.pethospital.employee.dto;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.employee.entities.*;
 import com.isaac.pethospital.employee.enums.EmploymentStatusEnum;
 import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
 import com.isaac.pethospital.employee.enums.SexualEnum;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import sun.swing.StringUIClientPropertyKey;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -20,9 +23,19 @@ public class EmployeeOperationRequest {
     String fullName;
     String password;
     //from EmployeeEntity
+
     String uuid;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public HanyuPinyinConverter getConverter() {
+        return converter;
+    }
+
+    public void setConverter(HanyuPinyinConverter converter) {
+        this.converter = converter;
+    }
+
+    HanyuPinyinConverter converter;
+
     private Long id;
     private String loginAccount;
     private String givenName;
@@ -48,7 +61,16 @@ public class EmployeeOperationRequest {
     private String emergencyContact;
     private String emergencyPhoneNumber;
 
+    public String getFullNameHanYuPinYin() {
+        return fullNameHanYuPinYin;
+    }
+
+    public void setFullNameHanYuPinYin(String fullNameHanYuPinYin) {
+        this.fullNameHanYuPinYin = fullNameHanYuPinYin;
+    }
+
     private String directReportToFullName;
+    private String fullNameHanYuPinYin;
 
     public String getDirectReportToFullName() {
         return directReportToFullName;
@@ -58,9 +80,8 @@ public class EmployeeOperationRequest {
         this.directReportToFullName = directReportToFullName;
     }
 
-    public static EmployeeOperationRequest convertToDto(EmployeeEntity ee)
-    {
-        EmployeeOperationRequest employeeOperationRequest=new EmployeeOperationRequest();
+    public static EmployeeOperationRequest convertToDto(EmployeeEntity ee) {
+        EmployeeOperationRequest employeeOperationRequest = new EmployeeOperationRequest();
 
         employeeOperationRequest.setId(ee.getId());
         employeeOperationRequest.setLoginAccount(ee.getLoginAccount());
@@ -71,6 +92,7 @@ public class EmployeeOperationRequest {
         employeeOperationRequest.setIdNumber(ee.getIdNumber());
         employeeOperationRequest.setDriverLicenseNumber(ee.getDriverLicenseNumber());
         employeeOperationRequest.setFullName(ee.getFullName());
+        employeeOperationRequest.setFullNameHanYuPinYin(ee.getFullNameHanYuPinYin());
         employeeOperationRequest.setDateOfBirth(ee.getDateOfBirth());
         employeeOperationRequest.setGender(ee.getGender());
         employeeOperationRequest.setNationality(ee.getNationality());
@@ -81,8 +103,8 @@ public class EmployeeOperationRequest {
         employeeOperationRequest.setJoinedDate(ee.getJoinedDate());
         employeeOperationRequest.setJobTitle(ee.getJobTitle());
 
-        if(ee.getDirectReportTo()!=null)
-        employeeOperationRequest.setDirectReportToFullName(ee.getDirectReportTo().getFullName());
+        if (ee.getDirectReportTo() != null)
+            employeeOperationRequest.setDirectReportToFullName(ee.getDirectReportTo().getFullName());
 
 
         return employeeOperationRequest;
@@ -331,17 +353,16 @@ public class EmployeeOperationRequest {
 
     public EmployeeEntity toEmployeeEntity() {
         EmployeeEntity ee = new EmployeeEntity();
-        updateInternal(ee,true);
+        updateInternal(ee, true);
         return ee;
     }
 
     public void updateEmployee(EmployeeEntity employee) {
-        updateInternal(employee,false);
+        updateInternal(employee, false);
 
     }
 
-    private void updateInternal(EmployeeEntity ee,boolean isCreate)
-    {
+    private void updateInternal(EmployeeEntity ee, boolean isCreate) {
         ee.setLoginAccount(this.loginAccount);
         ee.setEmployeeNumber(this.employeeNumber);
         ee.setEmploymentStatus(this.employmentStatus);
@@ -349,7 +370,11 @@ public class EmployeeOperationRequest {
         ee.setSurname(this.surname);
         ee.setIdNumber(this.idNumber);
         ee.setDriverLicenseNumber(this.driverLicenseNumber);
-        ee.setFullName(this.surname+this.givenName);
+        ee.setFullName(this.surname + this.givenName);
+        if (StringUtils.isEmpty(this.fullNameHanYuPinYin))
+            ee.setFullNameHanYuPinYin(converter.toHanyuPinyin(ee.getFullName()));
+        else
+            ee.setFullNameHanYuPinYin(this.fullNameHanYuPinYin);
         ee.setDateOfBirth(this.dateOfBirth);
         ee.setGender(this.gender);
         ee.setNationality(this.nationality);

@@ -52,4 +52,6 @@ public interface EmployeeService {
     boolean setAsManager(Long id);
 
     String findByTitle(EmployeeOperationRequest request);
+
+    String getHanYuPinYin(String text);
 }

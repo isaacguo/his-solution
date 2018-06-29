@@ -118,4 +118,10 @@ public class EmployeeRestController {
        return this.employeeService.setAsManager(request.getId());
     }
 
+    @GetMapping(value = "/getHanYuPinYin/{text}")
+    public String getHanYuPinYin(@PathVariable("text") String text)
+    {
+        return this.employeeService.getHanYuPinYin(text);
+    }
+
 }

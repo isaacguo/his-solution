@@ -21,10 +21,11 @@ export class EmployeeService extends AbstractService {
   private updateEmployeeUrl: string = `${this.rootUrl}/update`;
   private updateEmployeeLoginAccountUrl: string = `${this.rootUrl}/updateLoginAccount`;
   private updateEmployeePasswordUrl: string = `${this.rootUrl}/updatePassword`;
-  private moveEmployeeToDepartmentUrl:string= `${this.rootUrl}/move-employee-to-department`;
-  private setAsManagerUrl:string=`${this.rootUrl}/set-as-manager`;
+  private moveEmployeeToDepartmentUrl: string = `${this.rootUrl}/move-employee-to-department`;
+  private setAsManagerUrl: string = `${this.rootUrl}/set-as-manager`;
+  private getHanYuPinYinUrl: string = `${this.rootUrl}/getHanYuPinYin`;
 
-  private _showEmployeeView:boolean=false;
+  private _showEmployeeView: boolean = false;
 
   get showEmployeeView(): boolean {
     return this._showEmployeeView;
@@ -106,15 +107,20 @@ export class EmployeeService extends AbstractService {
       return this.extractTextData(r) === "true" ? true : false;
     });
   }
-  moveEmployeeToDepartment(empId:number, depId:string):Observable<boolean>{
-    return this.authHttp.put(this.moveEmployeeToDepartmentUrl, {'id':empId, 'departmentId':depId}).map(r => {
-      return this.extractTextData(r) === "true" ? true : false;
-    });
-  }
-  setAsManager(empId:number):Observable<boolean>{
-    return this.authHttp.put(this.setAsManagerUrl, {'id':empId}).map(r => {
+
+  moveEmployeeToDepartment(empId: number, depId: string): Observable<boolean> {
+    return this.authHttp.put(this.moveEmployeeToDepartmentUrl, {'id': empId, 'departmentId': depId}).map(r => {
       return this.extractTextData(r) === "true" ? true : false;
     });
   }
 
+  setAsManager(empId: number): Observable<boolean> {
+    return this.authHttp.put(this.setAsManagerUrl, {'id': empId}).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
+  }
+
+  getHanYuPinYin(text: any): Observable<any> {
+    return this.authHttp.get(`${this.getHanYuPinYinUrl}/${text}`).map(this.extractTextData);
+  }
 }

@@ -1,5 +1,6 @@
 package com.isaac.pethospital.employee.services;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.common.dtos.JmsEmployeeOperationRequest;
 import com.isaac.pethospital.common.enums.OperationEnum;
 import com.isaac.pethospital.common.jms.JmsAuthorizationProperties;
@@ -25,17 +26,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JmsSender jmsSender;
     private final JmsAuthorizationProperties jmsAuthorizationProperties;
+    private final HanyuPinyinConverter converter;
 
     private String getUserAccount() {
         return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService, BCryptPasswordEncoder bCryptPasswordEncoder, JmsSender jmsSender, JmsAuthorizationProperties jmsAuthorizationProperties) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService, BCryptPasswordEncoder bCryptPasswordEncoder, JmsSender jmsSender, JmsAuthorizationProperties jmsAuthorizationProperties, HanyuPinyinConverter converter) {
         this.employeeRepository = employeeRepository;
         this.departmentService = departmentService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jmsSender = jmsSender;
         this.jmsAuthorizationProperties = jmsAuthorizationProperties;
+        this.converter = converter;
     }
 
     @Override
@@ -51,6 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public boolean createEmployee(EmployeeOperationRequest request) {
         String uuid = UUID.randomUUID().toString();
+        request.setConverter(this.converter);
         EmployeeEntity ee = request.toEmployeeEntity();
         ee.setPassword(bCryptPasswordEncoder.encode(request.getLoginAccount()));
 
@@ -145,6 +149,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException("Employee doesn't exist");
 
         EmployeeEntity employeeEntity = this.employeeRepository.findOne(request.getId());
+        request.setConverter(this.converter);
         request.updateEmployee(employeeEntity);
         this.employeeRepository.save(employeeEntity);
 
@@ -286,6 +291,10 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException("Error to find manager");
     }
 
+    @Override
+    public String getHanYuPinYin(String text) {
+        return this.converter.toHanyuPinyin(text);
+    }
 
     @Override
     public EmployeeEntity findBySurnameAndGivenName(EmployeeOperationRequest request) {
