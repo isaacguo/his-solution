@@ -8,8 +8,6 @@
       <h1 class="page-header">新建化验报告</h1>
 
 
-
-
       <form [formGroup]="formModel" novalidate>
 
         <div class="panel panel-default">
@@ -60,9 +58,6 @@
 
 <div *ngIf="treatmentCase!=null" class="isaac-margin-15top">
 
-  <div class="btn-group">
-    <button class="btn btn-default" >保存病历</button>
-  </div>
 
   <div class="panel panel-info isaac-margin-15top">
     <div class="panel-heading">
@@ -70,25 +65,31 @@
     </div>
     <div class="panel-body">
 
-      <div class="isaac-margin-15top col-md-12">
-        <span><b>主人描述</b></span>
-        <textarea rows="3" class="form-control"></textarea>
-      </div>
+      <form [formGroup]="treatmentCaseBasicInfoModel" (submit)="onSaveTreatmentCaseBasicInfo()" novalidate>
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>主人描述</b></span>
+          <textarea formControlName="petOwnerDescription" rows="3" class="form-control"></textarea>
+        </div>
 
-      <div class="isaac-margin-15top col-md-12">
-        <span><b>临床检查</b></span>
-        <textarea rows="3" class="form-control"></textarea>
-      </div>
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>临床检查</b></span>
+          <textarea formControlName="clinicSituation" rows="3" class="form-control"></textarea>
+        </div>
 
-      <div class="isaac-margin-15top col-md-12">
-        <span><b>医生诊断</b></span>
-        <textarea rows="3" class="form-control"></textarea>
-      </div>
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>医生诊断</b></span>
+          <textarea formControlName="doctorDiagnose" rows="3" class="form-control"></textarea>
+        </div>
 
-      <div class="isaac-margin-15top col-md-12">
-        <span><b>医嘱</b></span>
-        <textarea rows="3" class="form-control"></textarea>
-      </div>
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>医嘱</b></span>
+          <textarea formControlName="doctorAdvice" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="isaac-margin-15top col-md-3">
+          <button class="btn btn-default" type="submit">保存病历</button>
+        </div>
+      </form>
+
     </div>
   </div>
 
@@ -147,6 +148,26 @@
       开药详情
     </div>
     <div class="panel-body">
+      <div class="btn-group">
+        <div class="dropdown" [class.open]="medicineSearchResults.length>0">
+
+          <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+                 (focus)="stopPropagation($event)"
+                 type="text" class="form-control dropdown-toggle"
+                 placeholder="输入化验报告名称关键字汉语拼音" [formControl]="medicineSearchInput"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu3"
+          >
+          <small [hidden]="
+          medicineSearchInput.valid || medicineSearchInput.pristine" class="text-danger">
+            最少1个字符
+          </small>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li *ngFor="let medicineSearchResult of medicineSearchResults">
+              <a href="javascript:void(0)" (click)="onMedicineSearchResultSelected(medicineSearchResult)">{{medicineSearchResult.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <table class="table table-bordered">
         <thead>
         <tr>
@@ -179,3 +200,4 @@
     </div>
   </div>
 </div>
+

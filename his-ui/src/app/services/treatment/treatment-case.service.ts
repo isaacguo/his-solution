@@ -25,4 +25,5 @@ export class TreatmentCaseService extends CrudService {
   addMedicalTestReport(tid: number, medicalReportTemplateId: number):Observable<any> {
     return this.authHttp.put(`${this.rootUrl}/${tid}/add-medical-test/${medicalReportTemplateId}`,{}).map(this.extractData);
   }
+
 }

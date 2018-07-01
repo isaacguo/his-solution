@@ -21,6 +21,44 @@ public class TreatmentCaseOperationRequest {
     EmployeeEntity doctor;
     PetEntity pet;
     List<Long> medicalTestReportIdList = new LinkedList<>();
+
+    String petOwnerDescription;
+    String doctorDiagnose;
+    String clinicSituation;
+    String doctorAdvice;
+
+    public String getPetOwnerDescription() {
+        return petOwnerDescription;
+    }
+
+    public void setPetOwnerDescription(String petOwnerDescription) {
+        this.petOwnerDescription = petOwnerDescription;
+    }
+
+    public String getDoctorDiagnose() {
+        return doctorDiagnose;
+    }
+
+    public void setDoctorDiagnose(String doctorDiagnose) {
+        this.doctorDiagnose = doctorDiagnose;
+    }
+
+    public String getClinicSituation() {
+        return clinicSituation;
+    }
+
+    public void setClinicSituation(String clinicSituation) {
+        this.clinicSituation = clinicSituation;
+    }
+
+    public String getDoctorAdvice() {
+        return doctorAdvice;
+    }
+
+    public void setDoctorAdvice(String doctorAdvice) {
+        this.doctorAdvice = doctorAdvice;
+    }
+
     private Long id;
     private String uuid;
     private TreatmentCaseStatusEnum treatmentCaseStatus;

@@ -133,6 +133,8 @@ import {TreatmentCaseService} from "./services/treatment/treatment-case.service"
 import { PetTreatmentDetailComponent } from './components/treatment/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component';
 import { RegistrationQueryComponent } from './components/treatment/front-desk/registration-query/registration-query.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { FeeQueryComponent } from './components/treatment/front-desk/fee-query/fee-query.component';
+import { QueryBarComponent } from './components/common/query-bar/query-bar.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -234,6 +236,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PetMedicalTestComponent,
     PetTreatmentDetailComponent,
     RegistrationQueryComponent,
+    FeeQueryComponent,
+    QueryBarComponent,
 
   ],
   imports: [

@@ -22,4 +22,6 @@ public interface TreatmentCaseService {
 
     boolean addMedicalReportTemplate(Long tId, Long medicalReportTemplateId);
     boolean removeMedicalReportTemplate(Long tid, Long medicalReportTemplateId);
+
+    TreatmentCaseEntity update(TreatmentCaseOperationRequest request);
 }

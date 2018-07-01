@@ -28,6 +28,7 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
   treatmentCase: any;
   detailedTreatmentCase: any = {};
 
+  treatmentCaseBasicInfoModel: FormGroup;
   formModel: FormGroup;
 
   constructor(private router: Router,
@@ -51,6 +52,20 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
         this.medicalTestReportTemplates = r;
       })
 
+    this.medicineSearchInput.valueChanges
+      .debounceTime(200)
+      .switchMap(name => {
+
+        if (name === "") {
+          return Observable.of([]);
+        }
+        else {
+          return this.medicalTestReportTemplateService.findMedicalTestReportTemplateByNameContains(name);
+        }
+      })
+      .subscribe(r => {
+        this.medicalTestReportTemplates = r;
+      })
   }
 
   medicalTestReportList: any[] = [];
@@ -60,8 +75,10 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
       this.treatmentCaseService.readOne(this.treatmentCase.id).subscribe(r => {
         this.detailedTreatmentCase = r;
 
-        this.medicalTestReportService.findReportsByIds(this.detailedTreatmentCase.medicalTestReportIdList).subscribe(r=>{
-          this.medicalTestReportList=r;
+        this.inflateTreatmentCaseBasicInfo(r);
+
+        this.medicalTestReportService.findReportsByIds(this.detailedTreatmentCase.medicalTestReportIdList).subscribe(r => {
+          this.medicalTestReportList = r;
         });
       });
   }
@@ -73,7 +90,10 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
 
   searchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
+  medicineSearchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
+
   medicalTestReportTemplates: any[] = [];
+  medicineSearchResults:any[]=[];
 
   stopPropagation($event) {
     event.stopPropagation()
@@ -115,7 +135,17 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
 
+
     this.initForm();
+  }
+
+  private inflateTreatmentCaseBasicInfo(r:any)
+  {
+    this.treatmentCaseBasicInfoModel.controls['id'].setValue(r.id);
+    this.treatmentCaseBasicInfoModel.controls['petOwnerDescription'].setValue(r.petOwnerDescription);
+    this.treatmentCaseBasicInfoModel.controls['clinicSituation'].setValue(r.clinicSituation);
+    this.treatmentCaseBasicInfoModel.controls['doctorDiagnose'].setValue(r.doctorDiagnose);
+    this.treatmentCaseBasicInfoModel.controls['doctorAdvice'].setValue(r.doctorAdvice);
   }
 
   protected process(medicalTestReportTemplate: any) {
@@ -159,6 +189,14 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
   }
 
   private initForm() {
+
+    this.treatmentCaseBasicInfoModel = this.fb.group({
+      'id': [''],
+      'petOwnerDescription': [''],
+      'clinicSituation': [''],
+      'doctorDiagnose': [''],
+      'doctorAdvice': ['']
+    });
     this.formModel = this.fb.group({
       'id': [''],
       'reportName': ['', Validators.required],
@@ -166,5 +204,16 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
       //'reportType': ['', Validators.required],
       'reportItems': this.fb.array([]),
     })
+  }
+
+  onSaveTreatmentCaseBasicInfo() {
+    this.treatmentCaseService.update(this.detailedTreatmentCase.id, this.treatmentCaseBasicInfoModel.value).subscribe(r=>{
+      this.loadData();
+    });
+
+  }
+
+  onMedicineSearchResultSelected(medicineSearchResult: any) {
+
   }
 }

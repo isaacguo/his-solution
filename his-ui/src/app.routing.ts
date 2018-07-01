@@ -67,6 +67,7 @@ import {InpatientComponent} from "./app/components/inpatient/inpatient.component
 import {MedicalTestSettingsDepartmentComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department.component";
 import {PetMedicalTestComponent} from "./app/components/treatment/my-consulting-room/pet-medical-test/pet-medical-test.component";
 import {RegistrationQueryComponent} from "./app/components/treatment/front-desk/registration-query/registration-query.component";
+import {FeeQueryComponent} from "./app/components/treatment/front-desk/fee-query/fee-query.component";
 
 
 const appRoutes: Routes = [
@@ -91,6 +92,11 @@ const appRoutes: Routes = [
           {
             path: 'registration-query',
             component: RegistrationQueryComponent
+          },
+          {
+
+            path: 'fee-query',
+            component:FeeQueryComponent,
           },
           {
             path: '**',

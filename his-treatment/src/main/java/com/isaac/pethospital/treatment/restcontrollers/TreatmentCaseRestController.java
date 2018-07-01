@@ -50,6 +50,10 @@ public class TreatmentCaseRestController {
     public boolean removeMedicalReportTemplate(@PathVariable("tId") Long tId, @PathVariable("medicalReportTemplateId") Long medicalReportTemplateId){
         return this.treatmentCaseService.removeMedicalReportTemplate(tId,medicalReportTemplateId);
     }
+    @PutMapping("/{tId}")
+    public TreatmentCaseEntity update(@RequestBody TreatmentCaseOperationRequest request) {
+        return this.treatmentCaseService.update(request);
+    }
 
     @PostMapping
     public TreatmentCaseEntity create(@RequestBody TreatmentCaseOperationRequest request) {
@@ -59,6 +63,7 @@ public class TreatmentCaseRestController {
 
         return this.treatmentCaseService.createTreatmentCase(request);
     }
+
 
     @DeleteMapping("/{tid}")
     public OperationResponse deleteOne(@PathVariable("tid") Long tid) {

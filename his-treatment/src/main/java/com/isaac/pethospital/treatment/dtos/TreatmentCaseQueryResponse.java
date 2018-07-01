@@ -20,6 +20,7 @@ public interface TreatmentCaseQueryResponse {
     String getDoctorDiagnose();
     String getDoctorAdvice();
 
+
     //List<Long> getMedicalTestReportIdList();
 
     Long getId();

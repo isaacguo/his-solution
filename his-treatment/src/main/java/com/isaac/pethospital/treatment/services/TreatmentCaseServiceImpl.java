@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -99,5 +100,18 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         tce.removeMedicalTestReportId(medicalReportTemplateId);
         this.treatmentCaseRepository.save(tce);
         return false;
+    }
+
+    @Override
+    public TreatmentCaseEntity update(TreatmentCaseOperationRequest request) {
+
+        TreatmentCaseEntity tce = getTreatmentCase(request.getId());
+        tce.setClinicSituation(request.getClinicSituation());
+        tce.setDoctorAdvice(request.getDoctorAdvice());
+        tce.setDoctorDiagnose(request.getDoctorDiagnose());
+        tce.setPetOwnerDescription(request.getPetOwnerDescription());
+        tce.setLastModifiedDateTime(LocalDateTime.now());
+
+        return this.treatmentCaseRepository.save(tce);
     }
 }
