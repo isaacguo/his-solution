@@ -7,6 +7,9 @@ import {TreatmentEmployeeService} from "../../../services/treatment/treatment-em
 import {PetInfo, PetService} from "../../../services/treatment/pet.service";
 import {PetOperationRequest} from "../../../dto/treatment/pet.operation.request";
 import {RegistrationStatusEnum} from "../../../enums/registration-status.enum";
+import {EmploymentStatusEnum} from "../../../enums/employment.status.enum";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 
 @Component({
   selector: 'app-my-consulting-room',
@@ -18,14 +21,31 @@ export class MyConsultingRoomComponent implements OnInit {
   myRegistrations: any[];
   selectedRegistration: any;
 
-  constructor(public petOwnerService: PetOwnerService, public petService: PetService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService: RegistrationService) {
+  searchFormModel: FormGroup;
+
+  constructor(private fb: FormBuilder, public petOwnerService: PetOwnerService, public petService: PetService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService: RegistrationService) {
 
   }
 
   ngOnInit() {
 
+    this.initSearchFormModel();
+    this.loadData();
+  }
+
+  private loadData() {
+    this.selectedRegistration=null;
     this.registrationService.findMyRegistrationToday().subscribe(r => {
-      this.myRegistrations = r;
+      this.petService.clearPetInfo();
+      if (this.searchFormModel.controls["includeDone"].value)
+        this.myRegistrations = r;
+      else {
+        let myRegistrationsList = r.filter(e => {
+          return RegistrationStatusEnum[e.registrationStatus] === RegistrationStatusEnum.WAITING ||
+            RegistrationStatusEnum[e.registrationStatus] === RegistrationStatusEnum.CURING;
+        })
+        this.myRegistrations = myRegistrationsList;
+      }
     })
   }
 
@@ -35,7 +55,7 @@ export class MyConsultingRoomComponent implements OnInit {
     request.id = registration.pid;
     this.petService.findPetOwner(request).subscribe(r => {
 
-      let petInfo = new PetInfo({'id':this.selectedRegistration.pid}, r);
+      let petInfo = new PetInfo({'id': this.selectedRegistration.pid}, r, this.selectedRegistration);
       this.petService.setPetInfo(petInfo);
 
     });
@@ -45,10 +65,60 @@ export class MyConsultingRoomComponent implements OnInit {
     return this.selectedRegistration == registration;
   }
 
-  getRegistrationStatusString(reg:RegistrationStatusEnum):string
-  {
+  getRegistrationStatusString(reg: RegistrationStatusEnum): string {
+    return RegistrationStatusEnum[reg];
+  }
+
+  isWaiting(reg: RegistrationStatusEnum): boolean {
     return RegistrationStatusEnum[reg];
   }
 
 
+  getRegistrationStatusList(): [string, string][] {
+    let arr: any;
+
+    arr = Object.keys(RegistrationStatusEnum).map(k => {
+      return [k, RegistrationStatusEnum[k as any]]
+    });
+    return arr;
+
+  }
+
+  selectedRegistrationStatusText
+
+
+  private initSearchFormModel() {
+    this.searchFormModel = this.fb.group({
+      'memberId': [''],
+      'treatmentId': [''],
+      'ownerName': [''],
+      'petName': [''],
+      'mobilePhoneNumber': [''],
+      'startDate': [''],
+      'endDate': [''],
+      'includeDone': [false]
+    })
+  }
+
+  public myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'yyyy-mm-dd',
+  };
+
+  onRegistrationQueryClicked() {
+
+
+  }
+
+  onDateChanged(control: string, event: IMyDateModel) {
+    if (event.formatted !== '') {
+      this.searchFormModel.controls[control].setValue(event.formatted);
+    }
+    else {
+      this.searchFormModel.controls[control].setValue("");
+    }
+  }
+
+  onIncludeDoneChanged(event) {
+    this.loadData();
+  }
 }

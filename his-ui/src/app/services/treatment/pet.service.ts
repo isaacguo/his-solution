@@ -11,7 +11,7 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 @Injectable()
 export class PetService extends AbstractService {
 
-  private petInfoManager: BehaviorSubject<PetInfo> = new BehaviorSubject(new PetInfo(null, null));
+  private petInfoManager: BehaviorSubject<PetInfo> = new BehaviorSubject(new PetInfo(null, null, null));
   private petInfo: PetInfo;
   petInfoChange: Observable<PetInfo>;
 
@@ -37,8 +37,7 @@ export class PetService extends AbstractService {
 
   clearPetInfo() {
 
-    this.petInfo.pet = {};
-    this.petInfo.petOwner = {};
+    this.petInfo={};
     this.petInfoManager.next(this.petInfo);
 
   }
@@ -46,7 +45,7 @@ export class PetService extends AbstractService {
 
 export class PetInfo {
 
-  constructor(public pet: Pet, public petOwner: PetOwner) {
+  constructor(public pet?: any, public petOwner?: any, public registration?: any) {
 
   }
 

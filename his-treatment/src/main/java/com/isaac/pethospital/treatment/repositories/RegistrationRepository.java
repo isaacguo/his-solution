@@ -17,7 +17,7 @@ public interface RegistrationRepository extends JpaRepository<RegistrationEntity
 
     List<RegistrationEntity> findByDoctorAndBookDateAfter(EmployeeEntity doctor, LocalDateTime localDateTime);
 
-    @Query("select r.indexOfDay as indexOfDay, p.id as pid, p.name as petName, o.name as petOwnerName, r.registrationStatus as registrationStatus from RegistrationEntity r join r.pet p join p.petOwner as o where r.doctor=:doctor and r.bookDate>=:bookDate")
+    @Query("select r.id as rid, r.indexOfDay as indexOfDay, p.id as pid, p.name as petName, o.name as petOwnerName, r.registrationStatus as registrationStatus from RegistrationEntity r join r.pet p join p.petOwner as o where r.doctor=:doctor and r.bookDate>=:bookDate")
     List<RegistrationResponse> customFindByDoctorAndBookDateAfter(@Param("doctor") EmployeeEntity doctor, @Param("bookDate") LocalDateTime localDateTime);
 
     List<RegistrationEntity> findByBookDateBetween(LocalDateTime start, LocalDateTime end);

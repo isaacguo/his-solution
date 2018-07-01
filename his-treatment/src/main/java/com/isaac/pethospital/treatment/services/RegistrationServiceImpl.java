@@ -1,5 +1,6 @@
 package com.isaac.pethospital.treatment.services;
 
+import com.isaac.pethospital.treatment.common.enums.RegistrationStatusEnum;
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
 import com.isaac.pethospital.treatment.dtos.RegistrationResponse;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
@@ -48,19 +49,32 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new RuntimeException("cannot find pet by id");
         PetEntity pet = this.petRepository.findOne(registrationOperationRequest.getPetId());
 
-        int indexOfDay=this.registrationNumberService.getNumber(doctor,LocalDate.now());
+        int indexOfDay = this.registrationNumberService.getNumber(doctor, LocalDate.now());
 
         RegistrationEntity registrationEntity = registrationOperationRequest.toRegistrationEntity(doctor, operator, pet);
         registrationEntity.setCreatedDate(LocalDateTime.now());
         registrationEntity.setBookDate(LocalDateTime.now());
         registrationEntity.setIndexOfDay(indexOfDay);
-        RegistrationEntity res= this.registrationRepository.save(registrationEntity);
+        RegistrationEntity res = this.registrationRepository.save(registrationEntity);
         return res;
     }
 
     @Override
     public List<RegistrationEntity> getRegistrations() {
         return this.registrationRepository.findAll();
+    }
+
+    @Override
+    public RegistrationStatusEnum updateStatus(RegistrationOperationRequest request) {
+
+        RegistrationEntity registration = this.registrationRepository.findOne(request.getId());
+        if(registration==null)
+            throw new RuntimeException("Cannot find Registration");
+
+        registration.setRegistrationStatus(request.getRegistrationStatus());
+        this.registrationRepository.save(registration);
+        return registration.getRegistrationStatus();
+
     }
 
     private EmployeeEntity getEmployeeById(Long employeeId) {

@@ -17,8 +17,14 @@
 
 
 <div class="btn-group isaac-margin-15top">
-  <button class="btn btn-default" (click)="onCreateTreatmentCase()">+新建病历</button>
+  <button [disabled]="!isWaiting()" class="btn btn-default" (click)="onTreatmentStarted()">治疗开始</button>
+  <button [disabled]="!isCuring()" class="btn btn-default" (click)="onTreatmentFinished()">治疗结束</button>
 </div>
+
+<div class="btn-group isaac-margin-15top">
+  <button [disabled]="!isCuring()" class="btn btn-default" (click)="onCreateTreatmentCase()">+新建病历</button>
+</div>
+
 <div class="row fixed-height-500 isaac-margin-15top">
   <split [direction]="'vertical'">
     <split-area [size]="20">
@@ -38,7 +44,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let treatmentCase of treatmentCases;let i=index" (click)="onRowClicked(treatmentCase)"
-          [class.info]="isRowSelected(treatmentCase)">
+            [class.info]="isRowSelected(treatmentCase)">
           <td>{{i+1}}</td>
           <td>{{treatmentCase.treatmentDate|date:'yyyy年MM月dd日'}}</td>
           <td>{{treatmentCase.doctor}}</td>
@@ -52,7 +58,8 @@
               <button type="button" class="btn btn-default btn-s"
                       (click)="onUpdateTreatmentCaseButtonClicked(treatmentCase)"><span
                 class="glyphicon glyphicon-pencil"></span></button>
-              <button type="button" class="btn btn-default btn-s" (click)="onRemoveTreatmentCaseButtonClicked(treatmentCase)"><span
+              <button type="button" class="btn btn-default btn-s"
+                      (click)="onRemoveTreatmentCaseButtonClicked(treatmentCase)"><span
                 class="glyphicon glyphicon-remove"></span></button>
             </div>
           </td>

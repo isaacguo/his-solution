@@ -1,5 +1,6 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
+import com.isaac.pethospital.treatment.common.enums.RegistrationStatusEnum;
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
 import com.isaac.pethospital.treatment.dtos.RegistrationResponse;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
@@ -53,6 +54,13 @@ public class RegistrationRestController {
     public List<RegistrationResponse> findByDoctorAndBookdateAfter(@Valid @RequestBody RegistrationOperationRequest request) {
         return this.registrationService.findByDoctorAndBookDateAfter(request);
     }
+
+    @PutMapping("updateStatus")
+    public RegistrationStatusEnum updateStatus(@RequestBody RegistrationOperationRequest request )
+    {
+        return this.registrationService.updateStatus(request);
+    }
+
 
 
 }

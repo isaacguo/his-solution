@@ -8,4 +8,5 @@ public interface RegistrationResponse {
     String getPetOwnerName();
     RegistrationStatusEnum getRegistrationStatus();
     Long getPid();
+    Long getRid();
 }

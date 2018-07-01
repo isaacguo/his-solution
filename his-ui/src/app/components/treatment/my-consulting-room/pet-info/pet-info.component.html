@@ -40,10 +40,6 @@
                  type="text">
         </div>
         <div class="form-group isaac-form-space">
-          <label>最后消费: </label>
-          <input class="form-control" type="text">
-        </div>
-        <div class="form-group isaac-form-space">
           <label>住址: </label>
           <input readonly [ngModel]="petInfo.petOwner?.address" name="currentPetOwnerAddress" class="form-control"
                  type="text">
@@ -52,6 +48,11 @@
           <label>卡号: </label>
           <input readonly [ngModel]="petInfo.petOwner?.memberNumber" name="currentPetOwnerMemberNumber"
                  class="form-control" type="text">
+        </div>
+
+        <div class="form-group isaac-form-space">
+          <label>最后消费: </label>
+          <input class="form-control" type="text">
         </div>
       </form>
       <!--

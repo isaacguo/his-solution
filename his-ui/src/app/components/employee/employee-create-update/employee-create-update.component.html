@@ -128,29 +128,20 @@
             </small>
           </div>
         </div>
-        <div class="col-md-3">
-          <div *ngIf="isCreateMode()">
-            <div class="form-group">
-              <label>员工账户</label>
-              <input type="text" class="form-control" formControlName="loginAccount">
-              <small [hidden]="formModel.controls.loginAccount.valid" class="text-danger">
-                员工账户长度至少为8位, 并且仅能是小写英文字母和数字的组合
-              </small>
-            </div>
+        <div class="col-md-3" *ngIf="isCreateMode()">
+          <div class="form-group">
+            <label>员工账户</label>
+            <input type="text" class="form-control" formControlName="loginAccount">
+            <small [hidden]="formModel.controls.loginAccount.valid" class="text-danger">
+              员工账户长度至少为8位, 并且仅能是小写英文字母和数字的组合
+            </small>
           </div>
 
-          <div *ngIf="!isCreateMode()">
+        </div>
+        <div class="col-md-3" *ngIf="!isCreateMode()">
+          <div class="form-group">
             <label>员工账户</label>
-            <div class="input-group">
-              <input type="text" class="form-control" formControlName="loginAccount" readonly>
-              <span class="input-group-btn">
-              <button class="btn btn-default" type="button" (click)="onChangeLoginAccountButtonClicked()"><span
-                class="glyphicon glyphicon-pencil"></span></button>
-            </span>
-            </div>
-            <small [hidden]="formModel.controls.loginAccount.valid" class="text-danger">
-              员工账户长度至少为8位
-            </small>
+            <input type="text" class="form-control" formControlName="loginAccount" readonly>
           </div>
         </div>
         <div class="col-md-3">
@@ -161,7 +152,18 @@
                             [options]="myDatePickerOptions"></my-date-picker>
           </div>
         </div>
-        <div class="col-md-2">
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>职位</label>
+            <input type="text" class="form-control" formControlName="jobTitle">
+            <small [hidden]="formModel.controls.jobTitle.valid" class="text-danger">
+              当前职位不能为空
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-3">
           <label>当前状态</label>
           <div class="btn-group" role="group">
             <button type="button"
@@ -175,23 +177,14 @@
                      (click)="onStatusClicked(status[0])">
                 {{status[1]}}</a></li>
             </ul>
-            <small [hidden]="formModel.controls.employmentStatus.valid" class="text-danger">
-              当前状态不能为空
-            </small>
-          </div>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-3">
-          <div class="form-group">
-            <label>职位</label>
-            <input type="text" class="form-control" formControlName="jobTitle">
-            <small [hidden]="formModel.controls.jobTitle.valid" class="text-danger">
-              当前职位不能为空
-            </small>
           </div>
+          <small [hidden]="formModel.controls.employmentStatus.valid" class="text-danger">
+            当前状态不能为空
+          </small>
         </div>
+
+
       </div>
       <div class="row">
         <div class="col-md-3">
@@ -242,7 +235,8 @@
             <div class="input-group">
               <input type="text" class="form-control" formControlName="fullNameHanYuPinYin">
               <span class="input-group-btn">
-              <button [disabled]="!formModel.controls.surname.valid || !formModel.controls.givenName.valid " class="btn btn-default" type="button" (click)="onGetHanYuPinYinButtonClicked()"><span
+              <button [disabled]="!formModel.controls.surname.valid || !formModel.controls.givenName.valid "
+                      class="btn btn-default" type="button" (click)="onGetHanYuPinYinButtonClicked()"><span
                 class="glyphicon glyphicon-font"></span></button>
             </span>
             </div>

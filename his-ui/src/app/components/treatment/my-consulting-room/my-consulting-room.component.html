@@ -3,25 +3,59 @@
 </div>
 
 <div class="row">
-  <form class="form-inline" role="form">
-    <div class="form-group isaac-form-space">
-      <label for="cardNumber">卡号:</label>
-      <input id="cardNumber" class="form-control" type="text">
+  <form role="form" [formGroup]="searchFormModel">
+    <div class="col-md-2">
+      <label>卡号</label>
+      <input type="text" class="form-control" formControlName="memberId">
     </div>
-    <div class="form-group isaac-form-space">
-      <label for="patientRecordId">病历: </label>
-      <input id="patientRecordId" class="form-control" type="text">
+    <div class="col-md-2">
+      <label>病历号</label>
+      <input type="text" class="form-control" formControlName="treatmentId">
     </div>
-    <div class="form-group isaac-form-space">
-      <label for="petName">宠物名称: </label>
-      <input id="petName" class="form-control" type="text">
+    <div class="col-md-2">
+      <label>主人姓名</label>
+      <input type="text" class="form-control" formControlName="ownerName">
     </div>
-    <div class="form-group isaac-form-space">
-      <label for="ownerName">主人姓名: </label>
-      <input id="ownerName" class="form-control" type="text">
+    <div class="col-md-2">
+      <label>宠物名称</label>
+      <input type="text" class="form-control" formControlName="petName">
     </div>
-    <button class="btn btn-default">查询</button>
-    <button class="btn btn-default">清除</button>
+    <div class="col-md-2">
+      <label>手机号码</label>
+      <input type="text" class="form-control" formControlName="mobilePhoneNumber">
+    </div>
+
+    <div class="col-md-3">
+      <label>挂号时间</label>
+      <div class="row">
+        <div class="col-md-5">
+          <my-date-picker id="startDate" name="mydate" [options]="myDatePickerOptions"
+                          [selDate]="searchFormModel.controls.startDate.value"
+                          (dateChanged)="onDateChanged('startDate',$event)"
+                          [locale]="'zh-cn'"></my-date-picker>
+        </div>
+        <div class="col-md-1">
+          <label>到</label>
+        </div>
+        <div class="col-md-5">
+          <my-date-picker id="endDate" name="mydate" [options]="myDatePickerOptions"
+                          [selDate]="searchFormModel.controls.endDate.value"
+                          (dateChanged)="onDateChanged('endDate',$event)"
+                          [locale]="'zh-cn'"></my-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label class="isaac-margin-25top" for="includeDone">
+        <input type="checkbox" (change)="onIncludeDoneChanged($event)" id="includeDone" formControlName="includeDone"/>包含已完成就诊的</label>
+    </div>
+
+    <div class="col-md-3">
+      <div class="btn-group isaac-margin-25top">
+        <button class="btn btn-default" (click)="onRegistrationQueryClicked()">查询</button>
+        <button class="btn btn-default">清除</button>
+      </div>
+    </div>
   </form>
 </div>
 
@@ -37,33 +71,49 @@
   </split>
   -->
 
-    <div class="col-lg-2">
+  <div class="col-lg-3">
 
-      <table class="table">
-        <thead>
-        <tr>
-          <th>就诊号</th>
-          <th>宠物名称</th>
-          <th>主人姓名</th>
-          <th>挂号状态</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr (click)="onRowClicked(registration)" *ngFor="let registration of myRegistrations"
-            [class.info]="isRowSelected(registration)">
-          <td>{{registration.indexOfDay}}</td>
-          <td>{{registration.petName}}</td>
-          <td>{{registration.petOwnerName}}</td>
-          <td>{{getRegistrationStatusString(registration.registrationStatus)}}</td>
-        </tr>
-        </tbody>
-      </table>
+    <!--
+    <div>
+      <div class="btn-group">
+        <button class="btn btn-default isaac-margin-15top">叫号</button>
+      </div>
+      <label>当前就诊号: 1</label>
     </div>
+    -->
+    <table class="table">
+      <thead>
+      <tr>
+        <th>就诊号</th>
+        <th>宠物名称</th>
+        <th>主人姓名</th>
+        <th>挂号状态</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr (click)="onRowClicked(registration)" *ngFor="let registration of myRegistrations"
+          [class.info]="isRowSelected(registration)">
+        <td>{{registration.indexOfDay}}</td>
+        <td>{{registration.petName}}</td>
+        <td>{{registration.petOwnerName}}</td>
+        <td>{{getRegistrationStatusString(registration.registrationStatus)}}</td>
+        <td>
+          <div class="btn-group btn-group-sm">
+            <button *ngIf="registration.registrationStatus==='WAITING'" type="button" class="btn btn-default btn-s"><span
+              class="glyphicon glyphicon-bullhorn"></span></button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
 
-    <div class="col-lg-10">
+  <div class="col-lg-9 isaac-margin-15top">
 
-        <app-my-consulting-room-registration-list
-          [registration]="selectedRegistration"></app-my-consulting-room-registration-list>
-    </div>
+    <app-my-consulting-room-registration-list
+      [registration]="selectedRegistration"></app-my-consulting-room-registration-list>
+  </div>
 </div>
+
