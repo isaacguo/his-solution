@@ -16,6 +16,8 @@ export class QueryBarComponent implements OnInit {
   includeDone: boolean = false;
   @Output()
   includeDoneChanged: EventEmitter<boolean> = new EventEmitter();
+  @Output()
+  queryClicked: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private fb: FormBuilder) {
 
@@ -55,4 +57,8 @@ export class QueryBarComponent implements OnInit {
     this.includeDoneChanged.emit();
   }
 
+  onQueryClicked()
+  {
+    this.queryClicked.emit();
+  }
 }
