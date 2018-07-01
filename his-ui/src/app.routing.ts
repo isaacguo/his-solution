@@ -66,6 +66,7 @@ import {FinanceManagementGuard} from "./app/guards/finance/finance-management.gu
 import {InpatientComponent} from "./app/components/inpatient/inpatient.component";
 import {MedicalTestSettingsDepartmentComponent} from "./app/components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department.component";
 import {PetMedicalTestComponent} from "./app/components/treatment/my-consulting-room/pet-medical-test/pet-medical-test.component";
+import {RegistrationQueryComponent} from "./app/components/treatment/front-desk/registration-query/registration-query.component";
 
 
 const appRoutes: Routes = [
@@ -86,6 +87,10 @@ const appRoutes: Routes = [
           {
             path: 'petreg',
             component: PetRegistrationComponent
+          },
+          {
+            path: 'registration-query',
+            component: RegistrationQueryComponent
           },
           {
             path: '**',
@@ -116,8 +121,8 @@ const appRoutes: Routes = [
             component: PetTreatmentComponent,
           },
           {
-            path:'pet-medical-test',
-            component:PetMedicalTestComponent,
+            path: 'pet-medical-test',
+            component: PetMedicalTestComponent,
 
           },
           {
@@ -184,8 +189,8 @@ const appRoutes: Routes = [
             component: MedicalTestSettingsReportCreateUpdateComponent
           },
           {
-            path:'departments',
-            component:MedicalTestSettingsDepartmentComponent
+            path: 'departments',
+            component: MedicalTestSettingsDepartmentComponent
           }
         ]
       },

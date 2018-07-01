@@ -7,6 +7,8 @@ import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
 import com.isaac.pethospital.treatment.services.EmployeeService;
 import com.isaac.pethospital.treatment.services.RegistrationService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +32,12 @@ public class RegistrationRestController {
     @GetMapping
     public List<RegistrationEntity> getRegistrations() {
         return this.registrationService.getRegistrations();
+    }
+
+    @GetMapping("all/{status}")
+    public Page<RegistrationEntity> findAllRegistrationsByStatusOnPage(@PathVariable("status") String status, Pageable pageable) {
+        RegistrationStatusEnum statusEnum = RegistrationStatusEnum.valueOf(status);
+        return this.registrationService.findAllRegistrationsByStatusOnPage(statusEnum, pageable);
     }
 
     @PostMapping("create-registration")

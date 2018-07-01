@@ -10,6 +10,8 @@ import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import com.isaac.pethospital.treatment.repositories.PetRepository;
 import com.isaac.pethospital.treatment.repositories.RegistrationNumberRepository;
 import com.isaac.pethospital.treatment.repositories.RegistrationRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -75,6 +77,11 @@ public class RegistrationServiceImpl implements RegistrationService {
         this.registrationRepository.save(registration);
         return registration.getRegistrationStatus();
 
+    }
+
+    @Override
+    public Page<RegistrationEntity> findAllRegistrationsByStatusOnPage(RegistrationStatusEnum status, Pageable pageable) {
+        return this.registrationRepository.findAllRegistrationsByRegistrationStatus(status, pageable);
     }
 
     private EmployeeEntity getEmployeeById(Long employeeId) {

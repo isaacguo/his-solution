@@ -1,0 +1,32 @@
+<table class="table table-bordered">
+  <thead>
+  <tr role="row">
+    <td>序号</td>
+    <td>主人姓名</td>
+    <td>宠物名称</td>
+    <td>医生</td>
+    <td>创建日期</td>
+    <td>当日序号</td>
+    <td>状态</td>
+    <td>操作</td>
+  </tr>
+  </thead>
+  <tbody role="alert" aria-live="polite" aria-relevant="all">
+  <tr *ngFor="let registration of registrations | paginate: {
+                                                      itemsPerPage: page.size,
+                                                      currentPage: page.number+1,
+                                                      totalItems: page.totalElements } ; let i=index">
+    <td>{{i+1}}</td>
+    <td></td>
+    <td></td>
+    <td>{{registration.doctor.name}}</td>
+    <td></td>
+    <td>{{registration.indexOfDay}}</td>
+    <td>{{getRegistrationStatusString(registration.registrationStatus)}}</td>
+    <td></td>
+  </tr>
+  </tbody>
+
+</table>
+
+<pagination-controls (pageChange)="onPageChanged($event)" previousLabel="上一页" nextLabel="下一页"></pagination-controls>

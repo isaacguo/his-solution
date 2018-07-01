@@ -16,6 +16,11 @@ export class RegistrationService extends AbstractService {
     super();
   }
 
+  findAllRegistrationsByStatusOnPage( page: number, status: string="WAITING",size: number = 15): Observable<any> {
+    let params:any={'page':page.toString(), 'size':size.toString()};
+    return this.authHttp.get(`${this.rootUrl}/all/${status}`, {params: params}).map(this.extractData);
+  }
+
   createRegistration(doctorId: number, operatorId: number, petId: number, bookDate?: Date, status?: string): Observable<TreatmentRegistrationModel> {
     let url = `${this.rootUrl}/create-registration`;
     let operationRequest = new TreatmentRegistrationOperationRequestModel(doctorId, operatorId, petId, null, status);

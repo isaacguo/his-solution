@@ -1,8 +1,11 @@
 package com.isaac.pethospital.treatment.repositories;
 
+import com.isaac.pethospital.treatment.common.enums.RegistrationStatusEnum;
 import com.isaac.pethospital.treatment.dtos.RegistrationResponse;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -21,4 +24,6 @@ public interface RegistrationRepository extends JpaRepository<RegistrationEntity
     List<RegistrationResponse> customFindByDoctorAndBookDateAfter(@Param("doctor") EmployeeEntity doctor, @Param("bookDate") LocalDateTime localDateTime);
 
     List<RegistrationEntity> findByBookDateBetween(LocalDateTime start, LocalDateTime end);
+
+    Page<RegistrationEntity> findAllRegistrationsByRegistrationStatus(RegistrationStatusEnum status, Pageable pageable);
 }
