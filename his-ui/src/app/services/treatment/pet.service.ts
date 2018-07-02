@@ -37,7 +37,7 @@ export class PetService extends AbstractService {
 
   clearPetInfo() {
 
-    this.petInfo={};
+    this.petInfo = {'pet': null, 'petOwner': null, 'registration': null};
     this.petInfoManager.next(this.petInfo);
 
   }
