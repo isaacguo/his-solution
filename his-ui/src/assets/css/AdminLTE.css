@@ -20,7 +20,7 @@
 */
 html,
 body {
-  overflow-x: hidden!important;
+  /*overflow-x: hidden!important;*/
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100%;
