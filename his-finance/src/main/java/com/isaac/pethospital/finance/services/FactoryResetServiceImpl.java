@@ -3,6 +3,8 @@ package com.isaac.pethospital.finance.services;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.common.services.AuthorizationTopicService;
 import com.isaac.pethospital.common.services.FactoryResetService;
+import com.isaac.pethospital.finance.entities.ChargeCategoryEntity;
+import com.isaac.pethospital.finance.repositories.ChargeCategoryRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,11 +15,13 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     private final AuthorizationService authorizationService;
     private final AuthorizationTopicService authorizationTopicService;
 
+    private final ChargeCategoryRepository chargeCategoryRepository;
 
 
-    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService) {
+    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, ChargeCategoryRepository chargeCategoryRepository) {
         this.authorizationService = authorizationService;
         this.authorizationTopicService = authorizationTopicService;
+        this.chargeCategoryRepository = chargeCategoryRepository;
     }
 
     @Transactional
@@ -29,6 +33,17 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
     @Override
     public void insertData() {
+
+        createRootChargeCategory();
+
+    }
+
+    private void createRootChargeCategory() {
+
+        ChargeCategoryEntity unCategorized=new ChargeCategoryEntity();
+        unCategorized.setName("未分类");
+
+        this.chargeCategoryRepository.save(unCategorized);
 
     }
 
@@ -42,6 +57,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     void init() {
         authorizationService.setDomainName("Finance");
         authorizationTopicService.addAuthorizationTopicAndOperations("财务管理", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("收费定价", "操作");
     }
 
 }

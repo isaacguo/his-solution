@@ -82,7 +82,7 @@
               class="fa arrow"></span></a>
           </li>
           <li *ngIf="canShowMedicalTestManagement()">
-            <a href="javascript:void(0)" routerLinkActive="active" class="text-center"> 化验管理<span class="fa arrow"></span></a>
+            <a href="javascript:void(0)"  class="text-center"> 化验管理<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
                 <a routerLink="/medical-test-query" routerLinkActive="active" class="text-center"> 化验查询</a>
@@ -107,8 +107,14 @@
             <a routerLink="/profiles" routerLinkActive="active" class="text-center"> 病历管理</a>
           </li>
           -->
-          <li *ngIf="canShowFinanceManagement()">
-            <a routerLink="/finance" routerLinkActive="active" class="text-center"> 财务管理</a>
+          <li *ngIf="canShowChargeManagement()">
+            <a routerLink="/finance"  routerLinkActive="active" class="text-center"> 财务管理<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <!--<li *ngIf="authInfo.isAdmin">-->
+              <li *ngIf="canShowChargeManagement()">
+                <a routerLink="/charge-management" routerLinkActive="active" class="text-center"> 收费定价</a>
+              </li>
+            </ul>
           </li>
           <li>
             <a href="javascript:void(0)" class="text-center"> 人事管理<span class="fa arrow"></span></a>

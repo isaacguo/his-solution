@@ -135,6 +135,13 @@ import { RegistrationQueryComponent } from './components/treatment/front-desk/re
 import {NgxPaginationModule} from "ngx-pagination";
 import { FeeQueryComponent } from './components/treatment/front-desk/fee-query/fee-query.component';
 import { QueryBarComponent } from './components/common/query-bar/query-bar.component';
+import { ChargeManagementComponent } from './components/finance/charge-management/charge-management.component';
+import {ChargeManagementGuard} from "./guards/finance/charge-management.guard";
+import { FinaceQueryComponent } from './components/finance/finace-query/finace-query.component';
+import { ChargeAdminListComponent } from './components/finance/charge-management/charge-admin-list/charge-admin-list.component';
+import { ChargeAdminDetailComponent } from './components/finance/charge-management/charge-admin-detail/charge-admin-detail.component';
+import {FinanceChargeCategoryService} from "./services/finance/finance-charge-category.service";
+import {FinanceChargeService} from "./services/finance/finance-charge.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -238,6 +245,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RegistrationQueryComponent,
     FeeQueryComponent,
     QueryBarComponent,
+    ChargeManagementComponent,
+    FinaceQueryComponent,
+    ChargeAdminListComponent,
+    ChargeAdminDetailComponent,
 
   ],
   imports: [
@@ -289,6 +300,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     //finance
     FinanceManagementGuard,
+    ChargeManagementGuard,
+    FinanceChargeCategoryService,
+    FinanceChargeService,
 
 
     //medical test

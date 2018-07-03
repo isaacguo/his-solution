@@ -68,6 +68,8 @@ import {MedicalTestSettingsDepartmentComponent} from "./app/components/medical-t
 import {PetMedicalTestComponent} from "./app/components/treatment/my-consulting-room/pet-medical-test/pet-medical-test.component";
 import {RegistrationQueryComponent} from "./app/components/treatment/front-desk/registration-query/registration-query.component";
 import {FeeQueryComponent} from "./app/components/treatment/front-desk/fee-query/fee-query.component";
+import {ChargeManagementComponent} from "./app/components/finance/charge-management/charge-management.component";
+import {ChargeManagementGuard} from "./app/guards/finance/charge-management.guard";
 
 
 const appRoutes: Routes = [
@@ -211,7 +213,12 @@ const appRoutes: Routes = [
       {
         path: 'finance',
         canActivate: [FinanceManagementGuard],
-        component: FinanceComponent
+        component: FinanceComponent,
+      },
+      {
+        path:'charge-management',
+        canActivate:[ChargeManagementGuard],
+        component:ChargeManagementComponent
       },
       {
         path: 'pharmacy',

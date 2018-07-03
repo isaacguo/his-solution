@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-md-3">
+
+    <modal #confirmDeleteModal (onClose)="onConfirmDeleteModalClosed()">
+      <form #modalForm1="ngForm">
+        <modal-header [show-close]="true">
+          <h4 class="modal-title">请确认</h4>
+        </modal-header>
+        <modal-body>
+          是否确定要删除 <b>{{selectedNodeName}} </b>收费分类
+        </modal-body>
+        <modal-footer>
+          <button type="button" class="btn btn-primary" (click)="confirmDeleteModal.close()">确定</button>
+          <button type="button" class="btn btn-default" data-dismiss="confirmDeleteModal"
+                  (click)="confirmDeleteModal.dismiss()">取消
+          </button>
+        </modal-footer>
+      </form>
+    </modal>
+
+    <modal #editNodeModal (onClose)="onEditNodeModalModalClosed()">
+      <form #modalForm1="ngForm">
+        <modal-header [show-close]="true">
+          <h4 class="modal-title">收费分类名称</h4>
+        </modal-header>
+        <modal-body>
+          <input class="form-control" [formControl]="chargeCategoryName">
+          <small [hidden]="chargeCategoryName.valid" class="text-danger">
+            收费分类名称不能为空
+          </small>
+        </modal-body>
+        <modal-footer>
+          <button type="button" class="btn btn-primary" [disabled]="!chargeCategoryName.valid"
+                  (click)="editNodeModal.close()">确定
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="editNodeModal"
+                  (click)="editNodeModal.dismiss()">取消
+          </button>
+        </modal-footer>
+      </form>
+    </modal>
+
+    <div class="row">
+      <div class="btn-group">
+        <button [disabled]="!enableWhenNodeIsActivated()" title="添加子分类" (click)="onPreAddChildNodeButtonClicked()"
+                class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+        <button [disabled]="!enableWhenNodeIsActivated()" title="修改分类名称" (click)="onPreEditNodeButtonClicked()"
+                class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
+      </div>
+
+      <div class="btn-group">
+        <button title="展开所有分类" (click)="onExpandButtonClicked()" class="btn btn-default"><span
+          class="glyphicon glyphicon-sort"></span></button>
+      </div>
+      <div class="btn-group">
+        <button [disabled]="!enableWhenNodeIsActivated()" title="删除所选分类" (click)="onPreRemoveNodeButtonClicked()"
+                class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
+      </div>
+
+    </div>
+
+    <div class="row panel panel-default isaac-margin-15top">
+      <div class="panel-heading">
+        收费分类树形图
+      </div>
+      <div class="panel-body">
+        <tree-root #tree (activate)="onNodeActivated($event)" [nodes]="nodes"></tree-root>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-9">
+    <app-charge-admin-detail [nodes]="nodes" [chargeCategoryId]="selectedChargeCategoryId"></app-charge-admin-detail >
+  </div>
+</div>

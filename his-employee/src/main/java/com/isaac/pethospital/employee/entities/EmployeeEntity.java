@@ -18,6 +18,7 @@ import java.util.List;
 public class EmployeeEntity {
 
 
+    String uuid;
     //employee info
     private String employeeNumber;
     private String loginAccount;
@@ -25,31 +26,15 @@ public class EmployeeEntity {
     private String jobTitle;
     private String workPhoneNumber;
     private EmploymentStatusEnum employmentStatus;
-
     //personal info
     private String givenName;
     private String surname;
     private String fullName;
     private String fullNameHanYuPinYin;
-
-    public String getFullNameHanYuPinYin()
-    {
-        return fullNameHanYuPinYin;
-    }
-
-    public void setFullNameHanYuPinYin(String fullNameHanYuPinYin) {
-        this.fullNameHanYuPinYin = fullNameHanYuPinYin;
-    }
-
     private String password;
-
-
-    String uuid;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
     private String idNumber;
     private String driverLicenseNumber;
     private LocalDate dateOfBirth;
@@ -58,15 +43,11 @@ public class EmployeeEntity {
     private String nationality;
     private String ethnic;
     private String email;
-
     @Enumerated(EnumType.STRING)
     private MaritalStatusEnum maritalStatus;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference("employee-contact")
     private ContactAddressEntity contactAddress;
-
-
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonManagedReference("employee-leaveInfo")
     private LeaveInfoEntity leaveInfo;
@@ -82,6 +63,20 @@ public class EmployeeEntity {
     @ManyToOne
     @JsonBackReference("DepartmentEntity-EmployeeEntity")
     private DepartmentEntity department;
+    @OneToOne
+    @JsonBackReference("DepartmentEntity-EmployeeEntity-Manager")
+    private DepartmentEntity departmentInCharge;
+    private String emergencyContact;
+    private String emergencyPhoneNumber;
+
+    public String getFullNameHanYuPinYin()
+    {
+        return fullNameHanYuPinYin;
+    }
+
+    public void setFullNameHanYuPinYin(String fullNameHanYuPinYin) {
+        this.fullNameHanYuPinYin = fullNameHanYuPinYin;
+    }
 
     public DepartmentEntity getDepartmentInCharge() {
         return departmentInCharge;
@@ -90,13 +85,6 @@ public class EmployeeEntity {
     public void setDepartmentInCharge(DepartmentEntity departmentInCharge) {
         this.departmentInCharge = departmentInCharge;
     }
-
-    @OneToOne
-    @JsonBackReference("DepartmentEntity-EmployeeEntity-Manager")
-    private DepartmentEntity departmentInCharge;
-
-    private String emergencyContact;
-    private String emergencyPhoneNumber;
 
     public String getFullName() {
         return fullName;

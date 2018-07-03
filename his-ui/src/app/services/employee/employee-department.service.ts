@@ -16,6 +16,7 @@ export class EmployeeDepartmentService extends AbstractService {
     super();
   }
 
+
   private rootUrl: string = "/api/hisemployee/departments";
   private getDepartmentListUrl: string = "/api/hisemployee/departments/brief";
 

@@ -13,6 +13,7 @@ import {InpatientManagementGuard} from "../../guards/treatment/inpatient-managem
 import {MedicineManagementGuard} from "../../guards/medicine/medicine-management.guard";
 import {MedicalTestManagementGuard} from "../../guards/medical-test/medical-test-management.guard";
 import {ProcurementManagementGuard} from "../../guards/procurement/procurement-management.guard";
+import {ChargeManagementGuard} from "../../guards/finance/charge-management.guard";
 
 @Component({
   selector: 'app-index',
@@ -49,6 +50,7 @@ export class IndexComponent implements OnInit, OnDestroy {
               private employeeService: EmployeeService,
               private employeeManagementGuard: EmployeeManagementGuard,
               private financeManagementGuard: FinanceManagementGuard,
+              private chargeManagementGuard:ChargeManagementGuard,
               private inpatientManagementGuard: InpatientManagementGuard,
               private medicineManagementGuard: MedicineManagementGuard,
               private medicalTestManagementGuard: MedicalTestManagementGuard,
@@ -114,5 +116,10 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   canShowTreatmentSettings() {
     return this.treatmentSettingsGuard.canActivate();
+  }
+
+  canShowChargeManagement() {
+    return this.chargeManagementGuard.canActivate();
+
   }
 }
