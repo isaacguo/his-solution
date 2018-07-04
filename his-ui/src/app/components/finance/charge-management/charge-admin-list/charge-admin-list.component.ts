@@ -1,10 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {TreeComponent} from "angular-tree-component";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {MyTreeNode} from "../../../../dto/procurement/MyTreeNode";
-import {TreeviewOperationEnum} from "../../../../enums/treeview-operation.enum";
-import {TreeNodeService} from "../../../../services/common/tree-node.service";
-import {FormControl} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
+import {DepartmentListItem} from "../../../../dto/employee/department-list-item.model";
+import {TreeComponent} from "angular-tree-component";
 import {FinanceChargeCategoryService} from "../../../../services/finance/finance-charge-category.service";
 
 @Component({
@@ -14,12 +13,19 @@ import {FinanceChargeCategoryService} from "../../../../services/finance/finance
 })
 export class ChargeAdminListComponent implements OnInit {
 
+  private static CREATE_HOME_NODE: number = 1;
+  private static CREATE_SUB_NODE: number = 2;
+  private static EDIT_NODE: number = 3;
 
-  nodeOperation: TreeviewOperationEnum;
+  nodeOperation: number;
+  departmentList: DepartmentListItem[] = [];
+
+  isExpanded: boolean = false;
+  isCreateNewNode: boolean = true;
 
   nodes: MyTreeNode[] = [];
 
-  chargeCategoryName: FormControl = new FormControl('');
+  categoryName: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
   @ViewChild("editNodeModal")
   editNodeModal: ModalComponent;
@@ -30,9 +36,10 @@ export class ChargeAdminListComponent implements OnInit {
   @ViewChild("confirmDeleteModal")
   confirmDeleteModal: ModalComponent;
   selectedNodeName: string;
-  selectedChargeCategoryId: number;
+  selectedCategoryId: number;
 
-  constructor(private financeChargeCategoryService:FinanceChargeCategoryService, private treeNodeService: TreeNodeService) {
+  constructor(private financeChargeCategoryService: FinanceChargeCategoryService) {
+
   }
 
   ngOnInit() {
@@ -43,7 +50,6 @@ export class ChargeAdminListComponent implements OnInit {
     this.financeChargeCategoryService.getRootChargeCategory().subscribe(r => {
       this.nodes = r;
       this.tree.treeModel.update();
-      this.tree.treeModel.expandAll();
     });
   }
 
@@ -51,15 +57,27 @@ export class ChargeAdminListComponent implements OnInit {
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
     const index = this.tree.treeModel.getActiveNode().index;
-    let cnode: MyTreeNode = this.treeNodeService.getMyTreeNodeById(this.nodes, nodeId);
+    let cnode: MyTreeNode = this.getMyTreeNodeById(nodeId);
     this.financeChargeCategoryService.deleteOne(cnode.categoryId).subscribe(r => {
       this.loadData()
     });
+    /*
+    if (cnode.isLevelOne) {
+      this.nodes.splice(index, 1);
+    }
+    else {
+      let parentId = this.tree.treeModel.getActiveNode().parent.id;
+      let pMyTreeNode: MyTreeNode = this.getMyTreeNodeById(parentId);
+      pMyTreeNode.children.splice(index, 1);
+    }
+    this.tree.treeModel.update();
+    */
+
   }
 
   onCreateRootNode() {
     const newRootNode = new MyTreeNode();
-    newRootNode.name = this.chargeCategoryName.value;
+    newRootNode.name = this.categoryName.value;
     newRootNode.isLevelOne = true;
     this.nodes.push(newRootNode);
     this.tree.treeModel.update();
@@ -71,34 +89,33 @@ export class ChargeAdminListComponent implements OnInit {
   }
 
   onPreAddChildNodeButtonClicked() {
-    this.nodeOperation = TreeviewOperationEnum.CREATE_SUB_NODE;
+    this.nodeOperation = ChargeAdminListComponent.CREATE_SUB_NODE;
     this.editNodeModal.open();
   }
 
   onPreRootNodeButtonClicked() {
-    this.nodeOperation = TreeviewOperationEnum.CREATE_HOME_NODE;
+    this.nodeOperation = ChargeAdminListComponent.CREATE_HOME_NODE;
     this.editNodeModal.open();
   }
 
   onPreEditNodeButtonClicked() {
 
-    this.nodeOperation = TreeviewOperationEnum.EDIT_NODE;
+    this.nodeOperation = ChargeAdminListComponent.EDIT_NODE;
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
-    let node = this.treeNodeService.getMyTreeNodeById(this.nodes, nodeId);
-    this.chargeCategoryName.setValue(node.name);
+    let node = this.getMyTreeNodeById(nodeId);
+    this.categoryName.setValue(node.name);
 
     this.editNodeModal.open();
   }
 
-  /*
   onAddSubNode() {
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
     let parentNode = this.getMyTreeNodeById(nodeId);
 
     const newRootNode = new MyTreeNode();
-    newRootNode.name = this.chargeCategoryName.value;
+    newRootNode.name = this.categoryName.value;
     newRootNode.isLevelOne = false;
     if (parentNode.children == null)
       parentNode.children = [];
@@ -109,7 +126,6 @@ export class ChargeAdminListComponent implements OnInit {
     this.tree.treeModel.getActiveNode().expand();
 
   }
-  */
 
   addNodeToParent(parent: MyTreeNode) {
 
@@ -126,33 +142,38 @@ export class ChargeAdminListComponent implements OnInit {
   onEditNode() {
 
     const nodeId = this.tree.treeModel.getActiveNode().id;
-    let node = this.treeNodeService.getMyTreeNodeById(this.nodes, nodeId);
+    let node = this.getMyTreeNodeById(nodeId);
 
-    this.financeChargeCategoryService.renameChargeCategory(node.categoryId, this.chargeCategoryName.value).subscribe(r => {
+    this.financeChargeCategoryService.renameChargeCategory(node.categoryId, this.categoryName.value).subscribe(r => {
       this.loadData();
+
     });
+
 
   }
 
   onEditNodeModalModalClosed() {
     switch (this.nodeOperation) {
-      //case TreeviewOperationEnum.CREATE_HOME_NODE:
+      case ChargeAdminListComponent.CREATE_HOME_NODE:
+        this.financeChargeCategoryService.create({'name': this.categoryName.value}).subscribe(r => {
+          this.loadData()
+        });
+        //this.onCreateRootNode();
+        break;
+      case ChargeAdminListComponent.CREATE_SUB_NODE:
 
-      //this.onCreateRootNode();
-      // break;
-      case TreeviewOperationEnum.CREATE_SUB_NODE:
-        this.financeChargeCategoryService.create({'parentId': this.selectedChargeCategoryId, 'name': this.chargeCategoryName.value}).subscribe(r => {
+        this.financeChargeCategoryService.create({'parentId':this.selectedCategoryId, 'name': this.categoryName.value}).subscribe(r => {
           this.loadData()
         });
         break;
-      case TreeviewOperationEnum.EDIT_NODE:
+      case ChargeAdminListComponent.EDIT_NODE:
         this.onEditNode();
         break;
       default: {
 
       }
     }
-    this.chargeCategoryName.setValue("");
+    this.categoryName.setValue("");
     this.nodeOperation = 0;
   }
 
@@ -164,14 +185,26 @@ export class ChargeAdminListComponent implements OnInit {
   getSelectedNodeName() {
     if (this.tree.treeModel.getActiveNode() != null) {
       const nodeId = this.tree.treeModel.getActiveNode().id;
-      let node = this.treeNodeService.getMyTreeNodeById(this.nodes, nodeId);
+      let node = this.getMyTreeNodeById(nodeId);
       this.selectedNodeName = node.name;
-      this.selectedChargeCategoryId = node.categoryId;
+      this.selectedCategoryId = node.categoryId;
     } else return "";
   }
 
   onPreRemoveNodeButtonClicked() {
     this.confirmDeleteModal.open();
+  }
+
+  private getMyTreeNodeById(nodeId: any) {
+    let parentNode: any;
+    for (let cnode of this.nodes) {
+      let found = cnode.findById(nodeId);
+      if (found != null) {
+        parentNode = found;
+        break;
+      }
+    }
+    return parentNode;
   }
 
 }

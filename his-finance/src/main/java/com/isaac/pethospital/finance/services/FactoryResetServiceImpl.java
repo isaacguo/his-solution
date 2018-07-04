@@ -40,10 +40,6 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
     private void createRootChargeCategory() {
 
-        ChargeCategoryEntity unCategorized=new ChargeCategoryEntity();
-        unCategorized.setName("未分类");
-
-        this.chargeCategoryRepository.save(unCategorized);
 
     }
 

@@ -29,13 +29,22 @@ public class ChargeCategoryServiceImpl implements ChargeCategoryService {
         ChargeCategoryEntity de = this.chargeCategoryRepository.findByName(name);
         if (de != null)
             throw new RuntimeException("Charge Category with name:" + name + " has existed");
-        if (parentId == null)
-            throw new RuntimeException("Parent Charge Category Id is null");
-        ChargeCategoryEntity parent = this.chargeCategoryRepository.findOne(parentId);
-        if (parent == null)
-            throw new RuntimeException("Parent Charge Category is null");
-        parent.addChildByName(name);
-        return this.chargeCategoryRepository.save(parent);
+        if (parentId == null) {
+
+            ChargeCategoryEntity chargeCategoryEntity=new ChargeCategoryEntity();
+            chargeCategoryEntity.setName(name);
+            chargeCategoryEntity.setParent(null);
+
+            return this.chargeCategoryRepository.save(chargeCategoryEntity);
+
+        } else {
+            ChargeCategoryEntity parent = this.chargeCategoryRepository.findOne(parentId);
+            if (parent == null)
+                throw new RuntimeException("Parent Charge Category is null");
+            parent.addChildByName(name);
+            return this.chargeCategoryRepository.save(parent);
+        }
+
     }
 
     @Override
@@ -58,8 +67,7 @@ public class ChargeCategoryServiceImpl implements ChargeCategoryService {
 
     @Override
     public boolean renameChargeCategory(ChargeCategoryOperationRequest request) {
-        if(StringUtils.isEmpty(request.getName()))
-        {
+        if (StringUtils.isEmpty(request.getName())) {
             throw new RuntimeException("Name is empty");
         }
         Long id = request.getId();
