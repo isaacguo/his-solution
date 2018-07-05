@@ -1,29 +1,57 @@
 package com.isaac.pethospital.medicaltest.services;
 
 import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
-import com.isaac.pethospital.medicaltest.dtos.ReportTemplateIdAndNameResponse;
+import com.isaac.pethospital.common.dtos.ChargeItemOperationMesassge;
+import com.isaac.pethospital.common.enums.OperationEnum;
+import com.isaac.pethospital.common.jms.JmsSender;
+import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
+import com.isaac.pethospital.medicaltest.jms.JmsProperties;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
 import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ReportTemplateServiceImpl implements ReportTemplateService {
 
     private final ReportTemplateRepository reportTemplateRepository;
     private final HanyuPinyinConverter converter;
+    private final JmsSender jmsSender;
+    private final JmsProperties jmsProperties;
+    private final AuthorizationService authorizationService;
 
-    public ReportTemplateServiceImpl(ReportTemplateRepository reportTemplateRepository, HanyuPinyinConverter converter) {
+    public ReportTemplateServiceImpl(ReportTemplateRepository reportTemplateRepository, HanyuPinyinConverter converter, JmsSender jmsSender, JmsProperties jmsProperties, AuthorizationService authorizationService) {
         this.reportTemplateRepository = reportTemplateRepository;
         this.converter = converter;
+        this.jmsSender = jmsSender;
+        this.jmsProperties = jmsProperties;
+        this.authorizationService = authorizationService;
     }
 
     @Override
     public ReportTemplateEntity createReportTemplate(ReportTemplateOperationRequest request) {
         ReportTemplateEntity reportTemplateEntity = request.toReport(this.converter);
-        return reportTemplateRepository.save(reportTemplateEntity);
+
+        ReportTemplateEntity rte = this.reportTemplateRepository.findByReportNameEquals(reportTemplateEntity.getReportName());
+        if (rte != null)
+            throw new RuntimeException("The Report with the same name has existed");
+
+        reportTemplateEntity.setUuid(UUID.randomUUID().toString());
+        rte = reportTemplateRepository.save(reportTemplateEntity);
+        onChargeItemCreated(rte);
+        return rte;
+    }
+
+    private void onChargeItemCreated(ReportTemplateEntity reportTemplateEntity) {
+        ChargeItemOperationMesassge chargeItemOperationMesassge = new ChargeItemOperationMesassge();
+        chargeItemOperationMesassge.setOperationEnum(OperationEnum.CREATE);
+        chargeItemOperationMesassge.setUuid(reportTemplateEntity.getUuid());
+        chargeItemOperationMesassge.setSource(this.authorizationService.getDomainName());
+
+        jmsSender.sendEvent(this.jmsProperties.getFinanceChargeItemOperationQueue(), chargeItemOperationMesassge);
     }
 
     @Override

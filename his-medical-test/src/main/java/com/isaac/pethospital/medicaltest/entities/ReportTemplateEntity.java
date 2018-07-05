@@ -24,8 +24,17 @@ public class ReportTemplateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String uuid;
     private String reportName;
     private String reportNameHanYuPinYin;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getReportNameHanYuPinYin() {
         return reportNameHanYuPinYin;
