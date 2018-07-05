@@ -14,6 +14,7 @@ import {MedicineManagementGuard} from "../../guards/medicine/medicine-management
 import {MedicalTestManagementGuard} from "../../guards/medical-test/medical-test-management.guard";
 import {ProcurementManagementGuard} from "../../guards/procurement/procurement-management.guard";
 import {ChargeManagementGuard} from "../../guards/finance/charge-management.guard";
+import {InventoryManagementGuard} from "../../guards/medicine/inventory-management.guard";
 
 @Component({
   selector: 'app-index',
@@ -50,11 +51,12 @@ export class IndexComponent implements OnInit, OnDestroy {
               private employeeService: EmployeeService,
               private employeeManagementGuard: EmployeeManagementGuard,
               private financeManagementGuard: FinanceManagementGuard,
-              private chargeManagementGuard:ChargeManagementGuard,
+              private chargeManagementGuard: ChargeManagementGuard,
               private inpatientManagementGuard: InpatientManagementGuard,
               private medicineManagementGuard: MedicineManagementGuard,
+              private inventoryManagementGuard: InventoryManagementGuard,
               private medicalTestManagementGuard: MedicalTestManagementGuard,
-              private procurementManagementGuard:ProcurementManagementGuard) {
+              private procurementManagementGuard: ProcurementManagementGuard) {
 
     this.authChangeSubscription = authenticationService.authChange.subscribe(
       newAuthInfo => {
@@ -87,6 +89,10 @@ export class IndexComponent implements OnInit, OnDestroy {
     return this.medicineManagementGuard.canActivate();
   }
 
+  canShowInventoryManagement(): boolean {
+    return this.inventoryManagementGuard.canActivate();
+  }
+
   canShowInpatientManagement(): boolean {
     return this.inpatientManagementGuard.canActivate();
   }
@@ -102,7 +108,8 @@ export class IndexComponent implements OnInit, OnDestroy {
   canShowMyConsultingRoom(): boolean {
     return this.myConsultingRoomGuard.canActivate();
   }
-  canShowProcurementManagement():boolean{
+
+  canShowProcurementManagement(): boolean {
     return this.procurementManagementGuard.canActivate();
   }
 

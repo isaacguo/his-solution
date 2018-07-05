@@ -142,6 +142,7 @@ import { ChargeAdminListComponent } from './components/finance/charge-management
 import { ChargeAdminDetailComponent } from './components/finance/charge-management/charge-admin-detail/charge-admin-detail.component';
 import {FinanceChargeCategoryService} from "./services/finance/finance-charge-category.service";
 import {FinanceChargeService} from "./services/finance/finance-charge.service";
+import {InventoryManagementGuard} from "./guards/medicine/inventory-management.guard";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -314,6 +315,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     //medicine
     MedicineManagementGuard,
+    InventoryManagementGuard,
 
 
     //settings
