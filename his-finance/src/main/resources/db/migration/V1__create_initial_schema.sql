@@ -3,7 +3,7 @@ create table authorization_assignment_entity_allowed_operations (authorization_a
 create table authorization_entity (id bigint not null auto_increment, uid bigint, user_account varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_topic_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table charge_category_entity (id bigint not null auto_increment, name varchar(255), parent_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table charge_entity (id bigint not null auto_increment, charge_item_id varchar(255), from_service varchar(255), member_price bigint, normal_price bigint, charge_category_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table charge_entity (id bigint not null auto_increment, charge_item_uuid varchar(255), from_service varchar(255), member_price bigint, normal_price bigint, charge_category_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table common_configuration_entity (id bigint not null auto_increment, conf_key varchar(255), conf_value varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table fee_entity (id bigint not null auto_increment, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table fee_item_entity (id bigint not null auto_increment, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
