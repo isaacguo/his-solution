@@ -4,9 +4,10 @@ import {AuthHttp} from "angular2-jwt";
 import {Observable} from "../../../../node_modules/rxjs";
 import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
 import {TreeNodeService} from "../common/tree-node.service";
+import {CategoryService} from "../../components/common/abstract-category-list/category-service";
 
 @Injectable()
-export class FinanceChargeCategoryService extends CrudService {
+export class FinanceChargeCategoryService extends CrudService implements CategoryService{
 
 
   rootUrl: string = "/api/hisfinance/charge-categories";
@@ -27,6 +28,10 @@ export class FinanceChargeCategoryService extends CrudService {
     return this.authHttp.put(`${this.rootUrl}/rename`, {'name': value, 'id': categoryId}).map(r => {
       return this.extractTextData(r) === "true" ? true : false;
     });
+  }
+
+  getNodes(): Observable<MyTreeNode[]> {
+    return this.getRootChargeCategory();
   }
 
 }

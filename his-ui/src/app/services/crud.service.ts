@@ -25,8 +25,10 @@ export class CrudService extends AbstractService {
     return this.authHttp.put(`${this.rootUrl}/${id}`, dto).map(this.extractData);
   }
 
-  deleteOne(id: number): Observable<any> {
-    return this.authHttp.delete(`${this.rootUrl}/${id}`).map(this.extractData);
+  deleteOne(id: number): Observable<boolean> {
+    return this.authHttp.delete(`${this.rootUrl}/${id}`).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
 }

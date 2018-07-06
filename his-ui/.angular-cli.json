@@ -27,6 +27,9 @@
         "styles.css"
       ],
       "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/metismenu/dist/metisMenu.min.js",
         "assets/js/sb-admin-2.min.js"
       ],
       "environmentSource": "environments/environment.ts",

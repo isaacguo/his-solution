@@ -10,10 +10,10 @@ import java.util.List;
 @Entity
 public class ReportTemplateEntity {
 
+
     @OneToMany(mappedBy = "reportTemplate", cascade = CascadeType.ALL)
     @JsonManagedReference("reportTemplate-reportTemplateItem")
     List<ReportTemplateItemEntity> reportTemplateItems = new LinkedList<>();
-
     @OneToMany(mappedBy = "reportTemplate", cascade = CascadeType.ALL)
     @JsonManagedReference("reportTemplate-reportTemplateInfo")
     List<ReportTemplateInfoEntity> reportTemplateInfoList = new LinkedList<>();
@@ -21,12 +21,23 @@ public class ReportTemplateEntity {
     //@JsonBackReference("department-reportTemplates")
     @JsonBackReference()
     List<DepartmentEntity> departmentList = new LinkedList<>();
+    @ManyToOne()
+    @JsonBackReference("ReportTemplateCategoryEntity-ReportTemplateEntity")
+    private ReportTemplateCategoryEntity category;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String uuid;
     private String reportName;
     private String reportNameHanYuPinYin;
+
+    public ReportTemplateCategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(ReportTemplateCategoryEntity category) {
+        this.category = category;
+    }
 
     public String getUuid() {
         return uuid;
@@ -49,14 +60,14 @@ public class ReportTemplateEntity {
     }
 
     public void addDepartment(DepartmentEntity department) {
-        if(department==null)
-            throw  new RuntimeException("Department is null");
+        if (department == null)
+            throw new RuntimeException("Department is null");
         this.departmentList.add(department);
     }
 
     public void removeDepartment(DepartmentEntity department) {
-        if(department==null)
-            throw  new RuntimeException("Department is null");
+        if (department == null)
+            throw new RuntimeException("Department is null");
         this.departmentList.remove(department);
     }
 

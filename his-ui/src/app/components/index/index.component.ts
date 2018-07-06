@@ -1,4 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+///<reference path="../../../../node_modules/protractor/built/index.d.ts"/>
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {AuthenticationService, AuthInfo} from "../../services/common/authentication.service";
 import {Subscription} from "rxjs/Subscription";
 import {ProcurementApprovalService} from "../../services/procurement/procurement-approval.service";
@@ -15,13 +16,15 @@ import {MedicalTestManagementGuard} from "../../guards/medical-test/medical-test
 import {ProcurementManagementGuard} from "../../guards/procurement/procurement-management.guard";
 import {ChargeManagementGuard} from "../../guards/finance/charge-management.guard";
 import {InventoryManagementGuard} from "../../guards/medicine/inventory-management.guard";
+import {Observable} from "rxjs/Observable";
+declare let $: any;
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent implements OnInit, OnDestroy {
+export class IndexComponent implements OnInit, OnDestroy,AfterViewInit {
 
   authInfo: AuthInfo;
   userName: string;
@@ -42,7 +45,8 @@ export class IndexComponent implements OnInit, OnDestroy {
       return this.count + "";
   }
 
-  constructor(private authenticationService: AuthenticationService,
+  constructor(private elementRef: ElementRef,
+              private authenticationService: AuthenticationService,
               private procurementApprovalService: ProcurementApprovalService,
               public procurementApprovalGuard: ProcurementApprovalGuard,
               public myConsultingRoomGuard: MyConsultingRoomGuard,
@@ -62,6 +66,7 @@ export class IndexComponent implements OnInit, OnDestroy {
       newAuthInfo => {
         this.authInfo = newAuthInfo;
         this.userName = this.authInfo.displayName;
+
         this.employeeService.getMyInfo().subscribe(r => {
           this.userName = r.fullName;
         })
@@ -118,9 +123,6 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.canShowEmployeeManagement()
   }
 
-  onLoginBtnClicked() {
-  }
-
   canShowTreatmentSettings() {
     return this.treatmentSettingsGuard.canActivate();
   }
@@ -129,4 +131,12 @@ export class IndexComponent implements OnInit, OnDestroy {
     return this.chargeManagementGuard.canActivate();
 
   }
+
+  ngAfterViewInit(): void {
+    Observable.timer(2000).subscribe(r=>{
+      let menuElement = this.elementRef.nativeElement.querySelector('#side-menu');
+      $('#side-menu').metisMenu();
+    })
+  }
+
 }

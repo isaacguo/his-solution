@@ -123,26 +123,29 @@ import {MedicalTestManagementGuard} from "./guards/medical-test/medical-test-man
 import {ProcurementManagementGuard} from "./guards/procurement/procurement-management.guard";
 import {EmployeeAdminListOnlyComponent} from './components/employee/employee-admin/employee-admin-list-only/employee-admin-list-only.component';
 import {MedicalTestReportService} from "./services/medical-test/medical-test-report.service";
-import { MedicalTestSettingsDepartmentComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department.component';
-import { MedicalTestSettingsDepartmentListComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-list/medical-test-settings-department-list.component';
-import { MedicalTestSettingsDepartmentDetailComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-detail/medical-test-settings-department-detail.component';
+import {MedicalTestSettingsDepartmentComponent} from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department.component';
+import {MedicalTestSettingsDepartmentListComponent} from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-list/medical-test-settings-department-list.component';
+import {MedicalTestSettingsDepartmentDetailComponent} from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-detail/medical-test-settings-department-detail.component';
 import {MedicalTestDepartmentService} from "./services/medical-test/medical-test-department.service";
-import { MedicalTestSettingsDepartmentReportTemplatesComponent } from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-detail/medical-test-settings-department-report-templates/medical-test-settings-department-report-templates.component';
-import { PetMedicalTestComponent } from './components/treatment/my-consulting-room/pet-medical-test/pet-medical-test.component';
+import {MedicalTestSettingsDepartmentReportTemplatesComponent} from './components/medical-test/medical-test-settings/medical-test-settings-department/medical-test-settings-department-detail/medical-test-settings-department-report-templates/medical-test-settings-department-report-templates.component';
+import {PetMedicalTestComponent} from './components/treatment/my-consulting-room/pet-medical-test/pet-medical-test.component';
 import {TreatmentCaseService} from "./services/treatment/treatment-case.service";
-import { PetTreatmentDetailComponent } from './components/treatment/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component';
-import { RegistrationQueryComponent } from './components/treatment/front-desk/registration-query/registration-query.component';
+import {PetTreatmentDetailComponent} from './components/treatment/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component';
+import {RegistrationQueryComponent} from './components/treatment/front-desk/registration-query/registration-query.component';
 import {NgxPaginationModule} from "ngx-pagination";
-import { FeeQueryComponent } from './components/treatment/front-desk/fee-query/fee-query.component';
-import { QueryBarComponent } from './components/common/query-bar/query-bar.component';
-import { ChargeManagementComponent } from './components/finance/charge-management/charge-management.component';
+import {FeeQueryComponent} from './components/treatment/front-desk/fee-query/fee-query.component';
+import {QueryBarComponent} from './components/common/query-bar/query-bar.component';
+import {ChargeManagementComponent} from './components/finance/charge-management/charge-management.component';
 import {ChargeManagementGuard} from "./guards/finance/charge-management.guard";
-import { FinaceQueryComponent } from './components/finance/finace-query/finace-query.component';
-import { ChargeAdminListComponent } from './components/finance/charge-management/charge-admin-list/charge-admin-list.component';
-import { ChargeAdminDetailComponent } from './components/finance/charge-management/charge-admin-detail/charge-admin-detail.component';
+import {FinaceQueryComponent} from './components/finance/finace-query/finace-query.component';
+import {ChargeAdminListComponent} from './components/finance/charge-management/charge-admin-list/charge-admin-list.component';
+import {ChargeAdminDetailComponent} from './components/finance/charge-management/charge-admin-detail/charge-admin-detail.component';
 import {FinanceChargeCategoryService} from "./services/finance/finance-charge-category.service";
 import {FinanceChargeService} from "./services/finance/finance-charge.service";
 import {InventoryManagementGuard} from "./guards/medicine/inventory-management.guard";
+import {MedicalTestSettingsReportTemplateCategoryListComponent} from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-list.component';
+import {MedicalTestSettingsReportTemplateCategoryDetailComponent} from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-detail/medical-test-settings-report-template-category-detail.component';
+import {MedicalTestReportTemplateCategoryService} from "./services/medical-test/medical-test-report-template-category.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -250,6 +253,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FinaceQueryComponent,
     ChargeAdminListComponent,
     ChargeAdminDetailComponent,
+    MedicalTestSettingsReportTemplateCategoryListComponent,
+    MedicalTestSettingsReportTemplateCategoryDetailComponent
 
   ],
   imports: [
@@ -309,6 +314,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     //medical test
     MedicalTestReportService,
     MedicalTestReportTemplateService,
+    MedicalTestReportTemplateCategoryService,
     MedicalTestManagementGuard,
     MedicalTestDepartmentService,
 
