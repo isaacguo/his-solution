@@ -36,6 +36,9 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
   }
 
   invokeWhenCreate() {
+
+    this.formModel.controls['categoryId'].setValue(this.categoryId);
+
     this.medicalTestReportService.createReport(this.formModel.value).subscribe(r => {
       if (r.id > 0) {
         this.reportCreationResultText = "化验报告模板信息添加成功";
@@ -50,9 +53,8 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
   }
 
   invokeWhenUpdate() {
-    this.medicalTestReportService.updateReport(this.formModel.value).subscribe(r=>{
-      if(r.id>0)
-      {
+    this.medicalTestReportService.updateReport(this.formModel.value).subscribe(r => {
+      if (r.id > 0) {
         this.reportCreationResultText = "化验报告模板信息更新成功";
         this.confirmCreateModal.open();
       }
@@ -61,9 +63,18 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
 
   }
 
+  categoryId: number;
+
   ngOnInit() {
     this.initForm();
     this.process();
+
+
+    if (this.operation === OperationEnum.CREATE) {
+      this.route.params.subscribe(params => {
+        this.categoryId = params['updateId'];
+      });
+    }
 
     if (this.operation === OperationEnum.UPDATE) {
       this.medicalTestReportService.findById(this.updateId).subscribe(r => {
@@ -137,9 +148,10 @@ export class MedicalTestSettingsReportCreateUpdateComponent extends AbstractCrea
 
   private initForm() {
     this.formModel = this.fb.group({
+      'categoryId': [''],
       'id': [''],
       'reportName': ['', Validators.required],
-      'reportInfo':this.fb.array([
+      'reportInfo': this.fb.array([
         this.initReportInfoItem()
       ]),
       'reportItems': this.fb.array([

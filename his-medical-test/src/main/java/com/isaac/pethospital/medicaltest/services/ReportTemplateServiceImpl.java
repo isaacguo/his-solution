@@ -5,6 +5,7 @@ import com.isaac.pethospital.common.dtos.ChargeItemOperationMesassge;
 import com.isaac.pethospital.common.enums.OperationEnum;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.services.AuthorizationService;
+import com.isaac.pethospital.medicaltest.entities.ReportTemplateCategoryEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import com.isaac.pethospital.medicaltest.jms.JmsProperties;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
@@ -18,13 +19,15 @@ import java.util.UUID;
 public class ReportTemplateServiceImpl implements ReportTemplateService {
 
     private final ReportTemplateRepository reportTemplateRepository;
+    private final ReportTemplateCategoryService reportTemplateCategoryService;
     private final HanyuPinyinConverter converter;
     private final JmsSender jmsSender;
     private final JmsProperties jmsProperties;
     private final AuthorizationService authorizationService;
 
-    public ReportTemplateServiceImpl(ReportTemplateRepository reportTemplateRepository, HanyuPinyinConverter converter, JmsSender jmsSender, JmsProperties jmsProperties, AuthorizationService authorizationService) {
+    public ReportTemplateServiceImpl(ReportTemplateRepository reportTemplateRepository, ReportTemplateCategoryService reportTemplateCategoryService, HanyuPinyinConverter converter, JmsSender jmsSender, JmsProperties jmsProperties, AuthorizationService authorizationService) {
         this.reportTemplateRepository = reportTemplateRepository;
+        this.reportTemplateCategoryService = reportTemplateCategoryService;
         this.converter = converter;
         this.jmsSender = jmsSender;
         this.jmsProperties = jmsProperties;
@@ -35,11 +38,16 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
     public ReportTemplateEntity createReportTemplate(ReportTemplateOperationRequest request) {
         ReportTemplateEntity reportTemplateEntity = request.toReport(this.converter);
 
+        ReportTemplateCategoryEntity category = this.reportTemplateCategoryService.findOne(request.getCategoryId());
+        if (category == null)
+            throw new RuntimeException("Category is null");
+
         ReportTemplateEntity rte = this.reportTemplateRepository.findByReportNameEquals(reportTemplateEntity.getReportName());
         if (rte != null)
             throw new RuntimeException("The Report with the same name has existed");
 
         reportTemplateEntity.setUuid(UUID.randomUUID().toString());
+        reportTemplateEntity.setCategory(category);
         rte = reportTemplateRepository.save(reportTemplateEntity);
         onChargeItemCreated(rte);
         return rte;
@@ -62,9 +70,19 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
         ReportTemplateEntity reportTemplateEntity = reportTemplateRepository.findOne(id);
         if (reportTemplateEntity == null)
             throw new RuntimeException("Cannot find ReportTemplate");
-        reportTemplateRepository.delete(reportTemplateEntity);
 
-        return this.createReportTemplate(request);
+
+        String uuid = reportTemplateEntity.getUuid();
+        ReportTemplateCategoryEntity category = reportTemplateEntity.getCategory();
+        ReportTemplateEntity newReportTemplateEntity = request.toReport(this.converter);
+
+        newReportTemplateEntity.setUuid(uuid);
+        newReportTemplateEntity.setCategory(category);
+
+
+        reportTemplateRepository.delete(reportTemplateEntity);
+        return reportTemplateRepository.save(newReportTemplateEntity);
+
 
     }
 

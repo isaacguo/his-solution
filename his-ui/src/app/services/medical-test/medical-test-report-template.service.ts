@@ -48,4 +48,5 @@ export class MedicalTestReportTemplateService extends AbstractService {
 
     return this.authHttp.get(`${this.rootUrl}/findTemplateByNameContains/${name}`).map(this.extractData);
   }
+
 }

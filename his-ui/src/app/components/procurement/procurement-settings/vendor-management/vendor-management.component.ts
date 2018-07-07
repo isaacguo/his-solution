@@ -5,7 +5,6 @@ import {Vendor} from "../../../../dto/procurement/vendor.model";
 import {VendorService} from "../../../../services/procurement/vendor.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {FormControl} from "@angular/forms";
-import {Observable} from "rxjs/Observable";
 import {DepartmentListItem} from "../../../../dto/employee/department-list-item.model";
 import {VendorCategoryService} from "../../../../services/procurement/vendor-category.service";
 import {VendorCategory} from "../../../../dto/procurement/vendor-category.model";

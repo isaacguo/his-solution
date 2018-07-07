@@ -14,8 +14,25 @@ public class ReportTemplateOperationRequest {
     List<ReportTemplateItemEntity> reportItems = new LinkedList<>();
     List<ReportTemplateInfoEntity> reportInfo = new LinkedList<>();
     private Long id;
+    private Long categoryId;
     private String reportName;
     private String reportNameHanYuPinYin;
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getReportNameHanYuPinYin() {
+        return reportNameHanYuPinYin;
+    }
+
+    public void setReportNameHanYuPinYin(String reportNameHanYuPinYin) {
+        this.reportNameHanYuPinYin = reportNameHanYuPinYin;
+    }
 
     public List<ReportTemplateInfoEntity> getReportInfo() {
         return reportInfo;

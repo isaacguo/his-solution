@@ -1,3 +1,55 @@
-<p>
-  medical-test-settings-report-template-category-detail works!
-</p>
+<div *ngIf="categoryId=== undefined ">
+  请选择化验模板分类
+</div>
+
+
+<div *ngIf="categoryId!= undefined ">
+  <modal #confirmDeletionModal (onClose)="onConfirmDeletionModalClosed()">
+    <form #modalForm1="ngForm">
+      <modal-header [show-close]="true">
+        <h4 class="modal-title">请确认</h4>
+      </modal-header>
+      <modal-body>
+        确定删除此化验报告模板 <b>{{reportToBeDeleted?.reportName}}</b> 信息?
+      </modal-body>
+      <modal-footer>
+        <button type="button" class="btn btn-primary" (click)="confirmDeletionModal.close()">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="confirmDeletionModal"
+                (click)="confirmDeletionModal.dismiss()">取消
+        </button>
+      </modal-footer>
+    </form>
+  </modal>
+
+
+  <div role="group">
+    <button (click)="onCreateNewReportClicked()" class="btn btn-default">新建化验报告模板</button>
+  </div>
+
+
+  <div class="isaac-margin-15top">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let report of medicalTestReports; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{report.reportName}}</td>
+        <td>
+          <a href="javascript:void(0)"><span class="glyphicon glyphicon-pencil "
+                                             (click)="onEditButtonClicked(report)"></span></a>
+          <a href="javascript:void(0)"> <span class="glyphicon glyphicon-remove isaac-margin-left-10"
+                                              (click)="removeReport(report)"></span></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</div>

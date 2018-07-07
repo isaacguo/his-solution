@@ -4,10 +4,12 @@ import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.common.services.AuthorizationTopicService;
 import com.isaac.pethospital.common.services.FactoryResetService;
+import com.isaac.pethospital.medicaltest.entities.ReportTemplateCategoryEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateInfoEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateItemEntity;
 import com.isaac.pethospital.medicaltest.enums.ReportSectionEnum;
+import com.isaac.pethospital.medicaltest.repositories.ReportTemplateCategoryRepository;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,14 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     private final AuthorizationTopicService authorizationTopicService;
     private final ReportTemplateRepository reportTemplateRepository;
     private final HanyuPinyinConverter converter;
+    private final ReportTemplateCategoryRepository reportTemplateCategoryRepository;
 
-    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, ReportTemplateRepository reportTemplateRepository, HanyuPinyinConverter converter) {
+    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, ReportTemplateRepository reportTemplateRepository, HanyuPinyinConverter converter, ReportTemplateCategoryRepository reportTemplateCategoryRepository) {
         this.authorizationService = authorizationService;
         this.authorizationTopicService = authorizationTopicService;
         this.reportTemplateRepository = reportTemplateRepository;
         this.converter = converter;
+        this.reportTemplateCategoryRepository = reportTemplateCategoryRepository;
     }
 
     @Transactional
@@ -37,6 +41,10 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
     @Override
     public void insertData() {
+
+        ReportTemplateCategoryEntity category=new ReportTemplateCategoryEntity();
+        category.setName("常规检查");
+
 
         ReportTemplateEntity reportTemplateEntity = new ReportTemplateEntity();
         reportTemplateEntity.setReportName("血常规");
@@ -55,7 +63,11 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         addReportInfoItem("申请科室", reportTemplateEntity);
         addReportInfoItem("送检医师", reportTemplateEntity);
         addReportInfoItem("临床诊断", reportTemplateEntity);
-        this.reportTemplateRepository.save(reportTemplateEntity);
+
+        category.addReportTemplate(reportTemplateEntity);
+
+        this.reportTemplateCategoryRepository.save(category);
+
 
     }
 
@@ -84,6 +96,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         authorizationService.deleteAll();
         authorizationTopicService.deleteAll();
 
+        this.reportTemplateCategoryRepository.deleteAll();
         this.reportTemplateRepository.deleteAll();
     }
 
