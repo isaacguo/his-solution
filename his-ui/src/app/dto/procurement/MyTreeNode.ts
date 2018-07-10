@@ -1,5 +1,3 @@
-import {VendorPermitDepartment} from "../employee/vendor-permit-department.model";
-
 export class MyTreeNode {
   public name?: string;
   public id?: any;
@@ -8,7 +6,6 @@ export class MyTreeNode {
   public isExpanded?: boolean;
   public categoryId?: number;
   public isLevelOne?: boolean;
-  //public departments?: VendorPermitDepartment[];
 
   constructor() {
   }

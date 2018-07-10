@@ -1,6 +1,10 @@
-<div class="row">
+<div *ngIf="showTitle" class="row">
   <h1 class="page-header">化验报告</h1>
 </div>
 
-<app-medical-test-settings-report-template-category-list ></app-medical-test-settings-report-template-category-list>
+<app-medical-test-settings-report-template-category-list [canEdit]="canEdit"
+                                                         [canDelete]="canDelete"
+                                                         [financeChargeService]="financeChargeService"
+                                                         [canCreateNewItem]="canCreateNewItem"
+                                                         [showToolBox]="showToolBox" ></app-medical-test-settings-report-template-category-list>
 

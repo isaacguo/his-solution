@@ -5,6 +5,9 @@ import {OperationEnum} from "../../../../../../enums/operation.enum";
 import {MedicalTestReportTemplate} from "../../../../../../dto/medical-test/medical-test-report-template.model";
 import {MedicalTestReportTemplateService} from "../../../../../../services/medical-test/medical-test-report-template.service";
 import {MedicalTestReportTemplateCategoryService} from "../../../../../../services/medical-test/medical-test-report-template-category.service";
+import {FinanceChargeService} from "../../../../../../services/finance/finance-charge.service";
+import {mergeMap} from "rxjs/operators";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-medical-test-settings-report-template-category-detail',
@@ -12,6 +15,16 @@ import {MedicalTestReportTemplateCategoryService} from "../../../../../../servic
   styleUrls: ['./medical-test-settings-report-template-category-detail.component.css']
 })
 export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements OnInit, OnChanges {
+
+  @Input()
+  canCreateNewItem: boolean = true;
+  @Input()
+  canDelete: boolean = true;
+  @Input()
+  canEdit: boolean = true;
+  @Input()
+  financeChargeService: FinanceChargeService;
+
 
   @Input()
   categoryName: string;
@@ -31,9 +44,38 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
 
   loadData() {
 
-    this.medicalTestReportTemplateCategoryService.readOne(this.categoryId).subscribe(r => {
-      this.medicalTestReports = r.reportTemplateList;
-    })
+    if (this.categoryId !== undefined && this.categoryId !== null) {
+      if (this.financeChargeService !== undefined) {
+        console.log(this.categoryId);
+        this.medicalTestReportTemplateCategoryService.readOne(this.categoryId).mergeMap(category => {
+          console.log(category);
+          return this.financeChargeService.findByUuids(category.reportTemplateList.map(m => m.uuid)).map(list => ({
+            'category': category,
+            'list': list
+          }))
+        })
+          .subscribe(r => {
+
+            r.list.forEach(b => {
+                let item = r.category.reportTemplateList.find(r => r.uuid === b["chargeItemUuid"]);
+                if (item != null) {
+                  console.log(item);
+                  item.normalPrice = b["normalPrice"];
+                  item.memberPrice = b["memberPrice"];
+                }
+              }
+            );
+            this.medicalTestReports = r.category.reportTemplateList;
+          })
+      }
+      else {
+
+        this.medicalTestReportTemplateCategoryService.readOne(this.categoryId).subscribe(r => {
+          this.medicalTestReports = r.reportTemplateList;
+        })
+      }
+    }
+
   }
 
   onCreateNewReportClicked() {
@@ -62,5 +104,18 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
   ngOnChanges(changes: SimpleChanges): void {
     this.loadData();
   }
+
+
+  onValueChanged(event: number, report, fieldName: string) {
+    //console.log(event);
+    //console.log(report);
+    let obj = {};
+    obj[fieldName] = event;
+    obj['uuid'] = report.uuid;
+    this.financeChargeService.updateValue(obj).subscribe(r => {
+
+    });
+  }
+
 
 }

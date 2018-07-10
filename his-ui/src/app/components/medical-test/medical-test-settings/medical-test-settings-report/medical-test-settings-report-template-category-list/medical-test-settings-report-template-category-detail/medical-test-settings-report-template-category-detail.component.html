@@ -23,7 +23,7 @@
 
 
   <div role="group">
-    <button (click)="onCreateNewReportClicked()" class="btn btn-default">新建化验报告模板</button>
+    <button *ngIf="canCreateNewItem" (click)="onCreateNewReportClicked()" class="btn btn-default">新建化验报告模板</button>
   </div>
 
 
@@ -33,18 +33,26 @@
       <tr>
         <th>编号</th>
         <th>名称</th>
-        <th>操作</th>
+        <th *ngIf="financeChargeService" style="width: 230px">会员价</th>
+        <th *ngIf="financeChargeService" style="width: 230px">非会员价</th>
+        <th *ngIf="canEdit || canDelete">操作</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let report of medicalTestReports; let i=index">
         <td>{{i+1}}</td>
         <td>{{report.reportName}}</td>
-        <td>
-          <a href="javascript:void(0)"><span class="glyphicon glyphicon-pencil "
-                                             (click)="onEditButtonClicked(report)"></span></a>
-          <a href="javascript:void(0)"> <span class="glyphicon glyphicon-remove isaac-margin-left-10"
-                                              (click)="removeReport(report)"></span></a>
+        <td *ngIf="financeChargeService">
+          <app-field-edit [value]="report.memberPrice" (valueChanged)="onValueChanged($event, report,'memberPrice')"></app-field-edit>
+        </td>
+        <td *ngIf="financeChargeService">
+          <app-field-edit [value]="report.normalPrice" (valueChanged)="onValueChanged($event,report,'normalPrice')"></app-field-edit>
+        </td>
+        <td *ngIf="canEdit || canDelete">
+          <a *ngIf="canEdit" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil "
+                                                             (click)="onEditButtonClicked(report)"></span></a>
+          <a *ngIf="canDelete" href="javascript:void(0)"> <span class="glyphicon glyphicon-remove isaac-margin-left-10"
+                                                                (click)="removeReport(report)"></span></a>
         </td>
       </tr>
       </tbody>

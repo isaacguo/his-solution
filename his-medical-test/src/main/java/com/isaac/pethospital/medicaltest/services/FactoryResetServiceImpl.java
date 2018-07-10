@@ -14,6 +14,7 @@ import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 @Service
 public class FactoryResetServiceImpl implements FactoryResetService {
@@ -47,6 +48,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
 
         ReportTemplateEntity reportTemplateEntity = new ReportTemplateEntity();
+        reportTemplateEntity.setUuid(UUID.randomUUID().toString());
         reportTemplateEntity.setReportName("血常规");
         reportTemplateEntity.setReportNameHanYuPinYin(converter.toHanyuPinyin(reportTemplateEntity.getReportName()));
 

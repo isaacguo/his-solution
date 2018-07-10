@@ -146,6 +146,7 @@ import {InventoryManagementGuard} from "./guards/medicine/inventory-management.g
 import {MedicalTestSettingsReportTemplateCategoryListComponent} from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-list.component';
 import {MedicalTestSettingsReportTemplateCategoryDetailComponent} from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-detail/medical-test-settings-report-template-category-detail.component';
 import {MedicalTestReportTemplateCategoryService} from "./services/medical-test/medical-test-report-template-category.service";
+import { FieldEditComponent } from './components/common/field-edit/field-edit.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -254,7 +255,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ChargeAdminListComponent,
     ChargeAdminDetailComponent,
     MedicalTestSettingsReportTemplateCategoryListComponent,
-    MedicalTestSettingsReportTemplateCategoryDetailComponent
+    MedicalTestSettingsReportTemplateCategoryDetailComponent,
+    FieldEditComponent
 
   ],
   imports: [

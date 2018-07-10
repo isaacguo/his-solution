@@ -1,9 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {OperationEnum} from "../../../../enums/operation.enum";
-import {Router} from "@angular/router";
-import {MedicalTestReportTemplateService} from "../../../../services/medical-test/medical-test-report-template.service";
-import {MedicalTestReportTemplate} from "../../../../dto/medical-test/medical-test-report-template.model";
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {Component, Input, OnInit} from '@angular/core';
+import {FinanceChargeService} from "../../../../services/finance/finance-charge.service";
 
 @Component({
   selector: 'app-medical-test-settings-report',
@@ -11,6 +7,20 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
   styleUrls: ['./medical-test-settings-report.component.css']
 })
 export class MedicalTestSettingsReportComponent implements OnInit {
+
+  @Input()
+  showToolBox: boolean = true;
+  @Input()
+  showTitle: boolean = true;
+  @Input()
+  canCreateNewItem: boolean = true;
+  @Input()
+  canDelete: boolean = true;
+  @Input()
+  canEdit: boolean = true;
+  @Input()
+  financeChargeService: FinanceChargeService;
+
   ngOnInit(): void {
   }
 

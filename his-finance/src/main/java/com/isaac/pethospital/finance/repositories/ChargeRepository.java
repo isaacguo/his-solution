@@ -5,6 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ChargeRepository extends JpaRepository<ChargeEntity,Long> {
+public interface ChargeRepository extends JpaRepository<ChargeEntity, Long> {
+
+    List<ChargeEntity> findByChargeItemUuidIn(List<String> uuids);
+
+    ChargeEntity findByChargeItemUuid(String uuid);
 
 }
