@@ -24,6 +24,9 @@ export class FieldEditComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    if(this.value==null)
+      this.formModel.controls['price'].setValue("价格未设置");
+    else
     this.formModel.controls['price'].setValue(this.value);
   }
 
@@ -48,12 +51,15 @@ export class FieldEditComponent implements OnInit {
     this.valueChanged.emit(this.value);
   }
 
+  previousValue:any;
+
   onEditClicked() {
     this.isViewMode = false;
+    this.previousValue=this.formModel.controls['price'].value;
   }
 
   onCancelClicked() {
     this.isViewMode = true;
-    this.formModel.controls['price'].setValue(this.value);
+    this.formModel.controls['price'].setValue(this.previousValue);
   }
 }

@@ -140,13 +140,23 @@ import {ChargeManagementGuard} from "./guards/finance/charge-management.guard";
 import {FinaceQueryComponent} from './components/finance/finace-query/finace-query.component';
 import {ChargeAdminListComponent} from './components/finance/charge-management/charge-admin-list/charge-admin-list.component';
 import {ChargeAdminDetailComponent} from './components/finance/charge-management/charge-admin-detail/charge-admin-detail.component';
-import {FinanceChargeCategoryService} from "./services/finance/finance-charge-category.service";
-import {FinanceChargeService} from "./services/finance/finance-charge.service";
+import {FinancePriceService} from "./services/finance/finance-price.service";
 import {InventoryManagementGuard} from "./guards/medicine/inventory-management.guard";
 import {MedicalTestSettingsReportTemplateCategoryListComponent} from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-list.component';
 import {MedicalTestSettingsReportTemplateCategoryDetailComponent} from './components/medical-test/medical-test-settings/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-detail/medical-test-settings-report-template-category-detail.component';
 import {MedicalTestReportTemplateCategoryService} from "./services/medical-test/medical-test-report-template-category.service";
-import { FieldEditComponent } from './components/common/field-edit/field-edit.component';
+import {FieldEditComponent} from './components/common/field-edit/field-edit.component';
+import {ImportManagementComponent} from './components/inventory/import-management/import-management.component';
+import {ExportManagementComponent} from './components/inventory/export-management/export-management.component';
+import {InventorySettingsComponent} from './components/inventory/inventory-settings/inventory-settings.component';
+import {ImportManagementListComponent} from './components/inventory/import-management/import-management-list/import-management-list.component';
+import {ImportManagementDetailComponent} from './components/inventory/import-management/import-management-list/import-management-detail/import-management-detail.component';
+import {InventoryOperationToolBarComponent} from './components/inventory/inventory-operation-tool-bar/inventory-operation-tool-bar.component';
+import {ProductImportReceiptService} from "./services/medicine/product-import-receipt.service";
+import { PriceManagementComponent } from './components/finance/price-management/price-management.component';
+import { PriceAdminListComponent } from './components/finance/price-management/price-admin-list/price-admin-list.component';
+import {PriceManagementGuard} from "./guards/finance/price-management.guard";
+import {FinanceChargeService} from "./services/finance/finance-charge.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -256,7 +266,15 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ChargeAdminDetailComponent,
     MedicalTestSettingsReportTemplateCategoryListComponent,
     MedicalTestSettingsReportTemplateCategoryDetailComponent,
-    FieldEditComponent
+    FieldEditComponent,
+    ImportManagementComponent,
+    ExportManagementComponent,
+    InventorySettingsComponent,
+    ImportManagementListComponent,
+    ImportManagementDetailComponent,
+    InventoryOperationToolBarComponent,
+    PriceManagementComponent,
+    PriceAdminListComponent
 
   ],
   imports: [
@@ -309,7 +327,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     //finance
     FinanceManagementGuard,
     ChargeManagementGuard,
-    FinanceChargeCategoryService,
+    PriceManagementGuard,
+    FinancePriceService,
     FinanceChargeService,
 
 
@@ -324,6 +343,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     //medicine
     MedicineManagementGuard,
     InventoryManagementGuard,
+    ProductImportReceiptService,
 
 
     //settings

@@ -5,7 +5,7 @@ import {OperationEnum} from "../../../../../../enums/operation.enum";
 import {MedicalTestReportTemplate} from "../../../../../../dto/medical-test/medical-test-report-template.model";
 import {MedicalTestReportTemplateService} from "../../../../../../services/medical-test/medical-test-report-template.service";
 import {MedicalTestReportTemplateCategoryService} from "../../../../../../services/medical-test/medical-test-report-template-category.service";
-import {FinanceChargeService} from "../../../../../../services/finance/finance-charge.service";
+import {FinancePriceService} from "../../../../../../services/finance/finance-price.service";
 import {mergeMap} from "rxjs/operators";
 import {Observable} from "rxjs/Observable";
 
@@ -23,7 +23,7 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
   @Input()
   canEdit: boolean = true;
   @Input()
-  financeChargeService: FinanceChargeService;
+  financePriceService: FinancePriceService;
 
 
   @Input()
@@ -45,11 +45,11 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
   loadData() {
 
     if (this.categoryId !== undefined && this.categoryId !== null) {
-      if (this.financeChargeService !== undefined) {
+      if (this.financePriceService !== undefined) {
         console.log(this.categoryId);
         this.medicalTestReportTemplateCategoryService.readOne(this.categoryId).mergeMap(category => {
           console.log(category);
-          return this.financeChargeService.findByUuids(category.reportTemplateList.map(m => m.uuid)).map(list => ({
+          return this.financePriceService.findByUuids(category.reportTemplateList.map(m => m.uuid)).map(list => ({
             'category': category,
             'list': list
           }))
@@ -112,7 +112,7 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
     let obj = {};
     obj[fieldName] = event;
     obj['uuid'] = report.uuid;
-    this.financeChargeService.updateValue(obj).subscribe(r => {
+    this.financePriceService.updateValue(obj).subscribe(r => {
 
     });
   }

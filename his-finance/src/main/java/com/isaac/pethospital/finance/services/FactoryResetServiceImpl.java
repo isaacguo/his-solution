@@ -3,8 +3,7 @@ package com.isaac.pethospital.finance.services;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.common.services.AuthorizationTopicService;
 import com.isaac.pethospital.common.services.FactoryResetService;
-import com.isaac.pethospital.finance.entities.ChargeCategoryEntity;
-import com.isaac.pethospital.finance.repositories.ChargeCategoryRepository;
+import com.isaac.pethospital.finance.repositories.PriceCategoryRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,13 +14,13 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     private final AuthorizationService authorizationService;
     private final AuthorizationTopicService authorizationTopicService;
 
-    private final ChargeCategoryRepository chargeCategoryRepository;
+    private final PriceCategoryRepository priceCategoryRepository;
 
 
-    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, ChargeCategoryRepository chargeCategoryRepository) {
+    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService, PriceCategoryRepository priceCategoryRepository) {
         this.authorizationService = authorizationService;
         this.authorizationTopicService = authorizationTopicService;
-        this.chargeCategoryRepository = chargeCategoryRepository;
+        this.priceCategoryRepository = priceCategoryRepository;
     }
 
     @Transactional

@@ -92,7 +92,21 @@
           </li>
 
           <li *ngIf="canShowInventoryManagement()">
-            <a href="#" routerLinkActive="active" class="text-center"> 库存管理</a>
+            <a href="#" routerLinkActive="active" class="text-center"> 库房管理<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a routerLink="/inventory-import-management" routerLinkActive="active" class="text-center"> 入库管理</a>
+              </li>
+              <li>
+                <a routerLink="/inventory-export-management" routerLinkActive="active" class="text-center"> 出库管理</a>
+              </li>
+              <li>
+                <a routerLink="/inventory-query" routerLinkActive="active" class="text-center"> 库存查询</a>
+              </li>
+              <li>
+                <a routerLink="/inventory-settings" routerLinkActive="active" class="text-center"> 库存设置</a>
+              </li>
+            </ul>
 
           </li>
 
@@ -110,13 +124,17 @@
             <a routerLink="/profiles" routerLinkActive="active" class="text-center"> 病历管理</a>
           </li>
           -->
-          <li *ngIf="canShowChargeManagement()">
+          <li *ngIf="canShowPriceManagement()">
             <a href="#"  routerLinkActive="active" class="text-center"> 财务管理<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <!--<li *ngIf="authInfo.isAdmin">-->
-              <li *ngIf="canShowChargeManagement()">
-                <a routerLink="/charge-management" routerLinkActive="active" class="text-center"> 收费定价</a>
+              <li *ngIf="canShowPriceManagement()">
+                <a routerLink="/charge-management" routerLinkActive="active" class="text-center"> 收费管理</a>
               </li>
+              <li *ngIf="canShowPriceManagement()">
+                <a routerLink="/price-management" routerLinkActive="active" class="text-center"> 收费定价</a>
+              </li>
+
             </ul>
           </li>
           <li>

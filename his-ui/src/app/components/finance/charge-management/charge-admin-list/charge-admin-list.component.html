@@ -1,30 +1,29 @@
-<div class="row">
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>订单编号</th>
+    <th>宠物主人</th>
+    <th>宠物姓名</th>
+    <th>创建日期</th>
+    <th>金额</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
 
-  <div class="btn-group" role="group">
-    <button type="button"
-            class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
-            data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-      {{selectedModule}}
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li *ngFor="let module of modules"><a href="javascript:void(0)"
-                                            (click)="setSelectedModule(module)">{{module}}</a></li>
-    </ul>
-  </div>
+  <tr *ngFor="let chargeItem of chargeItems;let i=index">
+    <td>{{i+1}}</td>
+    <td>订单编号</td>
+    <td>宠物主人</td>
+    <td>宠物姓名</td>
+    <td>创建日期</td>
+    <td>金额</td>
+    <td>状态</td>
+    <td>操作</td>
+  </tr>
 
+  </tbody>
 
-</div>
-
-
-<div *ngIf="selectedModule==='化验模块'">
-
-  <app-medical-test-settings-report
-    [financeChargeService]="financeChargeService"
-    [canDelete]="false"
-    [canEdit]="false"
-    [canCreateNewItem]="false"
-    [showToolBox]="false"
-    [showTitle]="false"></app-medical-test-settings-report>
-
-</div>
+</table>

@@ -17,6 +17,8 @@ import {ProcurementManagementGuard} from "../../guards/procurement/procurement-m
 import {ChargeManagementGuard} from "../../guards/finance/charge-management.guard";
 import {InventoryManagementGuard} from "../../guards/medicine/inventory-management.guard";
 import {Observable} from "rxjs/Observable";
+import {PriceManagementGuard} from "../../guards/finance/price-management.guard";
+
 declare let $: any;
 
 @Component({
@@ -24,7 +26,7 @@ declare let $: any;
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent implements OnInit, OnDestroy,AfterViewInit {
+export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
 
   authInfo: AuthInfo;
   userName: string;
@@ -55,6 +57,7 @@ export class IndexComponent implements OnInit, OnDestroy,AfterViewInit {
               private employeeService: EmployeeService,
               private employeeManagementGuard: EmployeeManagementGuard,
               private financeManagementGuard: FinanceManagementGuard,
+              private priceManagementGuard: PriceManagementGuard,
               private chargeManagementGuard: ChargeManagementGuard,
               private inpatientManagementGuard: InpatientManagementGuard,
               private medicineManagementGuard: MedicineManagementGuard,
@@ -127,13 +130,17 @@ export class IndexComponent implements OnInit, OnDestroy,AfterViewInit {
     return this.treatmentSettingsGuard.canActivate();
   }
 
-  canShowChargeManagement() {
-    return this.chargeManagementGuard.canActivate();
+  canShowPriceManagement() {
+    return this.priceManagementGuard.canActivate();
 
   }
 
+  canShowChargeManagement() {
+    return this.chargeManagementGuard.canActivate();
+  }
+
   ngAfterViewInit(): void {
-    Observable.timer(2000).subscribe(r=>{
+    Observable.timer(2000).subscribe(r => {
       let menuElement = this.elementRef.nativeElement.querySelector('#side-menu');
       $('#side-menu').metisMenu();
     })

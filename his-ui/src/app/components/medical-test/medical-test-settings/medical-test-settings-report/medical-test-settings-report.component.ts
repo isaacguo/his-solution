@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FinanceChargeService} from "../../../../services/finance/finance-charge.service";
+import {FinancePriceService} from "../../../../services/finance/finance-price.service";
 
 @Component({
   selector: 'app-medical-test-settings-report',
@@ -19,7 +19,7 @@ export class MedicalTestSettingsReportComponent implements OnInit {
   @Input()
   canEdit: boolean = true;
   @Input()
-  financeChargeService: FinanceChargeService;
+  financePriceService: FinancePriceService;
 
   ngOnInit(): void {
   }

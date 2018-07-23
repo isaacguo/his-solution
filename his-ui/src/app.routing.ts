@@ -3,7 +3,6 @@ import {ModuleWithProviders} from "@angular/core";
 import {IndexComponent} from "./app/components/index/index.component";
 import {LoginComponent} from "./app/components/login/login.component";
 import {TreatmentComponent} from "./app/components/treatment/treatment.component";
-import {TestingComponent} from "./app/components/testing/testing.component";
 import {ImagesComponent} from "./app/components/images/images.component";
 import {PharmacyComponent} from "./app/components/pharmacy/pharmacy.component";
 import {ProfilesComponent} from "./app/components/profiles/profiles.component";
@@ -36,7 +35,6 @@ import {PetTreatmentComponent} from "./app/components/treatment/my-consulting-ro
 import {InventoryQueryComponent} from "./app/components/inventory/inventory-query/inventory-query.component";
 import {ProcurementManagementComponent} from "./app/components/procurement/procurement-management/procurement-management.component";
 import {ProcurementSettingsComponent} from "./app/components/procurement/procurement-settings/procurement-settings.component";
-import {VendorManagementComponent} from "./app/components/procurement/procurement-settings/vendor-management/vendor-management.component";
 import {VendorCreateUpdateComponent} from "./app/components/procurement/procurement-settings/vendor-create-update/vendor-create-update.component";
 import {ProcurementStatusComponent} from "./app/components/procurement/procurement-settings/procurement-status/procurement-status.component";
 import {ProcurementApprovalComponent} from "./app/components/procurement/procurement-approval/procurement-approval.component";
@@ -70,6 +68,11 @@ import {RegistrationQueryComponent} from "./app/components/treatment/front-desk/
 import {FeeQueryComponent} from "./app/components/treatment/front-desk/fee-query/fee-query.component";
 import {ChargeManagementComponent} from "./app/components/finance/charge-management/charge-management.component";
 import {ChargeManagementGuard} from "./app/guards/finance/charge-management.guard";
+import {ImportManagementComponent} from "./app/components/inventory/import-management/import-management.component";
+import {ExportManagementComponent} from "./app/components/inventory/export-management/export-management.component";
+import {InventorySettingsComponent} from './app/components/inventory/inventory-settings/inventory-settings.component';
+import {PriceManagementComponent} from "./app/components/finance/price-management/price-management.component";
+import {PriceManagementGuard} from "./app/guards/finance/price-management.guard";
 
 
 const appRoutes: Routes = [
@@ -98,7 +101,7 @@ const appRoutes: Routes = [
           {
 
             path: 'fee-query',
-            component:FeeQueryComponent,
+            component: FeeQueryComponent,
           },
           {
             path: '**',
@@ -216,9 +219,14 @@ const appRoutes: Routes = [
         component: FinanceComponent,
       },
       {
-        path:'charge-management',
-        canActivate:[ChargeManagementGuard],
-        component:ChargeManagementComponent
+        path: 'charge-management',
+        canActivate: [ChargeManagementGuard],
+        component: ChargeManagementComponent
+      },
+      {
+        path: 'price-management',
+        canActivate: [PriceManagementGuard],
+        component: PriceManagementComponent
       },
       {
         path: 'pharmacy',
@@ -352,9 +360,20 @@ const appRoutes: Routes = [
         component: InventoryComponent
       },
       {
+        path: 'inventory-import-management',
+        component: ImportManagementComponent
+      },
+      {
+        path: 'inventory-export-management',
+        component: ExportManagementComponent
+      },
+      {
         path: 'inventory-query',
         component: InventoryQueryComponent
-
+      },
+      {
+        path: 'inventory-settings',
+        component: InventorySettingsComponent
       },
       {
         path: 'analysis',

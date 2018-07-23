@@ -9,7 +9,8 @@
         <span [class.input-group-btn]="true">
         <button *ngIf="isViewMode" (click)="onEditClicked()" class="btn btn-default" type="button"><span
           class="glyphicon glyphicon-pencil"></span> </button>
-        <button *ngIf="!isViewMode" [disabled]="!formModel.valid"  (click)="onSaveClicked()" class="btn btn-default" type="button"><span
+        <button *ngIf="!isViewMode" [disabled]="!formModel.valid" (click)="onSaveClicked()" class="btn btn-default"
+                type="button"><span
           class="glyphicon glyphicon-floppy-disk"></span> </button>
         <button *ngIf="!isViewMode" (click)="onCancelClicked()" class="btn btn-default" type="button"><span
           class="glyphicon glyphicon-remove"></span> </button>

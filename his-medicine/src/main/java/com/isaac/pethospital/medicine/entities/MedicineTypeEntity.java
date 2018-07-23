@@ -8,6 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class MedicineTypeEntity {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

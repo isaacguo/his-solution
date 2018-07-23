@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FinancePriceService} from "../../../../services/finance/finance-price.service";
 import {FinanceChargeService} from "../../../../services/finance/finance-charge.service";
 
 @Component({
@@ -9,19 +10,22 @@ import {FinanceChargeService} from "../../../../services/finance/finance-charge.
 export class ChargeAdminListComponent implements OnInit {
 
 
-  selectedModule: string = "请选择模块";
-  modules: any[] = ["请选择模块", "化验模块"];
+  chargeItems: any[] = [];
 
   constructor(public financeChargeService: FinanceChargeService) {
 
+
+  }
+
+  loadData() {
+    this.financeChargeService.readAll().subscribe(r => {
+      this.chargeItems = r;
+    })
   }
 
   ngOnInit(): void {
+    this.loadData();
 
   }
 
-  setSelectedModule(module: string) {
-    console.log(module);
-    this.selectedModule = module;
-  }
 }

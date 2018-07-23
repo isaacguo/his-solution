@@ -1,25 +1,32 @@
 package com.isaac.pethospital.finance.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.isaac.pethospital.finance.enums.ChargeStatusEnum;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 public class ChargeEntity {
 
-    String chargeItemUuid;
-    String fromService;
-    Long normalPrice; //普通价格
-    Long memberPrice; //会员价格
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne()
-    @JsonBackReference("ChargeCategoryEntity-ChargeEntity")
-    private ChargeCategoryEntity chargeCategory;
+
+    private String chargeId;
+    private String ownerName;
+    private String petName;
+    private LocalDateTime createdDate;
+
+    private Double amount;
+    private ChargeStatusEnum status;
+
+    @OneToMany(mappedBy = "charge")
+    @JsonManagedReference("charge-chargeItem")
+    private List<ChargeItemEntity> items=new LinkedList();
+
 
     public Long getId() {
         return id;
@@ -29,45 +36,51 @@ public class ChargeEntity {
         this.id = id;
     }
 
-    public String getChargeItemUuid() {
-        return chargeItemUuid;
+    public String getChargeId() {
+        return chargeId;
     }
 
-    public void setChargeItemUuid(String chargeItemUuid) {
-        this.chargeItemUuid = chargeItemUuid;
+    public void setChargeId(String chargeId) {
+        this.chargeId = chargeId;
     }
 
-    public String getFromService() {
-        return fromService;
+    public String getOwnerName() {
+        return ownerName;
     }
 
-    public void setFromService(String fromService) {
-        this.fromService = fromService;
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
-    public Long getNormalPrice() {
-        return normalPrice;
+    public String getPetName() {
+        return petName;
     }
 
-    public void setNormalPrice(Long normalPrice) {
-        this.normalPrice = normalPrice;
+    public void setPetName(String petName) {
+        this.petName = petName;
     }
 
-    public Long getMemberPrice() {
-        return memberPrice;
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
-    public void setMemberPrice(Long memberPrice) {
-        this.memberPrice = memberPrice;
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public ChargeCategoryEntity getChargeCategory() {
-        return chargeCategory;
+    public Double getAmount() {
+        return amount;
     }
 
-    public void setChargeCategory(ChargeCategoryEntity chargeCategory) {
-        this.chargeCategory = chargeCategory;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
+    public ChargeStatusEnum getStatus() {
+        return status;
+    }
 
+    public void setStatus(ChargeStatusEnum status) {
+        this.status = status;
+    }
 }

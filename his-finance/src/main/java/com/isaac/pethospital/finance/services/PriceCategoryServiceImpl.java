@@ -1,24 +1,24 @@
 package com.isaac.pethospital.finance.services;
 
 import com.isaac.pethospital.finance.dtos.ChargeCategoryOperationRequest;
-import com.isaac.pethospital.finance.entities.ChargeCategoryEntity;
-import com.isaac.pethospital.finance.repositories.ChargeCategoryRepository;
+import com.isaac.pethospital.finance.entities.PriceCategoryEntity;
+import com.isaac.pethospital.finance.repositories.PriceCategoryRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ChargeCategoryServiceImpl implements ChargeCategoryService {
+public class PriceCategoryServiceImpl implements PriceCategoryService {
 
-    private final ChargeCategoryRepository chargeCategoryRepository;
+    private final PriceCategoryRepository priceCategoryRepository;
 
-    public ChargeCategoryServiceImpl(ChargeCategoryRepository chargeCategoryRepository) {
-        this.chargeCategoryRepository = chargeCategoryRepository;
+    public PriceCategoryServiceImpl(PriceCategoryRepository priceCategoryRepository) {
+        this.priceCategoryRepository = priceCategoryRepository;
     }
 
     @Override
-    public ChargeCategoryEntity create(ChargeCategoryOperationRequest request) {
+    public PriceCategoryEntity create(ChargeCategoryOperationRequest request) {
 
 
         Long parentId = request.getParentId();
@@ -26,43 +26,43 @@ public class ChargeCategoryServiceImpl implements ChargeCategoryService {
 
         if (StringUtils.isEmpty(name))
             throw new RuntimeException("Charge Category name is null");
-        ChargeCategoryEntity de = this.chargeCategoryRepository.findByName(name);
+        PriceCategoryEntity de = this.priceCategoryRepository.findByName(name);
         if (de != null)
             throw new RuntimeException("Charge Category with name:" + name + " has existed");
         if (parentId == null) {
 
-            ChargeCategoryEntity chargeCategoryEntity=new ChargeCategoryEntity();
-            chargeCategoryEntity.setName(name);
-            chargeCategoryEntity.setParent(null);
+            PriceCategoryEntity priceCategoryEntity =new PriceCategoryEntity();
+            priceCategoryEntity.setName(name);
+            priceCategoryEntity.setParent(null);
 
-            return this.chargeCategoryRepository.save(chargeCategoryEntity);
+            return this.priceCategoryRepository.save(priceCategoryEntity);
 
         } else {
-            ChargeCategoryEntity parent = this.chargeCategoryRepository.findOne(parentId);
+            PriceCategoryEntity parent = this.priceCategoryRepository.findOne(parentId);
             if (parent == null)
                 throw new RuntimeException("Parent Charge Category is null");
             parent.addChildByName(name);
-            return this.chargeCategoryRepository.save(parent);
+            return this.priceCategoryRepository.save(parent);
         }
 
     }
 
     @Override
     public boolean delete(Long id) {
-        this.chargeCategoryRepository.delete(id);
+        this.priceCategoryRepository.delete(id);
         return true;
     }
 
     @Override
-    public ChargeCategoryEntity update(ChargeCategoryOperationRequest request) {
+    public PriceCategoryEntity update(ChargeCategoryOperationRequest request) {
         return null;
     }
 
 
     @Override
-    public List<ChargeCategoryEntity> findRoot() {
+    public List<PriceCategoryEntity> findRoot() {
 
-        return this.chargeCategoryRepository.findByParentIsNull();
+        return this.priceCategoryRepository.findByParentIsNull();
     }
 
     @Override
@@ -73,12 +73,12 @@ public class ChargeCategoryServiceImpl implements ChargeCategoryService {
         Long id = request.getId();
         if (id == null)
             throw new RuntimeException("ChargeCategory Id is null");
-        ChargeCategoryEntity de = this.chargeCategoryRepository.findOne(id);
+        PriceCategoryEntity de = this.priceCategoryRepository.findOne(id);
         if (de == null)
             throw new RuntimeException("ChargeCategory is null");
 
         de.setName(request.getName());
-        this.chargeCategoryRepository.save(de);
+        this.priceCategoryRepository.save(de);
         return true;
     }
 

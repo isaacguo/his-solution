@@ -9,31 +9,31 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-public class ChargeCategoryEntity {
+public class PriceCategoryEntity {
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     @JsonManagedReference("parent-children")
-    List<ChargeCategoryEntity> children = new LinkedList<>();
+    List<PriceCategoryEntity> children = new LinkedList<>();
     @ManyToOne
     @JsonBackReference("parent-children")
-    ChargeCategoryEntity parent;
+    PriceCategoryEntity parent;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @OneToMany(mappedBy = "chargeCategory", cascade = CascadeType.PERSIST)
-    @JsonManagedReference("ChargeCategoryEntity-ChargeEntity")
-    private List<ChargeEntity> chargeList = new LinkedList<>();
+    @JsonManagedReference("PriceCategoryEntity-PriceEntity")
+    private List<PriceEntity> chargeList = new LinkedList<>();
 
-    public List<ChargeCategoryEntity> getChildren() {
+    public List<PriceCategoryEntity> getChildren() {
         return children;
     }
 
-    public ChargeCategoryEntity getParent() {
+    public PriceCategoryEntity getParent() {
         return parent;
     }
 
-    public void setParent(ChargeCategoryEntity parent) {
+    public void setParent(PriceCategoryEntity parent) {
         this.parent = parent;
     }
 
@@ -53,23 +53,23 @@ public class ChargeCategoryEntity {
         this.name = name;
     }
 
-    public List<ChargeEntity> getChargeList() {
+    public List<PriceEntity> getChargeList() {
         return chargeList;
     }
 
-    public void setChargeList(List<ChargeEntity> chargeList) {
+    public void setChargeList(List<PriceEntity> chargeList) {
         this.chargeList = chargeList;
     }
 
     public void addChildByName(String name) {
         if (StringUtils.isEmpty(name))
             throw new RuntimeException("ChargeCategory name is null");
-        ChargeCategoryEntity de=new ChargeCategoryEntity();
+        PriceCategoryEntity de=new PriceCategoryEntity();
         de.setName(name);
         this.addChild(de);
     }
 
-    public void addChild(ChargeCategoryEntity child) {
+    public void addChild(PriceCategoryEntity child) {
         if (child == null)
             throw new RuntimeException("ChargeCategory is null");
         child.setParent(this);

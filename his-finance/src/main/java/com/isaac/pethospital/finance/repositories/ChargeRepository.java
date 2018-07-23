@@ -1,14 +1,9 @@
 package com.isaac.pethospital.finance.repositories;
 
+
 import com.isaac.pethospital.finance.entities.ChargeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface ChargeRepository extends JpaRepository<ChargeEntity, Long> {
-
-    List<ChargeEntity> findByChargeItemUuidIn(List<String> uuids);
-
-    ChargeEntity findByChargeItemUuid(String uuid);
+public interface ChargeRepository extends JpaRepository<ChargeEntity,Long> {
 
 }
