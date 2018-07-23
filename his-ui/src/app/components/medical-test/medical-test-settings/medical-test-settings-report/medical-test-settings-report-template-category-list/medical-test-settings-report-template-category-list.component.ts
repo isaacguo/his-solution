@@ -1,5 +1,4 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {FinancePriceCategoryService} from "../../../../../services/finance/finance-price-category.service";
 import {AbstractCategoryListComponent} from "../../../../common/abstract-category-list/abstract-category-list.component";
 import {MedicalTestReportTemplateCategoryService} from "../../../../../services/medical-test/medical-test-report-template-category.service";
 import {FinancePriceService} from "../../../../../services/finance/finance-price.service";
