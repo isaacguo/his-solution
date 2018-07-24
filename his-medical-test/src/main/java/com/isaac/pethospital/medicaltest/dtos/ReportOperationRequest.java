@@ -7,10 +7,7 @@ import com.isaac.pethospital.medicaltest.enums.ReportSectionEnum;
 import com.isaac.pethospital.medicaltest.enums.ReportStatusEnum;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ReportOperationRequest {
 
@@ -20,6 +17,37 @@ public class ReportOperationRequest {
     LocalDateTime paidDateTime;
     LocalDateTime finishedDateTime;
     ReportStatusEnum reportStatus;
+    String reportTemplateUuid;
+    //generate order
+    String treatmentCaseUuid;
+    List<String> reportUuid;
+    List<Long> reportIdLists = new LinkedList<>();
+    String reportName;
+    private Long id;
+
+    public String getReportTemplateUuid() {
+        return reportTemplateUuid;
+    }
+
+    public void setReportTemplateUuid(String reportTemplateUuid) {
+        this.reportTemplateUuid = reportTemplateUuid;
+    }
+
+    public String getTreatmentCaseUuid() {
+        return treatmentCaseUuid;
+    }
+
+    public void setTreatmentCaseUuid(String treatmentCaseUuid) {
+        this.treatmentCaseUuid = treatmentCaseUuid;
+    }
+
+    public List<String> getReportUuid() {
+        return reportUuid;
+    }
+
+    public void setReportUuid(List<String> reportUuid) {
+        this.reportUuid = reportUuid;
+    }
 
     public List<Long> getReportIdLists() {
         return reportIdLists;
@@ -29,8 +57,6 @@ public class ReportOperationRequest {
         this.reportIdLists = reportIdLists;
     }
 
-    List<Long> reportIdLists = new LinkedList<>();
-
     public String getReportName() {
         return reportName;
     }
@@ -39,12 +65,12 @@ public class ReportOperationRequest {
         this.reportName = reportName;
     }
 
-    String reportName;
-    private Long id;
-
     public ReportEntity toReport() {
         ReportEntity reportEntity = new ReportEntity();
+        reportEntity.setUuid(UUID.randomUUID().toString());
         reportEntity.setReportName(this.reportName);
+        reportEntity.setReportTemplateUuid(this.reportTemplateUuid);
+        reportEntity.setTreatmentCaseUuid(this.treatmentCaseUuid);
 
         this.reportInfoList.forEach(r -> {
             ReportInfoEntity reportInfoEntity = new ReportInfoEntity();

@@ -1,20 +1,14 @@
-package com.isaac.pethospital.common.dtos;
+package com.isaac.pethospital.common.jms.finance;
 
 import com.isaac.pethospital.common.enums.OperationEnum;
 
-public class ChargeItemOperationMesassge {
+public class PriceItemOperationMessage {
 
     OperationEnum operationEnum;
+
+
     String uuid;
     String source;
-
-    public OperationEnum getOperationEnum() {
-        return operationEnum;
-    }
-
-    public void setOperationEnum(OperationEnum operationEnum) {
-        this.operationEnum = operationEnum;
-    }
 
     public String getUuid() {
         return uuid;
@@ -31,4 +25,13 @@ public class ChargeItemOperationMesassge {
     public void setSource(String source) {
         this.source = source;
     }
+
+    public OperationEnum getOperationEnum() {
+        return operationEnum;
+    }
+
+    public void setOperationEnum(OperationEnum operationEnum) {
+        this.operationEnum = operationEnum;
+    }
+
 }

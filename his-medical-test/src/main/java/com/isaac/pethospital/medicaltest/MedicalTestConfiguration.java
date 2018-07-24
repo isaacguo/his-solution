@@ -1,10 +1,10 @@
 package com.isaac.pethospital.medicaltest;
 
 import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
+import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.common.time.DatetimeGenerator;
-import com.isaac.pethospital.medicaltest.jms.JmsProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

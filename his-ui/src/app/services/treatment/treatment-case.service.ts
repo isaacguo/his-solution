@@ -26,4 +26,7 @@ export class TreatmentCaseService extends CrudService {
     return this.authHttp.put(`${this.rootUrl}/${tid}/add-medical-test/${medicalReportTemplateId}`,{}).map(this.extractData);
   }
 
+  generateMedicalTestOrder(uuid: string): Observable<boolean> {
+    return this.authHttp.post(`${this.rootUrl}/${uuid}/generate-medical-test-order`, '').map(this.extractData);
+  }
 }

@@ -3,14 +3,15 @@ package com.isaac.pethospital.finance.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 public class PriceEntity {
 
-    String chargeItemUuid;
+    String priceItemUuid;
     String fromService;
-    Long normalPrice; //普通价格
-    Long memberPrice; //会员价格
+    BigDecimal normalPrice; //普通价格
+    BigDecimal memberPrice; //会员价格
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,12 +27,12 @@ public class PriceEntity {
         this.id = id;
     }
 
-    public String getChargeItemUuid() {
-        return chargeItemUuid;
+    public String getPriceItemUuid() {
+        return priceItemUuid;
     }
 
-    public void setChargeItemUuid(String chargeItemUuid) {
-        this.chargeItemUuid = chargeItemUuid;
+    public void setPriceItemUuid(String priceItemUuid) {
+        this.priceItemUuid = priceItemUuid;
     }
 
     public String getFromService() {
@@ -42,19 +43,19 @@ public class PriceEntity {
         this.fromService = fromService;
     }
 
-    public Long getNormalPrice() {
+    public BigDecimal getNormalPrice() {
         return normalPrice;
     }
 
-    public void setNormalPrice(Long normalPrice) {
+    public void setNormalPrice(BigDecimal normalPrice) {
         this.normalPrice = normalPrice;
     }
 
-    public Long getMemberPrice() {
+    public BigDecimal getMemberPrice() {
         return memberPrice;
     }
 
-    public void setMemberPrice(Long memberPrice) {
+    public void setMemberPrice(BigDecimal memberPrice) {
         this.memberPrice = memberPrice;
     }
 

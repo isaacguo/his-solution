@@ -31,6 +31,7 @@ public class TreatmentCaseRestController {
     public List<TreatmentCaseQueryResponse> findAll(@PathVariable("pId") Long pid) {
         return this.treatmentCaseService.findAll(pid);
     }
+
     @GetMapping("/{tId}")
     public TreatmentCaseEntity findOne(@PathVariable("tId") Long tid) {
         return this.treatmentCaseService.findOne(tid);
@@ -42,14 +43,15 @@ public class TreatmentCaseRestController {
     }
 
     @PutMapping("/{tId}/add-medical-test/{medicalReportTemplateId}")
-    public boolean addMedicalReportTemplate(@PathVariable("tId") Long tId, @PathVariable("medicalReportTemplateId") Long medicalReportTemplateId){
-        return this.treatmentCaseService.addMedicalReportTemplate(tId,medicalReportTemplateId);
+    public boolean addMedicalReportTemplate(@PathVariable("tId") Long tId, @PathVariable("medicalReportTemplateId") Long medicalReportTemplateId) {
+        return this.treatmentCaseService.addMedicalReportTemplate(tId, medicalReportTemplateId);
     }
 
-    @DeleteMapping("/{tId}/add-medical-test/{medicalReportTemplateId}")
-    public boolean removeMedicalReportTemplate(@PathVariable("tId") Long tId, @PathVariable("medicalReportTemplateId") Long medicalReportTemplateId){
-        return this.treatmentCaseService.removeMedicalReportTemplate(tId,medicalReportTemplateId);
+    @DeleteMapping("/{tId}/remove-medical-test/{medicalReportTemplateId}")
+    public boolean removeMedicalReportTemplate(@PathVariable("tId") Long tId, @PathVariable("medicalReportTemplateId") Long medicalReportTemplateId) {
+        return this.treatmentCaseService.removeMedicalReportTemplate(tId, medicalReportTemplateId);
     }
+
     @PutMapping("/{tId}")
     public TreatmentCaseEntity update(@RequestBody TreatmentCaseOperationRequest request) {
         return this.treatmentCaseService.update(request);
@@ -70,5 +72,9 @@ public class TreatmentCaseRestController {
         return this.treatmentCaseService.deleteOne(tid);
     }
 
+    @PostMapping("/{uuid}/generate-medical-test-order")
+    public Boolean generateMedicalTestOrder(@PathVariable("uuid") String uuid) {
+        return this.treatmentCaseService.generateMedicalTestOrder(uuid);
+    }
 
 }

@@ -1,5 +1,8 @@
 package com.isaac.pethospital.medicaltest.services;
 
+import com.isaac.pethospital.common.jms.JmsProperties;
+import com.isaac.pethospital.common.jms.JmsSender;
+import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 import com.isaac.pethospital.medicaltest.enums.ReportStatusEnum;
@@ -13,19 +16,22 @@ import java.util.List;
 public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository reportRepository;
+    private final JmsSender jmsSender;
+    private final JmsProperties jmsProperties;
 
-    public ReportServiceImpl(ReportRepository reportRepository) {
+    public ReportServiceImpl(ReportRepository reportRepository, JmsSender jmsSender, JmsProperties jmsProperties) {
         this.reportRepository = reportRepository;
+        this.jmsSender = jmsSender;
+        this.jmsProperties = jmsProperties;
     }
 
     @Override
     public ReportEntity createReport(ReportOperationRequest request) {
         ReportEntity reportEntity = request.toReport();
-        reportEntity.setReportStatus(ReportStatusEnum.CREATED);
+        reportEntity.setReportStatus(ReportStatusEnum.UNSUBMITTED);
         reportEntity.setCreatedDateTime(LocalDateTime.now());
 
         return this.reportRepository.save(reportEntity);
-
     }
 
     @Override
@@ -68,7 +74,21 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<ReportEntity> getReportsByIds(ReportOperationRequest request) {
-        List<Long> ids=request.getReportIdLists();
+        List<Long> ids = request.getReportIdLists();
         return this.reportRepository.findAll(ids);
     }
+
+    @Override
+    public void onGenerateMedicalTestOrder(GenerateMedicalTestOrderMessage message) {
+
+        String treatmentCaseUuid = message.getTreatmentCaseUuid();
+        List<ReportEntity> reportList = this.reportRepository.findByTreatmentCaseUuidAndReportStatusEquals(treatmentCaseUuid, ReportStatusEnum.UNSUBMITTED);
+
+        reportList.forEach(r->{
+        });
+
+
+    }
+
+
 }

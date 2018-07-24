@@ -57,7 +57,7 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
           .subscribe(r => {
 
             r.list.forEach(b => {
-                let item = r.category.reportTemplateList.find(r => r.uuid === b["chargeItemUuid"]);
+                let item = r.category.reportTemplateList.find(r => r.uuid === b["priceItemUuid"]);
                 if (item != null) {
                   console.log(item);
                   item.normalPrice = b["normalPrice"];

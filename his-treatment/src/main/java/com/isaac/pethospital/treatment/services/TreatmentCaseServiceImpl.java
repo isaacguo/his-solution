@@ -1,5 +1,8 @@
 package com.isaac.pethospital.treatment.services;
 
+import com.isaac.pethospital.common.jms.JmsProperties;
+import com.isaac.pethospital.common.jms.JmsSender;
+import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
@@ -9,7 +12,6 @@ import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
 import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import com.isaac.pethospital.treatment.repositories.PetRepository;
 import com.isaac.pethospital.treatment.repositories.TreatmentCaseRepository;
-import com.isaac.pethospital.treatment.restcontrollers.TreatmentCaseRestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,16 +22,19 @@ import java.util.List;
 @Service
 public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private final TreatmentCaseRepository treatmentCaseRepository;
     private final PetRepository petRepository;
     private final EmployeeRepository employeeRepository;
+    private final JmsSender jmsSender;
+    private final JmsProperties jmsProperties;
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public TreatmentCaseServiceImpl(TreatmentCaseRepository treatmentCaseRepository, PetRepository petRepository, EmployeeRepository employeeRepository) {
+    public TreatmentCaseServiceImpl(TreatmentCaseRepository treatmentCaseRepository, PetRepository petRepository, EmployeeRepository employeeRepository, JmsSender jmsSender, JmsProperties jmsProperties) {
         this.treatmentCaseRepository = treatmentCaseRepository;
         this.petRepository = petRepository;
         this.employeeRepository = employeeRepository;
+        this.jmsSender = jmsSender;
+        this.jmsProperties = jmsProperties;
     }
 
     @Override
@@ -81,7 +86,7 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
     @Override
     public TreatmentCaseEntity findOne(Long tid) {
-        TreatmentCaseEntity tce= this.treatmentCaseRepository.findOne(tid);
+        TreatmentCaseEntity tce = this.treatmentCaseRepository.findOne(tid);
         return tce;
     }
 
@@ -90,7 +95,8 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         TreatmentCaseEntity tce = getTreatmentCase(tid);
         tce.addMedicalTestReportId(medicalReportTemplateId);
         this.treatmentCaseRepository.save(tce);
-        return false;
+
+        return true;
     }
 
 
@@ -113,5 +119,18 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         tce.setLastModifiedDateTime(LocalDateTime.now());
 
         return this.treatmentCaseRepository.save(tce);
+    }
+
+
+    @Override
+    public Boolean generateMedicalTestOrder(String uuid) {
+
+        TreatmentCaseEntity tc = treatmentCaseRepository.findByUuid(uuid);
+        if (tc == null)
+            throw new RuntimeException("Treatment Case is null");
+
+        GenerateMedicalTestOrderMessage medicalTestOrderMessage = new GenerateMedicalTestOrderMessage(tc.getUuid());
+        this.jmsSender.sendEvent(jmsProperties.getTreatmentGenerateMedicalTestOrderTopic(), medicalTestOrderMessage);
+        return true;
     }
 }

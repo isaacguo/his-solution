@@ -3,13 +3,12 @@ package com.isaac.pethospital.employee.services;
 import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.common.dtos.JmsEmployeeOperationRequest;
 import com.isaac.pethospital.common.enums.OperationEnum;
-import com.isaac.pethospital.common.jms.JmsAuthorizationProperties;
+import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
-import com.isaac.pethospital.employee.repositories.DepartmentRepository;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,19 +24,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final DepartmentService departmentService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JmsSender jmsSender;
-    private final JmsAuthorizationProperties jmsAuthorizationProperties;
+    private final JmsProperties jmsProperties;
     private final HanyuPinyinConverter converter;
 
     private String getUserAccount() {
         return (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService, BCryptPasswordEncoder bCryptPasswordEncoder, JmsSender jmsSender, JmsAuthorizationProperties jmsAuthorizationProperties, HanyuPinyinConverter converter) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService, BCryptPasswordEncoder bCryptPasswordEncoder, JmsSender jmsSender, JmsProperties jmsProperties, HanyuPinyinConverter converter) {
         this.employeeRepository = employeeRepository;
         this.departmentService = departmentService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jmsSender = jmsSender;
-        this.jmsAuthorizationProperties = jmsAuthorizationProperties;
+        this.jmsProperties = jmsProperties;
         this.converter = converter;
     }
 
@@ -137,7 +136,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             this.employeeRepository.delete(id);
 
             JmsEmployeeOperationRequest jmsEmployeeOperationRequest = new JmsEmployeeOperationRequest(OperationEnum.DELETE, ee.getId(), ee.getFullName(), ee.getLoginAccount());
-            this.jmsSender.sendEvent(this.jmsAuthorizationProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
+            this.jmsSender.sendEvent(this.jmsProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
         }
 
         return true;
@@ -154,7 +153,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeRepository.save(employeeEntity);
 
         JmsEmployeeOperationRequest jmsEmployeeOperationRequest = new JmsEmployeeOperationRequest(OperationEnum.UPDATE, employeeEntity.getId(), employeeEntity.getFullName(), employeeEntity.getLoginAccount());
-        this.jmsSender.sendEvent(this.jmsAuthorizationProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
+        this.jmsSender.sendEvent(this.jmsProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
 
         return true;
     }
@@ -170,7 +169,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
         JmsEmployeeOperationRequest jmsEmployeeOperationRequest = new JmsEmployeeOperationRequest(OperationEnum.UPDATE, employeeEntity.getId(), employeeEntity.getFullName(), employeeEntity.getLoginAccount());
-        this.jmsSender.sendEvent(this.jmsAuthorizationProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
+        this.jmsSender.sendEvent(this.jmsProperties.getEmployeeUseraccountOperationTopic(), jmsEmployeeOperationRequest);
         return true;
 
 

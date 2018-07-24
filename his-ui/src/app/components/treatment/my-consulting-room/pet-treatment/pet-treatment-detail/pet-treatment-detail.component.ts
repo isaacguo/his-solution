@@ -5,9 +5,12 @@ import {MedicalTestReportService} from "../../../../../services/medical-test/med
 import {MedicalTestReportTemplateService} from "../../../../../services/medical-test/medical-test-report-template.service";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
-import {OperationEnum} from "../../../../../enums/operation.enum";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {MedicalTestReportTemplateItem} from "../../../../../dto/medical-test/medical-test-report-template-item.model";
+import {ReportStatusEnum} from "../../../../../enums/report-status.enum";
+import {FinanceChargeService} from "../../../../../services/finance/finance-charge.service";
+import {ChargeOperationRequest} from "../../../../../dto/finance/charge-operation-request.model";
+import {ChargeItemRequest} from "../../../../../dto/finance/charge-item-request.model";
 
 @Component({
   selector: 'app-pet-treatment-detail',
@@ -17,25 +20,27 @@ import {MedicalTestReportTemplateItem} from "../../../../../dto/medical-test/med
 export class PetTreatmentDetailComponent implements OnChanges, OnInit {
 
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.loadData();
-  }
-
   @ViewChild("createMedicalTestReportModal")
   createMedicalTestReportModal: ModalComponent;
-
   @Input()
   treatmentCase: any;
   detailedTreatmentCase: any = {};
-
   treatmentCaseBasicInfoModel: FormGroup;
   formModel: FormGroup;
+  medicalTestReportList: any[] = [];
+  medicalTestReportUnsubmittedList: any[] = [];
+  searchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
+  medicineSearchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
+  medicalTestReportTemplates: any[] = [];
+  medicineSearchResults: any[] = [];
+  selectedReportType: any;
 
   constructor(private router: Router,
               private fb: FormBuilder,
               private medicalTestReportService: MedicalTestReportService,
               private medicalTestReportTemplateService: MedicalTestReportTemplateService,
-              private treatmentCaseService: TreatmentCaseService) {
+              private treatmentCaseService: TreatmentCaseService,
+              private financeChargeService: FinanceChargeService) {
 
     this.searchInput.valueChanges
       .debounceTime(200)
@@ -68,32 +73,18 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
       })
   }
 
-  medicalTestReportList: any[] = [];
+  get reportInfoData() {
+    return <FormArray>this.formModel.get('reportInfoList');
+  }
 
-  private loadData() {
-    if (this.treatmentCase != null)
-      this.treatmentCaseService.readOne(this.treatmentCase.id).subscribe(r => {
-        this.detailedTreatmentCase = r;
-
-        this.inflateTreatmentCaseBasicInfo(r);
-
-        this.medicalTestReportService.findReportsByIds(this.detailedTreatmentCase.medicalTestReportIdList).subscribe(r => {
-          this.medicalTestReportList = r;
-        });
-      });
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadData();
   }
 
   onRequestMedicalTest() {
 
 
   }
-
-  searchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
-
-  medicineSearchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
-
-  medicalTestReportTemplates: any[] = [];
-  medicineSearchResults:any[]=[];
 
   stopPropagation($event) {
     event.stopPropagation()
@@ -102,8 +93,6 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
   onChooseReportTypeModalClosed() {
 
   }
-
-  selectedReportType: any;
 
   isRowSelected(report: any) {
     return this.selectedReportType === report;
@@ -122,30 +111,26 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
 
   onCreateMedicalTestReportModalClosed() {
     this.medicalTestReportService.createReport(this.formModel.value).subscribe(r => {
-      console.log(r);
       this.treatmentCaseService.addMedicalTestReport(this.treatmentCase.id, r.id).subscribe(z => {
         this.loadData();
       })
     });
   }
 
-  get reportInfoData() {
-    return <FormArray>this.formModel.get('reportInfoList');
-  }
-
   ngOnInit(): void {
-
 
     this.initForm();
   }
 
-  private inflateTreatmentCaseBasicInfo(r:any)
-  {
-    this.treatmentCaseBasicInfoModel.controls['id'].setValue(r.id);
-    this.treatmentCaseBasicInfoModel.controls['petOwnerDescription'].setValue(r.petOwnerDescription);
-    this.treatmentCaseBasicInfoModel.controls['clinicSituation'].setValue(r.clinicSituation);
-    this.treatmentCaseBasicInfoModel.controls['doctorDiagnose'].setValue(r.doctorDiagnose);
-    this.treatmentCaseBasicInfoModel.controls['doctorAdvice'].setValue(r.doctorAdvice);
+  onSaveTreatmentCaseBasicInfo() {
+    this.treatmentCaseService.update(this.detailedTreatmentCase.id, this.treatmentCaseBasicInfoModel.value).subscribe(r => {
+      this.loadData();
+    });
+
+  }
+
+  onMedicineSearchResultSelected(medicineSearchResult: any) {
+
   }
 
   protected process(medicalTestReportTemplate: any) {
@@ -156,6 +141,8 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
       //this.reportTemplate = r;
 
       this.formModel.controls['reportName'].setValue(r.reportName);
+      this.formModel.controls['reportTemplateUuid'].setValue(r.uuid);
+      this.formModel.controls['treatmentCaseUuid'].setValue(this.detailedTreatmentCase.uuid);
 
       r.reportTemplateInfoList.forEach(infoItem => {
         this.inflateReportInfo(infoItem);
@@ -163,7 +150,33 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
       r.reportTemplateItems.forEach(item => {
         this.inflateReportItem(item);
       });
+
     });
+  }
+
+
+  private loadData() {
+    if (this.treatmentCase != null)
+      this.treatmentCaseService.readOne(this.treatmentCase.id).subscribe(r => {
+        this.detailedTreatmentCase = r;
+
+        this.inflateTreatmentCaseBasicInfo(r);
+
+        this.medicalTestReportService.findReportsByIds(this.detailedTreatmentCase.medicalTestReportIdList).subscribe(r => {
+          this.medicalTestReportUnsubmittedList = r.filter(report => {
+            return ReportStatusEnum[report.reportStatus] === ReportStatusEnum.UNSUBMITTED;
+          })
+          this.medicalTestReportList = r.filter(report => ReportStatusEnum[report.reportStatus] !== ReportStatusEnum.UNSUBMITTED)
+        });
+      });
+  }
+
+  private inflateTreatmentCaseBasicInfo(r: any) {
+    this.treatmentCaseBasicInfoModel.controls['id'].setValue(r.id);
+    this.treatmentCaseBasicInfoModel.controls['petOwnerDescription'].setValue(r.petOwnerDescription);
+    this.treatmentCaseBasicInfoModel.controls['clinicSituation'].setValue(r.clinicSituation);
+    this.treatmentCaseBasicInfoModel.controls['doctorDiagnose'].setValue(r.doctorDiagnose);
+    this.treatmentCaseBasicInfoModel.controls['doctorAdvice'].setValue(r.doctorAdvice);
   }
 
   private inflateReportItem(reportItem: MedicalTestReportTemplateItem) {
@@ -178,7 +191,6 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
     }));
 
   }
-
 
   private inflateReportInfo(infoItem: any, rv: string = '') {
     const control = <FormArray>this.formModel.controls['reportInfoList'];
@@ -199,6 +211,8 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
     });
     this.formModel = this.fb.group({
       'id': [''],
+      'treatmentCaseUuid':[''],
+      'reportTemplateUuid':[''],
       'reportName': ['', Validators.required],
       'reportInfoList': this.fb.array([]),
       //'reportType': ['', Validators.required],
@@ -206,14 +220,15 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
     })
   }
 
-  onSaveTreatmentCaseBasicInfo() {
-    this.treatmentCaseService.update(this.detailedTreatmentCase.id, this.treatmentCaseBasicInfoModel.value).subscribe(r=>{
+  onAddReportFinished() {
+
+    this.treatmentCaseService.generateMedicalTestOrder(this.detailedTreatmentCase.uuid).delay(1000).subscribe(r => {
       this.loadData();
-    });
+    })
 
   }
 
-  onMedicineSearchResultSelected(medicineSearchResult: any) {
-
+  getMedicalTestReportStatus(medicalTestReport: any) {
+    return ReportStatusEnum[medicalTestReport.reportStatus];
   }
 }

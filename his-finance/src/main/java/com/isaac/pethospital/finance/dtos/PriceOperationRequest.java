@@ -1,14 +1,15 @@
 package com.isaac.pethospital.finance.dtos;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
 public class PriceOperationRequest {
 
-    String chargeItemUuid;
+    String priceItemUuid;
     String fromService;
-    Long normalPrice; //普通价格
-    Long memberPrice; //会员价格
+    BigDecimal normalPrice; //普通价格
+    BigDecimal memberPrice; //会员价格
     Long id;
 
     List<String> uuids = new LinkedList<>();
@@ -30,12 +31,12 @@ public class PriceOperationRequest {
         this.uuids = uuids;
     }
 
-    public String getChargeItemUuid() {
-        return chargeItemUuid;
+    public String getPriceItemUuid() {
+        return priceItemUuid;
     }
 
-    public void setChargeItemUuid(String chargeItemUuid) {
-        this.chargeItemUuid = chargeItemUuid;
+    public void setPriceItemUuid(String priceItemUuid) {
+        this.priceItemUuid = priceItemUuid;
     }
 
     public String getFromService() {
@@ -46,19 +47,19 @@ public class PriceOperationRequest {
         this.fromService = fromService;
     }
 
-    public Long getNormalPrice() {
+    public BigDecimal getNormalPrice() {
         return normalPrice;
     }
 
-    public void setNormalPrice(Long normalPrice) {
+    public void setNormalPrice(BigDecimal normalPrice) {
         this.normalPrice = normalPrice;
     }
 
-    public Long getMemberPrice() {
+    public BigDecimal getMemberPrice() {
         return memberPrice;
     }
 
-    public void setMemberPrice(Long memberPrice) {
+    public void setMemberPrice(BigDecimal memberPrice) {
         this.memberPrice = memberPrice;
     }
 

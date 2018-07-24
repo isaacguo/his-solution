@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 public class TreatmentCaseOperationRequest {
 
@@ -141,6 +142,7 @@ public class TreatmentCaseOperationRequest {
 
         treatmentCaseEntity.setTreatmentDate(LocalDateTime.now());
         treatmentCaseEntity.setLastModifiedDateTime(LocalDateTime.now());
+        treatmentCaseEntity.setUuid(UUID.randomUUID().toString());
         //treatmentCaseEntity.setCreatedDate(this.createdDate);
         /*
         treatmentCaseEntity.setTreatmentDate(this.treatmentDate);

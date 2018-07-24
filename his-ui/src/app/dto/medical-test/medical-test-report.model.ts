@@ -5,7 +5,7 @@ export class MedicalTestReport {
   public createdDateTime: Date;
   public paidDateTime: Date;
   public finishedDateTime: Date;
-  public reportStatus: any;
+  public reportStatus: string;
   public id: number;
 
   constructor() {

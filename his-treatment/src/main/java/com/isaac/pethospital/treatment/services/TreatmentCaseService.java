@@ -24,4 +24,6 @@ public interface TreatmentCaseService {
     boolean removeMedicalReportTemplate(Long tid, Long medicalReportTemplateId);
 
     TreatmentCaseEntity update(TreatmentCaseOperationRequest request);
+
+    Boolean generateMedicalTestOrder(String uuid);
 }

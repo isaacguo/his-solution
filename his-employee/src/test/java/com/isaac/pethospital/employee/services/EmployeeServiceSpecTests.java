@@ -1,13 +1,10 @@
 package com.isaac.pethospital.employee.services;
 
 import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
-import com.isaac.pethospital.common.jms.JmsAuthorizationProperties;
+import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
-import com.isaac.pethospital.employee.dto.MyDepartmentIdAndNameAndChildren;
-import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
-import com.isaac.pethospital.employee.enums.SexualEnum;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +20,7 @@ public class EmployeeServiceSpecTests {
     DepartmentService departmentService;
     BCryptPasswordEncoder bCryptPasswordEncoder;
     JmsSender jmsSender;
-    JmsAuthorizationProperties jmsAuthorizationProperties;
+    JmsProperties jmsProperties;
     HanyuPinyinConverter converter;
 
     @Before
@@ -32,9 +29,9 @@ public class EmployeeServiceSpecTests {
         this.departmentService = mock(DepartmentService.class);
         this.bCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
         this.jmsSender=mock(JmsSender.class);
-        this.jmsAuthorizationProperties=mock(JmsAuthorizationProperties.class);
+        this.jmsProperties=mock(JmsProperties.class);
         this.converter=mock(HanyuPinyinConverter.class);
-        this.employeeService = spy(new EmployeeServiceImpl(this.employeeRepository, this.departmentService, this.bCryptPasswordEncoder,jmsSender,jmsAuthorizationProperties,this.converter));
+        this.employeeService = spy(new EmployeeServiceImpl(this.employeeRepository, this.departmentService, this.bCryptPasswordEncoder,jmsSender,jmsProperties,this.converter));
     }
 
     /*

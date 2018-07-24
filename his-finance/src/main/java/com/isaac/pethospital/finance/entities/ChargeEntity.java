@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.finance.enums.ChargeStatusEnum;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,19 +15,16 @@ public class ChargeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String chargeId;
-    private String ownerName;
-    private String petName;
+    private String chargeUuid;
+    private String ownerUuid;
+    private String petUuid;
+    private String treatmentCaseUuid;
     private LocalDateTime createdDate;
-
-    private Double amount;
+    private BigDecimal totalAmount;
     private ChargeStatusEnum status;
-
     @OneToMany(mappedBy = "charge")
     @JsonManagedReference("charge-chargeItem")
-    private List<ChargeItemEntity> items=new LinkedList();
-
+    private List<ChargeItemEntity> chargeItems = new LinkedList();
 
     public Long getId() {
         return id;
@@ -36,28 +34,56 @@ public class ChargeEntity {
         this.id = id;
     }
 
-    public String getChargeId() {
-        return chargeId;
+    public String getChargeUuid() {
+        return chargeUuid;
     }
 
-    public void setChargeId(String chargeId) {
-        this.chargeId = chargeId;
+    public void setChargeUuid(String chargeUuid) {
+        this.chargeUuid = chargeUuid;
     }
 
-    public String getOwnerName() {
-        return ownerName;
+    public String getTreatmentCaseUuid() {
+        return treatmentCaseUuid;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public void setTreatmentCaseUuid(String treatmentCaseUuid) {
+        this.treatmentCaseUuid = treatmentCaseUuid;
     }
 
-    public String getPetName() {
-        return petName;
+    public List<ChargeItemEntity> getChargeItems() {
+        return chargeItems;
     }
 
-    public void setPetName(String petName) {
-        this.petName = petName;
+    public void addChargeItem(ChargeItemEntity chargeItem) {
+        if (chargeItem == null)
+            throw new RuntimeException("Charge Item is null");
+        chargeItem.setCharge(this);
+        this.chargeItems.add(chargeItem);
+    }
+
+    public void removeChargeItems(ChargeItemEntity chargeItem) {
+        if (chargeItem == null)
+            throw new RuntimeException("Charge Item is null");
+        chargeItem.setCharge(null);
+        this.chargeItems.remove(chargeItem);
+    }
+
+
+
+    public String getOwnerUuid() {
+        return ownerUuid;
+    }
+
+    public void setOwnerUuid(String ownerUuid) {
+        this.ownerUuid = ownerUuid;
+    }
+
+    public String getPetUuid() {
+        return petUuid;
+    }
+
+    public void setPetUuid(String petUuid) {
+        this.petUuid = petUuid;
     }
 
     public LocalDateTime getCreatedDate() {
@@ -68,12 +94,12 @@ public class ChargeEntity {
         this.createdDate = createdDate;
     }
 
-    public Double getAmount() {
-        return amount;
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public ChargeStatusEnum getStatus() {

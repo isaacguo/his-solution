@@ -1,13 +1,13 @@
 package com.isaac.pethospital.finance.services;
 
-import com.isaac.pethospital.common.dtos.ChargeItemOperationMesassge;
+import com.isaac.pethospital.common.jms.finance.PriceItemOperationMessage;
 import com.isaac.pethospital.finance.dtos.PriceOperationRequest;
 import com.isaac.pethospital.finance.entities.PriceEntity;
 
 import java.util.List;
 
 public interface PriceService {
-    void onChargeItemEventReceived(ChargeItemOperationMesassge mesassge);
+    void onPriceItemEventReceived(PriceItemOperationMessage mesassge);
 
     List<PriceEntity> findAll();
 

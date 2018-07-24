@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicaltest.services;
 
+import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 
@@ -18,4 +19,6 @@ public interface ReportService {
     ReportEntity findOne(Long rid);
 
     List<ReportEntity> getReportsByIds(ReportOperationRequest request);
+
+    void onGenerateMedicalTestOrder(GenerateMedicalTestOrderMessage message);
 }

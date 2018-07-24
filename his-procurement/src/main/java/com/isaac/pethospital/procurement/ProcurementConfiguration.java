@@ -1,9 +1,9 @@
 package com.isaac.pethospital.procurement;
 
+import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.common.time.DatetimeGenerator;
-import com.isaac.pethospital.procurement.jms.JmsProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

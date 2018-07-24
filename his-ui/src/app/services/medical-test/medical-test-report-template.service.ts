@@ -24,7 +24,7 @@ export class MedicalTestReportTemplateService extends AbstractService {
   }
 
 
-  updateReport(request: any):Observable<any>{
+  updateReport(request: any): Observable<any> {
     return this.authHttp.post(this.updateReportUrl, request).map(this.extractData);
 
   }
@@ -33,20 +33,21 @@ export class MedicalTestReportTemplateService extends AbstractService {
     return this.authHttp.get(this.rootUrl).map(this.extractData);
   }
 
-  findById(updateId: number):Observable<any> {
-   return this.authHttp.get(`${this.rootUrl}/${updateId}`).map(this.extractData);
+  findById(updateId: number): Observable<any> {
+    return this.authHttp.get(`${this.rootUrl}/${updateId}`).map(this.extractData);
   }
 
   deleteById(updateId: number) {
-   return this.authHttp.delete(`${this.rootUrl}/${updateId}`).map(r => {
-     return this.extractTextData(r) === "true" ? true : false;
-   });
+    return this.authHttp.delete(`${this.rootUrl}/${updateId}`).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
 
-  findMedicalTestReportTemplateByNameContains(name: any):Observable<any[]> {
+  findMedicalTestReportTemplateByNameContains(name: any): Observable<any[]> {
 
     return this.authHttp.get(`${this.rootUrl}/findTemplateByNameContains/${name}`).map(this.extractData);
   }
+
 
 }

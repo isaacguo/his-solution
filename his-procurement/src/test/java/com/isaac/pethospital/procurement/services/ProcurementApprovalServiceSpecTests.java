@@ -1,15 +1,14 @@
 package com.isaac.pethospital.procurement.services;
 
+import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.procurement.dtos.EmployeeOperationRequest;
 import com.isaac.pethospital.procurement.dtos.ProcurementApprovalOperationRequest;
 import com.isaac.pethospital.procurement.entities.*;
 import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
-import com.isaac.pethospital.procurement.jms.JmsProperties;
 import com.isaac.pethospital.procurement.repositories.ProcurementApprovalRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementApprovalStageRepository;
 import com.isaac.pethospital.procurement.repositories.ProcurementRepository;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.Before;
 import org.junit.Test;
 

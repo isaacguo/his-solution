@@ -100,9 +100,40 @@
     </div>
     <div class="panel-body">
 
-      <div class="btn-group">
-        <div class="dropdown" [class.open]="medicalTestReportTemplates.length>0">
+      <div class="verlink-bottom">
+        <div class="btn-group">
+          <div class="btn btn-primary" (click)="onAddReportFinished()">打印化验收费单</div>
+        </div>
+      </div>
 
+      <table class="table table-bordered isaac-margin-15top">
+        <thead>
+        <tr>
+          <th>序号</th>
+          <th>化验名称</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let medicalTestReport of medicalTestReportList;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{medicalTestReport.reportName}}</td>
+          <td>{{getMedicalTestReportStatus(medicalTestReport)}}</td>
+          <td>
+            <div class="btn-group btn-group-sm">
+              <button type="button" class="btn btn-default btn-s"><span
+                class="glyphicon glyphicon-search"></span></button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+
+      <div class="verlink">
+        <label>添加化验检查项目</label>
+        <div class="dropdown" [class.open]="medicalTestReportTemplates.length>0">
           <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
                  (focus)="stopPropagation($event)"
                  type="text" class="form-control dropdown-toggle"
@@ -120,7 +151,8 @@
           </ul>
         </div>
       </div>
-      <table class="table table-bordered">
+
+      <table class="table table-bordered isaac-margin-15top">
         <thead>
         <tr>
           <th>序号</th>
@@ -130,16 +162,27 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let medicalTestReport of medicalTestReportList;let i=index">
+        <tr *ngFor="let medicalTestReport of medicalTestReportUnsubmittedList;let i=index">
           <td>{{i+1}}</td>
           <td>{{medicalTestReport.reportName}}</td>
-          <td></td>
-          <td></td>
+          <td>{{getMedicalTestReportStatus(medicalTestReport)}}</td>
+          <td>
+            <div class="btn-group btn-group-sm">
+              <button type="button" class="btn btn-default btn-s"><span
+                class="glyphicon glyphicon-remove"></span></button>
+            </div>
+          </td>
         </tr>
         </tbody>
 
       </table>
 
+
+      <div class="verlink-bottom">
+        <div class="btn-group">
+          <div class="btn btn-primary" (click)="onAddReportFinished()">提交</div>
+        </div>
+      </div>
     </div>
   </div>
 

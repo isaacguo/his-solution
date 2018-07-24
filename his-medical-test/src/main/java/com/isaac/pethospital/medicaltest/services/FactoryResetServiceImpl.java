@@ -98,8 +98,8 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         authorizationService.deleteAll();
         authorizationTopicService.deleteAll();
 
-        this.reportTemplateCategoryRepository.deleteAll();
         this.reportTemplateRepository.deleteAll();
+        this.reportTemplateCategoryRepository.deleteAll();
     }
 
     @Transactional

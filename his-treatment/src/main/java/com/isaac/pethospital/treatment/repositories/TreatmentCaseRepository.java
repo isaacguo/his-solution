@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface TreatmentCaseRepository extends JpaRepository<TreatmentCaseEntity, Long> {
 
@@ -22,4 +23,6 @@ public interface TreatmentCaseRepository extends JpaRepository<TreatmentCaseEnti
             " t.clinicSituation as clinicSituation," +
             " d.name as doctor from TreatmentCaseEntity t join t.doctor d where t.pet=:pet ")
     List<TreatmentCaseQueryResponse> customFindTreatmentCaseEntitiesByPet(@Param("pet") PetEntity pet);
+
+    TreatmentCaseEntity findByUuid(String uuid);
 }

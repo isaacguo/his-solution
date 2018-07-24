@@ -1,6 +1,5 @@
-package com.isaac.pethospital.finance.services;
+package com.isaac.pethospital.common.services;
 
-import com.isaac.pethospital.common.services.CrudService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

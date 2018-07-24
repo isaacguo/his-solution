@@ -2,12 +2,13 @@ package com.isaac.pethospital.medicaltest.enums;
 
 public enum ReportStatusEnum {
 
-    CREATED("已创建"),
-    PAID("已付款"),
-    FINISHED("已完成");
+    UNSUBMITTED("UNSUBMITTED"),
+    UNPAID("UNPAID"),
+    PAID("PAID"),
+    FINISHED("FINISHED");
 
     ReportStatusEnum(String text) {
-        this.text =text;
+        this.text = text;
     }
 
     private String text;
@@ -17,4 +18,4 @@ public enum ReportStatusEnum {
         return text;
     }
 
-    }
+}

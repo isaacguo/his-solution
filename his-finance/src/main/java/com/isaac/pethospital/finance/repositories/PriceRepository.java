@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface PriceRepository extends JpaRepository<PriceEntity, Long> {
 
-    List<PriceEntity> findByChargeItemUuidIn(List<String> uuids);
+    List<PriceEntity> findByPriceItemUuidIn(List<String> uuids);
 
-    PriceEntity findByChargeItemUuid(String uuid);
+    PriceEntity findByPriceItemUuid(String uuid);
 
 }

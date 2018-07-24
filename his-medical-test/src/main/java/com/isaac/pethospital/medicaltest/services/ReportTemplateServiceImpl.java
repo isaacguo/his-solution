@@ -1,13 +1,13 @@
 package com.isaac.pethospital.medicaltest.services;
 
 import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
-import com.isaac.pethospital.common.dtos.ChargeItemOperationMesassge;
+import com.isaac.pethospital.common.jms.finance.PriceItemOperationMessage;
 import com.isaac.pethospital.common.enums.OperationEnum;
+import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateCategoryEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
-import com.isaac.pethospital.medicaltest.jms.JmsProperties;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
 import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
 import org.springframework.stereotype.Service;
@@ -49,17 +49,18 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
         reportTemplateEntity.setUuid(UUID.randomUUID().toString());
         reportTemplateEntity.setCategory(category);
         rte = reportTemplateRepository.save(reportTemplateEntity);
-        onChargeItemCreated(rte);
+        onPriceItemCreated(rte);
         return rte;
     }
 
-    private void onChargeItemCreated(ReportTemplateEntity reportTemplateEntity) {
-        ChargeItemOperationMesassge chargeItemOperationMesassge = new ChargeItemOperationMesassge();
-        chargeItemOperationMesassge.setOperationEnum(OperationEnum.CREATE);
-        chargeItemOperationMesassge.setUuid(reportTemplateEntity.getUuid());
-        chargeItemOperationMesassge.setSource(this.authorizationService.getDomainName());
+    private void onPriceItemCreated(ReportTemplateEntity reportTemplateEntity) {
 
-        jmsSender.sendEvent(this.jmsProperties.getFinanceChargeItemOperationQueue(), chargeItemOperationMesassge);
+        PriceItemOperationMessage priceItemOperationMessage = new PriceItemOperationMessage();
+        priceItemOperationMessage.setOperationEnum(OperationEnum.CREATE);
+        priceItemOperationMessage.setUuid(reportTemplateEntity.getUuid());
+        priceItemOperationMessage.setSource(this.authorizationService.getDomainName());
+
+        jmsSender.sendEvent(this.jmsProperties.getFinancePriceItemOperationQueue(), priceItemOperationMessage);
     }
 
     @Override

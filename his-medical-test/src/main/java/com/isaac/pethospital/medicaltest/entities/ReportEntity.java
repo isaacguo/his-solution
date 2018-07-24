@@ -21,8 +21,37 @@ public class ReportEntity {
     LocalDateTime paidDateTime;
     LocalDateTime finishedDateTime;
     ReportStatusEnum reportStatus;
-
     private String reportName;
+    private String uuid;
+    private String treatmentCaseUuid;
+    private String reportTemplateUuid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    public String getTreatmentCaseUuid() {
+        return treatmentCaseUuid;
+    }
+
+    public void setTreatmentCaseUuid(String treatmentCaseUuid) {
+        this.treatmentCaseUuid = treatmentCaseUuid;
+    }
+
+    public String getReportTemplateUuid() {
+        return reportTemplateUuid;
+    }
+
+    public void setReportTemplateUuid(String reportTemplateUuid) {
+        this.reportTemplateUuid = reportTemplateUuid;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getReportName() {
         return reportName;
@@ -31,10 +60,6 @@ public class ReportEntity {
     public void setReportName(String reportName) {
         this.reportName = reportName;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     public LocalDateTime getCreatedDateTime() {
         return createdDateTime;
