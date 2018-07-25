@@ -10,6 +10,8 @@ public class ChargeItemOperationMessage {
     ChargeEventEnum chargeEventEnum;
 
     private String treatmentCaseUuid;
+    private String petOwnerUuid;
+    private String petUuid;
     private List<String> reportUuid=new LinkedList<>();
 
 
