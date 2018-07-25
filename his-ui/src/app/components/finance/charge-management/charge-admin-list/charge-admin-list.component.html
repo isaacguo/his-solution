@@ -16,12 +16,21 @@
   <tr *ngFor="let chargeItem of chargeItems;let i=index">
     <td>{{i+1}}</td>
     <td>{{chargeItem.uuid}}</td>
-    <td>宠物主人</td>
-    <td>宠物姓名</td>
+    <td>{{chargeItem.petOwnerName}}</td>
+    <td>{{chargeItem.petName}}</td>
     <td>{{chargeItem.createdDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
     <td>{{chargeItem.totalAmount}}</td>
     <td>{{getStatusText(chargeItem.status)}}</td>
-    <td>操作</td>
+    <td>
+      <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-default btn-s"
+        >已支付
+        </button>
+        <button type="button" class="btn btn-default btn-s"
+        >已退款
+        </button>
+      </div>
+    </td>
   </tr>
 
   </tbody>

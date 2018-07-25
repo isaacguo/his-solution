@@ -30,6 +30,16 @@ export class PetService extends AbstractService {
     return this.authHttp.post(url, petOperationRequest).map(this.extractData);
   }
 
+  findByUuid(uuid: string): Observable<any> {
+    let url = `${this.rootUrl}/find-by-uuid/${uuid}/`;
+    return this.authHttp.get(url).map(this.extractData);
+  }
+  findByUuids(uuids: any[]):Observable<any[]> {
+
+    let url = `${this.rootUrl}/find-by-uuids`;
+    return this.authHttp.post(url,uuids).map(this.extractData);
+  }
+
   public setPetInfo(newPetInfo: PetInfo): void {
     this.petInfo = newPetInfo;
     this.petInfoManager.next(this.petInfo);
@@ -41,6 +51,8 @@ export class PetService extends AbstractService {
     this.petInfoManager.next(this.petInfo);
 
   }
+
+
 }
 
 export class PetInfo {
