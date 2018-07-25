@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class PetOwnerEntity {
@@ -21,6 +22,10 @@ public class PetOwnerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String uuid;
+
+    public PetOwnerEntity() {
+        this.uuid = UUID.randomUUID().toString();
+    }
 
     private String name;
     private GenderEnum gender;
@@ -124,14 +129,13 @@ public class PetOwnerEntity {
     public List<PetEntity> getPetList() {
         return petList;
     }
-    public void removePet(PetEntity pet)
-    {
-        if(pet==null)
+
+    public void removePet(PetEntity pet) {
+        if (pet == null)
             throw new RuntimeException("pet is null");
         pet.setPetOwner(null);
         this.petList.remove(pet);
     }
-
 
 
     public void addPet(PetEntity pet) {

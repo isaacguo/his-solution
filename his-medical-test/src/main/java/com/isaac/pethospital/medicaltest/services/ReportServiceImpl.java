@@ -2,6 +2,9 @@ package com.isaac.pethospital.medicaltest.services;
 
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
+import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
+import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
+import com.isaac.pethospital.common.jms.finance.ReportOperationMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
@@ -84,10 +87,38 @@ public class ReportServiceImpl implements ReportService {
         String treatmentCaseUuid = message.getTreatmentCaseUuid();
         List<ReportEntity> reportList = this.reportRepository.findByTreatmentCaseUuidAndReportStatusEquals(treatmentCaseUuid, ReportStatusEnum.UNSUBMITTED);
 
-        reportList.forEach(r->{
+        ChargeReportOperationMessage crom = new ChargeReportOperationMessage();
+        crom.setTreatmentCaseUuid(treatmentCaseUuid);
+        crom.setPetOwnerUuid(message.getPetOwnerUuid());
+        crom.setPetUuid(message.getPetUuid());
+        reportList.forEach(r -> {
+            ReportOperationMessage reportOperationMessage = new ReportOperationMessage();
+            reportOperationMessage.setReportUuid(r.getUuid());
+            reportOperationMessage.setReportTemplateUuid(r.getReportTemplateUuid());
+            crom.addReportOperationMessages(reportOperationMessage);
         });
 
+        jmsSender.sendEvent(jmsProperties.getFinanceChargeItemOperationQueue(), crom);
 
+
+    }
+
+    @Override
+    public void onChargeItemEvent(ChargeReportOperationReplyMessage message) {
+
+        message.getReportUuidList().forEach(r -> {
+            ReportEntity re = this.reportRepository.findByUuid(r);
+            switch (message.getStatus()) {
+                case PAID:
+                    break;
+                case UNPAID:
+                    re.setReportStatus(ReportStatusEnum.UNPAID);
+                    break;
+                case REIMBURSED:
+                    break;
+            }
+            this.reportRepository.save(re);
+        });
     }
 
 

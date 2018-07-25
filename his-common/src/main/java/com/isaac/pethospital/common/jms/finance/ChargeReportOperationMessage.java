@@ -5,14 +5,14 @@ import com.isaac.pethospital.common.enums.ChargeEventEnum;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ChargeItemOperationMessage {
+public class ChargeReportOperationMessage {
 
     ChargeEventEnum chargeEventEnum;
 
     private String treatmentCaseUuid;
     private String petOwnerUuid;
     private String petUuid;
-    private List<String> reportUuid=new LinkedList<>();
+    private List<ReportOperationMessage> reportOperationMessages = new LinkedList<>();
 
 
     public ChargeEventEnum getChargeEventEnum() {
@@ -31,15 +31,27 @@ public class ChargeItemOperationMessage {
         this.treatmentCaseUuid = treatmentCaseUuid;
     }
 
-    public List<String> getReportUuid() {
-        return reportUuid;
+    public String getPetOwnerUuid() {
+        return petOwnerUuid;
     }
 
-    public void setReportUuid(List<String> reportUuid) {
-        this.reportUuid = reportUuid;
+    public void setPetOwnerUuid(String petOwnerUuid) {
+        this.petOwnerUuid = petOwnerUuid;
     }
 
-    public void addReportUuid(String reportUuid) {
-        this.reportUuid.add(reportUuid);
+    public String getPetUuid() {
+        return petUuid;
+    }
+
+    public void setPetUuid(String petUuid) {
+        this.petUuid = petUuid;
+    }
+
+    public List<ReportOperationMessage> getReportOperationMessages() {
+        return reportOperationMessages;
+    }
+
+    public void addReportOperationMessages(ReportOperationMessage reportOperationMessage) {
+        this.reportOperationMessages.add(reportOperationMessage);
     }
 }

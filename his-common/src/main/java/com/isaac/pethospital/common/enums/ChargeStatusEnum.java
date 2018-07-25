@@ -1,4 +1,4 @@
-package com.isaac.pethospital.finance.enums;
+package com.isaac.pethospital.common.enums;
 
 public enum ChargeStatusEnum {
 

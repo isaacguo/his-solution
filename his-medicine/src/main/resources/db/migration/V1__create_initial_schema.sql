@@ -3,8 +3,10 @@ create table authorization_assignment_entity_allowed_operations (authorization_a
 create table authorization_entity (id bigint not null auto_increment, uid bigint, user_account varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_topic_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table common_configuration_entity (id bigint not null auto_increment, conf_key varchar(255), conf_value varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table inventory_item_entity (id bigint not null auto_increment, batch varchar(255), inventory_item_id varchar(255), name varchar(255), number varchar(255), specification varchar(255), uuid varchar(255), import_receipt_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table medicine_entity (id bigint not null auto_increment, bar_code varchar(255), dosage_per_day varchar(255), expiration_date datetime, han_yu_pin_yin_name varchar(255), medicine_specification varchar(255), medicine_specification_unit varchar(255), name varchar(255), package_count bigint, package_unit varchar(255), price bigint, production_date datetime, stock bigint, medicine_type_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table medicine_type_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table product_import_receipt_entity (id bigint not null auto_increment, auditor varchar(255), contact varchar(255), created_date datetime, import_receipt_id varchar(255), operator varchar(255), uuid varchar(255), vendor_id varchar(255), vendor_name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table topic_operation_entity (id bigint not null auto_increment, name varchar(255), authorization_topic_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table topic_operation_entity_authorization_assignment_list (topic_operation_entity_id bigint not null, authorization_assignment_list_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table warehouse_entity (id bigint not null auto_increment, location varchar(255), name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -12,6 +14,7 @@ alter table authorization_assignment_entity add constraint FKedjwiuan814a19bi4yy
 alter table authorization_assignment_entity add constraint FK8dqq1kc7jp0clkstctpnjtl2y foreign key (topic_id) references authorization_topic_entity (id);
 alter table authorization_assignment_entity_allowed_operations add constraint FK5vwid8n1jmi0r5h2fxxnbvbgn foreign key (allowed_operations_id) references topic_operation_entity (id);
 alter table authorization_assignment_entity_allowed_operations add constraint FKngkgigjkrhs9p2ir6bh9cuu6a foreign key (authorization_assignment_entity_id) references authorization_assignment_entity (id);
+alter table inventory_item_entity add constraint FK3qkysq06r9d2jvaukf2pwxnbw foreign key (import_receipt_id) references product_import_receipt_entity (id);
 alter table medicine_entity add constraint FK3qjfedbj789cco11fnx9wss0l foreign key (medicine_type_id) references medicine_type_entity (id);
 alter table topic_operation_entity add constraint FKoec3nr2ausdy7u53qubpxopo8 foreign key (authorization_topic_id) references authorization_topic_entity (id);
 alter table topic_operation_entity_authorization_assignment_list add constraint FKtmjvf3170d9xr73l2i2sy705t foreign key (authorization_assignment_list_id) references authorization_assignment_entity (id);

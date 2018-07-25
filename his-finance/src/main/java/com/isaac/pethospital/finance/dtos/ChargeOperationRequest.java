@@ -2,8 +2,7 @@ package com.isaac.pethospital.finance.dtos;
 
 import com.isaac.pethospital.finance.entities.ChargeEntity;
 import com.isaac.pethospital.finance.entities.ChargeItemEntity;
-import com.isaac.pethospital.finance.enums.ChargeStatusEnum;
-import com.isaac.pethospital.finance.repositories.PriceRepository;
+import com.isaac.pethospital.common.enums.ChargeStatusEnum;
 import com.isaac.pethospital.finance.services.PriceService;
 
 import java.time.LocalDateTime;
@@ -52,7 +51,7 @@ public class ChargeOperationRequest {
     public ChargeEntity toCharge(PriceService priceService) {
         ChargeEntity chargeEntity = new ChargeEntity();
         chargeEntity.setCreatedDate(LocalDateTime.now());
-        chargeEntity.setOwnerUuid(this.ownerUuid);
+        chargeEntity.setPetOwnerUuid(this.ownerUuid);
         chargeEntity.setTreatmentCaseUuid(this.treatmentCaseUuid);
         chargeEntity.setPetUuid(this.petUuid);
         chargeEntity.setStatus(ChargeStatusEnum.UNPAID);

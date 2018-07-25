@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 public class ChargeItemEntity {
@@ -12,6 +13,7 @@ public class ChargeItemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String uuid;
+    private String chargeItemUuid;
     @ManyToOne
     @JsonBackReference("charge-chargeItem")
     private ChargeEntity charge;
@@ -19,6 +21,17 @@ public class ChargeItemEntity {
     @ManyToOne
     private PriceEntity price;
     private Double discount;
+    public ChargeItemEntity() {
+        this.uuid = UUID.randomUUID().toString();
+    }
+
+    public String getChargeItemUuid() {
+        return chargeItemUuid;
+    }
+
+    public void setChargeItemUuid(String chargeItemUuid) {
+        this.chargeItemUuid = chargeItemUuid;
+    }
 
     public String getUuid() {
         return uuid;
@@ -39,7 +52,6 @@ public class ChargeItemEntity {
     public Double getDiscount() {
         return discount;
     }
-
 
 
     public void setDiscount(Double discount) {

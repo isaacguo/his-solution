@@ -7,9 +7,18 @@ public class JmsProperties {
 
     String financePriceItemOperationQueue;
     String financeChargeItemOperationQueue;
+    String financeChargeItemOperationReplyTopic;
     String procurementApprovalPassedTopic;
     String treatmentGenerateMedicalTestOrderTopic;
     String employeeUseraccountOperationTopic;
+
+    public String getFinanceChargeItemOperationReplyTopic() {
+        return financeChargeItemOperationReplyTopic;
+    }
+
+    public void setFinanceChargeItemOperationReplyTopic(String financeChargeItemOperationReplyTopic) {
+        this.financeChargeItemOperationReplyTopic = financeChargeItemOperationReplyTopic;
+    }
 
     public String getTreatmentGenerateMedicalTestOrderTopic() {
         return treatmentGenerateMedicalTestOrderTopic;

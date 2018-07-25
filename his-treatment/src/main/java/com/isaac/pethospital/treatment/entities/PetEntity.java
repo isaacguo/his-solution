@@ -3,7 +3,6 @@ package com.isaac.pethospital.treatment.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.isaac.pethospital.common.enums.GenderEnum;
 import com.isaac.pethospital.common.enums.PetColorEnum;
 import com.isaac.pethospital.common.enums.PetGenderEnum;
 
@@ -30,7 +29,12 @@ public class PetEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private UUID uuid;
+    private String uuid;
+
+    public PetEntity() {
+        this.uuid=UUID.randomUUID().toString();
+    }
+
     private PetGenderEnum gender;
     private String name;
     @ManyToOne
@@ -112,11 +116,11 @@ public class PetEntity {
         this.id = id;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 

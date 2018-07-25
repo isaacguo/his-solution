@@ -15,12 +15,12 @@
 
   <tr *ngFor="let chargeItem of chargeItems;let i=index">
     <td>{{i+1}}</td>
-    <td>订单编号</td>
+    <td>{{chargeItem.uuid}}</td>
     <td>宠物主人</td>
     <td>宠物姓名</td>
-    <td>创建日期</td>
-    <td>金额</td>
-    <td>状态</td>
+    <td>{{chargeItem.createdDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
+    <td>{{chargeItem.totalAmount}}</td>
+    <td>{{getStatusText(chargeItem.status)}}</td>
     <td>操作</td>
   </tr>
 

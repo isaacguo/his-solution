@@ -2,6 +2,8 @@ package com.isaac.pethospital.treatment.services;
 
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
+import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
+import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
@@ -129,8 +131,17 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         if (tc == null)
             throw new RuntimeException("Treatment Case is null");
 
-        GenerateMedicalTestOrderMessage medicalTestOrderMessage = new GenerateMedicalTestOrderMessage(tc.getUuid());
+        GenerateMedicalTestOrderMessage medicalTestOrderMessage = new GenerateMedicalTestOrderMessage();
+        medicalTestOrderMessage.setTreatmentCaseUuid(tc.getUuid());
+        medicalTestOrderMessage.setPetOwnerUuid(tc.getPet().getPetOwner().getUuid());
+        medicalTestOrderMessage.setPetUuid(tc.getPet().getUuid());
+
         this.jmsSender.sendEvent(jmsProperties.getTreatmentGenerateMedicalTestOrderTopic(), medicalTestOrderMessage);
         return true;
+    }
+
+    @Override
+    public void onChargeItemEvent(ChargeReportOperationReplyMessage message) {
+
     }
 }

@@ -4,6 +4,8 @@ import {MedicalTestReportTemplateService} from "../../../services/medical-test/m
 import {Router} from "@angular/router";
 import {OperationEnum} from "../../../enums/operation.enum";
 import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
+import {ReportStatusEnum} from "../../../enums/report-status.enum";
+import {TreatmentCaseService} from "../../../services/treatment/treatment-case.service";
 
 @Component({
   selector: 'app-medical-test-query',
@@ -18,6 +20,7 @@ export class MedicalTestQueryComponent implements OnInit {
   reports: any[] = [];
 
   constructor(private router: Router,
+              private treatmentCaseService:TreatmentCaseService,
               private medicalTestReportService: MedicalTestReportService,
               private medicalTestReportTemplateService: MedicalTestReportTemplateService) {
 
@@ -72,6 +75,10 @@ export class MedicalTestQueryComponent implements OnInit {
 
   onModifyStatusButtonClicked(report: any) {
 
-
   }
+  getStatusText(status:any):string
+  {
+    return ReportStatusEnum[status];
+  }
+
 }

@@ -46,6 +46,7 @@
       <th>接诊医师</th>
       <th>化验项目</th>
       <th>开单时间</th>
+      <th>状态</th>
       <th>操作</th>
     </tr>
     </thead>
@@ -58,7 +59,8 @@
       <td></td>
       <td></td>
       <td>{{report.reportName}}</td>
-      <td></td>
+      <td>{{report.createdDateTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
+      <td>{{getStatusText(report.reportStatus)}}</td>
       <td>
         <div class="button-group">
           <button title="修改报告" type="button" class="btn btn-default btn-s"

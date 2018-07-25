@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FinancePriceService} from "../../../../services/finance/finance-price.service";
 import {FinanceChargeService} from "../../../../services/finance/finance-charge.service";
+import {ChargeStatusEnum} from "../../../../enums/charge-status.enum";
 
 @Component({
   selector: 'app-charge-admin-list',
@@ -26,6 +27,11 @@ export class ChargeAdminListComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
 
+  }
+
+  getStatusText(status:any):string
+  {
+    return ChargeStatusEnum[status];
   }
 
 }

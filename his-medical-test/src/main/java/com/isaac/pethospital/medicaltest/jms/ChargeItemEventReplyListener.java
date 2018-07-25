@@ -1,23 +1,21 @@
-package com.isaac.pethospital.treatment.jms;
+package com.isaac.pethospital.medicaltest.jms;
 
-import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
-import com.isaac.pethospital.treatment.services.TreatmentCaseService;
+import com.isaac.pethospital.medicaltest.services.ReportService;
 import org.springframework.jms.annotation.JmsListener;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChargeItemEventListener {
+public class ChargeItemEventReplyListener {
 
-    private final TreatmentCaseService treatmentCaseService;
+    private final ReportService reportService;
 
-    public ChargeItemEventListener(TreatmentCaseService treatmentCaseService) {
-        this.treatmentCaseService = treatmentCaseService;
+    public ChargeItemEventReplyListener(ReportService reportService) {
+        this.reportService = reportService;
     }
 
     @JmsListener(destination = "${jms.finance-charge-item-operation-reply-topic}")
     public void processMessage(ChargeReportOperationReplyMessage message) throws Exception {
-        this.treatmentCaseService.onChargeItemEvent(message);
+        this.reportService.onChargeItemEvent(message);
     }
 }

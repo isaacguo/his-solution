@@ -1,13 +1,14 @@
 package com.isaac.pethospital.finance.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.isaac.pethospital.finance.enums.ChargeStatusEnum;
+import com.isaac.pethospital.common.enums.ChargeStatusEnum;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class ChargeEntity {
@@ -16,15 +17,28 @@ public class ChargeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String chargeUuid;
-    private String ownerUuid;
+    private String petOwnerUuid;
     private String petUuid;
     private String treatmentCaseUuid;
     private LocalDateTime createdDate;
     private BigDecimal totalAmount;
     private ChargeStatusEnum status;
+    private String uuid;
     @OneToMany(mappedBy = "charge")
     @JsonManagedReference("charge-chargeItem")
     private List<ChargeItemEntity> chargeItems = new LinkedList();
+
+    public ChargeEntity() {
+        this.uuid = UUID.randomUUID().toString();
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public Long getId() {
         return id;
@@ -69,13 +83,12 @@ public class ChargeEntity {
     }
 
 
-
-    public String getOwnerUuid() {
-        return ownerUuid;
+    public String getPetOwnerUuid() {
+        return petOwnerUuid;
     }
 
-    public void setOwnerUuid(String ownerUuid) {
-        this.ownerUuid = ownerUuid;
+    public void setPetOwnerUuid(String petOwnerUuid) {
+        this.petOwnerUuid = petOwnerUuid;
     }
 
     public String getPetUuid() {

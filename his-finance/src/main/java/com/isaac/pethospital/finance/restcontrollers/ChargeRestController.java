@@ -1,6 +1,5 @@
 package com.isaac.pethospital.finance.restcontrollers;
 
-import com.isaac.pethospital.common.jms.finance.ChargeItemOperationMessage;
 import com.isaac.pethospital.common.restcontrollers.AbstractCRUDRestController;
 import com.isaac.pethospital.finance.dtos.ChargeOperationRequest;
 import com.isaac.pethospital.finance.entities.ChargeEntity;

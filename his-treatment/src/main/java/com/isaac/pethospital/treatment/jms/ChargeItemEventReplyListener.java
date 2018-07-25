@@ -8,11 +8,11 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChargeItemEventListener {
+public class ChargeItemEventReplyListener {
 
     private final TreatmentCaseService treatmentCaseService;
 
-    public ChargeItemEventListener(TreatmentCaseService treatmentCaseService) {
+    public ChargeItemEventReplyListener(TreatmentCaseService treatmentCaseService) {
         this.treatmentCaseService = treatmentCaseService;
     }
 
