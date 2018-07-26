@@ -16,6 +16,17 @@ public class ChargeOperationRequest {
     private List<ChargeItemEntity> items = new LinkedList();
     private String treatmentCaseUuid;
 
+    public ChargeStatusEnum getChargeStatus() {
+        return chargeStatus;
+    }
+
+    public void setChargeStatus(ChargeStatusEnum chargeStatus) {
+        this.chargeStatus = chargeStatus;
+    }
+
+    private ChargeStatusEnum chargeStatus;
+
+
     public String getTreatmentCaseUuid() {
         return treatmentCaseUuid;
     }

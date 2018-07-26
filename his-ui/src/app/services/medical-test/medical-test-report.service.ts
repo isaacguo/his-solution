@@ -38,7 +38,11 @@ export class MedicalTestReportService extends AbstractService {
     return this.authHttp.get(`${this.rootUrl}/${updateId}`).map(this.extractData);
   }
 
-  findReportsByIds(reportIds: any[]): Observable<any> {
-    return this.authHttp.post(`${this.rootUrl}/get-reports-by-ids`, {'reportIdLists': reportIds}).map(this.extractData);
+  findReportsByUuids(reportUuidList: any[]): Observable<any> {
+    return this.authHttp.post(`${this.rootUrl}/get-reports-by-uuids`, {'reportUuidLists': reportUuidList}).map(this.extractData);
+  }
+
+  removeReport(uuid: string) {
+    return this.authHttp.delete(`${this.rootUrl}/${uuid}/`).map(this.extractData);
   }
 }

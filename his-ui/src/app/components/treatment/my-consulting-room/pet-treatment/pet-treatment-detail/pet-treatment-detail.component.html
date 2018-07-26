@@ -168,7 +168,7 @@
           <td>{{getMedicalTestReportStatus(medicalTestReport)}}</td>
           <td>
             <div class="btn-group btn-group-sm">
-              <button type="button" class="btn btn-default btn-s"><span
+              <button (click)="onRemoveReportClicked(medicalTestReport)" type="button" class="btn btn-default btn-s"><span
                 class="glyphicon glyphicon-remove"></span></button>
             </div>
           </td>

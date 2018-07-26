@@ -24,7 +24,12 @@ public class ReportRestController {
         return this.reportService.findOne(rid);
     }
 
-    @PostMapping("get-reports-by-ids")
+    @DeleteMapping("/{uuid}/")
+    public boolean deleteByUuid(@PathVariable("uuid") String uuid)
+    {
+        return this.reportService.deleteReport(uuid);
+    }
+    @PostMapping("get-reports-by-uuids")
     public List<ReportEntity> getReportsByIds(@RequestBody ReportOperationRequest request)
     {
         return this.reportService.getReportsByIds(request);

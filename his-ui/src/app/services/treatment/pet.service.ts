@@ -11,14 +11,12 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 @Injectable()
 export class PetService extends AbstractService {
 
-  private petInfoManager: BehaviorSubject<PetInfo> = new BehaviorSubject(new PetInfo(null, null, null));
-  private petInfo: PetInfo;
   petInfoChange: Observable<PetInfo>;
-
   rootUrl: string = "/api/histreatment/pets";
-
   selectedPet: Pet = {};
   selectedPetOwner: PetOwner = {};
+  private petInfoManager: BehaviorSubject<PetInfo> = new BehaviorSubject(new PetInfo(null, null, null));
+  private petInfo: PetInfo;
 
   constructor(private authHttp: AuthHttp) {
     super();
@@ -34,10 +32,11 @@ export class PetService extends AbstractService {
     let url = `${this.rootUrl}/find-by-uuid/${uuid}/`;
     return this.authHttp.get(url).map(this.extractData);
   }
-  findByUuids(uuids: any[]):Observable<any[]> {
+
+  findByUuids(uuids: any[]): Observable<any[]> {
 
     let url = `${this.rootUrl}/find-by-uuids`;
-    return this.authHttp.post(url,uuids).map(this.extractData);
+    return this.authHttp.post(url, uuids).map(this.extractData);
   }
 
   public setPetInfo(newPetInfo: PetInfo): void {

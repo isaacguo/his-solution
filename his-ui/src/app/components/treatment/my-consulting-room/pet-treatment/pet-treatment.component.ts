@@ -40,7 +40,6 @@ export class PetTreatmentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log(this.petInfo);
     this.loadData();
   }
 

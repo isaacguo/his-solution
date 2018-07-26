@@ -54,9 +54,9 @@
     <tr *ngFor="let report of reports; let i=index">
       <td>{{i+1}}</td>
       <td></td>
+      <td>{{report.petName}}</td>
       <td></td>
-      <td></td>
-      <td></td>
+      <td>{{report.petOwnerName}}</td>
       <td></td>
       <td>{{report.reportName}}</td>
       <td>{{report.createdDateTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>

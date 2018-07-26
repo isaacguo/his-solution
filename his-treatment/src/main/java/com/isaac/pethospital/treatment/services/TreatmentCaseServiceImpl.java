@@ -2,8 +2,9 @@ package com.isaac.pethospital.treatment.services;
 
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
-import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
+import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessage;
+import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
@@ -14,10 +15,12 @@ import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
 import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import com.isaac.pethospital.treatment.repositories.PetRepository;
 import com.isaac.pethospital.treatment.repositories.TreatmentCaseRepository;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -76,6 +79,17 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         return tce.getPrescriptionList();
     }
 
+
+    private TreatmentCaseEntity getTreatmentCaseByUuid(String uuid) {
+        if (StringUtils.isEmpty(uuid))
+            throw new RuntimeException("treatment case uuid is null");
+        TreatmentCaseEntity tce = this.treatmentCaseRepository.findByUuid(uuid);
+        if (tce == null) {
+            throw new RuntimeException("treatment case is null");
+        }
+        return tce;
+    }
+
     private TreatmentCaseEntity getTreatmentCase(Long tid) {
         if (tid == null)
             throw new RuntimeException("treatment case id is null");
@@ -93,22 +107,25 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
     }
 
     @Override
-    public boolean addMedicalReportTemplate(Long tid, Long medicalReportTemplateId) {
-        TreatmentCaseEntity tce = getTreatmentCase(tid);
-        tce.addMedicalTestReportId(medicalReportTemplateId);
+    public void onMedicalTestReportCreated(MedicalTestCreateReportMessage message) {
+
+        TreatmentCaseEntity tce = getTreatmentCaseByUuid(message.getTreatmentCaseUuid());
+        if (tce == null)
+            throw new RuntimeException("Cannot find TreatmentCase by uuid");
+        tce.addMedicalTestReportUuid(message.getReportUuid());
         this.treatmentCaseRepository.save(tce);
-
-        return true;
     }
-
 
     @Override
-    public boolean removeMedicalReportTemplate(Long tid, Long medicalReportTemplateId) {
-        TreatmentCaseEntity tce = getTreatmentCase(tid);
-        tce.removeMedicalTestReportId(medicalReportTemplateId);
+    public void onMedicalTestReportRemoved(MedicalTestDeleteReportMessage message) {
+
+        TreatmentCaseEntity tce = getTreatmentCaseByUuid(message.getTreatmentCaseUuid());
+        if (tce == null)
+            throw new RuntimeException("Cannot find TreatmentCase by uuid");
+        tce.removeMedicalTestReportUuid(message.getReportUuid());
         this.treatmentCaseRepository.save(tce);
-        return false;
     }
+
 
     @Override
     public TreatmentCaseEntity update(TreatmentCaseOperationRequest request) {
@@ -122,7 +139,6 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
         return this.treatmentCaseRepository.save(tce);
     }
-
 
     @Override
     public Boolean generateMedicalTestOrder(String uuid) {
@@ -144,4 +160,5 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
     public void onChargeItemEvent(ChargeReportOperationReplyMessage message) {
 
     }
+
 }

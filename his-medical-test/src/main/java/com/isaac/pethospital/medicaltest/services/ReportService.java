@@ -10,6 +10,8 @@ import java.util.List;
 public interface ReportService {
     ReportEntity createReport(ReportOperationRequest request);
 
+    boolean deleteReport(String uuid);
+
 
     boolean updateReportStatus(ReportOperationRequest reportOperationRequest);
 

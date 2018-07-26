@@ -46,9 +46,7 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
 
     if (this.categoryId !== undefined && this.categoryId !== null) {
       if (this.financePriceService !== undefined) {
-        console.log(this.categoryId);
         this.medicalTestReportTemplateCategoryService.readOne(this.categoryId).mergeMap(category => {
-          console.log(category);
           return this.financePriceService.findByUuids(category.reportTemplateList.map(m => m.uuid)).map(list => ({
             'category': category,
             'list': list
@@ -59,7 +57,6 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
             r.list.forEach(b => {
                 let item = r.category.reportTemplateList.find(r => r.uuid === b["priceItemUuid"]);
                 if (item != null) {
-                  console.log(item);
                   item.normalPrice = b["normalPrice"];
                   item.memberPrice = b["memberPrice"];
                 }

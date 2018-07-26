@@ -21,7 +21,7 @@ public interface TreatmentCaseQueryResponse {
     String getDoctorAdvice();
 
 
-    //List<Long> getMedicalTestReportIdList();
+    //List<Long> getMedicalTestReportUuidList();
 
     Long getId();
 }

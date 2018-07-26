@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface ReportRepository extends JpaRepository<ReportEntity, Long> {
     ReportEntity findByUuid(String uuid);
+    List<ReportEntity> findByUuidIn(List<String> uuids);
     List<ReportEntity> findByTreatmentCaseUuidAndReportStatusEquals(String treatmentCaseUuid, ReportStatusEnum status);
 }

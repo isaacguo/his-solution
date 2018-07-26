@@ -3,6 +3,7 @@ package com.isaac.pethospital.treatment.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,7 +29,7 @@ public class TreatmentCaseEntity {
     @JsonBackReference("PetEntity-TreatmentCaseEntity")
     PetEntity pet;
     @ElementCollection
-    List<Long> medicalTestReportIdList = new LinkedList<>();
+    List<String> medicalTestReportUuidList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -95,20 +96,20 @@ public class TreatmentCaseEntity {
     public void setPetOwnerDescription(String petOwnerDescription) {
         this.petOwnerDescription = petOwnerDescription;
     }
-    public List<Long> getMedicalTestReportIdList() {
-        return medicalTestReportIdList;
+    public List<String> getMedicalTestReportUuidList() {
+        return medicalTestReportUuidList;
     }
 
-    public void addMedicalTestReportId(Long medicalTestReportId) {
-        if (medicalTestReportId == null)
+    public void addMedicalTestReportUuid(String medicalTestReportUuid) {
+        if (StringUtils.isEmpty(medicalTestReportUuid))
             throw new RuntimeException("Medical Test Id is null");
-        this.medicalTestReportIdList.add(medicalTestReportId);
+        this.medicalTestReportUuidList.add(medicalTestReportUuid);
     }
 
-    public void removeMedicalTestReportId(Long medicalTestReportId) {
-        if (medicalTestReportId == null)
+    public void removeMedicalTestReportUuid(String medicalTestReportUuid) {
+        if (StringUtils.isEmpty(medicalTestReportUuid))
             throw new RuntimeException("Medical Test Id is null");
-        this.medicalTestReportIdList.remove(medicalTestReportId);
+        this.medicalTestReportUuidList.remove(medicalTestReportUuid);
     }
 
     public LocalDateTime getLastModifiedDateTime() {

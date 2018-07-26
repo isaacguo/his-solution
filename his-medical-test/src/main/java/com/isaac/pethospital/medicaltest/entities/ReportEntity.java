@@ -25,9 +25,27 @@ public class ReportEntity {
     private String uuid;
     private String treatmentCaseUuid;
     private String reportTemplateUuid;
+    private String petUuid;
+    private String petOwnerUuid;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public String getPetUuid() {
+        return petUuid;
+    }
+
+    public void setPetUuid(String petUuid) {
+        this.petUuid = petUuid;
+    }
+
+    public String getPetOwnerUuid() {
+        return petOwnerUuid;
+    }
+
+    public void setPetOwnerUuid(String petOwnerUuid) {
+        this.petOwnerUuid = petOwnerUuid;
+    }
 
     public String getTreatmentCaseUuid() {
         return treatmentCaseUuid;

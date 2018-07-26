@@ -38,7 +38,6 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
 
   ngOnChanges(changes: SimpleChanges): void {
 
-    console.log(this.procurement);
 
     if (this.pRoot == null) return;
     this.selectedStatus = (<Procurement>changes.procurement.currentValue).status;
@@ -55,8 +54,6 @@ export class ProcurementPurchaseDetailComponent implements OnInit, OnChanges, On
   }
 
   findNode(p: ProcurementStatus, status: string) {
-    console.log(p.status);
-    console.log(status);
     if (p.status === status) {
       this.curP = p;
       return;

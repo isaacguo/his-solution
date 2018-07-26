@@ -6,6 +6,7 @@ import {OperationEnum} from "../../../enums/operation.enum";
 import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
 import {ReportStatusEnum} from "../../../enums/report-status.enum";
 import {TreatmentCaseService} from "../../../services/treatment/treatment-case.service";
+import {PetService} from "../../../services/treatment/pet.service";
 
 @Component({
   selector: 'app-medical-test-query',
@@ -20,7 +21,8 @@ export class MedicalTestQueryComponent implements OnInit {
   reports: any[] = [];
 
   constructor(private router: Router,
-              private treatmentCaseService:TreatmentCaseService,
+              private treatmentCaseService: TreatmentCaseService,
+              private petService: PetService,
               private medicalTestReportService: MedicalTestReportService,
               private medicalTestReportTemplateService: MedicalTestReportTemplateService) {
 
@@ -59,8 +61,21 @@ export class MedicalTestQueryComponent implements OnInit {
   }
 
   private loadData() {
-    this.medicalTestReportService.findAll().subscribe(r => {
-      this.reports = r as any[];
+
+    this.medicalTestReportService.findAll().mergeMap(arr => {
+      return this.petService.findByUuids(arr.map(each => ({"uuid": (each.petUuid || "")}))).map(retArr => ({
+        'arr': arr,
+        'uuidMap': retArr
+      }))
+    }).subscribe(r => {
+      let nameMap: Map<string, { 'petName': string, 'petOwnerName': string }> = new Map<string, { 'petName': string, 'petOwnerName': string }>();
+      r.uuidMap.forEach(um => nameMap.set(um.petUuid, {'petName': um.petName, 'petOwnerName': um.petOwnerName}));
+      r.arr.forEach(item => {
+        item.petName = (nameMap.get(item.petUuid) || {})['petName'];
+        item.petOwnerName = (nameMap.get(item.petUuid) || {})['petOwnerName'];
+      })
+
+      this.reports = r.arr;
     })
 
   }
@@ -76,8 +91,8 @@ export class MedicalTestQueryComponent implements OnInit {
   onModifyStatusButtonClicked(report: any) {
 
   }
-  getStatusText(status:any):string
-  {
+
+  getStatusText(status: any): string {
     return ReportStatusEnum[status];
   }
 

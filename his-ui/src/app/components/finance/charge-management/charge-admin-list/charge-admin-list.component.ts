@@ -23,13 +23,11 @@ export class ChargeAdminListComponent implements OnInit {
 
   loadData() {
     this.financeChargeService.readAll().mergeMap(arr => {
-
       return this.petService.findByUuids(arr.map(each => ({"uuid": each.petUuid}))).map(retArr => ({
         'arr': arr,
         'uuidMap': retArr
       }))
     }).subscribe(r => {
-      console.log(r);
       let nameMap: Map<string, { 'petName': string, 'petOwnerName': string }> = new Map<string, { 'petName': string, 'petOwnerName': string }>();
       r.uuidMap.forEach(um => nameMap.set(um.petUuid, {'petName': um.petName, 'petOwnerName': um.petOwnerName}));
       r.arr.forEach(item => {
@@ -37,7 +35,7 @@ export class ChargeAdminListComponent implements OnInit {
         item.petOwnerName = (nameMap.get(item.petUuid) || {})['petOwnerName'];
       })
 
-      this.chargeItems=r.arr;
+      this.chargeItems = r.arr;
     })
 
   }
@@ -51,4 +49,11 @@ export class ChargeAdminListComponent implements OnInit {
     return ChargeStatusEnum[status];
   }
 
+  onPaidClicked(chargeItem: any) {
+    this.financeChargeService.updateStatus(chargeItem.id, "PAID").subscribe(this.loadData);
+  }
+
+  onReimbursedClicked(chargeItem: any) {
+
+  }
 }

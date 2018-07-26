@@ -5,11 +5,14 @@ import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.finance.ReportOperationMessage;
+import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessage;
+import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 import com.isaac.pethospital.medicaltest.enums.ReportStatusEnum;
 import com.isaac.pethospital.medicaltest.repositories.ReportRepository;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,7 +37,31 @@ public class ReportServiceImpl implements ReportService {
         reportEntity.setReportStatus(ReportStatusEnum.UNSUBMITTED);
         reportEntity.setCreatedDateTime(LocalDateTime.now());
 
-        return this.reportRepository.save(reportEntity);
+        ReportEntity saved = this.reportRepository.save(reportEntity);
+
+        MedicalTestCreateReportMessage message = new MedicalTestCreateReportMessage();
+        message.setReportUuid(reportEntity.getUuid());
+        message.setTreatmentCaseUuid(reportEntity.getTreatmentCaseUuid());
+        jmsSender.sendEvent(this.jmsProperties.getMedicalTestCreateReportTopic(), message);
+
+        return saved;
+    }
+
+    @Override
+    public boolean deleteReport(String uuid) {
+
+        ReportEntity report = this.reportRepository.findByUuid(uuid);
+        String treatmentCaseUuid=report.getTreatmentCaseUuid();
+        if(report==null)
+            throw  new RuntimeException("The Report to be deleted cannot be found");
+        this.reportRepository.delete(report);
+
+        MedicalTestDeleteReportMessage message=new MedicalTestDeleteReportMessage();
+        message.setTreatmentCaseUuid(treatmentCaseUuid);
+        message.setReportUuid(uuid);
+        jmsSender.sendEvent(this.jmsProperties.getMedicalTestRemovedReportTopic(),message);
+
+        return true;
     }
 
     @Override
@@ -77,8 +104,8 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<ReportEntity> getReportsByIds(ReportOperationRequest request) {
-        List<Long> ids = request.getReportIdLists();
-        return this.reportRepository.findAll(ids);
+        List<String> uuids = request.getReportUuidLists();
+        return this.reportRepository.findByUuidIn(uuids);
     }
 
     @Override

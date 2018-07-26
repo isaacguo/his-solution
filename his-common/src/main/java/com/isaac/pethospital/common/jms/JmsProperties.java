@@ -11,6 +11,24 @@ public class JmsProperties {
     String procurementApprovalPassedTopic;
     String treatmentGenerateMedicalTestOrderTopic;
     String employeeUseraccountOperationTopic;
+    String medicalTestCreateReportTopic;
+    String medicalTestRemovedReportTopic;
+
+    public String getMedicalTestRemovedReportTopic() {
+        return medicalTestRemovedReportTopic;
+    }
+
+    public void setMedicalTestRemovedReportTopic(String medicalTestRemovedReportTopic) {
+        this.medicalTestRemovedReportTopic = medicalTestRemovedReportTopic;
+    }
+
+    public String getMedicalTestCreateReportTopic() {
+        return medicalTestCreateReportTopic;
+    }
+
+    public void setMedicalTestCreateReportTopic(String medicalTestCreateReportTopic) {
+        this.medicalTestCreateReportTopic = medicalTestCreateReportTopic;
+    }
 
     public String getFinanceChargeItemOperationReplyTopic() {
         return financeChargeItemOperationReplyTopic;

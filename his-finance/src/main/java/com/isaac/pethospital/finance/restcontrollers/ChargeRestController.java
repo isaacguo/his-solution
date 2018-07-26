@@ -14,6 +14,14 @@ public class ChargeRestController extends AbstractCRUDRestController<ChargeEntit
 
     public ChargeRestController(ChargeService chargeService) {
         super(chargeService);
+        this.chargeService=chargeService;
+
+    }
+
+    @PostMapping("{id}/updateStatus")
+    public boolean updateStatus(@PathVariable("id")Long id,@RequestBody ChargeOperationRequest request)
+    {
+        return this.chargeService.updateStatus(id,request);
     }
 
 }

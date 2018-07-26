@@ -23,10 +23,10 @@
     <td>{{getStatusText(chargeItem.status)}}</td>
     <td>
       <div class="btn-group btn-group-sm">
-        <button type="button" class="btn btn-default btn-s"
+        <button (click)="onPaidClicked(chargeItem)" type="button" class="btn btn-default btn-s"
         >已支付
         </button>
-        <button type="button" class="btn btn-default btn-s"
+        <button (click)="onReimbursedClicked(chargeItem)" type="button" class="btn btn-default btn-s"
         >已退款
         </button>
       </div>

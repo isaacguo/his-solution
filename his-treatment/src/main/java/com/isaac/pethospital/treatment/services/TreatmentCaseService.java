@@ -2,6 +2,8 @@ package com.isaac.pethospital.treatment.services;
 
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
+import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessage;
+import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
@@ -22,12 +24,13 @@ public interface TreatmentCaseService {
 
     TreatmentCaseEntity findOne(Long tid);
 
-    boolean addMedicalReportTemplate(Long tId, Long medicalReportTemplateId);
-    boolean removeMedicalReportTemplate(Long tid, Long medicalReportTemplateId);
-
     TreatmentCaseEntity update(TreatmentCaseOperationRequest request);
 
     Boolean generateMedicalTestOrder(String uuid);
 
     void onChargeItemEvent(ChargeReportOperationReplyMessage message);
+
+    void onMedicalTestReportCreated(MedicalTestCreateReportMessage message);
+
+    void onMedicalTestReportRemoved(MedicalTestDeleteReportMessage message);
 }

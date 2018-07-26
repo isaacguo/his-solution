@@ -55,7 +55,7 @@ export class MyConsultingRoomComponent implements OnInit {
     request.id = registration.pid;
     this.petService.findPetOwner(request).subscribe(r => {
 
-      let petInfo = new PetInfo({'id': this.selectedRegistration.pid}, r, this.selectedRegistration);
+      let petInfo = new PetInfo({'id': this.selectedRegistration.pid,'uuid':this.selectedRegistration.petUuid}, r, this.selectedRegistration);
       this.petService.setPetInfo(petInfo);
 
     });

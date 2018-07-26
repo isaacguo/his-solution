@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {TreatmentCaseService} from "../../../../../services/treatment/treatment-case.service";
 import {Router} from "@angular/router";
 import {MedicalTestReportService} from "../../../../../services/medical-test/medical-test-report.service";
@@ -9,15 +9,15 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {MedicalTestReportTemplateItem} from "../../../../../dto/medical-test/medical-test-report-template-item.model";
 import {ReportStatusEnum} from "../../../../../enums/report-status.enum";
 import {FinanceChargeService} from "../../../../../services/finance/finance-charge.service";
-import {ChargeOperationRequest} from "../../../../../dto/finance/charge-operation-request.model";
-import {ChargeItemRequest} from "../../../../../dto/finance/charge-item-request.model";
+import {PetInfo, PetService} from "../../../../../services/treatment/pet.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-pet-treatment-detail',
   templateUrl: './pet-treatment-detail.component.html',
   styleUrls: ['./pet-treatment-detail.component.css']
 })
-export class PetTreatmentDetailComponent implements OnChanges, OnInit {
+export class PetTreatmentDetailComponent implements OnChanges, OnInit,OnDestroy {
 
 
   @ViewChild("createMedicalTestReportModal")
@@ -35,12 +35,24 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
   medicineSearchResults: any[] = [];
   selectedReportType: any;
 
+  petInfo: PetInfo;
+  petInfoChangeSubscription: Subscription;
+
+  ngOnDestroy(): void {
+    this.petInfoChangeSubscription.unsubscribe();
+  }
+
   constructor(private router: Router,
               private fb: FormBuilder,
               private medicalTestReportService: MedicalTestReportService,
               private medicalTestReportTemplateService: MedicalTestReportTemplateService,
+              private petService:PetService,
               private treatmentCaseService: TreatmentCaseService,
               private financeChargeService: FinanceChargeService) {
+
+    this.petInfoChangeSubscription = petService.petInfoChange.subscribe(
+      newPetInfo =>
+        this.petInfo = newPetInfo);
 
     this.searchInput.valueChanges
       .debounceTime(200)
@@ -110,15 +122,15 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
   }
 
   onCreateMedicalTestReportModalClosed() {
+    this.formModel.controls['petUuid'].setValue(this.petInfo.pet.uuid);
+    this.formModel.controls['petOwnerUuid'].setValue(this.petInfo.petOwner.uuid);
+
     this.medicalTestReportService.createReport(this.formModel.value).subscribe(r => {
-      this.treatmentCaseService.addMedicalTestReport(this.treatmentCase.id, r.id).subscribe(z => {
-        this.loadData();
-      })
+      this.loadData();
     });
   }
 
   ngOnInit(): void {
-
     this.initForm();
   }
 
@@ -136,6 +148,7 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
   protected process(medicalTestReportTemplate: any) {
 
     let reportType = medicalTestReportTemplate.id;
+    this.initFormModel();
 
     this.medicalTestReportTemplateService.findById(reportType).subscribe(r => {
       //this.reportTemplate = r;
@@ -162,7 +175,7 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
 
         this.inflateTreatmentCaseBasicInfo(r);
 
-        this.medicalTestReportService.findReportsByIds(this.detailedTreatmentCase.medicalTestReportIdList).subscribe(r => {
+        this.medicalTestReportService.findReportsByUuids(this.detailedTreatmentCase.medicalTestReportUuidList).subscribe(r => {
           this.medicalTestReportUnsubmittedList = r.filter(report => {
             return ReportStatusEnum[report.reportStatus] === ReportStatusEnum.UNSUBMITTED;
           })
@@ -209,10 +222,16 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
       'doctorDiagnose': [''],
       'doctorAdvice': ['']
     });
+    this.initFormModel();
+  }
+
+  private initFormModel() {
     this.formModel = this.fb.group({
       'id': [''],
-      'treatmentCaseUuid':[''],
-      'reportTemplateUuid':[''],
+      'petOwnerUuid': [''],
+      'petUuid': [''],
+      'treatmentCaseUuid': [''],
+      'reportTemplateUuid': [''],
       'reportName': ['', Validators.required],
       'reportInfoList': this.fb.array([]),
       //'reportType': ['', Validators.required],
@@ -230,5 +249,11 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit {
 
   getMedicalTestReportStatus(medicalTestReport: any) {
     return ReportStatusEnum[medicalTestReport.reportStatus];
+  }
+
+  onRemoveReportClicked(medicalTestReport: any) {
+    this.medicalTestReportService.removeReport(medicalTestReport.uuid).subscribe(r => {
+      this.loadData();
+    });
   }
 }

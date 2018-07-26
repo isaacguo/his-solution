@@ -28,7 +28,6 @@ export class MedicalTestSettingsDepartmentReportTemplatesComponent implements On
 
   isReportEnabled(id: number): boolean {
     let index = (<any[]>this.department.supportedReportTemplates).findIndex(r => r.id === id);
-    console.log(index);
     return index > -1;
   }
 
@@ -45,8 +44,6 @@ export class MedicalTestSettingsDepartmentReportTemplatesComponent implements On
   }
 
   onCheckChanged(medicalTestReport, event) {
-    console.log(medicalTestReport.reportName);
-    console.log(event.target.checked);
     if (event.target.checked)
       this.medicalTestDepartmentService.addSupportedTestReportTemplate(this.department.depId, medicalTestReport.id).subscribe(r => {
         this.loadData();

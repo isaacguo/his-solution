@@ -18,12 +18,39 @@ public class ReportOperationRequest {
     LocalDateTime finishedDateTime;
     ReportStatusEnum reportStatus;
     String reportTemplateUuid;
+    String uuid;
     //generate order
     String treatmentCaseUuid;
     List<String> reportUuid;
-    List<Long> reportIdLists = new LinkedList<>();
+    List<String> reportUuidLists = new LinkedList<>();
     String reportName;
+    String petUuid;
+    String petOwnerUuid;
     private Long id;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getPetUuid() {
+        return petUuid;
+    }
+
+    public void setPetUuid(String petUuid) {
+        this.petUuid = petUuid;
+    }
+
+    public String getPetOwnerUuid() {
+        return petOwnerUuid;
+    }
+
+    public void setPetOwnerUuid(String petOwnerUuid) {
+        this.petOwnerUuid = petOwnerUuid;
+    }
 
     public String getReportTemplateUuid() {
         return reportTemplateUuid;
@@ -49,12 +76,12 @@ public class ReportOperationRequest {
         this.reportUuid = reportUuid;
     }
 
-    public List<Long> getReportIdLists() {
-        return reportIdLists;
+    public List<String> getReportUuidLists() {
+        return reportUuidLists;
     }
 
-    public void setReportIdLists(List<Long> reportIdLists) {
-        this.reportIdLists = reportIdLists;
+    public void setReportUuidLists(List<String> reportUuidLists) {
+        this.reportUuidLists = reportUuidLists;
     }
 
     public String getReportName() {
@@ -71,6 +98,8 @@ public class ReportOperationRequest {
         reportEntity.setReportName(this.reportName);
         reportEntity.setReportTemplateUuid(this.reportTemplateUuid);
         reportEntity.setTreatmentCaseUuid(this.treatmentCaseUuid);
+        reportEntity.setPetOwnerUuid(this.petOwnerUuid);
+        reportEntity.setPetUuid(this.petUuid);
 
         this.reportInfoList.forEach(r -> {
             ReportInfoEntity reportInfoEntity = new ReportInfoEntity();

@@ -12,6 +12,7 @@ import com.isaac.pethospital.finance.entities.ChargeItemEntity;
 import com.isaac.pethospital.finance.entities.PriceEntity;
 import com.isaac.pethospital.common.enums.ChargeStatusEnum;
 import com.isaac.pethospital.finance.repositories.ChargeRepository;
+import org.apache.commons.lang.CharEncoding;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -84,5 +85,19 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
         //jmsSender.sendEvent(this.jmsProperties.getFinanceChargeItemOperationReplyTopic(), replyMessage);
 
 
+    }
+
+    @Override
+    public boolean updateStatus(Long id, ChargeOperationRequest request) {
+
+        ChargeEntity charge = this.jpaRepository.findOne(id);
+        if (charge == null)
+            throw new RuntimeException("Cannot find Charge");
+        charge.setStatus(request.getChargeStatus());
+        this.jpaRepository.save(charge);
+
+        
+
+        return true;
     }
 }

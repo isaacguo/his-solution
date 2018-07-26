@@ -21,7 +21,6 @@ export class PriceAdminListComponent implements OnInit {
   }
 
   setSelectedModule(module: string) {
-    console.log(module);
     this.selectedModule = module;
   }
 }
