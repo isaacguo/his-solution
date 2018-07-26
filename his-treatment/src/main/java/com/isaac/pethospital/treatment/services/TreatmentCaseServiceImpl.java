@@ -110,8 +110,6 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
     public void onMedicalTestReportCreated(MedicalTestCreateReportMessage message) {
 
         TreatmentCaseEntity tce = getTreatmentCaseByUuid(message.getTreatmentCaseUuid());
-        if (tce == null)
-            throw new RuntimeException("Cannot find TreatmentCase by uuid");
         tce.addMedicalTestReportUuid(message.getReportUuid());
         this.treatmentCaseRepository.save(tce);
     }
@@ -120,8 +118,6 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
     public void onMedicalTestReportRemoved(MedicalTestDeleteReportMessage message) {
 
         TreatmentCaseEntity tce = getTreatmentCaseByUuid(message.getTreatmentCaseUuid());
-        if (tce == null)
-            throw new RuntimeException("Cannot find TreatmentCase by uuid");
         tce.removeMedicalTestReportUuid(message.getReportUuid());
         this.treatmentCaseRepository.save(tce);
     }

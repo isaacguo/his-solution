@@ -96,7 +96,7 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
         charge.setStatus(request.getChargeStatus());
         this.jpaRepository.save(charge);
 
-        
+
 
         return true;
     }

@@ -52,7 +52,7 @@ public class ReportServiceImpl implements ReportService {
 
         ReportEntity report = this.reportRepository.findByUuid(uuid);
         String treatmentCaseUuid=report.getTreatmentCaseUuid();
-        if(report==null)
+        if(StringUtils.isEmpty(treatmentCaseUuid))
             throw  new RuntimeException("The Report to be deleted cannot be found");
         this.reportRepository.delete(report);
 
