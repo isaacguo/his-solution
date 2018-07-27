@@ -16,7 +16,7 @@ create table registration_number_entity (id bigint not null auto_increment, date
 create table topic_operation_entity (id bigint not null auto_increment, name varchar(255), authorization_topic_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table topic_operation_entity_authorization_assignment_list (topic_operation_entity_id bigint not null, authorization_assignment_list_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table treatment_case_entity (id bigint not null auto_increment, clinic_situation varchar(255), created_date datetime, doctor_advice varchar(255), doctor_diagnose varchar(255), last_modified_date_time datetime, pet_owner_description varchar(255), treatment_case_status varchar(255), treatment_date datetime, uuid varchar(255), doctor_id bigint, pet_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-create table treatment_case_entity_medical_test_report_id_list (treatment_case_entity_id bigint not null, medical_test_report_id_list bigint) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table treatment_case_entity_medical_test_report_uuid_list (treatment_case_entity_id bigint not null, medical_test_report_uuid_list varchar(255)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 alter table authorization_assignment_entity add constraint FKedjwiuan814a19bi4yy07tdph foreign key (authorization_id) references authorization_entity (id);
 alter table authorization_assignment_entity add constraint FK8dqq1kc7jp0clkstctpnjtl2y foreign key (topic_id) references authorization_topic_entity (id);
 alter table authorization_assignment_entity_allowed_operations add constraint FK5vwid8n1jmi0r5h2fxxnbvbgn foreign key (allowed_operations_id) references topic_operation_entity (id);
@@ -37,4 +37,4 @@ alter table topic_operation_entity_authorization_assignment_list add constraint 
 alter table topic_operation_entity_authorization_assignment_list add constraint FK4y6aqtertcn95oyqdiba3jdbf foreign key (topic_operation_entity_id) references topic_operation_entity (id);
 alter table treatment_case_entity add constraint FK66k2f9imb7mfetn3habawq81b foreign key (doctor_id) references employee_entity (id);
 alter table treatment_case_entity add constraint FKp7mrx9givae5w86lcv6fty4cl foreign key (pet_id) references pet_entity (id);
-alter table treatment_case_entity_medical_test_report_id_list add constraint FKk5iimbb4v51yo7ugh95wr0nod foreign key (treatment_case_entity_id) references treatment_case_entity (id);
+alter table treatment_case_entity_medical_test_report_uuid_list add constraint FK7aecoo9npchmw3tklctpmowqm foreign key (treatment_case_entity_id) references treatment_case_entity (id);
