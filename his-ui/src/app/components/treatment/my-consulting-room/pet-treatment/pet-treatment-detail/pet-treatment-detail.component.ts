@@ -17,11 +17,13 @@ import {Subscription} from "rxjs/Subscription";
   templateUrl: './pet-treatment-detail.component.html',
   styleUrls: ['./pet-treatment-detail.component.css']
 })
-export class PetTreatmentDetailComponent implements OnChanges, OnInit,OnDestroy {
+export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy {
 
 
   @ViewChild("createMedicalTestReportModal")
   createMedicalTestReportModal: ModalComponent;
+  @ViewChild("viewMedicalTestReportModal")
+  viewMedicalTestReportModal: ModalComponent;
   @Input()
   treatmentCase: any;
   detailedTreatmentCase: any = {};
@@ -35,6 +37,8 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit,OnDestroy 
   medicineSearchResults: any[] = [];
   selectedReportType: any;
 
+  selectedReportId: string;
+
   petInfo: PetInfo;
   petInfoChangeSubscription: Subscription;
 
@@ -46,7 +50,7 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit,OnDestroy 
               private fb: FormBuilder,
               private medicalTestReportService: MedicalTestReportService,
               private medicalTestReportTemplateService: MedicalTestReportTemplateService,
-              private petService:PetService,
+              private petService: PetService,
               private treatmentCaseService: TreatmentCaseService,
               private financeChargeService: FinanceChargeService) {
 
@@ -122,6 +126,7 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit,OnDestroy 
   }
 
   onCreateMedicalTestReportModalClosed() {
+    console.log(this.petInfo);
     this.formModel.controls['petUuid'].setValue(this.petInfo.pet.uuid);
     this.formModel.controls['petOwnerUuid'].setValue(this.petInfo.petOwner.uuid);
 
@@ -255,5 +260,17 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit,OnDestroy 
     this.medicalTestReportService.removeReport(medicalTestReport.uuid).subscribe(r => {
       this.loadData();
     });
+  }
+
+  isMedicalTestFinished(medicalTestReport: any) {
+    return ReportStatusEnum[medicalTestReport.reportStatus] === ReportStatusEnum.FINISHED;
+  }
+
+  onViewMedicalTestReportModalClosed() {
+  }
+
+  onViewMedicalTestReport(medicalTestReport: any) {
+    this.selectedReportId = medicalTestReport.id;
+    this.viewMedicalTestReportModal.open();
   }
 }

@@ -19,6 +19,7 @@ public class ReportOperationRequest {
     ReportStatusEnum reportStatus;
     String reportTemplateUuid;
     String uuid;
+    Boolean markAsDone;
     //generate order
     String treatmentCaseUuid;
     List<String> reportUuid;
@@ -27,6 +28,14 @@ public class ReportOperationRequest {
     String petUuid;
     String petOwnerUuid;
     private Long id;
+
+    public Boolean getMarkAsDone() {
+        return markAsDone;
+    }
+
+    public void setMarkAsDone(Boolean markAsDone) {
+        this.markAsDone = markAsDone;
+    }
 
     public String getUuid() {
         return uuid;

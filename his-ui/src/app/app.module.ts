@@ -153,10 +153,11 @@ import {ImportManagementListComponent} from './components/inventory/import-manag
 import {ImportManagementDetailComponent} from './components/inventory/import-management/import-management-list/import-management-detail/import-management-detail.component';
 import {InventoryOperationToolBarComponent} from './components/inventory/inventory-operation-tool-bar/inventory-operation-tool-bar.component';
 import {ProductImportReceiptService} from "./services/medicine/product-import-receipt.service";
-import { PriceManagementComponent } from './components/finance/price-management/price-management.component';
-import { PriceAdminListComponent } from './components/finance/price-management/price-admin-list/price-admin-list.component';
+import {PriceManagementComponent} from './components/finance/price-management/price-management.component';
+import {PriceAdminListComponent} from './components/finance/price-management/price-admin-list/price-admin-list.component';
 import {PriceManagementGuard} from "./guards/finance/price-management.guard";
 import {FinanceChargeService} from "./services/finance/finance-charge.service";
+import {MedicalTestReportViewComponent} from './components/medical-test/medical-test-report-view/medical-test-report-view.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -274,7 +275,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ImportManagementDetailComponent,
     InventoryOperationToolBarComponent,
     PriceManagementComponent,
-    PriceAdminListComponent
+    PriceAdminListComponent,
+    MedicalTestReportViewComponent
 
   ],
   imports: [

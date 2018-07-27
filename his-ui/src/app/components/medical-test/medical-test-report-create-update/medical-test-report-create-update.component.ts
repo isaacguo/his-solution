@@ -4,8 +4,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MedicalTestReportTemplateService} from "../../../services/medical-test/medical-test-report-template.service";
 import {OperationEnum} from "../../../enums/operation.enum";
-import {observable} from "rxjs/symbol/observable";
-import {MedicalTestReportTemplate} from "../../../dto/medical-test/medical-test-report-template.model";
 import {MedicalTestReportTemplateItem} from "../../../dto/medical-test/medical-test-report-template-item.model";
 import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
 
@@ -50,6 +48,7 @@ export class MedicalTestReportCreateUpdateComponent extends AbstractCreateUpdate
   private initForm() {
     this.formModel = this.fb.group({
       'id': [''],
+      'markAsDone': [false],
       'reportName': ['', Validators.required],
       'reportInfoList': this.fb.array([]),
       //'reportType': ['', Validators.required],
@@ -138,7 +137,7 @@ export class MedicalTestReportCreateUpdateComponent extends AbstractCreateUpdate
     }
     else {
       control.push(this.fb.group({
-        'id':[reportItem.id, Validators.required],
+        'id': [reportItem.id, Validators.required],
         'itemName': [reportItem.itemName, Validators.required],
         'itemUnit': [reportItem.itemUnit, Validators.required],
         'referenceLowLimitValue': [reportItem.referenceLowLimitValue, Validators.required],

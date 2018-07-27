@@ -1,8 +1,4 @@
-<div class="row">
-  <h1 class="page-header">新建化验报告</h1>
-</div>
-
-<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="formModel" novalidate>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -21,7 +17,7 @@
             <div class="form-group">
               <label>{{reportInfoData.controls[i].controls['reportKey'].value}}</label>
               <input type="hidden" formControlName="reportKey">
-              <input type="text" class="form-control" formControlName="reportValue" [readonly]="!isCreateMode()">
+              <input type="text" class="form-control" formControlName="reportValue" readonly>
               <small [hidden]="reportInfoData.controls[i].controls['reportValue'].valid" class="text-danger">
                 此报告项名称不可为空
               </small>
@@ -33,7 +29,7 @@
   </div>
 
 
-  <div *ngIf="!isCreateMode()" class="isaac-margin-15top" formArrayName="reportItems">
+  <div class="isaac-margin-15top" formArrayName="reportItems">
     <label>检查项目</label>
     <table class="table table-bordered">
       <thead>
@@ -61,31 +57,17 @@
         </td>
         <td>
           <label>{{reportItem.controls['referenceHighLimitValue'].value}}</label>
-
         </td>
         <td>
-          <input class="form-control" type="text" formControlName="result">
-          <small [hidden]="reportItem.controls.result.valid" class="text-danger">
-            测试结果不能为空
-          </small>
+          <label>{{reportItem.controls['result'].value}}</label>
         </td>
         <td>
-          <input class="form-control" type="text" formControlName="comments">
+          <label>{{reportItem.controls['comments'].value}}</label>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
 
-
-  <div>
-    <label class="isaac-margin-25top" for="markAsDone">
-      <input type="checkbox" id="markAsDone" formControlName="markAsDone"/>标记化验完成</label>
-  </div>
-  <div>
-    <button class="btn btn-primary isaac-margin-15top" type="submit" [disabled]="!formModel.valid">提交</button>
-  </div>
-
 </form>
-
 

@@ -87,7 +87,9 @@ public class ReportServiceImpl implements ReportService {
     public boolean updateReport(ReportOperationRequest request) {
 
         ReportEntity reportEntity = getReportById(request);
-        reportEntity.setReportStatus(ReportStatusEnum.FINISHED);
+
+        if (request.getMarkAsDone())
+            reportEntity.setReportStatus(ReportStatusEnum.FINISHED);
         request.updateReport(reportEntity);
         this.reportRepository.save(reportEntity);
         return true;
@@ -152,11 +154,11 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void onFinanceChargeStatusChanged(ChargeOrderStatusChangedMessage message) {
 
-        List<ReportEntity> reports=this.reportRepository.findByUuidIn(message.getChargeItemUuid());
+        List<ReportEntity> reports = this.reportRepository.findByUuidIn(message.getChargeItemUuid());
 
         switch (message.getNewStatus()) {
             case PAID:
-                reports.stream().forEach(r->r.setReportStatus(ReportStatusEnum.PAID));
+                reports.stream().forEach(r -> r.setReportStatus(ReportStatusEnum.PAID));
                 this.reportRepository.save(reports);
                 break;
             case UNPAID:

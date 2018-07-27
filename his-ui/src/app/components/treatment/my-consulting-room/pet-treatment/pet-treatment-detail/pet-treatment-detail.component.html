@@ -7,7 +7,6 @@
 
       <h1 class="page-header">新建化验报告</h1>
 
-
       <form [formGroup]="formModel" novalidate>
 
         <div class="panel panel-default">
@@ -50,6 +49,24 @@
       </button>
     </modal-footer>
   </form>
+</modal>
+
+
+
+<modal cssClass="modal-x1" #viewMedicalTestReportModal (onClose)="onViewMedicalTestReportModalClosed()">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">查看化验报告</h4>
+    </modal-header>
+    <modal-body style="padding: 10px">
+
+      <app-medical-test-report-view [medicalTestReportId]="selectedReportId"></app-medical-test-report-view>
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary"
+              (click)="viewMedicalTestReportModal.close()">关闭
+      </button>
+    </modal-footer>
 </modal>
 
 <div *ngIf="treatmentCase==null" class="isaac-margin-15top">
@@ -122,7 +139,7 @@
           <td>{{getMedicalTestReportStatus(medicalTestReport)}}</td>
           <td>
             <div class="btn-group btn-group-sm">
-              <button type="button" class="btn btn-default btn-s"><span
+              <button (click)="onViewMedicalTestReport(medicalTestReport)" [disabled]="!isMedicalTestFinished(medicalTestReport)" type="button" class="btn btn-default btn-s"><span
                 class="glyphicon glyphicon-search"></span></button>
             </div>
           </td>

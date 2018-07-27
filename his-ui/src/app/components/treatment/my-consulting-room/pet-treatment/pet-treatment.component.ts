@@ -101,8 +101,8 @@ export class PetTreatmentComponent implements OnInit, OnDestroy {
     this.registrationService.updateStatus(this.petInfo.registration.rid, status).subscribe(r => {
       let newReg = this.petInfo.registration;
       newReg.registrationStatus = r;
-      let petInfo = new PetInfo({'id': this.petInfo.pet.id}, this.petInfo.petOwner, newReg);
-      this.petService.setPetInfo(petInfo);
+      this.petInfo.registration=newReg;
+      this.petService.setPetInfo(this.petInfo);
     });
   }
 
