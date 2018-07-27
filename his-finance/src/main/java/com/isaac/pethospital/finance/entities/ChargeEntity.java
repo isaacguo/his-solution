@@ -21,15 +21,23 @@ public class ChargeEntity {
     private String petUuid;
     private String treatmentCaseUuid;
     private LocalDateTime createdDate;
+    private LocalDateTime chargedDate;
     private BigDecimal totalAmount;
     private ChargeStatusEnum status;
     private String uuid;
-    @OneToMany(mappedBy = "charge")
+    @OneToMany(mappedBy = "charge", cascade = CascadeType.ALL)
     @JsonManagedReference("charge-chargeItem")
     private List<ChargeItemEntity> chargeItems = new LinkedList();
-
     public ChargeEntity() {
         this.uuid = UUID.randomUUID().toString();
+    }
+
+    public LocalDateTime getChargedDate() {
+        return chargedDate;
+    }
+
+    public void setChargedDate(LocalDateTime chargedDate) {
+        this.chargedDate = chargedDate;
     }
 
     public String getUuid() {
@@ -46,14 +54,6 @@ public class ChargeEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getChargeUuid() {
-        return chargeUuid;
-    }
-
-    public void setChargeUuid(String chargeUuid) {
-        this.chargeUuid = chargeUuid;
     }
 
     public String getTreatmentCaseUuid() {

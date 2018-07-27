@@ -50,7 +50,9 @@ export class ChargeAdminListComponent implements OnInit {
   }
 
   onPaidClicked(chargeItem: any) {
-    this.financeChargeService.updateStatus(chargeItem.id, "PAID").subscribe(this.loadData);
+    this.financeChargeService.updateStatus(chargeItem.id, "PAID").subscribe(r => {
+      this.loadData();
+    });
   }
 
   onReimbursedClicked(chargeItem: any) {

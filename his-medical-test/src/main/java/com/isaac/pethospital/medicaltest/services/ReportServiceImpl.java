@@ -2,6 +2,7 @@ package com.isaac.pethospital.medicaltest.services;
 
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
+import com.isaac.pethospital.common.jms.finance.ChargeOrderStatusChangedMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.finance.ReportOperationMessage;
@@ -51,15 +52,15 @@ public class ReportServiceImpl implements ReportService {
     public boolean deleteReport(String uuid) {
 
         ReportEntity report = this.reportRepository.findByUuid(uuid);
-        String treatmentCaseUuid=report.getTreatmentCaseUuid();
-        if(StringUtils.isEmpty(treatmentCaseUuid))
-            throw  new RuntimeException("The Report to be deleted cannot be found");
+        String treatmentCaseUuid = report.getTreatmentCaseUuid();
+        if (StringUtils.isEmpty(treatmentCaseUuid))
+            throw new RuntimeException("The Report to be deleted cannot be found");
         this.reportRepository.delete(report);
 
-        MedicalTestDeleteReportMessage message=new MedicalTestDeleteReportMessage();
+        MedicalTestDeleteReportMessage message = new MedicalTestDeleteReportMessage();
         message.setTreatmentCaseUuid(treatmentCaseUuid);
         message.setReportUuid(uuid);
-        jmsSender.sendEvent(this.jmsProperties.getMedicalTestRemovedReportTopic(),message);
+        jmsSender.sendEvent(this.jmsProperties.getMedicalTestRemovedReportTopic(), message);
 
         return true;
     }
@@ -146,6 +147,24 @@ public class ReportServiceImpl implements ReportService {
             }
             this.reportRepository.save(re);
         });
+    }
+
+    @Override
+    public void onFinanceChargeStatusChanged(ChargeOrderStatusChangedMessage message) {
+
+        List<ReportEntity> reports=this.reportRepository.findByUuidIn(message.getChargeItemUuid());
+
+        switch (message.getNewStatus()) {
+            case PAID:
+                reports.stream().forEach(r->r.setReportStatus(ReportStatusEnum.PAID));
+                this.reportRepository.save(reports);
+                break;
+            case UNPAID:
+                break;
+            case REIMBURSED:
+                break;
+        }
+
     }
 
 

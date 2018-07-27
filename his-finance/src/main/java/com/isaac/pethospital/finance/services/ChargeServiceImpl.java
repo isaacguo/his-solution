@@ -1,5 +1,6 @@
 package com.isaac.pethospital.finance.services;
 
+import com.isaac.pethospital.common.jms.finance.ChargeOrderStatusChangedMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
@@ -93,10 +94,20 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
         ChargeEntity charge = this.jpaRepository.findOne(id);
         if (charge == null)
             throw new RuntimeException("Cannot find Charge");
+
+        ChargeStatusEnum previousStatus = charge.getStatus();
         charge.setStatus(request.getChargeStatus());
         this.jpaRepository.save(charge);
 
+        ChargeOrderStatusChangedMessage message = new ChargeOrderStatusChangedMessage();
+        message.setChargeItemUuid(charge.getChargeItems().stream().map(r -> r.getChargeItemUuid()).collect(Collectors.toList()));
+        message.setPetOwnerUuid(charge.getPetOwnerUuid());
+        message.setPetUuid(charge.getPetUuid());
+        message.setTreatmentCaseUuid(charge.getTreatmentCaseUuid());
+        message.setPreviousStatus(previousStatus);
+        message.setNewStatus(request.getChargeStatus());
 
+        this.jmsSender.sendEvent(jmsProperties.getFinanceChargeStatusChangedTopic(), message);
 
         return true;
     }

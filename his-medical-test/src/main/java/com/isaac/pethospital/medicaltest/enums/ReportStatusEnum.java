@@ -5,6 +5,7 @@ public enum ReportStatusEnum {
     UNSUBMITTED("UNSUBMITTED"),
     UNPAID("UNPAID"),
     PAID("PAID"),
+    TESTING("TESTING"),
     FINISHED("FINISHED");
 
     ReportStatusEnum(String text) {

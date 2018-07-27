@@ -8,11 +8,20 @@ public class JmsProperties {
     String financePriceItemOperationQueue;
     String financeChargeItemOperationQueue;
     String financeChargeItemOperationReplyTopic;
+    String financeChargeStatusChangedTopic;
     String procurementApprovalPassedTopic;
     String treatmentGenerateMedicalTestOrderTopic;
     String employeeUseraccountOperationTopic;
     String medicalTestCreateReportTopic;
     String medicalTestRemovedReportTopic;
+
+    public String getFinanceChargeStatusChangedTopic() {
+        return financeChargeStatusChangedTopic;
+    }
+
+    public void setFinanceChargeStatusChangedTopic(String financeChargeStatusChangedTopic) {
+        this.financeChargeStatusChangedTopic = financeChargeStatusChangedTopic;
+    }
 
     public String getMedicalTestRemovedReportTopic() {
         return medicalTestRemovedReportTopic;

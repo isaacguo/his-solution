@@ -15,7 +15,9 @@ export class FinanceChargeService extends CrudService {
   }
 
   updateStatus(id: number, status: string): Observable<boolean> {
-    return this.authHttp.post(`${this.rootUrl}/${id}/updateStatus`, {'chargeStatus': status}).map(this.extractData);
+    return this.authHttp.post(`${this.rootUrl}/${id}/updateStatus`, {'chargeStatus': status}).map(r => {
+      return this.extractTextData(r) === "true" ? true : false;
+    });
   }
 
 

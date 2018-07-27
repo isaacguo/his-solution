@@ -1,9 +1,11 @@
 package com.isaac.pethospital.medicaltest.services;
 
+import com.isaac.pethospital.common.jms.finance.ChargeOrderStatusChangedMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
+import com.isaac.pethospital.medicaltest.jms.FinanceChargeStatusChangedListener;
 
 import java.util.List;
 
@@ -26,4 +28,6 @@ public interface ReportService {
     void onGenerateMedicalTestOrder(GenerateMedicalTestOrderMessage message);
 
     void onChargeItemEvent(ChargeReportOperationReplyMessage message);
+
+    void onFinanceChargeStatusChanged(ChargeOrderStatusChangedMessage message);
 }

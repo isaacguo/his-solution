@@ -13,6 +13,7 @@ public class ReportOperationMessage {
         this.reportUuid = reportUuid;
     }
 
+
     public String getReportTemplateUuid() {
         return reportTemplateUuid;
     }
