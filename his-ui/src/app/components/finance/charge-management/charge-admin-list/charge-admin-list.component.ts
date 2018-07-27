@@ -58,4 +58,9 @@ export class ChargeAdminListComponent implements OnInit {
   onReimbursedClicked(chargeItem: any) {
 
   }
+
+  isPaid(status: any):boolean {
+    return this.getStatusText(status)===ChargeStatusEnum.PAID;
+
+  }
 }

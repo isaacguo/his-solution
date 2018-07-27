@@ -41,6 +41,7 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
 
   petInfo: PetInfo;
   petInfoChangeSubscription: Subscription;
+  prescriptions: any[] = [];
 
   ngOnDestroy(): void {
     this.petInfoChangeSubscription.unsubscribe();

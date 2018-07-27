@@ -24,12 +24,11 @@ export class MedicalTestReportViewComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.initForm();
+
 
   }
 
-  process()
-  {
+  process() {
     if(this.medicalTestReportId==undefined || this.medicalTestReportId==null)
     {
       return;
@@ -91,6 +90,7 @@ export class MedicalTestReportViewComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.initForm();
     this.process();
   }
 
