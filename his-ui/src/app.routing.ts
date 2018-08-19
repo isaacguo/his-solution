@@ -73,6 +73,10 @@ import {ExportManagementComponent} from "./app/components/inventory/export-manag
 import {InventorySettingsComponent} from './app/components/inventory/inventory-settings/inventory-settings.component';
 import {PriceManagementComponent} from "./app/components/finance/price-management/price-management.component";
 import {PriceManagementGuard} from "./app/guards/finance/price-management.guard";
+import {InventorySettingsWarehourseComponent} from "./app/components/inventory/inventory-settings/inventory-settings-warehourse/inventory-settings-warehourse.component";
+import {InventoryItemCreateUpdateComponent} from "./app/components/inventory/inventory-item-create-update/inventory-item-create-update.component";
+import {ImportSheetCreateUpdateComponent} from "./app/components/inventory/import-sheet-create-update/import-sheet-create-update.component";
+import {InventorySettingsItemManagementComponent} from "./app/components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component";
 
 
 const appRoutes: Routes = [
@@ -364,6 +368,10 @@ const appRoutes: Routes = [
         component: ImportManagementComponent
       },
       {
+        path: 'inventory-import/:operation',
+        component: ImportSheetCreateUpdateComponent
+      },
+      {
         path: 'inventory-export-management',
         component: ExportManagementComponent
       },
@@ -372,8 +380,22 @@ const appRoutes: Routes = [
         component: InventoryQueryComponent
       },
       {
+        path: 'inventory-item/:operation/:updateId',
+        component: InventoryItemCreateUpdateComponent
+      },
+      {
         path: 'inventory-settings',
-        component: InventorySettingsComponent
+        component: InventorySettingsComponent,
+        children: [
+          {
+            path: 'warehouses',
+            component: InventorySettingsWarehourseComponent
+          },
+          {
+            path:'item-management',
+            component:InventorySettingsItemManagementComponent
+          }
+        ]
       },
       {
         path: 'analysis',

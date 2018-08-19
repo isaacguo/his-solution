@@ -152,12 +152,23 @@ import {InventorySettingsComponent} from './components/inventory/inventory-setti
 import {ImportManagementListComponent} from './components/inventory/import-management/import-management-list/import-management-list.component';
 import {ImportManagementDetailComponent} from './components/inventory/import-management/import-management-list/import-management-detail/import-management-detail.component';
 import {InventoryOperationToolBarComponent} from './components/inventory/inventory-operation-tool-bar/inventory-operation-tool-bar.component';
-import {ProductImportReceiptService} from "./services/medicine/product-import-receipt.service";
+import {ProductImportReceiptService} from "./services/inventory/product-import-receipt.service";
 import {PriceManagementComponent} from './components/finance/price-management/price-management.component';
 import {PriceAdminListComponent} from './components/finance/price-management/price-admin-list/price-admin-list.component';
 import {PriceManagementGuard} from "./guards/finance/price-management.guard";
 import {FinanceChargeService} from "./services/finance/finance-charge.service";
 import {MedicalTestReportViewComponent} from './components/medical-test/medical-test-report-view/medical-test-report-view.component';
+import {InventorySettingsWarehourseComponent} from './components/inventory/inventory-settings/inventory-settings-warehourse/inventory-settings-warehourse.component';
+import {InventoryQueryListComponent} from './components/inventory/inventory-query/inventory-query-list/inventory-query-list.component';
+import {InventoryCategoryService} from "./services/inventory/inventory-category.service";
+import {InventoryItemService} from "./services/inventory/inventory-item.service";
+import {InventoryItemCreateUpdateComponent} from './components/inventory/inventory-item-create-update/inventory-item-create-update.component';
+import {ImportSheetCreateUpdateComponent} from './components/inventory/import-sheet-create-update/import-sheet-create-update.component';
+import {ExportSheetCreateUpdateComponent} from './components/inventory/export-sheet-create-update/export-sheet-create-update.component';
+import {InventoryImportSheetService} from "./services/inventory/inventory-import-sheet.service";
+import {InventoryExportSheetService} from "./services/inventory/inventory-export-sheet.service";
+import { InventorySettingsItemManagementComponent } from './components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component';
+import { InventorySettingsItemManagementDetailComponent } from './components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management-detail/inventory-settings-item-management-detail.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -276,8 +287,14 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     InventoryOperationToolBarComponent,
     PriceManagementComponent,
     PriceAdminListComponent,
-    MedicalTestReportViewComponent
-
+    MedicalTestReportViewComponent,
+    InventorySettingsWarehourseComponent,
+    InventoryQueryListComponent,
+    InventoryItemCreateUpdateComponent,
+    ImportSheetCreateUpdateComponent,
+    ExportSheetCreateUpdateComponent,
+    InventorySettingsItemManagementComponent,
+    InventorySettingsItemManagementDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -342,10 +359,17 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestDepartmentService,
 
 
+    //inventory
+    InventoryCategoryService,
+    InventoryItemService,
+    InventoryManagementGuard,
+
+    ProductImportReceiptService,
+    InventoryImportSheetService,
+    InventoryExportSheetService,
+
     //medicine
     MedicineManagementGuard,
-    InventoryManagementGuard,
-    ProductImportReceiptService,
 
 
     //settings

@@ -28,3 +28,16 @@
     [showTitle]="false"></app-medical-test-settings-report>
 
 </div>
+
+<div *ngIf="selectedModule==='库房模块'">
+
+  <app-inventory-settings-item-management
+    [financePriceService]="financePriceService"
+    [canDelete]="false"
+    [canEdit]="false"
+    [canShowAmount]="false"
+    [canCreateNewItem]="false"
+    [showToolBox]="false"
+    ></app-inventory-settings-item-management>
+
+</div>

@@ -1,0 +1,153 @@
+<div class="row">
+  <h1 class="page-header">新建入库单</h1>
+</div>
+
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{resultText}}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+
+  <input type="hidden" formControlName="id">
+
+  <div class="form-group isaac-margin-15top">
+    <label for="sheetNumber">入库编号</label>
+    <input id="sheetNumber" type="text" class="form-control" formControlName="sheetNumber">
+  </div>
+
+
+  <div class="form-group isaac-margin-15top">
+    <label for="vendor">供应商</label>
+    <input id="vendor" type="text" class="form-control" formControlName="vendor">
+  </div>
+
+  <div class="form-group isaac-margin-15top">
+    <label for="vendorContact">供应商联系人</label>
+    <input id="vendorContact" type="text" class="form-control" formControlName="vendorContact">
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="comments">备注</label> <span color="red" class="text-danger"
+                                       [hidden]="formModel.controls.comments.valid">*</span>
+    <input id="comments" type="text" class="form-control" formControlName="comments">
+  </div>
+
+  <div class="form-group">
+    <input type="hidden" formControlName="id">
+    <label for="operator">经办人</label> <span color="red" class="text-danger"
+                                        [hidden]="formModel.controls.operator.valid">*</span>
+    <input id="operator" type="text" class="form-control" formControlName="operator">
+    <small *ngIf="!formModel.controls.operator.valid" class="text-danger">
+      经办人不能为空
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="auditor">核对人</label> <span color="red" class="text-danger"
+                                        [hidden]="formModel.controls.auditor.valid">*</span>
+    <input id="auditor" type="text" class="form-control" formControlName="auditor">
+    <small *ngIf="!formModel.controls.auditor.valid" class="text-danger">
+      核对人不能为空
+    </small>
+  </div>
+
+  <div class="isaac-margin-15top" formArrayName="importItemList">
+    <label>检查项目</label>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>单位</th>
+        <th>规格</th>
+        <th>数量</th>
+        <th>单价</th>
+        <th>金额</th>
+        <th>备注</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let importItem of importItemListData.controls; let i=index" [formGroupName]="i">
+        <td>{{i+1}}</td>
+        <td><input class="form-control" type="text" formControlName="name">
+          <small [hidden]="importItem.controls.name.valid" class="text-danger">
+            检测项名称不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="unit">
+          <small [hidden]="importItem.controls.unit.valid" class="text-danger">
+            单位不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="specification">
+          <small [hidden]="importItem.controls.specification.valid" class="text-danger">
+            参考值(下限)不能为空
+          </small>
+        </td>
+
+        <td>
+          <input class="form-control" type="text" formControlName="amount">
+          <small [hidden]="importItem.controls.amount.valid" class="text-danger">
+            参考值(下限)不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="pricePerUnit">
+          <small [hidden]="importItem.controls.pricePerUnit.valid" class="text-danger">
+            参考值(上限)不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="totalPrice">
+          <small [hidden]="importItem.controls.totalPrice.valid" class="text-danger">
+            参考值(上限)不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="comments">
+        </td>
+        <td>
+       <span class="glyphicon glyphicon-remove"
+             (click)="removeItem(i)">
+                </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="isaac-margin-top">
+    <a (click)="addItem()" style="cursor: default">
+      添加新入库产品 +
+    </a>
+  </div>
+
+  <!--
+  <div class="form-group isaac-margin-15top">
+    <label for="address">公司地址</label>
+    <input id="address" type="text" class="form-control" formControlName="address">
+  </div>
+  -->
+
+  <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
+
+</form>
+
+
+

@@ -1,26 +1,18 @@
-<div class="row">
-  <h1 class="page-header">药品查询</h1>
+<div *ngIf="showTitle" class="row">
+  <h1 class="page-header">库存查询</h1>
+
 </div>
+
+<app-inventory-query-list [canEdit]="canEdit"
+                          [canDelete]="canDelete"
+                          [financeChargeService]="financePriceService"
+                          [canCreateNewItem]="canCreateNewItem"
+                          [showToolBox]="showToolBox"></app-inventory-query-list>
+
+
+<!--
 <div class="row">
 
-  <!--
-    <div class="navbar-default sidebar sidebar-2nd-level subsidebar " role="navigation">
-      <div class="sidebar-nav">
-        <h4>库房</h4>
-        <ul class="nav" id="side-menu2">
-          <li>
-            <a href="javascript:void(0)"> <input type="checkbox"/> 全部库房</a>
-            <ul class="nav nav-third-level">
-              <li><a href="javascript:void(0)"> <input type="checkbox"/> 库房1</a></li>
-              <li><a href="javascript:void(0)"> <input type="checkbox"/> 库房2</a></li>
-              <li><a href="javascript:void(0)"> <input type="checkbox"/> 库房3</a></li>
-              <li><a href="javascript:void(0)"> <input type="checkbox"/> 库房4</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-    -->
   <div class="mysidebar col-md-2">
     <h4>库房</h4>
     <div>
@@ -63,4 +55,5 @@
   </div>
 
 </div>
+-->
 

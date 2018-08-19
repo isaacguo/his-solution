@@ -123,6 +123,7 @@ export class VendorCreateUpdateComponent extends AbstractCreateUpdateComponent i
     this.vendorService.createVendor(this.formModel.value).subscribe(r => {
       if (r.id > 0) {
         this.vendorCreationResultText = "供应商信息添加成功";
+
         this.confirmCreateModal.open();
       }
     });

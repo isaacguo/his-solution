@@ -20,6 +20,8 @@ public class EmployeeConfiguration {
         return new HanyuPinyinConverter();
     }
 
+
+
     @Bean
     public AuthHelper getAuthHelper() {
         return new AuthHelper();

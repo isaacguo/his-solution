@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FinancePriceService} from "../../../services/finance/finance-price.service";
 
 @Component({
   selector: 'app-inventory-query',
@@ -7,35 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryQueryComponent implements OnInit {
 
+  @Input()
+  showToolBox: boolean = false;
+  @Input()
+  showTitle: boolean = true;
+  @Input()
+  canCreateNewItem: boolean = false;
+  @Input()
+  canDelete: boolean = false;
+  @Input()
+  canEdit: boolean = false;
+  @Input()
+  financePriceService: FinancePriceService;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  nodes = [
-    {
-      id: 1,
-      name: 'root1',
-      children: [
-        { id: 2, name: 'child1' },
-        { id: 3, name: 'child2' }
-      ]
-    },
-    {
-      id: 4,
-      name: 'root2',
-      children: [
-        { id: 5, name: 'child2.1' },
-        {
-          id: 6,
-          name: 'child2.2',
-          children: [
-            { id: 7, name: 'subsub' }
-          ]
-        }
-      ]
-    }
-  ];
-  options = {};
 
 }

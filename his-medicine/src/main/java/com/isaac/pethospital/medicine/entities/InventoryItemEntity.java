@@ -1,30 +1,43 @@
 package com.isaac.pethospital.medicine.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
 public class InventoryItemEntity {
 
+
     String uuid;
     String inventoryItemId; //货品编码
     String name; //名称
+    String unit; //单位
     String specification; //规格
-    String batch; //批次
     String number; //数量
-    @ManyToOne
-    ProductImportReceiptEntity importReceipt;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne()
+    @JsonBackReference("InventoryCategoryEntity-InventoryItemEntity")
+    private InventoryCategoryEntity category;
 
-    public ProductImportReceiptEntity getImportReceipt() {
-        return importReceipt;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setImportReceipt(ProductImportReceiptEntity importReceipt) {
-        this.importReceipt = importReceipt;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
+
+    public InventoryCategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(InventoryCategoryEntity category) {
+        this.category = category;
+    }
+
 
     public Long getId() {
         return id;
@@ -66,13 +79,6 @@ public class InventoryItemEntity {
         this.specification = specification;
     }
 
-    public String getBatch() {
-        return batch;
-    }
-
-    public void setBatch(String batch) {
-        this.batch = batch;
-    }
 
     public String getNumber() {
         return number;

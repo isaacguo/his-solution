@@ -31,6 +31,7 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
   @Input()
   categoryId: number;
   @ViewChild("confirmDeletionModal") confirmDeletionModal: ModalComponent;
+
   medicalTestReports: MedicalTestReportTemplate[];
 
   constructor(public router: Router,

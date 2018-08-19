@@ -15,14 +15,13 @@ public class AbstractCRUDRestController<T, R> implements CrudRestController<T, R
 
     @Override
     @PostMapping
-    public T create(R request) {
+    public T create(@RequestBody  R request) {
         return this.crudService.create(request);
     }
 
     @Override
     @GetMapping("{id}")
     public T readOne(@PathVariable("id") Long id)
-
     {
         return this.crudService.readOne(id);
     }
@@ -34,14 +33,14 @@ public class AbstractCRUDRestController<T, R> implements CrudRestController<T, R
     }
 
     @Override
-    @PutMapping("id")
-    public T update(R request) {
+    @PutMapping("{id}")
+    public T update(@RequestBody  R request) {
         return this.crudService.update(request);
     }
 
     @Override
-    @DeleteMapping
-    public boolean deleteOne(Long id) {
+    @DeleteMapping("{id}")
+    public boolean deleteOne(@PathVariable  Long id) {
         return this.crudService.deleteOne(id);
     }
 }

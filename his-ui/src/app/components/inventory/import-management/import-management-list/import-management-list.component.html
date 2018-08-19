@@ -18,13 +18,14 @@
         <tbody>
         <tr *ngFor="let importReceipt of importReceipts" (click)="onRowClicked(importReceipt) "
             [class.info]="isRowSelected(importReceipt)">
-          <td>{{importReceipt.receiptId}}</td>
-          <td>{{importReceipt.vendorId}}</td>
-          <td>{{importReceipt.vendorName}}</td>
+          <td>{{importReceipt.sheetNumber}}</td>
+          <td>{{importReceipt.vendor}}</td>
+          <td>{{importReceipt.vendor}}</td>
           <td>{{importReceipt.vendorContact}}</td>
           <td>{{getImportReceiptItemCount(importReceipt)}}</td>
           <td>{{getImportReceiptTotalSum(importReceipt)}}</td>
-          <td>{{importReceipt.createdDate| date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
+          <td>{{importReceipt.importTime| date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
+          <td>{{importReceipt.operator }}</td>
           <td>{{importReceipt.auditor }}</td>
         </tr>
         </tbody>

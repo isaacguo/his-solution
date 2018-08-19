@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {PetInfo} from "../../../../services/treatment/pet.service";
 import {PetOperationRequest} from "../../../../dto/treatment/pet.operation.request";
-import {ProductImportReceiptService} from "../../../../services/medicine/product-import-receipt.service";
+import {ProductImportReceiptService} from "../../../../services/inventory/product-import-receipt.service";
+import {InventoryImportSheetService} from "../../../../services/inventory/inventory-import-sheet.service";
 
 @Component({
   selector: 'app-import-management-list',
@@ -13,7 +14,7 @@ export class ImportManagementListComponent implements OnInit {
 
   importReceipts: any[] = [];
 
-  constructor(private productImportReceiptService: ProductImportReceiptService) {
+  constructor(private inventoryImportSheetService:InventoryImportSheetService) {
   }
 
   ngOnInit() {
@@ -21,7 +22,7 @@ export class ImportManagementListComponent implements OnInit {
   }
 
   loadData() {
-    this.productImportReceiptService.readAll().subscribe(r => {
+    this.inventoryImportSheetService.readAll().subscribe(r => {
       this.importReceipts = r;
     })
   }
@@ -37,12 +38,14 @@ export class ImportManagementListComponent implements OnInit {
     return this.selectedImportReceipt == importReceipt;
   }
 
-  getImportReceiptItemCount(importReceipt: any) {
+  getImportReceiptItemCount(importReceipt: any):string {
 
+    return "a";
   }
 
 
-  getImportReceiptTotalSum(importReceipt: any) {
+  getImportReceiptTotalSum(importReceipt: any):string {
 
+    return "b";
   }
 }

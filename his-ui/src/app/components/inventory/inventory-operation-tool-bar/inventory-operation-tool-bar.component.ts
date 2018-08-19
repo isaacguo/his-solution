@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {OperationEnum} from "../../../enums/operation.enum";
 
 @Component({
   selector: 'app-inventory-operation-tool-bar',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryOperationToolBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  onCreateNewImportSheet() {
+      this.router.navigate(['inventory-import', OperationEnum.CREATE]);
+  }
 }
