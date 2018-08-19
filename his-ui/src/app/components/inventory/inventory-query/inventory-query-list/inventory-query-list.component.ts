@@ -16,7 +16,7 @@ export class InventoryQueryListComponent extends AbstractCategoryListComponent i
   @Input()
   canEdit: boolean = true;
   @Input()
-  financeChargeService: FinancePriceService;
+  financePriceService: FinancePriceService;
   @Input()
   canShowAmount:boolean=true;
   @Input()
