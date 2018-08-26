@@ -1,10 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {VendorService} from "../../../services/procurement/vendor.service";
 import {InventoryImportSheetService} from "../../../services/inventory/inventory-import-sheet.service";
 import {AbstractCreateUpdateComponent} from "../../common/abstract-create-update.component";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {Observable} from "rxjs/Observable";
+import {InventoryItemService} from "../../../services/inventory/inventory-item.service";
 
 @Component({
   selector: 'app-import-sheet-create-update',
@@ -16,9 +18,32 @@ export class ImportSheetCreateUpdateComponent extends AbstractCreateUpdateCompon
   @ViewChild("confirmCreateModal") confirmCreateModal: ModalComponent;
   formModel: FormGroup;
 
-  constructor(public router: Router, public route: ActivatedRoute, private fb: FormBuilder, private inventoryImportSheetService: InventoryImportSheetService) {
+  constructor(public router: Router,
+              public route: ActivatedRoute,
+              private fb: FormBuilder,
+              private inventoryImportSheetService: InventoryImportSheetService,
+              private inventoryItemService:InventoryItemService) {
     super(route);
+
+    this.searchInput.valueChanges
+      .debounceTime(200)
+      .switchMap(name => {
+
+        if (name === "") {
+          return Observable.of([]);
+        }
+        else {
+          return this.inventoryItemService.findByNameContains(name);
+        }
+      })
+      .subscribe(r => {
+        this.searchedItems = r;
+      })
   }
+
+  searchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
+
+  searchedItems: any[] = [];
 
   private initForm() {
     this.formModel = this.fb.group({
@@ -29,23 +54,26 @@ export class ImportSheetCreateUpdateComponent extends AbstractCreateUpdateCompon
       'vendorContact': [''],
       'operator': [''],
       'auditor': [''],
-      'importItemList': this.fb.array([
-        this.initImportItem()
-      ]),
+      'importItemList':this.fb.array([]),
+      // 'importItemList': this.fb.array([
+      //   this.initImportItem()
+      // ]),
       'comments':['']
     })
   }
 
 
-  private initImportItem() {
+  private initImportItem(item:any) {
     return this.fb.group({
-      'name': ['', Validators.required],
-      'unit': ['', Validators.required],
-      'specification': [''],
-      'amount':[''],
-      'pricePerUnit': [''],
-      'totalPrice': [''],
-      'comments': ['']
+      'name': [item.name, Validators.required],
+      'unit': [item.unit, Validators.required],
+      'specification': [item.specification,Validators.required],
+      'amount':['',[Validators.required,Validators.pattern(/^-?\d*(\.\d+)?$/)]],
+      'batchNumber':['',Validators.required],
+      'pricePerUnit': ['',[Validators.required,Validators.pattern(/^-?\d*(\.\d+)?$/)]],
+      'totalPrice': ['',[Validators.required,Validators.pattern(/^-?\d*(\.\d+)?$/)]],
+      'comments': [''],
+      'inventoryItemId':[item.id]
     })
   }
 
@@ -82,9 +110,22 @@ export class ImportSheetCreateUpdateComponent extends AbstractCreateUpdateCompon
   }
 
 
-  addItem() {
+  addItem(item:any) {
     // add address to the list
     const control = <FormArray>this.formModel.controls['importItemList'];
-    control.push(this.initImportItem());
+
+    control.push(this.initImportItem(item));
+
+  }
+
+  stopPropagation($event) {
+    event.stopPropagation()
+  }
+
+  onSearchedItemSelected(item:any)
+  {
+    this.addItem(item);
+    this.searchInput.setValue("");
+
   }
 }

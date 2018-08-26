@@ -1,7 +1,9 @@
 package com.isaac.pethospital.medicine.dtos;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.medicine.entities.InventoryItemEntity;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class InventoryItemOperationRequest
@@ -79,14 +81,15 @@ public class InventoryItemOperationRequest
         this.categoryId = categoryId;
     }
 
-    public InventoryItemEntity toEntity
-            ()
+    public InventoryItemEntity toEntity(HanyuPinyinConverter converter)
     {
         InventoryItemEntity iie=new InventoryItemEntity();
         iie.setInventoryItemId(this.inventoryItemId);
         iie.setName(this.name);
+        iie.setNameHanYuPinYin(converter.toHanyuPinyin(this.name));
         iie.setSpecification(this.specification);
         iie.setUnit(this.unit);
+        iie.setAmount(new BigDecimal(0));
         iie.setUuid(UUID.randomUUID().toString());
         return iie;
     }

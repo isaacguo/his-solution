@@ -11,14 +11,6 @@ import java.util.UUID;
 @Entity
 public class ImportSheetEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @OneToMany(mappedBy = "importSheet", cascade = CascadeType.ALL)
-    @JsonManagedReference("ImportSheetEntity-ImportItemEntity")
-    private List<ImportItemEntity> importItemList = new LinkedList<>();
-
     String uuid;
     String sheetNumber;
     String vendor;
@@ -26,15 +18,25 @@ public class ImportSheetEntity {
     LocalDateTime importTime;
     String operator;
     String auditor;
-
+    String batchNumber;
     String comments;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany(mappedBy = "importSheet", cascade = CascadeType.ALL)
+    @JsonManagedReference("ImportSheetEntity-ImportItemEntity")
+    private List<ImportItemEntity> importItemList = new LinkedList<>();
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
 
     public String getComments() {
         return comments;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public void setComments(String comments) {
@@ -60,7 +62,6 @@ public class ImportSheetEntity {
         this.importItemList.add(importItem);
     }
 
-
     public void removeImportItem(ImportItemEntity importItem) {
         if (importItem == null)
             throw new RuntimeException("Import Item is null");
@@ -72,6 +73,9 @@ public class ImportSheetEntity {
         return uuid;
     }
 
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getSheetNumber() {
         return sheetNumber;
@@ -80,7 +84,6 @@ public class ImportSheetEntity {
     public void setSheetNumber(String sheetNumber) {
         this.sheetNumber = sheetNumber;
     }
-
 
 
     public LocalDateTime getImportTime() {

@@ -77,6 +77,7 @@ import {InventorySettingsWarehourseComponent} from "./app/components/inventory/i
 import {InventoryItemCreateUpdateComponent} from "./app/components/inventory/inventory-item-create-update/inventory-item-create-update.component";
 import {ImportSheetCreateUpdateComponent} from "./app/components/inventory/import-sheet-create-update/import-sheet-create-update.component";
 import {InventorySettingsItemManagementComponent} from "./app/components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component";
+import {ExportSheetCreateUpdateComponent} from "./app/components/inventory/export-sheet-create-update/export-sheet-create-update.component";
 
 
 const appRoutes: Routes = [
@@ -374,6 +375,10 @@ const appRoutes: Routes = [
       {
         path: 'inventory-export-management',
         component: ExportManagementComponent
+      },
+      {
+        path: 'inventory-export/:operation',
+        component: ExportSheetCreateUpdateComponent
       },
       {
         path: 'inventory-query',

@@ -6,11 +6,12 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class ImportItemEntity {
+public class ExportItemEntity {
 
     @ManyToOne()
-    @JsonBackReference("ImportSheetEntity-ImportItemEntity")
-    ImportSheetEntity importSheet;
+    @JsonBackReference("ExportSheetEntity-ExportItemEntity")
+    ExportSheetEntity exportSheet;
+
     String name;
     String unit;
     String specification;
@@ -21,6 +22,16 @@ public class ImportItemEntity {
     String nameHanYuPinYin;
 
     Long inventoryItemId;
+
+
+    public ExportSheetEntity getExportSheet() {
+        return exportSheet;
+    }
+
+    public void setExportSheet(ExportSheetEntity exportSheet) {
+        this.exportSheet = exportSheet;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,13 +60,6 @@ public class ImportItemEntity {
         this.id = id;
     }
 
-    public ImportSheetEntity getImportSheet() {
-        return importSheet;
-    }
-
-    public void setImportSheet(ImportSheetEntity importSheet) {
-        this.importSheet = importSheet;
-    }
 
     public BigDecimal getAmount() {
         return amount;

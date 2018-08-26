@@ -22,7 +22,8 @@ export class CrudService extends AbstractService {
   }
 
   update(id:number,dto: any): Observable<any> {
-    return this.authHttp.put(`${this.rootUrl}/${id}`, dto).map(this.extractData);
+    return this.authHttp.put(`${this.rootUrl}/${id}`, dto)
+
   }
 
   deleteOne(id: number): Observable<boolean> {

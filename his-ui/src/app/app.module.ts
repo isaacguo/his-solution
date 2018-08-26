@@ -169,6 +169,8 @@ import {InventoryImportSheetService} from "./services/inventory/inventory-import
 import {InventoryExportSheetService} from "./services/inventory/inventory-export-sheet.service";
 import { InventorySettingsItemManagementComponent } from './components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component';
 import { InventorySettingsItemManagementDetailComponent } from './components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management-detail/inventory-settings-item-management-detail.component';
+import { ExportManagementListComponent } from './components/inventory/export-management/export-management-list/export-management-list.component';
+import { ExportManagementDetailComponent } from './components/inventory/export-management/export-management-list/export-management-detail/export-management-detail.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -295,6 +297,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ExportSheetCreateUpdateComponent,
     InventorySettingsItemManagementComponent,
     InventorySettingsItemManagementDetailComponent,
+    ExportManagementListComponent,
+    ExportManagementDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 package com.isaac.pethospital.medicine.dtos;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.medicine.entities.ImportItemEntity;
 import com.isaac.pethospital.medicine.entities.ImportSheetEntity;
 
@@ -18,8 +19,22 @@ public class ImportSheetOperationRequest {
     String operator;
     String auditor;
     String comments;
+    String batchNumber;
+
+
+
+
+
     private Long id;
     private List<ImportItemEntity> importItemList = new LinkedList<>();
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
 
     public Long getId() {
         return id;
@@ -93,7 +108,7 @@ public class ImportSheetOperationRequest {
         this.auditor = auditor;
     }
 
-    public ImportSheetEntity toImportSheet() {
+    public ImportSheetEntity toImportSheet(HanyuPinyinConverter converter) {
         ImportSheetEntity sheet = new ImportSheetEntity();
         sheet.setUuid(UUID.randomUUID().toString());
         sheet.setAuditor(this.auditor);
@@ -103,18 +118,20 @@ public class ImportSheetOperationRequest {
         sheet.setVendor(this.vendor);
         sheet.setVendorContact(this.vendorContact);
         sheet.setComments(this.comments);
+        sheet.setBatchNumber(this.batchNumber);
         this.importItemList.forEach(r -> {
             ImportItemEntity importItemEntity = new ImportItemEntity();
             importItemEntity.setName(r.getName());
+            importItemEntity.setNameHanYuPinYin(converter.toHanyuPinyin(r.getName()));
             importItemEntity.setComments(r.getComments());
             importItemEntity.setPricePerUnit(r.getPricePerUnit());
             importItemEntity.setSpecification(r.getSpecification());
             importItemEntity.setUnit(r.getUnit());
             importItemEntity.setAmount(r.getAmount());
             importItemEntity.setTotalPrice(r.getAmount().multiply(r.getPricePerUnit()));
+            importItemEntity.setInventoryItemId(r.getInventoryItemId());
             sheet.addImportItem(importItemEntity);
         });
-
         return sheet;
     }
 }

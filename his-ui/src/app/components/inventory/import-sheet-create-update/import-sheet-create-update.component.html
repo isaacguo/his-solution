@@ -16,55 +16,107 @@
   </form>
 </modal>
 
+
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
 
-  <input type="hidden" formControlName="id">
 
-  <div class="form-group isaac-margin-15top">
-    <label for="sheetNumber">入库编号</label>
-    <input id="sheetNumber" type="text" class="form-control" formControlName="sheetNumber">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      基本信息
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <input type="hidden" formControlName="id">
+          <div class="form-group">
+            <label for="sheetNumber">入库编号</label>
+            <input id="sheetNumber" type="text" class="form-control" formControlName="sheetNumber">
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="form-group ">
+            <label for="vendor">供应商</label>
+            <input id="vendor" type="text" class="form-control" formControlName="vendor">
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="form-group ">
+            <label for="vendorContact">供应商联系人</label>
+            <input id="vendorContact" type="text" class="form-control" formControlName="vendorContact">
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <input type="hidden" formControlName="id">
+            <label for="operator">经办人</label> <span color="red" class="text-danger"
+                                                    [hidden]="formModel.controls.operator.valid">*</span>
+            <input id="operator" type="text" class="form-control" formControlName="operator">
+            <small *ngIf="!formModel.controls.operator.valid" class="text-danger">
+              经办人不能为空
+            </small>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="auditor">核对人</label> <span color="red" class="text-danger"
+                                                   [hidden]="formModel.controls.auditor.valid">*</span>
+            <input id="auditor" type="text" class="form-control" formControlName="auditor">
+            <small *ngIf="!formModel.controls.auditor.valid" class="text-danger">
+              核对人不能为空
+            </small>
+          </div>
+
+        </div>
+
+
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="comments">备注</label> <span color="red" class="text-danger"
+                                                   [hidden]="formModel.controls.comments.valid">*</span>
+            <input id="comments" type="text" class="form-control" formControlName="comments">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
-  <div class="form-group isaac-margin-15top">
-    <label for="vendor">供应商</label>
-    <input id="vendor" type="text" class="form-control" formControlName="vendor">
-  </div>
 
-  <div class="form-group isaac-margin-15top">
-    <label for="vendorContact">供应商联系人</label>
-    <input id="vendorContact" type="text" class="form-control" formControlName="vendorContact">
-  </div>
+  <div class="isaac-margin-top">
+    <span>添加新入库商品</span>
+    <div class="form-inline">
+      <div>
+        <div class="dropdown" [class.open]="searchedItems.length>0">
 
+          <input autocomplete="off" (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+                 (focus)="stopPropagation($event)"
+                 type="text" class="form-control dropdown-toggle"
+                 placeholder="请输入物品名称的汉语拼音" [formControl]="searchInput"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2"
+          >
+          <small [hidden]="searchInput.valid || searchInput.pristine" class="text-danger">
+            最少1个字符
+          </small>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li *ngFor="let searchedItem of searchedItems">
+              <a href="javascript:void(0)" (click)="onSearchedItemSelected(searchedItem)">{{searchedItem.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-
-  <div class="form-group">
-    <label for="comments">备注</label> <span color="red" class="text-danger"
-                                       [hidden]="formModel.controls.comments.valid">*</span>
-    <input id="comments" type="text" class="form-control" formControlName="comments">
-  </div>
-
-  <div class="form-group">
-    <input type="hidden" formControlName="id">
-    <label for="operator">经办人</label> <span color="red" class="text-danger"
-                                        [hidden]="formModel.controls.operator.valid">*</span>
-    <input id="operator" type="text" class="form-control" formControlName="operator">
-    <small *ngIf="!formModel.controls.operator.valid" class="text-danger">
-      经办人不能为空
-    </small>
-  </div>
-
-  <div class="form-group">
-    <label for="auditor">核对人</label> <span color="red" class="text-danger"
-                                        [hidden]="formModel.controls.auditor.valid">*</span>
-    <input id="auditor" type="text" class="form-control" formControlName="auditor">
-    <small *ngIf="!formModel.controls.auditor.valid" class="text-danger">
-      核对人不能为空
-    </small>
   </div>
 
   <div class="isaac-margin-15top" formArrayName="importItemList">
-    <label>检查项目</label>
+    <label>入库明细</label>
     <table class="table table-bordered">
       <thead>
       <tr>
@@ -72,6 +124,7 @@
         <th>名称</th>
         <th>单位</th>
         <th>规格</th>
+        <th>批次号</th>
         <th>数量</th>
         <th>单价</th>
         <th>金额</th>
@@ -81,41 +134,40 @@
       </thead>
       <tbody>
       <tr *ngFor="let importItem of importItemListData.controls; let i=index" [formGroupName]="i">
-        <td>{{i+1}}</td>
-        <td><input class="form-control" type="text" formControlName="name">
-          <small [hidden]="importItem.controls.name.valid" class="text-danger">
-            检测项名称不能为空
-          </small>
+        <td style="min-width: 50px">{{i+1}}</td>
+        <td style="min-width: 150px">
+          <label>{{importItem.controls['name'].value}}</label>
+        </td>
+        <td style="min-width: 50px">
+          <label>{{importItem.controls['unit'].value}}</label>
+        </td>
+        <td style="min-width: 50px;">
+          <label>{{importItem.controls['specification'].value}}</label>
         </td>
         <td>
-          <input class="form-control" type="text" formControlName="unit">
-          <small [hidden]="importItem.controls.unit.valid" class="text-danger">
-            单位不能为空
-          </small>
-        </td>
-        <td>
-          <input class="form-control" type="text" formControlName="specification">
-          <small [hidden]="importItem.controls.specification.valid" class="text-danger">
-            参考值(下限)不能为空
+          <input class="form-control" type="text" formControlName="batchNumber">
+          <small [hidden]="importItem.controls.batchNumber.valid" class="text-danger">
+            批次号不能为空
           </small>
         </td>
 
         <td>
           <input class="form-control" type="text" formControlName="amount">
           <small [hidden]="importItem.controls.amount.valid" class="text-danger">
-            参考值(下限)不能为空
+            数量不能为空
           </small>
         </td>
+
         <td>
           <input class="form-control" type="text" formControlName="pricePerUnit">
           <small [hidden]="importItem.controls.pricePerUnit.valid" class="text-danger">
-            参考值(上限)不能为空
+            单价不能为空
           </small>
         </td>
         <td>
           <input class="form-control" type="text" formControlName="totalPrice">
           <small [hidden]="importItem.controls.totalPrice.valid" class="text-danger">
-            参考值(上限)不能为空
+            金额不能为空
           </small>
         </td>
         <td>
@@ -131,20 +183,6 @@
     </table>
 
   </div>
-
-  <div class="isaac-margin-top">
-    <a (click)="addItem()" style="cursor: default">
-      添加新入库产品 +
-    </a>
-  </div>
-
-  <!--
-  <div class="form-group isaac-margin-15top">
-    <label for="address">公司地址</label>
-    <input id="address" type="text" class="form-control" formControlName="address">
-  </div>
-  -->
-
   <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
 
 </form>

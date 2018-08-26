@@ -20,4 +20,9 @@ export class InventoryItemService  extends CrudService{
       return this.extractTextData(r) === "true" ? true : false;
     });
   }
+
+  findByNameContains(keyword:string):Observable<any[]>
+  {
+    return this.authHttp.get(`${this.rootUrl}/find-by-name-contains/${keyword}`).map(this.extractData);
+  }
 }

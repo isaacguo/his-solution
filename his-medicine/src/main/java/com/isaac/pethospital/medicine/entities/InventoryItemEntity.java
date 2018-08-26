@@ -4,23 +4,40 @@ package com.isaac.pethospital.medicine.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 public class InventoryItemEntity {
-
 
     String uuid;
     String inventoryItemId; //货品编码
     String name; //名称
     String unit; //单位
     String specification; //规格
-    String number; //数量
+    BigDecimal amount; //数量
+    String nameHanYuPinYin;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne()
     @JsonBackReference("InventoryCategoryEntity-InventoryItemEntity")
     private InventoryCategoryEntity category;
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public String getNameHanYuPinYin() {
+        return nameHanYuPinYin;
+    }
+
+    public void setNameHanYuPinYin(String nameHanYuPinYin) {
+        this.nameHanYuPinYin = nameHanYuPinYin;
+    }
 
     public String getUnit() {
         return unit;
@@ -80,12 +97,5 @@ public class InventoryItemEntity {
     }
 
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 }
 
