@@ -57,7 +57,7 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
           .subscribe(r => {
 
             r.list.forEach(b => {
-                let item = r.category.reportTemplateList.find(r => r.uuid === b["priceItemUuid"]);
+                let item = r.category.inventoryItemList.find(r => r.uuid === b["priceItemUuid"]);
                 if (item != null) {
                   item.normalPrice = b["normalPrice"];
                   item.memberPrice = b["memberPrice"];

@@ -24,7 +24,8 @@ export class InventoryQueryListComponent extends AbstractCategoryListComponent i
 
 
 
-  constructor(inventoryCategoryService: InventoryCategoryService) {
+  constructor(inventoryCategoryService: InventoryCategoryService)
+  {
     super(inventoryCategoryService);
 
   }

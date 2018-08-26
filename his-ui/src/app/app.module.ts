@@ -167,10 +167,14 @@ import {ImportSheetCreateUpdateComponent} from './components/inventory/import-sh
 import {ExportSheetCreateUpdateComponent} from './components/inventory/export-sheet-create-update/export-sheet-create-update.component';
 import {InventoryImportSheetService} from "./services/inventory/inventory-import-sheet.service";
 import {InventoryExportSheetService} from "./services/inventory/inventory-export-sheet.service";
-import { InventorySettingsItemManagementComponent } from './components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component';
-import { InventorySettingsItemManagementDetailComponent } from './components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management-detail/inventory-settings-item-management-detail.component';
-import { ExportManagementListComponent } from './components/inventory/export-management/export-management-list/export-management-list.component';
-import { ExportManagementDetailComponent } from './components/inventory/export-management/export-management-list/export-management-detail/export-management-detail.component';
+import {InventorySettingsItemManagementComponent} from './components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component';
+import {InventorySettingsItemManagementDetailComponent} from './components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management-detail/inventory-settings-item-management-detail.component';
+import {ExportManagementListComponent} from './components/inventory/export-management/export-management-list/export-management-list.component';
+import {ExportManagementDetailComponent} from './components/inventory/export-management/export-management-list/export-management-detail/export-management-detail.component';
+import {PharmacyMedicineDispensingManagementComponent} from './components/pharmacy/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management.component';
+import {PharmacyMedicineDispensingManagementListComponent} from './components/pharmacy/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management-list/pharmacy-medicine-dispensing-management-list.component';
+import {PharmacyMedicineDispensingManagementDetailComponent} from './components/pharmacy/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management-list/pharmacy-medicine-dispensing-management-detail/pharmacy-medicine-dispensing-management-detail.component';
+import {PharmacyMedicineService} from "./services/pharmacy/pharmacy-medicine.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -299,6 +303,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     InventorySettingsItemManagementDetailComponent,
     ExportManagementListComponent,
     ExportManagementDetailComponent,
+    PharmacyMedicineDispensingManagementComponent,
+    PharmacyMedicineDispensingManagementListComponent,
+    PharmacyMedicineDispensingManagementDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -374,6 +381,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     //medicine
     MedicineManagementGuard,
+    PharmacyMedicineService,
 
 
     //settings

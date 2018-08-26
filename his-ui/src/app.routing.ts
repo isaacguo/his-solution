@@ -78,6 +78,7 @@ import {InventoryItemCreateUpdateComponent} from "./app/components/inventory/inv
 import {ImportSheetCreateUpdateComponent} from "./app/components/inventory/import-sheet-create-update/import-sheet-create-update.component";
 import {InventorySettingsItemManagementComponent} from "./app/components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component";
 import {ExportSheetCreateUpdateComponent} from "./app/components/inventory/export-sheet-create-update/export-sheet-create-update.component";
+import {PharmacyMedicineDispensingManagementComponent} from "./app/components/pharmacy/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management.component";
 
 
 const appRoutes: Routes = [
@@ -401,6 +402,10 @@ const appRoutes: Routes = [
             component:InventorySettingsItemManagementComponent
           }
         ]
+      },
+      {
+        path:'pharmacy-dispensing-management',
+        component:PharmacyMedicineDispensingManagementComponent
       },
       {
         path: 'analysis',
