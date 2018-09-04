@@ -24,8 +24,6 @@ public class InventoryItemRestController extends AbstractCRUDRestController<Inve
     public InventoryItemRestController(InventoryItemService inventoryItemService) {
         super(inventoryItemService);
         this.inventoryItemService=inventoryItemService;
-
-
     }
 
 

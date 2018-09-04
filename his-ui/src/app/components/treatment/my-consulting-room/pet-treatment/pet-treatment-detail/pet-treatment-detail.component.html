@@ -247,14 +247,13 @@
           medicineSearchInput.valid || medicineSearchInput.pristine" class="text-danger">
             最少1个字符
           </small>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
             <li *ngFor="let medicineSearchResult of medicineSearchResults">
               <a href="javascript:void(0)" (click)="onMedicineSearchResultSelected(medicineSearchResult)">{{medicineSearchResult.name}}</a>
             </li>
           </ul>
         </div>
       </div>
-
 
       <table class="table table-bordered isaac-margin-15top">
         <thead>

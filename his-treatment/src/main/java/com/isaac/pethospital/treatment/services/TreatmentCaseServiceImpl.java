@@ -5,6 +5,7 @@ import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessage;
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
+import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
@@ -119,6 +120,14 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
         TreatmentCaseEntity tce = getTreatmentCaseByUuid(message.getTreatmentCaseUuid());
         tce.removeMedicalTestReportUuid(message.getReportUuid());
+        this.treatmentCaseRepository.save(tce);
+    }
+
+    @Override
+    public void onPharmacyMedicineDispenseCreate(PharmacyMedicineDispenseCreateMessage message) {
+
+        TreatmentCaseEntity tce = getTreatmentCaseByUuid(message.getTreatmentCaseUuid());
+        tce.addPharmacyMedicineDispenseUuid(message.getPharmacyMedicineDispenseUuid());
         this.treatmentCaseRepository.save(tce);
     }
 

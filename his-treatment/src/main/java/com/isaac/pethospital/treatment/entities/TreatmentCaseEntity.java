@@ -30,6 +30,26 @@ public class TreatmentCaseEntity {
     PetEntity pet;
     @ElementCollection
     List<String> medicalTestReportUuidList = new LinkedList<>();
+
+    public List<String> getPharmacyMedicineDispenseUuidList() {
+        return pharmacyMedicineDispenseUuidList;
+    }
+
+    public void addPharmacyMedicineDispenseUuid(String pharmacyMedicineDispenseUuid) {
+        if (StringUtils.isEmpty(pharmacyMedicineDispenseUuid))
+            throw new RuntimeException("pharmacyMedicineDispenseUuid is null");
+        this.pharmacyMedicineDispenseUuidList.add(pharmacyMedicineDispenseUuid);
+    }
+
+    public void removePharmacyMedicineDispenseUuid(String pharmacyMedicineDispenseUuid) {
+        if (StringUtils.isEmpty(pharmacyMedicineDispenseUuid))
+            throw new RuntimeException("pharmacyMedicineDispenseUuid is null");
+        this.pharmacyMedicineDispenseUuidList.remove(pharmacyMedicineDispenseUuid);
+    }
+
+    @ElementCollection
+    List<String> pharmacyMedicineDispenseUuidList = new LinkedList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -56,6 +76,7 @@ public class TreatmentCaseEntity {
         prescription.setTreatmentCase(this);
         this.prescriptionList.add(prescription);
     }
+
     public void removePrescription(PrescriptionEntity prescription) {
         if (prescription == null)
             throw new RuntimeException("Prescription is null");
@@ -96,6 +117,7 @@ public class TreatmentCaseEntity {
     public void setPetOwnerDescription(String petOwnerDescription) {
         this.petOwnerDescription = petOwnerDescription;
     }
+
     public List<String> getMedicalTestReportUuidList() {
         return medicalTestReportUuidList;
     }

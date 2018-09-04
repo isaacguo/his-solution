@@ -11,6 +11,7 @@ import {ReportStatusEnum} from "../../../../../enums/report-status.enum";
 import {FinanceChargeService} from "../../../../../services/finance/finance-charge.service";
 import {PetInfo, PetService} from "../../../../../services/treatment/pet.service";
 import {Subscription} from "rxjs/Subscription";
+import {PharmacyMedicineService} from "../../../../../services/pharmacy/pharmacy-medicine.service";
 
 @Component({
   selector: 'app-pet-treatment-detail',
@@ -32,8 +33,11 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
   medicalTestReportList: any[] = [];
   medicalTestReportUnsubmittedList: any[] = [];
   searchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
+
+
   medicineSearchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
   medicalTestReportTemplates: any[] = [];
+
   medicineSearchResults: any[] = [];
   selectedReportType: any;
 
@@ -42,6 +46,9 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
   petInfo: PetInfo;
   petInfoChangeSubscription: Subscription;
   prescriptions: any[] = [];
+
+  pharmacyMedicineDispense:any={};
+
 
   ngOnDestroy(): void {
     this.petInfoChangeSubscription.unsubscribe();
@@ -53,6 +60,7 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
               private medicalTestReportTemplateService: MedicalTestReportTemplateService,
               private petService: PetService,
               private treatmentCaseService: TreatmentCaseService,
+              private pharmacyMedicineService:PharmacyMedicineService,
               private financeChargeService: FinanceChargeService) {
 
     this.petInfoChangeSubscription = petService.petInfoChange.subscribe(
@@ -82,11 +90,11 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
           return Observable.of([]);
         }
         else {
-          return this.medicalTestReportTemplateService.findMedicalTestReportTemplateByNameContains(name);
+          return this.pharmacyMedicineService.findMedicineByNameContains(name);
         }
       })
       .subscribe(r => {
-        this.medicalTestReportTemplates = r;
+        this.medicineSearchResults = r;
       })
   }
 
@@ -127,7 +135,6 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
   }
 
   onCreateMedicalTestReportModalClosed() {
-    console.log(this.petInfo);
     this.formModel.controls['petUuid'].setValue(this.petInfo.pet.uuid);
     this.formModel.controls['petOwnerUuid'].setValue(this.petInfo.petOwner.uuid);
 
@@ -157,7 +164,6 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
     this.initFormModel();
 
     this.medicalTestReportTemplateService.findById(reportType).subscribe(r => {
-      //this.reportTemplate = r;
 
       this.formModel.controls['reportName'].setValue(r.reportName);
       this.formModel.controls['reportTemplateUuid'].setValue(r.uuid);
