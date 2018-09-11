@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractCategoryListComponent} from "../../../common/abstract-category-list/abstract-category-list.component";
 import {PharmacyMedicineService} from "../../../../services/pharmacy/pharmacy-medicine.service";
 
@@ -10,9 +10,28 @@ import {PharmacyMedicineService} from "../../../../services/pharmacy/pharmacy-me
 export class PharmacyMedicineDispensingManagementListComponent implements OnInit {
 
 
-  constructor(private pharmacyMedicineService:PharmacyMedicineService) { }
-
-  ngOnInit() {
+  constructor(private pharmacyMedicineService: PharmacyMedicineService) {
   }
 
+  ngOnInit() {
+    this.loadData();
+  }
+
+  list: any[] = [];
+
+  loadData() {
+    this.pharmacyMedicineService.readAll().subscribe(r => {
+      this.list = r;
+    })
+  }
+
+
+  onRowClicked(item:any)
+  {
+
+  }
+  isRowSelected(item:any)
+  {
+
+  }
 }

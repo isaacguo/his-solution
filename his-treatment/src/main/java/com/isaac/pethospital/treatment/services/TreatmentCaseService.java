@@ -6,6 +6,7 @@ import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessa
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
 import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
+import com.isaac.pethospital.treatment.dtos.PrescriptionRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
 import com.isaac.pethospital.treatment.entities.PrescriptionEntity;
@@ -36,4 +37,6 @@ public interface TreatmentCaseService {
     void onMedicalTestReportRemoved(MedicalTestDeleteReportMessage message);
 
     void onPharmacyMedicineDispenseCreate(PharmacyMedicineDispenseCreateMessage message);
+
+    TreatmentCaseEntity setPrescriptions(Long tId, PrescriptionRequest request);
 }

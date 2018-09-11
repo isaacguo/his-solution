@@ -11,7 +11,9 @@ export class FieldEditComponent implements OnInit {
   @Input()
   value: number = 0.00;
   @Output()
-  valueChanged:EventEmitter<number> = new EventEmitter();
+  valueChanged: EventEmitter<number> = new EventEmitter();
+  @Input()
+  hint: string;
 
   formModel: FormGroup;
 
@@ -24,10 +26,13 @@ export class FieldEditComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    if(this.value==null)
-      this.formModel.controls['price'].setValue("价格未设置");
+    if (this.value == null)
+      if (this.hint !== null)
+        this.formModel.controls['price'].setValue(this.hint);
+      else
+        this.formModel.controls['price'].setValue("价格未设置");
     else
-    this.formModel.controls['price'].setValue(this.value);
+      this.formModel.controls['price'].setValue(this.value);
   }
 
   private initForm() {
@@ -51,11 +56,11 @@ export class FieldEditComponent implements OnInit {
     this.valueChanged.emit(this.value);
   }
 
-  previousValue:any;
+  previousValue: any;
 
   onEditClicked() {
     this.isViewMode = false;
-    this.previousValue=this.formModel.controls['price'].value;
+    this.previousValue = this.formModel.controls['price'].value;
   }
 
   onCancelClicked() {

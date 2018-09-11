@@ -13,22 +13,22 @@
       </tr>
       </thead>
       <tbody>
-      <!--
-      <tr (click)="onRowClicked(registration)" *ngFor="let registration of myRegistrations"
-          [class.info]="isRowSelected(registration)">
-        <td>{{registration.indexOfDay}}</td>
+      <tr (click)="onRowClicked(item)" *ngFor="let item of list"
+          [class.info]="isRowSelected(item)">
+        <td>{{item.uuid}}</td>
+        <!--
         <td>{{registration.petName}}</td>
         <td>{{registration.petOwnerName}}</td>
         <td>{{getRegistrationStatusString(registration.registrationStatus)}}</td>
+        -->
         <td>
           <div class="btn-group btn-group-sm">
-            <button *ngIf="registration.registrationStatus==='WAITING'" type="button"
+            <button *ngIf="item.status==='UNPAID'" type="button"
                     class="btn btn-default btn-s"><span
               class="glyphicon glyphicon-bullhorn"></span></button>
           </div>
         </td>
       </tr>
-      -->
       </tbody>
     </table>
   </div>

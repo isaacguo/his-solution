@@ -22,6 +22,9 @@ public class TreatmentCaseEntity {
     String clinicSituation;
     String doctorAdvice;
 
+    @OneToMany(mappedBy ="treatmentCase",cascade = CascadeType.ALL)
+    @JsonManagedReference("TreatmentCase-TreatmentCaseMedicine")
+    List<TreatmentCaseMedicineEntity> medicineList=new LinkedList<>();
     @ManyToOne
     @JsonBackReference("EmployeeEntity-TreatmentCaseEntity")
     EmployeeEntity doctor;
@@ -30,6 +33,35 @@ public class TreatmentCaseEntity {
     PetEntity pet;
     @ElementCollection
     List<String> medicalTestReportUuidList = new LinkedList<>();
+    @ElementCollection
+    List<String> pharmacyMedicineDispenseUuidList = new LinkedList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String uuid;
+    @Enumerated(EnumType.STRING)
+    private TreatmentCaseStatusEnum treatmentCaseStatus;
+    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.PERSIST)
+    @JsonManagedReference("TreatmentCaseEntity-PrescriptionEntity")
+    private List<PrescriptionEntity> prescriptionList = new LinkedList<>();
+
+    public List<TreatmentCaseMedicineEntity> getMedicineList() {
+        return medicineList;
+    }
+
+    public void addMedicine(TreatmentCaseMedicineEntity medicine) {
+        if(medicine==null)
+            throw new RuntimeException("Medicine is null");
+        medicine.setTreatmentCase(this);
+        this.medicineList.add(medicine);
+    }
+
+    public void removeMedicineList(TreatmentCaseMedicineEntity medicine) {
+        if(medicine==null)
+            throw new RuntimeException("Medicine is null");
+        medicine.setTreatmentCase(null);
+        this.medicineList.add(medicine);
+    }
 
     public List<String> getPharmacyMedicineDispenseUuidList() {
         return pharmacyMedicineDispenseUuidList;
@@ -47,27 +79,12 @@ public class TreatmentCaseEntity {
         this.pharmacyMedicineDispenseUuidList.remove(pharmacyMedicineDispenseUuid);
     }
 
-    @ElementCollection
-    List<String> pharmacyMedicineDispenseUuidList = new LinkedList<>();
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String uuid;
-    @Enumerated(EnumType.STRING)
-    private TreatmentCaseStatusEnum treatmentCaseStatus;
-
-    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.PERSIST)
-    @JsonManagedReference("TreatmentCaseEntity-PrescriptionEntity")
-    private List<PrescriptionEntity> prescriptionList = new LinkedList<>();
-
+    public List<PrescriptionEntity> getPrescriptionList() {
+        return prescriptionList;
+    }
 
     public void setPrescriptionList(List<PrescriptionEntity> prescriptionList) {
         this.prescriptionList = prescriptionList;
-    }
-
-    public List<PrescriptionEntity> getPrescriptionList() {
-        return prescriptionList;
     }
 
     public void addPrescription(PrescriptionEntity prescription) {

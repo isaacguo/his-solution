@@ -8,7 +8,6 @@
       <h1 class="page-header">新建化验报告</h1>
 
       <form [formGroup]="formModel" novalidate>
-
         <div class="panel panel-default">
           <div class="panel-heading">
             基本信息
@@ -152,7 +151,7 @@
       <div class="verlink">
         <label>添加化验检查项目</label>
         <div class="dropdown" [class.open]="medicalTestReportTemplates.length>0">
-          <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+          <input autocomplete="off" (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
                  (focus)="stopPropagation($event)"
                  type="text" class="form-control dropdown-toggle"
                  placeholder="输入化验报告名称关键字汉语拼音" [formControl]="searchInput"
@@ -204,40 +203,16 @@
       </div>
     </div>
   </div>
-
   <div class="panel panel-info">
     <div class="panel-heading">
       开药详情
     </div>
     <div class="panel-body">
 
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>序号</th>
-          <th>品名</th>
-          <th>规格</th>
-          <th>销售单位</th>
-          <th>销售数量</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let prescription of prescriptions;let i=index">
-          <td>{{i+1}}</td>
-          <td>{{prescription.medicineNumber}}</td>
-          <td>{{prescription.medicineName}}</td>
-          <td>{{prescription.medicineSpecification}}</td>
-          <td>{{prescription.medicineCount}}</td>
-        </tr>
-        </tbody>
-      </table>
-
-
       <div class="verlink">
         <label>添加药品</label>
         <div class="dropdown" [class.open]="medicineSearchResults.length>0">
-
-          <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+          <input autocomplete="off" (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
                  (focus)="stopPropagation($event)"
                  type="text" class="form-control dropdown-toggle"
                  placeholder="输入化验报告名称关键字汉语拼音" [formControl]="medicineSearchInput"
@@ -255,36 +230,39 @@
         </div>
       </div>
 
-      <table class="table table-bordered isaac-margin-15top">
-        <thead>
-        <tr>
-          <th>序号</th>
-          <th>品名</th>
-          <th>规格</th>
-          <th>销售单位</th>
-          <th>销售数量</th>
-          <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let medicalTestReport of medicalTestReportUnsubmittedList;let i=index">
-          <td>{{i+1}}</td>
-          <td>{{medicalTestReport.reportName}}</td>
-          <td>{{getMedicalTestReportStatus(medicalTestReport)}}</td>
-          <td></td>
-          <td></td>
-          <td>
-            <div class="btn-group btn-group-sm">
-              <button (click)="onRemoveReportClicked(medicalTestReport)" type="button"
-                      class="btn btn-default btn-s"><span
-                class="glyphicon glyphicon-remove"></span></button>
-            </div>
-          </td>
-        </tr>
-        </tbody>
+      <form [formGroup]="medicineFormModel" novalidate>
+        <div formArrayName="items">
+          <table class="table table-bordered isaac-margin-15top">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>品名</th>
+              <th>规格</th>
+              <th>销售单位</th>
+              <th>销售数量</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let medicine of medicineInfoData.controls;let i=index" [formGroupName]="i">
+              <td>{{i+1}}</td>
+              <td>{{medicine.controls['name'].value}}</td>
+              <td>{{medicine.controls['specification'].value}}</td>
+              <td>{{medicine.controls['unit'].value}}</td>
+              <td>
+                <app-field-edit [value]="null" [hint]="'请设置数量'"
+                                (valueChanged)="onValueChanged($event, i,'amount')"></app-field-edit>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
 
-      </table>
-
+      <div class="verlink-bottom">
+        <div class="btn-group">
+          <div class="btn btn-primary" (click)="onAddPrescriptionFinished()">开药完毕</div>
+        </div>
+      </div>
 
     </div>
   </div>

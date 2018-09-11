@@ -7,12 +7,16 @@ import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessa
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
 import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
+import com.isaac.pethospital.common.jms.treatment.GeneratePharmacyMedicineDispenseOrderMessage;
+import com.isaac.pethospital.common.jms.treatment.MedicineItemMessage;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
+import com.isaac.pethospital.treatment.dtos.PrescriptionRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PrescriptionEntity;
 import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
+import com.isaac.pethospital.treatment.entities.TreatmentCaseMedicineEntity;
 import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import com.isaac.pethospital.treatment.repositories.PetRepository;
 import com.isaac.pethospital.treatment.repositories.TreatmentCaseRepository;
@@ -23,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -131,6 +136,50 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         this.treatmentCaseRepository.save(tce);
     }
 
+    @Override
+    public TreatmentCaseEntity setPrescriptions(Long tId, PrescriptionRequest request) {
+
+        TreatmentCaseEntity tce = getTreatmentCase(tId);
+        request.getItems().forEach(r -> {
+            TreatmentCaseMedicineEntity tcme = new TreatmentCaseMedicineEntity();
+            tcme.setName(r.getName());
+            tcme.setUnit(r.getUnit());
+            tcme.setAmount(r.getAmount());
+            tcme.setMedicineUuid(r.getMedicineUuid());
+            tcme.setInventoryItemId(r.getInventoryItemId());
+            tcme.setSpecification(r.getSpecification());
+
+            tce.addMedicine(tcme);
+        });
+
+        GeneratePharmacyMedicineDispenseOrderMessage message = new GeneratePharmacyMedicineDispenseOrderMessage();
+
+
+        message.setTreatmentCaseUuid(tce.getUuid());
+        message.setPetOwnerUuid(tce.getPet().getPetOwner().getUuid());
+        message.setPetUuid(tce.getPet().getUuid());
+
+        List<MedicineItemMessage> messageList=new LinkedList<>();
+
+        tce.getMedicineList().forEach(r->{
+            MedicineItemMessage medicineItemMessage=new MedicineItemMessage();
+            medicineItemMessage.setAmount(r.getAmount());
+            medicineItemMessage.setInventoryItemId(r.getInventoryItemId());
+            medicineItemMessage.setName(r.getName());
+            medicineItemMessage.setSpecification(r.getSpecification());
+            medicineItemMessage.setUuid(r.getUuid());
+            medicineItemMessage.setMedicineUuid(r.getMedicineUuid());
+            medicineItemMessage.setUnit(r.getUnit());
+            messageList.add(medicineItemMessage);
+        });
+
+        message.setMedicineList(messageList);
+
+        this.jmsSender.sendEvent(jmsProperties.getTreatmentGenerateMedicineDispenseOrderTopic(), message);
+
+        return treatmentCaseRepository.save(tce);
+    }
+
 
     @Override
     public TreatmentCaseEntity update(TreatmentCaseOperationRequest request) {
@@ -163,6 +212,7 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
     @Override
     public void onChargeItemEvent(ChargeReportOperationReplyMessage message) {
+
 
     }
 

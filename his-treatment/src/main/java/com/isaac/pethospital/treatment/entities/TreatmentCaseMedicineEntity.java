@@ -1,15 +1,12 @@
-package com.isaac.pethospital.medicine.entities;
+package com.isaac.pethospital.treatment.entities;
 
-import com.isaac.pethospital.common.entities.AbstractCollectionItemEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class PharmacyMedicineDispenseItemEntity extends AbstractCollectionItemEntity<PharmacyMedicineDispenseEntity> {
+public class TreatmentCaseMedicineEntity {
 
 
     String inventoryItemId; //货品编码
@@ -18,10 +15,39 @@ public class PharmacyMedicineDispenseItemEntity extends AbstractCollectionItemEn
     String specification; //规格
     BigDecimal amount; //数量
 
+    public String getMedicineUuid() {
+        return medicineUuid;
+    }
+
+    public void setMedicineUuid(String medicineUuid) {
+        this.medicineUuid = medicineUuid;
+    }
+
+    String medicineUuid;
+    String uuid;
+    @ManyToOne
+
+    @JsonBackReference("TreatmentCase-TreatmentCaseMedicine")
+    TreatmentCaseEntity treatmentCase;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public TreatmentCaseEntity getTreatmentCase() {
+        return treatmentCase;
+    }
+
+    public void setTreatmentCase(TreatmentCaseEntity treatmentCase) {
+        this.treatmentCase = treatmentCase;
+    }
 
     public String getInventoryItemId() {
         return inventoryItemId;

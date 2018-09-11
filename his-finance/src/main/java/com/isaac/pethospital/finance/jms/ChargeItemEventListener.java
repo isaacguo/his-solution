@@ -2,6 +2,7 @@ package com.isaac.pethospital.finance.jms;
 
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
+import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
 import com.isaac.pethospital.finance.dtos.ChargeOperationRequest;
 import com.isaac.pethospital.finance.entities.ChargeEntity;
 import com.isaac.pethospital.finance.services.ChargeService;
@@ -23,4 +24,12 @@ public class ChargeItemEventListener {
     public ChargeReportOperationReplyMessage processMessage(ChargeReportOperationMessage message) throws Exception {
         return this.chargeService.onGenerateChargeOrderReceived(message);
     }
+
+    @JmsListener(destination = "${jms.pharmacy-medicine-dispense-create-topic}")
+    //@SendTo("${jms.finance-charge-item-operation-reply-topic}")
+    public void processPharmacyMessage(PharmacyMedicineDispenseCreateMessage message) throws Exception {
+        this.chargeService.onPharmacyMedicineDispenseCreateMessageReceived(message);
+    }
+
+
 }

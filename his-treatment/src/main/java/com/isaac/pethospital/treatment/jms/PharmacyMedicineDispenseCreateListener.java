@@ -14,9 +14,10 @@ public class PharmacyMedicineDispenseCreateListener {
         this.treatmentCaseService = treatmentCaseService;
     }
 
+    /*
     @JmsListener(destination = "${jms.pharmacy-medicine-dispense-create-topic}")
-    @Transactional
     public void processMessage(PharmacyMedicineDispenseCreateMessage message) throws Exception {
         this.treatmentCaseService.onPharmacyMedicineDispenseCreate(message);
     }
+    */
 }

@@ -3,6 +3,7 @@ package com.isaac.pethospital.treatment.restcontrollers;
 
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
+import com.isaac.pethospital.treatment.dtos.PrescriptionRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
@@ -41,6 +42,11 @@ public class TreatmentCaseRestController {
     @GetMapping("/{tId}/prescriptions")
     public List<PrescriptionEntity> getPrescriptions(@PathVariable("tId") Long tid) {
         return this.treatmentCaseService.getPrescriptionList(tid);
+    }
+
+    @PostMapping("/{tId}/prescriptions")
+    public TreatmentCaseEntity setPrescriptions(@PathVariable("tId") Long tId, @RequestBody PrescriptionRequest request) {
+        return this.treatmentCaseService.setPrescriptions(tId, request);
     }
 
     @PutMapping("/{tId}")

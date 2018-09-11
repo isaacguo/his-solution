@@ -1,5 +1,7 @@
 package com.isaac.pethospital.treatment.services;
 
+import com.isaac.pethospital.common.jms.JmsProperties;
+import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.treatment.common.enums.RegistrationStatusEnum;
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
 import com.isaac.pethospital.treatment.dtos.RegistrationResponse;
@@ -25,6 +27,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     private EmployeeRepository employeeRepository;
     private PetRepository petRepository;
     private RegistrationNumberService registrationNumberService;
+    private JmsSender jmsSender;
+    private JmsProperties jmsProperties;
 
     public RegistrationServiceImpl(RegistrationRepository registrationRepository, EmployeeRepository employeeRepository, PetRepository petRepository, RegistrationNumberService registrationNumberService) {
         this.registrationRepository = registrationRepository;
@@ -58,6 +62,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationEntity.setBookDate(LocalDateTime.now());
         registrationEntity.setIndexOfDay(indexOfDay);
         RegistrationEntity res = this.registrationRepository.save(registrationEntity);
+
+
+
         return res;
     }
 

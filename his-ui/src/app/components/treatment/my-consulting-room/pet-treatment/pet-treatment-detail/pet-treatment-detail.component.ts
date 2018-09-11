@@ -3,7 +3,7 @@ import {TreatmentCaseService} from "../../../../../services/treatment/treatment-
 import {Router} from "@angular/router";
 import {MedicalTestReportService} from "../../../../../services/medical-test/medical-test-report.service";
 import {MedicalTestReportTemplateService} from "../../../../../services/medical-test/medical-test-report-template.service";
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {MedicalTestReportTemplateItem} from "../../../../../dto/medical-test/medical-test-report-template-item.model";
@@ -30,6 +30,9 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
   detailedTreatmentCase: any = {};
   treatmentCaseBasicInfoModel: FormGroup;
   formModel: FormGroup;
+
+  medicineFormModel:FormGroup;
+
   medicalTestReportList: any[] = [];
   medicalTestReportUnsubmittedList: any[] = [];
   searchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
@@ -102,6 +105,11 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
     return <FormArray>this.formModel.get('reportInfoList');
   }
 
+
+  get medicineInfoData() {
+    return <FormArray>this.medicineFormModel.get('items');
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.loadData();
   }
@@ -154,14 +162,16 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
 
   }
 
-  onMedicineSearchResultSelected(medicineSearchResult: any) {
 
+  onMedicineSearchResultSelected(medicineSearchResult: any) {
+    this.addMedicine(medicineSearchResult);
   }
 
   protected process(medicalTestReportTemplate: any) {
 
     let reportType = medicalTestReportTemplate.id;
-    this.initFormModel();
+    //this.initFormModel();
+    this.initForm();
 
     this.medicalTestReportTemplateService.findById(reportType).subscribe(r => {
 
@@ -193,7 +203,18 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
           })
           this.medicalTestReportList = r.filter(report => ReportStatusEnum[report.reportStatus] !== ReportStatusEnum.UNSUBMITTED)
         });
+
+        this.inflateMedicineList(r);
+
       });
+  }
+
+  private inflateMedicineList(r:any)
+  {
+    r.medicineList.forEach(each=>
+    {
+      this.addMedicine(each);
+    })
   }
 
   private inflateTreatmentCaseBasicInfo(r: any) {
@@ -235,6 +256,7 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
       'doctorAdvice': ['']
     });
     this.initFormModel();
+    this.initMedicineFormModel();
   }
 
   private initFormModel() {
@@ -250,6 +272,39 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
       'reportItems': this.fb.array([]),
     })
   }
+
+  private initMedicineFormModel() {
+    this.medicineFormModel=this.fb.group({
+      'items':this.fb.array([])
+    });
+  }
+
+
+  addMedicine(medicineItem:any) {
+    const control = <FormArray>this.medicineFormModel.controls['items'];
+    control.push(this.initMedicineItem(medicineItem));
+  }
+
+  removeMedicine(i: number) {
+    // remove address from the list
+    const control = <FormArray>this.medicineFormModel.controls['items'];
+    control.removeAt(i);
+  }
+
+  initMedicineItem(medicineItem:any) {
+
+    return this.fb.group({
+      'id': [''],
+      'medicineId':[medicineItem.id, Validators.required],
+      'uuid': [medicineItem.uuid, Validators.required],
+      'name': [medicineItem.name, Validators.required],
+      'unit': [medicineItem.unit, Validators.required],
+      'specification':[medicineItem.specification, Validators.required],
+      'amount':[,Validators.required]
+    })
+  }
+
+
 
   onAddReportFinished() {
 
@@ -280,4 +335,15 @@ export class PetTreatmentDetailComponent implements OnChanges, OnInit, OnDestroy
     this.selectedReportId = medicalTestReport.id;
     this.viewMedicalTestReportModal.open();
   }
+
+  onAddPrescriptionFinished() {
+    this.treatmentCaseService.setPrescriptions(this.treatmentCase.id,this.medicineFormModel.value).subscribe(r=>{this.loadData()});
+
+  }
+
+  onValueChanged(event: number, index:number, fieldName: string) {
+    (<FormGroup>this.medicineInfoData.at(index)).controls["amount"].setValue(event);
+
+  }
+
 }

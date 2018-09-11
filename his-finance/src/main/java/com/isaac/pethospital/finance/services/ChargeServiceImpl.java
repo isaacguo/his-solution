@@ -6,6 +6,7 @@ import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.finance.ReportOperationMessage;
+import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
 import com.isaac.pethospital.common.services.AbstractCrudService;
 import com.isaac.pethospital.finance.dtos.ChargeOperationRequest;
 import com.isaac.pethospital.finance.entities.ChargeEntity;
@@ -110,5 +111,49 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
         this.jmsSender.sendEvent(jmsProperties.getFinanceChargeStatusChangedTopic(), message);
 
         return true;
+    }
+
+    @Override
+    public void onPharmacyMedicineDispenseCreateMessageReceived(PharmacyMedicineDispenseCreateMessage message) {
+
+
+        ChargeEntity chargeEntity = new ChargeEntity();
+        chargeEntity.setTreatmentCaseUuid(message.getTreatmentCaseUuid());
+        chargeEntity.setCreatedDate(LocalDateTime.now());
+        chargeEntity.setPetUuid(message.getPetUuid());
+        chargeEntity.setPetOwnerUuid(message.getPetOwnerUuid());
+        chargeEntity.setStatus(ChargeStatusEnum.UNPAID);
+        BigDecimal totalAmount = new BigDecimal(0);
+
+        ChargeEntity chargeEntity1 = jpaRepository.save(chargeEntity);
+
+
+
+        /*
+        for (int i = 0; i < message.getReportOperationMessages().size(); i++) {
+            ReportOperationMessage rom = message.getReportOperationMessages().get(i);
+            ChargeItemEntity cie = new ChargeItemEntity();
+            PriceEntity pe = priceService.findByUuid(rom.getReportTemplateUuid());
+            if (pe == null)
+                throw new RuntimeException("Cannot find price");
+            cie.setPrice(pe);
+            cie.setAmount(pe.getMemberPrice());
+            totalAmount = totalAmount.add(pe.getMemberPrice());
+            cie.setChargeItemUuid(rom.getReportUuid());
+            chargeEntity.addChargeItem(cie);
+        }
+
+        chargeEntity.setTotalAmount(totalAmount);
+        ChargeEntity chargeEntity1 = jpaRepository.save(chargeEntity);
+
+        //send event out
+        ChargeReportOperationReplyMessage replyMessage = new ChargeReportOperationReplyMessage();
+        replyMessage.setStatus(ChargeStatusEnum.UNPAID);
+        replyMessage.setPetOwnerUuid(chargeEntity1.getPetOwnerUuid());
+        replyMessage.setPetUuid(chargeEntity1.getPetUuid());
+        replyMessage.setTreatmentCaseUuid(chargeEntity1.getTreatmentCaseUuid());
+        replyMessage.setReportUuidList(chargeEntity1.getChargeItems().stream().map(i -> i.getChargeItemUuid()).collect(Collectors.toList()));
+        */
+
     }
 }

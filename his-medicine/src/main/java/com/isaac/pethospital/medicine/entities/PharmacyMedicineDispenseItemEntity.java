@@ -1,11 +1,9 @@
 package com.isaac.pethospital.medicine.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.isaac.pethospital.common.entities.AbstractCollectionItemEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -17,6 +15,8 @@ public class PharmacyMedicineDispenseItemEntity extends AbstractCollectionItemEn
     String unit; //单位
     String specification; //规格
     BigDecimal amount; //数量
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

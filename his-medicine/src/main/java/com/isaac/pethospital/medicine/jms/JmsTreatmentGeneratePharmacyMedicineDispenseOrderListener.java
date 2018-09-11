@@ -11,7 +11,7 @@ public class JmsTreatmentGeneratePharmacyMedicineDispenseOrderListener {
     private final PharmacyMedicineDispenseService pharmacyMedicineDispenseService;
 
     public JmsTreatmentGeneratePharmacyMedicineDispenseOrderListener(PharmacyMedicineDispenseService pharmacyMedicineDispenseService) {
-        this.pharmacyMedicineDispenseService=pharmacyMedicineDispenseService;
+        this.pharmacyMedicineDispenseService = pharmacyMedicineDispenseService;
     }
 
     @JmsListener(destination = "${jms.treatment-generate-medicine-dispense-order-topic}")
