@@ -3,6 +3,7 @@ package com.isaac.pethospital.treatment.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
+import com.sun.webkit.dom.CommentImpl;
 import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
@@ -35,6 +36,21 @@ public class TreatmentCaseEntity {
     List<String> medicalTestReportUuidList = new LinkedList<>();
     @ElementCollection
     List<String> pharmacyMedicineDispenseUuidList = new LinkedList<>();
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void addComment(CommentEntity comment) {
+        if(comment==null)
+            throw new RuntimeException("Comment is null");
+        comment.setTreatmentCase(this);
+        this.comments.add(comment);
+    }
+
+    @OneToMany
+    @JsonManagedReference("TreatmentCase-Comment")
+    List<CommentEntity> comments=new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,6 +65,12 @@ public class TreatmentCaseEntity {
         return medicineList;
     }
 
+    public void removeMedicine(TreatmentCaseMedicineEntity medicine) {
+        if(medicine==null)
+            throw new RuntimeException("Medicine is null");
+        medicine.setTreatmentCase(null);
+        this.medicineList.remove(medicine);
+    }
     public void addMedicine(TreatmentCaseMedicineEntity medicine) {
         if(medicine==null)
             throw new RuntimeException("Medicine is null");

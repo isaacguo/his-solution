@@ -175,6 +175,11 @@ import {PharmacyMedicineDispensingManagementComponent} from './components/pharma
 import {PharmacyMedicineDispensingManagementListComponent} from './components/pharmacy/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management-list/pharmacy-medicine-dispensing-management-list.component';
 import {PharmacyMedicineDispensingManagementDetailComponent} from './components/pharmacy/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management-list/pharmacy-medicine-dispensing-management-detail/pharmacy-medicine-dispensing-management-detail.component';
 import {PharmacyMedicineService} from "./services/pharmacy/pharmacy-medicine.service";
+import {CommentService} from "./services/treatment/comment.service";
+
+
+//containers
+import {TreatmentCommentsContainerComponent} from './components/containers/treatment-comments-container/treatment-comments-container.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -306,6 +311,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PharmacyMedicineDispensingManagementComponent,
     PharmacyMedicineDispensingManagementListComponent,
     PharmacyMedicineDispensingManagementDetailComponent,
+
+    TreatmentCommentsContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -337,6 +344,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PetOwnerService,
     RegistrationService,
     TreatmentEmployeeService,
+    CommentService,
     PetService,
     //procurement
     VendorService,

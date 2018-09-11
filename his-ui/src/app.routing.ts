@@ -79,6 +79,7 @@ import {ImportSheetCreateUpdateComponent} from "./app/components/inventory/impor
 import {InventorySettingsItemManagementComponent} from "./app/components/inventory/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component";
 import {ExportSheetCreateUpdateComponent} from "./app/components/inventory/export-sheet-create-update/export-sheet-create-update.component";
 import {PharmacyMedicineDispensingManagementComponent} from "./app/components/pharmacy/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management.component";
+import {TreatmentCommentsContainerComponent} from "./app/components/containers/treatment-comments-container/treatment-comments-container.component";
 
 
 const appRoutes: Routes = [
@@ -179,6 +180,10 @@ const appRoutes: Routes = [
 
           }
         ]
+      },
+      {
+        path:'customer-service',
+        component: TreatmentCommentsContainerComponent
       },
       {
         path: 'medical-test-query',
