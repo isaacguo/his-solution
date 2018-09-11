@@ -7,7 +7,7 @@ import {Observable} from "rxjs/Observable";
 import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
 
 @Injectable()
-export class InventoryCategoryService extends CrudService implements CategoryService {
+export class InventoryCategoryService extends CrudService<any> implements CategoryService {
 
   rootUrl: string = "/api/hismedicine/inventory-categories";
 

@@ -6,7 +6,7 @@ import {ChargeStatusEnum} from "../../enums/charge-status.enum";
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class FinanceChargeService extends CrudService {
+export class FinanceChargeService extends CrudService<any> {
 
   rootUrl: string = "/api/hisfinance/charge";
 

@@ -5,7 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {ServiceConstants} from "../../components/common/service-constants";
 
 @Injectable()
-export class PharmacyMedicineService extends CrudService {
+export class PharmacyMedicineService extends CrudService<any> {
 
   rootUrl: string = `${ServiceConstants.MEDICINE_URL}/pharmacy-medicine`;
 

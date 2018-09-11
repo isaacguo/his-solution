@@ -5,7 +5,7 @@ import {TreeNodeService} from "../common/tree-node.service";
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class FinancePriceService extends CrudService {
+export class FinancePriceService extends CrudService<any> {
 
 
   rootUrl: string = "/api/hisfinance/price";

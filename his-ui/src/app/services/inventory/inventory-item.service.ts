@@ -5,7 +5,7 @@ import {AuthHttp} from "angular2-jwt";
 import {CrudService} from "../crud.service";
 
 @Injectable()
-export class InventoryItemService  extends CrudService{
+export class InventoryItemService  extends CrudService<any>{
 
 
   rootUrl: string = "/api/hismedicine/inventory-items";

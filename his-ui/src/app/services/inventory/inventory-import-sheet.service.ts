@@ -3,7 +3,7 @@ import {CrudService} from "../crud.service";
 import {AuthHttp} from "angular2-jwt";
 
 @Injectable()
-export class InventoryImportSheetService extends CrudService  {
+export class InventoryImportSheetService extends CrudService<any>  {
 
   rootUrl: string = "/api/hismedicine/import-sheets";
 

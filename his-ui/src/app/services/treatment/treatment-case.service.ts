@@ -3,15 +3,17 @@ import {AbstractService} from "../abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
 import {CrudService} from "../crud.service";
+import {TreatmentCase} from "../../dto/treatment/treatment-case.model";
+import {ServiceConstants} from "../../components/common/service-constants";
 
 @Injectable()
-export class TreatmentCaseService extends CrudService {
+export class TreatmentCaseService extends CrudService<TreatmentCase> {
 
 
-  rootUrl: string = "/api/histreatment/treatment-cases";
+  rootUrl: string = `${ServiceConstants.TREATMENT_URL}/treatment-cases`;
 
   constructor(authHttp: AuthHttp) {
-    super("/api/histreatment/treatment-cases",authHttp);
+    super(`${ServiceConstants.TREATMENT_URL}/treatment-cases`,authHttp);
   }
 
   findAllByPetId(pid: number): Observable<any[]> {
