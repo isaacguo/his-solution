@@ -57,8 +57,7 @@ export class QueryBarComponent implements OnInit {
     this.includeDoneChanged.emit();
   }
 
-  onQueryClicked()
-  {
+  onQueryClicked() {
     this.queryClicked.emit();
   }
 }

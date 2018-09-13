@@ -1,6 +1,5 @@
 package com.isaac.pethospital.treatment.services;
 
-import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessage;
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
@@ -39,4 +38,6 @@ public interface TreatmentCaseService {
     void onPharmacyMedicineDispenseCreate(PharmacyMedicineDispenseCreateMessage message);
 
     TreatmentCaseEntity setPrescriptions(Long tId, PrescriptionRequest request);
+
+    List<TreatmentCaseEntity> findAll();
 }

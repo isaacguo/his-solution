@@ -1,5 +1,7 @@
-export interface TreatmentComment {
-  readonly treatmentUuid?:number,
-  readonly time:number;
-  readonly content:string;
+export interface TreatmentCaseComment {
+  readonly treatmentCaseUuid?:number,
+  readonly content?:string;
+
+  readonly comments?:string;
+  readonly createdDate?:Date;
 }

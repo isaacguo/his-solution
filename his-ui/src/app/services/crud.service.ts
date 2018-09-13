@@ -8,18 +8,19 @@ export class CrudService<T> extends AbstractService {
 
   private items = new BehaviorSubject<T[]>([]);
 
-  private loadData() {
+  public loadData() {
     this.authHttp.get(`${this.rootUrl}`).subscribe((items) => {
       this.items.next(this.extractArrayData(items));
     });
   }
 
-  getItems() {
+  getItems():Observable<T[]> {
     return this.items.asObservable();
   }
 
   constructor(public rootUrl: string, protected authHttp: AuthHttp) {
     super()
+    this.loadData();
   }
 
   createItem(data: T) {

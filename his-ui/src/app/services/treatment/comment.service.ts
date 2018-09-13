@@ -2,10 +2,11 @@ import {Injectable} from '@angular/core';
 import {CrudService} from "../crud.service";
 import {ServiceConstants} from "../../components/common/service-constants";
 import {AuthHttp} from "angular2-jwt";
-import {TreatmentComment} from "../../dto/treatment/treatment-comment.model";
+import {TreatmentCaseComment} from "../../dto/treatment/treatment-comment.model";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
-export class CommentService extends CrudService<TreatmentComment> {
+export class CommentService extends CrudService<TreatmentCaseComment> {
 
   rootUrl: string = `${ServiceConstants.TREATMENT_URL}/comments`;
 
@@ -14,5 +15,8 @@ export class CommentService extends CrudService<TreatmentComment> {
   }
 
 
+  createComment(comment: TreatmentCaseComment): Observable<any> {
+    return this.authHttp.post(`${this.rootUrl}`, comment);
+  }
 
 }

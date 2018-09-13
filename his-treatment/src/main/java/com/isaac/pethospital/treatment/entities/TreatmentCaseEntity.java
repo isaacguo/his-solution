@@ -48,7 +48,7 @@ public class TreatmentCaseEntity {
         this.comments.add(comment);
     }
 
-    @OneToMany
+    @OneToMany(mappedBy ="treatmentCase", cascade = CascadeType.ALL)
     @JsonManagedReference("TreatmentCase-Comment")
     List<CommentEntity> comments=new LinkedList<>();
     @Id

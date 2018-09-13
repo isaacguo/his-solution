@@ -180,6 +180,11 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         return treatmentCaseRepository.save(tce);
     }
 
+    @Override
+    public List<TreatmentCaseEntity> findAll() {
+        return this.treatmentCaseRepository.findAll();
+    }
+
 
     @Override
     public TreatmentCaseEntity update(TreatmentCaseOperationRequest request) {

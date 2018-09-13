@@ -13,7 +13,9 @@ export class TreatmentCaseService extends CrudService<TreatmentCase> {
   rootUrl: string = `${ServiceConstants.TREATMENT_URL}/treatment-cases`;
 
   constructor(authHttp: AuthHttp) {
+
     super(`${ServiceConstants.TREATMENT_URL}/treatment-cases`,authHttp);
+
   }
 
   findAllByPetId(pid: number): Observable<any[]> {

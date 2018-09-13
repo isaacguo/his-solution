@@ -177,9 +177,18 @@ import {PharmacyMedicineDispensingManagementDetailComponent} from './components/
 import {PharmacyMedicineService} from "./services/pharmacy/pharmacy-medicine.service";
 import {CommentService} from "./services/treatment/comment.service";
 
+import {CustomerComponent} from './components/customer/customer.component';
+import {CustomerServiceTreatmentCaseListComponent} from './components/customer/customer-service-treatment-case-list/customer-service-treatment-case-list.component';
+import {CustomerServiceTreatmentCaseCommentsComponent} from './components/customer/customer-service-treatment-case-list/customer-service-treatment-case-comments/customer-service-treatment-case-comments.component';
+import {CustomerServiceTreatmentCaseCommentComponent} from './components/customer/customer-service-treatment-case-list/customer-service-treatment-case-comments/customer-service-treatment-case-comment/customer-service-treatment-case-comment.component';
 
 //containers
 import {TreatmentCommentsContainerComponent} from './components/containers/treatment-comments-container/treatment-comments-container.component';
+import {EmployeeProfilePictureComponent} from './components/employee/employee-profile-picture/employee-profile-picture.component';
+
+//ui
+import {EditorComponent} from './components/ui/editor/editor.component';
+import { FromNowPipe } from './pipes/from-now.pipe';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -313,6 +322,20 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PharmacyMedicineDispensingManagementDetailComponent,
 
     TreatmentCommentsContainerComponent,
+
+    CustomerComponent,
+
+    CustomerServiceTreatmentCaseListComponent,
+
+    CustomerServiceTreatmentCaseCommentsComponent,
+
+    CustomerServiceTreatmentCaseCommentComponent,
+
+    EmployeeProfilePictureComponent,
+
+    EditorComponent,
+
+    FromNowPipe,
   ],
   imports: [
     BrowserModule,

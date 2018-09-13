@@ -3,7 +3,7 @@ import {Doctor} from "./doctor.model";
 import {PetOwner} from "./pet-owner.model";
 import {Pet} from "./pet.model";
 import {TreatmentCaseStatusEnum} from "../../enums/treatment-case-status.enum";
-import {TreatmentComment} from "./treatment-comment.model";
+import {TreatmentCaseComment} from "./treatment-comment.model";
 
 export class TreatmentCase {
 
@@ -17,6 +17,6 @@ export class TreatmentCase {
               public uuid?: string,
               public treatmentCaseStatus?: TreatmentCaseStatusEnum,
               public createResult?: boolean,
-              public comments?:TreatmentComment[]) {
+              public comments?:TreatmentCaseComment[]) {
   }
 }

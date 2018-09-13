@@ -1,0 +1,20 @@
+<div class="title">添加新评论</div>
+<div class="add-comment-section">
+  <div #commentContentEditable
+       class="add-comment-box"
+       contenteditable="true">
+  </div>
+
+  <button (click)="onCreateComment()"
+          class="btn btn-primary">添加
+  </button>
+</div>
+
+
+<ng-container *ngIf="comments?.length > 0">
+  <div class="title">所有评论</div>
+  <app-customer-service-treatment-case-comment *ngFor="let comment of comments; let index = index"
+               [comment]="comment"
+               (outUpdateComment)="updateComment(index, $event)">
+  </app-customer-service-treatment-case-comment>
+</ng-container>

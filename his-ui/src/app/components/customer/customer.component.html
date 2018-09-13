@@ -1,0 +1,8 @@
+<app-customer-service-treatment-case-list
+  [filteredTreatmentCases]="treatmentCases | async"
+  [treatmentCaseComments]="treatmentCaseComments"
+  [selectedTreatmentCase]="selectedTreatmentCase| async"
+  (treatmentCaseSelectedEvent)="onTreatmentCaseSelectedEvent($event)"
+  (createCommentEvent)="onCreateCommentEvent($event)"
+></app-customer-service-treatment-case-list>
+

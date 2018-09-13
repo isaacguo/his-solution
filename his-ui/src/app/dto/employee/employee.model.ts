@@ -28,6 +28,7 @@ export class Employee {
               public workPhoneNumber?: string,
               public contactAddress?: ContactAddress,
               public emergencyPhoneNumber?: string,
-              public uuid?: string) {
+              public uuid?: string,
+              public pictureUrl?:string) {
   }
 }

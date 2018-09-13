@@ -29,6 +29,12 @@ public class TreatmentCaseRestController {
         this.authHelper = authHelper;
     }
 
+    @GetMapping()
+    public List<TreatmentCaseEntity>findAll()
+    {
+        return this.treatmentCaseService.findAll();
+    }
+
     @GetMapping("/find-all-by-pet/{pId}")
     public List<TreatmentCaseQueryResponse> findAll(@PathVariable("pId") Long pid) {
         return this.treatmentCaseService.findAll(pid);
