@@ -7,6 +7,7 @@ import * as moment from 'moment';
 export class FromNowPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
+    moment.locale("zh-cn")
     return moment(value).fromNow();
   }
 
