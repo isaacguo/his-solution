@@ -2,6 +2,7 @@ create table authorization_assignment_entity (id bigint not null auto_increment,
 create table authorization_assignment_entity_allowed_operations (authorization_assignment_entity_id bigint not null, allowed_operations_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_entity (id bigint not null auto_increment, uid bigint, user_account varchar(255), username varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table authorization_topic_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+create table comment_entity (id bigint not null auto_increment, comments varchar(255), created_date datetime, uuid varchar(255), uuid_of_comment_by varchar(255), treatment_case_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table common_configuration_entity (id bigint not null auto_increment, conf_key varchar(255), conf_value varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table department_entity (id bigint not null auto_increment, dep_id bigint, description varchar(255), expose_to_public bit not null, name varchar(255), open_to_front_desk bit not null, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table employee_entity (id bigint not null auto_increment, can_be_registered bit not null, emp_id bigint, login_account varchar(255), name varchar(255), self_introduction varchar(255), department_id bigint, employee_type_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -23,6 +24,7 @@ alter table authorization_assignment_entity add constraint FKedjwiuan814a19bi4yy
 alter table authorization_assignment_entity add constraint FK8dqq1kc7jp0clkstctpnjtl2y foreign key (topic_id) references authorization_topic_entity (id);
 alter table authorization_assignment_entity_allowed_operations add constraint FK5vwid8n1jmi0r5h2fxxnbvbgn foreign key (allowed_operations_id) references topic_operation_entity (id);
 alter table authorization_assignment_entity_allowed_operations add constraint FKngkgigjkrhs9p2ir6bh9cuu6a foreign key (authorization_assignment_entity_id) references authorization_assignment_entity (id);
+alter table comment_entity add constraint FKcxa1gpl8foawe48is83aksfxr foreign key (treatment_case_id) references treatment_case_entity (id);
 alter table employee_entity add constraint FKrj4v5xw1jix23uajsogqdy0a0 foreign key (department_id) references department_entity (id);
 alter table employee_entity add constraint FKkve3m2lulwm1xav7ik2bowhr6 foreign key (employee_type_id) references employee_type_entity (id);
 alter table expense_entity add constraint FKt30kehjp5r3scxf5xt2l2lc99 foreign key (pet_owner_id) references pet_owner_entity (id);
