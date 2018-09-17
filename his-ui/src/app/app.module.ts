@@ -37,10 +37,14 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+
     CoreModule,
     SharedModule,
+
     AuthModule,
-    AppRoutingModule,
+
+    //feature modules
     DashboardModule,
     TreatmentModule,
     MedicalTestModule,

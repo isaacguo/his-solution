@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TreeComponent} from "angular-tree-component";
 import {MyTreeNode} from "../../../../../core/models/my-tree-node.model";
-import {EmployeeDepartmentService} from "../../../../../core/services/employee/employee-department.service";
+import {EmployeeDepartmentService} from "../../../../../employee/services/employee-department.service";
 
 @Component({
   selector: 'app-medical-test-settings-department-list',

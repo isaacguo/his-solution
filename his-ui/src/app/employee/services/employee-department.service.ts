@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {DepartmentListItem} from "../../dto/employee/department-list-item.model";
 import {Observable} from "rxjs/Rx";
-import {AbstractService} from "../abstract.service";
+import {AbstractService} from "../../core/services/abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {of} from "rxjs/observable/of";
 import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
 import 'rxjs/add/operator/map';
-import {TreeNodeService} from "../common/tree-node.service";
+import {TreeNodeService} from "../../core/services/common/tree-node.service";
 
 
 @Injectable()

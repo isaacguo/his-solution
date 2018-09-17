@@ -6,7 +6,7 @@ import {Employee} from "../../dto/employee/employee.model";
 import {EmployeeCount} from "../../dto/employee/employee.count.model";
 import {EmployeeListItem} from "../../dto/employee/employee-list-item.model";
 import {DepartmentListItem} from "../../dto/employee/department-list-item.model";
-import {AbstractService} from "../abstract.service";
+import {AbstractService} from "../../core/services/abstract.service";
 
 
 @Injectable()

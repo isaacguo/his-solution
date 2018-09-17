@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {OperationEnum} from "../../../enums/operation.enum";
-import {EmployeeService} from "../../../core/services/employee/employee.service";
+import {EmployeeService} from "../../services/employee.service";
 import {EmployeeListItem} from "../../../core/models/employee/employee-list-item.model";
 
 @Component({
