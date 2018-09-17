@@ -146,7 +146,7 @@ app-customer-service-treatment-case-comment .meta {
 
 app-customer-service-treatment-case-comments {
   display: block;
-  padding: 50px;
+  padding: 5px;
 }
 
 app-customer-service-treatment-case-comments .title {
@@ -167,7 +167,7 @@ app-customer-service-treatment-case-comments .add-comment-box {
   display: flex;
   position: relative;
   width: 100%;
-  padding: 20px;
+  padding: 5px;
   margin-bottom: 10px;
   min-height: 90px;
   align-items: center;
@@ -209,7 +209,7 @@ app-customer-service-treatment-case-comment .content {
   display: flex;
   position: relative;
   width: 100%;
-  padding: 20px;
+  padding: 5px;
   margin-bottom: 10px;
   min-height: 90px;
   align-items: center;
@@ -360,4 +360,47 @@ app-editor.edit-mode .output {
 app-editor.edit-mode .icon-cancel, app-editor.edit-mode .icon-save {
   opacity: 1;
   transform: scale(1)
+}
+
+
+app-tabs {
+  display: block;
+}
+
+app-tabs .tab-list {
+  display: flex;
+  flex-shrink: 0;
+  list-style: none;
+  padding: 10px 50px;
+  margin: 0;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
+}
+
+app-tabs .tab-list-item {
+  display: block;
+}
+
+app-tabs .tab-button {
+  display: block;
+  margin-right: 33px;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: rgba(0, 0, 0, .54);
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+app-tabs .tab-button:hover {
+  color: #000;
+}
+
+app-tabs .tab-button-active {
+  border-bottom: 3px solid #f3cd2c;
+  color: #000;
 }

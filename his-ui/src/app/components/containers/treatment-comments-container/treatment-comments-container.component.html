@@ -11,6 +11,8 @@
                 [selectedTreatmentCase]="selectedTreatmentCase"
                 (treatmentCaseSelectedEvent)="onTreatmentCaseSelected($event)"
                 (createCommentEvent)="onCreateComment($event)"
+                [tabs]="tabs"
+                (outActivateTab)="activateTab($event)"
   >
 
   </app-customer>

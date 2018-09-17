@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {TreatmentCaseComment} from "../../../dto/treatment/treatment-comment.model";
 import {TreatmentCase} from "../../../dto/treatment/treatment-case.model";
+import {Tab} from "../../../ui-controls/tabs/tab.model";
 
 @Component({
   selector: 'app-customer-service-treatment-case-list',
@@ -16,6 +17,8 @@ export class CustomerServiceTreatmentCaseListComponent implements OnInit {
   treatmentCaseComments: Observable<TreatmentCaseComment[]>;
   @Input()
   selectedTreatmentCase: TreatmentCase;
+
+  @Input() tabs: Tab[];
 
 
   @Output() updateCommentEvent = new EventEmitter<any>();

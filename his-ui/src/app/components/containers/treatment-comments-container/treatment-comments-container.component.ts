@@ -8,6 +8,7 @@ import {map} from "rxjs/operators";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {CommentService} from "../../../services/treatment/comment.service";
+import {Tab} from "../../../ui-controls/tabs/tab.model";
 
 
 @Component({
@@ -23,6 +24,31 @@ export class TreatmentCommentsContainerComponent implements OnInit {
   treatmentCaseComments: Observable<TreatmentCaseComment[]>;
 
   filteredTreatmentCases: Observable<TreatmentCase[]>;
+
+
+  tabs: Tab[] = [
+    {id: 'info', title: '宠物信息'},
+    {id: 'detail', title: '病历详情'},
+    {id: 'comment', title: '客户反馈'}
+  ];
+  activeTab: Observable<Tab>;
+
+
+  /*
+  activateTab(tab: Tab) {
+    this.selectedProject
+      .pipe(take(1))
+      .subscribe((project: Project) => {
+        this.router.navigate([
+          '/projects',
+          project.id,
+          tab.id
+        ]);
+      });
+  }
+  */
+
+
 
   constructor(private treatmentCaseService: TreatmentCaseService,
               private commentService: CommentService,
@@ -47,8 +73,14 @@ export class TreatmentCommentsContainerComponent implements OnInit {
     );
 
     this.treatmentCaseComments = this.selectedTreatmentCase.pipe(map(treatmentCase => {
-      return treatmentCase.comments;
+      if (treatmentCase)
+        return treatmentCase.comments;
+      else
+        return [];
     }))
+
+
+
   }
 
 

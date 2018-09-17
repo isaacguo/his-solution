@@ -183,7 +183,7 @@ const appRoutes: Routes = [
       },
       {
         path:'customer-service',
-        component: TreatmentCommentsContainerComponent
+        component: TreatmentCommentsContainerComponent,
       },
       {
         path: 'medical-test-query',

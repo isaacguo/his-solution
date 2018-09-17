@@ -189,6 +189,8 @@ import {EmployeeProfilePictureComponent} from './components/employee/employee-pr
 //ui
 import {EditorComponent} from './components/ui/editor/editor.component';
 import { FromNowPipe } from './pipes/from-now.pipe';
+import { CustomerServiceTreatmentCaseOutletComponent } from './components/customer/customer-service-treatment-case-list/customer-service-treatment-case-outlet/customer-service-treatment-case-outlet.component';
+import { TabsComponent } from './ui-controls/tabs/tabs.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -336,6 +338,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EditorComponent,
 
     FromNowPipe,
+
+    CustomerServiceTreatmentCaseOutletComponent,
+
+    TabsComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@
   [filteredTreatmentCases]="treatmentCases | async"
   [treatmentCaseComments]="treatmentCaseComments"
   [selectedTreatmentCase]="selectedTreatmentCase| async"
+  [tabs]="tabs"
   (treatmentCaseSelectedEvent)="onTreatmentCaseSelectedEvent($event)"
   (createCommentEvent)="onCreateCommentEvent($event)"
 ></app-customer-service-treatment-case-list>
