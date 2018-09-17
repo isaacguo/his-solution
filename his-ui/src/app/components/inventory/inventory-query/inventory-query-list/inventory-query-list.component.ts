@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AbstractCategoryListComponent} from "../../../common/abstract-category-list/abstract-category-list.component";
-import {MedicalTestReportTemplateCategoryService} from "../../../../services/medical-test/medical-test-report-template-category.service";
-import {InventoryCategoryService} from "../../../../services/inventory/inventory-category.service";
-import {FinancePriceService} from "../../../../services/finance/finance-price.service";
+import {FinancePriceService} from "../../../../core/services/finance/finance-price.service";
+import {InventoryCategoryService} from "../../../../core/services/inventory/inventory-category.service";
 
 @Component({
   selector: 'app-inventory-query-list',

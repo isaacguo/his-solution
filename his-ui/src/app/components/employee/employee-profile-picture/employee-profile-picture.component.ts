@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Employee} from "../../../dto/employee/employee.model";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import {Employee} from "../../../core/models/employee/employee.model";
 
 @Component({
   selector: 'app-employee-profile-picture',

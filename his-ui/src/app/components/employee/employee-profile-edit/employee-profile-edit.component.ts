@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {EmployeeService} from "../../../services/employee/employee.service";
-import {Employee} from "../../../dto/employee/employee.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {error} from "util";
+import {EmployeeService} from "../../../core/services/employee/employee.service";
 
 @Component({
   selector: 'app-employee-profile-edit',

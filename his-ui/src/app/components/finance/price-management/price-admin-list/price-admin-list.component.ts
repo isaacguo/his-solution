@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FinancePriceService} from "../../../../services/finance/finance-price.service";
+import {FinancePriceService} from "../../../../core/services/finance/finance-price.service";
 
 @Component({
   selector: 'app-price-admin-list',

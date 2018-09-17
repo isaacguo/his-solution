@@ -1,12 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {InventoryImportSheetService} from "../../../services/inventory/inventory-import-sheet.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {InventoryItemService} from "../../../services/inventory/inventory-item.service";
 import {AbstractCreateUpdateComponent} from "../../common/abstract-create-update.component";
 import {Observable} from "rxjs/Observable";
-import {InventoryExportSheetService} from "../../../services/inventory/inventory-export-sheet.service";
+import {InventoryExportSheetService} from "../../../core/services/inventory/inventory-export-sheet.service";
+import {InventoryItemService} from "../../../core/services/inventory/inventory-item.service";
 
 @Component({
   selector: 'app-export-sheet-create-update',

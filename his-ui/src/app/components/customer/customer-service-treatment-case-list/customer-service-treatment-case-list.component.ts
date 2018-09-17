@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {TreatmentCaseComment} from "../../../dto/treatment/treatment-comment.model";
-import {TreatmentCase} from "../../../dto/treatment/treatment-case.model";
 import {Tab} from "../../../ui-controls/tabs/tab.model";
+import {TreatmentCaseComment} from "../../../core/models/treatment/treatment-comment.model";
+import {TreatmentCase} from "../../../core/models/treatment/treatment-case.model";
 
 @Component({
   selector: 'app-customer-service-treatment-case-list',

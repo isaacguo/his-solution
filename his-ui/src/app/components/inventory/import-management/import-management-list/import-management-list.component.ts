@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PetInfo} from "../../../../services/treatment/pet.service";
-import {PetOperationRequest} from "../../../../dto/treatment/pet.operation.request";
-import {ProductImportReceiptService} from "../../../../services/inventory/product-import-receipt.service";
-import {InventoryImportSheetService} from "../../../../services/inventory/inventory-import-sheet.service";
+import {InventoryImportSheetService} from "../../../../core/services/inventory/inventory-import-sheet.service";
 
 @Component({
   selector: 'app-import-management-list',

@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {MedicalTestReportTemplateService} from "../../../services/medical-test/medical-test-report-template.service";
 import {Router} from "@angular/router";
 import {OperationEnum} from "../../../enums/operation.enum";
-import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
 import {ReportStatusEnum} from "../../../enums/report-status.enum";
-import {TreatmentCaseService} from "../../../services/treatment/treatment-case.service";
-import {PetService} from "../../../services/treatment/pet.service";
+import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
+import {PetService} from "../../../core/services/treatment/pet.service";
+import {MedicalTestReportService} from "../../../core/services/medical-test/medical-test-report.service";
+import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
 
 @Component({
   selector: 'app-medical-test-query',

@@ -1,9 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {MedicalTestReportTemplateService} from "../../../services/medical-test/medical-test-report-template.service";
-import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
-import {MedicalTestReportTemplateItem} from "../../../dto/medical-test/medical-test-report-template-item.model";
+import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
+import {MedicalTestReportService} from "../../../core/services/medical-test/medical-test-report.service";
 
 @Component({
   selector: 'app-medical-test-report-view',

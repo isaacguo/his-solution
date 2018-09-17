@@ -1,14 +1,14 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {EmployeeListItem} from "../../../../dto/employee/employee-list-item.model";
-import {EmployeeService} from "../../../../services/employee/employee.service";
 import {Router} from "@angular/router";
 import {OperationEnum} from "../../../../enums/operation.enum";
-import {Employee} from "../../../../dto/employee/employee.model";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {MyTreeNode} from "../../../../dto/procurement/MyTreeNode";
 import {TreeComponent} from "angular-tree-component";
-import {TreeNodeService} from "../../../../services/common/tree-node.service";
-import {EmployeeDepartmentService} from "../../../../services/employee/employee-department.service";
+import {MyTreeNode} from "../../../../core/models/my-tree-node.model";
+import {EmployeeListItem} from "../../../../core/models/employee/employee-list-item.model";
+import {Employee} from "../../../../core/models/employee/employee.model";
+import {EmployeeDepartmentService} from "../../../../core/services/employee/employee-department.service";
+import {EmployeeService} from "../../../../core/services/employee/employee.service";
+import {TreeNodeService} from "../../../../core/services/common/tree-node.service";
 
 @Component({
   selector: 'app-employee-admin-detail',

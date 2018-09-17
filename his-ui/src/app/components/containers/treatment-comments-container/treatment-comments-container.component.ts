@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {TreatmentCase} from "../../../dto/treatment/treatment-case.model";
-import {TreatmentCaseService} from "../../../services/treatment/treatment-case.service";
-import {TreatmentCaseComment} from "../../../dto/treatment/treatment-comment.model";
 import {ActivatedRoute} from "@angular/router";
 import {map} from "rxjs/operators";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {CommentService} from "../../../services/treatment/comment.service";
 import {Tab} from "../../../ui-controls/tabs/tab.model";
+import {TreatmentCaseComment} from "../../../core/models/treatment/treatment-comment.model";
+import {TreatmentCase} from "../../../core/models/treatment/treatment-case.model";
+import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
+import {CommentService} from "../../../core/services/treatment/comment.service";
 
 
 @Component({

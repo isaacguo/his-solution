@@ -2,9 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractCreateUpdateComponent} from "../../common/abstract-create-update.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {InventoryItemService} from "../../../services/inventory/inventory-item.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {OperationEnum} from "../../../enums/operation.enum";
+import {InventoryItemService} from "../../../core/services/inventory/inventory-item.service";
 
 @Component({
   selector: 'app-inventory-item-create-update',

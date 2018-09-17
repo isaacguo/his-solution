@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractCreateUpdateComponent} from "../../common/abstract-create-update.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MedicalTestReportTemplateService} from "../../../services/medical-test/medical-test-report-template.service";
 import {OperationEnum} from "../../../enums/operation.enum";
-import {MedicalTestReportTemplateItem} from "../../../dto/medical-test/medical-test-report-template-item.model";
-import {MedicalTestReportService} from "../../../services/medical-test/medical-test-report.service";
+import {MedicalTestReportService} from "../../../core/services/medical-test/medical-test-report.service";
+import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
 
 @Component({
   selector: 'app-medical-test-report-create-update',
