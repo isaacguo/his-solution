@@ -5,6 +5,7 @@ import {MedicalTestReportTemplate} from "../../../../../models/medical-test-repo
 import {MedicalTestReportTemplateCategoryService} from "../../../../../services/medical-test-report-template-category.service";
 import {MedicalTestReportTemplateService} from "../../../../../services/medical-test-report-template.service";
 import {FinancePriceService} from "../../../../../../core/services/finance-price.service";
+import {OperationEnum} from "../../../../../../core/enums/operation.enum";
 
 @Component({
   selector: 'app-medical-test-settings-report-template-category-detail',

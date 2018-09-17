@@ -1,5 +1,3 @@
-import {RegistrationStatusEnum} from "../../core/enums/registration-status.enum";
-
 export interface TreatmentRegistrationOperationRequestModel {
   doctorId?: number,
   operatorId?: number,

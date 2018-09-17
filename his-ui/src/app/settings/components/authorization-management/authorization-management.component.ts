@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthorizationService} from "../../../services/common/authorization.service";
-import {Authorization} from "../../../dto/authorization/authorization.model";
+import {Authorization} from "../../../core/models/authorization/authorization.model";
+import {AuthorizationService} from "../../../core/services/common/authorization.service";
 
 @Component({
   selector: 'app-authorization-management',

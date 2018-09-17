@@ -1,16 +1,16 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
-import {Authorization} from "../../dto/authorization/authorization.model";
 import {AbstractService} from "../abstract.service";
-import {AuthorizationTopic} from "../../dto/authorization/authorization-topic.model";
-import {AuthorizationOperationRequest} from "../../dto/authorization/authorization-operation-request.model";
-import {AuthorizationAssignment} from "../../dto/authorization/authorization-assignment.model";
 import {AuthenticationService, AuthInfo, AuthState} from "./authentication.service";
 import {Subscription} from "rxjs/Subscription";
 import {forkJoin} from "rxjs/observable/forkJoin";
 import {Router} from "@angular/router";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {AuthorizationAssignment} from "../../models/authorization/authorization-assignment.model";
+import {Authorization} from "../../models/authorization/authorization.model";
+import {AuthorizationTopic} from "../../models/authorization/authorization-topic.model";
+import {AuthorizationOperationRequest} from "../../models/authorization/authorization-operation-request.model";
 
 @Injectable()
 export class AuthorizationService extends AbstractService implements OnDestroy {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {RegistrationService} from "../../../../services/treatment/registration.service";
-import {RegistrationStatusEnum} from "../../../../enums/registration-status.enum";
+import {RegistrationService} from "../../../services/registration.service";
+import {RegistrationStatusEnum} from "../../../../core/enums/registration-status.enum";
 
 @Component({
   selector: 'app-registration-query',

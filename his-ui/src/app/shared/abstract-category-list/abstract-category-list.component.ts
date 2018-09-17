@@ -3,7 +3,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {TreeComponent} from "angular-tree-component";
 import {FormControl, Validators} from "@angular/forms";
 import {CategoryService} from "./category-service";
-import {MyTreeNode} from "../../../core/models/my-tree-node.model";
+import {MyTreeNode} from "../../core/models/my-tree-node.model";
 
 export abstract class AbstractCategoryListComponent implements OnInit {
 

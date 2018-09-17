@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {QueryBarComponent} from "../../../common/query-bar/query-bar.component";
+import {QueryBarComponent} from "../../../../shared/query-bar/query-bar.component";
 
 @Component({
   selector: 'app-fee-query',

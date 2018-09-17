@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {TreatmentCaseComment} from "../../../../../dto/treatment/treatment-comment.model";
+import {TreatmentCaseComment} from "../../../../models/treatment-comment.model";
 
 @Component({
   selector: 'app-customer-service-treatment-case-comment',

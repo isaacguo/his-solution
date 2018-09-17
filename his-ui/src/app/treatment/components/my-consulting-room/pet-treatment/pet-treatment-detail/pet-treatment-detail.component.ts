@@ -1,17 +1,17 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {TreatmentCaseService} from "../../../../../services/treatment/treatment-case.service";
 import {Router} from "@angular/router";
-import {MedicalTestReportService} from "../../../../../services/medical-test/medical-test-report.service";
-import {MedicalTestReportTemplateService} from "../../../../../services/medical-test/medical-test-report-template.service";
 import {Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {MedicalTestReportTemplateItem} from "../../../../../dto/medical-test/medical-test-report-template-item.model";
-import {ReportStatusEnum} from "../../../../../enums/report-status.enum";
-import {FinanceChargeService} from "../../../../../services/finance/finance-charge.service";
-import {PetInfo, PetService} from "../../../../../services/treatment/pet.service";
 import {Subscription} from "rxjs/Subscription";
-import {PharmacyMedicineService} from "../../../../../services/pharmacy/pharmacy-medicine.service";
+import {PetInfo, PetService} from "../../../../services/pet.service";
+import {MedicalTestReportService} from "../../../../../medical-test/services/medical-test-report.service";
+import {MedicalTestReportTemplateService} from "../../../../../medical-test/services/medical-test-report-template.service";
+import {TreatmentCaseService} from "../../../../services/treatment-case.service";
+import {PharmacyMedicineService} from "../../../../../pharmacy/services/pharmacy-medicine.service";
+import {FinanceChargeService} from "../../../../../finance/services/finance-charge.service";
+import {ReportStatusEnum} from "../../../../../medical-test/enums/report-status.enum";
+import {MedicalTestReportTemplateItem} from "../../../../../medical-test/models/medical-test-report-template-item.model";
 
 @Component({
   selector: 'app-pet-treatment-detail',

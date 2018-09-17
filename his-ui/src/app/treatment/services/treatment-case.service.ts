@@ -3,8 +3,8 @@ import {AbstractService} from "../../core/services/abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
 import {CrudService} from "../../core/services/crud.service";
-import {TreatmentCase} from "../../dto/treatment/treatment-case.model";
-import {ServiceConstants} from "../../components/common/service-constants";
+import {TreatmentCase} from "../models/treatment-case.model";
+import {ServiceConstants} from "../../shared/service-constants";
 
 @Injectable()
 export class TreatmentCaseService extends CrudService<TreatmentCase> {

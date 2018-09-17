@@ -1,5 +1,5 @@
-import {Observable} from "../../../../../node_modules/rxjs";
-import {MyTreeNode} from "../../../core/models/my-tree-node.model";
+import {Observable} from "rxjs/Observable";
+import {MyTreeNode} from "../../core/models/my-tree-node.model";
 
 export interface CategoryService {
 

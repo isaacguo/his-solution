@@ -2,12 +2,11 @@ import {Injectable} from "@angular/core";
 import {Headers, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
-import {Department} from "../../dto/treatment/department.model";
-import {MyTreeNode} from "../../dto/procurement/MyTreeNode";
 import {TreeNodeService} from "../../core/services/common/tree-node.service";
-import {DepartmentOperationRequest} from "../../dto/treatment/department.operation.request.model";
 import {AbstractService} from "../../core/services/abstract.service";
-import {TreatmentEmployeeModel} from "../../dto/treatment/treatment.employee.model";
+import {Department} from "../models/department.model";
+import {TreatmentEmployeeModel} from "../models/treatment.employee.model";
+import {DepartmentOperationRequest} from "../models/department.operation.request.model";
 
 @Injectable()
 export class DepartmentService extends AbstractService {
@@ -54,10 +53,11 @@ export class DepartmentService extends AbstractService {
 
   setDepartmentOpenToFrontDeskValue(departmentId: number, departmentName: string, state: boolean): Observable<boolean> {
 
-    const request: DepartmentOperationRequest = new DepartmentOperationRequest();
-    request.openToFrontDesk = state;
-    request.name = departmentName;
-    request.depId = departmentId;
+    let request: DepartmentOperationRequest = {
+      openToFrontDesk: state,
+      name: departmentName,
+      depId: departmentId
+    }
 
     let url = `${this.rootUrl}/setDepartmentOpenToFrontDeskValue`;
     return this.authHttp.post(url, request).map(r => {

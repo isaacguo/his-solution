@@ -2,10 +2,10 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {TreeComponent} from "angular-tree-component";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {TreeviewOperationEnum} from "../../../../enums/treeview-operation.enum";
 import {MyTreeNode} from "../../../../core/models/my-tree-node.model";
 import {EmployeeDepartmentService} from "../../../../core/services/employee-department.service";
 import {TreeNodeService} from "../../../../core/services/common/tree-node.service";
+import {TreeviewOperationEnum} from "../../../../core/enums/treeview-operation.enum";
 
 @Component({
   selector: 'app-employee-admin-list',

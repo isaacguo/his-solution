@@ -5,6 +5,7 @@ import {MedicalTestReportService} from "../../services/medical-test-report.servi
 import {MedicalTestReportTemplateService} from "../../services/medical-test-report-template.service";
 import {AbstractCreateUpdateComponent} from "../../../shared/abstract-create-update.component";
 import {OperationEnum} from "../../../core/enums/operation.enum";
+import {MedicalTestReportTemplateItem} from "../../models/medical-test-report-template-item.model";
 
 @Component({
   selector: 'app-medical-test-report-create-update',

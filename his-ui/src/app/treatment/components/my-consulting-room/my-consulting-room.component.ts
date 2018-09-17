@@ -3,9 +3,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 import {PetOwnerService} from "../../services/pet-owner.service";
 import {DepartmentService} from "../../services/department.service";
-import {PetService} from "../../services/pet.service";
+import {PetInfo, PetService} from "../../services/pet.service";
 import {TreatmentEmployeeService} from "../../services/treatment-employee.service";
 import {RegistrationService} from "../../services/registration.service";
+import {RegistrationStatusEnum} from "../../../core/enums/registration-status.enum";
+import {PetOperationRequest} from "../../models/pet.operation.request";
 
 @Component({
   selector: 'app-my-consulting-room',

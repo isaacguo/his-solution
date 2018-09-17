@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {DoctorRegistrationComponent} from "../../doctor-registration.component";
-import {Doctor} from "../../../models/doctor.model";
-import {DepartmentService} from "../../../../core/services/treatment/department.service";
+import {Doctor} from "../../../../models/doctor.model";
+import {DepartmentService} from "../../../../services/department.service";
 
 @Component({
   selector: 'doctor-list-view',

@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Doctor} from "../../../../../../dto/treatment/doctor.model";
-import {DepartmentService} from "../../../../../../services/treatment/department.service";
 import {BsModalComponent} from "ng2-bs3-modal";
-import {TreatmentCase} from "../../../../../../dto/treatment/treatment-case.model";
+import {Doctor} from "../../../../../models/doctor.model";
+import {DepartmentService} from "../../../../../services/department.service";
+import {TreatmentCase} from "../../../../../models/treatment-case.model";
 
 @Component({
   selector: 'doctor-list-item',

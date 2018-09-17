@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Rx";
-import {PetOwner} from "../../dto/treatment/pet-owner.model";
 import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
-import {Pet} from "../../dto/treatment/pet.model";
 import {OperationEnum} from "../../core/enums/operation.enum";
+import {PetOwner} from "../models/pet-owner.model";
+import {Pet} from "../models/pet.model";
 
 
 @Injectable()

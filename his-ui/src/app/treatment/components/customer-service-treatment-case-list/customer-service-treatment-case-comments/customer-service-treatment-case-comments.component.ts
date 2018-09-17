@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {TreatmentCaseComment} from "../../../../dto/treatment/treatment-comment.model";
-import {TreatmentCase} from "../../../../dto/treatment/treatment-case.model";
 import {Tab} from "../../../../ui-controls/tabs/tab.model";
+import {TreatmentCaseComment} from "../../../models/treatment-comment.model";
+import {TreatmentCase} from "../../../models/treatment-case.model";
 
 @Component({
   selector: 'app-customer-service-treatment-case-comments',

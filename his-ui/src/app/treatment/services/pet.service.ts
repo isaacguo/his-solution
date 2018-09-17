@@ -3,10 +3,10 @@ import {AbstractService} from "../../core/services/abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Rx";
 import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
-import {PetOperationRequest} from "../../dto/treatment/pet.operation.request";
-import {PetOwner} from "../../dto/treatment/pet-owner.model";
-import {Pet} from "../../dto/treatment/pet.model";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Pet} from "../models/pet.model";
+import {PetOwner} from "../models/pet-owner.model";
+import {PetOperationRequest} from "../models/pet.operation.request";
 
 @Injectable()
 export class PetService extends AbstractService {

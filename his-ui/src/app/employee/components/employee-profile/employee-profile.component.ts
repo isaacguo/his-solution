@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {SexualEnum} from "../../../enums/sexual.enum";
-import {EmploymentStatusEnum} from "../../../enums/employment.status.enum";
-import {OperationEnum} from "../../../enums/operation.enum";
 import {EmployeeService} from "../../../core/services/employee.service";
+import {OperationEnum} from "../../../core/enums/operation.enum";
+import {EmploymentStatusEnum} from "../../enums/employment.status.enum";
+import {SexualEnum} from "../../../core/enums/sexual.enum";
 
 @Component({
   selector: 'app-employee-profile',

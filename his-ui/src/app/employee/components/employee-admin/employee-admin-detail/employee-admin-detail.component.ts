@@ -1,6 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
-import {OperationEnum} from "../../../../enums/operation.enum";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {TreeComponent} from "angular-tree-component";
 import {MyTreeNode} from "../../../../core/models/my-tree-node.model";
@@ -9,6 +8,7 @@ import {Employee} from "../../../models/employee.model";
 import {EmployeeDepartmentService} from "../../../../core/services/employee-department.service";
 import {EmployeeService} from "../../../../core/services/employee.service";
 import {TreeNodeService} from "../../../../core/services/common/tree-node.service";
+import {OperationEnum} from "../../../../core/enums/operation.enum";
 
 @Component({
   selector: 'app-employee-admin-detail',

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
 import {AbstractService} from "../../core/services/abstract.service";
 import {Observable} from "rxjs/Observable";
+import {TreatmentEmployeeModel} from "../models/treatment.employee.model";
 
 @Injectable()
 export class TreatmentEmployeeService extends AbstractService {

@@ -4,6 +4,8 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {FinancePriceService} from "../../../../../core/services/finance-price.service";
 import {InventoryCategoryService} from "../../../../services/inventory-category.service";
 import {InventoryItemService} from "../../../../services/inventory-item.service";
+import {OperationEnum} from "../../../../../core/enums/operation.enum";
+import {MedicalTestReportTemplate} from "../../../../../medical-test/models/medical-test-report-template.model";
 
 @Component({
   selector: 'app-inventory-settings-item-management-detail',

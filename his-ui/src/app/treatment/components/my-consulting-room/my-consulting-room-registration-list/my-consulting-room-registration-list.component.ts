@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {TreatmentRegistrationModel} from "../../../../dto/treatment/treatment.registration.model";
-import {PetInfo, PetService} from "../../../../services/treatment/pet.service";
 import {Subscription} from "rxjs/Subscription";
+import {PetInfo, PetService} from "../../../services/pet.service";
+import {TreatmentRegistrationModel} from "../../../models/treatment.registration.model";
 
 @Component({
   selector: 'app-my-consulting-room-registration-list',

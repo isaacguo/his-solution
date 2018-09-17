@@ -1,16 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {Pet} from "../../../../dto/treatment/pet.model";
-import {PetOwner} from "../../../../dto/treatment/pet-owner.model";
-import {PetOwnerService} from "../../../../services/treatment/pet-owner.service";
-import {OperationEnum} from "../../../../enums/operation.enum";
-import {DepartmentService} from "../../../../services/treatment/department.service";
-import {Department} from "../../../../dto/treatment/department.model";
-import {TreatmentEmployeeService} from "../../../../services/treatment/treatment-employee.service";
-import {TreatmentEmployeeModel} from "../../../../dto/treatment/treatment.employee.model";
-import {RegistrationService} from "../../../../services/treatment/registration.service";
-import {TreatmentRegistrationModel} from "../../../../dto/treatment/treatment.registration.model";
-import {RegistrationStatusEnum} from "../../../../enums/registration-status.enum";
+import {OperationEnum} from "../../../../core/enums/operation.enum";
+import {Pet} from "../../../models/pet.model";
+import {PetOwner} from "../../../models/pet-owner.model";
+import {Department} from "../../../models/department.model";
+import {TreatmentEmployeeModel} from "../../../models/treatment.employee.model";
+import {TreatmentRegistrationModel} from "../../../models/treatment.registration.model";
+import {PetOwnerService} from "../../../services/pet-owner.service";
+import {DepartmentService} from "../../../services/department.service";
+import {RegistrationService} from "../../../services/registration.service";
+import {TreatmentEmployeeService} from "../../../services/treatment-employee.service";
 
 @Component({
   selector: 'app-pet-registration',

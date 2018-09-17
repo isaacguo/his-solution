@@ -1,7 +1,7 @@
 import {OnDestroy, OnInit} from "@angular/core";
-import {AuthorizationInfo, AuthorizationService} from "../services/common/authorization.service";
 import {Subscription} from "rxjs/Subscription";
-import {AuthorizationAssignment} from "../dto/authorization/authorization-assignment.model";
+import {AuthorizationInfo, AuthorizationService} from "../../core/services/common/authorization.service";
+import {AuthorizationAssignment} from "../../core/models/authorization/authorization-assignment.model";
 
 export class AbstractGuard implements OnInit, OnDestroy {
 

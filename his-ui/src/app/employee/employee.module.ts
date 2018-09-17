@@ -18,7 +18,6 @@ import {EmployeeManagementGuard} from "./guards/employee-management.guard";
   imports: [
     CommonModule,
     EmployeeRoutingModule,
-
     EmployeeComponent,
     EmployeeProfileComponent,
     EmployeeLeaveComponent,

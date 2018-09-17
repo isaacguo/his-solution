@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MedicalTestReportTemplateService} from "../../services/medical-test-report-template.service";
 import {MedicalTestReportService} from "../../services/medical-test-report.service";
+import {MedicalTestReportTemplateItem} from "../../models/medical-test-report-template-item.model";
 
 @Component({
   selector: 'app-medical-test-report-view',

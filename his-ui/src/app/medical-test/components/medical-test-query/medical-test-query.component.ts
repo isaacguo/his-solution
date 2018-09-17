@@ -6,6 +6,7 @@ import {PetService} from "../../../treatment/services/pet.service";
 import {MedicalTestReportService} from "../../services/medical-test-report.service";
 import {MedicalTestReportTemplateService} from "../../services/medical-test-report-template.service";
 import {OperationEnum} from "../../../core/enums/operation.enum";
+import {ReportStatusEnum} from "../../enums/report-status.enum";
 
 @Component({
   selector: 'app-medical-test-query',

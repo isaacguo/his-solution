@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MedicalTestReportService} from "../../../../services/medical-test/medical-test-report.service";
-import {PetInfo, PetService} from "../../../../services/treatment/pet.service";
 import {Subscription} from "rxjs/Subscription";
-import {TreatmentCaseService} from "../../../../services/treatment/treatment-case.service";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {RegistrationService} from "../../../../services/treatment/registration.service";
-import {RegistrationStatusEnum} from "../../../../enums/registration-status.enum";
-import {OperationEnum} from "../../../../enums/operation.enum";
+import {PetInfo, PetService} from "../../../services/pet.service";
+import {RegistrationService} from "../../../services/registration.service";
+import {MedicalTestReportService} from "../../../../medical-test/services/medical-test-report.service";
+import {TreatmentCaseService} from "../../../services/treatment-case.service";
+import {RegistrationStatusEnum} from "../../../../core/enums/registration-status.enum";
 
 @Component({
   selector: 'app-pet-treatment',

@@ -1,16 +1,15 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthorizationTopic} from "../../../../dto/authorization/authorization-topic.model";
-import {UserAccountAuthorizationAssignmentItem} from "../../../../dto/authorization/user-account-authorization-assignment-item.model";
-import {AuthorizationAssignment} from "../../../../dto/authorization/authorization-assignment.model";
-import {AuthorizationService} from "../../../../services/common/authorization.service";
-import {Authorization} from "../../../../dto/authorization/authorization.model";
-import {TopicOperation} from "../../../../dto/authorization/topic-operation.model";
-import {EmployeeService} from "../../../../services/employee/employee.service";
-import {Employee} from "../../../../dto/employee/employee.model";
 import {Observable} from "rxjs/Observable";
-import {AuthorizationOperationRequest} from "../../../../dto/authorization/authorization-operation-request.model";
-import {AuthorizationAssignmentOperationRequest} from "../../../../dto/authorization/authorization-assignment-operation-request.model";
+import {Authorization} from "../../../../core/models/authorization/authorization.model";
+import {Employee} from "../../../../employee/models/employee.model";
+import {AuthorizationTopic} from "../../../../core/models/authorization/authorization-topic.model";
+import {EmployeeService} from "../../../../core/services/employee.service";
+import {AuthorizationService} from "../../../../core/services/common/authorization.service";
+import {AuthorizationOperationRequest} from "../../../../core/models/authorization/authorization-operation-request.model";
+import {AuthorizationAssignmentOperationRequest} from "../../../../core/models/authorization/authorization-assignment-operation-request.model";
+import {AuthorizationAssignment} from "../../../../core/models/authorization/authorization-assignment.model";
+import {TopicOperation} from "../../../../core/models/authorization/topic-operation.model";
 
 @Component({
   selector: 'app-security-operation-panel',
