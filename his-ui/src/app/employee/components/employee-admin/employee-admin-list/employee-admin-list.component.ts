@@ -4,7 +4,7 @@ import {TreeComponent} from "angular-tree-component";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {TreeviewOperationEnum} from "../../../../enums/treeview-operation.enum";
 import {MyTreeNode} from "../../../../core/models/my-tree-node.model";
-import {EmployeeDepartmentService} from "../../../services/employee-department.service";
+import {EmployeeDepartmentService} from "../../../../core/services/employee-department.service";
 import {TreeNodeService} from "../../../../core/services/common/tree-node.service";
 
 @Component({

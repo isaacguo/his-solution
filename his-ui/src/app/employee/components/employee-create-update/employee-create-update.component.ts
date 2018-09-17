@@ -8,7 +8,7 @@ import {EmploymentStatusEnum} from "../../../enums/employment.status.enum";
 import {SexualEnum} from "../../../enums/sexual.enum";
 import {GenderEnum} from "../../../enums/gender.enum";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {EmployeeService} from "../../services/employee.service";
+import {EmployeeService} from "../../../core/services/employee.service";
 
 
 /**

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {OperationEnum} from "../../../../enums/operation.enum";
 import {Router} from "@angular/router";
-import {EmployeeService} from "../../../services/employee.service";
-import {Employee} from "../../../../core/models/employee/employee.model";
+import {EmployeeService} from "../../../../core/services/employee.service";
+import {Employee} from "../../../models/employee.model";
 
 @Component({
   selector: 'app-employee-admin-list-only',
