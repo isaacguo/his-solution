@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 import {FormBuilder, FormGroup} from "@angular/forms";
 

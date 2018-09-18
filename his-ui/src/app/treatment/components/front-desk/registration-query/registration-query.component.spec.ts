@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RegistrationQueryComponent } from './registration-query.component';
+import {RegistrationQueryComponent} from './registration-query.component';
 
 describe('RegistrationQueryComponent', () => {
   let component: RegistrationQueryComponent;

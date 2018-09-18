@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
-import {Http, Headers, Response} from "@angular/http";
+import {Response} from "@angular/http";
 import 'rxjs/add/operator/map'
 import {AuthHttp, JwtHelper} from "angular2-jwt";
 import {Router} from "@angular/router";
 import "rxjs/add/operator/catch";
-import {AuthorizationService} from "./authorization.service";
 
 @Injectable()
 export class AuthenticationService {

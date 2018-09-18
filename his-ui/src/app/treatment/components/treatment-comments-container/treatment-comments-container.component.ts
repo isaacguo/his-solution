@@ -9,7 +9,6 @@ import {TreatmentCaseComment} from "../../../treatment/models/treatment-comment.
 import {TreatmentCase} from "../../../treatment/models/treatment-case.model";
 import {TreatmentCaseService} from "../../../treatment/services/treatment-case.service";
 import {CommentService} from "../../../treatment/services/comment.service";
-import {take} from "rxjs/operator/take";
 
 
 @Component({

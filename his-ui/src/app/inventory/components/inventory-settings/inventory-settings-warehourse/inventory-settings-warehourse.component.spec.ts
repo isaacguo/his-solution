@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InventorySettingsWarehourseComponent } from './inventory-settings-warehourse.component';
+import {InventorySettingsWarehourseComponent} from './inventory-settings-warehourse.component';
 
 describe('InventorySettingsWarehourseComponent', () => {
   let component: InventorySettingsWarehourseComponent;

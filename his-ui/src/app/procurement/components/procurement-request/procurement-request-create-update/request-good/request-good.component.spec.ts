@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RequestGoodComponent } from './request-good.component';
+import {RequestGoodComponent} from './request-good.component';
 
 describe('RequestGoodComponent', () => {
   let component: RequestGoodComponent;

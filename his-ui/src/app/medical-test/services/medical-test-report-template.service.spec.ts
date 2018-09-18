@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { MedicalTestReportTemplateService } from './medical-test-report-template.service';
+import {MedicalTestReportTemplateService} from './medical-test-report-template.service';
 
 describe('MedicalTestReportTemplateService', () => {
   beforeEach(() => {

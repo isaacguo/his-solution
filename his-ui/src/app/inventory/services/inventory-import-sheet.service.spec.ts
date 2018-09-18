@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { InventoryImportSheetService } from './inventory-import-sheet.service';
+import {InventoryImportSheetService} from './inventory-import-sheet.service';
 
 describe('InventoryImportSheetService', () => {
   beforeEach(() => {

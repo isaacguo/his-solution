@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ExportManagementDetailComponent } from './export-management-detail.component';
+import {ExportManagementDetailComponent} from './export-management-detail.component';
 
 describe('ExportManagementDetailComponent', () => {
   let component: ExportManagementDetailComponent;

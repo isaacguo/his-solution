@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { TreeNodeService } from './tree-node.service';
+import {TreeNodeService} from './tree-node.service';
 
 describe('TreeNodeService', () => {
   beforeEach(() => {

@@ -37,6 +37,13 @@ import {FromNowPipe} from "./pipes/from-now.pipe";
 import {PetTreatmentDetailComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component";
 import {SharedModule} from "../shared/shared.module";
 import {EmployeeProfilePictureComponent} from "./components/employee-profile-picture/employee-profile-picture.component";
+import {PetOwnerService} from "./services/pet-owner.service";
+import {CommentService} from "./services/comment.service";
+import {DepartmentService} from "./services/department.service";
+import {PetService} from "./services/pet.service";
+import {RegistrationService} from "./services/registration.service";
+import {TreatmentCaseService} from "./services/treatment-case.service";
+import {TreatmentEmployeeService} from "./services/treatment-employee.service";
 
 @NgModule({
   imports: [
@@ -80,7 +87,14 @@ import {EmployeeProfilePictureComponent} from "./components/employee-profile-pic
     FrontdeskGuard,
     InpatientManagementGuard,
     MyConsultingRoomGuard,
-    TreatmentSettingsGuard
+    TreatmentSettingsGuard,
+    PetOwnerService,
+    CommentService,
+    DepartmentService,
+    PetService,
+    RegistrationService,
+    TreatmentCaseService,
+    TreatmentEmployeeService
   ]
 })
 export class TreatmentModule { }

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {AbstractService} from "../../core/services/abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Rx";
-import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Pet} from "../models/pet.model";
 import {PetOwner} from "../models/pet-owner.model";

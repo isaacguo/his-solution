@@ -11,6 +11,7 @@ export class FrontdeskGuard extends AbstractGuard implements CanActivate {
   }
 
   canActivate(): boolean {
-    return this.isAuthorized();
+    return true;
+    //return this.isAuthorized();
   }
 }

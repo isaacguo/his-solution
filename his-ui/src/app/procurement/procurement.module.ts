@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
 
-import { ProcurementRoutingModule } from './procurement-routing.module';
+import {ProcurementRoutingModule} from './procurement-routing.module';
 import {ProcurementSettingsComponent} from "./components/procurement-settings/procurement-settings.component";
 import {VendorProductCategoryComponent} from "./components/procurement-settings/vendor-product-category/vendor-product-category.component";
 import {CategoryListComponent} from "./components/procurement-settings/vendor-product-category/category-list/category-list.component";

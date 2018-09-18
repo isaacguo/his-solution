@@ -1,5 +1,5 @@
 import {Observable} from "rxjs/Rx";
-import {Http, Headers, RequestOptions, Response, ResponseContentType} from '@angular/http';
+import {Headers, RequestOptions, Response} from '@angular/http';
 
 export class AbstractService {
 

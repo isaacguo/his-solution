@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { QueryBarComponent } from './query-bar.component';
+import {QueryBarComponent} from './query-bar.component';
 
 describe('QueryBarComponent', () => {
   let component: QueryBarComponent;

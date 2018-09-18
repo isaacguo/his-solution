@@ -4,7 +4,6 @@ import {Observable} from "rxjs/Observable";
 import {AbstractService} from "../abstract.service";
 import {AuthenticationService, AuthInfo, AuthState} from "./authentication.service";
 import {Subscription} from "rxjs/Subscription";
-import {forkJoin} from "rxjs/observable/forkJoin";
 import {Router} from "@angular/router";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {AuthorizationAssignment} from "../../models/authorization/authorization-assignment.model";

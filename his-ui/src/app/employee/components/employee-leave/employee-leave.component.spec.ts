@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmployeeLeaveComponent } from './employee-leave.component';
+import {EmployeeLeaveComponent} from './employee-leave.component';
 
 describe('EmployeeLeaveComponent', () => {
   let component: EmployeeLeaveComponent;

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Department} from "../../../../models/department.model";
 import {DepartmentService} from "../../../../services/department.service";
 

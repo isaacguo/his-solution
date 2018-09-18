@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {AbstractService} from "../../core/services/abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
 import {CrudService} from "../../core/services/crud.service";

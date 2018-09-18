@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Tab} from "../../../../ui-controls/tabs/tab.model";
 import {TreatmentCaseComment} from "../../../models/treatment-comment.model";
 import {TreatmentCase} from "../../../models/treatment-case.model";

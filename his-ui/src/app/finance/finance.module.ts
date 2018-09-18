@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
 
-import { FinanceRoutingModule } from './finance-routing.module';
+import {FinanceRoutingModule} from './finance-routing.module';
 import {SharedModule} from "../shared/shared.module";
 import {ChargeAdminDetailComponent} from "./components/charge-management/charge-admin-detail/charge-admin-detail.component";
 import {ChargeAdminListComponent} from "./components/charge-management/charge-admin-list/charge-admin-list.component";

@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {MedicalTestQueryComponent} from "./components/medical-test-query/medical-test-query.component";
 import {MedicalTestReportCreateUpdateComponent} from "./components/medical-test-report-create-update/medical-test-report-create-update.component";
 import {MedicalTestSettingsComponent} from "./components/medical-test-settings/medical-test-settings.component";

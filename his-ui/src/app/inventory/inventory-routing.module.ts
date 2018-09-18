@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {InventoryComponent} from "./components/inventory.component";
 import {ImportManagementComponent} from "./components/import-management/import-management.component";
 import {ImportSheetCreateUpdateComponent} from "./components/import-sheet-create-update/import-sheet-create-update.component";

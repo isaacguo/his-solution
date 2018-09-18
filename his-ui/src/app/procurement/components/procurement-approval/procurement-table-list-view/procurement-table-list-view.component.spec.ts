@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProcurementTableListViewComponent } from './procurement-table-list-view.component';
+import {ProcurementTableListViewComponent} from './procurement-table-list-view.component';
 
 describe('ProcurementTableListViewComponent', () => {
   let component: ProcurementTableListViewComponent;

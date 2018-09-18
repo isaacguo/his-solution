@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProcurementRequestCreateUpdateComponent } from './procurement-request-create-update.component';
+import {ProcurementRequestCreateUpdateComponent} from './procurement-request-create-update.component';
 
 describe('ProcurementRequestCreateUpdateComponent', () => {
   let component: ProcurementRequestCreateUpdateComponent;

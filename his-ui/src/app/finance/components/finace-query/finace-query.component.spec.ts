@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FinaceQueryComponent } from './finace-query.component';
+import {FinaceQueryComponent} from './finace-query.component';
 
 describe('FinaceQueryComponent', () => {
   let component: FinaceQueryComponent;

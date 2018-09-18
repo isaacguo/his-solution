@@ -1,6 +1,6 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { ChargeManagementGuard } from './charge-management.guard';
+import {ChargeManagementGuard} from './charge-management.guard';
 
 describe('ChargeManagementGuard', () => {
   beforeEach(() => {

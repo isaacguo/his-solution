@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InventoryQueryComponent } from './inventory-query.component';
+import {InventoryQueryComponent} from './inventory-query.component';
 
 describe('InventoryQueryComponent', () => {
   let component: InventoryQueryComponent;

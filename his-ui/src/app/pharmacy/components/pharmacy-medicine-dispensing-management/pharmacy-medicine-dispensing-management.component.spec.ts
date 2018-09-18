@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PharmacyMedicineDispensingManagementComponent } from './pharmacy-medicine-dispensing-management.component';
+import {PharmacyMedicineDispensingManagementComponent} from './pharmacy-medicine-dispensing-management.component';
 
 describe('PharmacyMedicineDispensingManagementComponent', () => {
   let component: PharmacyMedicineDispensingManagementComponent;

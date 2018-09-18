@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmployeeAdminListOnlyComponent } from './employee-admin-list-only.component';
+import {EmployeeAdminListOnlyComponent} from './employee-admin-list-only.component';
 
 describe('EmployeeAdminListOnlyComponent', () => {
   let component: EmployeeAdminListOnlyComponent;

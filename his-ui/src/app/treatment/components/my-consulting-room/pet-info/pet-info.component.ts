@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MyConsultingRoomComponent} from "../my-consulting-room.component";
 import {Subscription} from "rxjs/Subscription";
 import {PetInfo, PetService} from "../../../services/pet.service";

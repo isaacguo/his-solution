@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {ProcurementManagementComponent} from "./components/procurement-management/procurement-management.component";
 import {ProcurementApprovalComponent} from "./components/procurement-approval/procurement-approval.component";
 import {ProcurementApprovalGuard} from "./guards/procurement-approval.guard";

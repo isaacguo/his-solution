@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { VendorCategoryService } from './vendor-category.service';
+import {VendorCategoryService} from './vendor-category.service';
 
 describe('VendorProductCategoryService', () => {
   beforeEach(() => {

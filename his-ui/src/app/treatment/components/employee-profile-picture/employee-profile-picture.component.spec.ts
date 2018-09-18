@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmployeeProfilePictureComponent } from './employee-profile-picture.component';
+import {EmployeeProfilePictureComponent} from './employee-profile-picture.component';
 
 describe('EmployeeProfilePictureComponent', () => {
   let component: EmployeeProfilePictureComponent;

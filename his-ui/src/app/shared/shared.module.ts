@@ -13,11 +13,13 @@ import {MyDatePickerModule} from "mydatepicker";
 import {AngularSplitModule} from "angular-split";
 import {TreeModule} from "angular-tree-component";
 import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HttpModule,
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
@@ -44,6 +46,7 @@ import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
       CommonModule,
       FormsModule,
       ReactiveFormsModule,
+      HttpModule,
       HttpClientModule,
       RouterModule,
       Ng2Bs3ModalModule,

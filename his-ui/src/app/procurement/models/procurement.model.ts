@@ -1,5 +1,3 @@
-import {Vendor} from "./vendor.model";
-import {ProcurementStatus} from "./procurement-status.model";
 import {ProcurementRequest} from "./procurement-request.model";
 import {ProcurementApproval} from "./procurement-approval.model";
 import {ProcurementPurchase} from "./procurement-purchase.model";

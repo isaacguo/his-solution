@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ChargeAdminListComponent } from './charge-admin-list.component';
+import {ChargeAdminListComponent} from './charge-admin-list.component';
 
 describe('ChargeAdminListComponent', () => {
   let component: ChargeAdminListComponent;

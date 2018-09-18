@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InventorySettingsItemManagementComponent } from './inventory-settings-item-management.component';
+import {InventorySettingsItemManagementComponent} from './inventory-settings-item-management.component';
 
 describe('InventorySettingsItemManagementComponent', () => {
   let component: InventorySettingsItemManagementComponent;

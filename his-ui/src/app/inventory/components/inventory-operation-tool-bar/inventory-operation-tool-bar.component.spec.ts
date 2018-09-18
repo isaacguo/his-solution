@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { InventoryOperationToolBarComponent } from './inventory-operation-tool-bar.component';
+import {InventoryOperationToolBarComponent} from './inventory-operation-tool-bar.component';
 
 describe('InventoryOperationToolBarComponent', () => {
   let component: InventoryOperationToolBarComponent;

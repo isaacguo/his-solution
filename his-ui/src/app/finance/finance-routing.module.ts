@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {FinanceManagementGuard} from "./guards/finance-management.guard";
 import {FinanceComponent} from "./components/finance.component";
 import {ChargeManagementGuard} from "./guards/charge-management.guard";

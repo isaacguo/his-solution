@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProcurementRequestDetailComponent } from './procurement-request-detail.component';
+import {ProcurementRequestDetailComponent} from './procurement-request-detail.component';
 
 describe('ProcurementRequestDetailComponent', () => {
   let component: ProcurementRequestDetailComponent;

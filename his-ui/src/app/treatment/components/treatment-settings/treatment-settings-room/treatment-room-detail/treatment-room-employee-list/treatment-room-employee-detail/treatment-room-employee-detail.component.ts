@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Employee} from "../../../../../../../employee/models/employee.model";
 import {TreatmentEmployeeModel} from "../../../../../../models/treatment.employee.model";
 import {TreatmentEmployeeService} from "../../../../../../services/treatment-employee.service";

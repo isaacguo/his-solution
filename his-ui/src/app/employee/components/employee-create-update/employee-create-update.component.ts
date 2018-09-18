@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router, RoutesRecognized} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {EmployeeService} from "../../../core/services/employee.service";

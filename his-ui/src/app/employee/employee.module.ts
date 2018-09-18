@@ -12,7 +12,6 @@ import {EmployeeAdminListComponent} from "./components/employee-admin/employee-a
 import {EmployeeCreateUpdateComponent} from "./components/employee-create-update/employee-create-update.component";
 import {EmployeeManagementGuard} from "./guards/employee-management.guard";
 import {SharedModule} from "../shared/shared.module";
-import {CommonModule} from "@angular/common";
 
 @NgModule({
   imports: [

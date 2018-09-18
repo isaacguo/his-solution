@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MedicalTestSettingsReportTemplateCategoryListComponent } from './medical-test-settings-report-template-category-list.component';
+import {MedicalTestSettingsReportTemplateCategoryListComponent} from './medical-test-settings-report-template-category-list.component';
 
 describe('MedicalTestSettingsReportTemplateCategoryListComponent', () => {
   let component: MedicalTestSettingsReportTemplateCategoryListComponent;

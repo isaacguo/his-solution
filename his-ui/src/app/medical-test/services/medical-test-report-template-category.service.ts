@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CrudService} from "../../core/services/crud.service";
 import {AuthHttp} from "angular2-jwt";
 import {TreeNodeService} from "../../core/services/common/tree-node.service";

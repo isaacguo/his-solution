@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TreeComponent} from "angular-tree-component";
-import * as $ from "jquery";
 import {FormControl, Validators} from "@angular/forms";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {DepartmentListItem} from "../../../../../employee/models/department-list-item.model";

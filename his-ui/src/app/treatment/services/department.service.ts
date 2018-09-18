@@ -1,5 +1,4 @@
 import {Injectable} from "@angular/core";
-import {Headers, RequestOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
 import {TreeNodeService} from "../../core/services/common/tree-node.service";

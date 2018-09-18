@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AuthorizationManagementComponent } from './authorization-management.component';
+import {AuthorizationManagementComponent} from './authorization-management.component';
 
 describe('AuthorizationManagementComponent', () => {
   let component: AuthorizationManagementComponent;

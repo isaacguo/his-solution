@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
 
-import { SettingsRoutingModule } from './settings-routing.module';
+import {SettingsRoutingModule} from './settings-routing.module';
 import {SettingsComponent} from "./components/settings.component";
 import {AuthorizationManagementComponent} from "./components/authorization-management/authorization-management.component";
 import {SecurityOperationPanelComponent} from "./components/authorization-management/security-operation-panel/security-operation-panel.component";

@@ -1,4 +1,4 @@
-import { HisUiPage } from './app.po';
+import {HisUiPage} from './app.po';
 
 describe('his-ui App', () => {
   let page: HisUiPage;

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {EmployeeComponent} from "../employee/components/employee.component";
 import {EmployeeProfileComponent} from "../employee/components/employee-profile/employee-profile.component";
 import {EmployeeProfileEditComponent} from "../employee/components/employee-profile-edit/employee-profile-edit.component";

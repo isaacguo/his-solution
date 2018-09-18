@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TimeBasedViewComponent } from './time-based-view.component';
+import {TimeBasedViewComponent} from './time-based-view.component';
 
 describe('TimeBasedViewComponent', () => {
   let component: TimeBasedViewComponent;

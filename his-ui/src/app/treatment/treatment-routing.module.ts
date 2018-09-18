@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {FrontdeskGuard} from "./guards/frontdesk.guard";
 import {FrontDeskComponent} from "./components/front-desk/front-desk.component";
 import {PetRegistrationComponent} from "./components/front-desk/pet-registration/pet-registration.component";
