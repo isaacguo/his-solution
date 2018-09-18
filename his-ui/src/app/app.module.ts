@@ -44,6 +44,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     AuthModule,
 
+    /*
     //feature modules
     DashboardModule,
     TreatmentModule,
@@ -53,6 +54,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EmployeeModule,
     ProcurementModule,
     InventoryModule,
+    */
 
   ],
   providers: [],
