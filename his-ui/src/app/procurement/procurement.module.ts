@@ -35,10 +35,11 @@ import {ProcurementRequestService} from "./services/procurement-request.service"
 import {ProcurementStatusService} from "./services/procurement-status.service";
 import {VendorService} from "./services/vendor.service";
 import {VendorCategoryService} from "./services/vendor-category.service";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     ProcurementRoutingModule
   ],
   declarations: [

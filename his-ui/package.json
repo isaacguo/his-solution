@@ -4,9 +4,9 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --proxy-config proxy.conf.json --verbose",
     "prebuild": "npm install",
-    "build": "ng build -prod",
+    "build": "ng build -prod -aot -vc -dop",
     "postbuild": "npm run deploy",
     "predeploy": "rimraf ../his-gateway/src/main/resources/static/ && mkdirp ../his-gateway/src/main/resources/static/",
     "deploy": "cp -r dist/** ../his-gateway/src/main/resources/static",

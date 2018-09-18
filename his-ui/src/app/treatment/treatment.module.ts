@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 
 import {TreatmentRoutingModule} from './treatment-routing.module';
 import {FrontDeskComponent} from "./components/front-desk/front-desk.component";
@@ -17,10 +16,31 @@ import {MyConsultingRoomGuard} from "./guards/my-consulting-room.guard";
 import {TreatmentSettingsGuard} from "./guards/treatment-settings.guard";
 import {CustomerComponent} from "./components/customer.component";
 import {TreatmentCommentsContainerComponent} from "./components/treatment-comments-container/treatment-comments-container.component";
+import {PetRegistrationComponent} from "./components/front-desk/pet-registration/pet-registration.component";
+import {RegistrationQueryComponent} from "./components/front-desk/registration-query/registration-query.component";
+import {MyConsultingRoomRegistrationDetailComponent} from "./components/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-detail/my-consulting-room-registration-detail.component";
+import {MyConsultingRoomRegistrationListComponent} from "./components/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-list.component";
+import {DoctorListViewComponent} from "./components/doctor-registration/views/doctor-list-view/doctor-list-view.component";
+import {DoctorListItemComponent} from "./components/doctor-registration/views/doctor-list-view/doctor-list-item/doctor-list-item.component";
+import {CustomerServiceTreatmentCaseOutletComponent} from "./components/customer-service-treatment-case-list/customer-service-treatment-case-outlet/customer-service-treatment-case-outlet.component";
+import {CustomerServiceTreatmentCaseCommentComponent} from "./components/customer-service-treatment-case-list/customer-service-treatment-case-comments/customer-service-treatment-case-comment/customer-service-treatment-case-comment.component";
+import {CustomerServiceTreatmentCaseCommentsComponent} from "./components/customer-service-treatment-case-list/customer-service-treatment-case-comments/customer-service-treatment-case-comments.component";
+import {CustomerServiceTreatmentCaseListComponent} from "./components/customer-service-treatment-case-list/customer-service-treatment-case-list.component";
+import {FeeQueryComponent} from "./components/front-desk/fee-query/fee-query.component";
+import {PetTreatmentComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment.component";
+import {PetMedicalTestComponent} from "./components/my-consulting-room/pet-medical-test/pet-medical-test.component";
+import {PetInfoComponent} from "./components/my-consulting-room/pet-info/pet-info.component";
+import {MyConsultingRoomComponent} from "./components/my-consulting-room/my-consulting-room.component";
+import {DoctorRegistrationComponent} from "./components/doctor-registration/doctor-registration.component";
+import {TimeBasedViewComponent} from "./components/doctor-registration/views/time-based-view/time-based-view.component";
+import {FromNowPipe} from "./pipes/from-now.pipe";
+import {PetTreatmentDetailComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component";
+import {SharedModule} from "../shared/shared.module";
+import {EmployeeProfilePictureComponent} from "./components/employee-profile-picture/employee-profile-picture.component";
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     TreatmentRoutingModule
   ],
   declarations: [
@@ -35,9 +55,26 @@ import {TreatmentCommentsContainerComponent} from "./components/treatment-commen
     RegisterComponent,
     CustomerComponent,
     TreatmentCommentsContainerComponent,
-
-
-
+    PetRegistrationComponent,
+    RegistrationQueryComponent,
+    MyConsultingRoomRegistrationDetailComponent,
+    MyConsultingRoomRegistrationListComponent,
+    DoctorListViewComponent,
+    DoctorListItemComponent,
+    CustomerServiceTreatmentCaseOutletComponent,
+    CustomerServiceTreatmentCaseCommentComponent,
+    CustomerServiceTreatmentCaseCommentsComponent,
+    CustomerServiceTreatmentCaseListComponent,
+    FeeQueryComponent,
+    MyConsultingRoomComponent,
+    PetInfoComponent,
+    PetTreatmentComponent,
+    PetMedicalTestComponent,
+    DoctorRegistrationComponent,
+    TimeBasedViewComponent,
+    FromNowPipe,
+    PetTreatmentDetailComponent,
+    EmployeeProfilePictureComponent
   ],
   providers:[
     FrontdeskGuard,

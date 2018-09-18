@@ -52,7 +52,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PharmacyModule,
     EmployeeModule,
     ProcurementModule,
-    InventoryModule
+    InventoryModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,7 @@ import {TreatmentCaseComment} from "../../../treatment/models/treatment-comment.
 import {TreatmentCase} from "../../../treatment/models/treatment-case.model";
 import {TreatmentCaseService} from "../../../treatment/services/treatment-case.service";
 import {CommentService} from "../../../treatment/services/comment.service";
+import {take} from "rxjs/operator/take";
 
 
 @Component({
@@ -34,8 +35,8 @@ export class TreatmentCommentsContainerComponent implements OnInit {
   activeTab: Observable<Tab>;
 
 
-  /*
   activateTab(tab: Tab) {
+    /*
     this.selectedProject
       .pipe(take(1))
       .subscribe((project: Project) => {
@@ -45,9 +46,8 @@ export class TreatmentCommentsContainerComponent implements OnInit {
           tab.id
         ]);
       });
+      */
   }
-  */
-
 
 
   constructor(private treatmentCaseService: TreatmentCaseService,

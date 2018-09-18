@@ -9,10 +9,10 @@ import {ChargeManagementComponent} from "./components/charge-management/charge-m
 import {FinaceQueryComponent} from "./components/finace-query/finace-query.component";
 import {PriceManagementComponent} from "./components/price-management/price-management.component";
 import {FinanceComponent} from "./components/finance.component";
+import {PriceAdminListComponent} from "./components/price-management/price-admin-list/price-admin-list.component";
 
 @NgModule({
   imports: [
-    CommonModule,
     SharedModule,
     FinanceRoutingModule
   ],
@@ -22,8 +22,8 @@ import {FinanceComponent} from "./components/finance.component";
     ChargeManagementComponent,
     FinaceQueryComponent,
     PriceManagementComponent,
-    FinanceComponent
-
+    FinanceComponent,
+    PriceAdminListComponent,
   ]
 })
 export class FinanceModule { }

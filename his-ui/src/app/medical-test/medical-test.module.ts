@@ -23,7 +23,6 @@ import {MedicalTestReportTemplateCategoryService} from "./services/medical-test-
 
 @NgModule({
   imports: [
-    CommonModule,
     SharedModule,
     MedicalTestRoutingModule
   ],
