@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ProcurementApprovalService} from "../../../services/procurement-approval.service";
+import {ProcurementApprovalService} from "../../../../core/services/procurement/procurement-approval.service";
 import {Procurement} from "../../../models/procurement.model";
 
 @Component({

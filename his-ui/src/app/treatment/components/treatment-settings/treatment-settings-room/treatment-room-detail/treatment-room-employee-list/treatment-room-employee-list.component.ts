@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EmployeeListItem} from "../../../../../../employee/models/employee-list-item.model";
 import {Employee} from "../../../../../../employee/models/employee.model";
-import {EmployeeService} from "../../../../../../core/services/employee.service";
+import {EmployeeService} from "../../../../../../core/services/employee/employee.service";
 
 @Component({
   selector: 'app-treatment-room-employee-list',

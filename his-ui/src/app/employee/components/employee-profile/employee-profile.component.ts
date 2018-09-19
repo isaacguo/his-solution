@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {EmployeeService} from "../../../core/services/employee.service";
+import {EmployeeService} from "../../../core/services/employee/employee.service";
 import {OperationEnum} from "../../../core/enums/operation.enum";
 import {EmploymentStatusEnum} from "../../enums/employment.status.enum";
 import {SexualEnum} from "../../../core/enums/sexual.enum";

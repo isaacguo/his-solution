@@ -25,11 +25,9 @@ import {ProcurementApprovalComponent} from "./components/procurement-approval/pr
 import {ProcurementTableListViewComponent} from "./components/procurement-approval/procurement-table-list-view/procurement-table-list-view.component";
 import {ProcurementApprovalListComponent} from "./components/procurement-approval/procurement-approval-list/procurement-approval-list.component";
 import {ProcurementApprovalDetailComponent} from "./components/procurement-approval/procurement-approval-detail/procurement-approval-detail.component";
-import {ProcurementApprovalGuard} from "./guards/procurement-approval.guard";
-import {ProcurementManagementGuard} from "./guards/procurement-management.guard";
 import {VendorGuard} from "./guards/vendor.guard";
 import {ProcurementService} from "./services/procurement.service";
-import {ProcurementApprovalService} from "./services/procurement-approval.service";
+import {ProcurementApprovalService} from "../core/services/procurement/procurement-approval.service";
 import {ProcurementRequestService} from "./services/procurement-request.service";
 import {ProcurementStatusService} from "./services/procurement-status.service";
 import {VendorService} from "./services/vendor.service";
@@ -68,11 +66,8 @@ import {SharedModule} from "../shared/shared.module";
     ProcurementApprovalDetailComponent,
   ],
   providers:[
-    ProcurementApprovalGuard,
-    ProcurementManagementGuard,
     VendorGuard,
     ProcurementService,
-    ProcurementApprovalService,
     ProcurementRequestService,
     ProcurementStatusService,
     VendorService,

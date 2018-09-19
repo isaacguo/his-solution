@@ -3,7 +3,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ProcurementApprovalListComponent} from "../procurement-approval-list/procurement-approval-list.component";
 import {Router} from "@angular/router";
 import {Procurement} from "../../../models/procurement.model";
-import {ProcurementApprovalService} from "../../../services/procurement-approval.service";
+import {ProcurementApprovalService} from "../../../../core/services/procurement/procurement-approval.service";
 import {ProcurementApprovalOperationRequest} from "../../../models/procurement-approval-operation-request.model";
 
 @Component({

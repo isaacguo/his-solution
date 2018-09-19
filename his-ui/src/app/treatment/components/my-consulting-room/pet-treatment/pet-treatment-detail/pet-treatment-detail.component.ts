@@ -4,12 +4,12 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {Observable} from "rxjs/Observable";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Subscription} from "rxjs/Subscription";
-import {PetInfo, PetService} from "../../../../services/pet.service";
+import {PetInfo, PetService} from "../../../../../core/services/treatment/pet.service";
 import {MedicalTestReportService} from "../../../../../medical-test/services/medical-test-report.service";
 import {MedicalTestReportTemplateService} from "../../../../../medical-test/services/medical-test-report-template.service";
 import {TreatmentCaseService} from "../../../../services/treatment-case.service";
 import {PharmacyMedicineService} from "../../../../../pharmacy/services/pharmacy-medicine.service";
-import {FinanceChargeService} from "../../../../../finance/services/finance-charge.service";
+import {FinanceChargeService} from "../../../../../core/services/finance/finance-charge.service";
 import {ReportStatusEnum} from "../../../../../medical-test/enums/report-status.enum";
 import {MedicalTestReportTemplateItem} from "../../../../../medical-test/models/medical-test-report-template-item.model";
 

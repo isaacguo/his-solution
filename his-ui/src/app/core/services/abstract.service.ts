@@ -1,7 +1,7 @@
 import {Observable} from "rxjs/Rx";
 import {Headers, RequestOptions, Response} from '@angular/http';
 
-export class AbstractService {
+export abstract class AbstractService {
 
   protected getOptions() {
     let headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON

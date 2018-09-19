@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TreeComponent} from "angular-tree-component";
 import {TreeNodeService} from "../../../../../core/services/common/tree-node.service";
-import {EmployeeDepartmentService} from "../../../../../core/services/employee-department.service";
+import {EmployeeDepartmentService} from "../../../../../core/services/employee/employee-department.service";
 import {MyTreeNode} from "../../../../../core/models/my-tree-node.model";
 
 @Component({

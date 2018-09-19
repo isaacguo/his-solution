@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {EmployeeManagementGuard} from "./guards/employee-management.guard";
+import {EmployeeManagementGuard} from "../core/guards/employee/employee-management.guard";
 import {EmployeeComponent} from "./components/employee.component";
 import {EmployeeProfileComponent} from "./components/employee-profile/employee-profile.component";
 import {EmployeeProfileEditComponent} from "./components/employee-profile-edit/employee-profile-edit.component";

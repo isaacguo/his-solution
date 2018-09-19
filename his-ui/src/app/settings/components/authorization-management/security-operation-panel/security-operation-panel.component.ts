@@ -4,12 +4,12 @@ import {Observable} from "rxjs/Observable";
 import {Authorization} from "../../../../core/models/authorization/authorization.model";
 import {Employee} from "../../../../employee/models/employee.model";
 import {AuthorizationTopic} from "../../../../core/models/authorization/authorization-topic.model";
-import {EmployeeService} from "../../../../core/services/employee.service";
 import {AuthorizationService} from "../../../../core/services/common/authorization.service";
 import {AuthorizationOperationRequest} from "../../../../core/models/authorization/authorization-operation-request.model";
 import {AuthorizationAssignmentOperationRequest} from "../../../../core/models/authorization/authorization-assignment-operation-request.model";
 import {AuthorizationAssignment} from "../../../../core/models/authorization/authorization-assignment.model";
 import {TopicOperation} from "../../../../core/models/authorization/topic-operation.model";
+import {EmployeeService} from "../../../services/employee.service";
 
 @Component({
   selector: 'app-security-operation-panel',

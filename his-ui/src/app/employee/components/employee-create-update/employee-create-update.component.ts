@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {EmployeeService} from "../../../core/services/employee.service";
+import {EmployeeService} from "../../../core/services/employee/employee.service";
 import {AbstractCreateUpdateComponent} from "../../../shared/abstract-create-update.component";
 import {OperationEnum} from "../../../core/enums/operation.enum";
 import {EmploymentStatusEnum} from "../../enums/employment.status.enum";

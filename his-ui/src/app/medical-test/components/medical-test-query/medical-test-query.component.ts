@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Router} from "@angular/router";
 import {TreatmentCaseService} from "../../../treatment/services/treatment-case.service";
-import {PetService} from "../../../treatment/services/pet.service";
+import {PetService} from "../../../core/services/treatment/pet.service";
 import {MedicalTestReportService} from "../../services/medical-test-report.service";
 import {MedicalTestReportTemplateService} from "../../services/medical-test-report-template.service";
 import {OperationEnum} from "../../../core/enums/operation.enum";

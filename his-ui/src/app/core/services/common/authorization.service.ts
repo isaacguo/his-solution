@@ -33,10 +33,6 @@ export class AuthorizationService extends AbstractService implements OnDestroy {
     this.authorizationArray.push(["/api/hismedicaltest", "化验模块"]);
     this.authorizationArray.push(["/api/hismedicine", "库房模块"]);
 
-    /*
-    AuthorizationService.serviceMap.set("Procurement", "/api/hisprocurement");
-    AuthorizationService.serviceMap.set("Employee", "/api/hisemployee");
-    */
 
     this.authChangeSubscription = authenticationService.authChange.subscribe(
       newAuthInfo => {

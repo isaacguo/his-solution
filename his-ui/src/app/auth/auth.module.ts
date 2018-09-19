@@ -4,6 +4,7 @@ import {AuthRoutingModule} from './auth-routing.module';
 import {LoginComponent} from "./components/login/login.component";
 import {LogoutComponent} from "./components/logout/logout.component";
 import {SharedModule} from "../shared/shared.module";
+import {LogoutGuardService} from "./guards/auth.guard";
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import {SharedModule} from "../shared/shared.module";
     LogoutComponent
   ],
   providers:[
-
+    LogoutGuardService
   ],
   exports:
   [

@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {MedicalTestReportTemplate} from "../../../../../models/medical-test-report-template.model";
 import {MedicalTestReportTemplateCategoryService} from "../../../../../services/medical-test-report-template-category.service";
 import {MedicalTestReportTemplateService} from "../../../../../services/medical-test-report-template.service";
-import {FinancePriceService} from "../../../../../../core/services/finance-price.service";
+import {FinancePriceService} from "../../../../../../core/services/finance/finance-price.service";
 import {OperationEnum} from "../../../../../../core/enums/operation.enum";
 
 @Component({

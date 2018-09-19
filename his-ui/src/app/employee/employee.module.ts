@@ -10,8 +10,8 @@ import {EmployeeAdminListOnlyComponent} from "./components/employee-admin/employ
 import {EmployeeAdminDetailComponent} from "./components/employee-admin/employee-admin-detail/employee-admin-detail.component";
 import {EmployeeAdminListComponent} from "./components/employee-admin/employee-admin-list/employee-admin-list.component";
 import {EmployeeCreateUpdateComponent} from "./components/employee-create-update/employee-create-update.component";
-import {EmployeeManagementGuard} from "./guards/employee-management.guard";
 import {SharedModule} from "../shared/shared.module";
+
 EmployeeProfileComponent
 @NgModule({
   imports: [
@@ -28,11 +28,8 @@ EmployeeProfileComponent
     EmployeeAdminListComponent,
     EmployeeAdminDetailComponent,
     EmployeeAdminListOnlyComponent,
-  ],
-
-  providers: [
-    EmployeeManagementGuard,
   ]
+
 })
 export class EmployeeModule {
 }

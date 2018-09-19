@@ -14,7 +14,6 @@ import {MedicalTestSettingsDepartmentReportTemplatesComponent} from "./component
 import {MedicalTestReportViewComponent} from "./components/medical-test-report-view/medical-test-report-view.component";
 import {MedicalTestReportCreateUpdateComponent} from "./components/medical-test-report-create-update/medical-test-report-create-update.component";
 import {MedicalTestQueryComponent} from "./components/medical-test-query/medical-test-query.component";
-import {MedicalTestManagementGuard} from "./guards/medical-test-management.guard";
 import {MedicalTestDepartmentService} from "./services/medical-test-department.service";
 import {MedicalTestReportService} from "./services/medical-test-report.service";
 import {MedicalTestReportTemplateService} from "./services/medical-test-report-template.service";
@@ -40,7 +39,7 @@ import {MedicalTestReportTemplateCategoryService} from "./services/medical-test-
     MedicalTestQueryComponent
   ],
   providers: [
-    MedicalTestManagementGuard,
+
     MedicalTestDepartmentService,
     MedicalTestReportService,
     MedicalTestReportTemplateService,

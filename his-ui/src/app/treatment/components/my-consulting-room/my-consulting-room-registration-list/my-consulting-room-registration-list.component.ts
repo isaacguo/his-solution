@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
-import {PetInfo, PetService} from "../../../services/pet.service";
+import {PetInfo, PetService} from "../../../../core/services/treatment/pet.service";
 import {TreatmentRegistrationModel} from "../../../models/treatment.registration.model";
 
 @Component({

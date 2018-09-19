@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 import {PetOwnerService} from "../../services/pet-owner.service";
 import {DepartmentService} from "../../services/department.service";
-import {PetInfo, PetService} from "../../services/pet.service";
+import {PetInfo, PetService} from "../../../core/services/treatment/pet.service";
 import {TreatmentEmployeeService} from "../../services/treatment-employee.service";
 import {RegistrationService} from "../../services/registration.service";
 import {RegistrationStatusEnum} from "../../../core/enums/registration-status.enum";

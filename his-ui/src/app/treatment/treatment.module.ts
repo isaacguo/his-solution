@@ -10,10 +10,6 @@ import {TreatmentRoomDetailComponent} from "./components/treatment-settings/trea
 import {TreatmentRoomEmployeeListComponent} from "./components/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-list.component";
 import {TreatmentRoomEmployeeDetailComponent} from "./components/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-detail/treatment-room-employee-detail.component";
 import {RegisterComponent} from "./components/register/register.component";
-import {FrontdeskGuard} from "./guards/frontdesk.guard";
-import {InpatientManagementGuard} from "./guards/inpatient-management.guard";
-import {MyConsultingRoomGuard} from "./guards/my-consulting-room.guard";
-import {TreatmentSettingsGuard} from "./guards/treatment-settings.guard";
 import {CustomerComponent} from "./components/customer.component";
 import {TreatmentCommentsContainerComponent} from "./components/treatment-comments-container/treatment-comments-container.component";
 import {PetRegistrationComponent} from "./components/front-desk/pet-registration/pet-registration.component";
@@ -40,7 +36,6 @@ import {EmployeeProfilePictureComponent} from "./components/employee-profile-pic
 import {PetOwnerService} from "./services/pet-owner.service";
 import {CommentService} from "./services/comment.service";
 import {DepartmentService} from "./services/department.service";
-import {PetService} from "./services/pet.service";
 import {RegistrationService} from "./services/registration.service";
 import {TreatmentCaseService} from "./services/treatment-case.service";
 import {TreatmentEmployeeService} from "./services/treatment-employee.service";
@@ -84,14 +79,10 @@ import {TreatmentEmployeeService} from "./services/treatment-employee.service";
     EmployeeProfilePictureComponent
   ],
   providers:[
-    FrontdeskGuard,
-    InpatientManagementGuard,
-    MyConsultingRoomGuard,
-    TreatmentSettingsGuard,
+
     PetOwnerService,
     CommentService,
     DepartmentService,
-    PetService,
     RegistrationService,
     TreatmentCaseService,
     TreatmentEmployeeService

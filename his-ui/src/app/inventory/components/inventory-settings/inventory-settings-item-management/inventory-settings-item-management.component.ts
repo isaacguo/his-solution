@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FinancePriceService} from "../../../../core/services/finance-price.service";
+import {FinancePriceService} from "../../../../core/services/finance/finance-price.service";
 import {InventoryCategoryService} from "../../../services/inventory-category.service";
 import {AbstractCategoryListComponent} from "../../../../shared/abstract-category-list/abstract-category-list.component";
 

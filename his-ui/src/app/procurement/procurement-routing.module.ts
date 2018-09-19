@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ProcurementManagementComponent} from "./components/procurement-management/procurement-management.component";
 import {ProcurementApprovalComponent} from "./components/procurement-approval/procurement-approval.component";
-import {ProcurementApprovalGuard} from "./guards/procurement-approval.guard";
+import {ProcurementApprovalGuard} from "../core/guards/procurement/procurement-approval.guard";
 import {ProcurementApprovalListComponent} from "./components/procurement-approval/procurement-approval-list/procurement-approval-list.component";
 import {ProcurementPurchaseComponent} from "./components/procurement-purchase/procurement-purchase.component";
 import {ProcurementPurchaseListComponent} from "./components/procurement-purchase/procurement-purchase-list/procurement-purchase-list.component";

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MyConsultingRoomComponent} from "../my-consulting-room.component";
 import {Subscription} from "rxjs/Subscription";
-import {PetInfo, PetService} from "../../../services/pet.service";
+import {PetInfo, PetService} from "../../../../core/services/treatment/pet.service";
 import {PetOwner} from "../../../models/pet-owner.model";
 import {Pet} from "../../../models/pet.model";
 

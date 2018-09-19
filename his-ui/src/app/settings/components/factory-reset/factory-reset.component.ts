@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FactoryResetService} from "../../../core/services/settings/factory-reset.service";
+import {FactoryResetService} from "../../services/factory-reset.service";
 import {AuthorizationService} from "../../../core/services/common/authorization.service";
 
 @Component({

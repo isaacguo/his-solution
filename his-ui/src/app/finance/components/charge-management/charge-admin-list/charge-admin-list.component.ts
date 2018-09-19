@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FinanceChargeService} from "../../../services/finance-charge.service";
-import {TreatmentCaseService} from "../../../../treatment/services/treatment-case.service";
-import {PetService} from "../../../../treatment/services/pet.service";
+import {FinanceChargeService} from "../../../../core/services/finance/finance-charge.service";
+import {PetService} from "../../../../core/services/treatment/pet.service";
 import {ChargeStatusEnum} from "../../../enums/charge-status.enum";
 
 @Component({
@@ -15,7 +14,6 @@ export class ChargeAdminListComponent implements OnInit {
   chargeItems: any[] = [];
 
   constructor(private financeChargeService: FinanceChargeService,
-              private treatmentCaseService: TreatmentCaseService,
               private petService: PetService) {
 
   }

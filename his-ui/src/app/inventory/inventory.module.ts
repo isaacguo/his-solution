@@ -20,7 +20,6 @@ import {ExportSheetCreateUpdateComponent} from "./components/export-sheet-create
 import {ExportManagementComponent} from "./components/export-management/export-management.component";
 import {ExportManagementListComponent} from "./components/export-management/export-management-list/export-management-list.component";
 import {ExportManagementDetailComponent} from "./components/export-management/export-management-list/export-management-detail/export-management-detail.component";
-import {InventoryManagementGuard} from "./guards/inventory-management.guard";
 import {InventoryCategoryService} from "./services/inventory-category.service";
 import {InventoryExportSheetService} from "./services/inventory-export-sheet.service";
 import {InventoryImportSheetService} from "./services/inventory-import-sheet.service";
@@ -54,7 +53,7 @@ import {ProductImportReceiptService} from "./services/product-import-receipt.ser
 
   ],
   providers:[
-    InventoryManagementGuard,
+
     InventoryCategoryService,
     InventoryExportSheetService,
     InventoryImportSheetService,

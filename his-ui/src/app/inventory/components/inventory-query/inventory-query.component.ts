@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FinancePriceService} from "../../../core/services/finance-price.service";
+import {FinancePriceService} from "../../../core/services/finance/finance-price.service";
 
 @Component({
   selector: 'app-inventory-query',

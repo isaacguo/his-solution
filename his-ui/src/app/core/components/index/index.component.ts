@@ -2,6 +2,22 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit} from '@angular/
 import {Subscription} from "rxjs/Subscription";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/timer';
+import {AuthenticationService, AuthInfo} from "../../services/common/authentication.service";
+import {ProcurementApprovalService} from "../../services/procurement/procurement-approval.service";
+import {ProcurementApprovalGuard} from "../../guards/procurement/procurement-approval.guard";
+import {MyConsultingRoomGuard} from "../../guards/treatement/my-consulting-room.guard";
+import {FrontdeskGuard} from "../../guards/treatement/frontdesk.guard";
+import {TreatmentSettingsGuard} from "../../guards/treatement/treatment-settings.guard";
+import {EmployeeService} from "../../services/employee/employee.service";
+import {EmployeeManagementGuard} from "../../guards/employee/employee-management.guard";
+import {FinanceManagementGuard} from "../../guards/finance/finance-management.guard";
+import {PriceManagementGuard} from "../../guards/finance/price-management.guard";
+import {ChargeManagementGuard} from "../../guards/finance/charge-management.guard";
+import {InpatientManagementGuard} from "../../guards/treatement/inpatient-management.guard";
+import {InventoryManagementGuard} from "../../guards/inventory/inventory-management.guard";
+import {MedicalTestManagementGuard} from "../../guards/medical-test/medical-test-management.guard";
+import {ProcurementManagementGuard} from "../../guards/procurement/procurement-management.guard";
+import {MedicineManagementGuard} from "../../guards/medicine/medicine-management.guard";
 
 declare let $: any;
 
@@ -12,6 +28,7 @@ declare let $: any;
 })
 export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  authInfo: AuthInfo;
   userName: string;
 
   private authChangeSubscription: Subscription;
@@ -30,50 +47,79 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
       return this.count + "";
   }
 
+
   constructor(private elementRef: ElementRef,
-  ) {
+              private authenticationService: AuthenticationService,
+              private procurementApprovalService: ProcurementApprovalService,
+              public procurementApprovalGuard: ProcurementApprovalGuard,
+              public myConsultingRoomGuard: MyConsultingRoomGuard,
+              public frontdeskGuard: FrontdeskGuard,
+              public treatmentSettingsGuard: TreatmentSettingsGuard,
+              private employeeService: EmployeeService,
+              private employeeManagementGuard: EmployeeManagementGuard,
+              private financeManagementGuard: FinanceManagementGuard,
+              private priceManagementGuard: PriceManagementGuard,
+              private chargeManagementGuard: ChargeManagementGuard,
+              private inpatientManagementGuard: InpatientManagementGuard,
+              private medicineManagementGuard: MedicineManagementGuard,
+              private inventoryManagementGuard: InventoryManagementGuard,
+              private medicalTestManagementGuard: MedicalTestManagementGuard,
+              private procurementManagementGuard: ProcurementManagementGuard) {
 
+    this.authChangeSubscription = authenticationService.authChange.subscribe(
+      newAuthInfo => {
+        this.authInfo = newAuthInfo;
+        this.userName = this.authInfo.displayName;
 
+        this.employeeService.getMyInfo().subscribe(r => {
+          this.userName = r.fullName;
+        })
+      }
+    );
+
+    this.unfinishedTaskCountSubscriptiion = procurementApprovalService.unfinishedTasksChange.subscribe(
+      r => this.count = r)
+    this.procurementApprovalService.updateUnfinishedApprovalCount();
   }
 
   canShowApproval(): boolean {
-    return true;
+    return this.procurementApprovalGuard.canActivate();
   }
 
   canShowEmployeeManagement(): boolean {
-    return true;
+    return this.employeeManagementGuard.canActivate();
   }
 
   canShowFrontdesk(): boolean {
-    return true;
+    return this.frontdeskGuard.canActivate();
   }
 
   canShowMedicineManagement(): boolean {
-    return true;
+    return this.medicineManagementGuard.canActivate();
   }
 
   canShowInventoryManagement(): boolean {
-    return true;
+    return this.inventoryManagementGuard.canActivate();
   }
 
   canShowInpatientManagement(): boolean {
-    return true;
+    return this.inpatientManagementGuard.canActivate();
   }
 
   canShowMedicalTestManagement(): boolean {
-    return true;
+    return this.medicalTestManagementGuard.canActivate();
   }
 
   canShowFinanceManagement(): boolean {
-    return true;
+    return this.financeManagementGuard.canActivate();
   }
 
   canShowMyConsultingRoom(): boolean {
-    return true;
+    return this.myConsultingRoomGuard.canActivate();
   }
 
   canShowProcurementManagement(): boolean {
-    return true;
+    return this.procurementManagementGuard.canActivate();
   }
 
   ngOnInit() {
@@ -82,20 +128,16 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   canShowTreatmentSettings() {
-    return true;
-  }
-  isAdmin()
-  {
-    return true;
+    return this.treatmentSettingsGuard.canActivate();
   }
 
   canShowPriceManagement() {
-    return true;
+    return this.priceManagementGuard.canActivate();
 
   }
 
   canShowChargeManagement() {
-    return true;
+    return this.chargeManagementGuard.canActivate();
   }
 
   ngAfterViewInit(): void {
@@ -103,6 +145,10 @@ export class IndexComponent implements OnInit, OnDestroy, AfterViewInit {
       let menuElement = this.elementRef.nativeElement.querySelector('#side-menu');
       $('#side-menu').metisMenu();
     })
+  }
+
+  isAdmin(): boolean {
+    return this.authInfo.isAdmin;
   }
 
 }

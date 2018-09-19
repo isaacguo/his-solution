@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProcurementApproval} from "../../../models/procurement-approval.model";
-import {ProcurementApprovalService} from "../../../services/procurement-approval.service";
+import {ProcurementApprovalService} from "../../../../core/services/procurement/procurement-approval.service";
 
 @Component({
   selector: 'app-procurement-table-list-view',

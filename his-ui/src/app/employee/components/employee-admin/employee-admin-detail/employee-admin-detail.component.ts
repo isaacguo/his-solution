@@ -5,8 +5,8 @@ import {TreeComponent} from "angular-tree-component";
 import {MyTreeNode} from "../../../../core/models/my-tree-node.model";
 import {EmployeeListItem} from "../../../models/employee-list-item.model";
 import {Employee} from "../../../models/employee.model";
-import {EmployeeDepartmentService} from "../../../../core/services/employee-department.service";
-import {EmployeeService} from "../../../../core/services/employee.service";
+import {EmployeeDepartmentService} from "../../../../core/services/employee/employee-department.service";
+import {EmployeeService} from "../../../../core/services/employee/employee.service";
 import {TreeNodeService} from "../../../../core/services/common/tree-node.service";
 import {OperationEnum} from "../../../../core/enums/operation.enum";
 
