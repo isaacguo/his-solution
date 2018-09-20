@@ -33,12 +33,12 @@ import {FromNowPipe} from "./pipes/from-now.pipe";
 import {PetTreatmentDetailComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component";
 import {SharedModule} from "../shared/shared.module";
 import {EmployeeProfilePictureComponent} from "./components/employee-profile-picture/employee-profile-picture.component";
-import {PetOwnerService} from "./services/pet-owner.service";
-import {CommentService} from "./services/comment.service";
-import {DepartmentService} from "./services/department.service";
-import {RegistrationService} from "./services/registration.service";
-import {TreatmentCaseService} from "./services/treatment-case.service";
-import {TreatmentEmployeeService} from "./services/treatment-employee.service";
+import {PetOwnerService} from "../core/services/treatment/pet-owner.service";
+import {CommentService} from "../core/services/treatment/comment.service";
+import {DepartmentService} from "../core/services/treatment/department.service";
+import {RegistrationService} from "../core/services/treatment/registration.service";
+import {TreatmentCaseService} from "../core/services/treatment/treatment-case.service";
+import {TreatmentEmployeeService} from "../core/services/treatment/treatment-employee.service";
 
 @NgModule({
   imports: [
@@ -77,15 +77,6 @@ import {TreatmentEmployeeService} from "./services/treatment-employee.service";
     FromNowPipe,
     PetTreatmentDetailComponent,
     EmployeeProfilePictureComponent
-  ],
-  providers:[
-
-    PetOwnerService,
-    CommentService,
-    DepartmentService,
-    RegistrationService,
-    TreatmentCaseService,
-    TreatmentEmployeeService
   ]
 })
 export class TreatmentModule { }

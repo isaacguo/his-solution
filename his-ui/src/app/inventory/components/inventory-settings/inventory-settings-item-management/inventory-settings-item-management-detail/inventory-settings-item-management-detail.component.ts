@@ -78,7 +78,7 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
   }
 
   onCreateNewItemClicked() {
-    this.router.navigate(['inventory-item', OperationEnum.CREATE, this.categoryId]);
+    this.router.navigate(['inventory','inventory-item', OperationEnum.CREATE, this.categoryId]);
   }
 
 

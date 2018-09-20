@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {IMyDateModel, IMyDpOptions} from "mydatepicker";
-import {PetOwnerService} from "../../services/pet-owner.service";
-import {DepartmentService} from "../../services/department.service";
+import {PetOwnerService} from "../../../core/services/treatment/pet-owner.service";
+import {DepartmentService} from "../../../core/services/treatment/department.service";
 import {PetInfo, PetService} from "../../../core/services/treatment/pet.service";
-import {TreatmentEmployeeService} from "../../services/treatment-employee.service";
-import {RegistrationService} from "../../services/registration.service";
+import {TreatmentEmployeeService} from "../../../core/services/treatment/treatment-employee.service";
+import {RegistrationService} from "../../../core/services/treatment/registration.service";
 import {RegistrationStatusEnum} from "../../../core/enums/registration-status.enum";
 import {PetOperationRequest} from "../../models/pet.operation.request";
 

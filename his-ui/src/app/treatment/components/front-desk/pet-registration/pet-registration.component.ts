@@ -6,10 +6,10 @@ import {PetOwner} from "../../../models/pet-owner.model";
 import {Department} from "../../../models/department.model";
 import {TreatmentEmployeeModel} from "../../../models/treatment.employee.model";
 import {TreatmentRegistrationModel} from "../../../models/treatment.registration.model";
-import {PetOwnerService} from "../../../services/pet-owner.service";
-import {DepartmentService} from "../../../services/department.service";
-import {RegistrationService} from "../../../services/registration.service";
-import {TreatmentEmployeeService} from "../../../services/treatment-employee.service";
+import {PetOwnerService} from "../../../../core/services/treatment/pet-owner.service";
+import {DepartmentService} from "../../../../core/services/treatment/department.service";
+import {RegistrationService} from "../../../../core/services/treatment/registration.service";
+import {TreatmentEmployeeService} from "../../../../core/services/treatment/treatment-employee.service";
 
 @Component({
   selector: 'app-pet-registration',

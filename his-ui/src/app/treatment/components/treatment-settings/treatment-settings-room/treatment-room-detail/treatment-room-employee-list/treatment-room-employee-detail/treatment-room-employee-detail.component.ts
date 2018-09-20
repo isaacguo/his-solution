@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Employee} from "../../../../../../../employee/models/employee.model";
 import {TreatmentEmployeeModel} from "../../../../../../models/treatment.employee.model";
-import {TreatmentEmployeeService} from "../../../../../../services/treatment-employee.service";
+import {TreatmentEmployeeService} from "../../../../../../../core/services/treatment/treatment-employee.service";
 
 @Component({
   selector: 'app-treatment-room-employee-detail',

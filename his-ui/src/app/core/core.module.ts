@@ -28,6 +28,18 @@ import {FinancePriceService} from "./services/finance/finance-price.service";
 import {FinanceChargeService} from "./services/finance/finance-charge.service";
 import {PetService} from "./services/treatment/pet.service";
 import {EmployeeDepartmentService} from "./services/employee/employee-department.service";
+import {MedicalTestReportService} from "./services/medical-test/medical-test-report.service";
+import {MedicalTestReportTemplateService} from "./services/medical-test/medical-test-report-template.service";
+import {MedicalTestReportTemplateCategoryService} from "./services/medical-test/medical-test-report-template-category.service";
+import {MedicalTestDepartmentService} from "./services/medical-test/medical-test-department.service";
+import {PharmacyManagementGuard} from "../pharmacy/guards/pharmacy-management-guard.service";
+import {PharmacyMedicineService} from "./services/pharmacy/pharmacy-medicine.service";
+import {CommentService} from "./services/treatment/comment.service";
+import {RegistrationService} from "./services/treatment/registration.service";
+import {TreatmentEmployeeService} from "./services/treatment/treatment-employee.service";
+import {DepartmentService} from "./services/treatment/department.service";
+import {PetOwnerService} from "./services/treatment/pet-owner.service";
+import {TreatmentCaseService} from "./services/treatment/treatment-case.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -64,6 +76,17 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FinanceChargeService,
     PetService,
     EmployeeDepartmentService,
+    MedicalTestReportService,
+    MedicalTestDepartmentService,
+    MedicalTestReportTemplateService,
+    MedicalTestReportTemplateCategoryService,
+    PharmacyMedicineService,
+    PetOwnerService,
+    CommentService,
+    DepartmentService,
+    RegistrationService,
+    TreatmentCaseService,
+    TreatmentEmployeeService,
     ProcurementApprovalGuard,
     ProcurementManagementGuard,
     FrontdeskGuard,

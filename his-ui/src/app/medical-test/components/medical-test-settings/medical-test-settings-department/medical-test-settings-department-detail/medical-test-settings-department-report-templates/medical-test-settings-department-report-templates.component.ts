@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MedicalTestReportTemplate} from "../../../../../models/medical-test-report-template.model";
-import {MedicalTestDepartmentService} from "../../../../../services/medical-test-department.service";
-import {MedicalTestReportTemplateService} from "../../../../../services/medical-test-report-template.service";
+import {MedicalTestDepartmentService} from "../../../../../../core/services/medical-test/medical-test-department.service";
+import {MedicalTestReportTemplateService} from "../../../../../../core/services/medical-test/medical-test-report-template.service";
 
 @Component({
   selector: 'app-medical-test-settings-department-report-templates',

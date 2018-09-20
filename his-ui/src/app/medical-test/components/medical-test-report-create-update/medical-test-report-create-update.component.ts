@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MedicalTestReportService} from "../../services/medical-test-report.service";
-import {MedicalTestReportTemplateService} from "../../services/medical-test-report-template.service";
+import {MedicalTestReportService} from "../../../core/services/medical-test/medical-test-report.service";
+import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
 import {AbstractCreateUpdateComponent} from "../../../shared/abstract-create-update.component";
 import {OperationEnum} from "../../../core/enums/operation.enum";
 import {MedicalTestReportTemplateItem} from "../../models/medical-test-report-template-item.model";

@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {MedicalTestDepartmentService} from "../../../../services/medical-test-department.service";
+import {MedicalTestDepartmentService} from "../../../../../core/services/medical-test/medical-test-department.service";
 
 @Component({
   selector: 'app-medical-test-settings-department-detail',

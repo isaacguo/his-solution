@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {AbstractService} from "../../core/services/abstract.service";
+import {AbstractService} from "../abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Rx";
-import {TreatmentRegistrationModel} from "../models/treatment.registration.model";
-import {TreatmentRegistrationOperationRequestModel} from "../models/treatment.registration.operation.request.model";
+import {TreatmentRegistrationModel} from "../../../treatment/models/treatment.registration.model";
+import {TreatmentRegistrationOperationRequestModel} from "../../../treatment/models/treatment.registration.operation.request.model";
 
 @Injectable()
 export class RegistrationService extends AbstractService {

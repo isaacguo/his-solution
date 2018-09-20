@@ -53,9 +53,27 @@ const routes: Routes = [
   {
     path: 'customer-service',
     component: TreatmentCommentsContainerComponent,
+    children: [
+      {
+        path: 'pet-info',
+        component: PetInfoComponent,
+      },
+      {
+        path: 'pet-treatment',
+        component: PetTreatmentComponent,
+      },
+      {
+        path: 'pet-medical-test',
+        component: PetMedicalTestComponent,
+
+      },
+      {
+        path: '**',
+        redirectTo: 'pet-info'
+      }
+    ]
   },
   {
-    //看病挂号,暂时不用
     path: 'register',
     component: RegisterComponent
   },

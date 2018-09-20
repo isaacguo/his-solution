@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AbstractCreateUpdateComponent} from "../../../../shared/abstract-create-update.component";
-import {MedicalTestReportTemplateService} from "../../../services/medical-test-report-template.service";
+import {MedicalTestReportTemplateService} from "../../../../core/services/medical-test/medical-test-report-template.service";
 import {MedicalTestReportTemplateItem} from "../../../models/medical-test-report-template-item.model";
 import {OperationEnum} from "../../../../core/enums/operation.enum";
 

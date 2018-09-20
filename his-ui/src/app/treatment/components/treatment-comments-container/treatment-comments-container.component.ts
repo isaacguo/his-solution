@@ -7,8 +7,8 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Tab} from "../../../ui-controls/tabs/tab.model";
 import {TreatmentCaseComment} from "../../../treatment/models/treatment-comment.model";
 import {TreatmentCase} from "../../../treatment/models/treatment-case.model";
-import {TreatmentCaseService} from "../../../treatment/services/treatment-case.service";
-import {CommentService} from "../../../treatment/services/comment.service";
+import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
+import {CommentService} from "../../../core/services/treatment/comment.service";
 
 
 @Component({

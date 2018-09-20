@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Rx";
 import {Headers, RequestOptions, Response} from '@angular/http';
-import {OperationEnum} from "../../core/enums/operation.enum";
-import {PetOwner} from "../models/pet-owner.model";
-import {Pet} from "../models/pet.model";
+import {OperationEnum} from "../../enums/operation.enum";
+import {PetOwner} from "../../../treatment/models/pet-owner.model";
+import {Pet} from "../../../treatment/models/pet.model";
 
 
 @Injectable()

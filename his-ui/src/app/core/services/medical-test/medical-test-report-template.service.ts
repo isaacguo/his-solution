@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
 import {FormGroup} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
-import {AbstractService} from "../../core/services/abstract.service";
-import {MedicalTestReportTemplate} from "../models/medical-test-report-template.model";
+import {AbstractService} from "../abstract.service";
+import {MedicalTestReportTemplate} from "../../../medical-test/models/medical-test-report-template.model";
 
 @Injectable()
 export class MedicalTestReportTemplateService extends AbstractService {

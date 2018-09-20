@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PharmacyMedicineService} from "../../../services/pharmacy-medicine.service";
+import {PharmacyMedicineService} from "../../../../core/services/pharmacy/pharmacy-medicine.service";
 
 @Component({
   selector: 'app-pharmacy-medicine-dispensing-management-list',

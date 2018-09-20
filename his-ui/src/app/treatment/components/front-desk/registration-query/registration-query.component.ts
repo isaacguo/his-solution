@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RegistrationService} from "../../../services/registration.service";
+import {RegistrationService} from "../../../../core/services/treatment/registration.service";
 import {RegistrationStatusEnum} from "../../../../core/enums/registration-status.enum";
 
 @Component({

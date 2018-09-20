@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BsModalComponent} from "ng2-bs3-modal";
 import {Doctor} from "../../../../../models/doctor.model";
-import {DepartmentService} from "../../../../../services/department.service";
+import {DepartmentService} from "../../../../../../core/services/treatment/department.service";
 import {TreatmentCase} from "../../../../../models/treatment-case.model";
 
 @Component({

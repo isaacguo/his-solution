@@ -7,7 +7,7 @@ import {PharmacyMedicineDispensingManagementListComponent} from "./components/ph
 import {PharmacyManagementGuard} from "./guards/pharmacy-management-guard.service";
 import {PharmacyMedicineDispensingManagementDetailComponent} from "./components/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management-list/pharmacy-medicine-dispensing-management-detail/pharmacy-medicine-dispensing-management-detail.component";
 import {SharedModule} from "../shared/shared.module";
-import {PharmacyMedicineService} from "./services/pharmacy-medicine.service";
+import {PharmacyMedicineService} from "../core/services/pharmacy/pharmacy-medicine.service";
 
 @NgModule({
   imports: [
@@ -21,7 +21,6 @@ import {PharmacyMedicineService} from "./services/pharmacy-medicine.service";
     PharmacyMedicineDispensingManagementDetailComponent,
   ],
   providers:[
-    PharmacyMedicineService,
     PharmacyManagementGuard
   ]
 })

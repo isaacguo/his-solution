@@ -13,7 +13,7 @@ import {InventorySettingsItemManagementComponent} from "./components/inventory-s
 
 const routes: Routes = [
   {
-    path: 'inventory',
+    path: '',
     component: InventoryComponent
   },
   {

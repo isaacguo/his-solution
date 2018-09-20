@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
-import {TreeNodeService} from "../../core/services/common/tree-node.service";
-import {AbstractService} from "../../core/services/abstract.service";
-import {Department} from "../models/department.model";
-import {TreatmentEmployeeModel} from "../models/treatment.employee.model";
-import {DepartmentOperationRequest} from "../models/department.operation.request.model";
+import {TreeNodeService} from "../common/tree-node.service";
+import {AbstractService} from "../abstract.service";
+import {Department} from "../../../treatment/models/department.model";
+import {TreatmentEmployeeModel} from "../../../treatment/models/treatment.employee.model";
+import {DepartmentOperationRequest} from "../../../treatment/models/department.operation.request.model";
 
 @Injectable()
 export class DepartmentService extends AbstractService {

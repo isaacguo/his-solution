@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Department} from "../../../../models/department.model";
-import {DepartmentService} from "../../../../services/department.service";
+import {DepartmentService} from "../../../../../core/services/treatment/department.service";
 
 @Component({
   selector: 'app-treatment-room-detail',

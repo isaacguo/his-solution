@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {DepartmentService} from "../../services/department.service";
+import {DepartmentService} from "../../../core/services/treatment/department.service";
 import {Department} from "../../models/department.model";
 
 @Component({

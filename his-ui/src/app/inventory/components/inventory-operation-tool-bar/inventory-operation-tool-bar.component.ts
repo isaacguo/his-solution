@@ -19,10 +19,10 @@ export class InventoryOperationToolBarComponent implements OnInit {
   }
 
   onCreateNewImportSheet() {
-      this.router.navigate(['inventory-import', OperationEnum.CREATE]);
+      this.router.navigate(['inventory','inventory-import', OperationEnum.CREATE]);
   }
 
   onCreateNewExportSheet() {
-    this.router.navigate(['inventory-export', OperationEnum.CREATE]);
+    this.router.navigate(['inventory','inventory-export', OperationEnum.CREATE]);
   }
 }

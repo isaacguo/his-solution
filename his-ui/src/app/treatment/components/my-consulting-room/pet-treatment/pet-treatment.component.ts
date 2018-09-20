@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Subscription} from "rxjs/Subscription";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {PetInfo, PetService} from "../../../../core/services/treatment/pet.service";
-import {RegistrationService} from "../../../services/registration.service";
-import {MedicalTestReportService} from "../../../../medical-test/services/medical-test-report.service";
-import {TreatmentCaseService} from "../../../services/treatment-case.service";
+import {RegistrationService} from "../../../../core/services/treatment/registration.service";
+import {MedicalTestReportService} from "../../../../core/services/medical-test/medical-test-report.service";
+import {TreatmentCaseService} from "../../../../core/services/treatment/treatment-case.service";
 import {RegistrationStatusEnum} from "../../../../core/enums/registration-status.enum";
 
 @Component({

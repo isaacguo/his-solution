@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
-import {CrudService} from "../../core/services/crud.service";
-import {TreatmentCase} from "../models/treatment-case.model";
-import {ServiceConstants} from "../../shared/service-constants";
+import {CrudService} from "../crud.service";
+import {TreatmentCase} from "../../../treatment/models/treatment-case.model";
+import {ServiceConstants} from "../../../shared/service-constants";
 
 @Injectable()
 export class TreatmentCaseService extends CrudService<TreatmentCase> {
