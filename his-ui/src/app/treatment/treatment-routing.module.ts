@@ -51,19 +51,19 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'customer-service',
+    path: 'customer-service/:treatmentCaseUuid',
     component: TreatmentCommentsContainerComponent,
     children: [
       {
-        path: 'pet-info',
+        path: 'info',
         component: PetInfoComponent,
       },
       {
-        path: 'pet-treatment',
+        path: 'treatment',
         component: PetTreatmentComponent,
       },
       {
-        path: 'pet-medical-test',
+        path: 'feedback',
         component: PetMedicalTestComponent,
 
       },
@@ -71,7 +71,7 @@ const routes: Routes = [
         path: '**',
         redirectTo: 'pet-info'
       }
-    ]
+    ],
   },
   {
     path: 'register',

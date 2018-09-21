@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AbstractService} from "../../core/services/abstract.service";
+import {AbstractService} from "../abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
-import {ProcurementStatus} from "../models/procurement-status.model";
+import {ProcurementStatus} from "../../../procurement/models/procurement-status.model";
 
 @Injectable()
 export class ProcurementStatusService extends AbstractService {

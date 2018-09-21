@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {AbstractService} from "../../core/services/abstract.service";
+import {AbstractService} from "../abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Rx";
 import {FormGroup} from "@angular/forms";
-import {Vendor} from "../models/vendor.model";
+import {Vendor} from "../../../procurement/models/vendor.model";
 
 @Injectable()
 export class VendorService extends AbstractService {

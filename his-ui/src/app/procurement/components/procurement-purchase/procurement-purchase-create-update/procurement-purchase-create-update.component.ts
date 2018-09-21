@@ -5,8 +5,8 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AbstractCreateUpdateComponent} from "../../../../shared/abstract-create-update.component";
 import {Procurement} from "../../../models/procurement.model";
 import {Vendor} from "../../../models/vendor.model";
-import {ProcurementService} from "../../../services/procurement.service";
-import {VendorService} from "../../../services/vendor.service";
+import {ProcurementService} from "../../../../core/services/procurement/procurement.service";
+import {VendorService} from "../../../../core/services/procurement/vendor.service";
 import {ProcurementGoods} from "../../../models/procurement-goods.model";
 
 @Component({

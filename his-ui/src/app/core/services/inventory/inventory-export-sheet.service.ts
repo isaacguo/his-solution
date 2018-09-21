@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
-import {CrudService} from "../../core/services/crud.service";
+import {CrudService} from "../crud.service";
 
 @Injectable()
 export class InventoryExportSheetService extends CrudService<any>  {

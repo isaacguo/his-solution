@@ -33,12 +33,6 @@ import {FromNowPipe} from "./pipes/from-now.pipe";
 import {PetTreatmentDetailComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component";
 import {SharedModule} from "../shared/shared.module";
 import {EmployeeProfilePictureComponent} from "./components/employee-profile-picture/employee-profile-picture.component";
-import {PetOwnerService} from "../core/services/treatment/pet-owner.service";
-import {CommentService} from "../core/services/treatment/comment.service";
-import {DepartmentService} from "../core/services/treatment/department.service";
-import {RegistrationService} from "../core/services/treatment/registration.service";
-import {TreatmentCaseService} from "../core/services/treatment/treatment-case.service";
-import {TreatmentEmployeeService} from "../core/services/treatment/treatment-employee.service";
 
 @NgModule({
   imports: [

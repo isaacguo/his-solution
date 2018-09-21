@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {InventoryItemService} from "../../services/inventory-item.service";
+import {InventoryItemService} from "../../../core/services/inventory/inventory-item.service";
 import {AbstractCreateUpdateComponent} from "../../../shared/abstract-create-update.component";
 import {OperationEnum} from "../../../core/enums/operation.enum";
 

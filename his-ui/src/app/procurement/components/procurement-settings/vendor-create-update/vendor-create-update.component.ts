@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AbstractCreateUpdateComponent} from "../../../../shared/abstract-create-update.component";
-import {VendorService} from "../../../services/vendor.service";
+import {VendorService} from "../../../../core/services/procurement/vendor.service";
 import {OperationEnum} from "../../../../core/enums/operation.enum";
 import {Contact} from "../../../models/contact.model";
 

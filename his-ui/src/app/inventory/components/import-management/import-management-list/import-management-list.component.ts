@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {InventoryImportSheetService} from "../../../services/inventory-import-sheet.service";
+import {InventoryImportSheetService} from "../../../../core/services/inventory/inventory-import-sheet.service";
 
 @Component({
   selector: 'app-import-management-list',

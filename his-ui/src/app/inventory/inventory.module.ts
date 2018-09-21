@@ -20,11 +20,6 @@ import {ExportSheetCreateUpdateComponent} from "./components/export-sheet-create
 import {ExportManagementComponent} from "./components/export-management/export-management.component";
 import {ExportManagementListComponent} from "./components/export-management/export-management-list/export-management-list.component";
 import {ExportManagementDetailComponent} from "./components/export-management/export-management-list/export-management-detail/export-management-detail.component";
-import {InventoryCategoryService} from "./services/inventory-category.service";
-import {InventoryExportSheetService} from "./services/inventory-export-sheet.service";
-import {InventoryImportSheetService} from "./services/inventory-import-sheet.service";
-import {InventoryItemService} from "./services/inventory-item.service";
-import {ProductImportReceiptService} from "./services/product-import-receipt.service";
 
 @NgModule({
   imports: [
@@ -50,16 +45,6 @@ import {ProductImportReceiptService} from "./services/product-import-receipt.ser
     ExportManagementComponent,
     ExportManagementListComponent,
     ExportManagementDetailComponent
-
-  ],
-  providers:[
-
-    InventoryCategoryService,
-    InventoryExportSheetService,
-    InventoryImportSheetService,
-    InventoryItemService,
-    ProductImportReceiptService
-
   ]
 })
 export class InventoryModule { }

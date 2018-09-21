@@ -14,10 +14,6 @@ import {MedicalTestSettingsDepartmentReportTemplatesComponent} from "./component
 import {MedicalTestReportViewComponent} from "./components/medical-test-report-view/medical-test-report-view.component";
 import {MedicalTestReportCreateUpdateComponent} from "./components/medical-test-report-create-update/medical-test-report-create-update.component";
 import {MedicalTestQueryComponent} from "./components/medical-test-query/medical-test-query.component";
-import {MedicalTestDepartmentService} from "../core/services/medical-test/medical-test-department.service";
-import {MedicalTestReportService} from "../core/services/medical-test/medical-test-report.service";
-import {MedicalTestReportTemplateService} from "../core/services/medical-test/medical-test-report-template.service";
-import {MedicalTestReportTemplateCategoryService} from "../core/services/medical-test/medical-test-report-template-category.service";
 
 @NgModule({
   imports: [

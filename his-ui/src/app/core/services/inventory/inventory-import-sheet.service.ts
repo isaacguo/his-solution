@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CrudService} from "../../core/services/crud.service";
+import {CrudService} from "../crud.service";
 import {AuthHttp} from "angular2-jwt";
 
 @Injectable()

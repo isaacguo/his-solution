@@ -3,8 +3,8 @@ import {Router} from "@angular/router";
 import {IMyDateModel, IMyDpOptions} from "mydatepicker";
 import {Procurement} from "../../../models/procurement.model";
 import {ProcurementOperationRequest} from "../../../models/procurement-operation-request.model";
-import {ProcurementService} from "../../../services/procurement.service";
-import {ProcurementStatusService} from "../../../services/procurement-status.service";
+import {ProcurementService} from "../../../../core/services/procurement/procurement.service";
+import {ProcurementStatusService} from "../../../../core/services/procurement/procurement-status.service";
 import {OperationEnum} from "../../../../core/enums/operation.enum";
 
 @Component({

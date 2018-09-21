@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Rx";
 import {AuthHttp} from "angular2-jwt";
-import {AbstractService} from "../../core/services/abstract.service";
+import {AbstractService} from "../abstract.service";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/do';
-import {VendorCategory} from "../models/vendor-category.model";
-import {MyTreeNode} from "../../core/models/my-tree-node.model";
-import {VendorPermitDepartment} from "../../employee/models/vendor-permit-department.model";
+import {VendorCategory} from "../../../procurement/models/vendor-category.model";
+import {MyTreeNode} from "../../models/my-tree-node.model";
+import {VendorPermitDepartment} from "../../../employee/models/vendor-permit-department.model";
 
 @Injectable()
 export class VendorCategoryService extends AbstractService {

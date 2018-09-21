@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProcurementStatus} from "../../../models/procurement-status.model";
-import {ProcurementStatusService} from "../../../services/procurement-status.service";
+import {ProcurementStatusService} from "../../../../core/services/procurement/procurement-status.service";
 
 @Component({
   selector: 'app-procurement-status',

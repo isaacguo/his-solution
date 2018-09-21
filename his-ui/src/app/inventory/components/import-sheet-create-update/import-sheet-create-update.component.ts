@@ -3,8 +3,8 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {ActivatedRoute, Router} from "@angular/router";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Observable} from "rxjs/Observable";
-import {InventoryImportSheetService} from "../../services/inventory-import-sheet.service";
-import {InventoryItemService} from "../../services/inventory-item.service";
+import {InventoryImportSheetService} from "../../../core/services/inventory/inventory-import-sheet.service";
+import {InventoryItemService} from "../../../core/services/inventory/inventory-item.service";
 import {AbstractCreateUpdateComponent} from "../../../shared/abstract-create-update.component";
 
 @Component({

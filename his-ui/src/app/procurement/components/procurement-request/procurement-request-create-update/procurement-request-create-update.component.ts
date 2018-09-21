@@ -7,8 +7,8 @@ import {AbstractCreateUpdateComponent} from "../../../../shared/abstract-create-
 import {Vendor} from "../../../models/vendor.model";
 import {VendorProduct} from "../../../models/vendor-product.model";
 import {OperationEnum} from "../../../../core/enums/operation.enum";
-import {ProcurementRequestService} from "../../../services/procurement-request.service";
-import {VendorService} from "../../../services/vendor.service";
+import {ProcurementRequestService} from "../../../../core/services/procurement/procurement-request.service";
+import {VendorService} from "../../../../core/services/procurement/vendor.service";
 import {Contact} from "../../../models/contact.model";
 
 @Component({

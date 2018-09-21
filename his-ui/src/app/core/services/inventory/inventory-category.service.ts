@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {CrudService} from "../../core/services/crud.service";
+import {CrudService} from "../crud.service";
 import {AuthHttp} from "angular2-jwt";
-import {TreeNodeService} from "../../core/services/common/tree-node.service";
+import {TreeNodeService} from "../common/tree-node.service";
 import {Observable} from "rxjs/Observable";
-import {CategoryService} from "../../shared/abstract-category-list/category-service";
-import {MyTreeNode} from "../../core/models/my-tree-node.model";
+import {CategoryService} from "../../../shared/abstract-category-list/category-service";
+import {MyTreeNode} from "../../models/my-tree-node.model";
 
 @Injectable()
 export class InventoryCategoryService extends CrudService<any> implements CategoryService {

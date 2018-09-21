@@ -6,8 +6,6 @@ import {AuthorizationManagementComponent} from "./components/authorization-manag
 import {SecurityOperationPanelComponent} from "./components/authorization-management/security-operation-panel/security-operation-panel.component";
 import {FactoryResetComponent} from "./components/factory-reset/factory-reset.component";
 import {SharedModule} from "../shared/shared.module";
-import {FactoryResetService} from "./services/factory-reset.service";
-import {EmployeeService} from "./services/employee.service";
 
 @NgModule({
   imports: [
@@ -19,12 +17,7 @@ import {EmployeeService} from "./services/employee.service";
     AuthorizationManagementComponent,
     SecurityOperationPanelComponent,
     FactoryResetComponent
-  ],
-  providers:
-    [
-      FactoryResetService,
-      EmployeeService
-    ]
+  ]
 })
 export class SettingsModule {
 }

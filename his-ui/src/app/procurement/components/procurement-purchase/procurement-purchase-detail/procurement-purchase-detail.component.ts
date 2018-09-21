@@ -4,8 +4,8 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AuthenticationService, AuthInfo} from "../../../../core/services/common/authentication.service";
 import {ProcurementStatus} from "../../../models/procurement-status.model";
 import {Procurement} from "../../../models/procurement.model";
-import {ProcurementService} from "../../../services/procurement.service";
-import {ProcurementStatusService} from "../../../services/procurement-status.service";
+import {ProcurementService} from "../../../../core/services/procurement/procurement.service";
+import {ProcurementStatusService} from "../../../../core/services/procurement/procurement-status.service";
 import {ProcurementOperationRequest} from "../../../models/procurement-operation-request.model";
 
 @Component({

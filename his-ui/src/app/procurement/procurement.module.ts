@@ -26,12 +26,6 @@ import {ProcurementTableListViewComponent} from "./components/procurement-approv
 import {ProcurementApprovalListComponent} from "./components/procurement-approval/procurement-approval-list/procurement-approval-list.component";
 import {ProcurementApprovalDetailComponent} from "./components/procurement-approval/procurement-approval-detail/procurement-approval-detail.component";
 import {VendorGuard} from "./guards/vendor.guard";
-import {ProcurementService} from "./services/procurement.service";
-import {ProcurementApprovalService} from "../core/services/procurement/procurement-approval.service";
-import {ProcurementRequestService} from "./services/procurement-request.service";
-import {ProcurementStatusService} from "./services/procurement-status.service";
-import {VendorService} from "./services/vendor.service";
-import {VendorCategoryService} from "./services/vendor-category.service";
 import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
@@ -67,11 +61,7 @@ import {SharedModule} from "../shared/shared.module";
   ],
   providers:[
     VendorGuard,
-    ProcurementService,
-    ProcurementRequestService,
-    ProcurementStatusService,
-    VendorService,
-    VendorCategoryService
+
   ]
 
 })

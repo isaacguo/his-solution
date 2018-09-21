@@ -1,11 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Observable} from 'rxjs/Rx';
 import {AuthHttp} from "angular2-jwt";
-import {EmployeeCount} from "../../employee/models/employee.count.model";
-import {Employee} from "../../employee/models/employee.model";
-import {EmployeeListItem} from "../../employee/models/employee-list-item.model";
-import {ServiceConstants} from "../../shared/service-constants";
-import {AbstractService} from "../../core/services/abstract.service";
+import {Employee} from "../../../employee/models/employee.model";
+import {ServiceConstants} from "../../../shared/service-constants";
+import {AbstractService} from "../abstract.service";
 
 
 @Injectable()

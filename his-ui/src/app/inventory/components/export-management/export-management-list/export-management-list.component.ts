@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {InventoryExportSheetService} from "../../../services/inventory-export-sheet.service";
+import {InventoryExportSheetService} from "../../../../core/services/inventory/inventory-export-sheet.service";
 
 @Component({
   selector: 'app-export-management-list',

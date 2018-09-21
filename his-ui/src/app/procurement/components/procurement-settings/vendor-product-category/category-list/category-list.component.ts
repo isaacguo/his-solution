@@ -4,7 +4,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {DepartmentListItem} from "../../../../../employee/models/department-list-item.model";
 import {MyTreeNode} from "../../../../../core/models/my-tree-node.model";
-import {VendorCategoryService} from "../../../../services/vendor-category.service";
+import {VendorCategoryService} from "../../../../../core/services/procurement/vendor-category.service";
 import {EmployeeDepartmentService} from "../../../../../core/services/employee/employee-department.service";
 
 @Component({

@@ -32,7 +32,6 @@ import {MedicalTestReportService} from "./services/medical-test/medical-test-rep
 import {MedicalTestReportTemplateService} from "./services/medical-test/medical-test-report-template.service";
 import {MedicalTestReportTemplateCategoryService} from "./services/medical-test/medical-test-report-template-category.service";
 import {MedicalTestDepartmentService} from "./services/medical-test/medical-test-department.service";
-import {PharmacyManagementGuard} from "../pharmacy/guards/pharmacy-management-guard.service";
 import {PharmacyMedicineService} from "./services/pharmacy/pharmacy-medicine.service";
 import {CommentService} from "./services/treatment/comment.service";
 import {RegistrationService} from "./services/treatment/registration.service";
@@ -40,6 +39,17 @@ import {TreatmentEmployeeService} from "./services/treatment/treatment-employee.
 import {DepartmentService} from "./services/treatment/department.service";
 import {PetOwnerService} from "./services/treatment/pet-owner.service";
 import {TreatmentCaseService} from "./services/treatment/treatment-case.service";
+import {InventoryItemService} from "./services/inventory/inventory-item.service";
+import {InventoryImportSheetService} from "./services/inventory/inventory-import-sheet.service";
+import {InventoryCategoryService} from "./services/inventory/inventory-category.service";
+import {ProductImportReceiptService} from "./services/inventory/product-import-receipt.service";
+import {InventoryExportSheetService} from "./services/inventory/inventory-export-sheet.service";
+import {ProcurementRequestService} from "./services/procurement/procurement-request.service";
+import {ProcurementStatusService} from "./services/procurement/procurement-status.service";
+import {VendorService} from "./services/procurement/vendor.service";
+import {ProcurementService} from "./services/procurement/procurement.service";
+import {VendorCategoryService} from "./services/procurement/vendor-category.service";
+import {FactoryResetService} from "./services/settings/factory-reset.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -87,6 +97,18 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RegistrationService,
     TreatmentCaseService,
     TreatmentEmployeeService,
+    InventoryCategoryService,
+    InventoryExportSheetService,
+    InventoryImportSheetService,
+    InventoryItemService,
+    ProductImportReceiptService,
+    ProcurementService,
+    ProcurementRequestService,
+    ProcurementStatusService,
+    VendorService,
+    VendorCategoryService,
+    FactoryResetService,
+    EmployeeService,
     ProcurementApprovalGuard,
     ProcurementManagementGuard,
     FrontdeskGuard,
