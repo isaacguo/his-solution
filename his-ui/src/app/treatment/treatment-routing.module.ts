@@ -18,7 +18,11 @@ import {TreatmentSettingsRoomComponent} from "./components/treatment-settings/tr
 import {DoctorRegistrationComponent} from "./components/doctor-registration/doctor-registration.component";
 import {DoctorListViewComponent} from "./components/doctor-registration/views/doctor-list-view/doctor-list-view.component";
 import {TimeBasedViewComponent} from "./components/doctor-registration/views/time-based-view/time-based-view.component";
-import {TreatmentCommentsContainerComponent} from "./components/treatment-comments-container/treatment-comments-container.component";
+import {CustomerServiceContainerComponent} from "./containers/customer-service-container/customer-service-container.component";
+import {CustomerServiceTreatmentCaseContainerComponent} from "./containers/customer-service-treatment-case-container/customer-service-treatment-case-container.component";
+import {CustomerServiceTreatmentCaseInfoContainerComponent} from "./containers/customer-service-treatment-case-info-container/customer-service-treatment-case-info-container.component";
+import {CustomerServiceTreatmentCaseDetailContainerComponent} from "./containers/customer-service-treatment-case-detail-container/customer-service-treatment-case-detail-container.component";
+import {CustomerServiceTreatmentCaseCommentsContainerComponent} from "./containers/customer-service-treatment-case-comments-container/customer-service-treatment-case-comments-container.component";
 
 const routes: Routes = [
   {
@@ -51,26 +55,31 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'customer-service/:treatmentCaseUuid',
-    component: TreatmentCommentsContainerComponent,
+    path: 'customer-service',
+    component: CustomerServiceContainerComponent,
     children: [
       {
-        path: 'info',
-        component: PetInfoComponent,
+        path: 'treatment-case/:treatmentCaseId',
+        component: CustomerServiceTreatmentCaseContainerComponent,
+        children: [
+          {
+            path: 'info',
+            component: CustomerServiceTreatmentCaseInfoContainerComponent,
+          },
+          {
+            path: 'detail',
+            component: CustomerServiceTreatmentCaseDetailContainerComponent,
+          },
+          {
+            path: 'comments',
+            component: CustomerServiceTreatmentCaseCommentsContainerComponent
+          },
+          {
+            path: '**',
+            redirectTo: 'info'
+          }
+        ]
       },
-      {
-        path: 'treatment',
-        component: PetTreatmentComponent,
-      },
-      {
-        path: 'feedback',
-        component: PetMedicalTestComponent,
-
-      },
-      {
-        path: '**',
-        redirectTo: 'pet-info'
-      }
     ],
   },
   {

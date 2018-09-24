@@ -8,6 +8,8 @@ import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.PrescriptionRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
+import com.isaac.pethospital.treatment.entities.PetEntity;
+import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.entities.PrescriptionEntity;
 import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
 
@@ -40,4 +42,6 @@ public interface TreatmentCaseService {
     TreatmentCaseEntity setPrescriptions(Long tId, PrescriptionRequest request);
 
     List<TreatmentCaseEntity> findAll();
+
+    PetOwnerEntity getPetOwnerInfoByTreatmentCaseId(Long tId);
 }

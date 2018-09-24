@@ -17,5 +17,10 @@ export interface TreatmentCase {
   uuid?: string,
   treatmentCaseStatus?: TreatmentCaseStatusEnum,
   createResult?: boolean,
-  comments?: TreatmentCaseComment[]
+  petOwnerDescription?: string;
+  doctorDiagnose?: string;
+  clinicSituation?: string;
+  doctorAdvice?: string;
+  comments?: TreatmentCaseComment[];
+  medicalTestReportUuidList?:string[];
 }

@@ -129,13 +129,50 @@
 }
 
 
-app-customer-service-treatment-case-comment {
+app-customer-service-comments {
+  display: block;
+  padding: 5px;
+}
+
+app-customer-service-comments .title {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 500
+}
+
+app-customer-service-comments .add-comment-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end
+}
+
+app-customer-service-comments .add-comment-box {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  min-height: 90px;
+  align-items: center;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .1));
+  background-color: #fff
+}
+
+app-customer-service-comments .comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0
+}
+
+app-customer-service-comment {
   display: flex;
   width: 100%;
   margin-bottom: 30px;
 }
 
-app-customer-service-treatment-case-comment .meta {
+app-customer-service-comment .meta {
   display: flex;
   flex: 0 0 100px;
   flex-direction: column;
@@ -144,60 +181,22 @@ app-customer-service-treatment-case-comment .meta {
 }
 
 
-app-customer-service-treatment-case-comments {
-  display: block;
-  padding: 5px;
-}
-
-app-customer-service-treatment-case-comments .title {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 20px;
-  line-height: 1.1;
-  font-weight: 500
-}
-
-app-customer-service-treatment-case-comments .add-comment-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end
-}
-
-app-customer-service-treatment-case-comments .add-comment-box {
-  display: flex;
-  position: relative;
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-  min-height: 90px;
-  align-items: center;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .1));
-  background-color: #fff
-}
-
-app-customer-service-treatment-case-comments .comments-list {
-  list-style: none;
-  padding: 0;
-  margin: 0
-}
-
-
-app-customer-service-treatment-case-comment .user-name {
+app-customer-service-comment .user-name {
   font-weight: 400;
 }
 
-app-customer-service-treatment-case-comment .time {
+app-customer-service-comment .time {
   font-size: 14px;
 }
 
-app-customer-service-treatment-case-comment .user-picture {
+app-customer-service-comment .user-picture {
   border-radius: 50%;
   overflow: hidden;
   width: 70px;
   height: 70px;
 }
 
-app-customer-service-treatment-case-comment .main {
+app-customer-service-comment .main {
   display: flex;
   flex: auto;
   flex-wrap: wrap;
@@ -205,11 +204,11 @@ app-customer-service-treatment-case-comment .main {
   margin-left: 30px;
 }
 
-app-customer-service-treatment-case-comment .content {
+app-customer-service-comment .content {
   display: flex;
   position: relative;
   width: 100%;
-  padding: 5px;
+  padding: 20px;
   margin-bottom: 10px;
   min-height: 90px;
   align-items: center;
@@ -217,7 +216,7 @@ app-customer-service-treatment-case-comment .content {
   background-color: #fff;
 }
 
-app-customer-service-treatment-case-comment .content:before {
+app-customer-service-comment .content:before {
   content: "";
   display: block;
   position: absolute;

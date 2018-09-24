@@ -10,18 +10,12 @@ import {TreatmentRoomDetailComponent} from "./components/treatment-settings/trea
 import {TreatmentRoomEmployeeListComponent} from "./components/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-list.component";
 import {TreatmentRoomEmployeeDetailComponent} from "./components/treatment-settings/treatment-settings-room/treatment-room-detail/treatment-room-employee-list/treatment-room-employee-detail/treatment-room-employee-detail.component";
 import {RegisterComponent} from "./components/register/register.component";
-import {CustomerComponent} from "./components/customer.component";
-import {TreatmentCommentsContainerComponent} from "./components/treatment-comments-container/treatment-comments-container.component";
 import {PetRegistrationComponent} from "./components/front-desk/pet-registration/pet-registration.component";
 import {RegistrationQueryComponent} from "./components/front-desk/registration-query/registration-query.component";
 import {MyConsultingRoomRegistrationDetailComponent} from "./components/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-detail/my-consulting-room-registration-detail.component";
 import {MyConsultingRoomRegistrationListComponent} from "./components/my-consulting-room/my-consulting-room-registration-list/my-consulting-room-registration-list.component";
 import {DoctorListViewComponent} from "./components/doctor-registration/views/doctor-list-view/doctor-list-view.component";
 import {DoctorListItemComponent} from "./components/doctor-registration/views/doctor-list-view/doctor-list-item/doctor-list-item.component";
-import {CustomerServiceTreatmentCaseOutletComponent} from "./components/customer-service-treatment-case-list/customer-service-treatment-case-outlet/customer-service-treatment-case-outlet.component";
-import {CustomerServiceTreatmentCaseCommentComponent} from "./components/customer-service-treatment-case-list/customer-service-treatment-case-comments/customer-service-treatment-case-comment/customer-service-treatment-case-comment.component";
-import {CustomerServiceTreatmentCaseCommentsComponent} from "./components/customer-service-treatment-case-list/customer-service-treatment-case-comments/customer-service-treatment-case-comments.component";
-import {CustomerServiceTreatmentCaseListComponent} from "./components/customer-service-treatment-case-list/customer-service-treatment-case-list.component";
 import {FeeQueryComponent} from "./components/front-desk/fee-query/fee-query.component";
 import {PetTreatmentComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment.component";
 import {PetMedicalTestComponent} from "./components/my-consulting-room/pet-medical-test/pet-medical-test.component";
@@ -33,6 +27,17 @@ import {FromNowPipe} from "./pipes/from-now.pipe";
 import {PetTreatmentDetailComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component";
 import {SharedModule} from "../shared/shared.module";
 import {EmployeeProfilePictureComponent} from "./components/employee-profile-picture/employee-profile-picture.component";
+import { CustomerServiceContainerComponent } from './containers/customer-service-container/customer-service-container.component';
+import { CustomerServiceTreatmentCaseContainerComponent } from './containers/customer-service-treatment-case-container/customer-service-treatment-case-container.component';
+import { QueryResultTableComponent } from './components/query-result-table/query-result-table.component';
+import { CustomerServiceTreatmentCaseInfoContainerComponent } from './containers/customer-service-treatment-case-info-container/customer-service-treatment-case-info-container.component';
+import { CustomerServiceTreatmentCaseDetailContainerComponent } from './containers/customer-service-treatment-case-detail-container/customer-service-treatment-case-detail-container.component';
+import { CustomerServiceTreatmentCaseCommentsContainerComponent } from './containers/customer-service-treatment-case-comments-container/customer-service-treatment-case-comments-container.component';
+import { CustomerServicePetInfoComponent } from './components/customer-service/customer-service-pet-info/customer-service-pet-info.component';
+import { CustomerServiceTreatmentDetailComponent } from './components/customer-service/customer-service-treatment-detail/customer-service-treatment-detail.component';
+import { CustomerServiceCommentsComponent } from './components/customer-service/customer-service-comments/customer-service-comments.component';
+import { CustomerServiceCommentComponent } from './components/customer-service/customer-service-comment/customer-service-comment.component';
+
 
 @NgModule({
   imports: [
@@ -49,18 +54,13 @@ import {EmployeeProfilePictureComponent} from "./components/employee-profile-pic
     TreatmentRoomEmployeeListComponent,
     TreatmentRoomEmployeeDetailComponent,
     RegisterComponent,
-    CustomerComponent,
-    TreatmentCommentsContainerComponent,
     PetRegistrationComponent,
     RegistrationQueryComponent,
+    MyConsultingRoomComponent,
     MyConsultingRoomRegistrationDetailComponent,
     MyConsultingRoomRegistrationListComponent,
     DoctorListViewComponent,
     DoctorListItemComponent,
-    CustomerServiceTreatmentCaseOutletComponent,
-    CustomerServiceTreatmentCaseCommentComponent,
-    CustomerServiceTreatmentCaseCommentsComponent,
-    CustomerServiceTreatmentCaseListComponent,
     FeeQueryComponent,
     MyConsultingRoomComponent,
     PetInfoComponent,
@@ -70,7 +70,17 @@ import {EmployeeProfilePictureComponent} from "./components/employee-profile-pic
     TimeBasedViewComponent,
     FromNowPipe,
     PetTreatmentDetailComponent,
-    EmployeeProfilePictureComponent
+    EmployeeProfilePictureComponent,
+    CustomerServiceContainerComponent,
+    CustomerServiceTreatmentCaseContainerComponent,
+    QueryResultTableComponent,
+    CustomerServiceTreatmentCaseInfoContainerComponent,
+    CustomerServiceTreatmentCaseDetailContainerComponent,
+    CustomerServiceTreatmentCaseCommentsContainerComponent,
+    CustomerServicePetInfoComponent,
+    CustomerServiceTreatmentDetailComponent,
+    CustomerServiceCommentsComponent,
+    CustomerServiceCommentComponent,
   ]
 })
 export class TreatmentModule { }

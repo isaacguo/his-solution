@@ -45,6 +45,9 @@ import {ExportManagementDetailComponent} from "./components/export-management/ex
     ExportManagementComponent,
     ExportManagementListComponent,
     ExportManagementDetailComponent
+  ],
+  exports:[
+    InventorySettingsItemManagementComponent
   ]
 })
 export class InventoryModule { }

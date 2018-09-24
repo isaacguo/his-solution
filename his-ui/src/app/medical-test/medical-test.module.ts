@@ -34,10 +34,8 @@ import {MedicalTestQueryComponent} from "./components/medical-test-query/medical
     MedicalTestReportCreateUpdateComponent,
     MedicalTestQueryComponent
   ],
-  providers: [
-
-
-
+  exports:[
+    MedicalTestSettingsReportComponent
   ]
 
 

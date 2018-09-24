@@ -2,16 +2,16 @@
   <div class="user-picture">
     <app-employee-profile-picture [employee]="null"></app-employee-profile-picture>
   </div>
-  <!--
-  <div class="user-name">{{comment.user}}</div>
-  -->
+  <div class="user-name">User1</div>
   <div class="time">
-    {{comment.createdDate|fromNow}}
+    {{comment?.createdDate|fromNow}}
   </div>
 </div>
+
 <div class="main">
   <div class="content">
-    <app-editor [content]="comment.comments"
+    <app-editor [content]="comment?.comments"
                 (saveEditEvent)="updateComment($event)"></app-editor>
   </div>
 </div>
+

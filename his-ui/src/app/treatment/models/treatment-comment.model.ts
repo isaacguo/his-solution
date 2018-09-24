@@ -1,5 +1,5 @@
 export interface TreatmentCaseComment {
-  readonly treatmentCaseUuid?: number,
+  readonly treatmentCaseUuid?: string,
   readonly content?: string;
 
   readonly comments?: string;

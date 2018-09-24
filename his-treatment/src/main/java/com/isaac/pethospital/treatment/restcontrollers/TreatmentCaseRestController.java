@@ -6,9 +6,7 @@ import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.PrescriptionRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
-import com.isaac.pethospital.treatment.entities.EmployeeEntity;
-import com.isaac.pethospital.treatment.entities.PrescriptionEntity;
-import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
+import com.isaac.pethospital.treatment.entities.*;
 import com.isaac.pethospital.treatment.services.EmployeeService;
 import com.isaac.pethospital.treatment.services.TreatmentCaseService;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +31,12 @@ public class TreatmentCaseRestController {
     public List<TreatmentCaseEntity>findAll()
     {
         return this.treatmentCaseService.findAll();
+    }
+    @GetMapping("/get-pet-owner-info-by-treatment-case-id/{tId}")
+    public PetOwnerEntity getPetOwnerInfoByTreatmentCaseId(@PathVariable("tId") Long tId)
+    {
+        return this.treatmentCaseService.getPetOwnerInfoByTreatmentCaseId(tId);
+
     }
 
     @GetMapping("/find-all-by-pet/{pId}")

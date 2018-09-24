@@ -5,7 +5,7 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 export class CrudService<T> extends AbstractService {
 
-  private items = new BehaviorSubject<T[]>([]);
+  protected items = new BehaviorSubject<T[]>([]);
 
   public loadData() {
     this.authHttp.get(`${this.rootUrl}`).subscribe((items) => {

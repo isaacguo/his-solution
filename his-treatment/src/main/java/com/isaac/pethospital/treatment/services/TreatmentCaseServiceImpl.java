@@ -13,10 +13,7 @@ import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.PrescriptionRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseQueryResponse;
-import com.isaac.pethospital.treatment.entities.PetEntity;
-import com.isaac.pethospital.treatment.entities.PrescriptionEntity;
-import com.isaac.pethospital.treatment.entities.TreatmentCaseEntity;
-import com.isaac.pethospital.treatment.entities.TreatmentCaseMedicineEntity;
+import com.isaac.pethospital.treatment.entities.*;
 import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import com.isaac.pethospital.treatment.repositories.PetRepository;
 import com.isaac.pethospital.treatment.repositories.TreatmentCaseRepository;
@@ -25,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -159,10 +155,10 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         message.setPetOwnerUuid(tce.getPet().getPetOwner().getUuid());
         message.setPetUuid(tce.getPet().getUuid());
 
-        List<MedicineItemMessage> messageList=new LinkedList<>();
+        List<MedicineItemMessage> messageList = new LinkedList<>();
 
-        tce.getMedicineList().forEach(r->{
-            MedicineItemMessage medicineItemMessage=new MedicineItemMessage();
+        tce.getMedicineList().forEach(r -> {
+            MedicineItemMessage medicineItemMessage = new MedicineItemMessage();
             medicineItemMessage.setAmount(r.getAmount());
             medicineItemMessage.setInventoryItemId(r.getInventoryItemId());
             medicineItemMessage.setName(r.getName());
@@ -183,6 +179,35 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
     @Override
     public List<TreatmentCaseEntity> findAll() {
         return this.treatmentCaseRepository.findAll();
+    }
+
+    @Override
+    public PetOwnerEntity getPetOwnerInfoByTreatmentCaseId(Long tId) {
+
+        PetEntity pet = getTreatmentCase(tId).getPet();
+        PetEntity clonePet = new PetEntity();
+        clonePet.setName(pet.getName());
+        clonePet.setPetType(pet.getPetType());
+        clonePet.setAge(pet.getAge());
+        clonePet.setColor(pet.getColor());
+        clonePet.setDateOfBirth(pet.getDateOfBirth());
+        clonePet.setGender(pet.getGender());
+        clonePet.setSterilized(pet.isSterilized());
+
+        PetOwnerEntity clonePetOwner=new PetOwnerEntity();
+        clonePetOwner.setName(pet.getPetOwner().getName());
+        clonePetOwner.setDateOfBirth(pet.getPetOwner().getDateOfBirth());
+        clonePetOwner.setMemberNumber(pet.getPetOwner().getMemberNumber());
+        clonePetOwner.setAddress(pet.getPetOwner().getAddress());
+        clonePetOwner.setCellPhone(pet.getPetOwner().getCellPhone());
+        clonePetOwner.setEmail(pet.getPetOwner().getEmail());
+        clonePetOwner.setHomePhone(pet.getPetOwner().getHomePhone());
+        clonePetOwner.setGender(pet.getPetOwner().getGender());
+
+        clonePet.setPetOwner(clonePetOwner);
+        clonePetOwner.addPet(clonePet);
+
+        return clonePetOwner;
     }
 
 

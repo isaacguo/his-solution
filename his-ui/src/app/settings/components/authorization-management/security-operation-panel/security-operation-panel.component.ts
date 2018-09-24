@@ -9,7 +9,7 @@ import {AuthorizationOperationRequest} from "../../../../core/models/authorizati
 import {AuthorizationAssignmentOperationRequest} from "../../../../core/models/authorization/authorization-assignment-operation-request.model";
 import {AuthorizationAssignment} from "../../../../core/models/authorization/authorization-assignment.model";
 import {TopicOperation} from "../../../../core/models/authorization/topic-operation.model";
-import {EmployeeService} from "../../../../core/services/settings/employee.service";
+import {EmployeeService} from "../../../../core/services/employee/employee.service";
 
 @Component({
   selector: 'app-security-operation-panel',

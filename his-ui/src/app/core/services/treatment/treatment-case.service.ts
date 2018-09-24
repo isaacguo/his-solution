@@ -4,6 +4,8 @@ import {Observable} from "rxjs/Observable";
 import {CrudService} from "../crud.service";
 import {TreatmentCase} from "../../../treatment/models/treatment-case.model";
 import {ServiceConstants} from "../../../shared/service-constants";
+import {Pet} from "../../../treatment/models/pet.model";
+import {PetOwner} from "../../../treatment/models/pet-owner.model";
 
 @Injectable()
 export class TreatmentCaseService extends CrudService<TreatmentCase> {
@@ -15,6 +17,11 @@ export class TreatmentCaseService extends CrudService<TreatmentCase> {
 
     super(`${ServiceConstants.TREATMENT_URL}/treatment-cases`,authHttp);
 
+  }
+
+  getPetOwnerInfoByTreatmentCaseId(tId:number): Observable<PetOwner>
+  {
+    return this.authHttp.get(`${this.rootUrl}/get-pet-owner-info-by-treatment-case-id/${tId}`).map(this.extractData);
   }
 
   findAllByPetId(pid: number): Observable<any[]> {
@@ -36,4 +43,5 @@ export class TreatmentCaseService extends CrudService<TreatmentCase> {
   setPrescriptions(tid:number,value: any) {
     return this.authHttp.post(`${this.rootUrl}/${tid}/prescriptions`, value).map(this.extractData);
   }
+
 }
