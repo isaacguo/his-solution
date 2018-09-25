@@ -1,12 +1,12 @@
 package com.isaac.pethospital.medicine.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.common.entities.AbstractCollectionEntity;
 import com.isaac.pethospital.medicine.enums.DispenseStatusEnum;
 
-import javax.persistence.*;
-import java.util.LinkedList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class PharmacyMedicineDispenseEntity extends AbstractCollectionEntity<PharmacyMedicineDispenseItemEntity> {

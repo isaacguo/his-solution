@@ -8,7 +8,7 @@ import {FinancePriceService} from "../../../core/services/finance/finance-price.
 })
 export class FinancePriceManagementTreatmentContainerComponent implements OnInit {
 
-  constructor(financePriceService: FinancePriceService) {
+  constructor(public financePriceService: FinancePriceService) {
 
   }
 

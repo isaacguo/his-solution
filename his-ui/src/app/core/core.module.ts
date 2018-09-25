@@ -50,6 +50,8 @@ import {VendorService} from "./services/procurement/vendor.service";
 import {ProcurementService} from "./services/procurement/procurement.service";
 import {VendorCategoryService} from "./services/procurement/vendor-category.service";
 import {FactoryResetService} from "./services/settings/factory-reset.service";
+import {ChargeableCategoryService} from "./services/treatment/chargeable-category.service";
+import {ChargeableItemService} from "./services/treatment/chargeable-item.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -121,7 +123,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FinanceManagementGuard,
     MedicalTestManagementGuard,
     InventoryManagementGuard,
-    MedicineManagementGuard
+    MedicineManagementGuard,
+    ChargeableCategoryService,
+    ChargeableItemService
+
   ]
 })
 export class CoreModule {

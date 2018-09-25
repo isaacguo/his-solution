@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FinanceChargeService} from "../../../../core/services/finance/finance-charge.service";
-import {PetService} from "../../../../core/services/treatment/pet.service";
-import {ChargeStatusEnum} from "../../../enums/charge-status.enum";
+import {FinanceChargeService} from "../../../core/services/finance/finance-charge.service";
+import {PetService} from "../../../core/services/treatment/pet.service";
+import {ChargeStatusEnum} from "../../../finance/enums/charge-status.enum";
 
 @Component({
   selector: 'app-charge-admin-list',

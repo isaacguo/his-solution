@@ -19,6 +19,9 @@ import {MedicalTestSettingsReportTemplateCategoryListComponent} from "./componen
 import {MedicalTestSettingsReportTemplateCategoryDetailComponent} from "./components/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-detail/medical-test-settings-report-template-category-detail.component";
 import {InventorySettingsItemManagementComponent} from "./components/inventory-settings-item-management/inventory-settings-item-management.component";
 import {InventorySettingsItemManagementDetailComponent} from "./components/inventory-settings-item-management/inventory-settings-item-management-detail/inventory-settings-item-management-detail.component";
+import { TreatmentSettingsChargeableItemsComponent } from './components/treatment-settings-chargeable-category/treatment-settings-chargeable-items/treatment-settings-chargeable-items.component';
+import {ChargeAdminListComponent} from "./components/charge-admin-list/charge-admin-list.component";
+import { TreatmentSettingsChargeableCategoryComponent } from './components/treatment-settings-chargeable-category/treatment-settings-chargeable-category.component';
 
 @NgModule({
   imports: [
@@ -45,8 +48,10 @@ import {InventorySettingsItemManagementDetailComponent} from "./components/inven
     MedicalTestSettingsReportTemplateCategoryListComponent,
     MedicalTestSettingsReportTemplateCategoryDetailComponent,
     InventorySettingsItemManagementComponent,
-    InventorySettingsItemManagementDetailComponent
-
+    InventorySettingsItemManagementDetailComponent,
+    TreatmentSettingsChargeableItemsComponent,
+    ChargeAdminListComponent,
+    TreatmentSettingsChargeableCategoryComponent
   ],
   exports:
     [
@@ -72,7 +77,10 @@ import {InventorySettingsItemManagementDetailComponent} from "./components/inven
       MedicalTestSettingsReportTemplateCategoryListComponent,
       MedicalTestSettingsReportTemplateCategoryDetailComponent,
       InventorySettingsItemManagementComponent,
-      InventorySettingsItemManagementDetailComponent
+      InventorySettingsItemManagementDetailComponent,
+      TreatmentSettingsChargeableItemsComponent,
+      ChargeAdminListComponent,
+      TreatmentSettingsChargeableCategoryComponent
     ]
 
 })

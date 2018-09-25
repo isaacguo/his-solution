@@ -72,15 +72,15 @@ public class ReportTemplateCategoryEntity {
     }
 
     public void addReportTemplate(ReportTemplateEntity reportTemplate) {
-        if(reportTemplate==null)
-            throw  new RuntimeException("Template is null");
+        if (reportTemplate == null)
+            throw new RuntimeException("Template is null");
         reportTemplate.setCategory(this);
         this.reportTemplateList.add(reportTemplate);
     }
 
     public void removeReportTemplate(ReportTemplateEntity reportTemplate) {
-        if(reportTemplate==null)
-            throw  new RuntimeException("Template is null");
+        if (reportTemplate == null)
+            throw new RuntimeException("Template is null");
         reportTemplate.setCategory(null);
         this.reportTemplateList.remove(reportTemplate);
     }
