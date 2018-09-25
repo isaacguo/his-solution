@@ -1,10 +1,8 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TreatmentCase} from "../../models/treatment-case.model";
 import {Observable} from "rxjs/Observable";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
 import {ActivatedRoute} from "@angular/router";
-import {Pet} from "../../models/pet.model";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {PetOwner} from "../../models/pet-owner.model";
 
 @Component({

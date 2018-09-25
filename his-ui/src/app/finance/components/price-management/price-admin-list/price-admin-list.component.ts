@@ -10,7 +10,7 @@ export class PriceAdminListComponent implements OnInit {
 
 
   selectedModule: string = "请选择模块";
-  modules: any[] = ["请选择模块", "化验模块", "库房模块", "药房模块"];
+  modules: any[] = ["请选择模块", "就诊模块", "化验模块", "库房模块", "药房模块"];
 
 
   constructor(public financePriceService: FinancePriceService) {

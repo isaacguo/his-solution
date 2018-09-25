@@ -4,8 +4,10 @@ import {FinanceManagementGuard} from "../core/guards/finance/finance-management.
 import {FinanceComponent} from "./components/finance.component";
 import {ChargeManagementGuard} from "../core/guards/finance/charge-management.guard";
 import {ChargeManagementComponent} from "./components/charge-management/charge-management.component";
-import {PriceManagementGuard} from "../core/guards/finance/price-management.guard";
-import {PriceManagementComponent} from "./components/price-management/price-management.component";
+import {FinancePriceManagementContainerComponent} from "./containers/finance-price-management-container/finance-price-management-container.component";
+import {FinancePriceManagementTreatmentContainerComponent} from "./containers/finance-price-management-treatment-container/finance-price-management-treatment-container.component";
+import {FinancePriceManagementMedicalTestContainerComponent} from "./containers/finance-price-management-medical-test-container/finance-price-management-medical-test-container.component";
+import {FinancePriceManagementInventoryContainerComponent} from "./containers/finance-price-management-inventory-container/finance-price-management-inventory-container.component";
 
 const routes: Routes = [
   {
@@ -20,9 +22,30 @@ const routes: Routes = [
   },
   {
     path: 'price-management',
+    component: FinancePriceManagementContainerComponent,
+    children: [
+      {
+        path: 'treatment',
+        component: FinancePriceManagementTreatmentContainerComponent
+      },
+      {
+        path: 'medical-test',
+        component: FinancePriceManagementMedicalTestContainerComponent,
+      },
+      {
+        path: 'inventory',
+        component: FinancePriceManagementInventoryContainerComponent
+      },
+
+    ]
+  }
+  /*
+  {
+    path: 'price-management',
     canActivate: [PriceManagementGuard],
     component: PriceManagementComponent
   },
+  */
 ];
 
 @NgModule({

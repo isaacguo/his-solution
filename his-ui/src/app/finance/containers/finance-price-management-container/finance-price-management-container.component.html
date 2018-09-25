@@ -1,0 +1,22 @@
+<div class="row">
+  <h1 class="page-header">收费定价</h1>
+</div>
+
+<div class="row">
+
+  <div class="btn-group" role="group">
+    <button type="button"
+            class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
+            data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+      {{(selectedTag|async).title}}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li *ngFor="let tag of tags"><a href="javascript:void(0)"
+                                      (click)="onTagSelected(tag)">{{tag.title}}</a></li>
+    </ul>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
