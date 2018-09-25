@@ -9,7 +9,7 @@ import {InventoryQueryComponent} from "./components/inventory-query/inventory-qu
 import {InventoryItemCreateUpdateComponent} from "./components/inventory-item-create-update/inventory-item-create-update.component";
 import {InventorySettingsComponent} from "./components/inventory-settings/inventory-settings.component";
 import {InventorySettingsWarehourseComponent} from "./components/inventory-settings/inventory-settings-warehourse/inventory-settings-warehourse.component";
-import {InventorySettingsItemManagementComponent} from "./components/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component";
+import {InventorySettingsItemManagementComponent} from "../shared/components/inventory-settings-item-management/inventory-settings-item-management.component";
 
 const routes: Routes = [
   {

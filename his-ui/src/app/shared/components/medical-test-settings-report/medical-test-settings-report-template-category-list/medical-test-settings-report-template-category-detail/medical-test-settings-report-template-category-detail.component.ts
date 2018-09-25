@@ -1,11 +1,11 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Router} from "@angular/router";
-import {MedicalTestReportTemplate} from "../../../../../models/medical-test-report-template.model";
-import {MedicalTestReportTemplateCategoryService} from "../../../../../../core/services/medical-test/medical-test-report-template-category.service";
-import {MedicalTestReportTemplateService} from "../../../../../../core/services/medical-test/medical-test-report-template.service";
-import {FinancePriceService} from "../../../../../../core/services/finance/finance-price.service";
-import {OperationEnum} from "../../../../../../core/enums/operation.enum";
+import {MedicalTestReportTemplate} from "../../../../../medical-test/models/medical-test-report-template.model";
+import {MedicalTestReportTemplateCategoryService} from "../../../../../core/services/medical-test/medical-test-report-template-category.service";
+import {MedicalTestReportTemplateService} from "../../../../../core/services/medical-test/medical-test-report-template.service";
+import {FinancePriceService} from "../../../../../core/services/finance/finance-price.service";
+import {OperationEnum} from "../../../../../core/enums/operation.enum";
 
 @Component({
   selector: 'app-medical-test-settings-report-template-category-detail',

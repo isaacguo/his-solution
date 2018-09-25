@@ -1,9 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Tag} from "../../models/tag.model";
 import {Observable} from "rxjs/Observable";
-import {take} from "rxjs/operators";
 import {ActivatedRoute, Router} from "@angular/router";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Component({
   selector: 'app-finance-price-management-container',
@@ -24,6 +22,8 @@ export class FinancePriceManagementContainerComponent {
               private route: ActivatedRoute,) {
 
     this.selectedTag = this.route.url.map(() => this.tags.find((tag) => router.isActive(`/finance/price-management/${tag.id}`, false)))
+
+    this.router.navigate(['finance', 'price-management', this.tags[0].id]);
   }
 
 

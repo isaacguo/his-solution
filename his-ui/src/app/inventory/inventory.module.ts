@@ -6,8 +6,6 @@ import {SharedModule} from "../shared/shared.module";
 import {InventoryComponent} from "./components/inventory.component";
 import {InventorySettingsComponent} from "./components/inventory-settings/inventory-settings.component";
 import {InventorySettingsWarehourseComponent} from "./components/inventory-settings/inventory-settings-warehourse/inventory-settings-warehourse.component";
-import {InventorySettingsItemManagementComponent} from "./components/inventory-settings/inventory-settings-item-management/inventory-settings-item-management.component";
-import {InventorySettingsItemManagementDetailComponent} from "./components/inventory-settings/inventory-settings-item-management/inventory-settings-item-management-detail/inventory-settings-item-management-detail.component";
 import {InventoryQueryComponent} from "./components/inventory-query/inventory-query.component";
 import {InventoryQueryListComponent} from "./components/inventory-query/inventory-query-list/inventory-query-list.component";
 import {InventoryOperationToolBarComponent} from "./components/inventory-operation-tool-bar/inventory-operation-tool-bar.component";
@@ -31,8 +29,6 @@ import {ExportManagementDetailComponent} from "./components/export-management/ex
     InventoryComponent,
     InventorySettingsComponent,
     InventorySettingsWarehourseComponent,
-    InventorySettingsItemManagementComponent,
-    InventorySettingsItemManagementDetailComponent,
     InventoryQueryComponent,
     InventoryQueryListComponent,
     InventoryOperationToolBarComponent,
@@ -46,8 +42,5 @@ import {ExportManagementDetailComponent} from "./components/export-management/ex
     ExportManagementListComponent,
     ExportManagementDetailComponent
   ],
-  exports:[
-    InventorySettingsItemManagementComponent
-  ]
 })
 export class InventoryModule { }

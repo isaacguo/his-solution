@@ -36,6 +36,10 @@ const routes: Routes = [
         path: 'inventory',
         component: FinancePriceManagementInventoryContainerComponent
       },
+      {
+        path: '**',
+        redirectTo: 'treatment',
+      }
 
     ]
   }

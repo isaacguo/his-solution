@@ -14,6 +14,11 @@ import {AngularSplitModule} from "angular-split";
 import {TreeModule} from "angular-tree-component";
 import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
 import {HttpModule} from "@angular/http";
+import {MedicalTestSettingsReportComponent} from "./components/medical-test-settings-report/medical-test-settings-report.component";
+import {MedicalTestSettingsReportTemplateCategoryListComponent} from "./components/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-list.component";
+import {MedicalTestSettingsReportTemplateCategoryDetailComponent} from "./components/medical-test-settings-report/medical-test-settings-report-template-category-list/medical-test-settings-report-template-category-detail/medical-test-settings-report-template-category-detail.component";
+import {InventorySettingsItemManagementComponent} from "./components/inventory-settings-item-management/inventory-settings-item-management.component";
+import {InventorySettingsItemManagementDetailComponent} from "./components/inventory-settings-item-management/inventory-settings-item-management-detail/inventory-settings-item-management-detail.component";
 
 @NgModule({
   imports: [
@@ -35,6 +40,13 @@ import {HttpModule} from "@angular/http";
     EditorComponent,
     FieldEditComponent,
     TabsComponent,
+
+    MedicalTestSettingsReportComponent,
+    MedicalTestSettingsReportTemplateCategoryListComponent,
+    MedicalTestSettingsReportTemplateCategoryDetailComponent,
+    InventorySettingsItemManagementComponent,
+    InventorySettingsItemManagementDetailComponent
+
   ],
   exports:
     [
@@ -54,7 +66,13 @@ import {HttpModule} from "@angular/http";
       AngularSplitModule,
       MyDatePickerModule,
       UiSwitchModule,
-      NgxPaginationModule
+      NgxPaginationModule,
+
+      MedicalTestSettingsReportComponent,
+      MedicalTestSettingsReportTemplateCategoryListComponent,
+      MedicalTestSettingsReportTemplateCategoryDetailComponent,
+      InventorySettingsItemManagementComponent,
+      InventorySettingsItemManagementDetailComponent
     ]
 
 })

@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {MedicalTestQueryComponent} from "./components/medical-test-query/medical-test-query.component";
 import {MedicalTestReportCreateUpdateComponent} from "./components/medical-test-report-create-update/medical-test-report-create-update.component";
 import {MedicalTestSettingsComponent} from "./components/medical-test-settings/medical-test-settings.component";
-import {MedicalTestSettingsReportComponent} from "./components/medical-test-settings/medical-test-settings-report/medical-test-settings-report.component";
+import {MedicalTestSettingsReportComponent} from "../shared/components/medical-test-settings-report/medical-test-settings-report.component";
 import {MedicalTestSettingsReportCreateUpdateComponent} from "./components/medical-test-settings/medical-test-settings-report-create-update/medical-test-settings-report-create-update.component";
 import {MedicalTestSettingsDepartmentComponent} from "./components/medical-test-settings/medical-test-settings-department/medical-test-settings-department.component";
 

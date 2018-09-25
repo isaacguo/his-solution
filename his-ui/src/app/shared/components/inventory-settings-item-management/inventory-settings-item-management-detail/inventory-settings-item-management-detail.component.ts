@@ -1,11 +1,11 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {FinancePriceService} from "../../../../../core/services/finance/finance-price.service";
-import {InventoryCategoryService} from "../../../../../core/services/inventory/inventory-category.service";
-import {InventoryItemService} from "../../../../../core/services/inventory/inventory-item.service";
-import {OperationEnum} from "../../../../../core/enums/operation.enum";
-import {MedicalTestReportTemplate} from "../../../../../medical-test/models/medical-test-report-template.model";
+import {FinancePriceService} from "../../../../core/services/finance/finance-price.service";
+import {InventoryCategoryService} from "../../../../core/services/inventory/inventory-category.service";
+import {InventoryItemService} from "../../../../core/services/inventory/inventory-item.service";
+import {OperationEnum} from "../../../../core/enums/operation.enum";
+import {MedicalTestReportTemplate} from "../../../../medical-test/models/medical-test-report-template.model";
 
 @Component({
   selector: 'app-inventory-settings-item-management-detail',
