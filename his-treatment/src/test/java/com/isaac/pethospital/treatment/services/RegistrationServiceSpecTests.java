@@ -6,6 +6,7 @@ import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.PetEntity;
+import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
 import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import com.isaac.pethospital.treatment.repositories.PetRepository;
@@ -96,6 +97,10 @@ public class RegistrationServiceSpecTests {
     @Test
     public void givenRegistrationOperationRequestWhenCreateRegistrationThenDoctorCanBeFoundByDoctorId() {
         RegistrationOperationRequest registrationOperationRequest = getFullRegistrationOperationRequest();
+        PetEntity petEntity=new PetEntity();
+        PetOwnerEntity petOwnerEntity=new PetOwnerEntity();
+        petOwnerEntity.addPet(petEntity);
+        doReturn(petEntity).when(this.petRepository).findOne(any(Long.class));
         //when
         this.registrationService.createRegistration(registrationOperationRequest);
         //then
@@ -116,6 +121,10 @@ public class RegistrationServiceSpecTests {
     @Test
     public void givenRegistrationOperationRequestWhenCreateRegistrationThenPetCanBeFoundByPetId() {
         RegistrationOperationRequest registrationOperationRequest = getFullRegistrationOperationRequest();
+        PetEntity petEntity=new PetEntity();
+        PetOwnerEntity petOwnerEntity=new PetOwnerEntity();
+        petOwnerEntity.addPet(petEntity);
+        doReturn(petEntity).when(this.petRepository).findOne(any(Long.class));
         //when
         this.registrationService.createRegistration(registrationOperationRequest);
         //then
@@ -142,7 +151,12 @@ public class RegistrationServiceSpecTests {
 
     @Test
     public void givenFullRegistrationOperationRequestWhenCreateRegistrationThenSaveInRegistrationRepositoryIsInvoked() {
+
         RegistrationOperationRequest registrationOperationRequest = getFullRegistrationOperationRequest();
+        PetEntity petEntity=new PetEntity();
+        PetOwnerEntity petOwnerEntity=new PetOwnerEntity();
+        petOwnerEntity.addPet(petEntity);
+        doReturn(petEntity).when(this.petRepository).findOne(any(Long.class));
         //when
         this.registrationService.createRegistration(registrationOperationRequest);
         //then

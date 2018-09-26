@@ -79,6 +79,7 @@ public class EmployeeServiceSpecTests {
         employeeOperationRequest.setDepartmentId(1L);
 
         doReturn(new DepartmentEntity()).when(departmentRepository).findByDepId(employeeOperationRequest.getDepartmentId());
+        doReturn(new EmployeeEntity()).when(employeeRepository).save(any(EmployeeEntity.class));
         //when
         this.employeeService.createEmployee(employeeOperationRequest);
         //then
