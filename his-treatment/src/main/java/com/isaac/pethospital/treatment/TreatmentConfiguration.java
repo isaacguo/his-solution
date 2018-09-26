@@ -1,5 +1,6 @@
 package com.isaac.pethospital.treatment;
 
+import com.isaac.pethospital.common.converter.HanyuPinyinConverter;
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.security.AuthHelper;
@@ -16,6 +17,11 @@ public class TreatmentConfiguration {
     @Bean
     public AuthHelper getAuthHelper() {
         return new AuthHelper();
+    }
+
+    @Bean
+    public HanyuPinyinConverter getHanyuPinyinConverter() {
+        return new HanyuPinyinConverter();
     }
 
     @Bean

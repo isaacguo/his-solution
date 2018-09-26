@@ -3,15 +3,16 @@ import {AuthHttp} from "angular2-jwt";
 import {CrudService} from "../crud.service";
 import {TreeNodeService} from "../common/tree-node.service";
 import {Observable} from "rxjs/Observable";
+import {ServiceConstants} from "../../../shared/service-constants";
 
 @Injectable()
 export class FinancePriceService extends CrudService<any> {
 
 
-  rootUrl: string = "/api/hisfinance/price";
+  rootUrl: string = `${ServiceConstants.FINANCE_URL}/price`;
 
   constructor(authHttp: AuthHttp, public treeNodeService: TreeNodeService) {
-    super("/api/hisfinance/charges", authHttp);
+    super(`${ServiceConstants.FINANCE_URL}/price`, authHttp);
   }
 
   findByUuids(list: any[]): Observable<any[]> {

@@ -371,7 +371,7 @@
 
         <div class="form-group isaac-form-space">
           <label>价格: </label>
-          <input readonly class="form-control" type="text">
+          <input name="memberPrice" [ngModel]="registrationFee?.memberPrice" readonly class="form-control" type="text">
         </div>
         <div class="btn-group" role="group">
           <button [disabled]="selectedDoctor.id==null" (click)="onRegistrationButtonClicked(confirmRegistrationModal)"

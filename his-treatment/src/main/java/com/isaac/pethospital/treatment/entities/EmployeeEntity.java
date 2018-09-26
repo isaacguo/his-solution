@@ -1,9 +1,6 @@
 package com.isaac.pethospital.treatment.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 public class EmployeeEntity {
@@ -22,6 +19,16 @@ public class EmployeeEntity {
     private EmployeeTypeEntity employeeType;
     private String name;
     private String loginAccount;
+
+    private String uuid;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public boolean isCanBeRegistered() {
         return canBeRegistered;

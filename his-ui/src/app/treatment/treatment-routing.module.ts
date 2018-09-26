@@ -23,6 +23,9 @@ import {CustomerServiceTreatmentCaseContainerComponent} from "./containers/custo
 import {CustomerServiceTreatmentCaseInfoContainerComponent} from "./containers/customer-service-treatment-case-info-container/customer-service-treatment-case-info-container.component";
 import {CustomerServiceTreatmentCaseDetailContainerComponent} from "./containers/customer-service-treatment-case-detail-container/customer-service-treatment-case-detail-container.component";
 import {CustomerServiceTreatmentCaseCommentsContainerComponent} from "./containers/customer-service-treatment-case-comments-container/customer-service-treatment-case-comments-container.component";
+import {TreatmentSettingsBusinessContainerComponent} from "./containers/treatment-settings-business-container/treatment-settings-business-container.component";
+import {InventoryItemCreateUpdateComponent} from "../inventory/components/inventory-item-create-update/inventory-item-create-update.component";
+import {TreatmentItemCreateUpdateComponent} from "./components/treatment-item-create-update/treatment-item-create-update.component";
 
 const routes: Routes = [
   {
@@ -120,8 +123,15 @@ const routes: Routes = [
         path: 'treatment-room',
         component: TreatmentSettingsRoomComponent
       },
-
+      {
+        path:'business',
+        component: TreatmentSettingsBusinessContainerComponent
+      }
     ]
+  },
+  {
+    path: 'treatment-item/:operation/:updateId',
+    component:TreatmentItemCreateUpdateComponent
   },
   {
     path: 'doctor-registration',

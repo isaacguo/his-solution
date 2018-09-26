@@ -10,6 +10,7 @@ import {PetOwnerService} from "../../../../core/services/treatment/pet-owner.ser
 import {DepartmentService} from "../../../../core/services/treatment/department.service";
 import {RegistrationService} from "../../../../core/services/treatment/registration.service";
 import {TreatmentEmployeeService} from "../../../../core/services/treatment/treatment-employee.service";
+import {FinancePriceService} from "../../../../core/services/finance/finance-price.service";
 
 @Component({
   selector: 'app-pet-registration',
@@ -39,7 +40,14 @@ export class PetRegistrationComponent implements OnInit {
   availableDoctors: TreatmentEmployeeModel[];
   returnedRegistration: TreatmentRegistrationModel = {};
 
-  constructor(public petOwnerService: PetOwnerService, public departmentService: DepartmentService, public treatmentEmployeeService: TreatmentEmployeeService, public registrationService: RegistrationService) {
+  registrationFee: any;
+
+  constructor(public petOwnerService: PetOwnerService,
+              public departmentService: DepartmentService,
+              public treatmentEmployeeService: TreatmentEmployeeService,
+              public registrationService: RegistrationService,
+              private financePriceService: FinancePriceService) {
+
   }
 
   ngOnInit() {
@@ -152,6 +160,10 @@ export class PetRegistrationComponent implements OnInit {
 
   setSelectedDoctor(doctor: TreatmentEmployeeModel) {
     this.selectedDoctor = doctor;
+    this.financePriceService.findByUuid(this.selectedDoctor.uuid).subscribe(r => {
+      this.registrationFee = r;
+    });
+
   }
 
   onRegistrationButtonClicked(confirmRegistrationModal: ModalComponent) {
@@ -159,7 +171,7 @@ export class PetRegistrationComponent implements OnInit {
   }
 
   onConfirmRegistrationModalClosed() {
-    this.registrationService.createRegistration(this.selectedDoctor.id, 1, this.selectedPet.id, null, "WAITING").subscribe(r => {
+    this.registrationService.createRegistration(this.selectedDoctor.id, 1, this.selectedPet.id, null, "WAITING", this.selectedDoctor.uuid).subscribe(r => {
       this.returnedRegistration = r;
       this.registrationResultModal.open();
     });

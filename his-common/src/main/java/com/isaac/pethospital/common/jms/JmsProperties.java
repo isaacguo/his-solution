@@ -9,13 +9,31 @@ public class JmsProperties {
     String financeChargeItemOperationQueue;
     String financeChargeItemOperationReplyTopic;
     String financeChargeStatusChangedTopic;
+    String financePetRegistrationCreatedTopic;
     String procurementApprovalPassedTopic;
+    String treatmentEmployeeGenerateTopic;
     String treatmentGenerateMedicalTestOrderTopic;
     String treatmentGenerateMedicineDispenseOrderTopic;
     String employeeUseraccountOperationTopic;
     String medicalTestCreateReportTopic;
     String medicalTestRemovedReportTopic;
     String pharmacyMedicineDispenseCreateTopic;
+
+    public String getFinancePetRegistrationCreatedTopic() {
+        return financePetRegistrationCreatedTopic;
+    }
+
+    public void setFinancePetRegistrationCreatedTopic(String financePetRegistrationCreatedTopic) {
+        this.financePetRegistrationCreatedTopic = financePetRegistrationCreatedTopic;
+    }
+
+    public String getTreatmentEmployeeGenerateTopic() {
+        return treatmentEmployeeGenerateTopic;
+    }
+
+    public void setTreatmentEmployeeGenerateTopic(String treatmentEmployeeGenerateTopic) {
+        this.treatmentEmployeeGenerateTopic = treatmentEmployeeGenerateTopic;
+    }
 
     public String getPharmacyMedicineDispenseCreateTopic() {
         return pharmacyMedicineDispenseCreateTopic;

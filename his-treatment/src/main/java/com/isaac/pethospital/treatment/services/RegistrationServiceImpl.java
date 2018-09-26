@@ -2,6 +2,7 @@ package com.isaac.pethospital.treatment.services;
 
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
+import com.isaac.pethospital.common.jms.treatment.PetRegistrationCreatedMessage;
 import com.isaac.pethospital.treatment.common.enums.RegistrationStatusEnum;
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
 import com.isaac.pethospital.treatment.dtos.RegistrationResponse;
@@ -30,11 +31,18 @@ public class RegistrationServiceImpl implements RegistrationService {
     private JmsSender jmsSender;
     private JmsProperties jmsProperties;
 
-    public RegistrationServiceImpl(RegistrationRepository registrationRepository, EmployeeRepository employeeRepository, PetRepository petRepository, RegistrationNumberService registrationNumberService) {
+    public RegistrationServiceImpl(RegistrationRepository registrationRepository,
+                                   EmployeeRepository employeeRepository,
+                                   PetRepository petRepository,
+                                   RegistrationNumberService registrationNumberService,
+                                   JmsSender jmsSender,
+                                   JmsProperties jmsProperties) {
         this.registrationRepository = registrationRepository;
         this.employeeRepository = employeeRepository;
         this.petRepository = petRepository;
         this.registrationNumberService = registrationNumberService;
+        this.jmsSender=jmsSender;
+        this.jmsProperties=jmsProperties;
     }
 
     @Override
@@ -64,6 +72,14 @@ public class RegistrationServiceImpl implements RegistrationService {
         RegistrationEntity res = this.registrationRepository.save(registrationEntity);
 
 
+        PetRegistrationCreatedMessage message=new PetRegistrationCreatedMessage();
+        message.setDoctorUuid(doctor.getUuid());
+        message.setName("挂号费");
+        message.setPetOwnerUuid(pet.getPetOwner().getUuid());
+        message.setPetUuid(pet.getUuid());
+        message.setPriceUuid(registrationOperationRequest.getPriceUuid());
+
+        jmsSender.sendEvent(this.jmsProperties.getFinancePetRegistrationCreatedTopic(), message);
 
         return res;
     }

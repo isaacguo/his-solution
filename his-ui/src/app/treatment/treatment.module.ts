@@ -27,16 +27,18 @@ import {FromNowPipe} from "./pipes/from-now.pipe";
 import {PetTreatmentDetailComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment-detail/pet-treatment-detail.component";
 import {SharedModule} from "../shared/shared.module";
 import {EmployeeProfilePictureComponent} from "./components/employee-profile-picture/employee-profile-picture.component";
-import { CustomerServiceContainerComponent } from './containers/customer-service-container/customer-service-container.component';
-import { CustomerServiceTreatmentCaseContainerComponent } from './containers/customer-service-treatment-case-container/customer-service-treatment-case-container.component';
-import { QueryResultTableComponent } from './components/query-result-table/query-result-table.component';
-import { CustomerServiceTreatmentCaseInfoContainerComponent } from './containers/customer-service-treatment-case-info-container/customer-service-treatment-case-info-container.component';
-import { CustomerServiceTreatmentCaseDetailContainerComponent } from './containers/customer-service-treatment-case-detail-container/customer-service-treatment-case-detail-container.component';
-import { CustomerServiceTreatmentCaseCommentsContainerComponent } from './containers/customer-service-treatment-case-comments-container/customer-service-treatment-case-comments-container.component';
-import { CustomerServicePetInfoComponent } from './components/customer-service/customer-service-pet-info/customer-service-pet-info.component';
-import { CustomerServiceTreatmentDetailComponent } from './components/customer-service/customer-service-treatment-detail/customer-service-treatment-detail.component';
-import { CustomerServiceCommentsComponent } from './components/customer-service/customer-service-comments/customer-service-comments.component';
-import { CustomerServiceCommentComponent } from './components/customer-service/customer-service-comment/customer-service-comment.component';
+import {CustomerServiceContainerComponent} from './containers/customer-service-container/customer-service-container.component';
+import {CustomerServiceTreatmentCaseContainerComponent} from './containers/customer-service-treatment-case-container/customer-service-treatment-case-container.component';
+import {QueryResultTableComponent} from './components/query-result-table/query-result-table.component';
+import {CustomerServiceTreatmentCaseInfoContainerComponent} from './containers/customer-service-treatment-case-info-container/customer-service-treatment-case-info-container.component';
+import {CustomerServiceTreatmentCaseDetailContainerComponent} from './containers/customer-service-treatment-case-detail-container/customer-service-treatment-case-detail-container.component';
+import {CustomerServiceTreatmentCaseCommentsContainerComponent} from './containers/customer-service-treatment-case-comments-container/customer-service-treatment-case-comments-container.component';
+import {CustomerServicePetInfoComponent} from './components/customer-service/customer-service-pet-info/customer-service-pet-info.component';
+import {CustomerServiceTreatmentDetailComponent} from './components/customer-service/customer-service-treatment-detail/customer-service-treatment-detail.component';
+import {CustomerServiceCommentsComponent} from './components/customer-service/customer-service-comments/customer-service-comments.component';
+import {CustomerServiceCommentComponent} from './components/customer-service/customer-service-comment/customer-service-comment.component';
+import {TreatmentSettingsBusinessContainerComponent} from './containers/treatment-settings-business-container/treatment-settings-business-container.component';
+import { TreatmentItemCreateUpdateComponent } from './components/treatment-item-create-update/treatment-item-create-update.component';
 
 
 @NgModule({
@@ -81,6 +83,9 @@ import { CustomerServiceCommentComponent } from './components/customer-service/c
     CustomerServiceTreatmentDetailComponent,
     CustomerServiceCommentsComponent,
     CustomerServiceCommentComponent,
+    TreatmentSettingsBusinessContainerComponent,
+    TreatmentItemCreateUpdateComponent,
   ]
 })
-export class TreatmentModule { }
+export class TreatmentModule {
+}

@@ -1,6 +1,7 @@
 package com.isaac.pethospital.common.jms.treatment;
 
 public class GenerateMedicalTestOrderMessage {
+
     String treatmentCaseUuid;
     String petOwnerUuid;
     String petUuid;

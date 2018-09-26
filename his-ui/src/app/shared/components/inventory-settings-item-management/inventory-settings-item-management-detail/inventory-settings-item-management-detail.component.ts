@@ -4,8 +4,8 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {FinancePriceService} from "../../../../core/services/finance/finance-price.service";
 import {OperationEnum} from "../../../../core/enums/operation.enum";
 import {MedicalTestReportTemplate} from "../../../../medical-test/models/medical-test-report-template.model";
-import {ChargeableCategoryService} from "../../../../core/services/treatment/chargeable-category.service";
-import {ChargeableItemService} from "../../../../core/services/treatment/chargeable-item.service";
+import {InventoryCategoryService} from "../../../../core/services/inventory/inventory-category.service";
+import {InventoryItemService} from "../../../../core/services/inventory/inventory-item.service";
 
 @Component({
   selector: 'app-inventory-settings-item-management-detail',
@@ -35,8 +35,8 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
 
   constructor(
     public router: Router,
-    private chargeableCategoryService: ChargeableCategoryService,
-    private chargeableItemService: ChargeableItemService) {
+    private inventoryCategoryService: InventoryCategoryService,
+    private inventoryItemService: InventoryItemService) {
   }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
 
     if (this.categoryId !== undefined && this.categoryId !== null) {
       if (this.financePriceService !== undefined) {
-        this.chargeableCategoryService.readOne(this.categoryId).mergeMap(category => {
+        this.inventoryCategoryService.readOne(this.categoryId).mergeMap(category => {
           return this.financePriceService.findByUuids(category.inventoryItemList.map(m => m.uuid)).map(list => ({
             'category': category,
             'list': list
@@ -69,7 +69,7 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
       }
       else {
 
-        this.chargeableCategoryService.readOne(this.categoryId).subscribe(r => {
+        this.inventoryCategoryService.readOne(this.categoryId).subscribe(r => {
           this.inventoryItemList = r.inventoryItemList;
         })
       }
@@ -94,7 +94,7 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
   }
 
   onConfirmDeletionModalClosed() {
-    this.chargeableItemService.deleteById(this.itemToBeDeleted.id).subscribe(r => {
+    this.inventoryItemService.deleteById(this.itemToBeDeleted.id).subscribe(r => {
       this.loadData();
     })
   }

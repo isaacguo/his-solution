@@ -5,5 +5,7 @@ export interface TreatmentRegistrationOperationRequestModel {
   bookDate?: Date,
   registrationStatus?: string,
   indexOfDay?: number,
-  id?: number
+  id?: number,
+  priceUuid?:string
+
 }

@@ -25,7 +25,16 @@ public class RegistrationOperationRequest {
     @NotNull
     private Long petId;
 
+    private String priceUuid;
     private RegistrationStatusEnum registrationStatus;
+
+    public String getPriceUuid() {
+        return priceUuid;
+    }
+
+    public void setPriceUuid(String priceUuid) {
+        this.priceUuid = priceUuid;
+    }
 
     public RegistrationStatusEnum getRegistrationStatus() {
         return registrationStatus;

@@ -1,6 +1,8 @@
 package com.isaac.pethospital.treatment.services;
 
 
+import com.isaac.pethospital.common.jms.JmsProperties;
+import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.PetEntity;
@@ -27,6 +29,8 @@ public class RegistrationServiceSpecTests {
     RegistrationRepository registrationRepository;
     EmployeeRepository employeeRepository;
     PetRepository petRepository;
+    JmsSender jmsSender;
+    JmsProperties jmsProperties;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -37,7 +41,10 @@ public class RegistrationServiceSpecTests {
         registrationNumberService = mock(RegistrationNumberService.class);
         employeeRepository = mock(EmployeeRepository.class);
         petRepository = mock(PetRepository.class);
-        registrationService = spy(new RegistrationServiceImpl(registrationRepository, employeeRepository, petRepository, registrationNumberService));
+        jmsSender = mock(JmsSender.class);
+        jmsProperties = mock(JmsProperties.class);
+
+        registrationService = spy(new RegistrationServiceImpl(registrationRepository, employeeRepository, petRepository, registrationNumberService, jmsSender, jmsProperties));
     }
 
     @Test

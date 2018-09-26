@@ -17,8 +17,10 @@ public class ChargeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String chargeUuid;
+    private String name;
     private String petOwnerUuid;
     private String petUuid;
+    private String doctorUuid;
     private String treatmentCaseUuid;
     private LocalDateTime createdDate;
     private LocalDateTime chargedDate;
@@ -30,6 +32,30 @@ public class ChargeEntity {
     private List<ChargeItemEntity> chargeItems = new LinkedList();
     public ChargeEntity() {
         this.uuid = UUID.randomUUID().toString();
+    }
+
+    public String getDoctorUuid() {
+        return doctorUuid;
+    }
+
+    public void setDoctorUuid(String doctorUuid) {
+        this.doctorUuid = doctorUuid;
+    }
+
+    public String getChargeUuid() {
+        return chargeUuid;
+    }
+
+    public void setChargeUuid(String chargeUuid) {
+        this.chargeUuid = chargeUuid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDateTime getChargedDate() {

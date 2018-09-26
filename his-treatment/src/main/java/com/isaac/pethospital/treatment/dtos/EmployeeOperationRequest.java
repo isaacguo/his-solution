@@ -4,6 +4,7 @@ import com.isaac.pethospital.treatment.entities.DepartmentEntity;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 public class EmployeeOperationRequest {
 
@@ -93,7 +94,16 @@ public class EmployeeOperationRequest {
 
         EmployeeEntity employeeEntity = new EmployeeEntity();
         employeeEntity.setName(name);
+        employeeEntity.setEmpId(empId);
+        employeeEntity.setLoginAccount(loginAccount);
+        employeeEntity.setName(name);
+        employeeEntity.setUuid(UUID.randomUUID().toString());
         employeeEntity.setSelfIntroduction(selfIntroduction);
         return employeeEntity;
+
+
+
+
+
     }
 }

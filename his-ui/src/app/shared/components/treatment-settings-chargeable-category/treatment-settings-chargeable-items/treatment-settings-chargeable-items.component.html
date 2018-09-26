@@ -1,5 +1,5 @@
 <div *ngIf="categoryId=== undefined ">
-请选择库存产品分类
+  请选择业务分类
 </div>
 
 
@@ -42,23 +42,25 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let inventoryItem of inventoryItemList; let i=index">
+      <tr *ngFor="let chargeableItem of chargeableItemList; let i=index">
         <td>{{i+1}}</td>
-        <td>{{inventoryItem.name}}</td>
-        <td>{{inventoryItem.unit}}</td>
-        <td>{{inventoryItem.specification}}</td>
-        <td *ngIf="canShowAmount">{{inventoryItem.amount}}</td>
+        <td>{{chargeableItem.name}}</td>
+        <td>{{chargeableItem.unit}}</td>
+        <td>{{chargeableItem.specification}}</td>
+        <td *ngIf="canShowAmount">{{chargeableItem.amount}}</td>
         <td *ngIf="financePriceService">
-          <app-field-edit [value]="inventoryItem.memberPrice" (valueChanged)="onValueChanged($event, inventoryItem,'memberPrice')"></app-field-edit>
+          <app-field-edit [value]="chargeableItem.memberPrice"
+                          (valueChanged)="onValueChanged($event, chargeableItem,'memberPrice')"></app-field-edit>
         </td>
         <td *ngIf="financePriceService">
-          <app-field-edit [value]="inventoryItem.normalPrice" (valueChanged)="onValueChanged($event,inventoryItem,'normalPrice')"></app-field-edit>
+          <app-field-edit [value]="chargeableItem.normalPrice"
+                          (valueChanged)="onValueChanged($event,chargeableItem,'normalPrice')"></app-field-edit>
         </td>
         <td *ngIf="canEdit || canDelete">
           <a *ngIf="canEdit" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil "
-                                                             (click)="onEditButtonClicked(inventoryItem)"></span></a>
+                                                             (click)="onEditButtonClicked(chargeableItem)"></span></a>
           <a *ngIf="canDelete" href="javascript:void(0)"> <span class="glyphicon glyphicon-remove isaac-margin-left-10"
-                                                                (click)="removeReport(inventoryItem)"></span></a>
+                                                                (click)="removeReport(chargeableItem)"></span></a>
         </td>
       </tr>
       </tbody>

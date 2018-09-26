@@ -14,20 +14,21 @@ export class RegistrationService extends AbstractService {
     super();
   }
 
-  findAllRegistrationsByStatusOnPage( page: number, status: string="WAITING",size: number = 15): Observable<any> {
-    let params:any={'page':page.toString(), 'size':size.toString()};
+  findAllRegistrationsByStatusOnPage(page: number, status: string = "WAITING", size: number = 15): Observable<any> {
+    let params: any = {'page': page.toString(), 'size': size.toString()};
     return this.authHttp.get(`${this.rootUrl}/all/${status}`, {params: params}).map(this.extractData);
   }
 
-  createRegistration(doctorId: number, operatorId: number, petId: number, bookDate?: Date, status?: string): Observable<TreatmentRegistrationModel> {
+  createRegistration(doctorId: number, operatorId: number, petId: number, bookDate?: Date, status?: string, priceUuid?: string): Observable<TreatmentRegistrationModel> {
     let url = `${this.rootUrl}/create-registration`;
-    let operationRequest:TreatmentRegistrationOperationRequestModel =
+    let operationRequest: TreatmentRegistrationOperationRequestModel =
       {
-        doctorId:doctorId,
-        operatorId:operatorId,
-        petId:petId,
-        bookDate:null,
-        registrationStatus:status,
+        doctorId: doctorId,
+        operatorId: operatorId,
+        petId: petId,
+        bookDate: null,
+        registrationStatus: status,
+        priceUuid: priceUuid
       };
     return this.authHttp.post(url, operationRequest).map(this.extractData);
   }
@@ -38,10 +39,10 @@ export class RegistrationService extends AbstractService {
   }
 
 
-  updateStatus(regId: number, registrationStatusEnum:string): Observable<boolean> {
+  updateStatus(regId: number, registrationStatusEnum: string): Observable<boolean> {
 
     let url = `${this.rootUrl}/updateStatus`;
-    return this.authHttp.put(url,{'id':regId, 'registrationStatus':registrationStatusEnum}).map(this.extractData);
+    return this.authHttp.put(url, {'id': regId, 'registrationStatus': registrationStatusEnum}).map(this.extractData);
 
   }
 

@@ -7,6 +7,7 @@ import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.finance.ReportOperationMessage;
 import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
+import com.isaac.pethospital.common.jms.treatment.PetRegistrationCreatedMessage;
 import com.isaac.pethospital.common.services.AbstractCrudService;
 import com.isaac.pethospital.finance.dtos.ChargeOperationRequest;
 import com.isaac.pethospital.finance.entities.ChargeEntity;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -154,6 +156,30 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
         replyMessage.setTreatmentCaseUuid(chargeEntity1.getTreatmentCaseUuid());
         replyMessage.setReportUuidList(chargeEntity1.getChargeItems().stream().map(i -> i.getChargeItemUuid()).collect(Collectors.toList()));
         */
+
+    }
+
+    @Override
+    public void onPetRegistrationMessageReceived(PetRegistrationCreatedMessage message) {
+
+        ChargeEntity chargeEntity = new ChargeEntity();
+        chargeEntity.setCreatedDate(LocalDateTime.now());
+        chargeEntity.setPetUuid(message.getPetUuid());
+        chargeEntity.setPetOwnerUuid(message.getPetOwnerUuid());
+        chargeEntity.setStatus(ChargeStatusEnum.PAID);
+        chargeEntity.setName(message.getName());
+        chargeEntity.setTotalAmount(message.getTotalAmount());
+        chargeEntity.setDoctorUuid(message.getDoctorUuid());
+
+        ChargeItemEntity chargeItemEntity=new ChargeItemEntity();
+        PriceEntity pe = priceService.findByUuid(message.getPriceUuid());
+        chargeItemEntity.setPrice(pe);
+        chargeItemEntity.setAmount(pe.getMemberPrice());
+
+        chargeEntity.addChargeItem(chargeItemEntity);
+        chargeEntity.setTotalAmount(chargeItemEntity.getAmount());
+
+        ChargeEntity chargeEntity1 = jpaRepository.save(chargeEntity);
 
     }
 }

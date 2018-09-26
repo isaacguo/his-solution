@@ -4,6 +4,7 @@ import com.isaac.pethospital.common.services.AuthorizationService;
 import com.isaac.pethospital.common.services.AuthorizationTopicService;
 import com.isaac.pethospital.common.services.FactoryResetService;
 import com.isaac.pethospital.treatment.entities.*;
+import com.isaac.pethospital.treatment.repositories.ChargeableCategoryRepository;
 import com.isaac.pethospital.treatment.repositories.EmployeeRepository;
 import com.isaac.pethospital.treatment.repositories.PetOwnerRepository;
 import com.isaac.pethospital.treatment.repositories.PetTypeRepository;
@@ -23,10 +24,14 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     PetOwnerRepository petOwnerRepository;
     EmployeeRepository employeeRepository;
     DepartmentService departmentService;
+    ChargeableCategoryRepository chargeableCategoryRepository;
 
-    public FactoryResetServiceImpl(AuthorizationService authorizationService, AuthorizationTopicService authorizationTopicService) {
+    public FactoryResetServiceImpl(AuthorizationService authorizationService,
+                                   AuthorizationTopicService authorizationTopicService,
+                                   ChargeableCategoryRepository chargeableCategoryRepository) {
         this.authorizationService = authorizationService;
         this.authorizationTopicService = authorizationTopicService;
+        this.chargeableCategoryRepository=chargeableCategoryRepository;
     }
 
     @Transactional
@@ -45,6 +50,8 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     void cleanDb() {
         authorizationService.deleteAll();
         authorizationTopicService.deleteAll();
+
+        this.chargeableCategoryRepository.deleteAll();
     }
 
     @Transactional
@@ -54,6 +61,10 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         authorizationTopicService.addAuthorizationTopicAndOperations("我的诊室", "操作");
         authorizationTopicService.addAuthorizationTopicAndOperations("就诊设置", "操作");
         authorizationTopicService.addAuthorizationTopicAndOperations("住院管理", "操作");
+
+        ChargeableCategoryEntity cce=new ChargeableCategoryEntity();
+        cce.setName("挂号");
+        this.chargeableCategoryRepository.save(cce);
 
     }
 

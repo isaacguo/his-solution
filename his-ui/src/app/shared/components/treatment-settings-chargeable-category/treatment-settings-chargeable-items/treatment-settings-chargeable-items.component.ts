@@ -4,8 +4,8 @@ import {OperationEnum} from "../../../../core/enums/operation.enum";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Router} from "@angular/router";
 import {MedicalTestReportTemplate} from "../../../../medical-test/models/medical-test-report-template.model";
-import {InventoryItemService} from "../../../../core/services/inventory/inventory-item.service";
-import {InventoryCategoryService} from "../../../../core/services/inventory/inventory-category.service";
+import {ChargeableCategoryService} from "../../../../core/services/treatment/chargeable-category.service";
+import {ChargeableItemService} from "../../../../core/services/treatment/chargeable-item.service";
 
 @Component({
   selector: 'app-treatment-settings-chargeable-items',
@@ -35,21 +35,21 @@ export class TreatmentSettingsChargeableItemsComponent implements OnInit, OnChan
 
   constructor(
     public router: Router,
-    private inventoryCategoryService: InventoryCategoryService,
-    private inventoryItemService: InventoryItemService) {
+    private chargeableCategoryService: ChargeableCategoryService,
+    private chargeableItemService: ChargeableItemService) {
   }
 
   ngOnInit() {
   }
 
-  inventoryItemList: any[] = [];
+  chargeableItemList: any[] = [];
 
   loadData() {
 
     if (this.categoryId !== undefined && this.categoryId !== null) {
       if (this.financePriceService !== undefined) {
-        this.inventoryCategoryService.readOne(this.categoryId).mergeMap(category => {
-          return this.financePriceService.findByUuids(category.inventoryItemList.map(m => m.uuid)).map(list => ({
+        this.chargeableCategoryService.readOne(this.categoryId).mergeMap(category => {
+          return this.financePriceService.findByUuids(category.chargeableItemList.map(m => m.uuid)).map(list => ({
             'category': category,
             'list': list
           }))
@@ -57,20 +57,20 @@ export class TreatmentSettingsChargeableItemsComponent implements OnInit, OnChan
           .subscribe(r => {
 
             r.list.forEach(b => {
-                let item = r.category.inventoryItemList.find(r => r.uuid === b["priceItemUuid"]);
+                let item = r.category.chargeableItemList.find(r => r.uuid === b["priceItemUuid"]);
                 if (item != null) {
                   item.normalPrice = b["normalPrice"];
                   item.memberPrice = b["memberPrice"];
                 }
               }
             );
-            this.inventoryItemList = r.category.inventoryItemList;
+            this.chargeableItemList = r.category.chargeableItemList;
           })
       }
       else {
 
-        this.inventoryCategoryService.readOne(this.categoryId).subscribe(r => {
-          this.inventoryItemList = r.inventoryItemList;
+        this.chargeableCategoryService.readOne(this.categoryId).subscribe(r => {
+          this.chargeableItemList = r.chargeableItemList;
         })
       }
     }
@@ -78,7 +78,7 @@ export class TreatmentSettingsChargeableItemsComponent implements OnInit, OnChan
   }
 
   onCreateNewItemClicked() {
-    this.router.navigate(['inventory','inventory-item', OperationEnum.CREATE, this.categoryId]);
+    this.router.navigate(['treatment', 'treatment-item', OperationEnum.CREATE, this.categoryId]);
   }
 
 
@@ -94,7 +94,7 @@ export class TreatmentSettingsChargeableItemsComponent implements OnInit, OnChan
   }
 
   onConfirmDeletionModalClosed() {
-    this.inventoryItemService.deleteById(this.itemToBeDeleted.id).subscribe(r => {
+    this.chargeableItemService.deleteById(this.itemToBeDeleted.id).subscribe(r => {
       this.loadData();
     })
   }
