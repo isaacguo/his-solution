@@ -32,7 +32,7 @@ public class PetEntitySpecTests {
     @Test
     public void givenPetEntityHasFieldColor() {
         PetEntity petEntity = getPetEntity();
-        assertThat(petEntity, hasProperty("color", is(PetColorEnum.WHITE)));
+        assertThat(petEntity, hasProperty("color"));
     }
 
     @Test

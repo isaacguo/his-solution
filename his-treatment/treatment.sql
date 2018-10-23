@@ -5,7 +5,7 @@ create table department_entity (id bigint not null auto_increment, dep_id bigint
 create table employee_entity (id bigint not null auto_increment, can_be_registered bit not null, emp_id bigint, login_account varchar(255), name varchar(255), self_introduction varchar(255), uuid varchar(255), department_id bigint, employee_type_id bigint, primary key (id)) ENGINE=InnoDB
 create table employee_type_entity (id bigint not null auto_increment, name varchar(255), primary key (id)) ENGINE=InnoDB
 create table expense_entity (id bigint not null auto_increment, pet_owner_id bigint, primary key (id)) ENGINE=InnoDB
-create table pet_entity (id bigint not null auto_increment, age integer not null, color integer, date_of_birth tinyblob, gender integer, name varchar(255), sterilized bit not null, uuid varchar(255), pet_owner_id bigint, pet_type_id bigint, primary key (id)) ENGINE=InnoDB
+create table pet_entity (id bigint not null auto_increment, age integer not null, color varchar(255), date_of_birth tinyblob, gender integer, name varchar(255), pet_type varchar(255), species varchar(255), sterilized bit not null, uuid varchar(255), pet_owner_id bigint, primary key (id)) ENGINE=InnoDB
 create table pet_owner_entity (id bigint not null auto_increment, address varchar(255), cell_phone varchar(255), date_of_birth tinyblob, email varchar(255), gender integer, home_phone varchar(255), member_number varchar(255), name varchar(255), uuid varchar(255), primary key (id)) ENGINE=InnoDB
 create table pet_type_entity (id bigint not null auto_increment, is_root bit not null, name varchar(255), parent_id bigint, primary key (id)) ENGINE=InnoDB
 create table prescription_entity (id bigint not null auto_increment, medicine_comment varchar(255), medicine_count bigint, medicine_group varchar(255), medicine_name varchar(255), medicine_number bigint, medicine_price bigint, medicine_specification varchar(255), medicine_unit varchar(255), medicine_usage varchar(255), treatment_case_id bigint, primary key (id)) ENGINE=InnoDB
@@ -22,7 +22,6 @@ alter table employee_entity add constraint FKrj4v5xw1jix23uajsogqdy0a0 foreign k
 alter table employee_entity add constraint FKkve3m2lulwm1xav7ik2bowhr6 foreign key (employee_type_id) references employee_type_entity (id)
 alter table expense_entity add constraint FKt30kehjp5r3scxf5xt2l2lc99 foreign key (pet_owner_id) references pet_owner_entity (id)
 alter table pet_entity add constraint FKhpcc8jomtw8h2hfqb247m0dq6 foreign key (pet_owner_id) references pet_owner_entity (id)
-alter table pet_entity add constraint FKaof55hsdpkgy8n1o1bwi8v28t foreign key (pet_type_id) references pet_type_entity (id)
 alter table pet_type_entity add constraint FKrfo06j1yysq5g1l9nywwa95a7 foreign key (parent_id) references pet_type_entity (id)
 alter table prescription_entity add constraint FKrl7x4dcjq3gy1puuhac9rhi0q foreign key (treatment_case_id) references treatment_case_entity (id)
 alter table registration_entity add constraint FK3dalsjnwcaaue8nysr0gd1gs7 foreign key (doctor_id) references employee_entity (id)
