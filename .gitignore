@@ -319,6 +319,7 @@ __pycache__/
 # !tools/packages.config
 /*.sql
 his-ui/tools/
+his-ui/dist/**
 his-gateway/src/main/resources/static/
 his-deploy/
 

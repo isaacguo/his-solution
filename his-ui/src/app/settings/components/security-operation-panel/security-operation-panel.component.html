@@ -12,27 +12,27 @@
     <th [rowSpan]="2">操作</th>
   </tr>
   <tr>
-    <template ngFor let-topic [ngForOf]="authorizationTopics" let-j="index">
-      <template ngFor let-operation [ngForOf]="topic.availableTopicOperationList">
+    <ng-template ngFor let-topic [ngForOf]="authorizationTopics" let-j="index">
+      <ng-template ngFor let-operation [ngForOf]="topic.availableTopicOperationList">
         <th>{{operation.name}}</th>
-      </template>
-    </template>
+      </ng-template>
+    </ng-template>
   </tr>
   </thead>
 
   <tbody>
-  <template ngFor let-authorization [ngForOf]="authorizations" let-i="index">
+  <ng-template ngFor let-authorization [ngForOf]="authorizations" let-i="index">
     <tr>
       <td> {{authorization.username}}({{authorization.userAccount}})</td>
-      <template ngFor let-assignment [ngForOf]="authorization?.authorizationAssignmentList" let-j="index">
-        <template ngFor let-op [ngForOf]="getAuthorizationTopicById(assignment.topic.id)?.availableTopicOperationList"
+      <ng-template ngFor let-assignment [ngForOf]="authorization?.authorizationAssignmentList" let-j="index">
+        <ng-template ngFor let-op [ngForOf]="getAuthorizationTopicById(assignment.topic.id)?.availableTopicOperationList"
                   let-k="index">
           <td>
             <input [checked]="isCheckedByDefault(assignment,op)" type="checkbox"
                    (change)="onChange(authorization,assignment,op, $event.target.checked)">
           </td>
-        </template>
-      </template>
+        </ng-template>
+      </ng-template>
       <td>
         <div class="btn-group-sm" role="group">
           <button (click)="onCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
@@ -46,7 +46,7 @@
         </div>
       </td>
     </tr>
-  </template>
+  </ng-template>
   </tbody>
 </table>
 
