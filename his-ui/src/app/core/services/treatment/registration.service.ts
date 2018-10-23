@@ -1,17 +1,19 @@
 import {Injectable} from '@angular/core';
-import {AbstractService} from "../abstract.service";
 import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Rx";
 import {TreatmentRegistrationModel} from "../../../treatment/models/treatment.registration.model";
 import {TreatmentRegistrationOperationRequestModel} from "../../../treatment/models/treatment.registration.operation.request.model";
+import {ServiceConstants} from "../../../shared/service-constants";
+import {CrudService} from "../crud.service";
 
 @Injectable()
-export class RegistrationService extends AbstractService {
+export class RegistrationService extends CrudService<any> {
 
-  rootUrl: string = "/api/histreatment/registrations";
 
-  constructor(private authHttp: AuthHttp) {
-    super();
+  rootUrl: string = `${ServiceConstants.TREATMENT_URL}/registrations`;
+
+  constructor(authHttp: AuthHttp) {
+    super(`${ServiceConstants.TREATMENT_URL}/registrations`,authHttp);
   }
 
   findAllRegistrationsByStatusOnPage(page: number, status: string = "WAITING", size: number = 15): Observable<any> {

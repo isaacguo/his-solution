@@ -1,9 +1,6 @@
-export class TopicOperation {
+export interface TopicOperation {
 
-  public id?: number;
-  public name?: string;
-
-  constructor() {
-  }
+  id?: number;
+  name?: string;
 
 }

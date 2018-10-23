@@ -19,6 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -66,7 +67,7 @@ public class HisTreatmentManagementApplication {
 
                 PetOwnerEntity petOwnerEntity = new PetOwnerEntity();
                 petOwnerEntity.setName("1黄老邪");
-                petOwnerEntity.setDateOfBirth(LocalDateTime.parse(LocalDateTime.now().format(formatter), formatter));
+                petOwnerEntity.setDateOfBirth(LocalDate.parse(LocalDateTime.now().format(formatter), formatter));
                 PetEntity petEntity1 = new PetEntity();
                 petEntity1.setName("笨笨");
                 petEntity1.setPetOwner(petOwnerEntity);

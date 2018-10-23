@@ -6,6 +6,8 @@ import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.services.EmployeeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,8 +67,8 @@ public class EmployeeRestController {
     }
 
     @GetMapping
-    public List<EmployeeListItem> getEmployees() {
-        return this.employeeService.findEmployeesForEmployeeListItem();
+    public Page<EmployeeListItem> getEmployees(Pageable pageable) {
+        return this.employeeService.findEmployeesForEmployeeListItem(pageable);
     }
 
     @GetMapping("/get-department-id/{userAccount}")

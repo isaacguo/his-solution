@@ -3,16 +3,15 @@
 </div>
 
 <div class="row">
-  <div class="navbar-default sidebar-2nd-level" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
-      <ul class="nav" id="side-menu">
-        <li><a routerLink="report-templates" routerLinkActive="active">化验报告</a></li>
-        <li><a routerLink="departments" routerLinkActive="active">科室设置</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div id="page-wrapper">
-    <router-outlet></router-outlet>
-  </div>
+  <ul class="nav nav-tabs ">
+    <li routerLinkActive="active">
+      <a routerLink="report-templates" class="text-center">化验报告</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="departments" class="text-center">科室设置</a>
+    </li>
+  </ul>
 </div>
+
+<router-outlet></router-outlet>
+

@@ -1,0 +1,20 @@
+<div class="row">
+  <h1 class="page-header">恢复出厂设置</h1>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>模块名称</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let service of this.serviceArray">
+    <td>{{service[1]}}</td>
+    <td><button class="btn btn-default" (click)="onResetButtonClicked(service[0])">恢复</button>
+      <button class="btn btn-default" (click)="onFillDemoDataButtonClicked(service[0])">填充演示数据</button></td>
+  </tr>
+  </tbody>
+</table>
+

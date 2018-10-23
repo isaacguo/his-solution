@@ -1,55 +1,44 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {FrontdeskGuard} from "../core/guards/treatement/frontdesk.guard";
-import {FrontDeskComponent} from "./components/front-desk/front-desk.component";
-import {PetRegistrationComponent} from "./components/front-desk/pet-registration/pet-registration.component";
-import {RegistrationQueryComponent} from "./components/front-desk/registration-query/registration-query.component";
-import {FeeQueryComponent} from "./components/front-desk/fee-query/fee-query.component";
-import {TreatmentComponent} from "./components/treatment.component";
-import {RegisterComponent} from "./components/register/register.component";
-import {MyConsultingRoomGuard} from "../core/guards/treatement/my-consulting-room.guard";
-import {MyConsultingRoomComponent} from "./components/my-consulting-room/my-consulting-room.component";
-import {PetInfoComponent} from "./components/my-consulting-room/pet-info/pet-info.component";
-import {PetTreatmentComponent} from "./components/my-consulting-room/pet-treatment/pet-treatment.component";
-import {PetMedicalTestComponent} from "./components/my-consulting-room/pet-medical-test/pet-medical-test.component";
-import {TreatmentSettingsGuard} from "../core/guards/treatement/treatment-settings.guard";
-import {TreatmentSettingsComponent} from "./components/treatment-settings/treatment-settings.component";
-import {TreatmentSettingsRoomComponent} from "./components/treatment-settings/treatment-settings-room/treatment-settings-room.component";
-import {DoctorRegistrationComponent} from "./components/doctor-registration/doctor-registration.component";
-import {DoctorListViewComponent} from "./components/doctor-registration/views/doctor-list-view/doctor-list-view.component";
-import {TimeBasedViewComponent} from "./components/doctor-registration/views/time-based-view/time-based-view.component";
+import {FrontDeskContainerComponent} from "./containers/front-desk-container/front-desk-container.component";
+import {PetRegistrationContainerComponent} from "./containers/pet-registration-container/pet-registration-container.component";
+import {RegistrationQueryContainerComponent} from "./containers/registration-query-container/registration-query-container.component";
+import {FeeQueryContainerComponent} from "./containers/fee-query-container/fee-query-container.component";
 import {CustomerServiceContainerComponent} from "./containers/customer-service-container/customer-service-container.component";
 import {CustomerServiceTreatmentCaseContainerComponent} from "./containers/customer-service-treatment-case-container/customer-service-treatment-case-container.component";
 import {CustomerServiceTreatmentCaseInfoContainerComponent} from "./containers/customer-service-treatment-case-info-container/customer-service-treatment-case-info-container.component";
 import {CustomerServiceTreatmentCaseDetailContainerComponent} from "./containers/customer-service-treatment-case-detail-container/customer-service-treatment-case-detail-container.component";
 import {CustomerServiceTreatmentCaseCommentsContainerComponent} from "./containers/customer-service-treatment-case-comments-container/customer-service-treatment-case-comments-container.component";
+import {MyConsultingRoomContainerComponent} from "./containers/my-consulting-room-container/my-consulting-room-container.component";
+import {PetInfoContainerComponent} from "./containers/pet-info-container/pet-info-container.component";
+import {PetTreatmentContainerComponent} from "./containers/pet-treatment-container/pet-treatment-container.component";
+import {TreatmentSettingsContainerComponent} from "./containers/treatment-settings-container/treatment-settings-container.component";
+import {TreatmentSettingsRoomContainerComponent} from "./containers/treatment-settings-room-container/treatment-settings-room-container.component";
 import {TreatmentSettingsBusinessContainerComponent} from "./containers/treatment-settings-business-container/treatment-settings-business-container.component";
-import {InventoryItemCreateUpdateComponent} from "../inventory/components/inventory-item-create-update/inventory-item-create-update.component";
-import {TreatmentItemCreateUpdateComponent} from "./components/treatment-item-create-update/treatment-item-create-update.component";
+import {MyConsultingRoomRegistrationContainerComponent} from "./containers/my-consulting-room-registration-container/my-consulting-room-registration-container.component";
+import {TreatmentPrescriptionsContainerComponent} from './containers/treatment-prescriptions-container/treatment-prescriptions-container.component';
+import {TreatmentCaseDetailContainerComponent} from "./containers/treatment-case-detail-container/treatment-case-detail-container.component";
+import {TreatmentMedicalTestContainerComponent} from "./containers/treatment-medical-test-container/treatment-medical-test-container.component";
+import {TreatmentPrescriptionDetailContainerComponent} from './containers/treatment-prescription-detail-container/treatment-prescription-detail-container.component';
+import {TreatmentSettingsRoomDetailContainerComponent} from "./containers/treatment-settings-room-detail-container/treatment-settings-room-detail-container.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: TreatmentComponent
-  },
-  {
-
     path: 'frontdesk',
-    canActivate: [FrontdeskGuard],
-    component: FrontDeskComponent,
+    component: FrontDeskContainerComponent,
     children: [
       {
         path: 'petreg',
-        component: PetRegistrationComponent
+        component: PetRegistrationContainerComponent
       },
       {
         path: 'registration-query',
-        component: RegistrationQueryComponent
+        component: RegistrationQueryContainerComponent
       },
       {
 
         path: 'fee-query',
-        component: FeeQueryComponent,
+        component: FeeQueryContainerComponent,
       },
       {
         path: '**',
@@ -86,68 +75,78 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'register',
-    component: RegisterComponent
-  },
-  {
     path: 'my-consulting-room',
-    canActivate: [MyConsultingRoomGuard],
-    component: MyConsultingRoomComponent,
+    component: MyConsultingRoomContainerComponent,
     children: [
       {
-        path: 'pet-info',
-        component: PetInfoComponent,
-      },
-      {
-        path: 'pet-treatment',
-        component: PetTreatmentComponent,
-      },
-      {
-        path: 'pet-medical-test',
-        component: PetMedicalTestComponent,
-
-      },
-      {
-        path: '**',
-        redirectTo: 'pet-info'
+        path: 'registrations/:registrationId',
+        component: MyConsultingRoomRegistrationContainerComponent,
+        children: [
+          {
+            path: 'info',
+            component: PetInfoContainerComponent,
+          },
+          {
+            path: 'treatment-cases',
+            component: PetTreatmentContainerComponent,
+            children:[
+              {
+                path:':treatmentCaseId',
+                component: TreatmentCaseDetailContainerComponent
+              }
+            ]
+          },
+          {
+            path:'medical-tests',
+            component:TreatmentMedicalTestContainerComponent,
+            children:[
+              {
+                path:':medicalTestId',
+                component: TreatmentCaseDetailContainerComponent,
+              }
+            ]
+          },
+          {
+            path:'treatment-prescriptions',
+            component:TreatmentPrescriptionsContainerComponent,
+            children:[
+              {
+                path:':prescriptionId',
+                component:TreatmentPrescriptionDetailContainerComponent
+              }
+            ]
+          },
+          {
+            path: '**',
+            redirectTo: 'info'
+          }
+        ]
       }
     ]
   },
   {
     path: 'treatment-settings',
-    canActivate: [TreatmentSettingsGuard],
-    component: TreatmentSettingsComponent,
-
+    component: TreatmentSettingsContainerComponent,
     children: [
       {
         path: 'treatment-room',
-        component: TreatmentSettingsRoomComponent
+        component: TreatmentSettingsRoomContainerComponent,
+        children:
+        [
+          {
+            path:':departmentId',
+            component:TreatmentSettingsRoomDetailContainerComponent
+          }
+        ]
+
       },
       {
-        path:'business',
+        path: 'business',
         component: TreatmentSettingsBusinessContainerComponent
-      }
-    ]
-  },
-  {
-    path: 'treatment-item/:operation/:updateId',
-    component:TreatmentItemCreateUpdateComponent
-  },
-  {
-    path: 'doctor-registration',
-    component: DoctorRegistrationComponent,
-    children: [
-      {
-        path: 'doctor-list-view/:uuid',
-        component: DoctorListViewComponent,
       },
       {
-        path: 'time-based-view/:uuid',
-        component: TimeBasedViewComponent,
-      },
-      {
-        path: '**',
-        redirectTo: 'doctor-list-view',
+        path:'**',
+        redirectTo:'treatment-room'
       }
     ]
   },

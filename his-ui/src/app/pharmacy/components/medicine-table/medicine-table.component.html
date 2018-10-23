@@ -1,0 +1,48 @@
+<modal #confirmModal (onClose)="onConfirmModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body>
+      <h3>确定药品已发放完毕？</h3>
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="confirmDeleteModal"
+              (click)="confirmModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div class="panel panel-info">
+
+  <div class="panel-heading">药品清单</div>
+
+  <div class="panel-body">
+
+    <table class="table table-bordered table-responsive">
+      <thead>
+      <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>药品规格</th>
+        <th>包装规格</th>
+        <th>单位</th>
+        <th>数量</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let medicine of medicineInfo?.medicines; let index=index">
+        <td>{{index+1}}</td>
+        <td>{{medicine.name}}</td>
+        <td>{{medicine.medicineSpecification}}/{{medicine.medicineSpecificationUnit}}</td>
+        <td>{{medicine.packageCount}}</td>
+        <td>{{medicine.count}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary pull-right"
+            (click)="onMedicineDispensedButtonClicked()">确认发药</button>
+  </div>
+</div>

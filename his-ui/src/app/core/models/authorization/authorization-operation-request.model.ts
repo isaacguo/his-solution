@@ -1,11 +1,10 @@
 import {AuthorizationAssignmentOperationRequest} from "./authorization-assignment-operation-request.model";
 
 export class AuthorizationOperationRequest {
-  public id:number;
-  public uid: number;
-  public username: string;
-  public userAccount:string;
-  public authorizationAssignmentList: AuthorizationAssignmentOperationRequest[];
+  id: number;
+  uid: number;
+  username: string;
+  userAccount: string;
+  authorizationAssignmentList: AuthorizationAssignmentOperationRequest[];
 
-  constructor(){}
 }

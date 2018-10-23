@@ -1,0 +1,9 @@
+<table class="table table-bordered table-responsive">
+  <tbody>
+  <tr *ngFor="let treatmentCase of list" [class.info]="isRowSelected(treatmentCase)"
+      (click)="onRowClicked(treatmentCase)">
+    <td>{{treatmentCase.id}}</td>
+  </tr>
+  </tbody>
+</table>
+

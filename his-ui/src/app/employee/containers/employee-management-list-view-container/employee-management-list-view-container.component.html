@@ -1,0 +1,5 @@
+<app-employee-management-list-view
+  (pageChanged)="onPageChanged($event)"
+  (employeeEdited)="onEmployeeEdited($event)"
+  [pageData]="employeeListPageData|async"
+></app-employee-management-list-view>

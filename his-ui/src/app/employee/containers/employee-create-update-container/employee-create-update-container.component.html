@@ -1,0 +1,9 @@
+<app-employee-management-create-new-employee
+  [employee]="employee|async"
+  [employeeCreatedObservable]="employeeCreatedObservable"
+  [employeeUpdatedObservable]="employeeUpdatedObservable"
+  [departmentId]="departmentId | async"
+  (employeeCreated)="onEmployeeCreated($event)"
+  (employeeUpdated)="onEmployeeUpdated($event)"
+  (passwordChanged)="onPasswordChanged($event)"
+></app-employee-management-create-new-employee>

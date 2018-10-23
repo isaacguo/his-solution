@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FinancePriceService} from "../../../core/services/finance/finance-price.service";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-treatment-settings-business-container',
@@ -7,13 +6,6 @@ import {FinancePriceService} from "../../../core/services/finance/finance-price.
   styleUrls: ['./treatment-settings-business-container.component.css']
 })
 export class TreatmentSettingsBusinessContainerComponent implements OnInit {
-
-  showToolBox: boolean = true;
-  showTitle: boolean = true;
-  canCreateNewItem: boolean = true;
-  canDelete: boolean = true;
-  canEdit: boolean = true;
-  financePriceService: FinancePriceService;
 
   constructor() { }
 

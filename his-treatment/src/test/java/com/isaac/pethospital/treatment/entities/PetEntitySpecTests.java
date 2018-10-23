@@ -4,9 +4,6 @@ import com.isaac.pethospital.common.enums.PetColorEnum;
 import com.isaac.pethospital.common.enums.PetGenderEnum;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertThat;
@@ -25,11 +22,6 @@ public class PetEntitySpecTests {
         assertThat(petEntity, hasProperty("gender", is(PetGenderEnum.MALE)));
     }
 
-    @Test
-    public void givenPetEntityHasFieldDateOfBirth() {
-        PetEntity petEntity = getPetEntity();
-        assertThat(petEntity, hasProperty("dateOfBirth", is(getDateOfBirth())));
-    }
 
     @Test
     public void givenPetEntityHasFieldAge() {
@@ -65,12 +57,12 @@ public class PetEntitySpecTests {
         PetEntity petEntity = new PetEntity();
         petEntity.setName("Benben");
         petEntity.setGender(PetGenderEnum.MALE);
-        petEntity.setDateOfBirth(getDateOfBirth());
+        //petEntity.setDateOfBirth(getDateOfBirth());
         petEntity.setAge(2);
-        petEntity.setColor(PetColorEnum.WHITE);
+        petEntity.setColor("白");
 
         PetTypeEntity petType = getPetTypeEntity();
-        petEntity.setPetType(petType);
+        petEntity.setPetType("狗");
         petEntity.setSterilized(false);
         return petEntity;
     }
@@ -81,9 +73,4 @@ public class PetEntitySpecTests {
         return petType;
     }
 
-    private LocalDateTime getDateOfBirth() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
-        return dateOfBirth;
-    }
 }

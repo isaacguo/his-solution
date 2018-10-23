@@ -21,6 +21,12 @@ public class PetRestController {
         this.petService = petService;
     }
 
+    @GetMapping("{id}")
+    public PetEntity findOne(@PathVariable("id") Long id)
+    {
+        return this.petService.findOne(id);
+    }
+
     @PostMapping(value = "find-by-name")
     public List<PetEntity> findByName(@RequestBody NameQuery nameQuery) {
         return this.petService.findByName(nameQuery.getName());

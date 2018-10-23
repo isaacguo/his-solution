@@ -1,26 +1,19 @@
 import {NgModule} from '@angular/core';
 
 import {PharmacyRoutingModule} from './pharmacy-routing.module';
-import {PharmacyComponent} from "./components/pharmacy.component";
-import {PharmacyMedicineDispensingManagementComponent} from "./components/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management.component";
-import {PharmacyMedicineDispensingManagementListComponent} from "./components/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management-list/pharmacy-medicine-dispensing-management-list.component";
-import {PharmacyManagementGuard} from "./guards/pharmacy-management-guard.service";
-import {PharmacyMedicineDispensingManagementDetailComponent} from "./components/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management-list/pharmacy-medicine-dispensing-management-detail/pharmacy-medicine-dispensing-management-detail.component";
 import {SharedModule} from "../shared/shared.module";
+import { PharmacyDispensingContainerComponent } from './containers/pharmacy-dispensing-container/pharmacy-dispensing-container.component';
+import { PharmacyDispensingComponent } from './components/pharmacy-dispensing/pharmacy-dispensing.component';
+import { DispensingDetailContainerComponent } from './containers/dispensing-detail-container/dispensing-detail-container.component';
+import { PharmacyDispensingDetailComponent } from './components/pharmacy-dispensing-detail/pharmacy-dispensing-detail.component';
+import { MedicineTableComponent } from './components/medicine-table/medicine-table.component';
+import { BasicInfoComponent } from './components/basic-info/basic-info.component';
 
 @NgModule({
   imports: [
     SharedModule,
     PharmacyRoutingModule
   ],
-  declarations: [
-    PharmacyComponent,
-    PharmacyMedicineDispensingManagementComponent,
-    PharmacyMedicineDispensingManagementListComponent,
-    PharmacyMedicineDispensingManagementDetailComponent,
-  ],
-  providers:[
-    PharmacyManagementGuard
-  ]
+  declarations: [PharmacyDispensingContainerComponent, PharmacyDispensingComponent, DispensingDetailContainerComponent, PharmacyDispensingDetailComponent, MedicineTableComponent, BasicInfoComponent]
 })
 export class PharmacyModule { }

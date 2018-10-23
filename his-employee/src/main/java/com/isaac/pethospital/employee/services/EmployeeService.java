@@ -3,6 +3,8 @@ package com.isaac.pethospital.employee.services;
 import com.isaac.pethospital.employee.dto.EmployeeListItem;
 import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public interface EmployeeService {
 
     List<EmployeeEntity> findKeywordInName(String any);
 
-    List<EmployeeListItem> findEmployeesForEmployeeListItem();
+    Page<EmployeeListItem> findEmployeesForEmployeeListItem(Pageable pageable);
 
     String getDirectManagerUserAccount(String userAccount);
 

@@ -1,24 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {FinanceManagementGuard} from "../core/guards/finance/finance-management.guard";
-import {FinanceComponent} from "./components/finance.component";
-import {ChargeManagementGuard} from "../core/guards/finance/charge-management.guard";
-import {ChargeManagementComponent} from "./components/charge-management/charge-management.component";
 import {FinancePriceManagementContainerComponent} from "./containers/finance-price-management-container/finance-price-management-container.component";
 import {FinancePriceManagementTreatmentContainerComponent} from "./containers/finance-price-management-treatment-container/finance-price-management-treatment-container.component";
 import {FinancePriceManagementMedicalTestContainerComponent} from "./containers/finance-price-management-medical-test-container/finance-price-management-medical-test-container.component";
 import {FinancePriceManagementInventoryContainerComponent} from "./containers/finance-price-management-inventory-container/finance-price-management-inventory-container.component";
+import {FinanceChargeManagementContainerComponent} from "./containers/finance-charge-management-container/finance-charge-management-container.component";
 
 const routes: Routes = [
   {
-    path: 'finance',
-    canActivate: [FinanceManagementGuard],
-    component: FinanceComponent,
-  },
-  {
     path: 'charge-management',
-    canActivate: [ChargeManagementGuard],
-    component: ChargeManagementComponent
+    component: FinanceChargeManagementContainerComponent
   },
   {
     path: 'price-management',

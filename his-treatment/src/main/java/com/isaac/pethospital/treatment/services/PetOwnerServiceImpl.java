@@ -73,6 +73,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
         petToBeUpdated.setName(request.getName());
         petToBeUpdated.setPetType(request.getPetType());
         petToBeUpdated.setSterilized(request.isSterilized());
+        petToBeUpdated.setSpecies(request.getSpecies());
 
         return this.petOwnerRepository.save(petOwnerEntity);
     }

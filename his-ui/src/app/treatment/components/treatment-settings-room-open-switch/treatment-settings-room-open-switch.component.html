@@ -1,0 +1,22 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <label>设置 <b>{{department.name}}</b></label>
+  </div>
+  <div *ngIf="department" class="panel-body">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div>
+          <div class=" pull-left">
+            前台可见
+          </div>
+          <div class="pull-right">
+            <app-checkbox [checked]="department.openToFrontDesk" (outCheck)="onOutCheck($event)"></app-checkbox>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</div>
+

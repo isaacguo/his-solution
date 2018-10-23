@@ -16,4 +16,6 @@ public interface PetService {
     PetQueryResponse findByUuid(String uuid);
 
     List<PetQueryResponse> findByUuids(List<PetUuidRequest> requestArr);
+
+    PetEntity findOne(Long id);
 }

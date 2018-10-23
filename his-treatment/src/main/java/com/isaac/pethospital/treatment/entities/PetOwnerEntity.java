@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.isaac.pethospital.common.enums.GenderEnum;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class PetOwnerEntity {
 
     private String name;
     private GenderEnum gender;
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
     private String memberNumber;
     @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
@@ -83,13 +84,11 @@ public class PetOwnerEntity {
         this.cellPhone = cellPhone;
     }
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

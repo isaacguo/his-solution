@@ -1,0 +1,75 @@
+
+
+<modal #setAsManagerConfirmationModal (onClose)="onSetAsManagerConfirmationModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">调整部门</h4>
+    </modal-header>
+    <modal-body>
+      确定将<b>{{employee?.fullName}}</b>设置为部门主管？
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="setAsManagerConfirmationModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="setAsManagerConfirmationModal"
+              (click)="setAsManagerConfirmationModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<modal #adjustDepartmentModal (onClose)="onAdjustDepartmentModalClosed()">
+  <form #modalForm2="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">调整部门</h4>
+    </modal-header>
+    <modal-body>
+
+      <label>请选择部门: {{selectedNodeInfo?.name}}</label>
+      <tree-root #tree (activate)="onNodeActivated($event)"  [nodes]="nodes"></tree-root>
+
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="adjustDepartmentModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="adjustDepartmentModal"
+              (click)="adjustDepartmentModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<modal #confirmDeletionModal (onClose)="onConfirmDeletionModalClosed()">
+  <form #modalForm3="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body>
+      确定删除员工 <b>{{employee?employee.fullName:manager.fullName}}</b> 信息?
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmDeletionModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="confirmDeletionModal"
+              (click)="confirmDeletionModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div *ngIf="manager || employee" class="button-group">
+  <button title="查看员工信息" type="button" class="btn btn-default btn-s"
+          (click)="onViewButtonClicked()"><span
+    class="glyphicon glyphicon-list-alt"></span></button>
+  <button title="修改员工信息" type="button" class="btn btn-default btn-s"
+          (click)="onEditButtonClicked()"><span
+    class="glyphicon glyphicon-pencil"></span></button>
+  <button *ngIf="((manager && noTeamMembers) || !manager)" title="删除员工" type="button" class="btn btn-default btn-s"
+          (click)="onRemoveButtonClicked()">
+    <span class="glyphicon glyphicon-remove"></span></button>
+  <button *ngIf="((manager && noTeamMembers) || !manager)" title="调整部门" type="button"
+          (click)="onAdjustDepartment()"
+          class="btn btn-default btn-s"><span
+    class="glyphicon glyphicon-briefcase"></span></button>
+  <button *ngIf="!manager" title="设置为部门主管" type="button" (click)="onSetAsManager()"
+          class="btn btn-default btn-s"><span
+    class="glyphicon glyphicon-upload"></span></button>
+</div>

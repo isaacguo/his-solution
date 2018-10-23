@@ -1,15 +1,13 @@
 import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {IndexComponent} from "./core/components/index/index.component";
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import {IndexContainerComponent} from "./core/containers/index-container/index-container.component";
 import {LoginComponent} from "./auth/components/login/login.component";
 import {LogoutComponent} from "./auth/components/logout/logout.component";
-import {AuthGuard, LogoutGuardService} from "./auth/guards/auth.guard";
 
 const routes: Routes = [
   {
     path: '',
-    component: IndexComponent,
-    canActivate: [AuthGuard],
+    component: IndexContainerComponent,
     children: [
       {
         path: 'dashboard',
@@ -32,22 +30,25 @@ const routes: Routes = [
         loadChildren: './pharmacy/pharmacy.module#PharmacyModule'
       },
       {
-        path: 'employee',
-        loadChildren: './employee/employee.module#EmployeeModule'
-      },
-      {
         path: 'procurement',
         loadChildren: './procurement/procurement.module#ProcurementModule'
+      },
+      {
+        path: 'employee',
+        loadChildren: './employee/employee.module#EmployeeModule'
       },
       {
         path: 'inventory',
         loadChildren: './inventory/inventory.module#InventoryModule'
       },
       {
+        path: 'statistics',
+        loadChildren: './statistics/statistics.module#StatisticsModule'
+      },
+      {
         path: 'settings',
         loadChildren: './settings/settings.module#SettingsModule'
       }
-
     ]
   },
   {
@@ -57,14 +58,17 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent,
-    canActivate: [LogoutGuardService]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
+  imports: [RouterModule.forRoot(routes, {
+    // preload all modules; optionally we could
+    // implement a custom preloading strategy for just some
+    // of the modules (PRs welcome 😉)
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
-
 export class AppRoutingModule {
 }

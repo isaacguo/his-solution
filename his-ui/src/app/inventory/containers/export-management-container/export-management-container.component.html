@@ -1,0 +1,18 @@
+
+<div class="row">
+  <h1 class="page-header">出库管理</h1>
+</div>
+
+<div class="row" style="height: 800px">
+  <split [direction]="'vertical'">
+    <split-area [size]="30">
+      <app-export-management></app-export-management>
+
+    </split-area>
+
+    <split-area [size]="70">
+      <router-outlet></router-outlet>
+    </split-area>
+  </split>
+
+</div>

@@ -1,13 +1,9 @@
 import {AuthorizationAssignment} from "./authorization-assignment.model";
 
-export class Authorization {
+export interface Authorization {
   id?: number;
   uid?: string;
   username?: string;
-  userAccount?:string;
+  userAccount?: string;
   authorizationAssignmentList?: AuthorizationAssignment[];
-
-  constructor() {
-  }
-
 }

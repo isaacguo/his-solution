@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs/Observable";
+import {Router} from "@angular/router";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
-import {TreatmentCase} from "../../models/treatment-case.model";
 
 @Component({
   selector: 'app-customer-service-container',
@@ -11,15 +10,13 @@ import {TreatmentCase} from "../../models/treatment-case.model";
 })
 export class CustomerServiceContainerComponent implements OnInit {
 
-  filteredTreatmentCases: Observable<TreatmentCase[]>;
+  filteredTreatmentCases: Observable<any[]>;
 
   constructor(private router: Router,
               private treatmentCaseService: TreatmentCaseService) {
 
-
     //filteredTreatmentCases should get items bases on searching criteria. for now, use service to get items directly
-    this.filteredTreatmentCases=this.treatmentCaseService.getItems();
-
+    this.filteredTreatmentCases=this.treatmentCaseService.getObservableItems();
 
   }
 
@@ -36,4 +33,5 @@ export class CustomerServiceContainerComponent implements OnInit {
   onItemSelected(event) {
     this.router.navigate(['treatment','customer-service','treatment-case', event]);
   }
+
 }

@@ -1,0 +1,63 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">查询</h3>
+  </div>
+  <div class="panel-body">
+
+    <form role="form" [formGroup]="searchFormModel">
+      <div class="col-md-2">
+        <label>卡号</label>
+        <input type="text" class="form-control" formControlName="memberId">
+      </div>
+      <div class="col-md-2">
+        <label>病历号</label>
+        <input type="text" class="form-control" formControlName="treatmentId">
+      </div>
+      <div class="col-md-2">
+        <label>主人姓名</label>
+        <input type="text" class="form-control" formControlName="ownerName">
+      </div>
+      <div class="col-md-2">
+        <label>宠物名称</label>
+        <input type="text" class="form-control" formControlName="petName">
+      </div>
+      <div class="col-md-2">
+        <label>手机号码</label>
+        <input type="text" class="form-control" formControlName="mobilePhoneNumber">
+      </div>
+
+      <div class="col-md-4">
+        <label>挂号时间</label>
+        <div class="row">
+          <div class="col-md-5">
+            <my-date-picker id="startDate" name="mydate" [options]="myDatePickerOptions"
+                            [selDate]="searchFormModel.controls.startDate.value"
+                            (dateChanged)="onDateChanged('startDate',$event)"
+                            [locale]="'zh-cn'"></my-date-picker>
+          </div>
+          <div class="col-md-1">
+            <label>到</label>
+          </div>
+          <div class="col-md-5">
+            <my-date-picker id="endDate" name="mydate" [options]="myDatePickerOptions"
+                            [selDate]="searchFormModel.controls.endDate.value"
+                            (dateChanged)="onDateChanged('endDate',$event)"
+                            [locale]="'zh-cn'"></my-date-picker>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="includeDone" class="col-md-3">
+        <label class="isaac-margin-25top" for="includeDone">
+          <input type="checkbox" (change)="onIncludeDoneChanged($event)" id="includeDone"
+                 formControlName="includeDone"/>包含已完成就诊的</label>
+      </div>
+
+      <div class="col-md-3">
+        <div class="btn-group isaac-margin-25top">
+          <button class="btn btn-default" (click)="onQueryClicked()">查询</button>
+          <button class="btn btn-default" (click)="onClearClicked()">清除</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

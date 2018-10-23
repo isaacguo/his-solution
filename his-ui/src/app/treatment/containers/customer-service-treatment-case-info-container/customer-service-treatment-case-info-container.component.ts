@@ -1,26 +1,15 @@
-import {Component} from '@angular/core';
-import {TreatmentCase} from "../../models/treatment-case.model";
-import {Observable} from "rxjs/Observable";
-import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
-import {ActivatedRoute} from "@angular/router";
-import {PetOwner} from "../../models/pet-owner.model";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-customer-service-treatment-case-info-conatiner',
+  selector: 'app-customer-service-treatment-case-info-container',
   templateUrl: './customer-service-treatment-case-info-container.component.html',
   styleUrls: ['./customer-service-treatment-case-info-container.component.css']
 })
-export class CustomerServiceTreatmentCaseInfoContainerComponent  {
+export class CustomerServiceTreatmentCaseInfoContainerComponent implements OnInit {
 
-  treatmentCase: Observable<TreatmentCase>;
-  petOwner: Observable<PetOwner>;
+  constructor() { }
 
-  constructor(private treatmentCaseService: TreatmentCaseService,
-              private route: ActivatedRoute) {
-
-    this.treatmentCase = this.route.parent.params.mergeMap(r => this.treatmentCaseService.readOne(r['treatmentCaseId']));
-    this.petOwner = this.route.parent.params.mergeMap(r => this.treatmentCaseService.getPetOwnerInfoByTreatmentCaseId(r['treatmentCaseId']));
-
+  ngOnInit() {
   }
 
 }

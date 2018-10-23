@@ -6,20 +6,28 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {Pet} from "../../../treatment/models/pet.model";
 import {PetOwner} from "../../../treatment/models/pet-owner.model";
 import {PetOperationRequest} from "../../../treatment/models/pet.operation.request";
+import {ServiceConstants} from "../../../shared/service-constants";
+import {CrudService} from "../crud.service";
 
 @Injectable()
-export class PetService extends AbstractService {
+export class PetService extends CrudService<Pet> {
 
   petInfoChange: Observable<PetInfo>;
-  rootUrl: string = "/api/histreatment/pets";
+  rootUrl: string = `${ServiceConstants.TREATMENT_URL}/pets`;
+
   selectedPet: Pet = {};
   selectedPetOwner: PetOwner = {};
   private petInfoManager: BehaviorSubject<PetInfo> = new BehaviorSubject(new PetInfo(null, null, null));
   private petInfo: PetInfo;
 
-  constructor(private authHttp: AuthHttp) {
-    super();
-    this.petInfoChange = this.petInfoManager.asObservable();
+  constructor(authHttp: AuthHttp) {
+    super(`${ServiceConstants.TREATMENT_URL}/pets`, authHttp);
+  }
+
+  findOne(id:number):Observable<Pet>
+  {
+    let url = `${this.rootUrl}/${id}`;
+    return this.authHttp.get(url).map(this.extractData);
   }
 
   findPetOwner(petOperationRequest: PetOperationRequest): Observable<PetOwner> {

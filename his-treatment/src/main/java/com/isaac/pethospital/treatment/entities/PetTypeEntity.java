@@ -22,9 +22,11 @@ public class PetTypeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /*
     @OneToMany(mappedBy = "petType", cascade = CascadeType.ALL)
     @JsonManagedReference("petType-pet")
     private List<PetEntity> pets=new LinkedList<>();
+    */
 
 
     public Long getId() {

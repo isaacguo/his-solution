@@ -1,0 +1,61 @@
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+  <div class="form-group isaac-form-space">
+    <label>姓名: </label>
+    <input formControlName="name" class="form-control" type="text">
+    <small [hidden]="formModel.controls.name.valid" class="text-danger">
+      姓名不能为空
+    </small>
+  </div>
+
+  <div class="form-group isaac-form-space">
+    <label>性别: </label>
+    <div class="btn-group" role="group">
+      <button type="button"
+              class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
+              data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+        {{selectedStatusText}}
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="javascript:void(0)" *ngFor="let status of genderStatusArr"
+               (click)="onStatusClicked(status[0])">
+          {{status[1]}}</a></li>
+      </ul>
+
+    </div>
+    <small [hidden]="formModel.controls.gender.valid" class="text-danger">
+      性别不能为空
+    </small>
+  </div>
+
+  <div class="form-group isaac-form-space">
+    <label>手机: </label>
+    <input formControlName="cellPhone" class="form-control" type="text">
+    <small [hidden]="formModel.controls.cellPhone.valid" class="text-danger">
+      手机不能为空
+    </small>
+  </div>
+
+  <div class="form-group isaac-form-space">
+    <label>生日: </label>
+    <my-date-picker id="dateOfBirth" name="mydate" [options]="myDatePickerOptions"
+                    [selDate]="formModel.controls.dateOfBirth.value"
+                    (dateChanged)="onDateChanged('dateOfBirth',$event)"
+                    [locale]="'zh-cn'"></my-date-picker>
+  </div>
+  <div class="form-group isaac-form-space">
+    <label>电话: </label>
+    <input formControlName="homePhone" class="form-control" type="text">
+  </div>
+  <div class="form-group isaac-form-space">
+    <label>邮箱: </label>
+    <input formControlName="email" class="form-control" type="text">
+  </div>
+  <div class="form-group isaac-form-space">
+    <label>住址: </label>
+    <input formControlName="address" class="form-control" type="text">
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
+
+</form>

@@ -1,0 +1,19 @@
+<div *ngIf="rootNode" class="col-md-3">
+  <app-category-tool-bar
+    [canDelete]="true"
+    [canEdit]="true"
+    [canCreateChildNode]="true"
+    [canCreateRootNode]="false"
+    [selectedNode]="getSelectedNode() | async"
+    (subNodeCreated)="onSubNodeCreated($event)"
+    (nodeDeleted)="onNodeDeleted($event)"
+    (nodeUpdated)="onNodeUpdated($event)"
+    (nodeExpanded)="onNodeExpanded()"
+  ></app-category-tool-bar>
+
+  <app-employee-management-category-tree #tree [nodes]="rootNode|async"
+                                         (nodeSelected)="onNodeSelected($event)"></app-employee-management-category-tree>
+</div>
+<div class="col-md-9">
+  <router-outlet></router-outlet>
+</div>

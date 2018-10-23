@@ -1,0 +1,21 @@
+<app-treatment-settings-room-open-switch [department]="departmentInfoFromTreatmentObservable | async"
+                                         (openCheck)="onDepartmentOpenChecked($event)"></app-treatment-settings-room-open-switch>
+
+<div *ngIf="(departmentInfoFromTreatmentObservable|async).openToFrontDesk">
+  <div class="row">
+    <div class="col-md-3">
+      <app-treatment-settings-room-employee-open-switch
+        [list]="employeeList |async"
+        (listChanged)="onListChanged()"
+        (itemSelected)="onEmployeeSelected($event)"></app-treatment-settings-room-employee-open-switch>
+    </div>
+
+    <div *ngIf="(selectedEmployee$|async).id" class="col-md-9">
+      <app-treatment-settings-room-employee-open-switch-detail
+        [employeeInfoInTreatment]="employeeInfoInTreatment$ |async "
+        [employeeInfoInEmployee]="selectedEmployee$|async"
+        (employeeOpenChecked)="onEmployeeOpenChecked($event)"></app-treatment-settings-room-employee-open-switch-detail>
+    </div>
+  </div>
+</div>
+

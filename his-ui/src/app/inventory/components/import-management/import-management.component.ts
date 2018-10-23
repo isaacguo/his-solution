@@ -1,15 +1,25 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AbstractItemSelectableTableComponent} from "../../../shared/components/abstract-item-selectable-table/abstract-item-selectable-table.component";
 
 @Component({
   selector: 'app-import-management',
   templateUrl: './import-management.component.html',
   styleUrls: ['./import-management.component.css']
 })
-export class ImportManagementComponent implements OnInit {
+export class ImportManagementComponent extends AbstractItemSelectableTableComponent<any>  {
 
-  constructor() { }
+  @Input()
+  importReceipts:any[];
 
-  ngOnInit() {
+  constructor() {
+    super();
   }
 
+  getImportReceiptItemCount(importReceipt: any) {
+
+  }
+
+  getImportReceiptTotalSum(importReceipt: any) {
+
+  }
 }

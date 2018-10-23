@@ -10,6 +10,8 @@ import com.isaac.pethospital.employee.dto.EmployeeOperationRequest;
 import com.isaac.pethospital.employee.entities.DepartmentEntity;
 import com.isaac.pethospital.employee.entities.EmployeeEntity;
 import com.isaac.pethospital.employee.repositories.EmployeeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -323,8 +325,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeListItem> findEmployeesForEmployeeListItem() {
-        return this.employeeRepository.findEmployeesForEmployeeListItem();
+    public Page<EmployeeListItem> findEmployeesForEmployeeListItem(Pageable pageable) {
+        return this.employeeRepository.findEmployeesForEmployeeListItem(pageable);
     }
 
     @Override

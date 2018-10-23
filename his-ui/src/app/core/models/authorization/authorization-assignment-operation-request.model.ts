@@ -1,10 +1,8 @@
 export class AuthorizationAssignmentOperationRequest {
 
-  public id: number;
-  public topicId: number;
+  id: number;
+  topicId: number;
   allowedOperationIds: number[];
 
-  constructor() {
-  }
 
 }

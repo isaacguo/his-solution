@@ -34,7 +34,7 @@ export class AuthenticationService {
 
     this.setAuthState(new AuthInfo(AuthState.Logging, ""));
 
-    this.authHttp.post('/login', JSON.stringify({username: username, password: password}))
+    this.authHttp.post('/api/hisgateway/login', JSON.stringify({username: username, password: password}))
       .map((response: Response) => {
 
         let token = response.headers.get("authorization");

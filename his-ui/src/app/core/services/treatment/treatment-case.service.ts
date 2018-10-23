@@ -3,12 +3,12 @@ import {AuthHttp} from "angular2-jwt";
 import {Observable} from "rxjs/Observable";
 import {CrudService} from "../crud.service";
 import {TreatmentCase} from "../../../treatment/models/treatment-case.model";
-import {ServiceConstants} from "../../../shared/service-constants";
-import {Pet} from "../../../treatment/models/pet.model";
 import {PetOwner} from "../../../treatment/models/pet-owner.model";
+import {ServiceConstants} from "../../../shared/service-constants";
 
 @Injectable()
 export class TreatmentCaseService extends CrudService<TreatmentCase> {
+
 
 
   rootUrl: string = `${ServiceConstants.TREATMENT_URL}/treatment-cases`;

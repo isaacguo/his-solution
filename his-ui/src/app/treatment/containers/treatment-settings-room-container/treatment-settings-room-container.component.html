@@ -1,0 +1,9 @@
+
+<div *ngIf="rootNode" class="col-md-3">
+  <app-treatment-settings-room #tree [nodes]="rootNode|async" (nodeSelected)="onNodeSelected($event)"></app-treatment-settings-room>
+</div>
+<div class="col-md-9">
+  <router-outlet></router-outlet>
+</div>
+
+

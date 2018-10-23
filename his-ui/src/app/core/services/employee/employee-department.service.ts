@@ -1,66 +1,76 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs/Rx";
-import {AbstractService} from "../abstract.service";
+import {Injectable, OnDestroy} from '@angular/core';
+import {CrudService} from "../crud.service";
+import {ServiceConstants} from "../../../shared/service-constants";
 import {AuthHttp} from "angular2-jwt";
-import 'rxjs/add/operator/map';
-import {TreeNodeService} from "../common/tree-node.service";
-import {DepartmentListItem} from "../../../employee/models/department-list-item.model";
-import {MyTreeNode} from "../../models/my-tree-node.model";
-
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from "rxjs/Observable";
+import {EmployeeDepartment} from "../../models/employee/employee-department.model";
+import {EmployeeListItem} from "../../models/employee/employee-list-item.model";
+import {EmployeeService} from "./employee.service";
+import {Subscription} from "rxjs/Subscription";
 
 @Injectable()
-export class EmployeeDepartmentService extends AbstractService {
+export class EmployeeDepartmentService extends CrudService<EmployeeDepartment> implements OnDestroy {
 
-  constructor(private authHttp: AuthHttp,public treeNodeService:TreeNodeService) {
-    super();
+  rootUrl: string = `${ServiceConstants.EMPLOYEE_URL}/departments`;
+
+  rootDepartmentSubject = new BehaviorSubject<EmployeeDepartment | null>(null)
+  managerSubject = new BehaviorSubject<EmployeeListItem>({}as EmployeeListItem);
+  private getRootDepartmentUrl: string = `${this.rootUrl}/root`;
+
+  managerChangedSubscription: Subscription;
+
+
+  constructor(authHttp: AuthHttp, employeeService: EmployeeService) {
+    super(`${ServiceConstants.TREATMENT_URL}/departments`, authHttp);
+    /*
+    this.managerChangedSubscription = employeeService.getManagerChangedAsObservable().subscribe(() => {
+      if (this.lastDepartmentId)
+        this.findManager(this.lastDepartmentId);
+    });
+    */
   }
 
-
-  private rootUrl: string = "/api/hisemployee/departments";
-  private getDepartmentListUrl: string = "/api/hisemployee/departments/brief";
-
-  private getRootDepartmentUrl: string = "/api/hisemployee/departments/root";
-  private createDepartmentUrl: string = "/api/hisemployee/departments/create-department";
-  private deleteDepartmentUrl: string = "/api/hisemployee/departments/delete-department";
-  private renameDepartmentUrl: string = "/api/hisemployee/departments/rename-department";
-
-
-  getDepartmentList(): Observable<DepartmentListItem[]> {
-    return this.authHttp.get(this.getDepartmentListUrl).map(this.extractData);
+  ngOnDestroy(): void {
+    this.managerChangedSubscription.unsubscribe();
   }
 
-
-  getRootDepartment(): Observable<MyTreeNode> {
-    return this.authHttp.get(this.getRootDepartmentUrl)
-      .map(res => {
-        let m: MyTreeNode = this.treeNodeService.treeConverter(res.json(), true);
-        return m;
-      });
+  getObservableRootDepartment(): Observable<EmployeeDepartment> {
+    return this.rootDepartmentSubject.asObservable();
   }
 
-
-
-  deleteDepartment(id: number | undefined): Observable<boolean> {
-    return this.authHttp.delete(`${this.deleteDepartmentUrl}/${id}`).map(r => {
-      return this.extractTextData(r) === "true" ? true : false;
+  getRootDepartment() {
+    this.authHttp.get(this.getRootDepartmentUrl).subscribe(res => {
+      this.rootDepartmentSubject.next(res.json());
     });
   }
 
-  createDepartment(parentId: number, name: string): Observable<boolean> {
-    return this.authHttp.post(this.createDepartmentUrl, {'name': name, 'parentId': parentId}).map(r => {
-      return this.extractTextData(r) === "true" ? true : false;
-    });
+  getManagerAsObservable(): Observable<EmployeeListItem> {
+    return this.managerSubject.asObservable();
   }
 
-  renameDepartment(id: number, name: string): Observable<boolean> {
-    return this.authHttp.put(this.renameDepartmentUrl, {'name': name, 'id': id}).map(r => {
-      return this.extractTextData(r) === "true" ? true : false;
-    });
-  }
-  findManager(depId: number): Observable<any> {
-    let url = `${this.rootUrl}/find-manager/${depId}`;
-    return this.authHttp.get(url).map(this.extractData);
+  lastDepartmentId: number;
+
+  findManager(depId: number): Observable<EmployeeListItem> {
+    this.lastDepartmentId = depId;
+    let url = `${this.rootUrl}/find-manager/${this.lastDepartmentId}`;
+    return this.authHttp.get(url).map(this.extractData).do(m => this.managerSubject.next(m));
   }
 
+  createDepartment(parentId: number, name: string) {
+    return this.authHttp.post(`${this.rootUrl}/create-department`, {
+      'name': name,
+      'parentId': parentId
+    }).subscribe(() => this.getRootDepartment());
+  }
+
+  deleteDepartment(id: number) {
+    return this.authHttp.delete(`${this.rootUrl}/delete-department/${id}`).subscribe(() => this.getRootDepartment());
+  }
+
+
+  getDepartmentById(id: number): Observable<EmployeeDepartment> {
+    return this.authHttp.get(`${this.rootUrl}/${id}`).map(this.extractData);
+  }
 
 }

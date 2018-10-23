@@ -47,4 +47,9 @@ public class PetServiceImpl implements PetService {
         return this.petRepository.findByUuidIn(uuids);
 
     }
+
+    @Override
+    public PetEntity findOne(Long id) {
+        return this.petRepository.findOne(id);
+    }
 }

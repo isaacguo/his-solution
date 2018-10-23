@@ -1,5 +1,5 @@
 export enum PetGenderEnum
 {
-  MALE = <any>"公",
-  FEMALE = <any>"母"
+  MALE = "公",
+  FEMALE = "母"
 }

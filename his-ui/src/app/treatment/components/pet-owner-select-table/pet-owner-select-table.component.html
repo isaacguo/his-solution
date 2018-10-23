@@ -1,0 +1,17 @@
+<table class="table table-bordered table-responsive">
+  <thead>
+  <tr>
+    <th>会员号</th>
+    <th>主人姓名</th>
+    <th>电话</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr [class.info]="isRowSelected(queryResult)" *ngFor="let queryResult of list"
+      (click)="onRowClicked(queryResult)">
+    <td>{{queryResult.memberNumber}}</td>
+    <td>{{queryResult.name}}</td>
+    <td>{{queryResult.cellPhone}}</td>
+  </tr>
+  </tbody>
+</table>

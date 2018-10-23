@@ -3,6 +3,7 @@ package com.isaac.pethospital.treatment.entities;
 import com.isaac.pethospital.common.enums.GenderEnum;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -80,9 +81,9 @@ public class PetOwnerEntitySpecTests {
         return petOwnerEntity;
     }
 
-    private LocalDateTime getDateOfBirth() {
+    private LocalDate getDateOfBirth() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateOfBirth = LocalDateTime.parse("1984-02-28 00:00:00", formatter);
+        LocalDate dateOfBirth = LocalDate.parse("1984-02-28 00:00:00", formatter);
         return dateOfBirth;
     }
 }

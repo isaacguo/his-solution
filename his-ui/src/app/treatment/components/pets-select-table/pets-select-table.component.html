@@ -1,0 +1,43 @@
+<modal #updatePetModal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">修改宠物信息</h4>
+  </modal-header>
+  <modal-body>
+    <app-pet-create-update [pet]="pet" (petUpdated)="onPetUpdated($event)"></app-pet-create-update>
+  </modal-body>
+</modal>
+
+
+<table class="table table-bordered table-responsive isaac-margin-top">
+  <thead>
+  <tr>
+    <th>编号</th>
+    <th>名称</th>
+    <th>性别</th>
+    <th>年龄</th>
+    <th>颜色</th>
+    <th>种类</th>
+    <th>品种</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr (click)="onRowClicked(pet)" *ngFor="let pet of list;let petIndex=index"
+      [class.info]="isRowSelected(pet)">
+    <td>{{petIndex+1}}</td>
+    <td>{{pet.name}}</td>
+    <td>{{pet.gender | petGenderEnum}}</td>
+    <td>{{pet.age}}</td>
+    <td>{{pet.color}}</td>
+    <td>{{pet.species}}</td>
+    <td>{{pet.petType}}</td>
+    <td>
+      <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-default btn-s"
+                (click)="onUpdatePetButtonClicked(pet)"><span
+          class="glyphicon glyphicon-pencil"></span></button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

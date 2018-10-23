@@ -1,56 +1,24 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {AppComponent} from "./app.component";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
 import {CoreModule} from "./core/core.module";
 import {SharedModule} from "./shared/shared.module";
-import {AuthModule} from "./auth/auth.module";
 import {AppRoutingModule} from "./app-routing.module";
-import {IndexComponent} from "./core/components/index/index.component";
-
-
-/*
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig({
-    headerName: "Authorization",
-    headerPrefix: "Bearer",
-    tokenName: "id_token",
-    tokenGetter: (() => sessionStorage.getItem("id_token")),
-    globalHeaders: [{'Content-Type': 'application/json'}],
-    noJwtError: true,
-    noTokenScheme: true
-  }), http, options);
-}
-*/
+import {AuthModule} from "./auth/auth.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    IndexComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-
     CoreModule,
     SharedModule,
-
-    AuthModule,
-
-    /*
-    //feature modules
-    DashboardModule,
-    TreatmentModule,
-    MedicalTestModule,
-    FinanceModule,
-    PharmacyModule,
-    EmployeeModule,
-    ProcurementModule,
-    InventoryModule,
-    */
-
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

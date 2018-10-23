@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("registrations")
-public class RegistrationRestController {
+public class RegistrationRestController  {
 
     RegistrationService registrationService;
     EmployeeService employeeService;
@@ -32,6 +31,11 @@ public class RegistrationRestController {
     @GetMapping
     public List<RegistrationEntity> getRegistrations() {
         return this.registrationService.getRegistrations();
+    }
+    @GetMapping("{id}")
+    public RegistrationEntity getOne(@PathVariable("id") Long id)
+    {
+        return this.registrationService.getOne(id);
     }
 
     @GetMapping("all/{status}")

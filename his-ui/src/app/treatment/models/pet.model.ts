@@ -12,7 +12,9 @@ export interface Pet {
   gender?: PetGenderEnum,
   name?: string,
   id?: number,
-  petType?: PetType
+  petType?: PetType,
+  species?:string;
+  uuid?:string;
 }
 
 

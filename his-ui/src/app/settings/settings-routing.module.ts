@@ -1,26 +1,28 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AdminGuard} from "../auth/guards/admin.guard";
-import {SettingsComponent} from "./components/settings.component";
-import {AuthorizationManagementComponent} from "./components/authorization-management/authorization-management.component";
-import {FactoryResetComponent} from "./components/factory-reset/factory-reset.component";
+import {AuthorizationContainerComponent} from "./containers/authorization-container/authorization-container.component";
+import {FactoryResetContainerComponent} from "./containers/factory-reset-container/factory-reset-container.component";
+import {DataBackupContainerComponent} from "./containers/data-backup-container/data-backup-container.component";
+import {DataRecoveryContainerComponent} from "./containers/data-recovery-container/data-recovery-container.component";
 
 const routes: Routes = [
 
+
   {
-    path: '',
-    canActivate: [AdminGuard],
-    component: SettingsComponent,
+    path: 'authorization',
+    component: AuthorizationContainerComponent
   },
   {
-    path: 'settings-authorization',
-    canActivate: [AdminGuard],
-    component: AuthorizationManagementComponent
+    path: 'factory-reset',
+    component: FactoryResetContainerComponent
   },
   {
-    path: 'settings-factory-reset',
-    canActivate: [AdminGuard],
-    component: FactoryResetComponent
+    path: 'data-backup',
+    component: DataBackupContainerComponent
+  },
+  {
+    path: 'data-recovery',
+    component: DataRecoveryContainerComponent
   }
 ];
 
@@ -28,4 +30,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class SettingsRoutingModule { }
+export class SettingsRoutingModule {
+}

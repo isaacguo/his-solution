@@ -1,0 +1,25 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+   基本信息
+  </div>
+  <div class="panel-body">
+    <form class="form-inline" role="form">
+      <div class="form-group isaac-form-space">
+        <label>编号: </label>
+        <input readonly [ngModel]="medicineInfo?.receiptId" name="receiptId" class="form-control" type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>主人姓名:</label>
+        <input readonly [ngModel]="medicineInfo?.petOwnerName" name="petOwnerName" class="form-control" type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>宠物名称: </label>
+        <input readonly [ngModel]="medicineInfo?.petName" name="petName" class="form-control" type="text">
+      </div>
+      <div>
+        <label>状态: </label>
+        <input readonly [ngModel]="medicineInfo?.receiptStatus" name="receiptStatus" class="form-control" type="text">
+      </div>
+    </form>
+  </div>
+</div>

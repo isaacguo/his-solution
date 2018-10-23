@@ -1,0 +1,19 @@
+<table class="table table-bordered table-responsive">
+  <thead>
+  <tr>
+    <th>编号</th>
+    <th>病历号</th>
+    <th>主人姓名</th>
+    <th>宠物姓名</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let receipt of list; let index=index" (click)="onRowClicked(exportReceipt) "
+      [class.info]="isRowSelected(exportReceipt)">
+    <td>{{index+1}}</td>
+    <td>{{receipt.id}}</td>
+    <td>{{receipt.petOwnerName}}</td>
+    <td>{{receipt.petName}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -1,28 +1,29 @@
 import {Injectable} from '@angular/core';
 import {AuthHttp} from "angular2-jwt";
-import {AbstractService} from "../abstract.service";
 import {Observable} from "rxjs/Observable";
 import {TreatmentEmployeeModel} from "../../../treatment/models/treatment.employee.model";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {ServiceConstants} from "../../../shared/service-constants";
+import {CrudService} from "../crud.service";
 
 @Injectable()
-export class TreatmentEmployeeService extends AbstractService {
+export class TreatmentEmployeeService extends CrudService<TreatmentEmployeeModel> {
 
-  rootUrl: string = "/api/histreatment/employees";
+  rootUrl: string = `${ServiceConstants.TREATMENT_URL}/employees`;
 
-  constructor(private authHttp: AuthHttp) {
-    super();
+  treatmentEmployeeSubject = new BehaviorSubject<TreatmentEmployeeModel>({} as TreatmentEmployeeModel);
+
+  constructor(authHttp: AuthHttp) {
+    super(`${ServiceConstants.TREATMENT_URL}/employees`, authHttp);
   }
-
 
   findByEmpId(empId: number): Observable<TreatmentEmployeeModel> {
     let url = `${this.rootUrl}/findByEmpId/${empId}`;
     return this.authHttp.get(url).map(this.extractData);
   }
 
-  setCanBeRegisteredValue(treatmentEmployee: TreatmentEmployeeModel) {
-
-    let url = `${this.rootUrl}/setCanBeRegisteredValue`;
-    return this.authHttp.post(url, treatmentEmployee).map(r => {
+  setCanBeRegisteredValue(treatmentEmployee: TreatmentEmployeeModel):Observable<any> {
+    return this.authHttp.post(`${this.rootUrl}/setCanBeRegisteredValue`, treatmentEmployee).map(r => {
       return this.extractTextData(r) === "true" ? true : false;
     });
   }

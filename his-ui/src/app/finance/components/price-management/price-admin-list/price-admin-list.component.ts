@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FinancePriceService} from "../../../../core/services/finance/finance-price.service";
 
 @Component({
   selector: 'app-price-admin-list',
@@ -9,11 +8,8 @@ import {FinancePriceService} from "../../../../core/services/finance/finance-pri
 export class PriceAdminListComponent implements OnInit {
 
 
-  selectedModule: string = "请选择模块";
-  modules: any[] = ["请选择模块", "就诊模块", "化验模块", "库房模块", "药房模块"];
 
-
-  constructor(public financePriceService: FinancePriceService) {
+  constructor() {
 
   }
 
@@ -21,7 +17,4 @@ export class PriceAdminListComponent implements OnInit {
 
   }
 
-  setSelectedModule(module: string) {
-    this.selectedModule = module;
-  }
 }

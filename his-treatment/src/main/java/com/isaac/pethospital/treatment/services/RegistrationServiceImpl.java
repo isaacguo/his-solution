@@ -107,6 +107,11 @@ public class RegistrationServiceImpl implements RegistrationService {
         return this.registrationRepository.findAllRegistrationsByRegistrationStatus(status, pageable);
     }
 
+    @Override
+    public RegistrationEntity getOne(Long id) {
+        return this.registrationRepository.findOne(id);
+    }
+
     private EmployeeEntity getEmployeeById(Long employeeId) {
         if (!employeeRepository.exists(employeeId)) {
             throw new RuntimeException("cannot find employee by id");

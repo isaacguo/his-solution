@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {VendorGuard} from "../../guards/vendor.guard";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-procurement-settings',
@@ -8,15 +7,9 @@ import {VendorGuard} from "../../guards/vendor.guard";
 })
 export class ProcurementSettingsComponent implements OnInit {
 
-
-
-  constructor(private vendorGuard:VendorGuard) { }
+  constructor() { }
 
   ngOnInit() {
-
   }
 
-  canShowVendor():boolean {
-    return this.vendorGuard.canActivate();
-  }
 }

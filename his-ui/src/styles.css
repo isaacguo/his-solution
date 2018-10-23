@@ -1,7 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/sb-admin-2.css";
 
-.large-panel-margin  {
-  margin-top: 50px;
+
+div.panel-heading
+{
+  padding: 4px 10px;
+}
+div.panel-info
+{
+  margin-top: 15px;
+}
+
+.isaac-dropdown-button
+{
+  min-width: 160px;
 }
 
 .isaac-form-space {
@@ -35,371 +47,61 @@
   margin-top: 25px;
 }
 
-.light-blue-label {
-  font-size: 14px !important;
-  color: #3c8dbc;
-}
-.head-photo
-{
-  text-align:center;
-  vertical-align: top;
-}
-.head-photo img
-{
-  height:70px;
-  border-radius: 50%;
-
-}
-.doctor-details
-{
-  vertical-align: top;
-}
-.doctor-score
-{
-  vertical-align: top;
-  text-align:center;
-  margin-top:25px;
-}
-.doctor-book
-{
-  vertical-align: top;
-  margin-top:25px;
-}
-
-.isaac-dropdown-button
-{
-  min-width: 160px;
-}
-.isaac-dropdown-250button
-{
-  min-width: 250px;
-}
-.sidebar-2nd-level {
-  z-index: 1;
-  position: absolute;
-  width: 250px;
-}
-
-@media (min-width: 768px) {
-  .mysidebar {
-    max-width:250px;
-  }
-}
-
-@media (min-width: 768px) {
-  .subsidebar {
-    margin-top: 0px;
-  }
-}
-@media (min-width: 768px) {
-  .subsidebar2 {
-    margin-top: 250px;
-  }
-}
-
-.table td{
-  text-align:center;
-}
-.table th{
-  text-align:center;
-}
-
-.form-control-noborder
-{
-  border-width: 0px;
-}
-.fixed-height
-{
-  height: 768px;
-}
-
-.fixed-height-500
-{
-  height: 680px;
-}
-
-.isaac-align-bottom{
-  display:table-cell;
-  vertical-align: bottom;
-}
-
-.isaac-badge{
-  font-size: 10px;
-  background-color: #fd0304;
-}
 
 
-app-customer-service-comments {
-  display: block;
-  padding: 5px;
-}
-
-app-customer-service-comments .title {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  font-size: 20px;
-  line-height: 1.1;
-  font-weight: 500
-}
-
-app-customer-service-comments .add-comment-section {
+app-checkbox {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end
-}
-
-app-customer-service-comments .add-comment-box {
-  display: flex;
-  position: relative;
-  width: 100%;
+  align-items: center;
   padding: 20px;
-  margin-bottom: 10px;
-  min-height: 90px;
-  align-items: center;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .1));
-  background-color: #fff
+  align-self: stretch;
+  border-right: 1px solid rgba(0, 0, 0, .06);
+  background-color: rgba(0, 0, 0, .02);
+  margin-right: 20px;
 }
 
-app-customer-service-comments .comments-list {
-  list-style: none;
-  padding: 0;
-  margin: 0
-}
-
-app-customer-service-comment {
-  display: flex;
-  width: 100%;
-  margin-bottom: 30px;
-}
-
-app-customer-service-comment .meta {
-  display: flex;
-  flex: 0 0 100px;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-
-app-customer-service-comment .user-name {
-  font-weight: 400;
-}
-
-app-customer-service-comment .time {
-  font-size: 14px;
-}
-
-app-customer-service-comment .user-picture {
-  border-radius: 50%;
-  overflow: hidden;
-  width: 70px;
-  height: 70px;
-}
-
-app-customer-service-comment .main {
-  display: flex;
-  flex: auto;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  margin-left: 30px;
-}
-
-app-customer-service-comment .content {
-  display: flex;
-  position: relative;
-  width: 100%;
-  padding: 20px;
-  margin-bottom: 10px;
-  min-height: 90px;
-  align-items: center;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .1));
-  background-color: #fff;
-}
-
-app-customer-service-comment .content:before {
+app-checkbox:before {
   content: "";
   display: block;
   position: absolute;
-  top: 20px;
-  left: -50px;
-  width: 0;
-  height: 0;
-  border: 25px solid transparent;
-  border-right: 25px solid #fff;
+  width: 25px;
+  height: 25px;
+  background-color: hsla(0, 0%, 100%, .26);
+  border: 2px solid rgba(0, 0, 0, .24)
 }
 
-
-app-editor {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  min-height: 50px
-}
-
-app-editor .editable-content {
-  display: none;
-  min-height: 1em;
-  word-break: break-word;
-}
-
-app-editor .editable-content:empty {
-  width: 100%;
-  min-width: 50px;
-}
-
-app-editor .editable-content:focus {
-  outline: none;
-}
-
-app-editor output {
-  word-break: break-word;
-}
-
-app-editor .controls {
-  display: flex;
-  margin: 0 10px
-}
-
-app-editor .icon-edit {
-  background: transparent;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  opacity: 0;
-  transition: transform .2s ease, opacity .2s ease;
-  transform-origin: 50% 50%;
-  transform: scale(.5);
-  color: #3699cb
-}
-
-app-editor .icon-edit:before {
-  content: "✎";
-  font-family: entypo, sans-serif;
-  text-decoration-skip: all;
+app-checkbox .label {
   display: block;
-  width: 30px;
-  height: 30px;
-  font-size: 30px;
-  line-height: 1;
+  position: relative;
+  cursor: pointer
 }
 
-app-editor .icon-save {
-  display: flex;
-  background: transparent;
-  border: none;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
+app-checkbox .input {
+  display: block;
   opacity: 0;
-  transition: transform .2s ease, opacity .2s ease;
-  transform-origin: 50% 50%;
-  transform: scale(.5);
-  color: #68be60;
+  appearance: none;
+  width: 20px;
+  height: 20px;
 }
 
-app-editor .icon-save:before {
+app-checkbox .text {
+  display: block;
+  margin-left: 30px;
+}
+
+app-checkbox .text:before {
   content: "✓";
   font-family: entypo, sans-serif;
-  text-decoration-skip: all;
   display: block;
-  width: 35px;
-  height: 35px;
-  font-size: 35px;
-  line-height: 1;
-}
-
-app-editor .icon-cancel {
-  display: flex;
-  background: transparent;
-  border: none;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  opacity: 0;
-  transition: transform .2s ease, opacity .2s ease;
-  transform-origin: 50% 50%;
-  transform: scale(.5);
-  color: #ff5967;
-}
-
-app-editor .icon-cancel:before {
-  content: "🚫";
-  font-family: entypo, sans-serif;
-  text-decoration-skip: all;
-  display: block;
-  width: 30px;
-  height: 30px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
   font-size: 30px;
-  line-height: 1;
+  color: transparent;
+  transition: all .2s ease;
+  transform: scale(.5)
 }
 
-app-editor:hover .icon-edit {
-  opacity: 1;
-  -webkit-transform: scale(1);
+app-checkbox .input:checked + .text:before {
+  color: #68be60;
   transform: scale(1)
-}
-
-app-editor.edit-mode .editable-content {
-  display: block;
-}
-
-app-editor.edit-mode .output {
-  display: none;
-}
-
-app-editor.edit-mode .icon-cancel, app-editor.edit-mode .icon-save {
-  opacity: 1;
-  transform: scale(1)
-}
-
-
-app-tabs {
-  display: block;
-}
-
-app-tabs .tab-list {
-  display: flex;
-  flex-shrink: 0;
-  list-style: none;
-  padding: 10px 50px;
-  margin: 0;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .18);
-}
-
-app-tabs .tab-list-item {
-  display: block;
-}
-
-app-tabs .tab-button {
-  display: block;
-  margin-right: 33px;
-  padding: 10px 0;
-  border: none;
-  border-bottom: 3px solid transparent;
-  background: transparent;
-  color: rgba(0, 0, 0, .54);
-  font-weight: 500;
-  text-decoration: none;
-  text-transform: uppercase;
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
-}
-
-app-tabs .tab-button:hover {
-  color: #000;
-}
-
-app-tabs .tab-button-active {
-  border-bottom: 3px solid #f3cd2c;
-  color: #000;
 }

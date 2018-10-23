@@ -1,56 +1,52 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {InventoryComponent} from "./components/inventory.component";
-import {ImportManagementComponent} from "./components/import-management/import-management.component";
-import {ImportSheetCreateUpdateComponent} from "./components/import-sheet-create-update/import-sheet-create-update.component";
-import {ExportManagementComponent} from "./components/export-management/export-management.component";
-import {ExportSheetCreateUpdateComponent} from "./components/export-sheet-create-update/export-sheet-create-update.component";
-import {InventoryQueryComponent} from "./components/inventory-query/inventory-query.component";
-import {InventoryItemCreateUpdateComponent} from "./components/inventory-item-create-update/inventory-item-create-update.component";
-import {InventorySettingsComponent} from "./components/inventory-settings/inventory-settings.component";
-import {InventorySettingsWarehourseComponent} from "./components/inventory-settings/inventory-settings-warehourse/inventory-settings-warehourse.component";
-import {InventorySettingsItemManagementComponent} from "../shared/components/inventory-settings-item-management/inventory-settings-item-management.component";
+import {ImportManagementContainerComponent} from "./containers/import-management-container/import-management-container.component";
+import {ExportManagementContainerComponent} from "./containers/export-management-container/export-management-container.component";
+import {InventorySettingsContainerComponent} from "./containers/inventory-settings-container/inventory-settings-container.component";
+import {InventorySettingsItemManagementContainerComponent} from "./containers/inventory-settings-item-management-container/inventory-settings-item-management-container.component";
+import {InventoryQueryContainerComponent} from "./containers/inventory-query-container/inventory-query-container.component";
+import {ImportReceiptContainerComponent} from "./containers/import-receipt-container/import-receipt-container.component";
+import {ExportReceiptContainerComponent} from './containers/export-receipt-container/export-receipt-container.component';
+import {InventoryQueryCategoryDetailContainerComponent} from "./containers/inventory-query-category-detail-container/inventory-query-category-detail-container.component";
 
 const routes: Routes = [
   {
-    path: '',
-    component: InventoryComponent
-  },
-  {
-    path: 'inventory-import-management',
-    component: ImportManagementComponent
-  },
-  {
-    path: 'inventory-import/:operation',
-    component: ImportSheetCreateUpdateComponent
-  },
-  {
-    path: 'inventory-export-management',
-    component: ExportManagementComponent
-  },
-  {
-    path: 'inventory-export/:operation',
-    component: ExportSheetCreateUpdateComponent
-  },
-  {
-    path: 'inventory-query',
-    component: InventoryQueryComponent
-  },
-  {
-    path: 'inventory-item/:operation/:updateId',
-    component: InventoryItemCreateUpdateComponent
-  },
-  {
-    path: 'inventory-settings',
-    component: InventorySettingsComponent,
+    path: 'import-management',
+    component: ImportManagementContainerComponent,
     children: [
       {
-        path: 'warehouses',
-        component: InventorySettingsWarehourseComponent
-      },
+        path: 'receipts/:receiptId',
+        component: ImportReceiptContainerComponent
+      }
+    ]
+  },
+  {
+    path: 'export-management',
+    component: ExportManagementContainerComponent,
+    children: [
       {
-        path:'item-management',
-        component:InventorySettingsItemManagementComponent
+        path: 'receipts/:receiptId',
+        component: ExportReceiptContainerComponent
+      }
+    ]
+  },
+  {
+    path: 'query',
+    component: InventoryQueryContainerComponent,
+    children: [
+      {
+        path: 'category/:categoryId',
+        component: InventoryQueryCategoryDetailContainerComponent
+      }
+    ]
+  },
+  {
+    path: 'settings',
+    component: InventorySettingsContainerComponent,
+    children: [
+      {
+        path: 'item-management',
+        component: InventorySettingsItemManagementContainerComponent
       }
     ]
   }
@@ -60,4 +56,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class InventoryRoutingModule { }
+export class InventoryRoutingModule {
+}

@@ -19,8 +19,7 @@ public class PharmacyRestController extends AbstractCRUDRestController<PharmacyM
 
     private final PharmacyMedicineDispenseService pharmacyMedicineDispenseService;
 
-    public PharmacyRestController(PharmacyMedicineDispenseService pharmacyMedicineDispenseService
-                                  ) {
+    public PharmacyRestController(PharmacyMedicineDispenseService pharmacyMedicineDispenseService) {
         super(pharmacyMedicineDispenseService);
         this.pharmacyMedicineDispenseService = pharmacyMedicineDispenseService;
     }
@@ -30,5 +29,4 @@ public class PharmacyRestController extends AbstractCRUDRestController<PharmacyM
         return this.pharmacyMedicineDispenseService.findMedicineByNameContains(name);
 
     }
-
 }

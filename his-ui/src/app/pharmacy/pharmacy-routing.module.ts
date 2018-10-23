@@ -1,11 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {PharmacyMedicineDispensingManagementComponent} from "./components/pharmacy-medicine-dispensing-management/pharmacy-medicine-dispensing-management.component";
+import {PharmacyDispensingContainerComponent} from "./containers/pharmacy-dispensing-container/pharmacy-dispensing-container.component";
+import {DispensingDetailContainerComponent} from "./containers/dispensing-detail-container/dispensing-detail-container.component";
 
 const routes: Routes = [
   {
-    path: 'pharmacy-dispensing-management',
-    component:PharmacyMedicineDispensingManagementComponent
+    path: 'dispensing',
+    component: PharmacyDispensingContainerComponent,
+    children:[
+      {
+        path: 'receipts/:receiptId',
+        component:DispensingDetailContainerComponent
+      }
+    ]
   },
 ];
 

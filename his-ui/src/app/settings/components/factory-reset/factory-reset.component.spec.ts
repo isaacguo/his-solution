@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {FactoryResetComponent} from './factory-reset.component';
+import { FactoryResetComponent } from './factory-reset.component';
 
 describe('FactoryResetComponent', () => {
   let component: FactoryResetComponent;

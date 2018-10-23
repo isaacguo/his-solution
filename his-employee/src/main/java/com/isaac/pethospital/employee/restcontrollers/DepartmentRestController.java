@@ -27,6 +27,11 @@ public class DepartmentRestController {
         List<DepartmentEntity> all = this.departmentService.findAll();
         return all;
     }
+    @GetMapping("{id}")
+    public DepartmentEntity getDepartmentById(@PathVariable("id") Long id)
+    {
+        return this.departmentService.findById(id);
+    }
 
     @GetMapping("root")
     public MyDepartmentIdAndNameAndChildren findRootDepartment() {

@@ -1,0 +1,15 @@
+<div  style="height: 700px ">
+  <split [direction]="'horizontal'">
+    <split-area [size]="20">
+      <div style="padding-right:15px">
+        <app-treatmnet-prescriptions></app-treatmnet-prescriptions>
+      </div>
+    </split-area>
+
+    <split-area [size]="80">
+      <div style="padding-left: 20px">
+        <router-outlet></router-outlet>
+      </div>
+    </split-area>
+  </split>
+</div>

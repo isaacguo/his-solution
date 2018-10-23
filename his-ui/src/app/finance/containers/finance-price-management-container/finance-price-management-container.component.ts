@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Tag} from "../../models/tag.model";
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, Router} from "@angular/router";
+import "rxjs/add/operator/map";
 
 @Component({
   selector: 'app-finance-price-management-container',

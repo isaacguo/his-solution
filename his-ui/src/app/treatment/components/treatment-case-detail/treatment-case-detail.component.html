@@ -1,0 +1,40 @@
+<div *ngIf="!treatmentCase" class="isaac-margin-15top">
+  <h4>请从病历列表中选择具体病历查看详细信息</h4>
+</div>
+
+<div *ngIf="treatmentCase" class="isaac-margin-15top">
+  <div class="panel panel-info isaac-margin-15top">
+    <div class="panel-heading">
+      基本信息
+    </div>
+    <div class="panel-body">
+
+      <form [formGroup]="treatmentCaseInfoModel" (submit)="onSaveTreatmentCaseBasicInfo()" novalidate>
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>主人描述</b></span>
+          <textarea formControlName="petOwnerDescription" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>临床检查</b></span>
+          <textarea formControlName="clinicSituation" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>医生诊断</b></span>
+          <textarea formControlName="doctorDiagnose" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>医嘱</b></span>
+          <textarea formControlName="doctorAdvice" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="isaac-margin-15top col-md-3">
+          <button class="btn btn-default" type="submit">保存病历</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>

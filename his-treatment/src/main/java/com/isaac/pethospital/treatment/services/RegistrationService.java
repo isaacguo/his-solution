@@ -23,4 +23,6 @@ public interface RegistrationService {
     RegistrationStatusEnum updateStatus(RegistrationOperationRequest request);
 
     Page<RegistrationEntity> findAllRegistrationsByStatusOnPage(RegistrationStatusEnum statusEnum, Pageable pageable);
+
+    RegistrationEntity getOne(Long id);
 }

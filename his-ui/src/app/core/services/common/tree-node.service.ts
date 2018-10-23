@@ -7,7 +7,6 @@ export class TreeNodeService {
   constructor() {
   }
 
-
   getMyTreeNodeById(nodes: MyTreeNode[], nodeId: any) {
     let parentNode: any;
     for (let cnode of nodes) {
@@ -23,6 +22,8 @@ export class TreeNodeService {
   treeConverter(json: any, isLevelOne: boolean): MyTreeNode {
 
     let node = new MyTreeNode();
+    if(!json)
+      return node;
     node.name = json.name;
     node.categoryId = json.id;
     node.isLevelOne = isLevelOne;
@@ -35,4 +36,5 @@ export class TreeNodeService {
     }
     return node;
   }
+
 }

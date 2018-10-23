@@ -1,12 +1,9 @@
 import {TopicOperation} from "./topic-operation.model";
 
 
-export class AuthorizationTopic {
+export interface AuthorizationTopic {
 
   id?: number;
   name?: AuthorizationTopic;
   availableTopicOperationList?: TopicOperation[];
-
-  constructor() {
-  }
 }

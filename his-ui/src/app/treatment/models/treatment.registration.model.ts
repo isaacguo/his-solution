@@ -4,7 +4,7 @@ import {Pet} from "./pet.model";
 export interface TreatmentRegistrationModel {
   price?: number,
   indexOfDay?: number,
-  id?: number,
+  rid?: number;
   createdDate?: Date,
   bookDate?: Date,
   doctor?: TreatmentEmployeeModel,
