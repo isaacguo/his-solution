@@ -56,7 +56,12 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
     @Override
     public TreatmentCaseEntity createTreatmentCase(TreatmentCaseOperationRequest request) {
+        TreatmentCaseEntity tce = request.toTreatmentCaseEntity(this.petRepository, this.employeeRepository);
+        tce.setCreatedDate(tce.getCreatedDate().minusDays(1));
+        tce.setCaseClosed(true);
+        this.treatmentCaseRepository.save(tce);
         return this.treatmentCaseRepository.save(request.toTreatmentCaseEntity(this.petRepository, this.employeeRepository));
+
     }
 
     @Override
@@ -194,7 +199,7 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         clonePet.setGender(pet.getGender());
         clonePet.setSterilized(pet.isSterilized());
 
-        PetOwnerEntity clonePetOwner=new PetOwnerEntity();
+        PetOwnerEntity clonePetOwner = new PetOwnerEntity();
         clonePetOwner.setName(pet.getPetOwner().getName());
         clonePetOwner.setDateOfBirth(pet.getPetOwner().getDateOfBirth());
         clonePetOwner.setMemberNumber(pet.getPetOwner().getMemberNumber());

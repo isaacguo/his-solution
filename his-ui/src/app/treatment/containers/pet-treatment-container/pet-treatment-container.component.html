@@ -8,10 +8,12 @@
             今日病历
           </div>
           <div class="panel-body">
-            <button (click)="onTreatmentCaseCreated()" class="btn btn-primary btn-sm"><span
+            <button (click)="onTreatmentCaseCreated()" class="btn btn-primary btn-sm isaac-margin-bottom-10px"><span
               class="glyphicon glyphicon-plus"></span> 新建病历
             </button>
-            <app-selectable-treatment-case-table [list]="treatmentCases$|async" (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
+            <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"
+                                                 [list]="unClosedTreatmentCases$|async"
+                                                 (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
           </div>
         </div>
 
@@ -20,7 +22,9 @@
             历史病历
           </div>
           <div class="panel-body">
-
+            <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$ |async"
+                                                 [list]="closedTreatmentCases$|async"
+                                                 (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
           </div>
         </div>
 

@@ -136,14 +136,18 @@ public class TreatmentCaseOperationRequest {
         this.treatmentCaseStatus = treatmentCaseStatus;
     }
 
-    public TreatmentCaseEntity toTreatmentCaseEntity(PetRepository petRepository, EmployeeRepository employeeRepository)
+    public TreatmentCaseEntity
+    toTreatmentCaseEntity(PetRepository petRepository, EmployeeRepository employeeRepository)
     {
         TreatmentCaseEntity treatmentCaseEntity=new TreatmentCaseEntity();
 
         treatmentCaseEntity.setTreatmentDate(LocalDateTime.now());
         treatmentCaseEntity.setLastModifiedDateTime(LocalDateTime.now());
         treatmentCaseEntity.setUuid(UUID.randomUUID().toString());
-        //treatmentCaseEntity.setCreatedDate(this.createdDate);
+        treatmentCaseEntity.setCreatedDate(LocalDateTime.now());
+        treatmentCaseEntity.setUuid(UUID.randomUUID().toString());
+        treatmentCaseEntity.setCaseClosed(false);
+
         /*
         treatmentCaseEntity.setTreatmentDate(this.treatmentDate);
         treatmentCaseEntity.setCreatedDate(this.createdDate);

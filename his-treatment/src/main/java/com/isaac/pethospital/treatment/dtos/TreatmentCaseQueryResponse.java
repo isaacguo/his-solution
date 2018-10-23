@@ -19,6 +19,7 @@ public interface TreatmentCaseQueryResponse {
     String getPetOwnerDescription();
     String getDoctorDiagnose();
     String getDoctorAdvice();
+    boolean isCaseClosed();
 
 
     //List<Long> getMedicalTestReportUuidList();

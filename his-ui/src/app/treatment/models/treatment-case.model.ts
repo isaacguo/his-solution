@@ -11,6 +11,7 @@ export interface TreatmentCase {
   createdDate?: Date,
   department?: Department,
   doctor?: Doctor,
+  caseClosed?:boolean,
   petOwner?: PetOwner,
   pet?: Pet,
   id?: number,

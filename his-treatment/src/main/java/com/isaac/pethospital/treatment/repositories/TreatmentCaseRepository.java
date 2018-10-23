@@ -19,6 +19,7 @@ public interface TreatmentCaseRepository extends JpaRepository<TreatmentCaseEnti
             " t.id as id," +
             " t.treatmentDate as treatmentDate," +
             " t.createdDate as createdDate," +
+            " t.caseClosed as caseClosed," +
             " t.lastModifiedDateTime as lastModifiedDateTime," +
             " t.clinicSituation as clinicSituation," +
             " d.name as doctor from TreatmentCaseEntity t join t.doctor d where t.pet=:pet ")

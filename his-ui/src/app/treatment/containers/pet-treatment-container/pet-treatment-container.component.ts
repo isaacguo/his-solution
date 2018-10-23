@@ -22,6 +22,11 @@ export class PetTreatmentContainerComponent implements OnInit {
   treatmentCaseChangedSubject = new BehaviorSubject<boolean>(false);
   treatmentCaseChanged$ = this.treatmentCaseChangedSubject.asObservable();
   treatmentCases$: Observable<TreatmentCase[]>;
+  unClosedTreatmentCases$: Observable<TreatmentCase[]>;
+  closedTreatmentCases$: Observable<TreatmentCase[]>;
+
+  selectedTreatmentCaseSubject=new BehaviorSubject<TreatmentCase>({});
+  selectedTreatmentCase$: Observable<TreatmentCase>=this.selectedTreatmentCaseSubject.asObservable();
 
   petOwner$: Observable<PetOwner>;
   petSubject = new BehaviorSubject<Pet>({});
@@ -44,7 +49,9 @@ export class PetTreatmentContainerComponent implements OnInit {
         return this.treatmentCaseService.findAllByPetId(p.id)
       else
         return [];
-    });
+    }).shareReplay(2);
+    this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed));
+    this.closedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => tc.caseClosed));
   }
 
   ngOnInit() {
@@ -58,6 +65,7 @@ export class PetTreatmentContainerComponent implements OnInit {
   }
 
   onTreatmentCaseSelected($treatmentCase: TreatmentCase) {
+    this.selectedTreatmentCaseSubject.next($treatmentCase);
     this.router.navigate([$treatmentCase.id], {relativeTo: this.route});
   }
 }

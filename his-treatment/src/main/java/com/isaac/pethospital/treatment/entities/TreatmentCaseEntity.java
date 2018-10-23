@@ -23,9 +23,9 @@ public class TreatmentCaseEntity {
     String clinicSituation;
     String doctorAdvice;
 
-    @OneToMany(mappedBy ="treatmentCase",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.ALL)
     @JsonManagedReference("TreatmentCase-TreatmentCaseMedicine")
-    List<TreatmentCaseMedicineEntity> medicineList=new LinkedList<>();
+    List<TreatmentCaseMedicineEntity> medicineList = new LinkedList<>();
     @ManyToOne
     @JsonBackReference("EmployeeEntity-TreatmentCaseEntity")
     EmployeeEntity doctor;
@@ -36,50 +36,61 @@ public class TreatmentCaseEntity {
     List<String> medicalTestReportUuidList = new LinkedList<>();
     @ElementCollection
     List<String> pharmacyMedicineDispenseUuidList = new LinkedList<>();
+    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.ALL)
+    @JsonManagedReference("TreatmentCase-Comment")
+    List<CommentEntity> comments = new LinkedList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String uuid;
+    /*
+        @Enumerated(EnumType.STRING)
+        private TreatmentCaseStatusEnum treatmentCaseStatus;
+        */
+    private boolean caseClosed;
+    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.PERSIST)
+    @JsonManagedReference("TreatmentCaseEntity-PrescriptionEntity")
+    private List<PrescriptionEntity> prescriptionList = new LinkedList<>();
 
     public List<CommentEntity> getComments() {
         return comments;
     }
 
     public void addComment(CommentEntity comment) {
-        if(comment==null)
+        if (comment == null)
             throw new RuntimeException("Comment is null");
         comment.setTreatmentCase(this);
         this.comments.add(comment);
     }
 
-    @OneToMany(mappedBy ="treatmentCase", cascade = CascadeType.ALL)
-    @JsonManagedReference("TreatmentCase-Comment")
-    List<CommentEntity> comments=new LinkedList<>();
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String uuid;
-    @Enumerated(EnumType.STRING)
-    private TreatmentCaseStatusEnum treatmentCaseStatus;
-    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.PERSIST)
-    @JsonManagedReference("TreatmentCaseEntity-PrescriptionEntity")
-    private List<PrescriptionEntity> prescriptionList = new LinkedList<>();
+    public boolean isCaseClosed() {
+        return caseClosed;
+    }
+
+    public void setCaseClosed(boolean caseClosed) {
+        this.caseClosed = caseClosed;
+    }
 
     public List<TreatmentCaseMedicineEntity> getMedicineList() {
         return medicineList;
     }
 
     public void removeMedicine(TreatmentCaseMedicineEntity medicine) {
-        if(medicine==null)
+        if (medicine == null)
             throw new RuntimeException("Medicine is null");
         medicine.setTreatmentCase(null);
         this.medicineList.remove(medicine);
     }
+
     public void addMedicine(TreatmentCaseMedicineEntity medicine) {
-        if(medicine==null)
+        if (medicine == null)
             throw new RuntimeException("Medicine is null");
         medicine.setTreatmentCase(this);
         this.medicineList.add(medicine);
     }
 
     public void removeMedicineList(TreatmentCaseMedicineEntity medicine) {
-        if(medicine==null)
+        if (medicine == null)
             throw new RuntimeException("Medicine is null");
         medicine.setTreatmentCase(null);
         this.medicineList.add(medicine);
@@ -206,15 +217,6 @@ public class TreatmentCaseEntity {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-
-    public TreatmentCaseStatusEnum getTreatmentCaseStatus() {
-        return treatmentCaseStatus;
-    }
-
-    public void setTreatmentCaseStatus(TreatmentCaseStatusEnum treatmentCaseStatus) {
-        this.treatmentCaseStatus = treatmentCaseStatus;
-    }
-
     public LocalDateTime getTreatmentDate() {
         return treatmentDate;
     }
