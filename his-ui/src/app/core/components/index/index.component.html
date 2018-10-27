@@ -20,7 +20,7 @@
     <ul class="nav navbar-top-links navbar-right">
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <i class="fa fa-user fa-fw"></i> 欢迎 {{userName}} <i class="fa fa-caret-down"></i>
+          <i class="fa fa-user fa-fw"></i> 欢迎 {{displayName}} <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
           <li><a href="#"><i class="fa fa-user fa-fw"></i> 我的</a>
@@ -54,17 +54,21 @@
             <a routerLink="/dashboard" routerLinkActive="active" class="text-center"> 快捷方式</a>
           </li>
           -->
-          <li>
+          <li
+            *ngIf="(guardMap.get('Treatment-前台服务-操作')?.isAuthorized()|async) ||
+                   (guardMap.get('Treatment-我的诊室-操作')?.isAuthorized()|async) ||
+                   (guardMap.get('Treatment-就诊设置-操作')?.isAuthorized()|async)">
+
             <a href="#" routerLinkActive="active" class="text-center"> 医院就诊<span
               class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
-              <li>
+              <li *ngIf="guardMap.get('Treatment-前台服务-操作')?.isAuthorized()|async">
                 <a routerLink="/treatment/frontdesk" routerLinkActive="active" class="text-center"> 前台服务</a>
               </li>
-              <li>
+              <li *ngIf="guardMap.get('Treatment-我的诊室-操作')?.isAuthorized()|async">
                 <a routerLink="/treatment/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室</a>
               </li>
-              <li>
+              <li *ngIf="guardMap.get('Treatment-就诊设置-操作')?.isAuthorized()|async">
                 <a routerLink="/treatment/treatment-settings" routerLinkActive="active" class="text-center"> 就诊设置</a>
               </li>
             </ul>
@@ -192,7 +196,7 @@
           </li>
 
           <li>
-            <a href="#" routerLinkActive="active"  class="text-center"> 系统管理<span class="fa arrow"></span></a>
+            <a href="#" routerLinkActive="active" class="text-center"> 系统管理<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li>
                 <a routerLink="/settings/authorization" routerLinkActive="active" class="text-center">权限管理 </a>

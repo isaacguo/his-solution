@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/timer';
+import {GuardDelegation} from "../../guards/guard-delegation";
 
 declare let $: any;
 
@@ -12,13 +13,18 @@ declare let $: any;
 export class IndexComponent implements OnInit, AfterViewInit {
 
   @Input()
-  userName:string;
+  displayName: string;
 
+  @Input()
+  guardMap: Map<string, GuardDelegation>;
 
   constructor(private elementRef: ElementRef) {
+
   }
 
   ngOnInit() {
+
+
   }
 
   ngAfterViewInit(): void {

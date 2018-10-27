@@ -1,13 +1,14 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {IndexContainerComponent} from "./core/containers/index-container/index-container.component";
-import {LoginComponent} from "./auth/components/login/login.component";
-import {LogoutComponent} from "./auth/components/logout/logout.component";
+import {AuthGuard} from "./auth/guards/auth.guard";
+import {GuardFactoryService} from "./core/services/guard-factory.service";
 
 const routes: Routes = [
   {
     path: '',
     component: IndexContainerComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -50,16 +51,13 @@ const routes: Routes = [
         loadChildren: './settings/settings.module#SettingsModule'
       }
     ]
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'logout',
-    component: LogoutComponent,
   }
 ];
+
+let routeGuardFactory = (key: string, guardFactoryService: GuardFactoryService) => {
+  //return guardFactoryService.getGuard(domain + '-' + topic + '-' + action);
+  return guardFactoryService.getGuard(key);
+}
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
@@ -68,6 +66,16 @@ const routes: Routes = [
     // of the modules (PRs welcome 😉)
     preloadingStrategy: PreloadAllModules
   })],
+  providers: [
+
+    /*
+    {
+      provide: 'canTreatment',
+      useFactory: routeGuardFactory,
+      deps: ['Treatment-前台服务-操作', GuardFactoryService]
+    }
+    */
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

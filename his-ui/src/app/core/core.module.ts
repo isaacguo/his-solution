@@ -16,6 +16,20 @@ import {TreatmentDepartmentService} from "./services/treatment/treatment-departm
 import {TreatmentEmployeeService} from "./services/treatment/treatment-employee.service";
 import {RegistrationService} from "./services/treatment/registration.service";
 import {PetService} from "./services/treatment/pet.service";
+import {EmployeeManagementGuard} from "./guards/employee/employee-management.guard";
+import {ChargeManagementGuard} from "./guards/finance/charge-management.guard";
+import {FinanceManagementGuard} from "./guards/finance/finance-management.guard";
+import {PriceManagementGuard} from "./guards/finance/price-management.guard";
+import {InventoryManagementGuard} from "./guards/inventory/inventory-management.guard";
+import {MedicalTestManagementGuard} from "./guards/medical-test/medical-test-management.guard";
+import {MedicineManagementGuard} from "./guards/medicine/medicine-management.guard";
+import {ProcurementManagementGuard} from "./guards/procurement/procurement-management.guard";
+import {FrontdeskGuard} from "./guards/treatement/frontdesk.guard";
+import {InpatientManagementGuard} from "./guards/treatement/inpatient-management.guard";
+import {MyConsultingRoomGuard} from "./guards/treatement/my-consulting-room.guard";
+import {TreatmentSettingsGuard} from "./guards/treatement/treatment-settings.guard";
+import {ProcurementApprovalGuard} from "./guards/procurement/procurement-approval.guard";
+import {GuardFactoryService} from "./services/guard-factory.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -29,6 +43,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     noTokenScheme: true
   }), http, options);
 }
+
 
 
 @NgModule({
@@ -58,7 +73,26 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PetService,
     TreatmentDepartmentService,
     TreatmentEmployeeService,
-    RegistrationService
+    RegistrationService,
+    EmployeeManagementGuard,
+    ChargeManagementGuard,
+    FinanceManagementGuard,
+    PriceManagementGuard,
+    InventoryManagementGuard,
+    MedicalTestManagementGuard,
+    MedicineManagementGuard,
+    MedicineManagementGuard,
+    ProcurementManagementGuard,
+    FrontdeskGuard,
+    InpatientManagementGuard,
+    MyConsultingRoomGuard,
+    TreatmentSettingsGuard,
+    ProcurementApprovalGuard,
+    GuardFactoryService
+
+
+
+
   ]
 
 })
