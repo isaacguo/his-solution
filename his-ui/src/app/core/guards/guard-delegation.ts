@@ -43,19 +43,19 @@ export class GuardDelegation implements OnInit, OnDestroy, CanActivate {
     }
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):  boolean {
     if (!this.authorizationInfo.authorizationAssignmentArray.has(this.service)) {
-      return Observable.of(false);
+      return false;
     }
     else {
       let assignments: AuthorizationAssignment[] = this.authorizationInfo.authorizationAssignmentArray.get(this.service);
       let index = assignments.findIndex(r => r.topic.name === this.topic);
-      if (index < 0) return Observable.of(false);
+      if (index < 0) return false;
       else {
         let assignmentIndex = assignments[index].allowedOperations.findIndex(op => op.name === this.operation);
-        if (assignmentIndex < 0) return Observable.of(false);
+        if (assignmentIndex < 0) return false;
         else {
-          return Observable.of(true);
+          return true;
         }
       }
     }

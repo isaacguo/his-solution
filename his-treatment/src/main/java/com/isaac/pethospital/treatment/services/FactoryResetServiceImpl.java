@@ -62,6 +62,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         authorizationTopicService.addAuthorizationTopicAndOperations("我的诊室", "操作");
         authorizationTopicService.addAuthorizationTopicAndOperations("就诊设置", "操作");
         authorizationTopicService.addAuthorizationTopicAndOperations("住院管理", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("客户服务", "操作");
 
         ChargeableCategoryEntity cce=new ChargeableCategoryEntity();
         cce.setName("挂号");

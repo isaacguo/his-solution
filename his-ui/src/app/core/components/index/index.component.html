@@ -54,26 +54,30 @@
             <a routerLink="/dashboard" routerLinkActive="active" class="text-center"> 快捷方式</a>
           </li>
           -->
+
+          <!--
           <li
             *ngIf="(guardMap.get('Treatment-前台服务-操作')?.isAuthorized()|async) ||
                    (guardMap.get('Treatment-我的诊室-操作')?.isAuthorized()|async) ||
                    (guardMap.get('Treatment-就诊设置-操作')?.isAuthorized()|async)">
-
-            <a href="#" routerLinkActive="active" class="text-center"> 医院就诊<span
-              class="fa arrow"></span></a>
-            <ul class="nav nav-second-level">
-              <li *ngIf="guardMap.get('Treatment-前台服务-操作')?.isAuthorized()|async">
-                <a routerLink="/treatment/frontdesk" routerLinkActive="active" class="text-center"> 前台服务</a>
-              </li>
-              <li *ngIf="guardMap.get('Treatment-我的诊室-操作')?.isAuthorized()|async">
-                <a routerLink="/treatment/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室</a>
-              </li>
-              <li *ngIf="guardMap.get('Treatment-就诊设置-操作')?.isAuthorized()|async">
-                <a routerLink="/treatment/treatment-settings" routerLinkActive="active" class="text-center"> 就诊设置</a>
-              </li>
-            </ul>
-          </li>
+                   -->
           <li>
+
+          <a href="#" routerLinkActive="active" class="text-center"> 医院就诊<span
+            class="fa arrow"></span></a>
+          <ul class="nav nav-second-level">
+            <li *ngIf="guardMap.get('Treatment-前台服务-操作')?.isAuthorized()|async">
+              <a routerLink="/treatment/frontdesk" routerLinkActive="active" class="text-center"> 前台服务</a>
+            </li>
+            <li *ngIf="guardMap.get('Treatment-我的诊室-操作')?.isAuthorized()|async">
+              <a routerLink="/treatment/my-consulting-room" routerLinkActive="active" class="text-center"> 我的诊室</a>
+            </li>
+            <li *ngIf="guardMap.get('Treatment-就诊设置-操作')?.isAuthorized()|async">
+              <a routerLink="/treatment/treatment-settings" routerLinkActive="active" class="text-center"> 就诊设置</a>
+            </li>
+          </ul>
+          </li>
+          <li *ngIf="guardMap.get('Treatment-客户服务-操作')?.isAuthorized()|async">
             <a routerLink="/treatment/customer-service" routerLinkActive="active" class="text-center"> 客户服务</a>
           </li>
           <!--

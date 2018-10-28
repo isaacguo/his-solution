@@ -26,6 +26,7 @@ const routes: Routes = [
   {
     path: 'frontdesk',
     component: FrontDeskContainerComponent,
+
     children: [
       {
         path: 'petreg',
@@ -33,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'registration-query',
-        component: RegistrationQueryContainerComponent
+        component: RegistrationQueryContainerComponent,
       },
       {
 

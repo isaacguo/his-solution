@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
-import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {ActivatedRouteSnapshot, PreloadAllModules, RouterModule, RouterStateSnapshot, Routes} from '@angular/router';
 import {IndexContainerComponent} from "./core/containers/index-container/index-container.component";
 import {AuthGuard} from "./auth/guards/auth.guard";
 import {GuardFactoryService} from "./core/services/guard-factory.service";
+import {GuardDelegation} from "./core/guards/guard-delegation";
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
       },
       {
         path: 'treatment',
-        loadChildren: './treatment/treatment.module#TreatmentModule'
+        loadChildren: './treatment/treatment.module#TreatmentModule',
+        canActivate: ['canTreatment'],
       },
       {
         path: 'medical-test',
@@ -55,26 +57,23 @@ const routes: Routes = [
 ];
 
 let routeGuardFactory = (key: string, guardFactoryService: GuardFactoryService) => {
-  //return guardFactoryService.getGuard(domain + '-' + topic + '-' + action);
   return guardFactoryService.getGuard(key);
 }
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    // preload all modules; optionally we could
-    // implement a custom preloading strategy for just some
-    // of the modules (PRs welcome 😉)
     preloadingStrategy: PreloadAllModules
   })],
   providers: [
-
-    /*
+    {
+      provide: '*canTreatment*',
+      useValue: 'Treatment'
+    },
     {
       provide: 'canTreatment',
       useFactory: routeGuardFactory,
-      deps: ['Treatment-前台服务-操作', GuardFactoryService]
+      deps: ['*canTreatment*', GuardFactoryService]
     }
-    */
   ],
   exports: [RouterModule]
 })
