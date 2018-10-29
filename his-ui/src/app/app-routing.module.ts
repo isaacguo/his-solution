@@ -56,7 +56,7 @@ const routes: Routes = [
   }
 ];
 
-let routeGuardFactory = (key: string, guardFactoryService: GuardFactoryService) => {
+export let routeGuardFactory = (key: string, guardFactoryService: GuardFactoryService) => {
   return guardFactoryService.getGuard(key);
 }
 
