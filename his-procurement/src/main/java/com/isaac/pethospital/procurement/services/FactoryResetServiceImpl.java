@@ -49,6 +49,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
         this.procurementConfigurationRepository.deleteAll();
         if(this.procurementApprovalService.getRoot()!=null)
         this.procurementApprovalStageRepository.delete(this.procurementApprovalService.getRoot());
+        this.procurementApprovalStageRepository.deleteAll();
         this.vendorRepository.deleteAll();
         authorizationService.deleteAll();
         authorizationTopicService.deleteAll();

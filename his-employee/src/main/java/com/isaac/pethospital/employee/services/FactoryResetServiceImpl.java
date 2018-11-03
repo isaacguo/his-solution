@@ -42,6 +42,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
     @Transactional
     void cleanDb() {
+
         authorizationService.deleteAll();
         authorizationTopicService.deleteAll();
         employeeRepository.deleteAll();

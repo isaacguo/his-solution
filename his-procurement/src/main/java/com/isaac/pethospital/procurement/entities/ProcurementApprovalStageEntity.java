@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class ProcurementApprovalStageEntity {
 
     String stage;
-    @OneToOne(mappedBy = "previousStage", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "previousStage", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("next-previous")
     ProcurementApprovalStageEntity nextStage;
     @OneToOne

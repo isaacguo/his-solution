@@ -17,6 +17,7 @@ import {CheckboxComponent} from "./components/checkbox/checkbox.component";
 import {PetGenderEnumPipe} from "./pipes/pet-gender-enum.pipe";
 import { RegistrationStatusEnumPipe } from './pipes/registration-status-enum.pipe';
 import { GenderEnumPipe } from './pipes/gender-enum.pipe';
+import {PopupModalComponent} from "./components/popup-modal/popup-modal.component";
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { GenderEnumPipe } from './pipes/gender-enum.pipe';
     PetGenderEnumPipe,
     RegistrationStatusEnumPipe,
     GenderEnumPipe,
+    PopupModalComponent,
 
 
     ],
@@ -63,7 +65,8 @@ import { GenderEnumPipe } from './pipes/gender-enum.pipe';
     CheckboxComponent,
     PetGenderEnumPipe,
     RegistrationStatusEnumPipe,
-    GenderEnumPipe
+    GenderEnumPipe,
+    PopupModalComponent
 
   ]
 })

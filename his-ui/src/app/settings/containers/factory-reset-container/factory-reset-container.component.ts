@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthorizationService} from "../../../core/services/common/authorization.service";
 import {FactoryResetService} from "../../../core/services/settings/factory-reset.service";
 
@@ -9,7 +9,9 @@ import {FactoryResetService} from "../../../core/services/settings/factory-reset
 })
 export class FactoryResetContainerComponent implements OnInit {
 
-  constructor(private factoryResetService:FactoryResetService, public authorizationService:AuthorizationService) { }
+  constructor(private factoryResetService: FactoryResetService, public authorizationService: AuthorizationService) {
+  }
+
   serviceArray: [string, string][] = [];
 
   ngOnInit() {
@@ -18,17 +20,25 @@ export class FactoryResetContainerComponent implements OnInit {
 
   private loadData() {
 
-    this.serviceArray=this.authorizationService.authorizationArray;
+    this.serviceArray = this.authorizationService.authorizationArray;
   }
 
-  onResetButtonClicked(serviceUrl:string) {
+  onResetButtonClicked(serviceUrl: string) {
 
-    this.factoryResetService.resetService(serviceUrl).subscribe(r=>{});
+    this.factoryResetService.resetService(serviceUrl).subscribe(r => {
+    });
 
   }
 
-  onFillDemoDataButtonClicked(serviceUrl:string) {
-    this.factoryResetService.fillDemoData(serviceUrl).subscribe(r=>{});
+  onFillDemoDataButtonClicked(serviceUrl: string) {
+    this.factoryResetService.fillDemoData(serviceUrl).subscribe(r => {
+    });
   }
 
+  onDoAll() {
+    this.serviceArray.forEach(r => {
+      this.factoryResetService.resetService(r[0]).mergeMap(() =>
+        this.factoryResetService.fillDemoData(r[0])).subscribe();
+    });
+  }
 }

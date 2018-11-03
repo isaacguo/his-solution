@@ -15,6 +15,9 @@ div.panel-info
 {
   min-width: 160px;
 }
+.nobull {
+  list-style-type: none;
+}
 
 .isaac-form-space {
   margin-left: 10px;

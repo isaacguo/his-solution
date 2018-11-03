@@ -3,6 +3,8 @@ package com.isaac.pethospital.procurement.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -12,10 +14,10 @@ import java.util.List;
 public class ProcurementStatusEntity {
 
     String status;
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("parent-next")
     List<ProcurementStatusEntity> next = new LinkedList<>();
-    @ManyToOne
+    @ManyToOne()
     @JsonBackReference("parent-next")
     ProcurementStatusEntity parent;
     @Id
