@@ -1,54 +1,57 @@
-<div class="row">
-  <h1 class="page-header">数据备份与恢复</h1>
-</div>
+<modal #scheduleBackupModal (onClose)="onScheduleBackupClosed()">
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">设置定时备份</h4>
+  </modal-header>
+  <modal-body>
+    <form [formGroup]="formModel" class="form" role="form">
+      <div class="form-group isaac-form-space">
+        <label>定时备份:</label>
+        <ul class="nobull">
+          <li>
+            <label class="radio">
+              <input type="radio" formControlName="scheduleType" name="optradio" checked value="bymin">每隔30分钟
+            </label>
+          </li>
+          <li>
+            <label class="radio" style="display: inline-block;">
+              <input type="radio" formControlName="scheduleType" name="optradio" value="byhour">每隔
+              <div class="dropdown" style="width: 40px;display: inline-block">
+                <button type="button"
+                        class="btn btn-default dropdown-toggle" id="dropdownMenu1"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  {{formModel.controls['hourValue'].value}}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a href="javascript:void(0)" *ngFor="let hour of getHoursArr()"
+                         (click)="onHourClicked(hour)"
+                  >{{hour}}</a>
+                  </li>
+                </ul>
+              </div>
+              小时
+            </label>
+          </li>
+        </ul>
+      </div>
+    </form>
+
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn" (click)="scheduleBackupModal.dismiss()">取消</button>
+    <button type="button" class="btn btn-primary" (click)="scheduleBackupModal.close()">确定</button>
+  </modal-footer>
+</modal>
+
+
+
 
 <div class="row">
   <div class="col-md-4 btn-group">
     <button class="btn btn-primary">立即备份</button>
+    <button class="btn" (click)="onScheduleBackupClicked()" >设置定时备份</button>
   </div>
 </div>
-
-<div class="row isaac-margin-15top">
-  <div class="col-md-4">
-    <div class="panel panel-primary">
-      <div class="panel-body">
-        <form class="form" role="form">
-          <div class="form-group isaac-form-space">
-            <label>定时备份:</label>
-            <ul class="nobull">
-              <li>
-                <label class="radio">
-                  <input type="radio" name="optradio" checked>每隔30分钟
-                </label>
-              </li>
-              <li>
-                <label class="radio" style="display: inline-block;">
-                  <input type="radio" name="optradio">每隔
-                  <div class="dropdown" style="width: 40px;display: inline-block">
-                    <button type="button"
-                            class="btn btn-default dropdown-toggle" id="dropdownMenu1"
-                            data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                      {{selectedStatusText}}
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><a href="javascript:void(0)" *ngFor="let hour of getHoursArr()">{{hour}}</a>
-                      </li>
-                    </ul>
-                  </div>
-                  小时
-                </label>
-              </li>
-            </ul>
-          </div>
-        </form>
-
-        <button class="btn btn-default pull-right" type="button">保存</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <h4>备份列表</h4>
 <table *ngIf="pageData?.content.length>0" class="table table-bordered isaac-margin-15top">
@@ -82,4 +85,5 @@
 
 <pagination-controls *ngIf="pageData" (pageChange)="onPageChanged($event)" previousLabel="上一页"
                      nextLabel="下一页"></pagination-controls>
+
 
