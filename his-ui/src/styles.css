@@ -1,37 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 @import "assets/sb-admin-2.css";
 
-
-div.panel-heading
-{
+div.panel-heading {
   padding: 4px 10px;
 }
-div.panel-info
-{
+
+div.panel-info {
   margin-top: 15px;
 }
 
-.isaac-dropdown-button
-{
+.isaac-dropdown-button {
   min-width: 160px;
 }
+
 .nobull {
   list-style-type: none;
 }
 
+.isaac-th-id {
+  width: 50px
+}
+.isaac-font-medium
+{
+  font-size: 15px;
+}
+
 .isaac-form-space {
   margin-left: 10px;
-  margin-top:5px;
+  margin-top: 5px;
 }
-.isaac-datepicker-width{
+
+.isaac-datepicker-width {
   max-width: 200px;
-  width:200px;
+  width: 200px;
 }
 
 .isaac-margin-top {
   margin-top: 5px;
 }
-
 
 .isaac-margin-left-10 {
   margin-left: 10px;
@@ -48,14 +54,14 @@ div.panel-info
 .isaac-margin-15top {
   margin-top: 15px;
 }
+
 .isaac-margin-20top {
   margin-top: 20px;
 }
+
 .isaac-margin-25top {
   margin-top: 25px;
 }
-
-
 
 app-checkbox {
   display: flex;

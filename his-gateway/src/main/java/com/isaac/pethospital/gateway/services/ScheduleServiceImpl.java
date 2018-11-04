@@ -1,6 +1,5 @@
 package com.isaac.pethospital.gateway.services;
 
-import com.isaac.pethospital.gateway.dtos.BackupData;
 import com.isaac.pethospital.gateway.entities.BackupEntity;
 import org.quartz.*;
 import org.slf4j.Logger;

@@ -1,5 +1,6 @@
 package com.isaac.pethospital.gateway;
 
+import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.security.AuthHelper;
 import com.isaac.pethospital.common.time.DatetimeGenerator;
@@ -11,7 +12,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-//@EnableConfigurationProperties({JmsProperties.class})
+@EnableConfigurationProperties({HisGatewayProperties.class, JmsProperties.class})
 public class GatewayConfiguration {
 
     @Bean
@@ -20,13 +21,12 @@ public class GatewayConfiguration {
     }
 
     @Bean
-    public DatetimeGenerator getDatetimeGenerator(){
+    public DatetimeGenerator getDatetimeGenerator() {
         return new DatetimeGenerator();
     }
 
     @Bean
-    public JmsSender getJmsSender(JmsTemplate jmsTemplate)
-    {
+    public JmsSender getJmsSender(JmsTemplate jmsTemplate) {
         return new JmsSender(jmsTemplate);
     }
 

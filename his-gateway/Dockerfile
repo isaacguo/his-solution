@@ -67,6 +67,10 @@ ADD backup.sh /backup.sh
 ADD restore.sh /restore.sh
 RUN chmod +x /entrypoint.sh
 
+RUN chmod +x /backup.sh
+RUN chmod +x /restore.sh
+
+
 LABEL version=${IMAGE_VERSION}
 
 ENTRYPOINT ["./entrypoint.sh"]

@@ -17,4 +17,16 @@ export class DataManagementService extends CrudService<any> {
     return this.authHttp.post(`${this.rootUrl}/backup`, {}).map(this.extractData);
   }
 
+  getBackupFiles(folderName: string): Observable<string[]> {
+    return this.authHttp.get(`${this.rootUrl}/get-backup-files/${folderName}`).map(this.extractData);
+  }
+
+
+  getBackupFolders(): Observable<string[]> {
+    return this.authHttp.get(`${this.rootUrl}/get-backup-folders`).map(this.extractData);
+  }
+
+  restoreFolder(fileName: string): Observable<any> {
+    return this.authHttp.post(`${this.rootUrl}/restore`, {fileName: fileName}).map(this.extractData);
+  }
 }

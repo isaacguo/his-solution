@@ -13,9 +13,14 @@ export class DataBackupContainerComponent implements OnInit {
   infoChangedSubject = new BehaviorSubject<boolean>(false);
   infoChangedObject$ = this.infoChangedSubject.asObservable();
   scheduleInfo$: Observable<any>;
+  backupFolders$: Observable<string[]>;
+
+  backupFilesSubject = new BehaviorSubject<string[]>([]);
+  backupFiles$ = this.backupFilesSubject.asObservable();
 
   constructor(private dataManagementService: DataManagementService) {
     this.scheduleInfo$ = this.infoChangedObject$.mergeMap(() => this.dataManagementService.readOne(1));
+    this.backupFolders$ = this.infoChangedObject$.mergeMap(() => this.dataManagementService.getBackupFolders());
   }
 
   ngOnInit() {
@@ -26,5 +31,14 @@ export class DataBackupContainerComponent implements OnInit {
   onScheduleInfoUpdated($event) {
     this.dataManagementService.update(1, {...$event})
       .subscribe(() => this.infoChangedSubject.next(true));
+  }
+
+  onRestoreFolder($event: string) {
+    this.dataManagementService.restoreFolder($event)
+      .subscribe(() => this.infoChangedSubject.next(true));
+  }
+
+  onFolderReview($event: string) {
+    this.dataManagementService.getBackupFiles($event).subscribe((files) => this.backupFilesSubject.next(files));
   }
 }

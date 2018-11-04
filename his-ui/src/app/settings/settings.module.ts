@@ -11,6 +11,7 @@ import {DataBackupComponent} from './components/data-backup/data-backup.componen
 import {DataRecoveryContainerComponent} from './containers/data-recovery-container/data-recovery-container.component';
 import {DataRecoveryComponent} from './components/data-recovery/data-recovery.component';
 import {SecurityOperationPanelComponent} from "./components/security-operation-panel/security-operation-panel.component";
+import {ShowBackupFilesTableComponent} from './/components/show-backup-files-table/show-backup-files-table.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {SecurityOperationPanelComponent} from "./components/security-operation-p
     DataBackupContainerComponent,
     DataBackupComponent,
     DataRecoveryContainerComponent,
-    DataRecoveryComponent]
+    DataRecoveryComponent,
+    ShowBackupFilesTableComponent]
 })
 export class SettingsModule {
 }
