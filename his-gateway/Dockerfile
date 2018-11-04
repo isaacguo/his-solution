@@ -5,6 +5,8 @@ MAINTAINER Isaac Guo <isaac_guo@163.com>
 RUN apk add --no-cache \
 		ca-certificates
 
+RUN apk add --no-cache bash gawk sed grep bc coreutils
+
 # set up nsswitch.conf for Go's "netgo" implementation (which Docker explicitly uses)
 # - https://github.com/docker/docker-ce/blob/v17.09.0-ce/components/engine/hack/make.sh#L149
 # - https://github.com/golang/go/blob/go1.9.1/src/net/conf.go#L194-L275
