@@ -58,6 +58,10 @@ public class BackupJob implements Job {
             databaseOperationRecordEntity.setFinishTime(LocalDateTime.now());
             databaseOperationRecordEntity.setLog(getStackTraceString(e));
 
+            LOG.error("Interrupted!", e);
+            // Restore interrupted state...
+            Thread.currentThread().interrupt();
+
         } catch (IOException e) {
 
             databaseOperationRecordEntity.setResult(false);

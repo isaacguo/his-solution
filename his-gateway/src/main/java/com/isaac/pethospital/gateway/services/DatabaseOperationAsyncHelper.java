@@ -5,6 +5,8 @@ import com.isaac.pethospital.gateway.dtos.RestoreData;
 import com.isaac.pethospital.gateway.entities.DatabaseOperationRecordEntity;
 import com.isaac.pethospital.gateway.repositories.DatabaseOperationRecordRepository;
 import com.isaac.pethospital.gateway.utils.CommandRunUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -12,12 +14,12 @@ import org.springframework.stereotype.Component;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.time.LocalDateTime;
 
 @Component
 public class DatabaseOperationAsyncHelper {
+
+    private static final Logger LOG = LoggerFactory.getLogger(DatabaseOperationAsyncHelper.class);
 
 
     private final DatabaseOperationRecordRepository databaseOperationRecordRepository;
@@ -51,6 +53,10 @@ public class DatabaseOperationAsyncHelper {
             databaseOperationRecordEntity.setResult(false);
             databaseOperationRecordEntity.setFinishTime(LocalDateTime.now());
             databaseOperationRecordEntity.setLog(CommandRunUtil.getStackTraceString(e));
+
+            LOG.error("Interrupted!", e);
+            // Restore interrupted state...
+            Thread.currentThread().interrupt();
 
         } catch (IOException e) {
 
