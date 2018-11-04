@@ -137,8 +137,10 @@ services:
       - his-db
     command: --spring.profiles.active=production
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
+      - "/his-backup:/his-backup"
 
 volumes:
    his-db-volume:

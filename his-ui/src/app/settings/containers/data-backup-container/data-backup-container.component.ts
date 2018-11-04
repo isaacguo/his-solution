@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DataManagementService} from "../../../core/services/gateway/data-management.service";
+import {Observable} from "rxjs/Observable";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 @Component({
   selector: 'app-data-backup-container',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataBackupContainerComponent implements OnInit {
 
-  constructor() { }
+  infoChangedSubject = new BehaviorSubject<boolean>(false);
+  infoChangedObject$ = this.infoChangedSubject.asObservable();
+  scheduleInfo$: Observable<any>;
 
-  ngOnInit() {
+  constructor(private dataManagementService: DataManagementService) {
+    this.scheduleInfo$ = this.infoChangedObject$.mergeMap(() => this.dataManagementService.readOne(1));
   }
 
+  ngOnInit() {
+
+  }
+
+
+  onScheduleInfoUpdated($event) {
+    this.dataManagementService.update(1, {...$event})
+      .subscribe(() => this.infoChangedSubject.next(true));
+  }
 }

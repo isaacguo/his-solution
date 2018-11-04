@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, EventEmitter,
   Input,
   OnChanges,
   OnInit,
@@ -23,18 +23,21 @@ export class DataBackupComponent implements OnInit, OnChanges {
 
   @Input()
   pageData: any;
-  @Output()
+
+  @Input()
   scheduleInfo: any;
+
+  @Output()
+  scheduleInfoUpdated=new EventEmitter<any>();
 
   @ViewChild("scheduleBackupModal")
   scheduleBackupModal: ModalComponent;
 
   formModel: FormGroup;
 
-  selectedStatusText: string = '1';
 
   getHoursArr() {
-    return Array.from(Array(23).keys()).map(i => i + 1);
+    return Array.from(Array(24).keys()).map(i => i + 1);
   }
 
   constructor(public route: ActivatedRoute,
@@ -64,7 +67,7 @@ export class DataBackupComponent implements OnInit, OnChanges {
   }
 
   onScheduleBackupClosed() {
-
+    this.scheduleInfoUpdated.emit(this.formModel.value);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

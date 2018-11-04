@@ -3,4 +3,6 @@
 </div>
 
 
-<app-data-backup></app-data-backup>
+<app-data-backup [scheduleInfo]="scheduleInfo$ |async"
+                 (scheduleInfoUpdated)="onScheduleInfoUpdated($event)"
+></app-data-backup>
