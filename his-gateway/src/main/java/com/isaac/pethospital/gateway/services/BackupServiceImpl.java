@@ -9,8 +9,13 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BackupServiceImpl extends AbstractCrudService<BackupEntity, BackupEntity> implements BackupService<BackupEntity, BackupEntity> {
@@ -73,12 +78,22 @@ public class BackupServiceImpl extends AbstractCrudService<BackupEntity, BackupE
 
         File folder = new File(this.hisGatewayProperties.getBackupFolder());
         File[] listOfFiles = folder.listFiles();
-        List<String> fileList = new ArrayList<>();
+        List<File> fileList = new ArrayList<>();
 
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isDirectory())
-                fileList.add(listOfFiles[i].getName());
+                fileList.add(listOfFiles[i]);
         }
-        return fileList;
+        fileList.sort((a, b) -> {
+            try {
+                BasicFileAttributes attrA = Files.readAttributes(a.toPath(), BasicFileAttributes.class);
+                BasicFileAttributes attrB = Files.readAttributes(b.toPath(), BasicFileAttributes.class);
+                return attrB.creationTime().compareTo(attrA.creationTime());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        });
+        return fileList.stream().map(r->r.getName()).collect(Collectors.toList());
     }
 }
