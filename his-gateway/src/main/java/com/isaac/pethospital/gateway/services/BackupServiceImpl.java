@@ -5,6 +5,8 @@ import com.isaac.pethospital.gateway.HisGatewayProperties;
 import com.isaac.pethospital.gateway.dtos.RestoreData;
 import com.isaac.pethospital.gateway.entities.BackupEntity;
 import com.isaac.pethospital.gateway.repositories.BackupRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class BackupServiceImpl extends AbstractCrudService<BackupEntity, BackupEntity> implements BackupService<BackupEntity, BackupEntity> {
+    private static final Logger LOG = LoggerFactory.getLogger(DatabaseOperationAsyncHelper.class);
     private final BackupRepository backupRepository;
     private final ScheduleService scheduleService;
     private final HisGatewayProperties hisGatewayProperties;
-
     private final ApplicationEventPublisher eventPublisher;
 
     public BackupServiceImpl(BackupRepository backupRepository,
@@ -90,7 +92,8 @@ public class BackupServiceImpl extends AbstractCrudService<BackupEntity, BackupE
                 BasicFileAttributes attrB = Files.readAttributes(b.toPath(), BasicFileAttributes.class);
                 return attrB.creationTime().compareTo(attrA.creationTime());
             } catch (IOException e) {
-                e.printStackTrace();
+
+                this.LOG.error("error in getBackupFolders",e);
                 return 0;
             }
         });
