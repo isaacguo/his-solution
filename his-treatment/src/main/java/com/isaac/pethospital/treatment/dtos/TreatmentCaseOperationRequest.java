@@ -140,6 +140,7 @@ public class TreatmentCaseOperationRequest {
     toTreatmentCaseEntity(PetRepository petRepository, EmployeeRepository employeeRepository)
     {
         TreatmentCaseEntity treatmentCaseEntity=new TreatmentCaseEntity();
+        treatmentCaseEntity.setTreatmentCaseStatus(TreatmentCaseStatusEnum.UNFINISHED);
 
         treatmentCaseEntity.setTreatmentDate(LocalDateTime.now());
         treatmentCaseEntity.setLastModifiedDateTime(LocalDateTime.now());

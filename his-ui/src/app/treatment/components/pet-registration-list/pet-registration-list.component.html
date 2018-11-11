@@ -5,7 +5,7 @@
     <th>宠物名称</th>
     <th>主人姓名</th>
     <th>挂号状态</th>
-    <th>操作</th>
+    <!--<th>操作</th>-->
   </tr>
   </thead>
   <tbody>
@@ -15,6 +15,7 @@
     <td>{{registration.petName}}</td>
     <td>{{registration.petOwnerName}}</td>
     <td>{{getRegistrationStatusString(registration.registrationStatus)}}</td>
+    <!--
     <td>
       <div class="btn-group btn-group-sm">
         <button *ngIf="registration.registrationStatus==='WAITING'" type="button"
@@ -22,6 +23,7 @@
           class="glyphicon glyphicon-bullhorn"></span></button>
       </div>
     </td>
+    -->
   </tr>
   </tbody>
 </table>

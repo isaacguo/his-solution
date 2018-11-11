@@ -1,1 +1,3 @@
-<app-treatment-case-detail></app-treatment-case-detail>
+<app-treatment-case-detail
+  (treatmentCaseSaved)="onTreatmentCaseSaved($event)"
+  [treatmentCase]="treatmentCase$|async"></app-treatment-case-detail>

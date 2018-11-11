@@ -9,6 +9,7 @@ import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateM
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.common.jms.treatment.GeneratePharmacyMedicineDispenseOrderMessage;
 import com.isaac.pethospital.common.jms.treatment.MedicineItemMessage;
+import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
 import com.isaac.pethospital.treatment.dtos.PrescriptionRequest;
 import com.isaac.pethospital.treatment.dtos.TreatmentCaseOperationRequest;
@@ -59,6 +60,7 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         TreatmentCaseEntity tce = request.toTreatmentCaseEntity(this.petRepository, this.employeeRepository);
         tce.setCreatedDate(tce.getCreatedDate().minusDays(1));
         tce.setCaseClosed(true);
+        tce.setTreatmentCaseStatus(TreatmentCaseStatusEnum.FINISHED);
         this.treatmentCaseRepository.save(tce);
         return this.treatmentCaseRepository.save(request.toTreatmentCaseEntity(this.petRepository, this.employeeRepository));
 

@@ -3,7 +3,6 @@ package com.isaac.pethospital.treatment.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
-import com.sun.webkit.dom.CommentImpl;
 import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
@@ -43,10 +42,18 @@ public class TreatmentCaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String uuid;
-    /*
-        @Enumerated(EnumType.STRING)
-        private TreatmentCaseStatusEnum treatmentCaseStatus;
-        */
+
+    @Enumerated(EnumType.STRING)
+    private TreatmentCaseStatusEnum treatmentCaseStatus;
+
+    public TreatmentCaseStatusEnum getTreatmentCaseStatus() {
+        return treatmentCaseStatus;
+    }
+
+    public void setTreatmentCaseStatus(TreatmentCaseStatusEnum treatmentCaseStatus) {
+        this.treatmentCaseStatus = treatmentCaseStatus;
+    }
+
     private boolean caseClosed;
     @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.PERSIST)
     @JsonManagedReference("TreatmentCaseEntity-PrescriptionEntity")
@@ -217,6 +224,7 @@ public class TreatmentCaseEntity {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
+
     public LocalDateTime getTreatmentDate() {
         return treatmentDate;
     }
