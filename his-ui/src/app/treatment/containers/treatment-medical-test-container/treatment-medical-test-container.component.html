@@ -2,7 +2,41 @@
   <split [direction]="'horizontal'">
     <split-area [size]="20">
       <div style="padding-right:15px">
-        <app-treatment-medical-test></app-treatment-medical-test>
+
+        <div class="panel panel-info isaac-margin-15top">
+          <div class="panel-heading">
+            今日检查
+          </div>
+          <div class="panel-body">
+            <button class="btn btn-primary btn-sm isaac-margin-bottom-10px"><span
+              class="glyphicon glyphicon-plus"></span> 新建检查
+            </button>
+            <!--
+            <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"
+                                                 [list]="unClosedTreatmentCases$|async"
+                                                 (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
+                                                 -->
+            <app-treatment-medical-test
+            ></app-treatment-medical-test>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            历史检查
+          </div>
+          <div class="panel-body">
+
+
+            <app-treatment-medical-test></app-treatment-medical-test>
+
+            <!--
+            <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$ |async"
+                                                 [list]="closedTreatmentCases$|async"
+                                                 (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
+                                                 -->
+          </div>
+        </div>
+
       </div>
     </split-area>
 

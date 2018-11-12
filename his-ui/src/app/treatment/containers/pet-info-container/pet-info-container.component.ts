@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {Pet} from "../../models/pet.model";
 import {PetOwnerService} from "../../../core/services/treatment/pet-owner.service";
@@ -7,6 +7,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TreatmentRegistrationModel} from "../../models/treatment.registration.model";
 import {PetService} from "../../../core/services/treatment/pet.service";
 import {PetOwner} from "../../models/pet-owner.model";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Subject} from "rxjs/Subject";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-pet-info-container',
@@ -14,11 +17,14 @@ import {PetOwner} from "../../models/pet-owner.model";
   styleUrls: ['./pet-info-container.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PetInfoContainerComponent implements OnInit {
+export class PetInfoContainerComponent implements OnInit, OnDestroy {
 
   petOwner$: Observable<PetOwner>;
   pet$: Observable<Pet>;
-  registration$: Observable<TreatmentRegistrationModel>;
+  registrationSubject = new BehaviorSubject<TreatmentRegistrationModel>({});
+  registration$ = this.registrationSubject.asObservable();
+
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,14 +33,31 @@ export class PetInfoContainerComponent implements OnInit {
     private petService: PetService,
     private registrationService: RegistrationService) {
 
-    this.registration$ = route.parent.params.mergeMap(p => this.registrationService.readOne(p['registrationId'])).shareReplay(2);
-    this.pet$ = this.registration$.mergeMap(r => this.petService.findOne(r.pet.id));
-    this.petOwner$ = this.registration$.mergeMap(r => this.petService.findPetOwner({id:r.pet.id}));
+    this.subscription = route.parent.params.mergeMap(p =>
+      this.registrationService.readOne(p['registrationId']))
+      .subscribe(r => this.registrationSubject.next(r))
 
+
+    this.pet$ = this.registration$.mergeMap(r => {
+      if (r && r.pet && r.pet.id)
+        return this.petService.findOne(r.pet.id);
+      else
+        return Observable.of({});
+    });
+    this.petOwner$ = this.registration$.mergeMap(r => {
+      if (r && r.pet && r.pet.id)
+        return this.petService.findPetOwner({id: r.pet.id})
+      else
+        return Observable.of({});
+    });
 
   }
 
   ngOnInit() {
   }
 
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

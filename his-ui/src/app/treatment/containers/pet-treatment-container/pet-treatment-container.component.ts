@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {TreatmentCase} from "../../models/treatment-case.model";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
@@ -11,13 +11,19 @@ import {PetService} from "../../../core/services/treatment/pet.service";
 import {PetOwnerService} from "../../../core/services/treatment/pet-owner.service";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {combineLatest} from "rxjs/observable/combineLatest";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-pet-treatment-container',
   templateUrl: './pet-treatment-container.component.html',
   styleUrls: ['./pet-treatment-container.component.css']
 })
-export class PetTreatmentContainerComponent implements OnInit {
+export class PetTreatmentContainerComponent implements OnInit, OnDestroy {
+
+  registrationSubject = new BehaviorSubject<TreatmentRegistrationModel>({});
+  registration$ = this.registrationSubject.asObservable();
+  registrationSubscription: Subscription;
+
 
   treatmentCaseChangedSubject = new BehaviorSubject<boolean>(false);
   treatmentCaseChanged$ = this.treatmentCaseChangedSubject.asObservable();
@@ -25,13 +31,12 @@ export class PetTreatmentContainerComponent implements OnInit {
   unClosedTreatmentCases$: Observable<TreatmentCase[]>;
   closedTreatmentCases$: Observable<TreatmentCase[]>;
 
-  selectedTreatmentCaseSubject=new BehaviorSubject<TreatmentCase>({});
-  selectedTreatmentCase$: Observable<TreatmentCase>=this.selectedTreatmentCaseSubject.asObservable();
+  selectedTreatmentCaseSubject = new BehaviorSubject<TreatmentCase>({});
+  selectedTreatmentCase$: Observable<TreatmentCase> = this.selectedTreatmentCaseSubject.asObservable();
 
-  petOwner$: Observable<PetOwner>;
   petSubject = new BehaviorSubject<Pet>({});
   pet$: Observable<Pet> = this.petSubject.asObservable();
-  registration$: Observable<TreatmentRegistrationModel>;
+  petSubscription: Subscription;
 
   constructor(private treatmentCaseService: TreatmentCaseService,
               private route: ActivatedRoute,
@@ -40,21 +45,33 @@ export class PetTreatmentContainerComponent implements OnInit {
               private petService: PetService,
               private registrationService: RegistrationService) {
 
+  }
 
-    this.registration$ = route.parent.params.mergeMap(p => this.registrationService.readOne(p['registrationId']))
-    this.registration$.mergeMap(r => this.petService.findOne(r.pet.id)).subscribe(p => this.petSubject.next(p));
-    //this.petOwner$ = this.registration$.mergeMap(r => this.petService.findPetOwner({id:r.pet.id}));
+  ngOnInit() {
+
+    this.registrationSubscription = this.route.parent.params.mergeMap(p => this.registrationService.readOne(p['registrationId']))
+      .subscribe(r => {
+        this.registrationSubject.next(r);
+      });
+
+    this.petSubscription = this.registration$.mergeMap(r => {
+      if (r && r.pet && r.pet.id)
+        return this.petService.findOne(r.pet.id);
+      else
+        return Observable.of({});
+    }).subscribe(p => this.petSubject.next(p));
+
+
     this.treatmentCases$ = combineLatest(this.treatmentCaseChanged$, this.pet$).mergeMap(([event, p]) => {
-      if (p.id)
+      if (p && p.id)
         return this.treatmentCaseService.findAllByPetId(p.id)
       else
         return [];
     }).shareReplay(2);
-    this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed));
-    this.closedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => tc.caseClosed));
-  }
 
-  ngOnInit() {
+    this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed));
+
+    this.closedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => tc.caseClosed));
   }
 
   onTreatmentCaseCreated() {
@@ -67,5 +84,11 @@ export class PetTreatmentContainerComponent implements OnInit {
   onTreatmentCaseSelected($treatmentCase: TreatmentCase) {
     this.selectedTreatmentCaseSubject.next($treatmentCase);
     this.router.navigate([$treatmentCase.id], {relativeTo: this.route});
+  }
+
+  ngOnDestroy(): void {
+
+    this.registrationSubscription.unsubscribe();
+    this.petSubscription.unsubscribe();
   }
 }

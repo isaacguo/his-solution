@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {Registration} from "../../models/registration.model";
 import {RegistrationService} from "../../../core/services/treatment/registration.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TreatmentRegistrationModel} from "../../models/treatment.registration.model";

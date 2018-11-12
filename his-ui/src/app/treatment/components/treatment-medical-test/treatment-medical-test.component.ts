@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-treatment-medical-test',
@@ -7,7 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TreatmentMedicalTestComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  list: any[];
+  @Output()
+  listChanged=new EventEmitter();
+  @Output()
+  itemSelected = new EventEmitter<any>();
+
+  @Input()
+  selectedMedicalTest: any;
+
+  onRowClicked(item: any) {
+    this.itemSelected.emit(item);
+  }
+
+  isRowSelected(item: any) {
+    return item === this.selectedMedicalTest;
+  }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -1,3 +1,9 @@
-<p>
-  treatment-medical-test works!
-</p>
+<table class="table table-bordered table-responsive">
+  <tbody>
+  <tr *ngFor="let medicalTest of list" [class.info]="isRowSelected(medicalTest)"
+      (click)="onRowClicked(medicalTest)">
+    <td>{{medicalTest.createdDate | date:'yyyy年MM月dd日 hh:mm:ss'}}</td>
+  </tr>
+  </tbody>
+</table>
+
