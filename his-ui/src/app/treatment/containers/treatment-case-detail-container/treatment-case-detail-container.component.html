@@ -1,3 +1,5 @@
+<app-popup-modal (modalClosed)="onModalClosed($event)" [bundle]="bundle$|async"></app-popup-modal>
+
 <app-treatment-case-detail
   (treatmentCaseSaved)="onTreatmentCaseSaved($event)"
   [treatmentCase]="treatmentCase$|async"></app-treatment-case-detail>

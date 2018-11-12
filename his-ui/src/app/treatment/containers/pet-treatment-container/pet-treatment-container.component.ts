@@ -4,7 +4,6 @@ import {TreatmentCase} from "../../models/treatment-case.model";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TreatmentRegistrationModel} from "../../models/treatment.registration.model";
-import {PetOwner} from "../../models/pet-owner.model";
 import {Pet} from "../../models/pet.model";
 import {RegistrationService} from "../../../core/services/treatment/registration.service";
 import {PetService} from "../../../core/services/treatment/pet.service";
@@ -38,6 +37,10 @@ export class PetTreatmentContainerComponent implements OnInit, OnDestroy {
   pet$: Observable<Pet> = this.petSubject.asObservable();
   petSubscription: Subscription;
 
+
+  isLoadingSubject=new BehaviorSubject<boolean>(true);
+  isLoading$=this.isLoadingSubject.asObservable();
+
   constructor(private treatmentCaseService: TreatmentCaseService,
               private route: ActivatedRoute,
               private router: Router,
@@ -69,7 +72,7 @@ export class PetTreatmentContainerComponent implements OnInit, OnDestroy {
         return [];
     }).shareReplay(2);
 
-    this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed));
+    this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed)).do(()=>{this.isLoadingSubject.next(false)});
 
     this.closedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => tc.caseClosed));
   }

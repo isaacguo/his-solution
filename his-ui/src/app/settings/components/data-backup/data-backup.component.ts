@@ -50,8 +50,7 @@ export class DataBackupComponent implements OnInit, OnChanges {
 
   formModel: FormGroup;
   popupBundleSubject = new BehaviorSubject<PopupModalBundle>({});
-  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable()
-  ;
+  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
 
   constructor(public route: ActivatedRoute,
               private fb: FormBuilder) {

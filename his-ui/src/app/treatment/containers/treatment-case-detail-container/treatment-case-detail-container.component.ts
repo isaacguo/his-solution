@@ -6,6 +6,7 @@ import {Observable} from "rxjs/Observable";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {EmployeeListItem} from "../../../core/models/employee/employee-list-item.model";
+import {PopupModalBundle} from "../../../shared/models/popup-modal-bundle.model";
 
 @Component({
   selector: 'app-treatment-case-detail-container',
@@ -35,7 +36,24 @@ export class TreatmentCaseDetailContainerComponent implements OnInit {
 
   onTreatmentCaseSaved($event: any) {
     this.treatmentCaseService.update($event.id, $event).subscribe(() => {
+
+      this.popupBundleSubject.next({
+        title: '成功',
+        body: '<h4>保存成功</h4>',
+        hasConfirmButton: true,
+        confirmButtonText: "确定",
+      })
+
       this.treatmentCaseChangedSubject.next(true);
+    },()=>{
+
     });
+  }
+
+  popupBundleSubject = new BehaviorSubject<PopupModalBundle>({});
+  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
+
+  onModalClosed($event) {
+
   }
 }
