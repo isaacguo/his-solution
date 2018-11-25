@@ -54,7 +54,7 @@ node {
                 notifyBuild("In Deploy to Production Server")
                 def workspaceInfSlave = pwd()
                 sh "cp docker-compose-prod.yml /home/isaac/projects/ansible/playbook/docker-compose.yml"
-                sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml -c paramiko"
+                sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml"
         }
 
 
