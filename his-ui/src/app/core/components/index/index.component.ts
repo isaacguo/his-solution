@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleCh
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/timer';
 import {GuardDelegation} from "../../guards/guard-delegation";
+import {AuthInfo} from "../../services/common/authentication.service";
 
 declare let $: any;
 
@@ -14,7 +15,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   @Input()
   displayName: string;
-
+  @Input()
+  authInfo: AuthInfo;
   @Input()
   guardMap: Map<string, GuardDelegation>;
 

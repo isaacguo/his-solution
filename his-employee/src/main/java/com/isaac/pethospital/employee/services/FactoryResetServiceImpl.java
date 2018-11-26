@@ -53,6 +53,8 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     void init() {
         authorizationService.setDomainName("Employee");
         authorizationTopicService.addAuthorizationTopicAndOperations("员工管理", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("个人信息", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("请假管理", "操作");
 
 
 

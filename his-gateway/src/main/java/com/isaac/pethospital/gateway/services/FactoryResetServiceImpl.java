@@ -40,7 +40,9 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     @Transactional
     void init() {
         authorizationService.setDomainName("Gateway");
-        authorizationTopicService.addAuthorizationTopicAndOperations("数据管理", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("权限管理", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("恢复出厂", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("数据备份与恢复", "操作");
     }
 
 

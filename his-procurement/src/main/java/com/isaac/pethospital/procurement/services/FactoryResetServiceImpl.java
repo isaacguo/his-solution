@@ -58,9 +58,9 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     @Transactional
     void init() {
         authorizationService.setDomainName("Procurement");
-        authorizationTopicService.addAuthorizationTopicAndOperations("采购管理", "操作");
         authorizationTopicService.addAuthorizationTopicAndOperations("采购审批", "操作");
-        authorizationTopicService.addAuthorizationTopicAndOperations("供应商管理", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("经销订货", "操作");
+        authorizationTopicService.addAuthorizationTopicAndOperations("其他管理", "操作");
     }
 
     @Override
