@@ -4,6 +4,8 @@ import {MedicalTestQueryContainerComponent} from "./containers/medical-test-quer
 import {MedicalTestSettingsContainerComponent} from "./containers/medical-test-settings-container/medical-test-settings-container.component";
 import {MedicalTestSettingsReportTemplatesContainerComponent} from "./containers/medical-test-settings-report-templates-container/medical-test-settings-report-templates-container.component";
 import {MedicalTestSettingsDepartmentContainerComponent} from "./containers/medical-test-settings-department-container/medical-test-settings-department-container.component";
+import {TreatmentSettingsRoomDetailContainerComponent} from "../treatment/containers/treatment-settings-room-detail-container/treatment-settings-room-detail-container.component";
+import {MedicalTestSettingsDepartmentDetailContainerComponent} from "./containers/medical-test-settings-department-detail-container/medical-test-settings-department-detail-container.component";
 
 const routes: Routes = [
   {
@@ -25,7 +27,14 @@ const routes: Routes = [
       },
       {
         path: 'departments',
-        component: MedicalTestSettingsDepartmentContainerComponent
+        component: MedicalTestSettingsDepartmentContainerComponent,
+        children:
+          [
+            {
+              path:':departmentId',
+              component:MedicalTestSettingsDepartmentDetailContainerComponent
+            }
+          ]
       }
     ]
   }

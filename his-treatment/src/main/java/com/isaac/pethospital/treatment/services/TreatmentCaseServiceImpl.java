@@ -57,11 +57,14 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
     @Override
     public TreatmentCaseEntity createTreatmentCase(TreatmentCaseOperationRequest request) {
+        /*
         TreatmentCaseEntity tce = request.toTreatmentCaseEntity(this.petRepository, this.employeeRepository);
         tce.setCreatedDate(tce.getCreatedDate().minusDays(1));
         tce.setCaseClosed(true);
         tce.setTreatmentCaseStatus(TreatmentCaseStatusEnum.FINISHED);
         this.treatmentCaseRepository.save(tce);
+        */
+
         return this.treatmentCaseRepository.save(request.toTreatmentCaseEntity(this.petRepository, this.employeeRepository));
 
     }
