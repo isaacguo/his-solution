@@ -1,3 +1,5 @@
-<p>
-  medical-test-settings-department-detail-container works!
-</p>
+<app-medical-test-settings-room-detail
+  [department]="departmentInfoFromMedicalTest$ | async"
+  (openCheck)="onDepartmentOpenChecked($event)"
+></app-medical-test-settings-room-detail>
+

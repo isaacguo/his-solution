@@ -1,16 +1,17 @@
+
 <div class="panel panel-info">
   <div class="panel-heading">
-    <label>设置 <b>{{department.name}}</b></label>
+    <label>设置 <b>{{department?.name}}</b></label>
   </div>
   <div *ngIf="department" class="panel-body">
     <ul class="list-group">
       <li class="list-group-item">
         <div>
           <div class=" pull-left">
-            前台可见
+            设置为化验室
           </div>
           <div class="pull-right">
-            <app-checkbox [checked]="department.openToFrontDesk" (outCheck)="onOutCheck($event)"></app-checkbox>
+            <app-checkbox [checked]="department?.enable" (outCheck)="onOutCheck($event)"></app-checkbox>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -18,4 +19,5 @@
     </ul>
   </div>
 </div>
+
 

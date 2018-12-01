@@ -10,7 +10,6 @@ import {TreatmentEmployeeModel} from "../../models/treatment.employee.model";
 import {EmployeeDepartmentService} from "../../../core/services/employee/employee-department.service";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {DepartmentOperationRequest} from "../../models/department.operation.request.model";
-import {EmployeeDepartment} from "../../../core/models/employee/employee-department.model";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {Subscription} from "rxjs/Subscription";
 
