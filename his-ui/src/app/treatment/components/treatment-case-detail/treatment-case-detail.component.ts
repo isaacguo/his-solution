@@ -16,6 +16,8 @@ export class TreatmentCaseDetailComponent implements OnInit, OnChanges {
 
   @Output()
   treatmentCaseSaved = new EventEmitter<any>();
+  @Output()
+  treatmentCaseClosed = new EventEmitter<any>();
 
 
   treatmentCaseInfoModel: FormGroup;
@@ -56,6 +58,10 @@ export class TreatmentCaseDetailComponent implements OnInit, OnChanges {
 
   onSaveClicked() {
     this.treatmentCaseSaved.emit(this.treatmentCaseInfoModel.value);
+  }
+
+  onCloseClicked() {
+    this.treatmentCaseClosed.emit(this.treatmentCaseInfoModel.value);
   }
 
 

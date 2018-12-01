@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {TreatmentCase} from "../../models/treatment-case.model";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
@@ -15,7 +15,8 @@ import {Subscription} from "rxjs/Subscription";
 @Component({
   selector: 'app-pet-treatment-container',
   templateUrl: './pet-treatment-container.component.html',
-  styleUrls: ['./pet-treatment-container.component.css']
+  styleUrls: ['./pet-treatment-container.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PetTreatmentContainerComponent implements OnInit, OnDestroy {
 
@@ -66,13 +67,16 @@ export class PetTreatmentContainerComponent implements OnInit, OnDestroy {
 
 
     this.treatmentCases$ = combineLatest(this.treatmentCaseChanged$, this.pet$).mergeMap(([event, p]) => {
+
+      this.isLoadingSubject.next(false)
       if (p && p.id)
         return this.treatmentCaseService.findAllByPetId(p.id)
       else
-        return [];
+        return Observable.of([]);
     }).shareReplay(2);
 
-    this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed)).do(()=>{this.isLoadingSubject.next(false)});
+    //this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed)).do(()=>{this.isLoadingSubject.next(false)});
+    this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed));
 
     this.closedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => tc.caseClosed));
   }

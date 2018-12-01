@@ -67,6 +67,7 @@
       </form>
       <div class="isaac-margin-15top col-md-3">
         <button *ngIf="!isTreatmentCaseFinished()" class="btn btn-default" (click)="onSaveClicked()" type="submit">保存病历</button>
+        <button *ngIf="!isTreatmentCaseFinished()" class="btn btn-default" (click)="onCloseClicked()" type="submit">完成病历</button>
       </div>
     </div>
   </div>

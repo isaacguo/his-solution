@@ -14,9 +14,9 @@
             <app-loading-spinner [isLoading]="isLoading$|async"></app-loading-spinner>
 
 
-            <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"
-                                                 [list]="unClosedTreatmentCases$|async"
-                                                 (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
+              <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"
+                                                   [list]="unClosedTreatmentCases$|async"
+                                                   (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
           </div>
         </div>
         <div class="panel panel-info">
@@ -26,9 +26,11 @@
           <div class="panel-body">
 
             <app-loading-spinner [isLoading]="isLoading$|async"></app-loading-spinner>
-            <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$ |async"
-                                                 [list]="closedTreatmentCases$|async"
-                                                 (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
+
+              <app-selectable-treatment-case-table
+                [selectedTreatmentCase]="selectedTreatmentCase$ |async"
+                [list]="closedTreatmentCases$|async"
+                (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
           </div>
         </div>
       </div>

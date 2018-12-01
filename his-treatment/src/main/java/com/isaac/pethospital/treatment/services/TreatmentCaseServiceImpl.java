@@ -220,6 +220,16 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         return clonePetOwner;
     }
 
+    @Override
+    public TreatmentCaseEntity closeTreatmentCase(Long tId) {
+
+        TreatmentCaseEntity tce = getTreatmentCase(tId);
+        tce.setCaseClosed(true);
+        tce.setTreatmentCaseStatus(TreatmentCaseStatusEnum.FINISHED);
+        this.treatmentCaseRepository.save(tce);
+        return tce;
+    }
+
 
     @Override
     public TreatmentCaseEntity update(TreatmentCaseOperationRequest request) {

@@ -24,8 +24,8 @@ export class TreatmentCaseDetailContainerComponent implements OnInit {
               private router: Router
   ) {
 
-    this.treatmentCase$ =combineLatest( route.params,this.treatmentCaseChangedObservable$)
-      .mergeMap(([params,e])=>{
+    this.treatmentCase$ = combineLatest(route.params, this.treatmentCaseChangedObservable$)
+      .mergeMap(([params, e]) => {
         return this.treatmentCaseService.readOne(params['treatmentCaseId']);
       });
   }
@@ -45,7 +45,7 @@ export class TreatmentCaseDetailContainerComponent implements OnInit {
       })
 
       this.treatmentCaseChangedSubject.next(true);
-    },()=>{
+    }, () => {
 
     });
   }
@@ -54,6 +54,20 @@ export class TreatmentCaseDetailContainerComponent implements OnInit {
   bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
 
   onModalClosed($event) {
+    this.treatmentCase$.take(1).mergeMap(tc => this.treatmentCaseService.closeTreatmentCase(tc.id)).subscribe(() => this.treatmentCaseChangedSubject.next(true));
+
+  }
+
+  onTreatmentCaseClosed($event: any) {
+
+    this.popupBundleSubject.next({
+      title: '请确定',
+      body: '<h4>是否要关闭此病历?</h4>\n<h4 class="label label-danger isaac-font-medium ">病历关闭后，无法再次修改</h4>',
+      hasConfirmButton: true,
+      confirmButtonText: "确定",
+      hasCancelButton: true,
+      cancelButtonText: "取消"
+    })
 
   }
 }

@@ -34,6 +34,7 @@ public class PetRestController {
 
     @PostMapping(value = "find-pet-owner")
     public PetOwnerEntity findPetOwnerByPet(@RequestBody PetOperationRequest request) {
+
         return this.petService.findPetOwnerByPet(request);
     }
 

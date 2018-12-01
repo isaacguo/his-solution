@@ -26,10 +26,10 @@ export class AuthorizationService extends AbstractService implements OnDestroy {
     super();
     this.authorizationChange=this.authorizationSubjectManager.asObservable();
 
+    this.authorizationArray.push(["/api/histreatment", "就诊模块"]);
     this.authorizationArray.push(["/api/hisemployee", "人事模块"]);
     this.authorizationArray.push(["/api/hisfinance", "财务模块"]);
     this.authorizationArray.push(["/api/hisprocurement", "采购模块"]);
-    this.authorizationArray.push(["/api/histreatment", "就诊模块"]);
     this.authorizationArray.push(["/api/hismedicaltest", "化验模块"]);
     this.authorizationArray.push(["/api/hismedicine", "库房模块"]);
     this.authorizationArray.push(["/api/hisgateway", "网关模块"]);

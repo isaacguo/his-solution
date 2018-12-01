@@ -10,18 +10,17 @@ import {TreatmentCaseService} from "../../../core/services/treatment/treatment-c
 })
 export class CustomerServiceContainerComponent implements OnInit {
 
-  filteredTreatmentCases: Observable<any[]>;
+  filteredTreatmentCases$: Observable<any[]>;
 
   constructor(private router: Router,
               private treatmentCaseService: TreatmentCaseService) {
 
     //filteredTreatmentCases should get items bases on searching criteria. for now, use service to get items directly
-    this.filteredTreatmentCases=this.treatmentCaseService.getObservableItems();
 
   }
 
   ngOnInit() {
-    this.treatmentCaseService.loadData();
+    this.filteredTreatmentCases$=this.treatmentCaseService.readAll()
   }
 
 

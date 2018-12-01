@@ -58,6 +58,11 @@ public class TreatmentCaseRestController {
     public TreatmentCaseEntity setPrescriptions(@PathVariable("tId") Long tId, @RequestBody PrescriptionRequest request) {
         return this.treatmentCaseService.setPrescriptions(tId, request);
     }
+    @PutMapping("/{tId}/close")
+    public TreatmentCaseEntity closeTreatmentCase(@PathVariable("tId") Long tId) {
+        return this.treatmentCaseService.closeTreatmentCase(tId);
+    }
+
 
     @PutMapping("/{tId}")
     public TreatmentCaseEntity update(@RequestBody TreatmentCaseOperationRequest request) {

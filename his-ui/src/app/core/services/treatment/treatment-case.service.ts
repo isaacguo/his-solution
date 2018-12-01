@@ -19,6 +19,13 @@ export class TreatmentCaseService extends CrudService<TreatmentCase> {
 
   }
 
+
+  closeTreatmentCase(tId:number):Observable<TreatmentCase>
+  {
+    return this.authHttp.put(`${this.rootUrl}/${tId}/close`,{}).map(this.extractData);
+  }
+
+
   getPetOwnerInfoByTreatmentCaseId(tId:number): Observable<PetOwner>
   {
     return this.authHttp.get(`${this.rootUrl}/get-pet-owner-info-by-treatment-case-id/${tId}`).map(this.extractData);
