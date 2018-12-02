@@ -19,6 +19,7 @@ import {PetService} from "./services/treatment/pet.service";
 import {GuardFactoryService} from "./services/guard-factory.service";
 import {DataManagementService} from "./services/gateway/data-management.service";
 import {MedicalTestDepartmentService} from "./services/medical-test/medical-test-department.service";
+import {CommentService} from "./services/treatment/comment.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -65,6 +66,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RegistrationService,
     DataManagementService,
     MedicalTestDepartmentService,
+    CommentService,
     /*
     EmployeeManagementGuard,
     ChargeManagementGuard,

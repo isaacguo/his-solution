@@ -1,3 +1,18 @@
-<p>
-  customer-service-treatment-case-comments works!
-</p>
+<h4>添加新评论</h4>
+
+<div>
+  <form [formGroup]="commentForm" >
+  <textarea formControlName="content" rows="5" class="add-comment-box form-control">
+
+  </textarea>
+  </form>
+  <button (click)="onCreateComment()"
+          class="btn btn-primary">添加
+  </button>
+</div>
+
+<ng-container *ngIf="comments?.length > 0">
+  <div class="title">所有评论</div>
+  <app-customer-service-treatment-case-comment [comment]="comment" *ngFor="let comment of comments.reverse(); let index = index">
+  </app-customer-service-treatment-case-comment>
+</ng-container>

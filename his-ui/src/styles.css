@@ -119,3 +119,202 @@ app-checkbox .input:checked + .text:before {
   color: #68be60;
   transform: scale(1)
 }
+
+
+app-customer-service-treatment-case-comment  {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+
+app-customer-service-treatment-case-comment .meta {
+  display: flex;
+  flex: 0 0 100px;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+}
+
+
+
+
+app-customer-service-treatment-case-comment .user-name {
+  font-weight: 400;
+}
+
+app-customer-service-treatment-case-comment .time {
+  font-size: 14px;
+}
+
+app-customer-service-treatment-case-comment .user-picture {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
+}
+
+app-customer-service-treatment-case-comment .main {
+  display: flex;
+  flex: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-left: 30px;
+}
+
+app-customer-service-treatment-case-comment .content {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  min-height: 90px;
+  align-items: center;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .1));
+  background-color: #fff;
+}
+
+app-customer-service-treatment-case-comment .content:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: -50px;
+  width: 0;
+  height: 0;
+  border: 25px solid transparent;
+  border-right: 25px solid #fff;
+}
+
+
+app-editor {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  min-height: 50px
+}
+
+app-editor .editable-content {
+  display: none;
+  min-height: 1em;
+  word-break: break-word;
+}
+
+app-editor .editable-content:empty {
+  width: 100%;
+  min-width: 50px;
+}
+
+app-editor .editable-content:focus {
+  outline: none;
+}
+
+app-editor output {
+  word-break: break-word;
+}
+
+app-editor .controls {
+  display: flex;
+  margin: 0 10px
+}
+
+app-editor .icon-edit {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #3699cb
+}
+
+app-editor .icon-edit:before {
+  content: "✎";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 1;
+}
+
+app-editor .icon-save {
+  display: flex;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #68be60;
+}
+
+app-editor .icon-save:before {
+  content: "✓";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 35px;
+  height: 35px;
+  font-size: 35px;
+  line-height: 1;
+}
+
+app-editor .icon-cancel {
+  display: flex;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #ff5967;
+}
+
+app-editor .icon-cancel:before {
+  content: "🚫";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 1;
+}
+
+app-editor:hover .icon-edit {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1)
+}
+
+app-editor.edit-mode .editable-content {
+  display: block;
+}
+
+app-editor.edit-mode .output {
+  display: none;
+}
+
+app-editor.edit-mode .icon-cancel, app-editor.edit-mode .icon-save {
+  opacity: 1;
+  transform: scale(1)
+}

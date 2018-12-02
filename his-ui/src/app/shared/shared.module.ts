@@ -20,6 +20,9 @@ import { GenderEnumPipe } from './pipes/gender-enum.pipe';
 import {PopupModalComponent} from "./components/popup-modal/popup-modal.component";
 import { TreatmentCaseStatusEnumPipe } from './pipes/treatment-case-status-enum.pipe';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import {ProfilePictureComponent} from "./components/profile-picture/profile-picture.component";
+import {EditorComponent} from "./components/editor/editor.component";
+import { FromNowPipe } from './pipes/from-now.pipe';
 
 @NgModule({
   imports: [
@@ -46,6 +49,9 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     PopupModalComponent,
     TreatmentCaseStatusEnumPipe,
     LoadingSpinnerComponent,
+    ProfilePictureComponent,
+    EditorComponent,
+    FromNowPipe
 
 
     ],
@@ -73,6 +79,9 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     GenderEnumPipe,
     PopupModalComponent,
     LoadingSpinnerComponent,
+    ProfilePictureComponent,
+    EditorComponent,
+    FromNowPipe,
 
   ]
 })

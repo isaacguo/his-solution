@@ -55,6 +55,8 @@ import { TreatmentSettingsRoomEmployeeOpenSwitchComponent } from './components/t
 import { TreatmentSettingsRoomEmployeeOpenSwitchDetailComponent } from './components/treatment-settings-room-employee-open-switch-detail/treatment-settings-room-employee-open-switch-detail.component';
 import { PetOwnerBriefInfoComponent } from './components/pet-owner-brief-info/pet-owner-brief-info.component';
 import { SelectableTreatmentCaseTableComponent } from './components/selectable-treatment-case-table/selectable-treatment-case-table.component';
+import { CustomerServiceTreatmentCaseCommentComponent } from './components/customer-service-treatment-case-comment/customer-service-treatment-case-comment.component';
+import {CustomerServicePetInfoComponent} from "./components/customer-service-pet-info/customer-service-pet-info.component";
 
 @NgModule({
   imports: [
@@ -114,6 +116,8 @@ import { SelectableTreatmentCaseTableComponent } from './components/selectable-t
     TreatmentSettingsRoomEmployeeOpenSwitchDetailComponent,
     PetOwnerBriefInfoComponent,
     SelectableTreatmentCaseTableComponent,
+    CustomerServiceTreatmentCaseCommentComponent,
+    CustomerServicePetInfoComponent
     ]
 })
 export class TreatmentModule {
