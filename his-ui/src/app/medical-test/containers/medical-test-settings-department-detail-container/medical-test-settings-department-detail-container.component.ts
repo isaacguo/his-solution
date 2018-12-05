@@ -31,11 +31,9 @@ export class MedicalTestSettingsDepartmentDetailContainerComponent implements On
     private medicalTestDepartmentService: MedicalTestDepartmentService
   ) {
 
-    console.log('init')
 
     this.department$ = combineLatest(this.route.params, this.operationDone$).mergeMap(([params, op]) => {
 
-      console.log('init2')
       return this.employeeDepartmentService.getDepartmentById(params['departmentId'])
     });
 

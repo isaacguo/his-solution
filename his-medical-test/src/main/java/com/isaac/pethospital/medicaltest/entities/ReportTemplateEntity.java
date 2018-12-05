@@ -17,13 +17,16 @@ public class ReportTemplateEntity {
     @OneToMany(mappedBy = "reportTemplate", cascade = CascadeType.ALL)
     @JsonManagedReference("reportTemplate-reportTemplateInfo")
     List<ReportTemplateInfoEntity> reportTemplateInfoList = new LinkedList<>();
-    @ManyToMany
-    //@JsonBackReference("department-reportTemplates")
-    @JsonBackReference()
-    List<DepartmentEntity> departmentList = new LinkedList<>();
+
+    @ManyToOne
+    @JsonBackReference("department-reportTemplates")
+    DepartmentEntity department;
+
+
     @ManyToOne()
     @JsonBackReference("ReportTemplateCategoryEntity-ReportTemplateEntity")
     private ReportTemplateCategoryEntity category;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -55,20 +58,12 @@ public class ReportTemplateEntity {
         this.reportNameHanYuPinYin = reportNameHanYuPinYin;
     }
 
-    public List<DepartmentEntity> getDepartmentList() {
-        return departmentList;
+    public DepartmentEntity getDepartment() {
+        return department;
     }
 
-    public void addDepartment(DepartmentEntity department) {
-        if (department == null)
-            throw new RuntimeException("Department is null");
-        this.departmentList.add(department);
-    }
-
-    public void removeDepartment(DepartmentEntity department) {
-        if (department == null)
-            throw new RuntimeException("Department is null");
-        this.departmentList.remove(department);
+    public void setDepartment(DepartmentEntity department) {
+        this.department = department;
     }
 
     public List<ReportTemplateInfoEntity> getReportTemplateInfoList() {

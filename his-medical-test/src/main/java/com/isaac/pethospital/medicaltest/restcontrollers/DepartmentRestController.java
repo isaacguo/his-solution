@@ -18,6 +18,12 @@ public class DepartmentRestController {
         this.departmentService = departmentService;
     }
 
+
+    @GetMapping(value = "/getAllEnabledDepartments")
+    public List<DepartmentEntity> getAllEnabledDepartments() {
+        return this.departmentService.getAllEnabledDepartments();
+    }
+
     @GetMapping(value = "/getDepartmentByDepId/{depId}")
     public DepartmentEntity getDepartmentByDepId(@PathVariable("depId") Long depId) {
         return this.departmentService.getDepartmentByDepId(depId);

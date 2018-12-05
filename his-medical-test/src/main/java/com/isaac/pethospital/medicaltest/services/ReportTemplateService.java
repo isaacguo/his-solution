@@ -1,6 +1,5 @@
 package com.isaac.pethospital.medicaltest.services;
 
-import com.isaac.pethospital.medicaltest.dtos.ReportTemplateIdAndNameResponse;
 import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 
@@ -10,6 +9,8 @@ public interface ReportTemplateService {
     ReportTemplateEntity createReportTemplate(ReportTemplateOperationRequest request);
 
     List<ReportTemplateEntity> findAll();
+
+    List<ReportTemplateEntity> findReportTemplatesByDepartmentId(Long dId);
 
     ReportTemplateEntity findById(Long rid);
 

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {TreatmentCase} from "../../models/treatment-case.model";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";

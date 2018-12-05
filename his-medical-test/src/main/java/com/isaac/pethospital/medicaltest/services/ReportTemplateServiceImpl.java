@@ -6,8 +6,10 @@ import com.isaac.pethospital.common.enums.OperationEnum;
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.services.AuthorizationService;
+import com.isaac.pethospital.medicaltest.entities.DepartmentEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateCategoryEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
+import com.isaac.pethospital.medicaltest.repositories.DepartmentRepository;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
 import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
 import org.springframework.stereotype.Service;
@@ -24,14 +26,22 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
     private final JmsSender jmsSender;
     private final JmsProperties jmsProperties;
     private final AuthorizationService authorizationService;
+    private final DepartmentRepository departmentRepository;
 
-    public ReportTemplateServiceImpl(ReportTemplateRepository reportTemplateRepository, ReportTemplateCategoryService reportTemplateCategoryService, HanyuPinyinConverter converter, JmsSender jmsSender, JmsProperties jmsProperties, AuthorizationService authorizationService) {
+    public ReportTemplateServiceImpl(ReportTemplateRepository reportTemplateRepository,
+                                     ReportTemplateCategoryService reportTemplateCategoryService,
+                                     HanyuPinyinConverter converter,
+                                     JmsSender jmsSender,
+                                     JmsProperties jmsProperties,
+                                     AuthorizationService authorizationService,
+                                     DepartmentRepository departmentRepository) {
         this.reportTemplateRepository = reportTemplateRepository;
         this.reportTemplateCategoryService = reportTemplateCategoryService;
         this.converter = converter;
         this.jmsSender = jmsSender;
         this.jmsProperties = jmsProperties;
         this.authorizationService = authorizationService;
+        this.departmentRepository=departmentRepository;
     }
 
     @Override
@@ -95,6 +105,16 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
     @Override
     public List<ReportTemplateEntity> findAll() {
         return this.reportTemplateRepository.findAll();
+    }
+
+    @Override
+    public List<ReportTemplateEntity> findReportTemplatesByDepartmentId(Long dId) {
+
+       DepartmentEntity de= this.departmentRepository.findByDepId(dId);
+       if(de==null)
+           throw new RuntimeException("Cannot find department by given id");
+
+        return this.reportTemplateRepository.findReportTemplateEntitiesByDepartment(de);
     }
 
     @Override

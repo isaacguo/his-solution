@@ -24,6 +24,12 @@ export class MedicalTestDepartmentService extends CrudService<any> {
       .map(this.extractData);
   }
 
+  getAllEnabledDepartments(): Observable<any[]>{
+    return this.authHttp.get(`${this.rootUrl}/getAllEnabledDepartments`)
+      .map(this.extractData);
+  }
+
+
 
   getDepartmentByDepId(depId: number, depName: string): Observable<Department> {
     let url = `${this.rootUrl}/getDepartmentByDepId/${depId}/`;

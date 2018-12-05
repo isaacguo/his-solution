@@ -1,0 +1,24 @@
+
+
+<div class="btn-group isaac-margin-15top">
+  <button class="btn btn-primary" type="button">添加新报告模板</button>
+</div>
+<table class="table table-bordered table-responsive isaac-margin-15top">
+  <thead>
+  <tr>
+    <th>
+      序号
+    </th>
+    <th>
+      化验报告名称
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let template of list; let index=index" [class.info]="isRowSelected(template)"
+      (click)="onRowClicked(template)">
+    <td>{{index+1}}</td>
+    <td>{{template?.name}}</td>
+  </tr>
+  </tbody>
+</table>

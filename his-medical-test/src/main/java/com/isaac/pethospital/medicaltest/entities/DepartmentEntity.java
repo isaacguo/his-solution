@@ -17,9 +17,11 @@ public class DepartmentEntity {
     private String description;
     private boolean enable;
 
-    @ManyToMany(mappedBy = "departmentList")
-    //@JsonManagedReference("department-reportTemplates")
+    @OneToMany(mappedBy = "department")
+    @JsonManagedReference("department-reportTemplates")
     List<ReportTemplateEntity> supportedReportTemplates = new LinkedList<>();
+
+
 
     public List<ReportTemplateEntity> getSupportedReportTemplates() {
         return supportedReportTemplates;
@@ -27,13 +29,13 @@ public class DepartmentEntity {
 
     public void addSupportedReportTemplate(ReportTemplateEntity supportedReportTemplate) {
         if (supportedReportTemplate != null)
-            supportedReportTemplate.addDepartment(this);
+            supportedReportTemplate.setDepartment(this);
         this.supportedReportTemplates.add(supportedReportTemplate);
     }
 
     public void removeSupportedReportTemplate(ReportTemplateEntity supportedReportTemplate) {
         if (supportedReportTemplate != null)
-            supportedReportTemplate.removeDepartment(this);
+            supportedReportTemplate.setDepartment(null);
         this.supportedReportTemplates.remove(supportedReportTemplate);
     }
 

@@ -16,4 +16,5 @@ public interface ReportTemplateCategoryService {
     ReportTemplateCategoryEntity update(ReportTemplateCategoryOperationRequest request);
 
     boolean delete(Long id);
+
 }

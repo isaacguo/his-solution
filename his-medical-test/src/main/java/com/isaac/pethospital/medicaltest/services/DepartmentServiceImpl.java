@@ -8,6 +8,8 @@ import com.isaac.pethospital.medicaltest.repositories.DepartmentRepository;
 import com.isaac.pethospital.medicaltest.repositories.ReportTemplateRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
@@ -60,5 +62,10 @@ public class DepartmentServiceImpl implements DepartmentService {
             de.removeSupportedReportTemplate(rte);
         this.departmentRepository.save(de);
         return true;
+    }
+
+    @Override
+    public List<DepartmentEntity> getAllEnabledDepartments() {
+        return this.departmentRepository.findDepartmentEntitiesByEnableIsTrue();
     }
 }

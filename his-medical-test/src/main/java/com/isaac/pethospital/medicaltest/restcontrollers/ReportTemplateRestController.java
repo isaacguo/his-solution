@@ -28,9 +28,13 @@ public class ReportTemplateRestController {
         return this.reportTemplateService.findById(rid);
     }
 
+    @GetMapping("findReportTemplatesByDepartmentId/{dId}")
+    public List<ReportTemplateEntity> findReportTemplatesByDepartmentId(@PathVariable("dId") Long dId) {
+        return this.reportTemplateService.findReportTemplatesByDepartmentId(dId);
+    }
+
     @GetMapping("findTemplateByNameContains/{name}")
-    public List<ReportTemplateEntity> findTemplateByNameContains(@PathVariable("name") String name)
-    {
+    public List<ReportTemplateEntity> findTemplateByNameContains(@PathVariable("name") String name) {
         return this.reportTemplateService.findTemplateByNameContains(name);
     }
 
