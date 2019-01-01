@@ -42,6 +42,7 @@ export class TreatmentCaseDetailContainerComponent implements OnInit {
         body: '<h4>保存成功</h4>',
         hasConfirmButton: true,
         confirmButtonText: "确定",
+        payload: {'closeCase': false}
       })
 
       this.treatmentCaseChangedSubject.next(true);
@@ -54,7 +55,15 @@ export class TreatmentCaseDetailContainerComponent implements OnInit {
   bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
 
   onModalClosed($event) {
-    this.treatmentCase$.take(1).mergeMap(tc => this.treatmentCaseService.closeTreatmentCase(tc.id)).subscribe(() => this.treatmentCaseChangedSubject.next(true));
+    console.log($event)
+    this.treatmentCase$.take(1).mergeMap(tc => {
+      if ($event.closeCase)
+        return this.treatmentCaseService.closeTreatmentCase(tc.id)
+      else {
+        let m: TreatmentCase = {};
+        return Observable.of(m);
+      }
+    }).subscribe(() => this.treatmentCaseChangedSubject.next(true));
 
   }
 
@@ -66,7 +75,8 @@ export class TreatmentCaseDetailContainerComponent implements OnInit {
       hasConfirmButton: true,
       confirmButtonText: "确定",
       hasCancelButton: true,
-      cancelButtonText: "取消"
+      cancelButtonText: "取消",
+      payload: {'closeCase': true}
     })
 
   }
