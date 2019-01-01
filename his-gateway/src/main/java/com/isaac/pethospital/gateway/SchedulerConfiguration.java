@@ -34,7 +34,7 @@ public class SchedulerConfiguration {
         factory.setQuartzProperties(quartzProperties());
         factory.afterPropertiesSet();
 
-        Scheduler scheduler=factory.getScheduler();
+        Scheduler scheduler = factory.getScheduler();
         scheduler.setJobFactory(jobFactory);
 
         scheduler.start();

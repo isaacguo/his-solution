@@ -38,6 +38,10 @@
     <div class="navbar-default sidebar" role="navigation">
       <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
+
+
+          <!-- /input-group -->
+          <!--
           <li class="sidebar-search">
             <div class="input-group custom-search-form">
               <input type="text" class="form-control" placeholder="Search...">
@@ -47,8 +51,8 @@
                                 </button>
                             </span>
             </div>
-            <!-- /input-group -->
           </li>
+          -->
           <!--
           <li>
             <a routerLink="/dashboard" routerLinkActive="active" class="text-center"> 快捷方式</a>
@@ -89,7 +93,7 @@
             <a href="#" class="text-center"> 化验管理<span class="fa arrow"></span></a>
             <ul class="nav nav-second-level">
               <li *ngIf="guardMap.get('MedicalTest-化验管理-操作')?.isAuthorized()|async">
-                <a routerLink="/medical-test/query" routerLinkActive="active" class="text-center"> 化验管理</a>
+                <a routerLink="/medical-test/query" routerLinkActive="active" class="text-center"> 化验查询</a>
               </li>
               <li *ngIf="guardMap.get('MedicalTest-化验设置-操作')?.isAuthorized()|async">
                 <a routerLink="/medical-test/settings" routerLinkActive="active" class="text-center"> 化验设置</a>
@@ -161,9 +165,11 @@
               <li *ngIf="guardMap.get('Employee-员工管理-操作')?.isAuthorized()|async">
                 <a routerLink="/employee/management" routerLinkActive="active" class="text-center"> 员工管理</a>
               </li>
+              <!--
               <li *ngIf="guardMap.get('Employee-个人信息-操作')?.isAuthorized()|async">
                 <a routerLink="/employee/profile" routerLinkActive="active" class="text-center"> 个人信息</a>
               </li>
+              -->
               <li *ngIf="guardMap.get('Employee-请假管理-操作')?.isAuthorized()|async">
                 <a routerLink="/employee/leave" routerLinkActive="active" class="text-center"> 请假管理</a>
               </li>
