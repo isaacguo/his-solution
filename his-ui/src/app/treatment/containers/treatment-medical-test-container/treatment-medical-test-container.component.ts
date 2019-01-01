@@ -12,4 +12,7 @@ export class TreatmentMedicalTestContainerComponent implements OnInit {
   ngOnInit() {
   }
 
+  onMedicalTestsCreated() {
+
+  }
 }

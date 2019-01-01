@@ -5,7 +5,6 @@ import {TreatmentCase} from "../../models/treatment-case.model";
 import {Observable} from "rxjs/Observable";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {combineLatest} from "rxjs/observable/combineLatest";
-import {EmployeeListItem} from "../../../core/models/employee/employee-list-item.model";
 import {PopupModalBundle} from "../../../shared/models/popup-modal-bundle.model";
 
 @Component({
