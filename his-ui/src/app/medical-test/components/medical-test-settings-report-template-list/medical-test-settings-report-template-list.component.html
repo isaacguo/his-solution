@@ -1,8 +1,14 @@
 
-
-<div class="btn-group isaac-margin-15top">
-  <button class="btn btn-primary" type="button">添加新报告模板</button>
+<div class=" panel panel-info isaac-margin-15top">
+  <div class="panel-heading">
+    化验报告分类
+  </div>
+  <div class="panel-body">
+    <tree-root #tree (activate)="onNodeActivated($event)" [nodes]="nodes"></tree-root>
+  </div>
 </div>
+
+<!--
 <table class="table table-bordered table-responsive isaac-margin-15top">
   <thead>
   <tr>
@@ -22,3 +28,4 @@
   </tr>
   </tbody>
 </table>
+-->

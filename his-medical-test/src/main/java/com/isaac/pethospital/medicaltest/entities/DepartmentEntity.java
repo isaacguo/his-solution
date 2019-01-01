@@ -18,10 +18,29 @@ public class DepartmentEntity {
     private boolean enable;
 
     @OneToMany(mappedBy = "department")
+    @JsonManagedReference("department-reportCategories")
+    List<ReportTemplateCategoryEntity> reportTemplateCategoryList = new LinkedList<>();
+
+    public List<ReportTemplateCategoryEntity> getReportTemplateCategoryList() {
+        return reportTemplateCategoryList;
+    }
+
+    public void addReportTemplateCategory(ReportTemplateCategoryEntity reportTemplateCategory) {
+        if(reportTemplateCategory==null)
+            throw new RuntimeException("ReportTemplateCategory is null");
+        reportTemplateCategory.setDepartment(this);
+        this.reportTemplateCategoryList.add(reportTemplateCategory);
+    }
+
+    public void removeReportTemplateCategory(ReportTemplateCategoryEntity reportTemplateCategory) {
+        if(reportTemplateCategory==null)
+            throw new RuntimeException("ReportTemplateCategory is null");
+        reportTemplateCategory.setDepartment(null);
+        this.reportTemplateCategoryList.remove(reportTemplateCategory);
+    }
+    @OneToMany(mappedBy = "department")
     @JsonManagedReference("department-reportTemplates")
     List<ReportTemplateEntity> supportedReportTemplates = new LinkedList<>();
-
-
 
     public List<ReportTemplateEntity> getSupportedReportTemplates() {
         return supportedReportTemplates;
@@ -32,6 +51,7 @@ public class DepartmentEntity {
             supportedReportTemplate.setDepartment(this);
         this.supportedReportTemplates.add(supportedReportTemplate);
     }
+
 
     public void removeSupportedReportTemplate(ReportTemplateEntity supportedReportTemplate) {
         if (supportedReportTemplate != null)

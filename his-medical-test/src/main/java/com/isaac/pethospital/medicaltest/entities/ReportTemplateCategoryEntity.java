@@ -25,6 +25,19 @@ public class ReportTemplateCategoryEntity {
     @JsonManagedReference("ReportTemplateCategoryEntity-ReportTemplateEntity")
     private List<ReportTemplateEntity> reportTemplateList = new LinkedList<>();
 
+
+    @ManyToOne()
+    @JsonBackReference("department-reportCategories")
+    private DepartmentEntity department;
+
+    public DepartmentEntity getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(DepartmentEntity department) {
+        this.department = department;
+    }
+
     public List<ReportTemplateCategoryEntity> getChildren() {
         return children;
     }

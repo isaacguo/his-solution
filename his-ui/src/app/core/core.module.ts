@@ -21,6 +21,7 @@ import {DataManagementService} from "./services/gateway/data-management.service"
 import {MedicalTestDepartmentService} from "./services/medical-test/medical-test-department.service";
 import {CommentService} from "./services/treatment/comment.service";
 import {MedicalTestReportTemplateService} from "./services/medical-test/medical-test-report-template.service";
+import {MedicalTestReportTemplateCategoryService} from "./services/medical-test/medical-test-report-template-category.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -85,7 +86,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     TreatmentSettingsGuard,
     ProcurementApprovalGuard,
     */
-    GuardFactoryService
+    GuardFactoryService,
+    MedicalTestReportTemplateCategoryService
 
 
 
