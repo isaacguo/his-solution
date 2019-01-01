@@ -28,7 +28,6 @@ public class ReportTemplateCategoryRestController {
         return this.reportTemplateCategoryService.findOne(id);
     }
 
-
     @PostMapping
     public ReportTemplateCategoryEntity create(@RequestBody ReportTemplateCategoryOperationRequest request) {
         return this.reportTemplateCategoryService.create(request);

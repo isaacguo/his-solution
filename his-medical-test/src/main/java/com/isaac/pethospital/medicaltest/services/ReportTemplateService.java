@@ -11,6 +11,7 @@ public interface ReportTemplateService {
     List<ReportTemplateEntity> findAll();
 
     List<ReportTemplateEntity> findReportTemplatesByDepartmentId(Long dId);
+    List<ReportTemplateEntity> findReportTemplatesByCategoryId(Long cId);
 
     ReportTemplateEntity findById(Long rid);
 

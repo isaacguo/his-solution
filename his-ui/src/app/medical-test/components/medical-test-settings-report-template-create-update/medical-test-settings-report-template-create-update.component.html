@@ -1,19 +1,8 @@
 <h3 class="page-header">新建化验报告模板</h3>
 
 
-<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()">
-  <form #modalForm1="ngForm">
-    <modal-header [show-close]="true">
-      <h4 class="modal-title">信息</h4>
-    </modal-header>
-    <modal-body>
-      {{reportCreationResultText}}
-    </modal-body>
-    <modal-footer>
-      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
-    </modal-footer>
-  </form>
-</modal>
+<app-popup-modal [bundle]="bundle$|async" (modalClosed)="onModalClosed()" ></app-popup-modal>
+
 
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
   <div class="form-group">

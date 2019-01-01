@@ -20,9 +20,13 @@ export class MedicalTestReportTemplateService extends AbstractService {
     super();
   }
 
-  findReportTemplatesByDepartmentId(dId:number):Observable<any[]> {
+  findReportTemplatesByDepartmentId(dId: number): Observable<any[]> {
     return this.authHttp.get(`${this.rootUrl}/findReportTemplatesByDepartmentId/${dId}`).map(this.extractData);
-}
+  }
+
+  findReportTemplatesByCategoryId(cId:number): Observable<any[]> {
+    return this.authHttp.get(`${this.rootUrl}/findReportTemplatesByCategoryId/${cId}`).map(this.extractData);
+  }
 
   createReport(request: FormGroup): Observable<any> {
     return this.authHttp.post(this.createReportUrl, request).map(this.extractData);

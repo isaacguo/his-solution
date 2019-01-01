@@ -24,6 +24,7 @@ export class MedicalTestSettingsDepartmentDetailContainerComponent implements On
   departmentInfoFromMedicalTest$: Observable<Department>;
 
   constructor(
+
     private router: Router,
     private route: ActivatedRoute,
     private employeeService: EmployeeService,

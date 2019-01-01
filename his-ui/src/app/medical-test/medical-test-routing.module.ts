@@ -32,11 +32,11 @@ const routes: Routes = [
                     path: 'medical-tests/:categoryId',
                     component: MedicalTestSettingsReportTemplatesCategoryContainerComponent,
                   },
+                  {
+                    path: 'medical-tests/:categoryId/:operation',
+                    component: MedicalTestSettingsReportTemplateCreateUpdateContainerComponent
+                  },
                 ]
-            },
-            {
-              path: 'departments/:departmentId/create',
-              component: MedicalTestSettingsReportTemplateCreateUpdateContainerComponent
             },
           ]
         },

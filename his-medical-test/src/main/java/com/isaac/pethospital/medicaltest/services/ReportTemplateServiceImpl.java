@@ -118,6 +118,12 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
     }
 
     @Override
+    public List<ReportTemplateEntity> findReportTemplatesByCategoryId(Long cId) {
+        ReportTemplateCategoryEntity category = this.reportTemplateCategoryService.findOne(cId);
+        return category.getReportTemplateList();
+    }
+
+    @Override
     public ReportTemplateEntity findById(Long rid) {
         return this.reportTemplateRepository.findOne(rid);
     }

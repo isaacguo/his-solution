@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
 import {OperationEnum} from "../../../core/enums/operation.enum";
 import {MedicalTestReportTemplateItem} from "../../models/medical-test-report-template-item.model";
+import {BehaviorSubject, Observable} from "rxjs";
+import {PopupModalBundle} from "../../../shared/models/popup-modal-bundle.model";
 
 @Component({
   selector: 'app-medical-test-settings-report-template-create-update',
@@ -13,7 +15,7 @@ import {MedicalTestReportTemplateItem} from "../../models/medical-test-report-te
   styleUrls: ['./medical-test-settings-report-template-create-update.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MedicalTestSettingsReportTemplateCreateUpdateComponent  extends AbstractCreateUpdateComponent implements OnInit {
+export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends AbstractCreateUpdateComponent implements OnInit {
 
 
   reportCreationResultText = "";
@@ -25,6 +27,7 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent  extends Abs
               public router: Router,
               private medicalTestReportService: MedicalTestReportTemplateService) {
     super(route);
+
   }
 
   get reportData() {
@@ -34,23 +37,31 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent  extends Abs
   get reportInfoData() {
     return <FormArray>this.formModel.get('reportInfo');
   }
+  popupBundleSubject = new BehaviorSubject<PopupModalBundle>({});
+  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
 
   invokeWhenCreate() {
+
 
     this.formModel.controls['categoryId'].setValue(this.categoryId);
 
     this.medicalTestReportService.createReport(this.formModel.value).subscribe(r => {
       if (r.id > 0) {
-        this.reportCreationResultText = "化验报告模板信息添加成功";
-        this.confirmCreateModal.open();
-      }
 
+        this.popupBundleSubject.next({
+          title: '信息',
+          body: '<h4>化验报告模板信息添加成功</h4>',
+          hasConfirmButton: true,
+          confirmButtonText: "确定",
+        })
+      }
     });
   }
-
-  onConfirmCreateModalClosed() {
-    this.router.navigate(['medical-test-settings', 'report-templates']);
+  onModalClosed()
+  {
+    this.router.navigate(['medical-tests', this.categoryId], {relativeTo: this.route.parent});
   }
+
 
   invokeWhenUpdate() {
     this.medicalTestReportService.updateReport(this.formModel.value).subscribe(r => {
@@ -72,7 +83,7 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent  extends Abs
 
     if (this.operation === OperationEnum.CREATE) {
       this.route.params.subscribe(params => {
-        this.categoryId = params['updateId'];
+        this.categoryId = params['categoryId'];
       });
     }
 
