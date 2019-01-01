@@ -68,6 +68,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
         category.addReportTemplate(reportTemplateEntity);
 
+
         this.reportTemplateCategoryRepository.save(category);
 
 

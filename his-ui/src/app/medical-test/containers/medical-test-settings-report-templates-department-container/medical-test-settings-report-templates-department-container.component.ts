@@ -1,10 +1,13 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {MedicalTestReportTemplateCategoryService} from "../../../core/services/medical-test/medical-test-report-template-category.service";
 import {MyTreeNode} from "../../../core/models/my-tree-node.model";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {combineLatest} from "rxjs/observable/combineLatest";
+import {EmployeeManagementCategoryTreeComponent} from "../../../employee/components/employee-management-category-tree/employee-management-category-tree.component";
+import {MedicalTestSettingsReportTemplateListComponent} from "../../components/medical-test-settings-report-template-list/medical-test-settings-report-template-list.component";
 
 @Component({
   selector: 'app-medical-test-settings-report-templates-department-container',
@@ -17,6 +20,12 @@ export class MedicalTestSettingsReportTemplatesDepartmentContainerComponent {
   //reportTemplates$: Observable<any>;
 
   categoryNodes$: Observable<MyTreeNode[]>;
+  operationDoneSubject = new BehaviorSubject<boolean>(false);
+  operationDone$ = this.operationDoneSubject.asObservable();
+
+  @ViewChild("tree")
+  medicalTestSettingsReportTemplateListComponent: MedicalTestSettingsReportTemplateListComponent;
+
 
   constructor(
     private router: Router,
@@ -31,7 +40,11 @@ export class MedicalTestSettingsReportTemplatesDepartmentContainerComponent {
     })
     */
 
-    this.categoryNodes$ = this.medicalTestReportTemplateCategoryService.getNodes();
+    //this.categoryNodes$ = this.medicalTestReportTemplateCategoryService.getNodes();
+
+    this.categoryNodes$ = combineLatest(this.route.params, this.operationDone$).mergeMap(([params, op]) => {
+      return this.medicalTestReportTemplateCategoryService.getNodesByDepartmentId(params['departmentId'])
+    });
 
   }
 
@@ -61,22 +74,49 @@ export class MedicalTestSettingsReportTemplatesDepartmentContainerComponent {
 
   onNodeDeleted(event: MyTreeNode) {
     //this.employeeDepartmentService.deleteDepartment(event.id);
+
+    this.medicalTestReportTemplateCategoryService.deleteOne(event.id)
+      .subscribe(() => {
+        this.operationDoneSubject.next(true)
+      });
   }
 
   onNodeUpdated(event: MyTreeNode) {
+    this.medicalTestReportTemplateCategoryService.update(event.id, {'id': event.id, 'name': event.name})
+      .subscribe(() => {
+        this.operationDoneSubject.next(true)
+      });
 
   }
 
   onNodeExpanded() {
-    //this.appEmployeeManagementCategoryTree.expandTree();
+    this.medicalTestSettingsReportTemplateListComponent.expandTree();
   }
 
   onRootNodeCreated($event: MyTreeNode) {
+    this.route.params.take(1).mergeMap((params) => {
+      return this.medicalTestReportTemplateCategoryService.create({
+        'name': $event.name,
+        'departmentId': params['departmentId']
+      })
+    })
+      .subscribe(() => {
+        this.operationDoneSubject.next(true)
+      });
   }
 
   onSubNodeCreated(event: MyTreeNode) {
-    //this.employeeDepartmentService.createDepartment(event.id, event.name)
 
+    this.route.params.take(1).mergeMap((params) => {
+      return this.medicalTestReportTemplateCategoryService.create({
+        'parentId': event.id,
+        'name': event.name,
+        'departmentId': params['departmentId']
+      })
+    })
+      .subscribe(() => {
+        this.operationDoneSubject.next(true)
+      });
 
   }
 

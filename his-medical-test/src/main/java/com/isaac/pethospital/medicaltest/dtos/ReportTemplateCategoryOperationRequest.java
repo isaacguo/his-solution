@@ -5,6 +5,15 @@ public class ReportTemplateCategoryOperationRequest {
     private Long parentId;
     private Long id;
     private String name;
+    private Long departmentId;
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public Long getParentId() {
         return parentId;

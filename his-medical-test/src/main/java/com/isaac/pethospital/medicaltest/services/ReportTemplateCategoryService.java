@@ -17,4 +17,5 @@ public interface ReportTemplateCategoryService {
 
     boolean delete(Long id);
 
+    List<ReportTemplateCategoryEntity> findByDepartmentId(Long depId);
 }

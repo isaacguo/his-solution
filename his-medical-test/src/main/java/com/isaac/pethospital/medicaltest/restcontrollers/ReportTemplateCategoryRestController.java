@@ -18,6 +18,11 @@ public class ReportTemplateCategoryRestController {
     private final ReportTemplateCategoryService reportTemplateCategoryService;
 
 
+    @GetMapping("departmentId/{dId}")
+    public List<ReportTemplateCategoryEntity> findByDepartmentId(@PathVariable("dId") Long depId) {
+        return this.reportTemplateCategoryService.findByDepartmentId(depId);
+    }
+
     @GetMapping
     public List<ReportTemplateCategoryEntity> findRoots() {
         return this.reportTemplateCategoryService.findRoots();

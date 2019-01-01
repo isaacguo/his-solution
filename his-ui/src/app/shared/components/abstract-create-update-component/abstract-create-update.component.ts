@@ -39,7 +39,6 @@ export abstract class AbstractCreateUpdateComponent {
     this.route.params.take(1).subscribe(params => {
       this.operation = OperationEnum[<string>params['operation']];
       if(this.operation===OperationEnum.UPDATE) {
-        console.log('true');
         this.updateId = params['updateId'];
       }
     });

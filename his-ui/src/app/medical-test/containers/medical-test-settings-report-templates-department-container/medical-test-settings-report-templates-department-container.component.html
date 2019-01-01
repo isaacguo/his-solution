@@ -8,6 +8,7 @@
       [canCreateChildNode]="true"
       [canCreateRootNode]="true"
       [selectedNode]="getSelectedNode() | async"
+      (rootNodeCreated)="onRootNodeCreated($event)"
       (subNodeCreated)="onSubNodeCreated($event)"
       (nodeDeleted)="onNodeDeleted($event)"
       (nodeUpdated)="onNodeUpdated($event)"
@@ -16,6 +17,7 @@
     ></app-category-tool-bar>
 
     <app-medical-test-settings-report-template-list
+      #tree
       (createNewTemplateClick)="onCreateNewTemplateClicked()"
       (nodeSelected)="onNodeSelected($event)"
 

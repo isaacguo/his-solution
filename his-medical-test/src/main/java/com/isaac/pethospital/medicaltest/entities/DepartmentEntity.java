@@ -17,7 +17,7 @@ public class DepartmentEntity {
     private String description;
     private boolean enable;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
     @JsonManagedReference("department-reportCategories")
     List<ReportTemplateCategoryEntity> reportTemplateCategoryList = new LinkedList<>();
 
