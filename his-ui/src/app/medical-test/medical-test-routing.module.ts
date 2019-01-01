@@ -6,45 +6,60 @@ import {MedicalTestSettingsReportTemplatesContainerComponent} from "./containers
 import {MedicalTestSettingsDepartmentContainerComponent} from "./containers/medical-test-settings-department-container/medical-test-settings-department-container.component";
 import {MedicalTestSettingsDepartmentDetailContainerComponent} from "./containers/medical-test-settings-department-detail-container/medical-test-settings-department-detail-container.component";
 import {MedicalTestSettingsReportTemplatesDepartmentContainerComponent} from "./containers/medical-test-settings-report-templates-department-container/medical-test-settings-report-templates-department-container.component";
+import {MedicalTestSettingsReportTemplateCreateUpdateContainerComponent} from "./containers/medical-test-settings-report-template-create-update-container/medical-test-settings-report-template-create-update-container.component";
+import {MedicalTestSettingsReportTemplatesCategoryContainerComponent} from "./containers/medical-test-settings-report-templates-category-container/medical-test-settings-report-templates-category-container.component";
 
 const routes: Routes = [
-  {
-    path: 'query',
-    component: MedicalTestQueryContainerComponent
-  },
-  {
+    {
+      path: 'query',
+      component: MedicalTestQueryContainerComponent
+    },
+    {
 
-    path: 'settings',
-    component: MedicalTestSettingsContainerComponent,
-    children: [
-      {
-        path: 'report-templates',
-        component: MedicalTestSettingsReportTemplatesContainerComponent,
-        children:[
-          {
-            path:'departments/:departmentId',
-            component:MedicalTestSettingsReportTemplatesDepartmentContainerComponent
-          }
-
-        ]
-      },
-      {
-        path: 'departments',
-        component: MedicalTestSettingsDepartmentContainerComponent,
-        children:
-          [
+      path: 'settings',
+      component: MedicalTestSettingsContainerComponent,
+      children: [
+        {
+          path: 'report-templates',
+          component: MedicalTestSettingsReportTemplatesContainerComponent,
+          children: [
             {
-              path:':departmentId',
-              component:MedicalTestSettingsDepartmentDetailContainerComponent
-            }
+              path: 'departments/:departmentId',
+              component: MedicalTestSettingsReportTemplatesDepartmentContainerComponent,
+              children:
+                [
+                  {
+                    path: 'medical-tests/:categoryId',
+                    component: MedicalTestSettingsReportTemplatesCategoryContainerComponent,
+                  },
+                ]
+            },
+            {
+              path: 'departments/:departmentId/create',
+              component: MedicalTestSettingsReportTemplateCreateUpdateContainerComponent
+            },
           ]
-      }
-    ]
-  }
-];
+        },
+        {
+          path: 'departments',
+          component: MedicalTestSettingsDepartmentContainerComponent,
+          children:
+            [
+              {
+                path: ':departmentId',
+                component: MedicalTestSettingsDepartmentDetailContainerComponent
+              }
+            ]
+        }
+
+      ]
+    }
+  ]
+;
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MedicalTestRoutingModule { }
+export class MedicalTestRoutingModule {
+}

@@ -53,8 +53,6 @@ export class EmployeeManagementTreeViewContainerComponent implements OnInit {
 
   onNodeDeleted(event: MyTreeNode) {
     this.employeeDepartmentService.deleteDepartment(event.id);
-
-
   }
 
   onNodeUpdated(event: MyTreeNode) {
@@ -71,7 +69,5 @@ export class EmployeeManagementTreeViewContainerComponent implements OnInit {
   onSubNodeCreated(event: MyTreeNode) {
     this.employeeDepartmentService.createDepartment(event.id, event.name)
   }
-
-
 
 }

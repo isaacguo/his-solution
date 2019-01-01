@@ -17,6 +17,7 @@ public class ReportTemplateOperationRequest {
     private Long categoryId;
     private String reportName;
     private String reportNameHanYuPinYin;
+    private Long depId;
 
     public Long getCategoryId() {
         return categoryId;

@@ -48,6 +48,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public boolean operateSupportedTestReportTemplate(DepartmentReportTemplateOperationRequest request, boolean addOperation) {
+        /*
         DepartmentEntity de = this.departmentRepository.findByDepId(request.getDepId());
         if (de == null)
             throw new RuntimeException("Cannot find Department");
@@ -61,6 +62,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         else
             de.removeSupportedReportTemplate(rte);
         this.departmentRepository.save(de);
+        */
         return true;
     }
 
