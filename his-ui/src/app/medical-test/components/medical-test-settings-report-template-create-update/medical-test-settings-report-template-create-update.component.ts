@@ -21,6 +21,9 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends Abst
   reportCreationResultText = "";
   @ViewChild("confirmCreateModal") confirmCreateModal: ModalComponent;
   formModel: FormGroup;
+  popupBundleSubject = new BehaviorSubject<PopupModalBundle>({});
+  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
+  categoryId: number;
 
   constructor(public route: ActivatedRoute,
               private fb: FormBuilder,
@@ -37,8 +40,6 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends Abst
   get reportInfoData() {
     return <FormArray>this.formModel.get('reportInfo');
   }
-  popupBundleSubject = new BehaviorSubject<PopupModalBundle>({});
-  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
 
   invokeWhenCreate() {
 
@@ -57,48 +58,53 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends Abst
       }
     });
   }
-  onModalClosed()
-  {
+
+  onModalClosed() {
     this.router.navigate(['medical-tests', this.categoryId], {relativeTo: this.route.parent});
   }
-
 
   invokeWhenUpdate() {
     this.medicalTestReportService.updateReport(this.formModel.value).subscribe(r => {
       if (r.id > 0) {
-        this.reportCreationResultText = "化验报告模板信息更新成功";
-        this.confirmCreateModal.open();
+        this.popupBundleSubject.next({
+          title: '信息',
+          body: '<h4>化验报告模板信息更新成功</h4>',
+          hasConfirmButton: true,
+          confirmButtonText: "确定",
+        })
+
       }
     })
-
-
   }
-
-  categoryId: number;
 
   ngOnInit() {
     this.initForm();
     this.process();
 
-
     if (this.operation === OperationEnum.CREATE) {
-      this.route.params.subscribe(params => {
+      this.route.params.take(1).subscribe(params => {
         this.categoryId = params['categoryId'];
       });
     }
 
     if (this.operation === OperationEnum.UPDATE) {
-      this.medicalTestReportService.findById(this.updateId).subscribe(r => {
-        this.inflatFormModelWithValues(r);
-        this.clearReportItems();
-        r.reportTemplateItems.forEach(contact => {
-          this.inflateReportItem(contact);
-        });
-        r.reportTemplateInfoList.forEach(infoItem => {
-          this.inflateReportInfo(infoItem);
-        });
-      })
 
+      this.route.params.take(1).subscribe(params => {
+        this.categoryId = params['categoryId'];
+
+        this.medicalTestReportService.findById(this.updateId).subscribe(r => {
+          this.inflateFormModelWithValues(r);
+
+          this.clearReportItems();
+          r.reportTemplateItems.forEach(contact => {
+            this.inflateReportItem(contact);
+          });
+          r.reportTemplateInfoList.forEach(infoItem => {
+            this.inflateReportInfo(infoItem);
+          });
+
+        })
+      });
     }
   }
 
@@ -108,15 +114,6 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends Abst
 
     const control1 = <FormArray>this.formModel.controls['reportInfo'];
     control1.controls = [];
-  }
-
-
-  private inflateReportInfo(infoItem: any) {
-    const control = <FormArray>this.formModel.controls['reportInfo'];
-
-    control.push(this.fb.group({
-      'reportKey': [infoItem.reportKey, Validators.required],
-    }));
   }
 
   inflateReportItem(reportItem: MedicalTestReportTemplateItem) {
@@ -146,14 +143,22 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends Abst
     control.removeAt(i);
   }
 
-
   removeReportInfoItem(i) {
     const control = <FormArray>this.formModel.controls['reportInfo'];
     control.removeAt(i);
   }
 
-  private inflatFormModelWithValues(r) {
+  private inflateReportInfo(infoItem: any) {
+    const control = <FormArray>this.formModel.controls['reportInfo'];
+
+    control.push(this.fb.group({
+      'reportKey': [infoItem.reportKey, Validators.required],
+    }));
+  }
+
+  private inflateFormModelWithValues(r) {
     this.formModel.controls['id'].setValue(r.id);
+    this.formModel.controls['categoryId'].setValue(this.categoryId);
     this.formModel.controls['reportName'].setValue(r.reportName);
   }
 

@@ -1,4 +1,8 @@
+<app-popup-modal [bundle]="bundle$|async" ></app-popup-modal>
+
 <app-medical-test-settings-report-template-category-detail
   [reportTemplateList]="reportTemplateList$|async"
   (createNewReportTemplate)="onCreateNewReportTemplate()"
+  (editNewReportTemplate)="onEditNewReportTemplate($event)"
+  (removeReportTemplate)="onRemoveReportTemplate($event)"
 ></app-medical-test-settings-report-template-category-detail>

@@ -28,6 +28,11 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
   @Output()
   createNewReportTemplate=new EventEmitter();
 
+  @Output()
+  editNewReportTemplate=new EventEmitter<number>();
+  @Output()
+  removeReportTemplate=new EventEmitter<number>();
+  reportToBeDeleted: MedicalTestReportTemplate;
 
   constructor() { }
 
@@ -40,10 +45,16 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
   }
 
   onEditButtonClicked(report: MedicalTestReportTemplate) {
-
+    this.editNewReportTemplate.emit(report.id);
   }
 
   onRemoveReport(report: MedicalTestReportTemplate) {
 
+    this.reportToBeDeleted = report;
+    this.confirmDeletionModal.open();
+  }
+
+  onConfirmDeletionModalClosed() {
+    this.removeReportTemplate.emit(this.reportToBeDeleted.id);
   }
 }

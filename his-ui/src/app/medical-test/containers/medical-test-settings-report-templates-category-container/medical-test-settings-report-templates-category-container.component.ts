@@ -6,6 +6,7 @@ import {MedicalTestReportTemplate} from "../../models/medical-test-report-templa
 import {BehaviorSubject, Observable} from "rxjs";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {OperationEnum} from "../../../core/enums/operation.enum";
+import {PopupModalBundle} from "../../../shared/models/popup-modal-bundle.model";
 
 @Component({
   selector: 'app-medical-test-settings-report-templates-category-container',
@@ -15,7 +16,7 @@ import {OperationEnum} from "../../../core/enums/operation.enum";
 })
 export class MedicalTestSettingsReportTemplatesCategoryContainerComponent implements OnInit {
 
-  reportTemplateList$:Observable<MedicalTestReportTemplate[]>;
+  reportTemplateList$: Observable<MedicalTestReportTemplate[]>;
 
   operationDoneSubject = new BehaviorSubject<boolean>(false);
   operationDone$ = this.operationDoneSubject.asObservable();
@@ -26,7 +27,7 @@ export class MedicalTestSettingsReportTemplatesCategoryContainerComponent implem
     private treeNodeService: TreeNodeService,
     private medicalTestReportTemplateService: MedicalTestReportTemplateService
   ) {
-    this.reportTemplateList$=combineLatest(route.params,this.operationDone$).mergeMap(([params, managerSet]) => {
+    this.reportTemplateList$ = combineLatest(route.params, this.operationDone$).mergeMap(([params, managerSet]) => {
       return this.medicalTestReportTemplateService.findReportTemplatesByCategoryId(params['categoryId']);
     });
   }
@@ -37,9 +38,30 @@ export class MedicalTestSettingsReportTemplatesCategoryContainerComponent implem
   onCreateNewReportTemplate() {
     this.route.params.subscribe(params => {
       this.router.navigate([OperationEnum.CREATE], {relativeTo: this.route});
-      //console.log(params)
-      //this.router.navigate(['medical-test','settings','report-templates','departments']);
     })
     ;
+  }
+
+  onEditNewReportTemplate(event: number) {
+    this.route.params.subscribe(params => {
+      this.router.navigate([OperationEnum.UPDATE, event], {relativeTo: this.route});
+    });
+  }
+
+
+  popupBundleSubject = new BehaviorSubject<PopupModalBundle>({});
+  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
+  onRemoveReportTemplate($event: number) {
+    this.medicalTestReportTemplateService.deleteById($event).subscribe(() => {
+      this.operationDoneSubject.next(true)
+
+      this.popupBundleSubject.next({
+        title: '信息',
+        body: '模板删除成功',
+        hasConfirmButton: true,
+        confirmButtonText: "确定",
+      })
+
+    });
   }
 }
