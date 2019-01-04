@@ -183,9 +183,11 @@
               <li *ngIf="guardMap.get('Finance-财务管理-操作')?.isAuthorized()|async">
                 <a routerLink="/finance/charge-management" routerLinkActive="active" class="text-center"> 收费管理</a>
               </li>
+              <!--
               <li *ngIf="guardMap.get('Finance-收费定价-操作')?.isAuthorized()|async">
                 <a routerLink="/finance/price-management" routerLinkActive="active" class="text-center"> 收费定价</a>
               </li>
+              -->
 
             </ul>
           </li>

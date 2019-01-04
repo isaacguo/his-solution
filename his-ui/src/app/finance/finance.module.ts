@@ -14,6 +14,7 @@ import {ChargeManagementComponent} from "./components/charge-management/charge-m
 import {ChargeAdminDetailComponent} from "./components/charge-management/charge-admin-detail/charge-admin-detail.component";
 import {PriceAdminListComponent} from "./components/price-management/price-admin-list/price-admin-list.component";
 import {PriceManagementComponent} from "./components/price-management/price-management.component";
+import {ChargeAdminListComponent} from "./components/charge-management/charge-admin-list/charge-admin-list.component";
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import {PriceManagementComponent} from "./components/price-management/price-mana
     FinanceChargeManagementContainerComponent,
     FinanceChargeManagementComponent,
     ChargeAdminDetailComponent,
+    ChargeAdminListComponent,
     PriceAdminListComponent]
 
 })

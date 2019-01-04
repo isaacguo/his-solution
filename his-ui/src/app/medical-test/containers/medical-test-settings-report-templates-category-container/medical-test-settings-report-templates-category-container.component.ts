@@ -39,7 +39,6 @@ export class MedicalTestSettingsReportTemplatesCategoryContainerComponent implem
     }).map(r=>{
       r.list.forEach(b=>{
         let item = r.reportTemplateList.find(r => r.uuid === b["priceItemUuid"]);
-        console.log(item);
         if (item != null) {
           item.normalPrice = b["normalPrice"];
           item.memberPrice = b["memberPrice"];

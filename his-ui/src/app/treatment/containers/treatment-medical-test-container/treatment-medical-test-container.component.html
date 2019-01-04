@@ -1,3 +1,8 @@
+
+
+
+
+
 <div  style="height: 700px ">
   <split [direction]="'horizontal'">
     <split-area [size]="20">
@@ -12,14 +17,13 @@
               class="glyphicon glyphicon-plus"></span> 新建化验检查
             </button>
 
-            <app-treatment-medical-test></app-treatment-medical-test>
+            <app-treatment-medical-test
+            ></app-treatment-medical-test>
             <!--
             <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"
                                                  [list]="unClosedTreatmentCases$|async"
                                                  (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
                                                  -->
-            <app-treatment-medical-test
-            ></app-treatment-medical-test>
           </div>
         </div>
         <div class="panel panel-info">
