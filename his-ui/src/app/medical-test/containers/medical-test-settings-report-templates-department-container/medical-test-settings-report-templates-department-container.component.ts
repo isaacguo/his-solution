@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
@@ -6,7 +6,6 @@ import {MedicalTestReportTemplateCategoryService} from "../../../core/services/m
 import {MyTreeNode} from "../../../core/models/my-tree-node.model";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {combineLatest} from "rxjs/observable/combineLatest";
-import {EmployeeManagementCategoryTreeComponent} from "../../../employee/components/employee-management-category-tree/employee-management-category-tree.component";
 import {MedicalTestSettingsReportTemplateListComponent} from "../../components/medical-test-settings-report-template-list/medical-test-settings-report-template-list.component";
 
 @Component({
@@ -17,7 +16,6 @@ import {MedicalTestSettingsReportTemplateListComponent} from "../../components/m
 })
 export class MedicalTestSettingsReportTemplatesDepartmentContainerComponent {
 
-  //reportTemplates$: Observable<any>;
 
   categoryNodes$: Observable<MyTreeNode[]>;
   operationDoneSubject = new BehaviorSubject<boolean>(false);

@@ -10,7 +10,8 @@ export class DataManagementService extends CrudService<any> {
   rootUrl: string = `${ServiceConstants.GATEWAY_URL}/data-management`;
 
   constructor(authHttp: AuthHttp) {
-    super(`${ServiceConstants.GATEWAY_URL}/data-management`, authHttp);
+    super
+    (`${ServiceConstants.GATEWAY_URL}/data-management`, authHttp);
   }
 
   backup(): Observable<any> {

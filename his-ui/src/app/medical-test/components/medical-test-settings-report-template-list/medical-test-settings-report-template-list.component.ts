@@ -10,8 +10,6 @@ import {BehaviorSubject} from "rxjs/BehaviorSubject";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-//export class MedicalTestSettingsReportTemplateListComponent extends AbstractItemSelectableTableComponent<any> implements OnInit {
-
 export class MedicalTestSettingsReportTemplateListComponent extends AbstractCategoryTreeComponent  {
 
   selectedNodeSubject = new BehaviorSubject<MyTreeNode>(new MyTreeNode());

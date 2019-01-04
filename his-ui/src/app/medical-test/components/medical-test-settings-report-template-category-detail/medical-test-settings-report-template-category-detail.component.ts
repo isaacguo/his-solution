@@ -1,6 +1,16 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output, SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {MedicalTestReportTemplate} from "../../models/medical-test-report-template.model";
+import {FinancePriceService} from "../../../core/services/finance/finance-price.service";
 
 @Component({
   selector: 'app-medical-test-settings-report-template-category-detail',
@@ -20,24 +30,31 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
   @Input()
   categoryName: string;
 
+  financePriceService: FinancePriceService;
+
   @ViewChild("confirmDeletionModal") confirmDeletionModal: ModalComponent;
 
   @Input()
-  reportTemplateList:MedicalTestReportTemplate[];
+  reportTemplateList: MedicalTestReportTemplate[];
 
   @Output()
-  createNewReportTemplate=new EventEmitter();
+  createNewReportTemplate = new EventEmitter();
 
   @Output()
-  editNewReportTemplate=new EventEmitter<number>();
+  editNewReportTemplate = new EventEmitter<number>();
   @Output()
-  removeReportTemplate=new EventEmitter<number>();
+  removeReportTemplate = new EventEmitter<number>();
+
   reportToBeDeleted: MedicalTestReportTemplate;
 
-  constructor() { }
+  @Output()
+  priceChanged = new EventEmitter<any>();
+
+
+  constructor() {
+  }
 
   ngOnInit() {
-
   }
 
   onCreateNewReportClicked() {
@@ -57,4 +74,14 @@ export class MedicalTestSettingsReportTemplateCategoryDetailComponent implements
   onConfirmDeletionModalClosed() {
     this.removeReportTemplate.emit(this.reportToBeDeleted.id);
   }
+
+
+  onValueChanged(event: number, report: any, fieldName: string) {
+    let obj = {};
+    obj[fieldName] = event;
+    obj['uuid'] = report.uuid;
+    this.priceChanged.emit(obj);
+  }
+
+
 }

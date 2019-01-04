@@ -43,6 +43,7 @@ public class FactoryResetServiceImpl implements FactoryResetService {
     @Override
     public void insertData() {
 
+        /*
         ReportTemplateCategoryEntity category=new ReportTemplateCategoryEntity();
         category.setName("常规检查");
 
@@ -71,11 +72,12 @@ public class FactoryResetServiceImpl implements FactoryResetService {
 
         this.reportTemplateCategoryRepository.save(category);
 
+         */
 
     }
 
-    private void addReportInfoItem(String key,ReportTemplateEntity reportTemplateEntity) {
-        ReportTemplateInfoEntity reportTemplateInfoEntity=new ReportTemplateInfoEntity();
+    private void addReportInfoItem(String key, ReportTemplateEntity reportTemplateEntity) {
+        ReportTemplateInfoEntity reportTemplateInfoEntity = new ReportTemplateInfoEntity();
         reportTemplateInfoEntity.setReportSection(ReportSectionEnum.HEADER);
         reportTemplateInfoEntity.setReportKey(key);
         reportTemplateEntity.addReportTemplateInfo(reportTemplateInfoEntity);

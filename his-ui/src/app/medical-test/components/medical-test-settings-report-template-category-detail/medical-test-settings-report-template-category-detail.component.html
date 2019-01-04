@@ -31,8 +31,8 @@
     <tr>
       <th>编号</th>
       <th>名称</th>
-      <th *ngIf="financePriceService" style="width: 230px">会员价</th>
-      <th *ngIf="financePriceService" style="width: 230px">非会员价</th>
+      <th style="width: 230px">会员价</th>
+      <th style="width: 230px">非会员价</th>
       <th *ngIf="canEdit || canDelete">操作</th>
     </tr>
     </thead>
@@ -40,11 +40,11 @@
     <tr *ngFor="let report of reportTemplateList; let i=index">
       <td>{{i + 1}}</td>
       <td>{{report.reportName}}</td>
-      <td *ngIf="financePriceService">
+      <td>
         <app-field-edit [value]="report.memberPrice"
                         (valueChanged)="onValueChanged($event, report,'memberPrice')"></app-field-edit>
       </td>
-      <td *ngIf="financePriceService">
+      <td>
         <app-field-edit [value]="report.normalPrice"
                         (valueChanged)="onValueChanged($event,report,'normalPrice')"></app-field-edit>
       </td>

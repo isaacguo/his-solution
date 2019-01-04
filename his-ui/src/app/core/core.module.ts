@@ -22,6 +22,8 @@ import {MedicalTestDepartmentService} from "./services/medical-test/medical-test
 import {CommentService} from "./services/treatment/comment.service";
 import {MedicalTestReportTemplateService} from "./services/medical-test/medical-test-report-template.service";
 import {MedicalTestReportTemplateCategoryService} from "./services/medical-test/medical-test-report-template-category.service";
+import {FinancePriceService} from "./services/finance/finance-price.service";
+import {FinanceChargeService} from "./services/finance/finance-charge.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -70,6 +72,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestDepartmentService,
     CommentService,
     MedicalTestReportTemplateService,
+    FinancePriceService,
+    FinanceChargeService,
+
     /*
     EmployeeManagementGuard,
     ChargeManagementGuard,
