@@ -38,6 +38,8 @@
 
             <app-treatment-medical-test
               [list]="todayMedicalTestReports$|async"
+              [selectedMedicalTest]="selectedMedicalTest$|async"
+              (itemSelected)="onMedicalTestSelected($event)"
             ></app-treatment-medical-test>
             <!--
             <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"

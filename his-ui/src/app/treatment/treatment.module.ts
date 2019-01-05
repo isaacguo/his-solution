@@ -58,6 +58,7 @@ import { SelectableTreatmentCaseTableComponent } from './components/selectable-t
 import { CustomerServiceTreatmentCaseCommentComponent } from './components/customer-service-treatment-case-comment/customer-service-treatment-case-comment.component';
 import {CustomerServicePetInfoComponent} from "./components/customer-service-pet-info/customer-service-pet-info.component";
 import { CreateMedicalTestsComponent } from './components/create-medical-tests/create-medical-tests.component';
+import { TreatmentMedicalTestReportDetailComponent } from './components/treatment-medical-test-report-detail/treatment-medical-test-report-detail.component';
 
 @NgModule({
   imports: [
@@ -119,7 +120,8 @@ import { CreateMedicalTestsComponent } from './components/create-medical-tests/c
     SelectableTreatmentCaseTableComponent,
     CustomerServiceTreatmentCaseCommentComponent,
     CustomerServicePetInfoComponent,
-    CreateMedicalTestsComponent
+    CreateMedicalTestsComponent,
+    TreatmentMedicalTestReportDetailComponent
     ]
 })
 export class TreatmentModule {

@@ -21,6 +21,7 @@ import {TreatmentCaseDetailContainerComponent} from "./containers/treatment-case
 import {TreatmentMedicalTestContainerComponent} from "./containers/treatment-medical-test-container/treatment-medical-test-container.component";
 import {TreatmentPrescriptionDetailContainerComponent} from './containers/treatment-prescription-detail-container/treatment-prescription-detail-container.component';
 import {TreatmentSettingsRoomDetailContainerComponent} from "./containers/treatment-settings-room-detail-container/treatment-settings-room-detail-container.component";
+import {TreatmentMedicalTestDetailContainerComponent} from "./containers/treatment-medical-test-detail-container/treatment-medical-test-detail-container.component";
 
 const routes: Routes = [
   {
@@ -102,8 +103,9 @@ const routes: Routes = [
             component:TreatmentMedicalTestContainerComponent,
             children:[
               {
-                path:':medicalTestId',
-                component: TreatmentCaseDetailContainerComponent,
+                path:':reportUuid' +
+                  '',
+                component: TreatmentMedicalTestDetailContainerComponent
               }
             ]
           },

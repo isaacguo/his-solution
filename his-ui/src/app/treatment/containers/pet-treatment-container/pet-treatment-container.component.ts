@@ -87,8 +87,8 @@ export class PetTreatmentContainerComponent implements OnInit, OnDestroy {
   }
 
   onTreatmentCaseSelected($treatmentCase: TreatmentCase) {
-    this.selectedTreatmentCaseSubject.next($treatmentCase);
-    this.router.navigate([$treatmentCase.id], {relativeTo: this.route});
+
+
   }
 
   ngOnDestroy(): void {

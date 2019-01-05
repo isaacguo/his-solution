@@ -35,6 +35,9 @@ export class TreatmentMedicalTestContainerComponent implements OnInit {
   medicalTestReportChangedSubject = new BehaviorSubject<boolean>(false);
   medicalTestReportChanged$ = this.medicalTestReportChangedSubject.asObservable();
 
+  selectedMedicalTestReportSubject = new BehaviorSubject<MedicalTestReport>({});
+  selectedMedicalTest$: Observable<MedicalTestReport> = this.selectedMedicalTestReportSubject.asObservable();
+
   medicaTestReport$: Observable<MedicalTestReport[]>;
   todayMedicalTestReports$: Observable<MedicalTestReport[]>;
   historyMedicalTestReports$: Observable<MedicalTestReport[]>;
@@ -98,5 +101,11 @@ export class TreatmentMedicalTestContainerComponent implements OnInit {
     this.medicalTestReportService.createReports($event).subscribe(()=>{
       this.medicalTestReportChangedSubject.next(true);
     });
+  }
+
+  onMedicalTestSelected($event: any) {
+    this.selectedMedicalTestReportSubject.next($event);
+    this.router.navigate([$event.uuid], {relativeTo: this.route});
+
   }
 }
