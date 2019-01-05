@@ -6,7 +6,6 @@ import com.isaac.pethospital.common.jms.finance.ChargeOrderStatusChangedMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.finance.ReportOperationMessage;
-import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessage;
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
@@ -16,7 +15,6 @@ import com.isaac.pethospital.medicaltest.repositories.ReportRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -25,25 +23,38 @@ public class ReportServiceImpl implements ReportService {
     private final ReportRepository reportRepository;
     private final JmsSender jmsSender;
     private final JmsProperties jmsProperties;
+    private final ReportTemplateService reportTemplateService;
 
-    public ReportServiceImpl(ReportRepository reportRepository, JmsSender jmsSender, JmsProperties jmsProperties) {
+    public ReportServiceImpl(ReportRepository reportRepository,
+                             JmsSender jmsSender,
+                             JmsProperties jmsProperties,
+                             ReportTemplateService reportTemplateService
+    ) {
         this.reportRepository = reportRepository;
         this.jmsSender = jmsSender;
         this.jmsProperties = jmsProperties;
+        this.reportTemplateService = reportTemplateService;
     }
 
     @Override
-    public ReportEntity createReport(ReportOperationRequest request) {
-        ReportEntity reportEntity = request.toReport();
-        reportEntity.setReportStatus(ReportStatusEnum.UNSUBMITTED);
-        reportEntity.setCreatedDateTime(LocalDateTime.now());
+    public List<ReportEntity> createReports(ReportOperationRequest request) {
 
-        ReportEntity saved = this.reportRepository.save(reportEntity);
+        List<ReportEntity> reportEntities = request.toReports(reportTemplateService);
+        List<ReportEntity> saved = this.reportRepository.save(reportEntities);
 
-        MedicalTestCreateReportMessage message = new MedicalTestCreateReportMessage();
-        message.setReportUuid(reportEntity.getUuid());
-        message.setTreatmentCaseUuid(reportEntity.getTreatmentCaseUuid());
-        jmsSender.sendEvent(this.jmsProperties.getMedicalTestCreateReportTopic(), message);
+
+        ChargeReportOperationMessage crom = new ChargeReportOperationMessage();
+        //crom.setTreatmentCaseUuid(treatmentCaseUuid);
+        crom.setPetOwnerUuid(request.getPetOwnerUuid());
+        crom.setPetUuid(request.getPetUuid());
+        saved.forEach(r -> {
+            ReportOperationMessage reportOperationMessage = new ReportOperationMessage();
+            reportOperationMessage.setReportUuid(r.getUuid());
+            reportOperationMessage.setReportTemplateUuid(r.getReportTemplateUuid());
+            crom.addReportOperationMessages(reportOperationMessage);
+        });
+
+        jmsSender.sendEvent(jmsProperties.getFinanceChargeItemOperationQueue(), crom);
 
         return saved;
     }
@@ -114,6 +125,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void onGenerateMedicalTestOrder(GenerateMedicalTestOrderMessage message) {
 
+        /*
         String treatmentCaseUuid = message.getTreatmentCaseUuid();
         List<ReportEntity> reportList = this.reportRepository.findByTreatmentCaseUuidAndReportStatusEquals(treatmentCaseUuid, ReportStatusEnum.UNSUBMITTED);
 
@@ -129,6 +141,7 @@ public class ReportServiceImpl implements ReportService {
         });
 
         jmsSender.sendEvent(jmsProperties.getFinanceChargeItemOperationQueue(), crom);
+        */
 
 
     }

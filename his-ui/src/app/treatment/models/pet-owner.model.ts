@@ -11,6 +11,7 @@ export interface PetOwner {
   homePhone?: string,
   id?: number,
   petList?: Pet[],
-  memberNumber?: string
+  memberNumber?: string,
+  uuid?:string
 
 }

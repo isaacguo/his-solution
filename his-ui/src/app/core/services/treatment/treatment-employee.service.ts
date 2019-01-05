@@ -9,7 +9,6 @@ import {CrudService} from "../crud.service";
 @Injectable()
 export class TreatmentEmployeeService extends CrudService<TreatmentEmployeeModel> {
 
-  rootUrl: string = `${ServiceConstants.TREATMENT_URL}/employees`;
 
   treatmentEmployeeSubject = new BehaviorSubject<TreatmentEmployeeModel>({} as TreatmentEmployeeModel);
 

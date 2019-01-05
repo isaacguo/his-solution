@@ -3,8 +3,10 @@ package com.isaac.pethospital.medicaltest.dtos;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportInfoEntity;
 import com.isaac.pethospital.medicaltest.entities.ReportItemEntity;
+import com.isaac.pethospital.medicaltest.entities.ReportTemplateEntity;
 import com.isaac.pethospital.medicaltest.enums.ReportSectionEnum;
 import com.isaac.pethospital.medicaltest.enums.ReportStatusEnum;
+import com.isaac.pethospital.medicaltest.services.ReportTemplateService;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -12,7 +14,6 @@ import java.util.*;
 public class ReportOperationRequest {
 
     List<ReportItemEntity> reportItems = new LinkedList<>();
-    List<ReportInfoEntity> reportInfoList = new LinkedList<>();
     LocalDateTime createdDateTime;
     LocalDateTime paidDateTime;
     LocalDateTime finishedDateTime;
@@ -20,14 +21,24 @@ public class ReportOperationRequest {
     String reportTemplateUuid;
     String uuid;
     Boolean markAsDone;
+
+
     //generate order
     String treatmentCaseUuid;
     List<String> reportUuid;
     List<String> reportUuidLists = new LinkedList<>();
-    String reportName;
     String petUuid;
     String petOwnerUuid;
+    List<ReportItemOperationRequest> medicalTestReports = new LinkedList<>();
     private Long id;
+
+    public List<ReportItemOperationRequest> getMedicalTestReports() {
+        return medicalTestReports;
+    }
+
+    public void setMedicalTestReports(List<ReportItemOperationRequest> medicalTestReports) {
+        this.medicalTestReports = medicalTestReports;
+    }
 
     public Boolean getMarkAsDone() {
         return markAsDone;
@@ -77,39 +88,49 @@ public class ReportOperationRequest {
         this.treatmentCaseUuid = treatmentCaseUuid;
     }
 
-    public List<String> getReportUuid() {
-        return reportUuid;
-    }
-
-    public void setReportUuid(List<String> reportUuid) {
-        this.reportUuid = reportUuid;
-    }
 
     public List<String> getReportUuidLists() {
         return reportUuidLists;
     }
 
-    public void setReportUuidLists(List<String> reportUuidLists) {
-        this.reportUuidLists = reportUuidLists;
-    }
 
-    public String getReportName() {
-        return reportName;
-    }
+    public List<ReportEntity> toReports(ReportTemplateService reportTemplateService) {
 
-    public void setReportName(String reportName) {
-        this.reportName = reportName;
-    }
+        List<ReportEntity> list = new LinkedList<>();
 
-    public ReportEntity toReport() {
-        ReportEntity reportEntity = new ReportEntity();
-        reportEntity.setUuid(UUID.randomUUID().toString());
-        reportEntity.setReportName(this.reportName);
-        reportEntity.setReportTemplateUuid(this.reportTemplateUuid);
-        reportEntity.setTreatmentCaseUuid(this.treatmentCaseUuid);
-        reportEntity.setPetOwnerUuid(this.petOwnerUuid);
-        reportEntity.setPetUuid(this.petUuid);
+        this.getMedicalTestReports().forEach(r -> {
+            ReportEntity reportEntity = new ReportEntity();
 
+            reportEntity.setReportStatus(ReportStatusEnum.UNPAID);
+            reportEntity.setCreatedDateTime(LocalDateTime.now());
+
+            reportEntity.setUuid(UUID.randomUUID().toString());
+            reportEntity.setReportName(r.reportName);
+            reportEntity.setReportTemplateUuid(r.reportTemplateUuid);
+            reportEntity.setTreatmentCaseUuid(this.treatmentCaseUuid);
+
+            ReportTemplateEntity template = reportTemplateService.findByUuid(r.reportTemplateUuid);
+
+            template.getReportTemplateItems().forEach(i -> {
+                ReportItemEntity reportItemEntity = new ReportItemEntity();
+                reportItemEntity.setComments(i.getComments());
+                reportItemEntity.setReferenceHighLimitValue(i.getReferenceHighLimitValue());
+                reportItemEntity.setReferenceLowLimitValue(i.getReferenceLowLimitValue());
+                reportItemEntity.setItemUnit(i.getItemUnit());
+                reportItemEntity.setItemName(i.getItemName());
+                reportEntity.addReportItem(reportItemEntity);
+            });
+
+            reportEntity.setPetOwnerUuid(this.petOwnerUuid);
+            reportEntity.setPetUuid(this.petUuid);
+            list.add(reportEntity);
+        });
+
+        return list;
+
+
+
+        /*
         this.reportInfoList.forEach(r -> {
             ReportInfoEntity reportInfoEntity = new ReportInfoEntity();
             reportInfoEntity.setReportKey(r.getReportKey());
@@ -118,36 +139,8 @@ public class ReportOperationRequest {
             reportEntity.addReportInfo(reportInfoEntity);
         });
 
-        this.reportItems.forEach(r -> {
-            ReportItemEntity reportItemEntity = new ReportItemEntity();
-            reportItemEntity.setComments(r.getComments());
-            reportItemEntity.setReferenceHighLimitValue(r.getReferenceHighLimitValue());
-            reportItemEntity.setReferenceLowLimitValue(r.getReferenceLowLimitValue());
-            reportItemEntity.setItemUnit(r.getItemUnit());
-            reportItemEntity.setItemName(r.getItemName());
-            reportItemEntity.setResult(r.getResult());
 
-            reportEntity.addReportItem(reportItemEntity);
-        });
-
-
-        return reportEntity;
-    }
-
-    public List<ReportItemEntity> getReportItems() {
-        return reportItems;
-    }
-
-    public void setReportItems(List<ReportItemEntity> reportItems) {
-        this.reportItems = reportItems;
-    }
-
-    public List<ReportInfoEntity> getReportInfoList() {
-        return reportInfoList;
-    }
-
-    public void setReportInfoList(List<ReportInfoEntity> reportInfoList) {
-        this.reportInfoList = reportInfoList;
+        */
     }
 
     public LocalDateTime getCreatedDateTime() {

@@ -10,7 +10,7 @@ import com.isaac.pethospital.medicaltest.jms.FinanceChargeStatusChangedListener;
 import java.util.List;
 
 public interface ReportService {
-    ReportEntity createReport(ReportOperationRequest request);
+    List<ReportEntity> createReports(ReportOperationRequest request);
 
     boolean deleteReport(String uuid);
 

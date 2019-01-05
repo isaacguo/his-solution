@@ -17,6 +17,8 @@ public interface ReportTemplateRepository extends JpaRepository<ReportTemplateEn
 
     List<ReportTemplateEntity> findReportTemplateEntitiesByDepartment(DepartmentEntity department);
 
+    ReportTemplateEntity findReportTemplateEntityByUuid(String uuid);
+
 
 
 }

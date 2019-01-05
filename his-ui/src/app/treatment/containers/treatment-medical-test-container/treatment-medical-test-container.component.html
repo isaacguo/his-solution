@@ -1,9 +1,26 @@
+<modal #createMedicalTestsModal>
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请添加化验检查项</h4>
+    </modal-header>
+    <modal-body>
+      <app-create-medical-tests
+        [petOwner]="petOwner$|async"
+        [pet]="pet$|async"
+        (generateMedicalTestReport)="onGenerateMedicalTestReport($event)"
+      >
+      </app-create-medical-tests>
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-default" data-dismiss="createMedicalTestsModal"
+              (click)="createMedicalTestsModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
 
 
-
-
-
-<div  style="height: 700px ">
+<div style="height: 700px ">
   <split [direction]="'horizontal'">
     <split-area [size]="20">
       <div style="padding-right:15px">
@@ -13,7 +30,7 @@
             今日检查
           </div>
           <div class="panel-body">
-            <button (click)="onMedicalTestsCreated()" class="btn btn-primary btn-sm isaac-margin-bottom-10px"><span
+            <button (click)="onCreateMedicalTestClicked()" class="btn btn-primary btn-sm isaac-margin-bottom-10px"><span
               class="glyphicon glyphicon-plus"></span> 新建化验检查
             </button>
 

@@ -129,6 +129,11 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
     }
 
     @Override
+    public ReportTemplateEntity findByUuid(String uuid) {
+        return this.reportTemplateRepository.findReportTemplateEntityByUuid(uuid);
+    }
+
+    @Override
     public boolean deleteById(Long rid) {
         this.reportTemplateRepository.delete(rid);
         return true;

@@ -1,7 +1,6 @@
 package com.isaac.pethospital.medicaltest.restcontrollers;
 
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
-import com.isaac.pethospital.medicaltest.dtos.ReportTemplateOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 import com.isaac.pethospital.medicaltest.services.ReportService;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +41,8 @@ public class ReportRestController {
     }
 
     @PostMapping
-    public ReportEntity createReport(@RequestBody ReportOperationRequest request) {
-        return this.reportService.createReport(request);
+    public List<ReportEntity> createReports(@RequestBody ReportOperationRequest request) {
+        return this.reportService.createReports(request);
     }
 
 
