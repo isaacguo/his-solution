@@ -2,17 +2,9 @@ import {NgModule} from '@angular/core';
 
 import {InventoryRoutingModule} from './inventory-routing.module';
 import {SharedModule} from "../shared/shared.module";
-import {ImportManagementContainerComponent} from './containers/import-management-container/import-management-container.component';
 import {ImportManagementComponent} from './components/import-management/import-management.component';
-import {ExportManagementContainerComponent} from './containers/export-management-container/export-management-container.component';
 import {ExportManagementComponent} from './components/export-management/export-management.component';
-import {InventorySettingsContainerComponent} from './containers/inventory-settings-container/inventory-settings-container.component';
 import {InventorySettingsComponent} from './components/inventory-settings/inventory-settings.component';
-import {InventorySettingsItemManagementContainerComponent} from './containers/inventory-settings-item-management-container/inventory-settings-item-management-container.component';
-import {InventoryQueryContainerComponent} from './containers/inventory-query-container/inventory-query-container.component';
-import {ImportReceiptContainerComponent} from './containers/import-receipt-container/import-receipt-container.component';
-import {ExportReceiptContainerComponent} from './containers/export-receipt-container/export-receipt-container.component';
-import {InventoryQueryCategoryDetailContainerComponent} from './containers/inventory-query-category-detail-container/inventory-query-category-detail-container.component';
 
 import {ImportManagementListComponent} from './components/import-management/import-management-list/import-management-list.component';
 import {ImportManagementDetailComponent} from './components/import-management/import-management-list/import-management-detail/import-management-detail.component';
@@ -33,19 +25,11 @@ import {ExportManagementDetailComponent} from './components/export-management/ex
     SharedModule,
     InventoryRoutingModule
   ],
-  declarations: [ImportManagementContainerComponent,
+  declarations: [
     ImportManagementComponent,
-    ExportManagementContainerComponent,
     ExportManagementComponent,
-    InventorySettingsContainerComponent,
     InventorySettingsComponent,
-    InventorySettingsItemManagementContainerComponent,
     InventorySettingsItemManagementComponent,
-    InventoryQueryContainerComponent,
-    ImportReceiptContainerComponent,
-    ExportReceiptContainerComponent,
-    InventoryQueryCategoryDetailContainerComponent,
-
     ImportManagementListComponent,
     ImportManagementDetailComponent,
     InventoryOperationToolBarComponent,

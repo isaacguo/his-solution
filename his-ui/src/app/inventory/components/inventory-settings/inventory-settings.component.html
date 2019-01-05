@@ -3,17 +3,19 @@
 </div>
 
 <div class="row">
-  <div class="navbar-default sidebar-2nd-level" role="navigation">
-    <div class="sidebar-nav navbar-collapse">
-      <ul class="nav" id="side-menu">
-        <li><a routerLink="warehouses" routerLinkActive="active">仓库管理</a></li>
-        <li><a routerLink="item-management" routerLinkActive="active">货品管理</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div id="page-wrapper">
-    <router-outlet></router-outlet>
+  <div class="row">
+    <ul class="nav nav-tabs ">
+      <!--
+      <li routerLinkActive="active">
+        <a routerLink="warehouses" class="text-center">仓库管理</a>
+      </li>
+      -->
+      <li routerLinkActive="active">
+        <a routerLink="item-management" class="text-center">货品管理</a>
+      </li>
+    </ul>
   </div>
 </div>
+
+<router-outlet></router-outlet>
 

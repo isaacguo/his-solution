@@ -318,3 +318,9 @@ app-editor.edit-mode .icon-cancel, app-editor.edit-mode .icon-save {
   opacity: 1;
   transform: scale(1)
 }
+
+.fixed-height
+{
+  height: 768px;
+}
+

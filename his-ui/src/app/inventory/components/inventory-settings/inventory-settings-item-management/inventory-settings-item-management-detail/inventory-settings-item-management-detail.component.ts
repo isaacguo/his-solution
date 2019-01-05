@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {FinancePriceService} from "../../../../../core/services/finance/finance-price.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {InventoryCategoryService} from "../../../../../core/services/inventory/inventory-category.service";
 import {InventoryItemService} from "../../../../../core/services/inventory/inventory-item.service";
@@ -34,7 +34,8 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
   categoryId: number;
 
   constructor(
-    public router: Router,
+    private router: Router,
+    private route: ActivatedRoute,
     private inventoryCategoryService: InventoryCategoryService,
     private inventoryItemService: InventoryItemService) {
   }
@@ -78,7 +79,7 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
   }
 
   onCreateNewItemClicked() {
-    this.router.navigate(['inventory-item', OperationEnum.CREATE, this.categoryId]);
+    this.router.navigate(['inventory-item', OperationEnum.CREATE, this.categoryId],{relativeTo:this.route.parent.parent});
   }
 
 
