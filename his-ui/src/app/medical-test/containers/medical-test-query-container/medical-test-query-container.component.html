@@ -6,5 +6,9 @@
   <app-query-bar></app-query-bar>
 </div>
 <div class="row">
-  <app-medical-test-query></app-medical-test-query>
+  <app-medical-test-query
+    [pageData]="pageData$|async"
+    (modifyMedicalTestReport)="onModifyMedicalTestReport($event)"
+    (pageChanged)="onPageChanged($event)">
+  </app-medical-test-query>
 </div>

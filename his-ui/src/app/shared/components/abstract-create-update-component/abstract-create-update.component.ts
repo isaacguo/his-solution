@@ -14,6 +14,7 @@ export abstract class AbstractCreateUpdateComponent {
 
   constructor(public route: ActivatedRoute) {
 
+
   }
 
   getOperationText() {

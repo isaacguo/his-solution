@@ -8,11 +8,16 @@ import {MedicalTestSettingsDepartmentDetailContainerComponent} from "./container
 import {MedicalTestSettingsReportTemplatesDepartmentContainerComponent} from "./containers/medical-test-settings-report-templates-department-container/medical-test-settings-report-templates-department-container.component";
 import {MedicalTestSettingsReportTemplateCreateUpdateContainerComponent} from "./containers/medical-test-settings-report-template-create-update-container/medical-test-settings-report-template-create-update-container.component";
 import {MedicalTestSettingsReportTemplatesCategoryContainerComponent} from "./containers/medical-test-settings-report-templates-category-container/medical-test-settings-report-templates-category-container.component";
+import {MedicalTestReportUpdateContainerComponent} from "./containers/medical-test-report-update-container/medical-test-report-update-container.component";
 
 const routes: Routes = [
     {
       path: 'query',
       component: MedicalTestQueryContainerComponent
+    },
+    {
+      path: 'reports/:reportUuid',
+      component: MedicalTestReportUpdateContainerComponent
     },
     {
 

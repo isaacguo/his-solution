@@ -1,4 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {MedicalTestReport} from "../../models/medical-test-report.model";
+import {ReportStatusEnum} from "../../../core/enums/report-status.enum";
 
 @Component({
   selector: 'app-medical-test-query',
@@ -9,11 +11,31 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 export class MedicalTestQueryComponent implements OnInit {
 
   @Input()
-  reports:any[];
+  pageData: any;
+  @Output()
+  pageSelected = new EventEmitter<number>();
+
+  @Output()
+  modifyMedicalTestReport=new EventEmitter<MedicalTestReport>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onModifyButtonClicked(report: MedicalTestReport) {
+    this.modifyMedicalTestReport.emit(report);
+  }
+
+  onModifyStatusButtonClicked(report: MedicalTestReport) {
+
+  }
+
+  getStatusText(status: any): string {
+    return ReportStatusEnum[status];
+  }
+
+  onPageChanged($event: number) {
+    this.pageSelected.emit($event);
+  }
 }

@@ -17,6 +17,8 @@ import { MedicalTestSettingsReportTemplateCreateUpdateContainerComponent } from 
 import { MedicalTestSettingsReportTemplateCreateUpdateComponent } from './components/medical-test-settings-report-template-create-update/medical-test-settings-report-template-create-update.component';
 import { MedicalTestSettingsReportTemplatesCategoryContainerComponent } from './containers/medical-test-settings-report-templates-category-container/medical-test-settings-report-templates-category-container.component';
 import { MedicalTestSettingsReportTemplateCategoryDetailComponent } from './components/medical-test-settings-report-template-category-detail/medical-test-settings-report-template-category-detail.component';
+import { MedicalTestReportUpdateContainerComponent } from './containers/medical-test-report-update-container/medical-test-report-update-container.component';
+import { MedicalTestReportUpdateComponent } from './components/medical-test-report-update/medical-test-report-update.component';
 
 @NgModule({
   imports: [
@@ -38,6 +40,8 @@ import { MedicalTestSettingsReportTemplateCategoryDetailComponent } from './comp
     MedicalTestSettingsReportTemplateCreateUpdateContainerComponent,
     MedicalTestSettingsReportTemplateCreateUpdateComponent,
     MedicalTestSettingsReportTemplatesCategoryContainerComponent,
-    MedicalTestSettingsReportTemplateCategoryDetailComponent]
+    MedicalTestSettingsReportTemplateCategoryDetailComponent,
+    MedicalTestReportUpdateContainerComponent,
+    MedicalTestReportUpdateComponent]
 })
 export class MedicalTestModule { }

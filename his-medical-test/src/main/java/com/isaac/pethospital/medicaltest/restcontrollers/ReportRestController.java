@@ -3,6 +3,8 @@ package com.isaac.pethospital.medicaltest.restcontrollers;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
 import com.isaac.pethospital.medicaltest.services.ReportService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,18 +36,27 @@ public class ReportRestController {
         return this.reportService.getReportsByIds(request);
     }
 
+    @GetMapping("find-by-uuid/{uuid}")
+    public ReportEntity findByUuid(@PathVariable("uuid") String uuid)
+    {
+        return this.reportService.findByUuid(uuid);
+    }
+
     @GetMapping
     public List<ReportEntity> findAll()
     {
         return this.reportService.findAll();
     }
 
+    @GetMapping("all-on-page")
+    public Page<ReportEntity> findAllOnPage(Pageable pageable) {
+        return this.reportService.findAllOnPage( pageable);
+    }
+
     @PostMapping
     public List<ReportEntity> createReports(@RequestBody ReportOperationRequest request) {
         return this.reportService.createReports(request);
     }
-
-
 
 
     @PutMapping("update-status")

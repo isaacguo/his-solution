@@ -13,6 +13,14 @@ import java.util.*;
 
 public class ReportOperationRequest {
 
+    public List<ReportItemEntity> getReportItems() {
+        return reportItems;
+    }
+
+    public void setReportItems(List<ReportItemEntity> reportItems) {
+        this.reportItems = reportItems;
+    }
+
     List<ReportItemEntity> reportItems = new LinkedList<>();
     LocalDateTime createdDateTime;
     LocalDateTime paidDateTime;

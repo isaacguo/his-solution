@@ -1,0 +1,92 @@
+<div class="row">
+  <h1 class="page-header">化验报告</h1>
+</div>
+
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      基本信息
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>化验报告名称</label>
+            <input readonly type="text" class="form-control" formControlName="reportName">
+          </div>
+        </div>
+        <!--
+        <div formArrayName="reportInfoList">
+          <div class="col-md-3" *ngFor="let infoItem of reportInfoData.controls; let i=index" [formGroupName]="i">
+            <div class="form-group">
+              <label>{{reportInfoData.controls[i].controls['reportKey'].value}}</label>
+              <input type="hidden" formControlName="reportKey">
+              <input type="text" class="form-control" formControlName="reportValue" [readonly]="!isCreateMode()">
+              <small [hidden]="reportInfoData.controls[i].controls['reportValue'].valid" class="text-danger">
+                此报告项名称不可为空
+              </small>
+            </div>
+          </div>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="isaac-margin-15top" formArrayName="reportItems">
+    <label>检查项目</label>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>序号</th>
+        <th>名称</th>
+        <th>单位</th>
+        <th>参考值(下限)</th>
+        <th>参考值(上限)</th>
+        <th>测试结果</th>
+        <th>备注</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reportItem of reportData.controls; let i=index" [formGroupName]="i">
+        <td>{{i+1}}</td>
+        <td>
+          <label>{{reportItem.controls['itemName'].value}}</label>
+        </td>
+        <td>
+          <label>{{reportItem.controls['itemUnit'].value}}</label>
+        </td>
+        <td>
+          <label>{{reportItem.controls['referenceLowLimitValue'].value}}</label>
+        </td>
+        <td>
+          <label>{{reportItem.controls['referenceHighLimitValue'].value}}</label>
+
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="result">
+          <small [hidden]="reportItem.controls.result.valid" class="text-danger">
+            测试结果不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="comments">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div>
+    <label class="isaac-margin-25top" for="markAsDone">
+      <input type="checkbox" id="markAsDone" formControlName="markAsDone"/>标记化验完成</label>
+  </div>
+  <div>
+    <button class="btn btn-primary isaac-margin-15top" type="submit" [disabled]="!formModel.valid">提交</button>
+  </div>
+</form>
+
+

@@ -1,5 +1,6 @@
 export interface MedicalTestReport {
 
+  reportName:string;
   reportInfoList: any[];
   reportItems: any[];
   createdDateTime: Date;
@@ -7,6 +8,6 @@ export interface MedicalTestReport {
   finishedDateTime: Date;
   reportStatus: string;
   id: number;
-
+  uuid: string;
 
 }

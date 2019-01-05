@@ -5,7 +5,8 @@ import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessag
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
 import com.isaac.pethospital.medicaltest.dtos.ReportOperationRequest;
 import com.isaac.pethospital.medicaltest.entities.ReportEntity;
-import com.isaac.pethospital.medicaltest.jms.FinanceChargeStatusChangedListener;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -30,4 +31,8 @@ public interface ReportService {
     void onChargeItemEvent(ChargeReportOperationReplyMessage message);
 
     void onFinanceChargeStatusChanged(ChargeOrderStatusChangedMessage message);
+
+    Page<ReportEntity> findAllOnPage(Pageable pageable);
+
+    ReportEntity findByUuid(String uuid);
 }
