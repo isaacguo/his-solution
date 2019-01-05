@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -205,5 +206,17 @@ public class ReportServiceImpl implements ReportService {
     public ReportEntity findByUuid(String uuid) {
         return this.reportRepository.findByUuid(uuid);
     }
+
+    @Override
+    public List<ReportEntity> findByPetUuidToday(String uuid) {
+        return this.reportRepository.findReportEntitiesByPetUuidAndCreatedDateTimeAfter(uuid, LocalDate.now().atStartOfDay());
+    }
+
+    @Override
+    public List<ReportEntity> findByPetUuidHistory(String uuid) {
+        return this.reportRepository.findReportEntitiesByPetUuidAndCreatedDateTimeBefore(uuid, LocalDate.now().atStartOfDay());
+    }
+
+
 
 }

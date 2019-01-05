@@ -35,4 +35,7 @@ public interface ReportService {
     Page<ReportEntity> findAllOnPage(Pageable pageable);
 
     ReportEntity findByUuid(String uuid);
+
+    List<ReportEntity> findByPetUuidToday(String uuid);
+    List<ReportEntity> findByPetUuidHistory(String uuid);
 }

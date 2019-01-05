@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ReportStatusEnum} from "../../../core/enums/report-status.enum";
 
 @Component({
   selector: 'app-treatment-medical-test',
@@ -30,4 +31,7 @@ export class TreatmentMedicalTestComponent implements OnInit {
   ngOnInit() {
   }
 
+  getStatusText(status: any): string {
+    return ReportStatusEnum[status];
+  }
 }

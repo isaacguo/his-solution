@@ -75,9 +75,7 @@ export class PetTreatmentContainerComponent implements OnInit, OnDestroy {
         return Observable.of([]);
     }).shareReplay(2);
 
-    //this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed)).do(()=>{this.isLoadingSubject.next(false)});
     this.unClosedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => !tc.caseClosed));
-
     this.closedTreatmentCases$ = this.treatmentCases$.map(cases => cases.filter(tc => tc.caseClosed));
   }
 

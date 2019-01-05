@@ -22,7 +22,7 @@
 
 <div style="height: 700px ">
   <split [direction]="'horizontal'">
-    <split-area [size]="20">
+    <split-area [size]="30">
       <div style="padding-right:15px">
 
         <div class="panel panel-info isaac-margin-15top">
@@ -34,7 +34,10 @@
               class="glyphicon glyphicon-plus"></span> 新建化验检查
             </button>
 
+            <app-loading-spinner [isLoading]="isLoading$|async"></app-loading-spinner>
+
             <app-treatment-medical-test
+              [list]="todayMedicalTestReports$|async"
             ></app-treatment-medical-test>
             <!--
             <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"
@@ -50,7 +53,9 @@
           <div class="panel-body">
 
 
-            <app-treatment-medical-test></app-treatment-medical-test>
+            <app-treatment-medical-test
+              [list]="historyMedicalTestReports$|async"
+            ></app-treatment-medical-test>
 
             <!--
             <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$ |async"
@@ -63,7 +68,7 @@
       </div>
     </split-area>
 
-    <split-area [size]="80">
+    <split-area [size]="70">
       <div style="padding-left: 20px">
         <router-outlet></router-outlet>
       </div>

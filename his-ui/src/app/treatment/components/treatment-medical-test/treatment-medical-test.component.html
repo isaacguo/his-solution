@@ -9,9 +9,10 @@
   <tbody>
   <tr *ngFor="let medicalTest of list" [class.info]="isRowSelected(medicalTest)"
       (click)="onRowClicked(medicalTest)">
-    <td>{{medicalTest.createdDate | date:'yyyy年MM月dd日 hh:mm:ss'}}</td>
-    <td></td>
-    <td></td>
+    <td>{{medicalTest.createdDateTime
+      | date:'yyyy年MM月dd日 hh:mm:ss'}}</td>
+    <td>{{medicalTest.reportName}}</td>
+    <td>{{getStatusText(medicalTest.reportStatus)}}</td>
   </tr>
   </tbody>
 </table>

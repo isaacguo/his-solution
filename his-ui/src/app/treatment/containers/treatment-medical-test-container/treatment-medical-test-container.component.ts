@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,11 +11,14 @@ import {Pet} from "../../models/pet.model";
 import {PetOwner} from "../../models/pet-owner.model";
 import {MedicalTestReportService} from "../../../core/services/medical-test/medical-test-report.service";
 import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
+import {combineLatest} from "rxjs/observable/combineLatest";
+import {MedicalTestReport} from "../../../medical-test/models/medical-test-report.model";
 
 @Component({
   selector: 'app-treatment-medical-test-container',
   templateUrl: './treatment-medical-test-container.component.html',
-  styleUrls: ['./treatment-medical-test-container.component.css']
+  styleUrls: ['./treatment-medical-test-container.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreatmentMedicalTestContainerComponent implements OnInit {
 
@@ -28,6 +31,16 @@ export class TreatmentMedicalTestContainerComponent implements OnInit {
   petSubscription: Subscription;
   petOwner$: Observable<PetOwner>;
   @ViewChild("createMedicalTestsModal") createMedicalTestsModal: ModalComponent;
+
+  medicalTestReportChangedSubject = new BehaviorSubject<boolean>(false);
+  medicalTestReportChanged$ = this.medicalTestReportChangedSubject.asObservable();
+
+  medicaTestReport$: Observable<MedicalTestReport[]>;
+  todayMedicalTestReports$: Observable<MedicalTestReport[]>;
+  historyMedicalTestReports$: Observable<MedicalTestReport[]>;
+
+  isLoadingSubject = new BehaviorSubject<boolean>(true);
+  isLoading$ = this.isLoadingSubject.asObservable();
 
   constructor(
     private petOwnerService: PetOwnerService,
@@ -61,6 +74,19 @@ export class TreatmentMedicalTestContainerComponent implements OnInit {
         return Observable.of({});
     });
 
+    this.todayMedicalTestReports$ = combineLatest(this.medicalTestReportChanged$, this.pet$).mergeMap(([event, p]) => {
+      this.isLoadingSubject.next(false)
+      if (p && p.id)
+        return this.medicalTestReportService.findByPetUuidToday(p.uuid)
+      else
+        return Observable.of([]);
+    });
+    this.historyMedicalTestReports$ = combineLatest(this.medicalTestReportChanged$, this.pet$).mergeMap(([event, p]) => {
+      if (p && p.id)
+        return this.medicalTestReportService.findByPetUuidHistory(p.uuid)
+      else
+        return Observable.of([]);
+    });
   }
 
   onCreateMedicalTestClicked() {
@@ -69,6 +95,8 @@ export class TreatmentMedicalTestContainerComponent implements OnInit {
 
   onGenerateMedicalTestReport($event: any) {
     this.createMedicalTestsModal.dismiss();
-    this.medicalTestReportService.createReports($event).subscribe();
+    this.medicalTestReportService.createReports($event).subscribe(()=>{
+      this.medicalTestReportChangedSubject.next(true);
+    });
   }
 }
