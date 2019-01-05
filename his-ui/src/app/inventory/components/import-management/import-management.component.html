@@ -1,29 +1,11 @@
-<table class="table table-bordered table-responsive">
-  <thead>
-  <tr>
-    <th>入库单号</th>
-    <th>供应商编号</th>
-    <th>供应商名称</th>
-    <th>联系人</th>
-    <th>总项数</th>
-    <th>订货总金额</th>
-    <th>入库日期</th>
-    <th>制单人</th>
-    <th>审核人</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let importReceipt of importReceipts" (click)="onRowClicked(importReceipt) "
-      [class.info]="isRowSelected(importReceipt)">
-    <td>{{importReceipt.sheetNumber}}</td>
-    <td>{{importReceipt.vendor}}</td>
-    <td>{{importReceipt.vendor}}</td>
-    <td>{{importReceipt.vendorContact}}</td>
-    <td>{{getImportReceiptItemCount(importReceipt)}}</td>
-    <td>{{getImportReceiptTotalSum(importReceipt)}}</td>
-    <td>{{importReceipt.importTime| date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
-    <td>{{importReceipt.operator }}</td>
-    <td>{{importReceipt.auditor }}</td>
-  </tr>
-  </tbody>
-</table>
+<div class="row">
+  <h1 class="page-header">入库管理</h1>
+</div>
+
+<div class="row">
+  <app-inventory-operation-tool-bar [importMode]="true"></app-inventory-operation-tool-bar>
+</div>
+<div class="row">
+  <app-import-management-list></app-import-management-list>
+</div>
+

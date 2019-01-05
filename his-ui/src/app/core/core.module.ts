@@ -25,6 +25,11 @@ import {MedicalTestReportTemplateCategoryService} from "./services/medical-test/
 import {FinancePriceService} from "./services/finance/finance-price.service";
 import {FinanceChargeService} from "./services/finance/finance-charge.service";
 import {MedicalTestReportService} from "./services/medical-test/medical-test-report.service";
+import {InventoryCategoryService} from "./services/inventory/inventory-category.service";
+import {InventoryExportSheetService} from "./services/inventory/inventory-export-sheet.service";
+import {InventoryImportSheetService} from "./services/inventory/inventory-import-sheet.service";
+import {InventoryItemService} from "./services/inventory/inventory-item.service";
+import {ProductImportReceiptService} from "./services/inventory/product-import-receipt.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -75,6 +80,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestReportTemplateService,
     FinancePriceService,
     FinanceChargeService,
+    InventoryCategoryService,
+    InventoryExportSheetService,
+    InventoryImportSheetService,
+    InventoryItemService,
+    ProductImportReceiptService,
 
     /*
     EmployeeManagementGuard,
