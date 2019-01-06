@@ -1,4 +1,4 @@
-<table class="table table-bordered table-responsive">
+<table *ngIf="list.length>0"  class="table table-bordered table-responsive">
   <thead>
   <tr>
     <th>日期</th>
@@ -16,4 +16,8 @@
   </tr>
   </tbody>
 </table>
+
+<div *ngIf="list.length==0">
+  <label>未查询到检查报告</label>
+</div>
 
