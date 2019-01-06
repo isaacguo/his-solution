@@ -60,6 +60,7 @@ import {CustomerServicePetInfoComponent} from "./components/customer-service-pet
 import { CreateMedicalTestsComponent } from './components/create-medical-tests/create-medical-tests.component';
 import { TreatmentMedicalTestReportDetailComponent } from './components/treatment-medical-test-report-detail/treatment-medical-test-report-detail.component';
 import { TreatmentPrescriptionListComponent } from './components/treatment-prescription-list/treatment-prescription-list.component';
+import { TreatmentPrescriptionMedicineSelectorComponent } from './components/treatment-prescription-medicine-selector/treatment-prescription-medicine-selector.component';
 
 @NgModule({
   imports: [
@@ -123,7 +124,8 @@ import { TreatmentPrescriptionListComponent } from './components/treatment-presc
     CustomerServicePetInfoComponent,
     CreateMedicalTestsComponent,
     TreatmentMedicalTestReportDetailComponent,
-    TreatmentPrescriptionListComponent
+    TreatmentPrescriptionListComponent,
+    TreatmentPrescriptionMedicineSelectorComponent
     ]
 })
 export class TreatmentModule {
