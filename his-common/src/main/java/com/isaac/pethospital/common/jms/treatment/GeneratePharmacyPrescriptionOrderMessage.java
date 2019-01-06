@@ -2,7 +2,7 @@ package com.isaac.pethospital.common.jms.treatment;
 
 import java.util.List;
 
-public class GeneratePharmacyMedicineDispenseOrderMessage {
+public class GeneratePharmacyPrescriptionOrderMessage {
 
     String treatmentCaseUuid;
     String petOwnerUuid;

@@ -30,6 +30,8 @@ import {InventoryExportSheetService} from "./services/inventory/inventory-export
 import {InventoryImportSheetService} from "./services/inventory/inventory-import-sheet.service";
 import {InventoryItemService} from "./services/inventory/inventory-item.service";
 import {ProductImportReceiptService} from "./services/inventory/product-import-receipt.service";
+import {PharmacyPrescriptionService} from "./services/pharmacy/pharmacy-prescription.service";
+import {PharmacyMedicineService} from "./services/pharmacy/pharmacy-medicine.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -104,10 +106,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     */
     GuardFactoryService,
     MedicalTestReportTemplateCategoryService,
-    MedicalTestReportService
-
-
-
+    MedicalTestReportService,
+    PharmacyPrescriptionService,
+    PharmacyMedicineService
 
   ]
 

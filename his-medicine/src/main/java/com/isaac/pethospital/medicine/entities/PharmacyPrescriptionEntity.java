@@ -1,15 +1,16 @@
 package com.isaac.pethospital.medicine.entities;
 
 import com.isaac.pethospital.common.entities.AbstractCollectionEntity;
-import com.isaac.pethospital.medicine.enums.DispenseStatusEnum;
+import com.isaac.pethospital.medicine.enums.PrescriptionStatusEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
-public class PharmacyMedicineDispenseEntity extends AbstractCollectionEntity<PharmacyMedicineDispenseItemEntity> {
+public class PharmacyPrescriptionEntity extends AbstractCollectionEntity<PharmacyPrescriptionItemEntity> {
 
     String petOwnerUuid;
     String petUuid;
@@ -17,10 +18,18 @@ public class PharmacyMedicineDispenseEntity extends AbstractCollectionEntity<Pha
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String sheetNumber;
-    private DispenseStatusEnum status;
+    private PrescriptionStatusEnum status;
     private String treatmentCaseUuid;
+    private LocalDateTime createdDate;
     String uuid;
 
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
 
     public String getUuid() {
         return uuid;
@@ -62,11 +71,11 @@ public class PharmacyMedicineDispenseEntity extends AbstractCollectionEntity<Pha
         this.sheetNumber = sheetNumber;
     }
 
-    public DispenseStatusEnum getStatus() {
+    public PrescriptionStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(DispenseStatusEnum status) {
+    public void setStatus(PrescriptionStatusEnum status) {
         this.status = status;
     }
 

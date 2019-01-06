@@ -22,7 +22,6 @@ import {MedicalTestReport} from "../../../medical-test/models/medical-test-repor
 })
 export class TreatmentMedicalTestContainerComponent implements OnInit {
 
-
   registrationSubject = new BehaviorSubject<TreatmentRegistrationModel>({});
   registration$ = this.registrationSubject.asObservable();
   registrationSubscription: Subscription;

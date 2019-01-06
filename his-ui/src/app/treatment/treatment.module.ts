@@ -42,7 +42,7 @@ import {TreatmentCaseDetailComponent} from './components/treatment-case-detail/t
 import {TreatmentMedicalTestContainerComponent} from './containers/treatment-medical-test-container/treatment-medical-test-container.component';
 import {TreatmentMedicalTestDetailContainerComponent} from './containers/treatment-medical-test-detail-container/treatment-medical-test-detail-container.component';
 import {TreatmentMedicalTestComponent} from './components/treatment-medical-test/treatment-medical-test.component';
-import { TreatmnetPrescriptionsComponent } from './components/treatmnet-prescriptions/treatmnet-prescriptions.component';
+import { TreatmentPrescriptionsComponent } from './components/treatmnet-prescriptions/treatment-prescriptions.component';
 import { TreatmnetPrescriptionDetailComponent } from './components/treatmnet-prescription-detail/treatmnet-prescription-detail.component';
 import { TreatmentPrescriptionDetailContainerComponent } from './containers/treatment-prescription-detail-container/treatment-prescription-detail-container.component';
 import { PetOwnerSelectTableComponent } from './components/pet-owner-select-table/pet-owner-select-table.component';
@@ -59,6 +59,7 @@ import { CustomerServiceTreatmentCaseCommentComponent } from './components/custo
 import {CustomerServicePetInfoComponent} from "./components/customer-service-pet-info/customer-service-pet-info.component";
 import { CreateMedicalTestsComponent } from './components/create-medical-tests/create-medical-tests.component';
 import { TreatmentMedicalTestReportDetailComponent } from './components/treatment-medical-test-report-detail/treatment-medical-test-report-detail.component';
+import { TreatmentPrescriptionListComponent } from './components/treatment-prescription-list/treatment-prescription-list.component';
 
 @NgModule({
   imports: [
@@ -105,7 +106,7 @@ import { TreatmentMedicalTestReportDetailComponent } from './components/treatmen
     TreatmentMedicalTestContainerComponent,
     TreatmentMedicalTestDetailContainerComponent,
     TreatmentMedicalTestComponent,
-    TreatmnetPrescriptionsComponent,
+    TreatmentPrescriptionsComponent,
     TreatmnetPrescriptionDetailComponent,
     TreatmentPrescriptionDetailContainerComponent,
     PetOwnerSelectTableComponent,
@@ -121,7 +122,8 @@ import { TreatmentMedicalTestReportDetailComponent } from './components/treatmen
     CustomerServiceTreatmentCaseCommentComponent,
     CustomerServicePetInfoComponent,
     CreateMedicalTestsComponent,
-    TreatmentMedicalTestReportDetailComponent
+    TreatmentMedicalTestReportDetailComponent,
+    TreatmentPrescriptionListComponent
     ]
 })
 export class TreatmentModule {

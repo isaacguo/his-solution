@@ -6,7 +6,7 @@ import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.finance.ReportOperationMessage;
-import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
+import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionCreateMessage;
 import com.isaac.pethospital.common.jms.treatment.PetRegistrationCreatedMessage;
 import com.isaac.pethospital.common.services.AbstractCrudService;
 import com.isaac.pethospital.finance.dtos.ChargeOperationRequest;
@@ -15,12 +15,10 @@ import com.isaac.pethospital.finance.entities.ChargeItemEntity;
 import com.isaac.pethospital.finance.entities.PriceEntity;
 import com.isaac.pethospital.common.enums.ChargeStatusEnum;
 import com.isaac.pethospital.finance.repositories.ChargeRepository;
-import org.apache.commons.lang.CharEncoding;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -116,7 +114,7 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
     }
 
     @Override
-    public void onPharmacyMedicineDispenseCreateMessageReceived(PharmacyMedicineDispenseCreateMessage message) {
+    public void onPharmacyPrescriptionCreateMessageReceived(PharmacyPrescriptionCreateMessage message) {
 
 
         ChargeEntity chargeEntity = new ChargeEntity();

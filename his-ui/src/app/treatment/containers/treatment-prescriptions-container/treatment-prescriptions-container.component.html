@@ -2,7 +2,35 @@
   <split [direction]="'horizontal'">
     <split-area [size]="20">
       <div style="padding-right:15px">
-        <app-treatmnet-prescriptions></app-treatmnet-prescriptions>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            今日处方
+          </div>
+          <div class="panel-body">
+            <button (click)="onCreatePrescriptionClicked()" class="btn btn-primary btn-sm isaac-margin-bottom-10px"><span
+              class="glyphicon glyphicon-plus"></span> 新建处方
+            </button>
+
+            <app-loading-spinner [isLoading]="isLoading$|async"></app-loading-spinner>
+
+            <app-treatment-prescription-list
+              [list]="todayPrescription$|async"
+              [selectedPrescription]="selectedPrescription$|async"
+              (itemSelected)="onPrescriptionSelected($event)"
+            ></app-treatment-prescription-list>
+
+
+          </div>
+        </div>
+
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            历史处方
+          </div>
+          <div class="panel-body">
+
+          </div>
+        </div>
       </div>
     </split-area>
 

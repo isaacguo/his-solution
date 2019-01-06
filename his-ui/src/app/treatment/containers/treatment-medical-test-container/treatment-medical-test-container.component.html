@@ -41,11 +41,6 @@
               [selectedMedicalTest]="selectedMedicalTest$|async"
               (itemSelected)="onMedicalTestSelected($event)"
             ></app-treatment-medical-test>
-            <!--
-            <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"
-                                                 [list]="unClosedTreatmentCases$|async"
-                                                 (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
-                                                 -->
           </div>
         </div>
         <div class="panel panel-info">
@@ -53,17 +48,12 @@
             历史化验检查
           </div>
           <div class="panel-body">
-
-
             <app-treatment-medical-test
               [list]="historyMedicalTestReports$|async"
+              [selectedMedicalTest]="selectedMedicalTest$|async"
+              (itemSelected)="onMedicalTestSelected($event)"
             ></app-treatment-medical-test>
 
-            <!--
-            <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$ |async"
-                                                 [list]="closedTreatmentCases$|async"
-                                                 (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
-                                                 -->
           </div>
         </div>
 

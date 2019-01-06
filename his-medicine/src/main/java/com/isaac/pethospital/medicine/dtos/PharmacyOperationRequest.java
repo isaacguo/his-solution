@@ -1,19 +1,26 @@
 package com.isaac.pethospital.medicine.dtos;
 
-import com.isaac.pethospital.medicine.entities.PharmacyMedicineDispenseEntity;
-import com.isaac.pethospital.medicine.entities.PharmacyMedicineDispenseItemEntity;
+import com.isaac.pethospital.medicine.entities.PharmacyPrescriptionEntity;
+import com.isaac.pethospital.medicine.entities.PharmacyPrescriptionItemEntity;
 
-public class PharmacyOperationRequest extends PharmacyMedicineDispenseEntity {
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-    public PharmacyMedicineDispenseEntity toEntity()
+public class PharmacyOperationRequest extends PharmacyPrescriptionEntity {
+
+    public PharmacyPrescriptionEntity toEntity()
     {
-        PharmacyMedicineDispenseEntity entity=new PharmacyMedicineDispenseEntity();
+        PharmacyPrescriptionEntity entity=new PharmacyPrescriptionEntity();
         entity.setId(this.getId());
+        entity.setUuid(UUID.randomUUID().toString());
         entity.setSheetNumber(this.getSheetNumber());
         entity.setStatus(this.getStatus());
+        entity.setPetOwnerUuid(this.getPetOwnerUuid());
+        entity.setPetUuid(this.getPetUuid());
+        entity.setCreatedDate(LocalDateTime.now());
 
         entity.getItems().forEach(r->{
-            PharmacyMedicineDispenseItemEntity item=new PharmacyMedicineDispenseItemEntity();
+            PharmacyPrescriptionItemEntity item=new PharmacyPrescriptionItemEntity();
             item.setAmount(r.getAmount());
             item.setInventoryItemId(r.getInventoryItemId());
             item.setName(r.getName());

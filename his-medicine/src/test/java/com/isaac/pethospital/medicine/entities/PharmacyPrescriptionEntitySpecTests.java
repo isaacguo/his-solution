@@ -10,20 +10,20 @@ import static org.hamcrest.CoreMatchers.isA;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertThat;
 
-public class PharmacyMedicineDispenseEntitySpecTests {
+public class PharmacyPrescriptionEntitySpecTests {
 
-    PharmacyMedicineDispenseEntity pharmacyMedicineDispenseEntity;
+    PharmacyPrescriptionEntity pharmacyPrescriptionEntity;
 
     @Before
     public void init() {
 
-        this.pharmacyMedicineDispenseEntity = new PharmacyMedicineDispenseEntity();
+        this.pharmacyPrescriptionEntity = new PharmacyPrescriptionEntity();
     }
 
 
     @Test
     public void givenMedicineEntityHasFieldId() {
-        LinkedList<PharmacyMedicineDispenseItemEntity> list=new LinkedList<>();
-        assertThat(pharmacyMedicineDispenseEntity, hasProperty("items",isA(list.getClass())));
+        LinkedList<PharmacyPrescriptionItemEntity> list=new LinkedList<>();
+        assertThat(pharmacyPrescriptionEntity, hasProperty("items",isA(list.getClass())));
     }
 }

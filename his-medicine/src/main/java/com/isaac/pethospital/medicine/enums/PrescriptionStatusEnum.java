@@ -1,13 +1,13 @@
 package com.isaac.pethospital.medicine.enums;
 
-public enum DispenseStatusEnum {
+public enum PrescriptionStatusEnum {
 
     UNPAID("UNPAID"),
     PAID("PAID"),
     DISPENSED("DISPENSED"),
     UNDISPENSED("UNDISPENSED");
 
-    DispenseStatusEnum(String text) {
+    PrescriptionStatusEnum(String text) {
         this.text = text;
     }
 

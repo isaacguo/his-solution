@@ -49,15 +49,6 @@ public class TreatmentCaseRestController {
         return this.treatmentCaseService.findOne(tid);
     }
 
-    @GetMapping("/{tId}/prescriptions")
-    public List<PrescriptionEntity> getPrescriptions(@PathVariable("tId") Long tid) {
-        return this.treatmentCaseService.getPrescriptionList(tid);
-    }
-
-    @PostMapping("/{tId}/prescriptions")
-    public TreatmentCaseEntity setPrescriptions(@PathVariable("tId") Long tId, @RequestBody PrescriptionRequest request) {
-        return this.treatmentCaseService.setPrescriptions(tId, request);
-    }
     @PutMapping("/{tId}/close")
     public TreatmentCaseEntity closeTreatmentCase(@PathVariable("tId") Long tId) {
         return this.treatmentCaseService.closeTreatmentCase(tId);

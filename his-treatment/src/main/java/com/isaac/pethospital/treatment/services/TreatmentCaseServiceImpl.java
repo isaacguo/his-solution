@@ -5,9 +5,9 @@ import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestCreateReportMessage;
 import com.isaac.pethospital.common.jms.medicaltest.MedicalTestDeleteReportMessage;
-import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
+import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionCreateMessage;
 import com.isaac.pethospital.common.jms.treatment.GenerateMedicalTestOrderMessage;
-import com.isaac.pethospital.common.jms.treatment.GeneratePharmacyMedicineDispenseOrderMessage;
+import com.isaac.pethospital.common.jms.treatment.GeneratePharmacyPrescriptionOrderMessage;
 import com.isaac.pethospital.common.jms.treatment.MedicineItemMessage;
 import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
 import com.isaac.pethospital.treatment.dtos.OperationResponse;
@@ -85,13 +85,6 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
     }
 
-    @Override
-    public List<PrescriptionEntity> getPrescriptionList(Long tid) {
-        TreatmentCaseEntity tce = getTreatmentCase(tid);
-        return tce.getPrescriptionList();
-    }
-
-
     private TreatmentCaseEntity getTreatmentCaseByUuid(String uuid) {
         if (StringUtils.isEmpty(uuid))
             throw new RuntimeException("treatment case uuid is null");
@@ -134,15 +127,7 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
         this.treatmentCaseRepository.save(tce);
     }
 
-    @Override
-    public void onPharmacyMedicineDispenseCreate(PharmacyMedicineDispenseCreateMessage message) {
-
-        TreatmentCaseEntity tce = getTreatmentCaseByUuid(message.getTreatmentCaseUuid());
-        tce.addPharmacyMedicineDispenseUuid(message.getPharmacyMedicineDispenseUuid());
-        this.treatmentCaseRepository.save(tce);
-    }
-
-    @Override
+    /*
     public TreatmentCaseEntity setPrescriptions(Long tId, PrescriptionRequest request) {
 
         TreatmentCaseEntity tce = getTreatmentCase(tId);
@@ -158,7 +143,7 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
             tce.addMedicine(tcme);
         });
 
-        GeneratePharmacyMedicineDispenseOrderMessage message = new GeneratePharmacyMedicineDispenseOrderMessage();
+        GeneratePharmacyPrescriptionOrderMessage message = new GeneratePharmacyPrescriptionOrderMessage();
 
 
         message.setTreatmentCaseUuid(tce.getUuid());
@@ -185,6 +170,7 @@ public class TreatmentCaseServiceImpl implements TreatmentCaseService {
 
         return treatmentCaseRepository.save(tce);
     }
+    */
 
     @Override
     public List<TreatmentCaseEntity> findAll() {

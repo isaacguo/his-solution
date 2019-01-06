@@ -33,8 +33,7 @@ public class TreatmentCaseEntity {
     PetEntity pet;
     @ElementCollection
     List<String> medicalTestReportUuidList = new LinkedList<>();
-    @ElementCollection
-    List<String> pharmacyMedicineDispenseUuidList = new LinkedList<>();
+
     @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.ALL)
     @JsonManagedReference("TreatmentCase-Comment")
     List<CommentEntity> comments = new LinkedList<>();
@@ -55,9 +54,6 @@ public class TreatmentCaseEntity {
     }
 
     private boolean caseClosed;
-    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.PERSIST)
-    @JsonManagedReference("TreatmentCaseEntity-PrescriptionEntity")
-    private List<PrescriptionEntity> prescriptionList = new LinkedList<>();
 
     public List<CommentEntity> getComments() {
         return comments;
@@ -101,44 +97,6 @@ public class TreatmentCaseEntity {
             throw new RuntimeException("Medicine is null");
         medicine.setTreatmentCase(null);
         this.medicineList.add(medicine);
-    }
-
-    public List<String> getPharmacyMedicineDispenseUuidList() {
-        return pharmacyMedicineDispenseUuidList;
-    }
-
-    public void addPharmacyMedicineDispenseUuid(String pharmacyMedicineDispenseUuid) {
-        if (StringUtils.isEmpty(pharmacyMedicineDispenseUuid))
-            throw new RuntimeException("pharmacyMedicineDispenseUuid is null");
-        this.pharmacyMedicineDispenseUuidList.add(pharmacyMedicineDispenseUuid);
-    }
-
-    public void removePharmacyMedicineDispenseUuid(String pharmacyMedicineDispenseUuid) {
-        if (StringUtils.isEmpty(pharmacyMedicineDispenseUuid))
-            throw new RuntimeException("pharmacyMedicineDispenseUuid is null");
-        this.pharmacyMedicineDispenseUuidList.remove(pharmacyMedicineDispenseUuid);
-    }
-
-    public List<PrescriptionEntity> getPrescriptionList() {
-        return prescriptionList;
-    }
-
-    public void setPrescriptionList(List<PrescriptionEntity> prescriptionList) {
-        this.prescriptionList = prescriptionList;
-    }
-
-    public void addPrescription(PrescriptionEntity prescription) {
-        if (prescription == null)
-            throw new RuntimeException("Prescription is null");
-        prescription.setTreatmentCase(this);
-        this.prescriptionList.add(prescription);
-    }
-
-    public void removePrescription(PrescriptionEntity prescription) {
-        if (prescription == null)
-            throw new RuntimeException("Prescription is null");
-        prescription.setTreatmentCase(null);
-        this.prescriptionList.remove(prescription);
     }
 
     public String getDoctorAdvice() {

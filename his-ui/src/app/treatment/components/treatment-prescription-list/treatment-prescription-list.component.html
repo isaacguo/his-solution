@@ -1,0 +1,14 @@
+<table class="table table-bordered table-responsive">
+  <thead>
+  <tr>
+    <th>日期</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let prescription of list" [class.info]="isRowSelected(prescription)"
+      (click)="onRowClicked(prescription)">
+    <td>{{prescription.createdDate
+      | date:'yyyy年MM月dd日 hh:mm:ss'}}</td>
+  </tr>
+  </tbody>
+</table>

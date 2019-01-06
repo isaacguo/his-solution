@@ -2,7 +2,7 @@ package com.isaac.pethospital.finance.jms;
 
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationMessage;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
-import com.isaac.pethospital.common.jms.medicine.PharmacyMedicineDispenseCreateMessage;
+import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionCreateMessage;
 import com.isaac.pethospital.common.jms.treatment.PetRegistrationCreatedMessage;
 import com.isaac.pethospital.finance.dtos.ChargeOperationRequest;
 import com.isaac.pethospital.finance.entities.ChargeEntity;
@@ -26,10 +26,10 @@ public class ChargeItemEventListener {
         return this.chargeService.onGenerateChargeOrderReceived(message);
     }
 
-    @JmsListener(destination = "${jms.pharmacy-medicine-dispense-create-topic}")
+    @JmsListener(destination = "${jms.pharmacy-medicine-prescription-create-topic}")
     //@SendTo("${jms.finance-charge-item-operation-reply-topic}")
-    public void processPharmacyMessage(PharmacyMedicineDispenseCreateMessage message) throws Exception {
-        this.chargeService.onPharmacyMedicineDispenseCreateMessageReceived(message);
+    public void processPharmacyMessage(PharmacyPrescriptionCreateMessage message) throws Exception {
+        this.chargeService.onPharmacyPrescriptionCreateMessageReceived(message);
     }
 
 

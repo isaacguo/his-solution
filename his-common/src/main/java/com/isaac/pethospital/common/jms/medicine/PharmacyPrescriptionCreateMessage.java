@@ -1,8 +1,8 @@
 package com.isaac.pethospital.common.jms.medicine;
 
-public class PharmacyMedicineDispenseCreateMessage {
+public class PharmacyPrescriptionCreateMessage {
 
-    String pharmacyMedicineDispenseUuid;
+    String pharmacyPrescriptionUuid;
     String treatmentCaseUuid;
     String petOwnerUuid;
     String petUuid;
@@ -23,17 +23,17 @@ public class PharmacyMedicineDispenseCreateMessage {
         this.petUuid = petUuid;
     }
 
-    public String getPharmacyMedicineDispenseUuid() {
-        return pharmacyMedicineDispenseUuid;
+    public String getPharmacyPrescriptionUuid() {
+        return pharmacyPrescriptionUuid;
     }
 
-    public void setPharmacyMedicineDispenseUuid(String pharmacyMedicineDispenseUuid) {
-        this.pharmacyMedicineDispenseUuid = pharmacyMedicineDispenseUuid;
+    public void setPharmacyPrescriptionUuid(String pharmacyPrescriptionUuid) {
+        this.pharmacyPrescriptionUuid = pharmacyPrescriptionUuid;
     }
 
     public String getTreatmentCaseUuid() {
         return treatmentCaseUuid;
-        }
+    }
 
     public void setTreatmentCaseUuid(String treatmentCaseUuid) {
         this.treatmentCaseUuid = treatmentCaseUuid;
