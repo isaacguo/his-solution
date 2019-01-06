@@ -1,4 +1,4 @@
-FROM jenkins:latest
+FROM jenkins/jenkins:lts
 
 MAINTAINER Isaac Guo <yue_guo@keysight.com>
 

@@ -31,7 +31,7 @@ services:
       - "8080:8080"
       - "50000:50000"
     volumes:
-      - /var/jenkins_home:/var/jenkins_home
+      - jenkins_home:/var/jenkins_home
     networks:
       - sonarnet
 
@@ -41,6 +41,7 @@ networks:
   sonarnet:
     driver: bridge
 volumes:
+  jenkins_home:
   sonarqube_conf:
   sonarqube_data:
   sonarqube_extensions:
