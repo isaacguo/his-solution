@@ -12,7 +12,19 @@
   <div class="col-xs-6 col-md-4" style="font-size:16px;">
     <label class="control-label col-xs-12">宠物名称</label>
     <label class="control-label col-xs-12 light-blue-label" style="font-size:13px;font-weight: bold;"
-           id="employee_id">benben</label>
+           id="pet_name">benben</label>
+  </div>
+
+  <div class="col-xs-6 col-md-4" style="font-size:16px;">
+    <label class="control-label col-xs-12">医生姓名</label>
+    <label class="control-label col-xs-12 light-blue-label" style="font-size:13px;font-weight: bold;"
+           id="doctor_name">benben</label>
+  </div>
+
+  <div class="col-xs-6 col-md-4" style="font-size:16px;">
+    <label class="control-label col-xs-12">日期</label>
+    <label class="control-label col-xs-12 light-blue-label" style="font-size:13px;font-weight: bold;"
+           id="dateTime">benben</label>
   </div>
 
 </div>
@@ -29,6 +41,7 @@
     <th>药品名称</th>
     <th>规格</th>
     <th>单位</th>
+    <th>操作</th>
   </tr>
   </thead>
   <tbody>
@@ -36,9 +49,17 @@
       [class.info]="isRowSelected(prescription)">
     <td>{{i}}</td>
     <td>{{prescription.name}}</td>
-    <td>{{registration.specification}}</td>
-    <td>{{registration.unit}}</td>
+    <td>{{prescription.specification}}</td>
+    <td>{{prescription.unit}}</td>
+    <td>
+      <button title="删除" type="button" class="btn btn-default btn-sm"
+              (click)="onRemoveButtonClicked(i)">
+        <span class="glyphicon glyphicon-remove"></span></button>
+    </td>
   </tr>
   </tbody>
 </table>
+
+
+
 

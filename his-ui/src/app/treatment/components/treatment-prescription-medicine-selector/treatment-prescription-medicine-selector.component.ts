@@ -14,8 +14,7 @@ export class TreatmentPrescriptionMedicineSelectorComponent implements OnInit {
   searchInput: FormControl = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
   @Output()
-  medicineSelected=new EventEmitter<any>();
-
+  medicineSelected = new EventEmitter<any>();
 
 
   constructor(private inventoryItemService: InventoryItemService) {
@@ -42,5 +41,10 @@ export class TreatmentPrescriptionMedicineSelectorComponent implements OnInit {
 
   onRowClicked(result: any) {
     this.medicineSelected.emit(result);
+  }
+
+  addMedicine(medicine: any) {
+    
+
   }
 }

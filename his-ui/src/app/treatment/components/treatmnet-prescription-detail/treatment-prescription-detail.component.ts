@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AbstractItemSelectableTableComponent} from "../../../shared/components/abstract-item-selectable-table/abstract-item-selectable-table.component";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-treatment-prescription-detail',
@@ -8,11 +9,21 @@ import {AbstractItemSelectableTableComponent} from "../../../shared/components/a
 })
 export class TreatmentPrescriptionDetailComponent extends AbstractItemSelectableTableComponent<any> implements OnInit {
 
-  constructor() {
-     super();
+
+  @Output()
+  submitPrescription = new EventEmitter();
+
+
+  constructor(
+    private fb: FormBuilder
+  ) {
+    super();
   }
 
   ngOnInit() {
   }
 
+  onSubmitPrescription() {
+    this.submitPrescription.emit();
+  }
 }

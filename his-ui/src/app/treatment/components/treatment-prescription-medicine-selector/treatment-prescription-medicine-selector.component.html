@@ -21,6 +21,7 @@
             <th>规格</th>
             <th>单位</th>
             <th>库存</th>
+            <th>操作</th>
           </tr>
           </thead>
           <tbody>
@@ -29,6 +30,12 @@
             <td>{{result.specification}}</td>
             <td>{{result.unit}}</td>
             <td>{{result.amount}}</td>
+            <td>
+              <button (click)="
+              addMedicine(result)"
+                type="button" class="btn btn-default btn-sm"
+              ><span class="glyphicon glyphicon-plus"></span> </button>
+            </td>
           </tr>
           </tbody>
         </table>

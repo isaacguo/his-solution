@@ -1,7 +1,15 @@
 <div class="fixed-height isaac-margin-15top">
   <split [direction]="'horizontal'">
     <split-area [size]="60">
-      <app-treatment-prescription-detail [list]="prescriptions|async"></app-treatment-prescription-detail>
+      <app-treatment-prescription-detail
+        (submitPrescription)="onSubmitPrescription($event)"
+      ></app-treatment-prescription-detail>
+
+      <div class="verlink-bottom">
+        <div class="btn-group">
+          <button [disabled]="!formModel.valid" class="btn btn-primary" (click)="onSubmitPrescription()">提交</button>
+        </div>
+      </div>
 
     </split-area>
     <split-area [size]="40">
