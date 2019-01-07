@@ -19,6 +19,5 @@ export class PetRegistrationListComponent extends AbstractItemSelectableTableCom
 
   getRegistrationStatusString(reg: RegistrationStatusEnum): string {
     return RegistrationStatusEnum[reg];
-
   }
 }

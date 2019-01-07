@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-treatment-prescription-detail-container',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TreatmentPrescriptionDetailContainerComponent implements OnInit {
 
+  prescriptions:Observable<any[]>;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onMedicineSelected($event: any) {
+
+  }
 }

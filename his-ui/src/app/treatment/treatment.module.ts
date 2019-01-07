@@ -43,7 +43,7 @@ import {TreatmentMedicalTestContainerComponent} from './containers/treatment-med
 import {TreatmentMedicalTestDetailContainerComponent} from './containers/treatment-medical-test-detail-container/treatment-medical-test-detail-container.component';
 import {TreatmentMedicalTestComponent} from './components/treatment-medical-test/treatment-medical-test.component';
 import { TreatmentPrescriptionsComponent } from './components/treatmnet-prescriptions/treatment-prescriptions.component';
-import { TreatmnetPrescriptionDetailComponent } from './components/treatmnet-prescription-detail/treatmnet-prescription-detail.component';
+import { TreatmentPrescriptionDetailComponent } from './components/treatmnet-prescription-detail/treatment-prescription-detail.component';
 import { TreatmentPrescriptionDetailContainerComponent } from './containers/treatment-prescription-detail-container/treatment-prescription-detail-container.component';
 import { PetOwnerSelectTableComponent } from './components/pet-owner-select-table/pet-owner-select-table.component';
 import { PetsSelectTableComponent } from './components/pets-select-table/pets-select-table.component';
@@ -108,7 +108,7 @@ import { TreatmentPrescriptionMedicineSelectorComponent } from './components/tre
     TreatmentMedicalTestDetailContainerComponent,
     TreatmentMedicalTestComponent,
     TreatmentPrescriptionsComponent,
-    TreatmnetPrescriptionDetailComponent,
+    TreatmentPrescriptionDetailComponent,
     TreatmentPrescriptionDetailContainerComponent,
     PetOwnerSelectTableComponent,
     PetsSelectTableComponent,

@@ -1,17 +1,15 @@
 <div class="fixed-height isaac-margin-15top">
   <split [direction]="'horizontal'">
     <split-area [size]="60">
-      <div class="text-center">
-        <h2>处方笺</h2>
-      </div>
-
-      <div class="text-left">
-        <img [src]="'../../../assets/images/rx.png'" style="width:45px;height: 45px;" alt="Rx">
-      </div>
+      <app-treatment-prescription-detail [list]="prescriptions|async"></app-treatment-prescription-detail>
 
     </split-area>
     <split-area [size]="40">
-      <app-treatment-prescription-medicine-selector></app-treatment-prescription-medicine-selector>
+      <div style="padding-left: 10px">
+        <app-treatment-prescription-medicine-selector
+          (medicineSelected)="onMedicineSelected($event)"
+        ></app-treatment-prescription-medicine-selector>
+      </div>
     </split-area>
   </split>
 </div>

@@ -168,6 +168,7 @@ export class SecurityOperationPanelComponent implements OnInit {
 
   stopPropagation($event) {
     event.stopPropagation()
+
   }
 
 

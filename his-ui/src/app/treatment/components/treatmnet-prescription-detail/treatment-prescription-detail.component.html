@@ -1,0 +1,44 @@
+<div class="text-center">
+  <h2>处方笺</h2>
+</div>
+
+<div class="row">
+  <div class="col-xs-6 col-md-4" style="font-size:16px;">
+    <label class="control-label col-xs-12">主人姓名</label>
+    <label class="control-label col-xs-12 light-blue-label" style="font-size:13px;font-weight: bold;"
+           id="owner_name">testing</label>
+  </div>
+
+  <div class="col-xs-6 col-md-4" style="font-size:16px;">
+    <label class="control-label col-xs-12">宠物名称</label>
+    <label class="control-label col-xs-12 light-blue-label" style="font-size:13px;font-weight: bold;"
+           id="employee_id">benben</label>
+  </div>
+
+</div>
+
+
+<div class="row text-left" style="padding-left: 30px">
+  <img [src]="'../../../assets/images/rx.png'" style="width:18px;height: 18px;" alt="Rx">
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>药品名称</th>
+    <th>规格</th>
+    <th>单位</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr (click)="onRowClicked(prescription)" *ngFor="let prescription of list;let i=index"
+      [class.info]="isRowSelected(prescription)">
+    <td>{{i}}</td>
+    <td>{{prescription.name}}</td>
+    <td>{{registration.specification}}</td>
+    <td>{{registration.unit}}</td>
+  </tr>
+  </tbody>
+</table>
+
