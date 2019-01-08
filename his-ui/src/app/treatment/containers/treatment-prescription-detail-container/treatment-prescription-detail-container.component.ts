@@ -83,7 +83,7 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
     this.addPrescription($event);
   }
 
-  onSubmitPrescription($event: any) {
+  onSubmitPrescription() {
 
   }
 
