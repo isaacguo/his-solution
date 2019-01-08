@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 import {InventoryItemService} from "../../../core/services/inventory/inventory-item.service";
@@ -6,7 +6,8 @@ import {InventoryItemService} from "../../../core/services/inventory/inventory-i
 @Component({
   selector: 'app-treatment-prescription-medicine-selector',
   templateUrl: './treatment-prescription-medicine-selector.component.html',
-  styleUrls: ['./treatment-prescription-medicine-selector.component.css']
+  styleUrls: ['./treatment-prescription-medicine-selector.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreatmentPrescriptionMedicineSelectorComponent implements OnInit {
 
@@ -39,12 +40,7 @@ export class TreatmentPrescriptionMedicineSelectorComponent implements OnInit {
   ngOnInit() {
   }
 
-  onRowClicked(result: any) {
-    this.medicineSelected.emit(result);
-  }
-
   addMedicine(medicine: any) {
-    
-
+    this.medicineSelected.emit(medicine);
   }
 }

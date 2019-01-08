@@ -1,5 +1,5 @@
 <form [formGroup]="formModel" novalidate>
-  <div (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" style="width: 220px">
+  <div (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" >
     <div *ngIf="!isMouseEntered && formModel.valid && value!==undefined && value!==null">
       {{value}}
     </div>

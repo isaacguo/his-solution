@@ -7,6 +7,7 @@ import {ReportStatusEnum} from "../../../core/enums/report-status.enum";
   templateUrl: './medical-test-query.component.html',
   styleUrls: ['./medical-test-query.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class MedicalTestQueryComponent implements OnInit {
 

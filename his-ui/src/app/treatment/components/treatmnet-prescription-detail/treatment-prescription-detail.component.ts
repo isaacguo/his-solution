@@ -1,6 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractItemSelectableTableComponent} from "../../../shared/components/abstract-item-selectable-table/abstract-item-selectable-table.component";
-import {FormBuilder} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-treatment-prescription-detail',
@@ -9,10 +9,21 @@ import {FormBuilder} from "@angular/forms";
 })
 export class TreatmentPrescriptionDetailComponent extends AbstractItemSelectableTableComponent<any> implements OnInit {
 
+  @Input()
+  formModel: FormGroup;
+  @Output()
+  removePrescription=new EventEmitter<number>();
 
   @Output()
   submitPrescription = new EventEmitter();
 
+
+  get prescriptionsData() {
+    if (this.formModel)
+      return <FormArray>this.formModel.get('prescriptions');
+    else
+      return null;
+  }
 
   constructor(
     private fb: FormBuilder
@@ -23,7 +34,13 @@ export class TreatmentPrescriptionDetailComponent extends AbstractItemSelectable
   ngOnInit() {
   }
 
-  onSubmitPrescription() {
-    this.submitPrescription.emit();
+  onRemoveButtonClicked(i: number) {
+    this.removePrescription.emit(i);
   }
+
+  onValueChanged($event: number, prescription: AbstractControl, count: string) {
+
+
+  }
+
 }

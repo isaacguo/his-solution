@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -20,7 +20,7 @@ import {MedicalTestReport} from "../../../medical-test/models/medical-test-repor
   styleUrls: ['./treatment-medical-test-container.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreatmentMedicalTestContainerComponent implements OnInit {
+export class TreatmentMedicalTestContainerComponent implements OnInit,OnDestroy {
 
   registrationSubject = new BehaviorSubject<TreatmentRegistrationModel>({});
   registration$ = this.registrationSubject.asObservable();
@@ -106,5 +106,9 @@ export class TreatmentMedicalTestContainerComponent implements OnInit {
     this.selectedMedicalTestReportSubject.next($event);
     this.router.navigate([$event.uuid], {relativeTo: this.route});
 
+  }
+
+  ngOnDestroy(): void {
+    this.registrationSubscription.unsubscribe();
   }
 }

@@ -3,6 +3,8 @@
     <split-area [size]="60">
       <app-treatment-prescription-detail
         (submitPrescription)="onSubmitPrescription($event)"
+        (removePrescription)="onRemovePrescription($event)"
+        [formModel]="formModel$|async"
       ></app-treatment-prescription-detail>
 
       <div class="verlink-bottom">

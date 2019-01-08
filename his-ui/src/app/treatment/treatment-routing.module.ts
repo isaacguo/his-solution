@@ -103,8 +103,7 @@ const routes: Routes = [
             component:TreatmentMedicalTestContainerComponent,
             children:[
               {
-                path:':reportUuid' +
-                  '',
+                path:':reportUuid',
                 component: TreatmentMedicalTestDetailContainerComponent
               }
             ]

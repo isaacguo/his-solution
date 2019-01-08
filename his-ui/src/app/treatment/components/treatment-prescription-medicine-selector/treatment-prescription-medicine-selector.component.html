@@ -1,5 +1,5 @@
 <div class="isaac-margin-top">
-  <span>关键字搜索</span>
+  <span>药品名关键字搜索</span>
   <div class="form-inline">
     <div>
       <div>
@@ -25,7 +25,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let result of results|async" (click)="onRowClicked(result)">
+          <tr *ngFor="let result of results|async">
             <td>{{result.name}}</td>
             <td>{{result.specification}}</td>
             <td>{{result.unit}}</td>
@@ -42,5 +42,4 @@
       </div>
     </div>
   </div>
-
 </div>
