@@ -54,7 +54,6 @@ export class TreatmentCaseDetailContainerComponent implements OnInit {
   bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
 
   onModalClosed($event) {
-    console.log($event)
     this.treatmentCase$.take(1).mergeMap(tc => {
       if ($event.closeCase)
         return this.treatmentCaseService.closeTreatmentCase(tc.id)

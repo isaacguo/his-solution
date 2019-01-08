@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractItemSelectableTableComponent} from "../../../shared/components/abstract-item-selectable-table/abstract-item-selectable-table.component";
 import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
+import {PrescriptionStatusEnum} from "../../../core/enums/prescription-status.enum";
 
 @Component({
   selector: 'app-treatment-prescription-detail',
@@ -12,16 +13,18 @@ export class TreatmentPrescriptionDetailComponent extends AbstractItemSelectable
   @Input()
   formModel: FormGroup;
   @Output()
-  removePrescription=new EventEmitter<number>();
+  removePrescription = new EventEmitter<number>();
+  @Output()
+  amountChanged = new EventEmitter<any>();
 
   @Output()
   submitPrescription = new EventEmitter();
 
 
   get prescriptionsData() {
-    if (this.formModel)
+    if (this.formModel) {
       return <FormArray>this.formModel.get('items');
-    else
+    } else
       return null;
   }
 
@@ -38,9 +41,16 @@ export class TreatmentPrescriptionDetailComponent extends AbstractItemSelectable
     this.removePrescription.emit(i);
   }
 
-  onValueChanged($event: number, prescription: AbstractControl, count: string) {
+  onValueChanged($event: number, index: number, count: string) {
+    this.amountChanged.emit({'index': index, 'field': count, 'amount': $event})
+  }
 
-
+  isPrescriptionStillUnSubmitted() {
+    if (this.formModel) {
+      return this.formModel.controls['status'].value === PrescriptionStatusEnum.UNSUBMITTED;
+    } else {
+      return false;
+    }
   }
 
 }

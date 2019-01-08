@@ -112,6 +112,7 @@
           </li>
 
 
+          <!--
           <li *ngIf="(guardMap.get('Procurement-采购审批-操作')?.isAuthorized()|async) ||
             (guardMap.get('Procurement-经销订货-操作')?.isAuthorized()|async) ||
             (guardMap.get('Procurement-其他管理-操作')?.isAuthorized()|async) ">
@@ -129,6 +130,7 @@
               </li>
             </ul>
           </li>
+          -->
 
           <li *ngIf="guardMap.get('Medicine-库房管理-操作')?.isAuthorized()|async">
             <a href="#" routerLinkActive="active" class="text-center"> 库房管理<span class="fa arrow"></span></a>

@@ -11,6 +11,8 @@ import {RegistrationService} from "../../../core/services/treatment/registration
 import {ActivatedRoute, Router} from "@angular/router";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {PharmacyPrescriptionService} from "../../../core/services/pharmacy/pharmacy-prescription.service";
+import {PopupModalBundle} from "../../../shared/models/popup-modal-bundle.model";
+import {PrescriptionStatusEnum} from "../../../core/enums/prescription-status.enum";
 
 @Component({
   selector: 'app-treatment-prescription-detail-container',
@@ -54,7 +56,7 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
         this.registrationSubject.next(r);
       });
 
-    this.prescription$ = this.route.params.mergeMap(p => {
+    this.prescription$ = combineLatest(this.prescriptionChanged$, this.route.params).mergeMap(([change, p]) => {
       return this.pharmacyPrescriptionService.readOne(p['prescriptionId'])
     })
 
@@ -89,13 +91,22 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
 
       this.formModel.controls['status'].setValue(prescription.status)
 
-      this.formModel.controls['items'] = this.fb.array([]);
+      this.clearFormArray(<FormArray>this.formModel.controls['items'])
+
+
       prescription.items.forEach(r => {
         this.addPrescription(this.inflatePrescriptionItem(r));
       })
 
       this.formModel$.next(this.formModel);
     })
+  }
+
+
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
   }
 
   ngOnInit() {
@@ -106,15 +117,34 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
     this.addPrescription(this.initPrescription($event));
   }
 
-  onSubmitPrescription() {
-    this.pharmacyPrescriptionService.update(0, this.formModel.value).subscribe(() => {
+
+  onSavePrescription() {
+    this.pharmacyPrescriptionService.update(this.formModel.controls['uuid'].value, this.formModel.value).subscribe(() => {
+
+      this.popupBundleSubject.next({
+        title: '成功',
+        body: '<h4>保存成功</h4>',
+        hasConfirmButton: true,
+        confirmButtonText: "确定",
+      })
+
       this.prescriptionChangedSubject.next(true);
     })
   }
 
-  addPrescription(prescriptionFormGroup: FormGroup) {
+  onModalClosed($event) {
+    if ($event.closePrescription) {
+      this.pharmacyPrescriptionService.submitPrescription(this.formModel.value)
+        .subscribe(() =>
+          this.prescriptionChangedSubject.next(true)
+        )
+    }
+  }
+
+  addPrescription(prescriptionFormGroup: any) {
     const control = <FormArray>this.formModel.controls['items'];
     control.push(prescriptionFormGroup);
+
     this.formModel$.next(this.formModel);
   }
 
@@ -127,7 +157,7 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
       'name': [prescription.name, Validators.required],
       'specification': [prescription.specification, Validators.required],
       'unit': [prescription.unit, Validators.required],
-      'amount': [1, Validators.required],
+      'amount': [prescription.amount, Validators.required],
     })
   }
 
@@ -168,4 +198,40 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
     this.formModel$.next(this.formModel);
   }
 
+
+  popupBundleSubject = new BehaviorSubject<PopupModalBundle>({});
+  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
+
+
+  onSubmitPrescription() {
+
+    this.popupBundleSubject.next({
+      title: '请确定',
+      body: '<h4>是否要提交处方?</h4>\n<h4 class="label label-danger isaac-font-medium ">提交处方后，无法再次修改</h4>',
+      hasConfirmButton: true,
+      confirmButtonText: "确定",
+      hasCancelButton: true,
+      cancelButtonText: "取消",
+      payload: {'closePrescription': true}
+    })
+  }
+
+  isPrescriptionStillUnSubmitted() {
+    if (this.formModel) {
+      return this.formModel.controls['status'].value === PrescriptionStatusEnum.UNSUBMITTED;
+    } else {
+      return false;
+    }
+  }
+
+  onAmountChanged($event: any) {
+    (<FormGroup> (<FormArray>this.formModel.get('items')).at($event.index)).controls['amount'].setValue($event.amount);
+  }
+
+  get prescriptionsData() {
+    if (this.formModel) {
+      return <FormArray>this.formModel.get('items');
+    } else
+      return null;
+  }
 }

@@ -9,7 +9,6 @@ export class LogoutGuard implements CanActivate {
   }
 
   canActivate(): boolean {
-    console.log("logout");
     this.authenticationService.logout();
     this.router.navigate(['login']);
     return true;

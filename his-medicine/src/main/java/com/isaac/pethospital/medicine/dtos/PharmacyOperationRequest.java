@@ -5,11 +5,21 @@ import com.isaac.pethospital.medicine.entities.PharmacyPrescriptionItemEntity;
 import com.isaac.pethospital.medicine.enums.PrescriptionStatusEnum;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 public class PharmacyOperationRequest extends PharmacyPrescriptionEntity {
 
     public void update(PharmacyPrescriptionEntity prescription) {
+
+        List<PharmacyPrescriptionItemEntity> toRemove = new LinkedList<>();
+        prescription.getItems().forEach(r -> toRemove.add(r));
+
+
+        for (PharmacyPrescriptionItemEntity item : toRemove) {
+            prescription.removeItem(item);
+        }
 
         this.getItems().forEach(r -> {
             PharmacyPrescriptionItemEntity item = new PharmacyPrescriptionItemEntity();

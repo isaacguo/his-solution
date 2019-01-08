@@ -4,10 +4,7 @@ import com.isaac.pethospital.common.restcontrollers.AbstractCRUDRestController;
 import com.isaac.pethospital.medicine.dtos.PharmacyOperationRequest;
 import com.isaac.pethospital.medicine.entities.PharmacyPrescriptionEntity;
 import com.isaac.pethospital.medicine.services.PharmacyPrescriptionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class PharmacyPrescriptionRestController extends AbstractCRUDRestControll
 
     public PharmacyPrescriptionRestController(PharmacyPrescriptionService pharmacyPrescriptionService) {
         super(pharmacyPrescriptionService);
-        this.pharmacyPrescriptionService=pharmacyPrescriptionService;
+        this.pharmacyPrescriptionService = pharmacyPrescriptionService;
     }
 
     @GetMapping("findByPetUuidToday/{uuid}")
@@ -30,5 +27,11 @@ public class PharmacyPrescriptionRestController extends AbstractCRUDRestControll
     @GetMapping("findByPetUuidHistory/{uuid}")
     public List<PharmacyPrescriptionEntity> findByPetUuidHistory(@PathVariable("uuid") String uuid) {
         return this.pharmacyPrescriptionService.findByPetUuidHistory(uuid);
+    }
+
+    @PutMapping("submitPrescription")
+    public PharmacyPrescriptionEntity submitPrescription(@RequestBody
+                                                                     PharmacyOperationRequest request) {
+        return this.pharmacyPrescriptionService.submitPrescription(request);
     }
 }

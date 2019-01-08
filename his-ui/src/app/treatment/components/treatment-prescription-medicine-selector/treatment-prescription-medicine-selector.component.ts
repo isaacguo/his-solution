@@ -24,7 +24,6 @@ export class TreatmentPrescriptionMedicineSelectorComponent implements OnInit {
       .debounceTime(200)
       .switchMap(name => {
         if (!name) {
-          console.log('empty')
           return Observable.of([]);
         } else {
           return this.inventoryItemService.findByNameContains(name);

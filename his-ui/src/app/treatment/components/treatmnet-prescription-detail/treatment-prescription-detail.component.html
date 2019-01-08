@@ -1,6 +1,8 @@
 <div class="text-center">
   <h3>处方笺</h3>
-  <label class="text-right">单据状态:{{formModel?.controls['status'].value|prescriptionStatusEnum}}</label>
+</div>
+<div class="text-right">
+  <label >单据状态:{{formModel?.controls['status'].value|prescriptionStatusEnum}}</label>
 </div>
 
 <div class="row">
@@ -49,14 +51,15 @@
     <td>{{prescription.controls['unit'].value}}</td>
     <td>
       <app-field-edit [value]="prescription.controls['amount'].value"
-                      (valueChanged)="onValueChanged($event,prescription,'count')"></app-field-edit>
+                      (valueChanged)="onValueChanged($event,i,'amount')"></app-field-edit>
     </td>
-    <td>
-      <button title="删除" type="button" class="btn btn-default btn-sm"
+    <td >
+      <button [disabled]="!isPrescriptionStillUnSubmitted()" title="删除" type="button" class="btn btn-default btn-sm"
               (click)="onRemoveButtonClicked(i)">
         <span class="glyphicon glyphicon-remove"></span></button>
     </td>
   </tr>
   </tbody>
 </table>
+
 

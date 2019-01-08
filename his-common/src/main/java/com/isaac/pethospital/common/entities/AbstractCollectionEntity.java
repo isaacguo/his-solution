@@ -13,7 +13,7 @@ public abstract class AbstractCollectionEntity<T extends AbstractCollectionItemE
 
 
 
-    @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "collection", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("collection-items")
     List<T> items=new LinkedList<>();
 
@@ -31,7 +31,7 @@ public abstract class AbstractCollectionEntity<T extends AbstractCollectionItemE
         if(item==null)
             throw new RuntimeException("item is null");
         item.setCollection(null);
-        this.items.add(item);
+        this.items.remove(item);
     }
 
     public List<T> getItems() {

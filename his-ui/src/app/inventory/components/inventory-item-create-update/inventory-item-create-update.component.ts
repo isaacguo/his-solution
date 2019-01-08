@@ -17,7 +17,10 @@ export class InventoryItemCreateUpdateComponent extends AbstractCreateUpdateComp
   itemCreationResultText: string;
   @ViewChild("confirmCreateModal") confirmCreateModal: ModalComponent;
 
-  constructor(public router: Router, public route: ActivatedRoute, private fb: FormBuilder, private inventoryItemService: InventoryItemService) {
+  constructor(public router: Router,
+              public route: ActivatedRoute,
+              private fb: FormBuilder,
+              private inventoryItemService: InventoryItemService) {
     super(route);
 
   }
@@ -78,8 +81,8 @@ export class InventoryItemCreateUpdateComponent extends AbstractCreateUpdateComp
 
 
   onConfirmCreateModalClosed()
-  {
-
+ {
+   this.router.navigate(['inventory-settings','item-management'],{relativeTo:this.route.parent})
   }
 
 

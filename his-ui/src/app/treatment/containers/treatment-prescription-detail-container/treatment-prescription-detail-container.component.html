@@ -1,15 +1,22 @@
+
+<app-popup-modal (modalClosed)="onModalClosed($event)" [bundle]="bundle$|async"></app-popup-modal>
+
 <div class="fixed-height isaac-margin-15top">
   <split [direction]="'horizontal'">
     <split-area [size]="60">
       <app-treatment-prescription-detail
         (submitPrescription)="onSubmitPrescription()"
         (removePrescription)="onRemovePrescription($event)"
+        (amountChanged)="onAmountChanged($event)"
         [formModel]="formModel$|async"
+
       ></app-treatment-prescription-detail>
 
       <div class="verlink-bottom">
         <div class="btn-group">
-          <button [disabled]="!formModel.valid" class="btn btn-primary" (click)="onSubmitPrescription()">提交</button>
+          <button style="margin-right: 10px" [disabled]="!formModel.valid || !isPrescriptionStillUnSubmitted()" class="btn btn-primary" (click)="onSavePrescription()">仅保存处方笺</button>
+          <button [disabled]="!formModel.valid || !isPrescriptionStillUnSubmitted()" class="btn btn-primary" (click)="onSubmitPrescription()">直接提交至财务</button>
+          {{formModel.errors}}
         </div>
       </div>
 

@@ -106,8 +106,6 @@ export class InventorySettingsItemManagementDetailComponent implements OnInit, O
 
 
   onValueChanged(event: number, report, fieldName: string) {
-    //console.log(event);
-    //console.log(report);
     let obj = {};
     obj[fieldName] = event;
     obj['uuid'] = report.uuid;

@@ -16,7 +16,6 @@ export class FinanceContainerComponent implements OnInit {
   selectedStatusText: string = this.getEmployeeStatusList()[0][1];
 
   onStatusClicked(status: string) {
-    console.log(status);
     this.selectedStatusText = EmploymentStatusEnum[status];
   }
 

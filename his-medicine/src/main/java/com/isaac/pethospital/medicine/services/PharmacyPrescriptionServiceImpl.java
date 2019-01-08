@@ -39,7 +39,7 @@ public class PharmacyPrescriptionServiceImpl extends AbstractCrudService<Pharmac
         Long pid = request.getId();
         if (pid == null || pid == 0L) {
             PharmacyPrescriptionEntity entity = request.toEntity();
-            entity.setStatus(PrescriptionStatusEnum.UNPAID);
+            entity.setStatus(PrescriptionStatusEnum.UNSUBMITTED);
             PharmacyPrescriptionEntity ret = pharmacyPrescriptionRepository.save(request.toEntity());
             return ret;
         } else {
@@ -54,11 +54,9 @@ public class PharmacyPrescriptionServiceImpl extends AbstractCrudService<Pharmac
             throw new RuntimeException("Cannot find prescription with the given uuid");
 
         request.update(prescription);
-        prescription.setStatus(
-                PrescriptionStatusEnum.UNPAID);
 
         this.pharmacyPrescriptionRepository.save(prescription);
-        this.generatePharmacyPrescriptionOrderMessage(prescription);
+
         return prescription;
     }
 
@@ -87,5 +85,15 @@ public class PharmacyPrescriptionServiceImpl extends AbstractCrudService<Pharmac
     @Override
     public List<PharmacyPrescriptionEntity> findByPetUuidHistory(String uuid) {
         return this.pharmacyPrescriptionRepository.findPharmacyPrescriptionEntitiesByPetUuidAndCreatedDateBefore(uuid, LocalDate.now().atStartOfDay());
+    }
+
+    @Override
+    public PharmacyPrescriptionEntity submitPrescription(PharmacyOperationRequest request) {
+        PharmacyPrescriptionEntity prescription=this.update(request);
+        prescription.setStatus(PrescriptionStatusEnum.UNPAID);
+        this.pharmacyPrescriptionRepository.save(prescription);
+
+        this.generatePharmacyPrescriptionOrderMessage(prescription);
+        return prescription;
     }
 }

@@ -11,7 +11,7 @@ export class TreatmentPrescriptionListComponent implements OnInit {
   @Input()
   list: any[];
   @Output()
-  listChanged=new EventEmitter();
+  listChanged = new EventEmitter();
   @Output()
   itemSelected = new EventEmitter<any>();
 
@@ -25,6 +25,7 @@ export class TreatmentPrescriptionListComponent implements OnInit {
   isRowSelected(item: any) {
     return item === this.selectedPrescription;
   }
+
   constructor() {
   }
 

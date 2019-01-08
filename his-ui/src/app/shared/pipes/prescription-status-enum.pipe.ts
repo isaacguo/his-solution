@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import {PrescriptionStatusEnum} from "../../core/enums/prescription-status.enum";
+import {TreatmentCaseStatusEnum} from "../../core/enums/treatment-case-status.enum";
 
 @Pipe({
   name: 'prescriptionStatusEnum'
@@ -7,7 +8,18 @@ import {PrescriptionStatusEnum} from "../../core/enums/prescription-status.enum"
 export class PrescriptionStatusEnumPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    return PrescriptionStatusEnum[value];
-  }
 
+    switch (value) {
+      case PrescriptionStatusEnum.UNSUBMITTED:
+        return "未提交";
+      case PrescriptionStatusEnum.UNPAID:
+        return "未付款";
+      case PrescriptionStatusEnum.PAID:
+        return "已付款";
+      case PrescriptionStatusEnum.DISPENSED:
+        return "已发药";
+      case PrescriptionStatusEnum.UNDISPENSED:
+        return "未发药";
+    }
+  }
 }

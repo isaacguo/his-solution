@@ -74,11 +74,18 @@ export class TreatmentMedicalTestReportDetailComponent implements OnInit {
       this.formModel.controls['uuid'].setValue(this.medicalTestReport.uuid);
       this.formModel.controls['reportName'].setValue(this.medicalTestReport.reportName);
 
-      this.formModel.controls['reportItems'] = this.fb.array([])
+      this.clearFormArray(<FormArray>this.formModel.controls['reportItems']);
 
       this.medicalTestReport.reportItems.forEach(item => {
         this.inflateReportItem(item);
       })
     }
   }
+
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
+  }
 }
+

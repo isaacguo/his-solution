@@ -2,7 +2,7 @@
   <h1 class="page-header">{{getOperationText()}}产品信息</h1>
 </div>
 
-<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()" >
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()" (onDismiss)="onConfirmCreateModalClosed()" >
   <form #modalForm1="ngForm">
     <modal-header [show-close]="true">
       <h4 class="modal-title">信息</h4>

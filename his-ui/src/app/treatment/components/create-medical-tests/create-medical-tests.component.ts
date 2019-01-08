@@ -113,8 +113,14 @@ export class CreateMedicalTestsComponent implements OnInit, OnChanges {
   onModalClosed($event: any) {
     let data=this.formModel.value;
     this.searchInput.setValue("");
-    this.formModel.controls['medicalTestReports']=this.fb.array([], this.minLengthArray(1));
+    this.clearFormArray(<FormArray>this.formModel.controls['medicalTestReports']);
     this.generateMedicalTestReport.emit(data);
+  }
+
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
   }
 
   private initFormModel() {
