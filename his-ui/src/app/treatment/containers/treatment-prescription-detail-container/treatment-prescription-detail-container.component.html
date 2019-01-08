@@ -2,7 +2,7 @@
   <split [direction]="'horizontal'">
     <split-area [size]="60">
       <app-treatment-prescription-detail
-        (submitPrescription)="onSubmitPrescription($event)"
+        (submitPrescription)="onSubmitPrescription()"
         (removePrescription)="onRemovePrescription($event)"
         [formModel]="formModel$|async"
       ></app-treatment-prescription-detail>

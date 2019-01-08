@@ -10,6 +10,7 @@ import {PetService} from "../../../core/services/treatment/pet.service";
 import {RegistrationService} from "../../../core/services/treatment/registration.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {combineLatest} from "rxjs/observable/combineLatest";
+import {PharmacyPrescriptionService} from "../../../core/services/pharmacy/pharmacy-prescription.service";
 
 @Component({
   selector: 'app-treatment-prescription-detail-container',
@@ -24,7 +25,6 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
   registrationSubscription: Subscription;
   petSubject = new BehaviorSubject<Pet>({});
   pet$: Observable<Pet> = this.petSubject.asObservable();
-  petSubscription: Subscription;
   petOwner$: Observable<PetOwner>;
 
   formModelSubscription: Subscription;
@@ -33,12 +33,16 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
   formModel$ = new Subject<FormGroup>();
   formModel: FormGroup;
 
+  prescriptionChangedSubject = new BehaviorSubject<boolean>(false);
+  prescriptionChanged$ = this.prescriptionChangedSubject.asObservable();
+
   constructor(private fb: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
               private petOwnerService: PetOwnerService,
               private petService: PetService,
-              private registrationService: RegistrationService
+              private registrationService: RegistrationService,
+              private pharmacyPrescriptionService:PharmacyPrescriptionService
   ) {
 
     this.initForm();
@@ -84,9 +88,10 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
   }
 
   onSubmitPrescription() {
-
+    this.pharmacyPrescriptionService.create(this.formModel.value).subscribe(()=>{
+      this.prescriptionChangedSubject.next(true);
+    })
   }
-
 
   addPrescription(prescription: any) {
     const control = <FormArray>this.formModel.controls['prescriptions'];
@@ -125,9 +130,9 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
   }
 
   onRemovePrescription($event: number) {
-    console.log($event);
     const control = <FormArray>this.formModel.controls['prescriptions'];
     control.removeAt($event);
     this.formModel$.next(this.formModel);
   }
+
 }
