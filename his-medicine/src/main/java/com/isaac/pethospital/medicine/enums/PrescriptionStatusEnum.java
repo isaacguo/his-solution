@@ -2,6 +2,8 @@ package com.isaac.pethospital.medicine.enums;
 
 public enum PrescriptionStatusEnum {
 
+
+    UNSUBMITTED("UNSUBMITTED"),
     UNPAID("UNPAID"),
     PAID("PAID"),
     DISPENSED("DISPENSED"),
