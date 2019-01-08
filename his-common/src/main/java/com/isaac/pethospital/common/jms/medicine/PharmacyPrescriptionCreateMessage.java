@@ -6,6 +6,42 @@ public class PharmacyPrescriptionCreateMessage {
     String treatmentCaseUuid;
     String petOwnerUuid;
     String petUuid;
+    String petName;
+    String petOwnerName;
+    String doctorName;
+    String doctorUuid;
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public String getPetOwnerName() {
+        return petOwnerName;
+    }
+
+    public void setPetOwnerName(String petOwnerName) {
+        this.petOwnerName = petOwnerName;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getDoctorUuid() {
+        return doctorUuid;
+    }
+
+    public void setDoctorUuid(String doctorUuid) {
+        this.doctorUuid = doctorUuid;
+    }
 
     public String getPetOwnerUuid() {
         return petOwnerUuid;

@@ -23,6 +23,7 @@ import {LoadingSpinnerComponent} from './components/loading-spinner/loading-spin
 import {ProfilePictureComponent} from "./components/profile-picture/profile-picture.component";
 import {EditorComponent} from "./components/editor/editor.component";
 import {FromNowPipe} from './pipes/from-now.pipe';
+import {PrescriptionStatusEnumPipe} from './pipes/prescription-status-enum.pipe';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import {FromNowPipe} from './pipes/from-now.pipe';
     ProfilePictureComponent,
     EditorComponent,
     FromNowPipe,
+    PrescriptionStatusEnumPipe,
   ],
   exports: [
     CommonModule,
@@ -73,6 +75,7 @@ import {FromNowPipe} from './pipes/from-now.pipe';
     PetGenderEnumPipe,
     TreatmentCaseStatusEnumPipe,
     RegistrationStatusEnumPipe,
+    PrescriptionStatusEnumPipe,
     GenderEnumPipe,
     PopupModalComponent,
     LoadingSpinnerComponent,

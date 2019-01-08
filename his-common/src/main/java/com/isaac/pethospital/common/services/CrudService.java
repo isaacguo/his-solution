@@ -14,3 +14,4 @@ public interface CrudService<T, R> {
 
     boolean deleteOne(Long id);
 }
+

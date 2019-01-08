@@ -1,5 +1,6 @@
 <div class="text-center">
   <h3>处方笺</h3>
+  <label class="text-right">单据状态:{{formModel?.controls['status'].value|prescriptionStatusEnum}}</label>
 </div>
 
 <div class="row">
@@ -42,7 +43,7 @@
   <tbody>
   <tr (click)="onRowClicked(prescription)" *ngFor="let prescription of prescriptionsData?.controls;let i=index"
       [class.info]="isRowSelected(prescription)">
-    <td>{{i+1}}</td>
+    <td>{{i + 1}}</td>
     <td>{{prescription.controls['name'].value}}</td>
     <td>{{prescription.controls['specification'].value}}</td>
     <td>{{prescription.controls['unit'].value}}</td>

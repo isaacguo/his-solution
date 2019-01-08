@@ -74,8 +74,7 @@ public class ReportRestController {
         return this.reportService.findByPetUuidToday(uuid);
     }
 
-    @GetMapping("" +
-            "findByPetUuidHistory/{uuid}")
+    @GetMapping("findByPetUuidHistory/{uuid}")
     public List<ReportEntity> findByPetUuidHistory(@PathVariable("uuid") String uuid) {
         return this.reportService.findByPetUuidHistory(uuid);
     }

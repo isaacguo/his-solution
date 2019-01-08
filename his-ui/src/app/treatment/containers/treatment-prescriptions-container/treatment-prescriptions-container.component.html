@@ -1,4 +1,4 @@
-<div  style="height: 700px ">
+<div style="height: 700px ">
   <split [direction]="'horizontal'">
     <split-area [size]="20">
       <div style="padding-right:15px">
@@ -7,14 +7,15 @@
             今日处方
           </div>
           <div class="panel-body">
-            <button (click)="onCreatePrescriptionClicked()" class="btn btn-primary btn-sm isaac-margin-bottom-10px"><span
+            <button (click)="onCreatePrescriptionClicked()"
+                    class="btn btn-primary btn-sm isaac-margin-bottom-10px"><span
               class="glyphicon glyphicon-plus"></span> 新建处方
             </button>
 
             <app-loading-spinner [isLoading]="isLoading$|async"></app-loading-spinner>
 
             <app-treatment-prescription-list
-              [list]="todayPrescription$|async"
+              [list]="todayPrescriptions$|async"
               [selectedPrescription]="selectedPrescription$|async"
               (itemSelected)="onPrescriptionSelected($event)"
             ></app-treatment-prescription-list>
@@ -28,6 +29,12 @@
             历史处方
           </div>
           <div class="panel-body">
+
+            <app-treatment-prescription-list
+              [list]="historyPrescriptions$|async"
+              [selectedPrescription]="selectedPrescription$|async"
+              (itemSelected)="onPrescriptionSelected($event)"
+            ></app-treatment-prescription-list>
 
           </div>
         </div>

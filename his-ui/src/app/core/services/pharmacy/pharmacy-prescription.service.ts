@@ -14,11 +14,11 @@ export class PharmacyPrescriptionService extends CrudService<any> {
   }
 
   findByPetUuidHistory(uuid: any):Observable<any[]> {
-    return this.authHttp.get(`${this.rootUrl}/findByPetUuidHistory/${uuid}/`).map(this.extractData);
+    return this.authHttp.get(`${this.rootUrl}/findByPetUuidHistory/${uuid}`).map(this.extractData);
   }
 
   findByPetUuidToday(uuid: any):Observable<any[]> {
-    return this.authHttp.get(`${this.rootUrl}/findByPetUuidToday/${uuid}/`).map(this.extractData);
+    return this.authHttp.get(`${this.rootUrl}/findByPetUuidToday/${uuid}`).map(this.extractData);
   }
 
 

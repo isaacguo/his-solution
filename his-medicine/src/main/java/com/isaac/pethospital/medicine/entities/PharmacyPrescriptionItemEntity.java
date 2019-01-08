@@ -12,23 +12,30 @@ import java.math.BigDecimal;
 public class PharmacyPrescriptionItemEntity extends AbstractCollectionItemEntity<PharmacyPrescriptionEntity> {
 
 
-    String inventoryItemId; //货品编码
+    String uuid;
+    String inventoryItemUuid; //货品编码
     String name; //名称
     String unit; //单位
     String specification; //规格
     BigDecimal amount; //数量
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    public String getInventoryItemId() {
-        return inventoryItemId;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setInventoryItemId(String inventoryItemId) {
-        this.inventoryItemId = inventoryItemId;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getInventoryItemUuid() {
+        return inventoryItemUuid;
+    }
+
+    public void setInventoryItemUuid(String inventoryItemUuid) {
+        this.inventoryItemUuid = inventoryItemUuid;
     }
 
     public String getName() {

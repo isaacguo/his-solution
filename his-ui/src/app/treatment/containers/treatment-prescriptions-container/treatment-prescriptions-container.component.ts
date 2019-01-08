@@ -8,8 +8,6 @@ import {PetOwnerService} from "../../../core/services/treatment/pet-owner.servic
 import {PetService} from "../../../core/services/treatment/pet.service";
 import {RegistrationService} from "../../../core/services/treatment/registration.service";
 import {TreatmentCaseService} from "../../../core/services/treatment/treatment-case.service";
-import {MedicalTestReportService} from "../../../core/services/medical-test/medical-test-report.service";
-import {MedicalTestReportTemplateService} from "../../../core/services/medical-test/medical-test-report-template.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {combineLatest} from "rxjs/observable/combineLatest";
 import {PharmacyPrescriptionService} from "../../../core/services/pharmacy/pharmacy-prescription.service";
@@ -38,8 +36,8 @@ export class TreatmentPrescriptionsContainerComponent implements OnInit {
   selectedPrescriptionSubject = new BehaviorSubject<any>({});
   selectedPrescription$: Observable<any> = this.selectedPrescriptionSubject.asObservable();
 
-  todayPrescription$: Observable<any[]>;
-  historyPrescription$: Observable<any[]>;
+  todayPrescriptions$: Observable<any[]>;
+  historyPrescriptions$: Observable<any[]>;
 
   isLoadingSubject = new BehaviorSubject<boolean>(true);
   isLoading$ = this.isLoadingSubject.asObservable();
@@ -75,14 +73,14 @@ export class TreatmentPrescriptionsContainerComponent implements OnInit {
         return Observable.of({});
     });
 
-    this.todayPrescription$ = combineLatest(this.actionChanged$, this.pet$).mergeMap(([event, p]) => {
+    this.todayPrescriptions$ = combineLatest(this.actionChanged$, this.pet$).mergeMap(([event, p]) => {
       this.isLoadingSubject.next(false)
       if (p && p.id)
         return this.pharmacyPrescriptionService.findByPetUuidToday(p.uuid)
       else
         return Observable.of([]);
     });
-    this.historyPrescription$ = combineLatest(this.actionChanged$, this.pet$).mergeMap(([event, p]) => {
+    this.historyPrescriptions$ = combineLatest(this.actionChanged$, this.pet$).mergeMap(([event, p]) => {
       if (p && p.id)
         return this.pharmacyPrescriptionService.findByPetUuidHistory(p.uuid)
       else
@@ -107,7 +105,7 @@ export class TreatmentPrescriptionsContainerComponent implements OnInit {
 
   onPrescriptionSelected($event: any) {
     this.selectedPrescriptionSubject.next($event);
-    this.router.navigate([$event.uuid], {relativeTo: this.route});
+    this.router.navigate([$event.id], {relativeTo: this.route});
   }
 
 }

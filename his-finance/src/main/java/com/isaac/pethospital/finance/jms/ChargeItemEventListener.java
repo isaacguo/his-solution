@@ -26,7 +26,7 @@ public class ChargeItemEventListener {
         return this.chargeService.onGenerateChargeOrderReceived(message);
     }
 
-    @JmsListener(destination = "${jms.pharmacy-medicine-prescription-create-topic}")
+    @JmsListener(destination = "${jms.pharmacy-prescription-create-topic}")
     //@SendTo("${jms.finance-charge-item-operation-reply-topic}")
     public void processPharmacyMessage(PharmacyPrescriptionCreateMessage message) throws Exception {
         this.chargeService.onPharmacyPrescriptionCreateMessageReceived(message);

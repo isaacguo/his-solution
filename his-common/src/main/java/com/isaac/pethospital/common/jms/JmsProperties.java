@@ -17,6 +17,15 @@ public class JmsProperties {
     String medicalTestCreateReportTopic;
     String medicalTestRemovedReportTopic;
     String pharmacyPrescriptionCreateTopic;
+    String pharmacyPrescriptionRemoveTopic;
+
+    public String getPharmacyPrescriptionRemoveTopic() {
+        return pharmacyPrescriptionRemoveTopic;
+    }
+
+    public void setPharmacyPrescriptionRemoveTopic(String pharmacyPrescriptionRemoveTopic) {
+        this.pharmacyPrescriptionRemoveTopic = pharmacyPrescriptionRemoveTopic;
+    }
 
     public String getFinancePetRegistrationCreatedTopic() {
         return financePetRegistrationCreatedTopic;

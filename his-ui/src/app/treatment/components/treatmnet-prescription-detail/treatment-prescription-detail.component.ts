@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractItemSelectableTableComponent} from "../../../shared/components/abstract-item-selectable-table/abstract-item-selectable-table.component";
-import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-treatment-prescription-detail',
@@ -20,7 +20,7 @@ export class TreatmentPrescriptionDetailComponent extends AbstractItemSelectable
 
   get prescriptionsData() {
     if (this.formModel)
-      return <FormArray>this.formModel.get('prescriptions');
+      return <FormArray>this.formModel.get('items');
     else
       return null;
   }

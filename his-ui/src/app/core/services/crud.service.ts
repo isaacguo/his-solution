@@ -59,6 +59,9 @@ export class CrudService<T> extends AbstractService {
   readOne(id: number): Observable<T> {
     return this.authHttp.get(`${this.rootUrl}/${id}`).map(this.extractData);
   }
+  readOneByUuid(uuid: number): Observable<T> {
+    return this.authHttp.get(`${this.rootUrl}/by-uuid/${uuid}`).map(this.extractData);
+  }
 
   readAll(): Observable<T[]> {
     return this.authHttp.get(`${this.rootUrl}`).map(this.extractData);

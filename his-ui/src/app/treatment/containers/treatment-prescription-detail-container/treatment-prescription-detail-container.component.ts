@@ -27,6 +27,8 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
   pet$: Observable<Pet> = this.petSubject.asObservable();
   petOwner$: Observable<PetOwner>;
 
+  prescription$: Observable<any>;
+
   formModelSubscription: Subscription;
 
 
@@ -42,7 +44,7 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
               private petOwnerService: PetOwnerService,
               private petService: PetService,
               private registrationService: RegistrationService,
-              private pharmacyPrescriptionService:PharmacyPrescriptionService
+              private pharmacyPrescriptionService: PharmacyPrescriptionService
   ) {
 
     this.initForm();
@@ -51,6 +53,11 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
       .subscribe(r => {
         this.registrationSubject.next(r);
       });
+
+    this.prescription$ = this.route.params.mergeMap(p => {
+      return this.pharmacyPrescriptionService.readOne(p['prescriptionId'])
+    })
+
 
     this.pet$ = this.registration$.mergeMap(r => {
       if (r && r.pet && r.pet.id)
@@ -66,15 +73,27 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
         return Observable.of({});
     });
 
-    this.formModelSubscription = combineLatest(this.registration$, this.pet$, this.petOwner$).subscribe(([registration, pet, petOwner]) => {
-      if (registration && registration.doctor ) {
+
+    this.formModelSubscription = combineLatest(this.registration$, this.pet$, this.petOwner$, this.prescription$).subscribe(([registration, pet, petOwner, prescription]) => {
+      if (registration && registration.doctor) {
         this.formModel.controls['doctorName'].setValue(registration.doctor.name)
         this.formModel.controls['doctorUuid'].setValue(registration.doctor.uuid)
       }
+
+      this.formModel.controls['id'].setValue(prescription.id);
+      this.formModel.controls['uuid'].setValue(prescription.uuid);
       this.formModel.controls['petName'].setValue(pet.name)
       this.formModel.controls['petOwnerName'].setValue(petOwner.name)
       this.formModel.controls['petUuid'].setValue(pet.uuid)
       this.formModel.controls['petOwnerUuid'].setValue(petOwner.uuid)
+
+      this.formModel.controls['status'].setValue(prescription.status)
+
+      this.formModel.controls['items'] = this.fb.array([]);
+      prescription.items.forEach(r => {
+        this.addPrescription(this.inflatePrescriptionItem(r));
+      })
+
       this.formModel$.next(this.formModel);
     })
   }
@@ -84,29 +103,41 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
   }
 
   onMedicineSelected($event: any) {
-    this.addPrescription($event);
+    this.addPrescription(this.initPrescription($event));
   }
 
   onSubmitPrescription() {
-    this.pharmacyPrescriptionService.create(this.formModel.value).subscribe(()=>{
+    this.pharmacyPrescriptionService.update(0, this.formModel.value).subscribe(() => {
       this.prescriptionChangedSubject.next(true);
     })
   }
 
-  addPrescription(prescription: any) {
-    const control = <FormArray>this.formModel.controls['prescriptions'];
-    control.push(this.initPrescription(prescription));
-
+  addPrescription(prescriptionFormGroup: FormGroup) {
+    const control = <FormArray>this.formModel.controls['items'];
+    control.push(prescriptionFormGroup);
     this.formModel$.next(this.formModel);
+  }
+
+
+  private inflatePrescriptionItem(prescription: any) {
+    return this.fb.group({
+      'id': [prescription.id],
+      'uuid': [prescription.uuid],
+      'inventoryItemUuid': [prescription.inventoryItemUuid, Validators.required],
+      'name': [prescription.name, Validators.required],
+      'specification': [prescription.specification, Validators.required],
+      'unit': [prescription.unit, Validators.required],
+      'amount': [1, Validators.required],
+    })
   }
 
   private initPrescription(prescription: any) {
     return this.fb.group({
-      'uuid': [prescription.uuid, Validators.required],
+      'inventoryItemUuid': [prescription.uuid, Validators.required],
       'name': [prescription.name, Validators.required],
       'specification': [prescription.specification, Validators.required],
       'unit': [prescription.unit, Validators.required],
-      'amount':[1, Validators.required]
+      'amount': [1, Validators.required]
     })
   }
 
@@ -114,13 +145,15 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
   private initForm() {
     this.formModel = this.fb.group({
       'id': [],
+      'uuid': ['', Validators.required],
       'petName': ['', Validators.required],
       'petOwnerName': ['', Validators.required],
       'doctorName': ['', Validators.required],
       'petUuid': ['', Validators.required],
       'petOwnerUuid': ['', Validators.required],
       'doctorUuid': ['', Validators.required],
-      'prescriptions': this.fb.array([], minLengthArray(1)),
+      'items': this.fb.array([], minLengthArray(1)),
+      'status': [],
     })
   }
 
@@ -130,7 +163,7 @@ export class TreatmentPrescriptionDetailContainerComponent implements OnInit, On
   }
 
   onRemovePrescription($event: number) {
-    const control = <FormArray>this.formModel.controls['prescriptions'];
+    const control = <FormArray>this.formModel.controls['items'];
     control.removeAt($event);
     this.formModel$.next(this.formModel);
   }
