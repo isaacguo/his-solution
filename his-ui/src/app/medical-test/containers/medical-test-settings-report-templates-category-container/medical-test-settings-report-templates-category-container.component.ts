@@ -92,7 +92,6 @@ export class MedicalTestSettingsReportTemplatesCategoryContainerComponent implem
         hasConfirmButton: true,
         confirmButtonText: "确定",
       })
-
     });
   }
 }

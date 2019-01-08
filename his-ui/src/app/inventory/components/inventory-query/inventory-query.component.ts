@@ -18,10 +18,11 @@ export class InventoryQueryComponent implements OnInit {
   canDelete: boolean = false;
   @Input()
   canEdit: boolean = false;
-  @Input()
-  financePriceService: FinancePriceService;
+  //@Input()
+  //financePriceService: FinancePriceService;
 
-  constructor() { }
+  constructor(public financePriceService: FinancePriceService) {
+  }
 
   ngOnInit() {
   }

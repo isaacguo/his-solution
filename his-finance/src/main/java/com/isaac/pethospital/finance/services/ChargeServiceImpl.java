@@ -7,6 +7,7 @@ import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.jms.finance.ChargeReportOperationReplyMessage;
 import com.isaac.pethospital.common.jms.finance.ReportOperationMessage;
 import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionCreateMessage;
+import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionItemCreateMessage;
 import com.isaac.pethospital.common.jms.treatment.PetRegistrationCreatedMessage;
 import com.isaac.pethospital.common.services.AbstractCrudService;
 import com.isaac.pethospital.finance.dtos.ChargeOperationRequest;
@@ -125,6 +126,19 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
         chargeEntity.setStatus(ChargeStatusEnum.UNPAID);
         BigDecimal totalAmount = new BigDecimal(0);
 
+        for (int i = 0; i < message.getPharmacyPrescriptionItems().size(); i++) {
+            PharmacyPrescriptionItemCreateMessage rom = message.getPharmacyPrescriptionItems().get(i);
+            ChargeItemEntity cie = new ChargeItemEntity();
+            PriceEntity pe = priceService.findByUuid(rom.getInventoryItemUuid());
+            if (pe == null)
+                throw new RuntimeException("Cannot find price");
+            cie.setPrice(pe);
+            cie.setAmount(rom.getAmount());
+            totalAmount = totalAmount.add(pe.getMemberPrice().multiply(cie.getAmount()));
+            chargeEntity.addChargeItem(cie);
+        }
+
+        chargeEntity.setTotalAmount(totalAmount);
         ChargeEntity chargeEntity1 = jpaRepository.save(chargeEntity);
 
 
@@ -169,7 +183,7 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
         chargeEntity.setTotalAmount(message.getTotalAmount());
         chargeEntity.setDoctorUuid(message.getDoctorUuid());
 
-        ChargeItemEntity chargeItemEntity=new ChargeItemEntity();
+        ChargeItemEntity chargeItemEntity = new ChargeItemEntity();
         PriceEntity pe = priceService.findByUuid(message.getPriceUuid());
         chargeItemEntity.setPrice(pe);
         chargeItemEntity.setAmount(pe.getMemberPrice());

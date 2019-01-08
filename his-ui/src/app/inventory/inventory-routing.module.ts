@@ -51,7 +51,12 @@ const routes: Routes = [
       {
         path:'item-management',
         component:InventorySettingsItemManagementComponent
+      },
+      {
+        path:'',
+        redirectTo:'item-management'
       }
+
     ]
   }
 ];;

@@ -3,6 +3,7 @@ package com.isaac.pethospital.medicine.services;
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionCreateMessage;
+import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionItemCreateMessage;
 import com.isaac.pethospital.common.services.AbstractCrudService;
 import com.isaac.pethospital.medicine.dtos.PharmacyOperationRequest;
 import com.isaac.pethospital.medicine.entities.InventoryItemEntity;
@@ -67,6 +68,24 @@ public class PharmacyPrescriptionServiceImpl extends AbstractCrudService<Pharmac
         medicinePrescriptionCreateMessage.setTreatmentCaseUuid(prescription.getTreatmentCaseUuid());
         medicinePrescriptionCreateMessage.setPetUuid(prescription.getPetUuid());
         medicinePrescriptionCreateMessage.setPetOwnerUuid(prescription.getPetOwnerUuid());
+
+
+        //crom.setTreatmentCaseUuid(treatmentCaseUuid);
+        prescription.getItems().forEach(r -> {
+
+            PharmacyPrescriptionItemCreateMessage pharmacyPrescriptionItemCreateMessage=new PharmacyPrescriptionItemCreateMessage();
+            pharmacyPrescriptionItemCreateMessage.setAmount(r.getAmount());
+            pharmacyPrescriptionItemCreateMessage.setInventoryItemUuid(r.getInventoryItemUuid());
+            pharmacyPrescriptionItemCreateMessage.setName(r.getName());
+            pharmacyPrescriptionItemCreateMessage.setSpecification(r.getSpecification());
+            pharmacyPrescriptionItemCreateMessage.setUnit(r.getUnit());
+
+            medicinePrescriptionCreateMessage.addPharmacyPrescriptionItem(pharmacyPrescriptionItemCreateMessage);
+
+        });
+
+
+
         this.jmsSender.sendEvent(this.jmsProperties.getPharmacyPrescriptionCreateTopic(), medicinePrescriptionCreateMessage);
 
     }

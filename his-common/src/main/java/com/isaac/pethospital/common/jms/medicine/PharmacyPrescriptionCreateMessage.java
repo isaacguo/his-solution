@@ -1,5 +1,8 @@
 package com.isaac.pethospital.common.jms.medicine;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class PharmacyPrescriptionCreateMessage {
 
     String pharmacyPrescriptionUuid;
@@ -10,6 +13,21 @@ public class PharmacyPrescriptionCreateMessage {
     String petOwnerName;
     String doctorName;
     String doctorUuid;
+
+    private List<PharmacyPrescriptionItemCreateMessage> pharmacyPrescriptionItems = new LinkedList<>();
+
+    public List<PharmacyPrescriptionItemCreateMessage> getPharmacyPrescriptionItems() {
+        return pharmacyPrescriptionItems;
+    }
+
+
+    public void addPharmacyPrescriptionItem(PharmacyPrescriptionItemCreateMessage pharmacyPrescriptionItem) {
+        this.pharmacyPrescriptionItems.add(pharmacyPrescriptionItem);
+    }
+
+    public void setPharmacyPrescriptionItems(List<PharmacyPrescriptionItemCreateMessage> pharmacyPrescriptionItems) {
+        this.pharmacyPrescriptionItems = pharmacyPrescriptionItems;
+    }
 
     public String getPetName() {
         return petName;
