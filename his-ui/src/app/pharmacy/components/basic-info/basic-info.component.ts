@@ -14,7 +14,7 @@ export class BasicInfoComponent implements OnInit {
   prescription: any;
 
   @Input()
-  pet: Pet;
+  pet: any;
 
 
   constructor() {
