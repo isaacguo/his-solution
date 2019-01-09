@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MedicineInfo} from "../../models/medicine-info.model";
+import {Pet} from "../../../treatment/models/pet.model";
+import {PetOwner} from "../../../treatment/models/pet-owner.model";
 
 @Component({
   selector: 'app-basic-info',
@@ -9,9 +11,14 @@ import {MedicineInfo} from "../../models/medicine-info.model";
 export class BasicInfoComponent implements OnInit {
 
   @Input()
-  medicineInfo:MedicineInfo;
+  prescription: any;
 
-  constructor() { }
+  @Input()
+  pet: Pet;
+
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

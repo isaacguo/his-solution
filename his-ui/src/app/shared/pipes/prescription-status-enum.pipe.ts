@@ -1,6 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 import {PrescriptionStatusEnum} from "../../core/enums/prescription-status.enum";
-import {TreatmentCaseStatusEnum} from "../../core/enums/treatment-case-status.enum";
 
 @Pipe({
   name: 'prescriptionStatusEnum'

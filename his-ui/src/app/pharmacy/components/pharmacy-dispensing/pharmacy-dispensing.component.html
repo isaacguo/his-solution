@@ -1,19 +1,31 @@
-<table class="table table-bordered table-responsive">
+<table *ngIf="pageData?.content.length>0" class="table table-bordered isaac-margin-15top">
   <thead>
   <tr>
+    <th>序号</th>
     <th>编号</th>
-    <th>病历号</th>
     <th>主人姓名</th>
     <th>宠物姓名</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let receipt of list; let index=index" (click)="onRowClicked(exportReceipt) "
-      [class.info]="isRowSelected(exportReceipt)">
-    <td>{{index+1}}</td>
-    <td>{{receipt.id}}</td>
-    <td>{{receipt.petOwnerName}}</td>
-    <td>{{receipt.petName}}</td>
+  <tr *ngFor="let prescription of pageData?.content | paginate: {
+                                                      itemsPerPage: pageData?.size,
+                                                      currentPage: pageData?.number+1,
+                                                      totalItems: pageData?.totalElements } ; let i=index"
+      [class.info]="isRowSelected(prescription)"
+      (click)="onRowClicked(prescription)">
+
+    <td>{{i+1}}</td>
+    <td>{{prescription.uuid}}</td>
+    <td></td>
+    <td></td>
   </tr>
   </tbody>
 </table>
+
+
+<div class="alert alert-info isaac-margin-15top" *ngIf="pageData?.content.length===0" role="alert">
+  无数据
+</div>
+
+<pagination-controls (pageChange)="onPageChanged($event)" previousLabel="上一页" nextLabel="下一页"></pagination-controls>

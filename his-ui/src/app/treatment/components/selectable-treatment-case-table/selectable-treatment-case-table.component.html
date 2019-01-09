@@ -2,6 +2,8 @@
   <tbody>
   <tr *ngFor="let treatmentCase of list" [class.info]="isRowSelected(treatmentCase)"
       (click)="onRowClicked(treatmentCase)">
+
+
     <td>{{treatmentCase.createdDate | date:'yyyy年MM月dd日 hh:mm:ss'}}</td>
   </tr>
   </tbody>

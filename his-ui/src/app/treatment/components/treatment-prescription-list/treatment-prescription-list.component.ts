@@ -9,7 +9,8 @@ import {ReportStatusEnum} from "../../../core/enums/report-status.enum";
 export class TreatmentPrescriptionListComponent implements OnInit {
 
   @Input()
-  list: any[];
+  list: any[]
+  ;
   @Output()
   listChanged = new EventEmitter();
   @Output()

@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {getPetGenderEnumArr, getRegistrationStatusArr} from "../../../utilities/enum-utilities";
+import {getRegistrationStatusArr} from "../../../utilities/enum-utilities";
 import {PageableParams} from "../../../core/models/pageable-params.model";
-import {RegistrationStatusEnum} from "../../../core/enums/registration-status.enum";
 
 @Component({
   selector: 'app-registration-query',

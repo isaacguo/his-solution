@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PharmacyDispensingContainerComponent,
     children:[
       {
-        path: 'receipts/:receiptId',
+        path: ':prescriptionId',
         component:DispensingDetailContainerComponent
       }
     ]

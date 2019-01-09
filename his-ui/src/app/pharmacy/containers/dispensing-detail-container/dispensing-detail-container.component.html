@@ -1,9 +1,10 @@
 <div class="row">
   <div class="col-md-12">
-    <app-basic-info [medicineInfo]="medicineInfo|async"></app-basic-info>
+    <app-basic-info [pet]="pet$|async"
+                    [prescription]="prescription$|async"></app-basic-info>
   </div>
   <div class="col-md-12">
     <app-medicine-table (medicineDispensed)="onMedicineDispensed()"
-                        [medicineInfo]="medicineInfo | async"></app-medicine-table>
+                        [prescription]="prescription$ | async"></app-medicine-table>
   </div>
 </div>

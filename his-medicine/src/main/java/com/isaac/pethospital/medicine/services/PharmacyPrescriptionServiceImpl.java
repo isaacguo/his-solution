@@ -2,6 +2,7 @@ package com.isaac.pethospital.medicine.services;
 
 import com.isaac.pethospital.common.jms.JmsProperties;
 import com.isaac.pethospital.common.jms.JmsSender;
+import com.isaac.pethospital.common.jms.finance.ChargeOrderStatusChangedMessage;
 import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionCreateMessage;
 import com.isaac.pethospital.common.jms.medicine.PharmacyPrescriptionItemCreateMessage;
 import com.isaac.pethospital.common.services.AbstractCrudService;
@@ -11,6 +12,8 @@ import com.isaac.pethospital.medicine.entities.PharmacyPrescriptionEntity;
 import com.isaac.pethospital.medicine.enums.PrescriptionStatusEnum;
 import com.isaac.pethospital.medicine.repository.InventoryItemRepository;
 import com.isaac.pethospital.medicine.repository.PharmacyPrescriptionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -114,5 +117,16 @@ public class PharmacyPrescriptionServiceImpl extends AbstractCrudService<Pharmac
 
         this.generatePharmacyPrescriptionOrderMessage(prescription);
         return prescription;
+    }
+
+    @Override
+    public Page<PharmacyPrescriptionEntity> findAllPrescriptionsByStatusOnPage(PrescriptionStatusEnum status, Pageable pageable) {
+        return this.pharmacyPrescriptionRepository.findPharmacyPrescriptionEntitiesByStatus(status, pageable);
+    }
+
+    @Override
+    public void onFinanceChargeStatusChanged(ChargeOrderStatusChangedMessage message) {
+
+
     }
 }

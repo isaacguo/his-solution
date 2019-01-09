@@ -3,7 +3,10 @@ package com.isaac.pethospital.medicine.restcontrollers;
 import com.isaac.pethospital.common.restcontrollers.AbstractCRUDRestController;
 import com.isaac.pethospital.medicine.dtos.PharmacyOperationRequest;
 import com.isaac.pethospital.medicine.entities.PharmacyPrescriptionEntity;
+import com.isaac.pethospital.medicine.enums.PrescriptionStatusEnum;
 import com.isaac.pethospital.medicine.services.PharmacyPrescriptionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,8 +33,14 @@ public class PharmacyPrescriptionRestController extends AbstractCRUDRestControll
     }
 
     @PutMapping("submitPrescription")
-    public PharmacyPrescriptionEntity submitPrescription(@RequestBody
-                                                                     PharmacyOperationRequest request) {
+    public PharmacyPrescriptionEntity submitPrescription(@RequestBody PharmacyOperationRequest request) {
         return this.pharmacyPrescriptionService.submitPrescription(request);
     }
+
+    @GetMapping("all/{status}")
+    public Page<PharmacyPrescriptionEntity> findAllPrescriptionsByStatusOnPage(@PathVariable("status") String status, Pageable pageable) {
+        PrescriptionStatusEnum statusEnum = PrescriptionStatusEnum.valueOf(status);
+        return this.pharmacyPrescriptionService.findAllPrescriptionsByStatusOnPage(statusEnum, pageable);
+    }
+
 }

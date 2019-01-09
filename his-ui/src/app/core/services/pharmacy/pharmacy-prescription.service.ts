@@ -26,4 +26,9 @@ export class PharmacyPrescriptionService extends CrudService<any> {
   }
 
 
+  findAllPrescriptionsByStatusOnPage(page: number, status: string = "UNPAID", size: number = 15): Observable<any> {
+    let params: any = {'page': page.toString(), 'size': size.toString()};
+    return this.authHttp.get(`${this.rootUrl}/all/${status}`, {params: params}).map(this.extractData);
+  }
+
 }
