@@ -9,7 +9,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 export class MedicineTableComponent implements OnInit {
 
   @Input()
-  prescription: any;
+  prescriptions: any[];
   @Output()
   medicineDispensed = new EventEmitter();
   @ViewChild("confirmModal")
