@@ -1,5 +1,6 @@
 package com.isaac.pethospital.treatment.services;
 
+import com.isaac.pethospital.treatment.dtos.DepartmentOperationRequest;
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 
@@ -11,7 +12,7 @@ public interface DepartmentService {
 
     DepartmentEntity getDepartmentByDepId(Long depId);
 
-    boolean setDepartmentOpenToFrontDeskValue(DepartmentEntity department);
+    boolean setDepartmentOpenToFrontDeskValue(DepartmentOperationRequest department);
 
     List<EmployeeEntity> getEmployeesByDepartmentId(Long depId);
 }

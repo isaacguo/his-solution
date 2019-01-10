@@ -1,5 +1,6 @@
 package com.isaac.pethospital.treatment.services;
 
+import com.isaac.pethospital.treatment.dtos.DepartmentOperationRequest;
 import com.isaac.pethospital.treatment.dtos.EmployeeListItem;
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
@@ -50,7 +51,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public boolean setDepartmentOpenToFrontDeskValue(DepartmentEntity department) {
+    public boolean setDepartmentOpenToFrontDeskValue(DepartmentOperationRequest department) {
         DepartmentEntity de = this.departmentRepository.findByDepId(department.getDepId());
         if (de == null)
             de = new DepartmentEntity();

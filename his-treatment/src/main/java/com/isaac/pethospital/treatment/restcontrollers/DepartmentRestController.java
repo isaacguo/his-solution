@@ -1,5 +1,6 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
+import com.isaac.pethospital.treatment.dtos.DepartmentOperationRequest;
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.services.DepartmentService;
@@ -36,7 +37,7 @@ public class DepartmentRestController {
 
 
     @PostMapping(value = "/setDepartmentOpenToFrontDeskValue")
-    public boolean setDepartmentOpenToFrontDeskValue(@RequestBody DepartmentEntity department)
+    public boolean setDepartmentOpenToFrontDeskValue(@RequestBody DepartmentOperationRequest department)
     {
         return this.departmentService.setDepartmentOpenToFrontDeskValue(department);
     }
