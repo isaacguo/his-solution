@@ -8,4 +8,6 @@ import java.util.List;
 public interface InventoryItemRepository extends JpaRepository<InventoryItemEntity,Long> {
 
     List<InventoryItemEntity> findDistinctByNameHanYuPinYinContains(String keyword);
+    InventoryItemEntity findInventoryItemEntityByUuid(String uuid);
+
 }

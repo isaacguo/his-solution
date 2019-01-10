@@ -16,6 +16,7 @@ public class ChargeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String requestUuidFromService;
     private String chargeUuid;
     private String name;
     private String petOwnerUuid;
@@ -32,6 +33,14 @@ public class ChargeEntity {
     private List<ChargeItemEntity> chargeItems = new LinkedList();
     public ChargeEntity() {
         this.uuid = UUID.randomUUID().toString();
+    }
+
+    public String getRequestUuidFromService() {
+        return requestUuidFromService;
+    }
+
+    public void setRequestUuidFromService(String requestUuidFromService) {
+        this.requestUuidFromService = requestUuidFromService;
     }
 
     public String getDoctorUuid() {

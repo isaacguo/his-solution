@@ -8,6 +8,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Subscription} from "rxjs";
 import {Pet} from "../../../treatment/models/pet.model";
 import {PetOwner} from "../../../treatment/models/pet-owner.model";
+import {PopupModalBundle} from "../../../shared/models/popup-modal-bundle.model";
+import {combineLatest} from "rxjs/observable/combineLatest";
 
 @Component({
   selector: 'app-dispensing-detail-container',
@@ -16,6 +18,9 @@ import {PetOwner} from "../../../treatment/models/pet-owner.model";
 })
 export class DispensingDetailContainerComponent implements OnInit, OnDestroy {
 
+
+  operationChangedSubject = new BehaviorSubject<boolean>(true);
+  operationChanged$ = this.operationChangedSubject.asObservable();
 
   prescriptionSubject = new BehaviorSubject<any>({});
   prescription$ = this.prescriptionSubject.asObservable();
@@ -32,11 +37,12 @@ export class DispensingDetailContainerComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
 
-    this.prescriptionSubscription = this.route.params.mergeMap(p => this.pharmacyPrescriptionService.readOne(p['prescriptionId']))
+    this.prescriptionSubscription = combineLatest(this.operationChanged$, this.route.params).mergeMap(([op, params]) => {
+      return this.pharmacyPrescriptionService.readOne(params['prescriptionId'])
+    })
       .subscribe(r => {
         this.prescriptionSubject.next(r);
       });
-
 
     this.pet$ = this.prescription$.mergeMap(r => {
       if (r && r.petUuid)
@@ -52,10 +58,39 @@ export class DispensingDetailContainerComponent implements OnInit, OnDestroy {
   }
 
   onMedicineDispensed() {
+    this.prescription$.take(1).mergeMap((p) => {
+      return this.pharmacyPrescriptionService.medicineDispensed(p);
+    })
+      .subscribe(() => {
 
+        this.popupBundleSubject.next({
+          title: '信息',
+          body: '药品已发放',
+          hasConfirmButton: true,
+          confirmButtonText: "确定",
+        })
+      });
   }
+
+  popupBundleSubject = new BehaviorSubject<PopupModalBundle>({});
+  bundle$: Observable<PopupModalBundle> = this.popupBundleSubject.asObservable();
 
   ngOnDestroy(): void {
     this.prescriptionSubscription.unsubscribe();
+  }
+
+  onWithdrawMedicine() {
+    this.prescription$.take(1).mergeMap((p) => {
+      return this.pharmacyPrescriptionService.withdrawMedicine(p);
+    })
+      .subscribe(() => {
+
+        this.popupBundleSubject.next({
+          title: '信息',
+          body: '药品已从库房领取',
+          hasConfirmButton: true,
+          confirmButtonText: "确定",
+        })
+      });
   }
 }

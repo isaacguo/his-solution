@@ -103,6 +103,7 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
 
         ChargeOrderStatusChangedMessage message = new ChargeOrderStatusChangedMessage();
         message.setChargeItemUuid(charge.getChargeItems().stream().map(r -> r.getChargeItemUuid()).collect(Collectors.toList()));
+        message.setRequestUuidFromService(charge.getRequestUuidFromService());
         message.setPetOwnerUuid(charge.getPetOwnerUuid());
         message.setPetUuid(charge.getPetUuid());
         message.setTreatmentCaseUuid(charge.getTreatmentCaseUuid());
@@ -119,6 +120,7 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
 
 
         ChargeEntity chargeEntity = new ChargeEntity();
+        chargeEntity.setRequestUuidFromService(message.getPharmacyPrescriptionUuid());
         chargeEntity.setTreatmentCaseUuid(message.getTreatmentCaseUuid());
         chargeEntity.setCreatedDate(LocalDateTime.now());
         chargeEntity.setPetUuid(message.getPetUuid());
@@ -140,35 +142,6 @@ public class ChargeServiceImpl extends AbstractCrudService<ChargeEntity, ChargeO
 
         chargeEntity.setTotalAmount(totalAmount);
         ChargeEntity chargeEntity1 = jpaRepository.save(chargeEntity);
-
-
-
-        /*
-        for (int i = 0; i < message.getReportOperationMessages().size(); i++) {
-            ReportOperationMessage rom = message.getReportOperationMessages().get(i);
-            ChargeItemEntity cie = new ChargeItemEntity();
-            PriceEntity pe = priceService.findByUuid(rom.getReportTemplateUuid());
-            if (pe == null)
-                throw new RuntimeException("Cannot find price");
-            cie.setPrice(pe);
-            cie.setAmount(pe.getMemberPrice());
-            totalAmount = totalAmount.add(pe.getMemberPrice());
-            cie.setChargeItemUuid(rom.getReportUuid());
-            chargeEntity.addChargeItem(cie);
-        }
-
-        chargeEntity.setTotalAmount(totalAmount);
-        ChargeEntity chargeEntity1 = jpaRepository.save(chargeEntity);
-
-        //send event out
-        ChargeReportOperationReplyMessage replyMessage = new ChargeReportOperationReplyMessage();
-        replyMessage.setStatus(ChargeStatusEnum.UNPAID);
-        replyMessage.setPetOwnerUuid(chargeEntity1.getPetOwnerUuid());
-        replyMessage.setPetUuid(chargeEntity1.getPetUuid());
-        replyMessage.setTreatmentCaseUuid(chargeEntity1.getTreatmentCaseUuid());
-        replyMessage.setReportUuidList(chargeEntity1.getChargeItems().stream().map(i -> i.getChargeItemUuid()).collect(Collectors.toList()));
-        */
-
     }
 
     @Override

@@ -31,4 +31,11 @@ export class PharmacyPrescriptionService extends CrudService<any> {
     return this.authHttp.get(`${this.rootUrl}/all/${status}`, {params: params}).map(this.extractData);
   }
 
+  medicineDispensed(prescription: any) {
+    return this.authHttp.put(`${this.rootUrl}/medicineDispensed`, prescription).map(this.extractData);
+  }
+
+  withdrawMedicine(prescription: any) {
+    return this.authHttp.put(`${this.rootUrl}/withdrawMedicine`, prescription).map(this.extractData);
+  }
 }

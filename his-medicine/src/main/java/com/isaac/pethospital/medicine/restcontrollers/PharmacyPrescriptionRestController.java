@@ -43,4 +43,13 @@ public class PharmacyPrescriptionRestController extends AbstractCRUDRestControll
         return this.pharmacyPrescriptionService.findAllPrescriptionsByStatusOnPage(statusEnum, pageable);
     }
 
+    @PutMapping("medicineDispensed")
+    public PharmacyPrescriptionEntity medicineDispensed(@RequestBody PharmacyOperationRequest request) {
+        return this.pharmacyPrescriptionService.medicineDispensed(request);
+    }
+    @PutMapping("withdrawMedicine")
+    public PharmacyPrescriptionEntity withdrawMedicine(@RequestBody PharmacyOperationRequest request) {
+        return this.pharmacyPrescriptionService.withdrawMedicine(request);
+    }
+
 }

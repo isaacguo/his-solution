@@ -1,6 +1,7 @@
 package com.isaac.pethospital.medicine.services;
 
 import com.isaac.pethospital.common.jms.finance.ChargeOrderStatusChangedMessage;
+import com.isaac.pethospital.common.jms.medicine.InventoryPrescriptionDispensedMessage;
 import com.isaac.pethospital.common.services.CrudService;
 import com.isaac.pethospital.medicine.dtos.PharmacyOperationRequest;
 import com.isaac.pethospital.medicine.entities.InventoryItemEntity;
@@ -26,4 +27,10 @@ public interface PharmacyPrescriptionService<T, R> extends CrudService<T, R> {
     Page<PharmacyPrescriptionEntity> findAllPrescriptionsByStatusOnPage(PrescriptionStatusEnum statusEnum, Pageable pageable);
 
     void onFinanceChargeStatusChanged(ChargeOrderStatusChangedMessage message);
+
+    void onInventoryPrescriptionDispensed(InventoryPrescriptionDispensedMessage message);
+
+    PharmacyPrescriptionEntity medicineDispensed(PharmacyOperationRequest request);
+
+    PharmacyPrescriptionEntity withdrawMedicine(PharmacyOperationRequest request);
 }

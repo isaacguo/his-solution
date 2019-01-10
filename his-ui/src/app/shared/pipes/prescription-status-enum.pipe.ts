@@ -15,6 +15,8 @@ export class PrescriptionStatusEnumPipe implements PipeTransform {
         return "未付款";
       case PrescriptionStatusEnum.PAID:
         return "已付款";
+      case PrescriptionStatusEnum.WITHDREW:
+        return "药品已领出"
       case PrescriptionStatusEnum.DISPENSED:
         return "已发药";
       case PrescriptionStatusEnum.UNDISPENSED:

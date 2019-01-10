@@ -36,13 +36,20 @@
       <tr *ngFor="let medicine of prescription?.items; let index=index">
         <td>{{index+1}}</td>
         <td>{{medicine.name}}</td>
-        <td>{{medicine.medicineSpecification}}/{{medicine.medicineSpecificationUnit}}</td>
-        <td>{{medicine.packageCount}}</td>
-        <td>{{medicine.count}}</td>
+        <td>{{medicine.specification}}</td>
+        <td>{{medicine.packageSpecification}}</td>
+        <td>{{medicine.unit}}</td>
+        <td>{{medicine.amount}}</td>
       </tr>
       </tbody>
     </table>
-    <button type="button" class="btn btn-primary pull-right"
-            (click)="onMedicineDispensedButtonClicked()">确认发药</button>
+    <div class="btn-group">
+
+      <button type="button" class="btn btn-primary pull-right"
+              (click)="onWithdrewButtonClicked()">领出药品</button>
+
+      <button type="button" class="btn btn-primary pull-right"
+              (click)="onMedicineDispensedButtonClicked()">确认发药</button>
+    </div>
   </div>
 </div>

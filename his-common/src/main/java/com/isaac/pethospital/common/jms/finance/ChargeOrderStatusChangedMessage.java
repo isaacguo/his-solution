@@ -15,7 +15,16 @@ public class ChargeOrderStatusChangedMessage {
     String petOwnerUuid;
     String petUuid;
     String fromService;
+    String requestUuidFromService;
     List<String> chargeItemUuid=new LinkedList<>() ;
+
+    public String getRequestUuidFromService() {
+        return requestUuidFromService;
+    }
+
+    public void setRequestUuidFromService(String requestUuidFromService) {
+        this.requestUuidFromService = requestUuidFromService;
+    }
 
     public ChargeStatusEnum getPreviousStatus() {
         return previousStatus;

@@ -12,6 +12,9 @@ export class MedicineTableComponent implements OnInit {
   prescription: any;
   @Output()
   medicineDispensed = new EventEmitter();
+
+  @Output()
+  withdrawMedicine = new EventEmitter();
   @ViewChild("confirmModal")
   confirmModal: ModalComponent;
 
@@ -27,5 +30,9 @@ export class MedicineTableComponent implements OnInit {
 
   onConfirmModalClosed() {
     this.medicineDispensed.emit();
+  }
+
+  onWithdrewButtonClicked() {
+    this.withdrawMedicine.emit();
   }
 }

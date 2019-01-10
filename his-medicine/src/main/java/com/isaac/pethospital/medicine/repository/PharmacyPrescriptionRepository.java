@@ -16,5 +16,7 @@ public interface PharmacyPrescriptionRepository extends JpaRepository<PharmacyPr
     PharmacyPrescriptionEntity findByUuid(String uuid);
     Page<PharmacyPrescriptionEntity> findPharmacyPrescriptionEntitiesByStatus(PrescriptionStatusEnum status, Pageable pageable);
 
+    Page<PharmacyPrescriptionEntity> findPharmacyPrescriptionEntitiesByStatusIn(List<PrescriptionStatusEnum> status, Pageable pageable);
+
 
 }
