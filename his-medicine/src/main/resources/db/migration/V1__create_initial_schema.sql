@@ -16,16 +16,16 @@ create table pharmacy_prescription_item_entity (id bigint not null auto_incremen
 create table topic_operation_entity (id bigint not null auto_increment, name varchar(255), authorization_topic_id bigint, primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table topic_operation_entity_authorization_assignment_list (topic_operation_entity_id bigint not null, authorization_assignment_list_id bigint not null) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table warehouse_entity (id bigint not null auto_increment, location varchar(255), name varchar(255), primary key (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-alter table authorization_assignment_entity add constraint FKedjwiuan814a19bi4yy07tdph foreign key (authorization_id) references authorization_entity (id)
-alter table authorization_assignment_entity add constraint FK8dqq1kc7jp0clkstctpnjtl2y foreign key (topic_id) references authorization_topic_entity (id)
-alter table authorization_assignment_entity_allowed_operations add constraint FK5vwid8n1jmi0r5h2fxxnbvbgn foreign key (allowed_operations_id) references topic_operation_entity (id)
-alter table authorization_assignment_entity_allowed_operations add constraint FKngkgigjkrhs9p2ir6bh9cuu6a foreign key (authorization_assignment_entity_id) references authorization_assignment_entity (id)
-alter table export_item_entity add constraint FKojq3tqtvsgl341n6nofih182 foreign key (export_sheet_id) references export_sheet_entity (id)
-alter table import_item_entity add constraint FK4xunnowwnqwktb8oykm8donyw foreign key (import_sheet_id) references import_sheet_entity (id)
-alter table inventory_category_entity add constraint FKkuxnxxm5d9dwj69thuwav51ps foreign key (parent_id) references inventory_category_entity (id)
-alter table inventory_item_entity add constraint FKeni1jjccd68r5gawcgdl30m10 foreign key (category_id) references inventory_category_entity (id)
-alter table medicine_entity add constraint FK3qjfedbj789cco11fnx9wss0l foreign key (medicine_type_id) references medicine_type_entity (id)
-alter table pharmacy_prescription_item_entity add constraint FK8enyfaprro7afgk964f80pd61 foreign key (collection_id) references pharmacy_prescription_entity (id)
-alter table topic_operation_entity add constraint FKoec3nr2ausdy7u53qubpxopo8 foreign key (authorization_topic_id) references authorization_topic_entity (id)
-alter table topic_operation_entity_authorization_assignment_list add constraint FKtmjvf3170d9xr73l2i2sy705t foreign key (authorization_assignment_list_id) references authorization_assignment_entity (id)
-alter table topic_operation_entity_authorization_assignment_list add constraint FK4y6aqtertcn95oyqdiba3jdbf foreign key (topic_operation_entity_id) references topic_operation_entity (id)
+alter table authorization_assignment_entity add constraint FKedjwiuan814a19bi4yy07tdph foreign key (authorization_id) references authorization_entity (id);
+alter table authorization_assignment_entity add constraint FK8dqq1kc7jp0clkstctpnjtl2y foreign key (topic_id) references authorization_topic_entity (id);
+alter table authorization_assignment_entity_allowed_operations add constraint FK5vwid8n1jmi0r5h2fxxnbvbgn foreign key (allowed_operations_id) references topic_operation_entity (id);
+alter table authorization_assignment_entity_allowed_operations add constraint FKngkgigjkrhs9p2ir6bh9cuu6a foreign key (authorization_assignment_entity_id) references authorization_assignment_entity (id);
+alter table export_item_entity add constraint FKojq3tqtvsgl341n6nofih182 foreign key (export_sheet_id) references export_sheet_entity (id);
+alter table import_item_entity add constraint FK4xunnowwnqwktb8oykm8donyw foreign key (import_sheet_id) references import_sheet_entity (id);
+alter table inventory_category_entity add constraint FKkuxnxxm5d9dwj69thuwav51ps foreign key (parent_id) references inventory_category_entity (id);
+alter table inventory_item_entity add constraint FKeni1jjccd68r5gawcgdl30m10 foreign key (category_id) references inventory_category_entity (id);
+alter table medicine_entity add constraint FK3qjfedbj789cco11fnx9wss0l foreign key (medicine_type_id) references medicine_type_entity (id);
+alter table pharmacy_prescription_item_entity add constraint FK8enyfaprro7afgk964f80pd61 foreign key (collection_id) references pharmacy_prescription_entity (id);
+alter table topic_operation_entity add constraint FKoec3nr2ausdy7u53qubpxopo8 foreign key (authorization_topic_id) references authorization_topic_entity (id);
+alter table topic_operation_entity_authorization_assignment_list add constraint FKtmjvf3170d9xr73l2i2sy705t foreign key (authorization_assignment_list_id) references authorization_assignment_entity (id);
+alter table topic_operation_entity_authorization_assignment_list add constraint FK4y6aqtertcn95oyqdiba3jdbf foreign key (topic_operation_entity_id) references topic_operation_entity (id);
