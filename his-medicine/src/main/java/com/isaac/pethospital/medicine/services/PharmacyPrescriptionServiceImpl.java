@@ -156,13 +156,7 @@ public class PharmacyPrescriptionServiceImpl extends AbstractCrudService<Pharmac
         this.pharmacyPrescriptionRepository.save(pharmacy);
     }
 
-    @Override
-    public void onInventoryPrescriptionDispensed(InventoryPrescriptionDispensedMessage message) {
 
-        PharmacyPrescriptionEntity prescription = pharmacyPrescriptionRepository.findByUuid(message.getPharmacyPrescriptionUuid());
-        prescription.setStatus(PrescriptionStatusEnum.DISPENSED);
-        this.pharmacyPrescriptionRepository.save(prescription);
-    }
 
     @Override
     public PharmacyPrescriptionEntity medicineDispensed(PharmacyOperationRequest request) {

@@ -28,8 +28,6 @@ public interface PharmacyPrescriptionService<T, R> extends CrudService<T, R> {
 
     void onFinanceChargeStatusChanged(ChargeOrderStatusChangedMessage message);
 
-    void onInventoryPrescriptionDispensed(InventoryPrescriptionDispensedMessage message);
-
     PharmacyPrescriptionEntity medicineDispensed(PharmacyOperationRequest request);
 
     PharmacyPrescriptionEntity withdrawMedicine(PharmacyOperationRequest request);
