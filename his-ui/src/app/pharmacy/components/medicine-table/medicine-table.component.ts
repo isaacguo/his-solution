@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {PrescriptionStatusEnum} from "../../../core/enums/prescription-status.enum";
 
 @Component({
   selector: 'app-medicine-table',
@@ -34,5 +35,14 @@ export class MedicineTableComponent implements OnInit {
 
   onWithdrewButtonClicked() {
     this.withdrawMedicine.emit();
+  }
+
+
+  isPaid():boolean {
+    return this.prescription.status === PrescriptionStatusEnum.PAID;
+  }
+
+  isWithdrew():boolean {
+    return this.prescription.status === PrescriptionStatusEnum.WITHDREW;
   }
 }

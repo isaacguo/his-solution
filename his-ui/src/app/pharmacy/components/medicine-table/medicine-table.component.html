@@ -45,10 +45,10 @@
     </table>
     <div class="btn-group">
 
-      <button type="button" class="btn btn-primary pull-right"
+      <button [disabled]="!isPaid()"  type="button" class="btn btn-primary"
               (click)="onWithdrewButtonClicked()">领出药品</button>
 
-      <button type="button" class="btn btn-primary pull-right"
+      <button [disabled]="!isWithdrew()" type="button" class="btn btn-primary "
               (click)="onMedicineDispensedButtonClicked()">确认发药</button>
     </div>
   </div>

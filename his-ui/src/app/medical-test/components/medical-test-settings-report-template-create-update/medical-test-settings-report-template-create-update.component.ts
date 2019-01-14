@@ -81,39 +81,47 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends Abst
     this.initForm();
     this.process();
 
-    if (this.operation === OperationEnum.CREATE) {
-      this.route.params.take(1).subscribe(params => {
-        this.categoryId = params['categoryId'];
-      });
-    }
+
+    this.route.params.take(1).subscribe(params => {
+      this.categoryId = params['categoryId'];
+    });
+
 
     if (this.operation === OperationEnum.UPDATE) {
 
-      this.route.params.take(1).subscribe(params => {
-        this.categoryId = params['categoryId'];
+      this.medicalTestReportService.findById(this.updateId).subscribe(r => {
+        this.inflateFormModelWithValues(r);
 
-        this.medicalTestReportService.findById(this.updateId).subscribe(r => {
-          this.inflateFormModelWithValues(r);
+        /*
+        this.clearReportItems();
+        r.reportTemplateItems.forEach(contact => {
+          this.inflateReportItem(contact);
+        });
+        r.reportTemplateInfoList.forEach(infoItem => {
+          this.inflateReportInfo(infoItem);
+        });
+        */
 
-          this.clearReportItems();
-          r.reportTemplateItems.forEach(contact => {
-            this.inflateReportItem(contact);
-          });
-          r.reportTemplateInfoList.forEach(infoItem => {
-            this.inflateReportInfo(infoItem);
-          });
 
-        })
       });
     }
   }
 
   clearReportItems() {
-    const control = <FormArray>this.formModel.controls['reportItems'];
-    control.controls = [];
+    let control = <FormArray>this.formModel.controls['reportItems'];
+    this.clearFormArray(control);
 
-    const control1 = <FormArray>this.formModel.controls['reportInfo'];
-    control1.controls = [];
+    let control2 = <FormArray>this.formModel.controls['reportInfo'];
+
+    this.clearFormArray(control2);
+
+
+  }
+
+  clearFormArray(formArray: FormArray) {
+    while (formArray.length !== 0) {
+      formArray.removeAt(0)
+    }
   }
 
   inflateReportItem(reportItem: MedicalTestReportTemplateItem) {
@@ -152,7 +160,7 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends Abst
     const control = <FormArray>this.formModel.controls['reportInfo'];
 
     control.push(this.fb.group({
-      'reportKey': [infoItem.reportKey, Validators.required],
+      'reportKey': [infoItem.reportKey],
     }));
   }
 

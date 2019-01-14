@@ -69,6 +69,8 @@ export class DispensingDetailContainerComponent implements OnInit, OnDestroy {
           hasConfirmButton: true,
           confirmButtonText: "确定",
         })
+
+        this.operationChangedSubject.next(true);
       });
   }
 
@@ -91,6 +93,9 @@ export class DispensingDetailContainerComponent implements OnInit, OnDestroy {
           hasConfirmButton: true,
           confirmButtonText: "确定",
         })
+
+        this.operationChangedSubject.next(true);
       });
+
   }
 }
