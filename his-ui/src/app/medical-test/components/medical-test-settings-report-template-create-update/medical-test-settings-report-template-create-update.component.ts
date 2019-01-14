@@ -92,16 +92,15 @@ export class MedicalTestSettingsReportTemplateCreateUpdateComponent extends Abst
       this.medicalTestReportService.findById(this.updateId).subscribe(r => {
         this.inflateFormModelWithValues(r);
 
-        /*
         this.clearReportItems();
         r.reportTemplateItems.forEach(contact => {
           this.inflateReportItem(contact);
         });
+        /*
         r.reportTemplateInfoList.forEach(infoItem => {
           this.inflateReportInfo(infoItem);
         });
         */
-
 
       });
     }
