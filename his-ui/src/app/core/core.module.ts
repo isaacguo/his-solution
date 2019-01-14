@@ -32,6 +32,12 @@ import {InventoryItemService} from "./services/inventory/inventory-item.service"
 import {ProductImportReceiptService} from "./services/inventory/product-import-receipt.service";
 import {PharmacyPrescriptionService} from "./services/pharmacy/pharmacy-prescription.service";
 import {PharmacyMedicineService} from "./services/pharmacy/pharmacy-medicine.service";
+import {VendorService} from "./services/procurement/vendor.service";
+import {VendorCategoryService} from "./services/procurement/vendor-category.service";
+import {ProcurementStatusService} from "./services/procurement/procurement-status.service";
+import {ProcurementRequestService} from "./services/procurement/procurement-request.service";
+import {ProcurementService} from "./services/procurement/procurement.service";
+import {ProcurementApprovalService} from "./services/procurement/procurement-approval.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -88,22 +94,15 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     InventoryItemService,
     ProductImportReceiptService,
 
-    /*
-    EmployeeManagementGuard,
-    ChargeManagementGuard,
-    FinanceManagementGuard,
-    PriceManagementGuard,
-    InventoryManagementGuard,
-    MedicalTestManagementGuard,
-    MedicineManagementGuard,
-    MedicineManagementGuard,
-    ProcurementManagementGuard,
-    FrontdeskGuard,
-    InpatientManagementGuard,
-    MyConsultingRoomGuard,
-    TreatmentSettingsGuard,
-    ProcurementApprovalGuard,
-    */
+    //procurement
+    VendorService,
+    VendorCategoryService,
+    ProcurementService,
+    ProcurementStatusService,
+    ProcurementRequestService,
+    ProcurementApprovalService,
+
+
     GuardFactoryService,
     MedicalTestReportTemplateCategoryService,
     MedicalTestReportService,

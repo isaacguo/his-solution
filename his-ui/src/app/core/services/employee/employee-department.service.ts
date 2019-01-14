@@ -8,6 +8,7 @@ import {EmployeeDepartment} from "../../models/employee/employee-department.mode
 import {EmployeeListItem} from "../../models/employee/employee-list-item.model";
 import {EmployeeService} from "./employee.service";
 import {Subscription} from "rxjs/Subscription";
+import {DepartmentListItem} from "../../models/employee/department-list-item.model";
 
 @Injectable()
 export class EmployeeDepartmentService extends CrudService<EmployeeDepartment> implements OnDestroy {
@@ -18,8 +19,13 @@ export class EmployeeDepartmentService extends CrudService<EmployeeDepartment> i
   managerSubject = new BehaviorSubject<EmployeeListItem>({}as EmployeeListItem);
   private getRootDepartmentUrl: string = `${this.rootUrl}/root`;
 
+  private getDepartmentListUrl: string = "/api/hisemployee/departments/brief";
+
   managerChangedSubscription: Subscription;
 
+  getDepartmentList(): Observable<DepartmentListItem[]> {
+    return this.authHttp.get(this.getDepartmentListUrl).map(this.extractData);
+  }
 
   constructor(authHttp: AuthHttp, employeeService: EmployeeService) {
     super(`${ServiceConstants.TREATMENT_URL}/departments`, authHttp);

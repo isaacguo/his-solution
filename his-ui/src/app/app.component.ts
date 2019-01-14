@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
     this.guardFactoryService.addGuard("Medicine", "药房管理", "操作");
     this.guardFactoryService.addGuard("Procurement", "采购审批", "操作");
     this.guardFactoryService.addGuard("Procurement", "采购管理", "操作");
+    this.guardFactoryService.addGuard("Procurement", "其他管理", "操作");
     this.guardFactoryService.addGuard("Treatment", "前台服务", "操作");
     this.guardFactoryService.addGuard("Treatment", "住院管理", "操作");
     this.guardFactoryService.addGuard("Treatment", "我的诊室", "操作");

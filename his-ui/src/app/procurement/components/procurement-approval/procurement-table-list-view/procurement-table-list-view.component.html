@@ -1,0 +1,84 @@
+<div class=" isaac-margin-top">
+  <div class="panel panel-default">
+    <div class="panel-heading ">
+      <div class="panel-title pull-left">
+        审批意见
+      </div>
+      <div class="panel-title pull-right">
+        <a *ngIf="!isPanelView" (click)="onShowPanelViewClicked()" href="javascript:void(0)"><span
+          class="glyphicon glyphicon-th-large "></span></a>
+        <a *ngIf="isPanelView" (click)="onShowTableViewClicked()" href="javascript:void(0)"><span
+          class="glyphicon glyphicon-th-list"></span></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+      <span>当前状态：</span> <span>{{getStatusText()}}</span>
+      <ul class="list-inline isaac-margin-15top " *ngIf="approvalStages!=null">
+        <li class="list-inline-item"
+            *ngFor="let stage of approvalStages; let oIndex = index">
+          <div *ngIf="oIndex!=approvalStages.length-1">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                <a href="javascript:void(0)" class="list-group-item">
+                  {{stage}}
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="oIndex===approvalStages.length-1">
+            <a href="javascript:void(0)" class="list-group-item">
+              {{stage}}
+            </a>
+          </div>
+        </li>
+      </ul>
+
+      <table *ngIf="!isPanelView" class="table table-bordered">
+        <thead>
+        <tr>
+          <th>节点</th>
+          <th>操作者</th>
+          <th>操作</th>
+          <th>时间</th>
+          <th>备注</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let approval of approvalList">
+          <td>{{approval.stage}}</td>
+          <td>{{approval.reviewerFullName}}</td>
+          <td>{{getApprovalText(approval)}}</td>
+          <td>{{approval.reviewedDateTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
+          <td>{{approval.comments}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div *ngIf="isPanelView">
+        <div *ngFor="let approval of approvalList">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              {{approval.stage}}意见
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label>{{approval.reviewer}}</label>
+                {{getApprovalText(approval)}}
+              </div>
+              <div class="form-group">
+                <label>审批日期：{{approval.reviewedDateTime| date:'yyyy年MM月dd日 HH:mm:ss' }}</label>
+              </div>
+              <div class="form-group">
+                <label>备注</label>
+                <input class="form-control" type="text" [ngModel]="approval.comments" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

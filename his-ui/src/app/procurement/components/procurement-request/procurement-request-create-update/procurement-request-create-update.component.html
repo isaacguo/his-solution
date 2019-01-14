@@ -1,0 +1,186 @@
+<div class="row">
+  <h1 class="page-header text-center">
+    采购申请单
+  </h1>
+</div>
+
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{requestCreationResultText}}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+
+  <input type="hidden" formControlName="id">
+
+  <div class="panel panel-info" formGroupName="vendorInfo">
+    <div class="panel-heading">
+      <div>
+        <span>供应商信息</span>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="row"></div>
+      <div class="col-md-4 form-group">
+        <input type="hidden" formControlName="vendorId">
+        <label>供应商名称</label>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle isaac-dropdown-250button" type="button" id="dropdownMenu1"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{vendorInfo.controls.vendor.value===""?"请选择供应商":vendorInfo.controls.vendor.value}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li *ngFor="let vendor of vendors">
+              <a (click)="onVendorDropdownClicked(vendor)">{{vendor.name}}</a>
+            </li>
+          </ul>
+        </div>
+
+        <small [hidden]="vendorInfo.controls.vendor.valid" class="text-danger">
+          供应商信息不能为空
+        </small>
+      </div>
+      <div class="col-md-4 form-group">
+        <label>联系人</label>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle isaac-dropdown-250button" type="button" id="dropdownMenu2"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{vendorInfo.controls.contact.value===""?"请选择联系人":vendorInfo.controls.contact.value}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li *ngFor="let contact of selectedVendor?.contacts">
+              <a (click)="onContactDropdownClicked(contact)">{{contact.name}}</a>
+            </li>
+          </ul>
+        </div>
+        <small [hidden]="vendorInfo.controls.contact.valid" class="text-danger">
+          信息人信息不能为空
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <div>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <div>
+              <span><b>申请采购商品或服务</b></span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div formArrayName="goods">
+              <table class="table table-bordered">
+                <thead>
+                <tr>
+                  <td>序号</td>
+                  <td>产品名称</td>
+                  <td>包装规格</td>
+                  <td>包装单位</td>
+                  <td>数量</td>
+                  <td>操作</td>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr *ngFor="let good of goodsData.controls; let i=index" [formGroupName]="i">
+                  <td>{{i+1}}</td>
+                  <td>
+
+                    <div class="dropdown" [class.open]="vendorProducts.length>0">
+
+                      <input (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+                             (focus)="stopPropagation($event)"
+                             type="text" class="form-control dropdown-toggle"
+                             placeholder="请输入商品名称" [formControl]="searchInput"
+                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu3"
+                      >
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li *ngFor="let vendorProduct of vendorProducts">
+                          <a href="javascript:void(0)" (click)="onEmployeeSelected(e)">{{e.surname}}{{e.givenName}}</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </td>
+                  <!--
+                  <td>
+                    <input class="form-control" type="text" formControlName="name">
+                    <small [hidden]="good.controls.name.valid" class="text-danger">
+                      产品名称不能为空
+                    </small>
+                  </td>
+                  -->
+                  <td><input class="form-control" type="text" formControlName="packageSpecification">
+                    <small [hidden]="good.controls.packageSpecification.valid" class="text-danger">
+                      包装规格不能为空
+                    </small>
+                  </td>
+                  <td><input class="form-control" type="text" formControlName="packageUnit">
+                    <small [hidden]="good.controls.packageUnit.valid" class="text-danger">
+                      包装单位不能为空
+                    </small>
+                  </td>
+                  <td><input (change)="onValueChanged(i)" class="form-control" type="text" formControlName="number">
+                    <small [hidden]="good.controls.number.valid" class="text-danger">
+                      数量不能为空
+                    </small>
+                  </td>
+                  <td><span class="glyphicon glyphicon-remove"
+                            (click)="removeGood(i)">
+                </span></td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <div class="isaac-margin-top">
+              <a (click)="addGood()" style="cursor: default">
+                添加新商品 +
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <div>
+            <span><b>采购说明</b></span>
+          </div>
+        </div>
+        <div class="panel-body">
+
+          <textarea rows="5" class="form-control" formControlName="explanation"></textarea>
+          <small [hidden]="formModel.controls.explanation.valid" class="text-danger">
+            采购说明不能为空
+          </small>
+          <div>
+            <label>备注：采购说明至少应包含采购物品/服务详细信息，三家比价信息等</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <button class="btn btn-primary isaac-margin-15top" type="submit" [disabled]="!formModel.valid">提交</button>
+
+</form>
+
+
