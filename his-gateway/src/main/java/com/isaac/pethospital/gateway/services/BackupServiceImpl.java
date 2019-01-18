@@ -93,10 +93,10 @@ public class BackupServiceImpl extends AbstractCrudService<BackupEntity, BackupE
                 return attrB.creationTime().compareTo(attrA.creationTime());
             } catch (IOException e) {
 
-                this.LOG.error("error in getBackupFolders",e);
+                this.LOG.error("error in getBackupFolders", e);
                 return 0;
             }
         });
-        return fileList.stream().map(r->r.getName()).collect(Collectors.toList());
+        return fileList.stream().map(r -> r.getName()).collect(Collectors.toList());
     }
 }
