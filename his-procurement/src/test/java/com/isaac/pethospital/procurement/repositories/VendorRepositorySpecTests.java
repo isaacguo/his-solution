@@ -22,7 +22,8 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ContextConfiguration(classes = PersistenceConfig.class)
+
+//@ContextConfiguration(classes = PersistenceConfig.class)
 public class VendorRepositorySpecTests {
 
     @Autowired

@@ -13,13 +13,13 @@ public class MedicineEntity {
     private Long id;
     private String name;
     private String hanYuPinYinName;
-    private String barCode;
+    private String barCode;     // 货品编码
     private String packageUnit; //包装规格单位  瓶，盒
     private Long packageCount; //包装规格数量
     private String medicineSpecificationUnit; //药品规格单位
     private String medicineSpecification; //药品规格 药品规格就是药品最小包装或最小单体的一个量度值
     private String dosagePerDay;  //每日药品剂量
-    private LocalDateTime productionDate;
+    private LocalDateTime productionDate;   //
     private LocalDateTime expirationDate;
     private Long price;           //单价
     private Long stock;
