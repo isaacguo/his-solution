@@ -1,0 +1,21 @@
+
+<app-popup-modal [bundle]="bundle$|async" ></app-popup-modal>
+
+<label class="isaac-margin-15top">请选择化验室：</label>
+<div class="btn-group" role="group">
+  <button type="button"
+          class="btn btn-primary dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
+          data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+    {{(selectedDepartment$|async)?.name}}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li *ngFor="let enabledDepartment of (enabledDepartments| async)"><a href="javascript:void(0)"
+                                                                         (click)="onTagSelected(enabledDepartment)">{{enabledDepartment.name}}</a>
+    </li>
+  </ul>
+</div>
+
+<router-outlet></router-outlet>
+
+

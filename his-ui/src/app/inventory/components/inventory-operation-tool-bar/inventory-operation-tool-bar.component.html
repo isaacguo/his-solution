@@ -1,0 +1,4 @@
+<div class="btn-group">
+  <button class="btn btn-primary" *ngIf="importMode" (click)="onCreateNewImportSheet()">新建入库单</button>
+  <button class="btn btn-primary" *ngIf="!importMode" (click)="onCreateNewExportSheet()">新建出库单</button>
+</div>

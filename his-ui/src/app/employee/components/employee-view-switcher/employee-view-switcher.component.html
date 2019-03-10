@@ -1,0 +1,9 @@
+<div class="linemarging">
+  <div class="verlinktop">树形视图</div>
+  <div class="verlink">
+    <ui-switch size="small"
+               [ngModel]="isViewModeList()"
+               (change)="onSwitched($event)"></ui-switch>
+  </div>
+  <div class="verlinktop">列表视图</div>
+</div>

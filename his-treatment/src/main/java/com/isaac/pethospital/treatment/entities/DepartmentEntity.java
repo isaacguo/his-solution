@@ -1,32 +1,38 @@
 package com.isaac.pethospital.treatment.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.*;
-import java.util.LinkedList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class DepartmentEntity {
 
-    /*
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @JsonManagedReference("DepartmentEntity-TreatmentCaseEntity")
-    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
-    */
-    /*
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @JsonManagedReference("DepartmentEntity-EmployeeEntity")
-    List<EmployeeEntity> doctorList = new LinkedList<>();
-    */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String uuid;
+    private Long depId;
     private String name;
     private String description;
     private boolean exposeToPublic;
+    private boolean openToFrontDesk;
+
+    public Long getDepId() {
+        return depId;
+    }
+
+    public void setDepId(Long depId) {
+        this.depId = depId;
+    }
+
+    public boolean isOpenToFrontDesk() {
+        return openToFrontDesk;
+    }
+
+    public void setOpenToFrontDesk(boolean openToFrontDesk) {
+        this.openToFrontDesk = openToFrontDesk;
+    }
 
     public String getDescription() {
         return description;
@@ -52,13 +58,6 @@ public class DepartmentEntity {
         this.id = id;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 
     public String getName() {
         return name;

@@ -1,73 +1,326 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/sb-admin-2.css";
 
-.large-panel-margin  {
-  margin-top: 50px;
+div.panel-heading {
+  padding: 4px 10px;
+}
+
+div.panel-info {
+  margin-top: 15px;
+}
+
+.isaac-dropdown-button {
+  min-width: 160px;
+}
+
+.nobull {
+  list-style-type: none;
+}
+
+.isaac-th-id {
+  width: 50px
+}
+.isaac-font-medium
+{
+  font-size: 15px;
 }
 
 .isaac-form-space {
   margin-left: 10px;
-  margin-top:5px;
+  margin-top: 5px;
+}
+
+.isaac-datepicker-width {
+  max-width: 200px;
+  width: 200px;
 }
 
 .isaac-margin-top {
   margin-top: 5px;
 }
 
-.light-blue-label {
-  font-size: 14px !important;
-  color: #3c8dbc;
-}
-.head-photo
-{
-  text-align:center;
-  vertical-align: top;
-}
-.head-photo img
-{
-  height:70px;
-  border-radius: 50%;
-
-}
-.doctor-details
-{
-  vertical-align: top;
-}
-.doctor-score
-{
-  vertical-align: top;
-  text-align:center;
-  margin-top:25px;
-}
-.doctor-book
-{
-  vertical-align: top;
-  margin-top:25px;
+.isaac-margin-left-10 {
+  margin-left: 10px;
 }
 
-.isaac-dropdown-button
-{
-  min-width: 160px;
+.isaac-margin-bottom-10px {
+  margin-bottom: 10px;
 }
-.sidebar-2nd-level {
-  z-index: 1;
+
+.isaac-margin-bottom100px {
+  margin-bottom: 100px;
+}
+
+.isaac-margin-15top {
+  margin-top: 15px;
+}
+
+.isaac-margin-20top {
+  margin-top: 20px;
+}
+
+.isaac-margin-25top {
+  margin-top: 25px;
+}
+
+app-checkbox {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  align-self: stretch;
+  border-right: 1px solid rgba(0, 0, 0, .06);
+  background-color: rgba(0, 0, 0, .02);
+  margin-right: 20px;
+}
+
+app-checkbox:before {
+  content: "";
+  display: block;
   position: absolute;
-  width: 250px;
+  width: 25px;
+  height: 25px;
+  background-color: hsla(0, 0%, 100%, .26);
+  border: 2px solid rgba(0, 0, 0, .24)
 }
 
-@media (min-width: 768px) {
-  .mysidebar {
-    max-width:250px;
-  }
+app-checkbox .label {
+  display: block;
+  position: relative;
+  cursor: pointer
 }
 
-@media (min-width: 768px) {
-  .subsidebar {
-    margin-top: 0px;
-  }
+app-checkbox .input {
+  display: block;
+  opacity: 0;
+  appearance: none;
+  width: 20px;
+  height: 20px;
 }
-@media (min-width: 768px) {
-  .subsidebar2 {
-    margin-top: 250px;
-  }
+
+app-checkbox .text {
+  display: block;
+  margin-left: 30px;
+}
+
+app-checkbox .text:before {
+  content: "✓";
+  font-family: entypo, sans-serif;
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  font-size: 30px;
+  color: transparent;
+  transition: all .2s ease;
+  transform: scale(.5)
+}
+
+app-checkbox .input:checked + .text:before {
+  color: #68be60;
+  transform: scale(1)
+}
+
+
+app-customer-service-treatment-case-comment  {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+
+app-customer-service-treatment-case-comment .meta {
+  display: flex;
+  flex: 0 0 100px;
+  flex-direction: column;
+  align-items: left;
+  text-align: left;
+}
+
+
+
+
+app-customer-service-treatment-case-comment .user-name {
+  font-weight: 400;
+}
+
+app-customer-service-treatment-case-comment .time {
+  font-size: 14px;
+}
+
+app-customer-service-treatment-case-comment .user-picture {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 70px;
+  height: 70px;
+}
+
+app-customer-service-treatment-case-comment .main {
+  display: flex;
+  flex: auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-left: 30px;
+}
+
+app-customer-service-treatment-case-comment .content {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 10px;
+  min-height: 90px;
+  align-items: center;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .1));
+  background-color: #fff;
+}
+
+app-customer-service-treatment-case-comment .content:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: -50px;
+  width: 0;
+  height: 0;
+  border: 25px solid transparent;
+  border-right: 25px solid #fff;
+}
+
+
+app-editor {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  min-height: 50px
+}
+
+app-editor .editable-content {
+  display: none;
+  min-height: 1em;
+  word-break: break-word;
+}
+
+app-editor .editable-content:empty {
+  width: 100%;
+  min-width: 50px;
+}
+
+app-editor .editable-content:focus {
+  outline: none;
+}
+
+app-editor output {
+  word-break: break-word;
+}
+
+app-editor .controls {
+  display: flex;
+  margin: 0 10px
+}
+
+app-editor .icon-edit {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #3699cb
+}
+
+app-editor .icon-edit:before {
+  content: "✎";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 1;
+}
+
+app-editor .icon-save {
+  display: flex;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #68be60;
+}
+
+app-editor .icon-save:before {
+  content: "✓";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 35px;
+  height: 35px;
+  font-size: 35px;
+  line-height: 1;
+}
+
+app-editor .icon-cancel {
+  display: flex;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  transition: transform .2s ease, opacity .2s ease;
+  transform-origin: 50% 50%;
+  transform: scale(.5);
+  color: #ff5967;
+}
+
+app-editor .icon-cancel:before {
+  content: "🚫";
+  font-family: entypo, sans-serif;
+  text-decoration-skip: all;
+  display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 1;
+}
+
+app-editor:hover .icon-edit {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1)
+}
+
+app-editor.edit-mode .editable-content {
+  display: block;
+}
+
+app-editor.edit-mode .output {
+  display: none;
+}
+
+app-editor.edit-mode .icon-cancel, app-editor.edit-mode .icon-save {
+  opacity: 1;
+  transform: scale(1)
+}
+
+.fixed-height
+{
+  height: 768px;
 }
 

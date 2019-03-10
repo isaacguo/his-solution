@@ -1,0 +1,46 @@
+<div style="height: 700px ">
+  <split [direction]="'horizontal'">
+    <split-area [size]="20">
+      <div style="padding-right:15px">
+        <div class="panel panel-info isaac-margin-15top">
+          <div class="panel-heading">
+            今日病历
+          </div>
+          <div class="panel-body">
+            <button (click)="onTreatmentCaseCreated()" class="btn btn-primary btn-sm isaac-margin-bottom-10px"><span
+              class="glyphicon glyphicon-plus"></span> 新建病历
+            </button>
+
+            <app-loading-spinner [isLoading]="isLoading$|async"></app-loading-spinner>
+
+
+              <app-selectable-treatment-case-table [selectedTreatmentCase]="selectedTreatmentCase$|async"
+                                                   [list]="unClosedTreatmentCases$|async"
+                                                   (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            历史病历
+          </div>
+          <div class="panel-body">
+
+            <app-loading-spinner [isLoading]="isLoading$|async"></app-loading-spinner>
+
+              <app-selectable-treatment-case-table
+                [selectedTreatmentCase]="selectedTreatmentCase$ |async"
+                [list]="closedTreatmentCases$|async"
+                (itemSelected)="onTreatmentCaseSelected($event)"></app-selectable-treatment-case-table>
+          </div>
+        </div>
+      </div>
+    </split-area>
+
+    <split-area [size]="80">
+      <div style="padding-left: 20px">
+        <router-outlet></router-outlet>
+      </div>
+    </split-area>
+  </split>
+</div>
+

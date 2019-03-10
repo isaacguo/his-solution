@@ -1,0 +1,61 @@
+<modal #confirmDeletionModal (onClose)="onConfirmDeletionModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body>
+      确定删除此化验报告模板 <b>{{reportToBeDeleted?.reportName}}</b> 信息?
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmDeletionModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="confirmDeletionModal"
+              (click)="confirmDeletionModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+
+<div role="group">
+  <button *ngIf="canCreateNewItem"
+          (click)="onCreateNewReportClicked()"
+          class="btn btn-primary"
+
+  >新建化验报告模板</button>
+</div>
+
+
+<div class="isaac-margin-15top">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>编号</th>
+      <th>名称</th>
+      <th style="width: 230px">会员价</th>
+      <th style="width: 230px">非会员价</th>
+      <th *ngIf="canEdit || canDelete">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let report of reportTemplateList; let i=index">
+      <td>{{i + 1}}</td>
+      <td>{{report.reportName}}</td>
+      <td>
+        <app-field-edit [value]="report.memberPrice"
+                        (valueChanged)="onValueChanged($event, report,'memberPrice')"></app-field-edit>
+      </td>
+      <td>
+        <app-field-edit [value]="report.normalPrice"
+                        (valueChanged)="onValueChanged($event,report,'normalPrice')"></app-field-edit>
+      </td>
+      <td *ngIf="canEdit || canDelete">
+        <a *ngIf="canEdit" href="javascript:void(0)"><span class="glyphicon glyphicon-pencil "
+                                                           (click)="onEditButtonClicked(report)"></span></a>
+        <a *ngIf="canDelete" href="javascript:void(0)"> <span class="glyphicon glyphicon-remove isaac-margin-left-10"
+                                                              (click)="onRemoveReport(report)"></span></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

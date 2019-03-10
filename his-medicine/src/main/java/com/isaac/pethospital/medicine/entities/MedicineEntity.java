@@ -1,6 +1,7 @@
 package com.isaac.pethospital.medicine.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 public class MedicineEntity {
@@ -11,15 +12,41 @@ public class MedicineEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String barCode;
+    private String hanYuPinYinName;
+    private String barCode;     // 货品编码
     private String packageUnit; //包装规格单位  瓶，盒
     private Long packageCount; //包装规格数量
     private String medicineSpecificationUnit; //药品规格单位
     private String medicineSpecification; //药品规格 药品规格就是药品最小包装或最小单体的一个量度值
     private String dosagePerDay;  //每日药品剂量
-
-    private Long price;
+    private LocalDateTime productionDate;   //
+    private LocalDateTime expirationDate;
+    private Long price;           //单价
     private Long stock;
+
+    public LocalDateTime getProductionDate() {
+        return productionDate;
+    }
+
+    public void setProductionDate(LocalDateTime productionDate) {
+        this.productionDate = productionDate;
+    }
+
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getHanYuPinYinName() {
+        return hanYuPinYinName;
+    }
+
+    public void setHanYuPinYinName(String hanYuPinYinName) {
+        this.hanYuPinYinName = hanYuPinYinName;
+    }
 
     public String getBarCode() {
         return barCode;

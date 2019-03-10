@@ -1,0 +1,30 @@
+<div class="row panel panel-info isaac-margin-15top">
+  <div class="panel-heading">
+    化验报告分类
+  </div>
+  <div class="panel-body">
+    <tree-root #tree (activate)="onNodeActivated($event)" [nodes]="nodes"></tree-root>
+  </div>
+</div>
+
+<!--
+<table class="table table-bordered table-responsive isaac-margin-15top">
+  <thead>
+  <tr>
+    <th>
+      序号
+    </th>
+    <th>
+      化验报告名称
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let template of list; let index=index" [class.info]="isRowSelected(template)"
+      (click)="onRowClicked(template)">
+    <td>{{index+1}}</td>
+    <td>{{template?.name}}</td>
+  </tr>
+  </tbody>
+</table>
+-->

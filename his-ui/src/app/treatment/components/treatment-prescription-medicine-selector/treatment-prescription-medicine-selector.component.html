@@ -1,0 +1,45 @@
+<div class="isaac-margin-top">
+  <span>药品名关键字搜索</span>
+  <div class="form-inline">
+    <div>
+      <div>
+
+        <input autocomplete="off" (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+               (focus)="stopPropagation($event)"
+               type="text" class="form-control dropdown-toggle"
+               placeholder="请输入药品名称的汉语拼音" [formControl]="searchInput"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2"
+        >
+        <small [hidden]="searchInput.valid || searchInput.pristine" class="text-danger">
+          最少1个字符
+        </small>
+        <div><label>返回{{(results|async)?.length}}项结果</label></div>
+        <table class="table table-bordered table-responsive">
+          <thead>
+          <tr>
+            <th>名称</th>
+            <th>规格</th>
+            <th>单位</th>
+            <th>库存</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let result of results|async">
+            <td>{{result.name}}</td>
+            <td>{{result.specification}}</td>
+            <td>{{result.unit}}</td>
+            <td>{{result.amount}}</td>
+            <td>
+              <button (click)="
+              addMedicine(result)"
+                type="button" class="btn btn-default btn-sm"
+              ><span class="glyphicon glyphicon-plus"></span> </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

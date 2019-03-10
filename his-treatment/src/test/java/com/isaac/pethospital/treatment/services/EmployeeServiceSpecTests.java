@@ -1,5 +1,7 @@
 package com.isaac.pethospital.treatment.services;
 
+import com.isaac.pethospital.common.jms.JmsProperties;
+import com.isaac.pethospital.common.jms.JmsSender;
 import com.isaac.pethospital.treatment.dtos.EmployeeOperationRequest;
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
@@ -24,6 +26,8 @@ public class EmployeeServiceSpecTests {
     DepartmentRepository departmentRepository;
     EmployeeRepository employeeRepository;
     EmployeeTypeRepository employeeTypeRepository;
+    JmsProperties jmsProperties;
+    JmsSender jmsSender;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -33,7 +37,10 @@ public class EmployeeServiceSpecTests {
         employeeRepository = mock(EmployeeRepository.class);
         departmentRepository = mock(DepartmentRepository.class);
         employeeTypeRepository = mock(EmployeeTypeRepository.class);
-        employeeService = spy(new EmployeeServiceImpl(employeeRepository,employeeTypeRepository,departmentRepository));
+        jmsProperties=mock(JmsProperties.class);
+        jmsSender=mock(JmsSender.class);
+        employeeService = spy(new EmployeeServiceImpl(employeeRepository,employeeTypeRepository,departmentRepository,jmsProperties,
+                               jmsSender));
     }
 
     @Test
@@ -69,8 +76,10 @@ public class EmployeeServiceSpecTests {
         EmployeeOperationRequest employeeOperationRequest = new EmployeeOperationRequest();
         employeeOperationRequest.setDepartmentId(1L);
         employeeOperationRequest.setName("任我行");
+        employeeOperationRequest.setDepartmentId(1L);
 
-        doReturn(new DepartmentEntity()).when(departmentRepository).findOne(employeeOperationRequest.getDepartmentId());
+        doReturn(new DepartmentEntity()).when(departmentRepository).findByDepId(employeeOperationRequest.getDepartmentId());
+        doReturn(new EmployeeEntity()).when(employeeRepository).save(any(EmployeeEntity.class));
         //when
         this.employeeService.createEmployee(employeeOperationRequest);
         //then
@@ -168,7 +177,7 @@ public class EmployeeServiceSpecTests {
         EmployeeOperationRequest employeeOperationRequest = new EmployeeOperationRequest();
         employeeOperationRequest.setDepartmentId(1L);
         employeeOperationRequest.setName("任我行");
-        doReturn(departmentEntity).when(departmentRepository).findOne(1L);
+        doReturn(departmentEntity).when(departmentRepository).findByDepId(1L);
         doReturn(list).when(employeeRepository).findByDepartment(departmentEntity);
         //when
         this.employeeService.findByDepartment(employeeOperationRequest);

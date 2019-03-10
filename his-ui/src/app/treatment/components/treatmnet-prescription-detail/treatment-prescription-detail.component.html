@@ -1,0 +1,65 @@
+<div class="text-center">
+  <h3>处方笺</h3>
+</div>
+<div class="text-right">
+  <label >单据状态:{{formModel?.controls['status'].value|prescriptionStatusEnum}}</label>
+</div>
+
+<div class="row">
+  <div class="col-xs-6 col-md-4" style="font-size:16px;">
+    <label class="control-label col-xs-12">主人姓名</label>
+    <label class="control-label col-xs-12 light-blue-label" style="font-size:13px;font-weight: bold;"
+           id="owner_name">{{formModel?.controls['petOwnerName'].value}}</label>
+  </div>
+
+  <div class="col-xs-6 col-md-4" style="font-size:16px;">
+    <label class="control-label col-xs-12">宠物名称</label>
+    <label class="control-label col-xs-12 light-blue-label" style="font-size:13px;font-weight: bold;"
+           id="pet_name">{{formModel?.controls['petName'].value}}</label>
+  </div>
+
+  <div class="col-xs-6 col-md-4" style="font-size:16px;">
+    <label class="control-label col-xs-12">医生姓名</label>
+    <label class="control-label col-xs-12 light-blue-label" style="font-size:13px;font-weight: bold;"
+           id="doctor_name">{{formModel?.controls['doctorName'].value}}</label>
+  </div>
+
+</div>
+
+
+<div class="row text-left" style="padding-left: 30px">
+  <img [src]="'../../../../assets/images/rx.png'" style="width:18px;height: 18px;" alt="Rx">
+</div>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>药品名称</th>
+    <th>规格</th>
+    <th>单位</th>
+    <th>数量</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr (click)="onRowClicked(prescription)" *ngFor="let prescription of prescriptionsData?.controls;let i=index"
+      [class.info]="isRowSelected(prescription)">
+    <td>{{i + 1}}</td>
+    <td>{{prescription.controls['name'].value}}</td>
+    <td>{{prescription.controls['specification'].value}}</td>
+    <td>{{prescription.controls['unit'].value}}</td>
+    <td>
+      <app-field-edit [value]="prescription.controls['amount'].value"
+                      (valueChanged)="onValueChanged($event,i,'amount')"></app-field-edit>
+    </td>
+    <td >
+      <button [disabled]="!isPrescriptionStillUnSubmitted()" title="删除" type="button" class="btn btn-default btn-sm"
+              (click)="onRemoveButtonClicked(i)">
+        <span class="glyphicon glyphicon-remove"></span></button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+

@@ -1,0 +1,14 @@
+<table *ngIf="list.length>0" class="table table-bordered table-responsive">
+  <tbody>
+  <tr *ngFor="let treatmentCase of list" [class.info]="isRowSelected(treatmentCase)"
+      (click)="onRowClicked(treatmentCase)">
+
+
+    <td>{{treatmentCase.createdDate | date:'yyyy年MM月dd日 hh:mm:ss'}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="list.length==0">
+  <label>未查询到病历</label>
+</div>

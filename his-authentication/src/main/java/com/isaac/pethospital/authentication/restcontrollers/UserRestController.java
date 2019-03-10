@@ -1,6 +1,7 @@
 package com.isaac.pethospital.authentication.restcontrollers;
 
 
+import com.isaac.pethospital.authentication.dtos.ApplicationUserOperationRequest;
 import com.isaac.pethospital.authentication.entities.ApplicationUser;
 import com.isaac.pethospital.authentication.repositories.ApplicationUserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,8 +24,11 @@ public class UserRestController {
     }
 
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody ApplicationUser user) {
+    public void signUp(@RequestBody ApplicationUserOperationRequest user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        applicationUserRepository.save(user);
+        ApplicationUser applicationUser=new ApplicationUser();
+        applicationUser.setPassword(user.getPassword());
+        applicationUser.setUsername(user.getUsername());
+        applicationUserRepository.save(applicationUser);
     }
 }

@@ -1,0 +1,21 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>宠物名称</th>
+    <th>主人姓名</th>
+    <th>病历日期</th>
+    <th>医师</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let treatmentCase of list;let i=index" (click)="onRowClicked(treatmentCase)"
+      [class.info]="isRowSelected(treatmentCase)">
+    <td>{{i+1}}</td>
+    <td></td>
+    <td></td>
+    <td>{{treatmentCase.treatmentDate|date:'yyyy年MM月dd日'}}</td>
+    <td>{{treatmentCase.doctor}}</td>
+  </tr>
+  </tbody>
+</table>

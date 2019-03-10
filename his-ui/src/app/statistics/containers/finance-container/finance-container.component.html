@@ -1,0 +1,14 @@
+<div class="dropdown">
+  <button type="button"
+          class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
+          data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+    {{selectedStatusText}}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="javascript:void(0)" *ngFor="let status of getEmployeeStatusList()"
+           (click)="onStatusClicked(status[0])">{{status[1]}}</a>
+    </li>
+  </ul>
+
+</div>

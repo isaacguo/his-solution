@@ -1,0 +1,42 @@
+<ng-container *ngIf="pageData">
+
+  共有 <b>{{pageData.totalElements}}</b> 人
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>编号</th>
+      <th>照片</th>
+      <th>员工编号</th>
+      <th>姓名</th>
+      <th>职位</th>
+      <th>工作电话</th>
+      <th>部门</th>
+      <th>性别</th>
+      <th>直接汇报</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of pageData.content | paginate: {
+                                                      itemsPerPage: pageData.size,
+                                                      currentPage: pageData.number+1,
+                                                      totalItems: pageData.totalElements } ; let i=index">
+      <td>{{i+1}}</td>
+      <img
+        [src]="employee?.gender==='MALE'?'../../../../assets/images/user.svg':'../../../../assets/images/user.svg'"
+        style="width:45px;height: 45px;" alt="User Image">
+      <td>{{employee.employeeNumber}}</td>
+      <td>{{employee.fullName}}</td>
+      <td>{{employee.jobTitle}}</td>
+      <td>{{employee.workPhoneNumber}}</td>
+      <td>{{employee.departmentName}}</td>
+      <td>{{employee.gender==='MALE'?'男':'女'}}</td>
+      <td>{{employee.directReportTo}}</td>
+
+    </tr>
+    </tbody>
+  </table>
+
+  <pagination-controls (pageChange)="onPageChanged($event)" previousLabel="上一页" nextLabel="下一页"></pagination-controls>
+
+</ng-container>

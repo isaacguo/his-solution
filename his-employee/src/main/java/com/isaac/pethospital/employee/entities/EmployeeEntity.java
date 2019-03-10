@@ -10,46 +10,50 @@ import com.isaac.pethospital.employee.enums.MaritalStatusEnum;
 import com.isaac.pethospital.employee.enums.SexualEnum;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 public class EmployeeEntity {
 
+
     String uuid;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    //employee info
+    private String employeeNumber;
     private String loginAccount;
+    private LocalDate joinedDate;
+    private String jobTitle;
+    private String workPhoneNumber;
+    private EmploymentStatusEnum employmentStatus;
+    //personal info
     private String givenName;
     private String surname;
-    private String employeeNumber;
+    private String fullName;
+    private String fullNameHanYuPinYin;
+    private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String idNumber;
     private String driverLicenseNumber;
-
-
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
     private SexualEnum gender;
     private String nationality;
     private String ethnic;
     private String email;
-    private String workPhoneNumber;
     @Enumerated(EnumType.STRING)
     private MaritalStatusEnum maritalStatus;
-    private LocalDateTime joinedDate;
     @OneToOne(cascade = CascadeType.ALL)
     @JsonManagedReference("employee-contact")
     private ContactAddressEntity contactAddress;
-    private String jobTitle;
-    private EmploymentStatusEnum employmentStatus;
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonManagedReference("employee-leaveInfo")
     private LeaveInfoEntity leaveInfo;
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     @JsonManagedReference("employee-leaverecords")
-    private List<LeaveRecordEntity> leaveRecords=new LinkedList<>();
+    private List<LeaveRecordEntity> leaveRecords = new LinkedList<>();
     @ManyToOne()
     @JsonBackReference("directReportTo-teamMembers")
     private EmployeeEntity directReportTo;
@@ -59,8 +63,36 @@ public class EmployeeEntity {
     @ManyToOne
     @JsonBackReference("DepartmentEntity-EmployeeEntity")
     private DepartmentEntity department;
+    @OneToOne
+    @JsonBackReference("DepartmentEntity-EmployeeEntity-Manager")
+    private DepartmentEntity departmentInCharge;
     private String emergencyContact;
     private String emergencyPhoneNumber;
+
+    public String getFullNameHanYuPinYin()
+    {
+        return fullNameHanYuPinYin;
+    }
+
+    public void setFullNameHanYuPinYin(String fullNameHanYuPinYin) {
+        this.fullNameHanYuPinYin = fullNameHanYuPinYin;
+    }
+
+    public DepartmentEntity getDepartmentInCharge() {
+        return departmentInCharge;
+    }
+
+    public void setDepartmentInCharge(DepartmentEntity departmentInCharge) {
+        this.departmentInCharge = departmentInCharge;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public String getWorkPhoneNumber() {
         return workPhoneNumber;
@@ -74,11 +106,9 @@ public class EmployeeEntity {
         return leaveRecords;
     }
 
-    public void addLeaveRecord(LeaveRecordEntity leaveRecord)
-    {
-        if(leaveRecord==null) throw new RuntimeException("Leave Record is null");
-        if(leaveRecord!=null)
-        {
+    public void addLeaveRecord(LeaveRecordEntity leaveRecord) {
+        if (leaveRecord == null) throw new RuntimeException("Leave Record is null");
+        if (leaveRecord != null) {
             leaveRecord.setEmployee(this);
             this.leaveRecords.add(leaveRecord);
         }
@@ -92,11 +122,11 @@ public class EmployeeEntity {
         this.uuid = uuid;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -149,12 +179,12 @@ public class EmployeeEntity {
     }
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDateTime getDateOfBirth() {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -199,12 +229,12 @@ public class EmployeeEntity {
     }
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDateTime getJoinedDate() {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    public LocalDate getJoinedDate() {
         return joinedDate;
     }
 
-    public void setJoinedDate(LocalDateTime joinedDate) {
+    public void setJoinedDate(LocalDate joinedDate) {
         this.joinedDate = joinedDate;
     }
 
@@ -246,7 +276,7 @@ public class EmployeeEntity {
         if (leaveInfo == null)
             throw new RuntimeException("Leave info should not be null");
         else {
-            this.leaveInfo=leaveInfo;
+            this.leaveInfo = leaveInfo;
             this.leaveInfo.setEmployee(this);
         }
     }
@@ -263,8 +293,23 @@ public class EmployeeEntity {
         return teamMembers;
     }
 
-    public void setTeamMembers(List<EmployeeEntity> teamMembers) {
-        this.teamMembers = teamMembers;
+    public void addTeamMember(EmployeeEntity teamMember) {
+        if (teamMember == null)
+            throw new RuntimeException("Team member is null");
+        teamMember.setDirectReportTo(this);
+        this.teamMembers.add(teamMember);
+    }
+
+    public void removeTeamMember(EmployeeEntity teamMember) {
+        if (teamMember == null)
+            throw new RuntimeException("Team member is null");
+        this.teamMembers.remove(teamMember);
+        teamMember.setDirectReportTo(null);
+    }
+    public void removeAllTeamMembers()
+    {
+        this.teamMembers.forEach(r->{r.setDirectReportTo(null);});
+        this.teamMembers=new LinkedList<>();
     }
 
     public DepartmentEntity getDepartment() {
@@ -291,5 +336,11 @@ public class EmployeeEntity {
         this.emergencyPhoneNumber = emergencyPhoneNumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -1,0 +1,17 @@
+
+
+<table class="table table-bordered table-responsive">
+  <thead>
+  <tr>
+    <th class="isaac-th-id">序号</th>
+    <th>文件名</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let file of list;let i=index" [class.info]="isRowSelected(file)"
+      (click)="onRowClicked(file)">
+    <td>{{i+1}}</td>
+    <td>{{file}}</td>
+  </tr>
+  </tbody>
+</table>

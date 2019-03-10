@@ -1,0 +1,97 @@
+<modal #createPetOwnerModal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">创建新主人</h4>
+  </modal-header>
+  <modal-body>
+    <app-pet-owner-create-update (petOwnerCreated)="onPetOwnerCreated($event)"></app-pet-owner-create-update>
+  </modal-body>
+</modal>
+
+<modal #createPetModal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">创建新宠物</h4>
+  </modal-header>
+  <modal-body>
+    <app-pet-create-update (petCreated)="onPetCreated($event)"></app-pet-create-update>
+  </modal-body>
+</modal>
+
+<modal #updatePetOwnerModal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">修改主人信息</h4>
+  </modal-header>
+  <modal-body>
+    <app-pet-owner-create-update [isCreate]="false" [petOwner]="petOwner" (petOwnerUpdated)="onPetOwnerUpdated($event)"></app-pet-owner-create-update>
+  </modal-body>
+</modal>
+
+
+
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">主人信息</h3>
+  </div>
+  <div class="panel-body">
+
+    <div class="btn-group isaac-margin-top" role="group">
+      <button [disabled]="petOwner.id" (click)="onCreateNewOwnerButtonClicked()" class="btn btn-primary">新建主人信息</button>
+      <button [disabled]="!petOwner.id" (click)="onModifyOwnerButtonClicked()" class="btn btn-default">修改主人信息</button>
+      <button [disabled]="!petOwner.id" (click)="onClearPetButtonClicked()" class="btn btn-default">取消选择</button>
+    </div>
+    <form class="form-inline" role="form">
+      <div class="form-group isaac-form-space">
+        <label>编号:</label>
+        <input readonly [ngModel]="petOwner.id" name="petOwnerId" class="form-control" type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>姓名: </label>
+        <input readonly [ngModel]="petOwner?.name" name="petOwnerName" class="form-control" type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>性别: </label>
+        <input readonly [ngModel]="genderText" name="petOwnerGender" class="form-control"
+               type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>生日: </label>
+        <input readonly [ngModel]="petOwner?.dateOfBirth | date:'yyyy年MM月dd日' "
+               name="petOwnerDateOfBirth" class="form-control"
+               type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>手机: </label>
+        <input readonly [ngModel]="petOwner?.cellPhone" name="petOwnerCellPhone" class="form-control"
+               type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>电话: </label>
+        <input readonly [ngModel]="petOwner?.homePhone" name="petOwnerHomePhone" class="form-control"
+               type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>邮箱: </label>
+        <input readonly [ngModel]="petOwner?.email" name="petOwnerEmail" class="form-control"
+               type="text">
+      </div>
+
+      <div class="form-group isaac-form-space">
+        <label>住址: </label>
+        <input readonly [ngModel]="petOwner?.address" name="petOwnerAddress" class="form-control"
+               type="text">
+      </div>
+      <div class="form-group isaac-form-space">
+        <label>卡号: </label>
+        <input readonly [ngModel]="petOwner?.memberNumber" name="petOwnerMemberNumber"
+               class="form-control" type="text">
+      </div>
+    </form>
+
+    <div class="btn-group isaac-margin-top" role="group">
+      <button [disabled]="!petOwner" (click)="onCreateNewPetButtonClicked()" class="btn btn-primary">新增宠物</button>
+    </div>
+    <div class="row">
+      <app-pets-select-table  (petUpdated)="onPetUpdated($event)" (itemSelected)="onPetSelected($event)" [list]="petOwner?.petList"></app-pets-select-table>
+    </div>
+  </div>
+</div>

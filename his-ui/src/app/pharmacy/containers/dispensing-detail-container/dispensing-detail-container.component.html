@@ -1,0 +1,13 @@
+<app-popup-modal [bundle]="bundle$|async" ></app-popup-modal>
+
+<div class="row">
+  <div class="col-md-12">
+    <app-basic-info [pet]="pet$|async"
+                    [prescription]="prescription$|async"></app-basic-info>
+  </div>
+  <div class="col-md-12">
+    <app-medicine-table (medicineDispensed)="onMedicineDispensed()"
+                        (withdrawMedicine)="onWithdrawMedicine()"
+                        [prescription]="prescription$ | async"></app-medicine-table>
+  </div>
+</div>

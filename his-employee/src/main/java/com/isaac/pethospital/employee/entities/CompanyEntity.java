@@ -12,7 +12,7 @@ public class CompanyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private UUID uuid;
 
     private String companyName;
@@ -30,11 +30,11 @@ public class CompanyEntity {
         this.departmentEntities.add(departmentEntity);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

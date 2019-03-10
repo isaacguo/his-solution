@@ -1,0 +1,98 @@
+<modal #scheduleBackupModal (onClose)="onScheduleBackupClosed()">
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">设置定时备份</h4>
+  </modal-header>
+  <modal-body>
+    <form [formGroup]="formModel" class="form" role="form">
+      <div class="form-group isaac-form-space">
+        <label>定时备份:</label>
+        <ul class="nobull">
+          <li>
+            <label class="radio">
+              <input type="radio" formControlName="scheduleType" name="scheduleType" checked value="bymin">每隔30分钟
+            </label>
+          </li>
+          <li>
+            <label class="radio" style="display: inline-block;">
+              <input type="radio" formControlName="scheduleType" name="scheduleType" value="byhour">每隔
+              <div class="dropdown" style="width: 40px;display: inline-block">
+                <button type="button"
+                        class="btn btn-default dropdown-toggle" id="dropdownMenu1"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  {{formModel.controls['hourValue'].value}}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a href="javascript:void(0)" *ngFor="let hour of getHoursArr()"
+                         (click)="onHourClicked(hour)"
+                  >{{hour}}</a>
+                  </li>
+                </ul>
+              </div>
+              小时
+            </label>
+          </li>
+        </ul>
+      </div>
+    </form>
+
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn" (click)="scheduleBackupModal.dismiss()">取消</button>
+    <button type="button" class="btn btn-primary" (click)="scheduleBackupModal.close()">确定</button>
+  </modal-footer>
+</modal>
+
+
+<app-popup-modal (modalClosed)="onModalClosed($event)" [bundle]="bundle$|async"></app-popup-modal>
+
+<modal #showBackupFilesModal (onClose)="onShowBackupFilesModalClosed()">
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">查看备份数据库文件</h4>
+  </modal-header>
+  <modal-body>
+    <app-show-backup-files-table
+      [list]="backupFiles"></app-show-backup-files-table>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="showBackupFilesModal.dismiss()">完成</button>
+  </modal-footer>
+</modal>
+
+<div class="row">
+  <div class="col-md-4 btn-group">
+    <button class="btn btn-primary">立即备份</button>
+    <button class="btn" (click)="onScheduleBackupClicked()">设置定时备份</button>
+  </div>
+</div>
+
+<h4>备份列表</h4>
+<table *ngIf="backupFolders?.length>0" class="table table-bordered isaac-margin-15top">
+  <thead>
+  <tr role="row">
+    <th class="isaac-th-id ">序号</th>
+    <th>备份</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody role="alert" aria-live="polite" aria-relevant="all">
+  <tr *ngFor="let folder of backupFolders; let i=index">
+    <td>{{i+1}}</td>
+    <td>{{folder}}</td>
+    <td>
+      <div class="btn-group">
+        <button type="button" (click)="onReviewFolder(folder)" class="btn btn-default">查看</button>
+        <button type="button" (click)="onRestoreFolder(folder)" class="btn btn-default">恢复</button>
+        <!--<button type="button" class="btn btn-default">删除</button>-->
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-info isaac-margin-15top" *ngIf="!backupFolders || backupFolders?.length===0" role="alert">
+  无数据
+</div>
+
+
+

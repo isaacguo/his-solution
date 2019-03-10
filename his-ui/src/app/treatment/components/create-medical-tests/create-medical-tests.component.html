@@ -1,0 +1,57 @@
+
+<app-popup-modal (modalClosed)="onModalClosed($event)" [bundle]="bundle$|async"></app-popup-modal>
+
+<div class="verlink">
+
+  <label>添加化验检查项目</label>
+  <div class="dropdown" [class.open]="medicalTestReportTemplates.length>0">
+    <input autocomplete="off" (click)="stopPropagation($event)" (focusout)="stopPropagation($event)"
+           (focus)="stopPropagation($event)"
+           type="text" class="form-control dropdown-toggle"
+           placeholder="输入化验报告名称关键字汉语拼音" [formControl]="searchInput"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2"
+    >
+    <small [hidden]="
+          searchInput.valid || searchInput.pristine" class="text-danger">
+      最少1个字符
+    </small>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <li *ngFor="let medicalTestReportTemplate of medicalTestReportTemplates">
+        <a href="javascript:void(0)"
+           (click)="onMedicalTestReportTemplateSelected(medicalTestReportTemplate)">{{medicalTestReportTemplate.reportName}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<table class="table table-bordered isaac-margin-15top">
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>化验名称</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let medicalTestReport of medicalTestReportData.controls;let i=index">
+    <td>{{i + 1}}</td>
+    <td>{{medicalTestReport.controls['reportName'].value}}</td>
+    <td>
+      <div class="btn-group btn-group-sm">
+        <button (click)="removeMedicalTestReport(i)" type="button"
+                class="btn btn-default btn-s"><span
+          class="glyphicon glyphicon-remove"></span></button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+
+</table>
+
+
+<div class="verlink-bottom">
+  <div class="btn-group">
+    <button [disabled]="!formModel.valid" class="btn btn-primary" (click)="onAddReportFinished()">提交</button>
+  </div>
+</div>
+

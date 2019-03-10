@@ -1,0 +1,16 @@
+<div class="meta">
+  <div class="user-picture">
+    <app-profile-picture></app-profile-picture>
+  </div>
+  <div class="user-name">User1</div>
+  <div class="time">
+    {{comment?.createdDate|fromNow}}
+  </div>
+</div>
+
+<div class="main">
+  <div class="content">
+    <app-editor [content]="comment?.comments"
+                (saveEditEvent)="updateComment($event)"></app-editor>
+  </div>
+</div>

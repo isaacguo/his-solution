@@ -1,25 +1,20 @@
 package com.isaac.pethospital.treatment.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.isaac.pethospital.common.enums.GenderEnum;
-import com.isaac.pethospital.common.enums.PetColorEnum;
 import com.isaac.pethospital.common.enums.PetGenderEnum;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@JsonIgnoreProperties({"treatmentCaseList"})
 public class PetEntity {
 
-    /*
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
-    @JsonManagedReference("PetEntity-RegistrationEntity")
-    List<RegistrationEntity> registrationList = new LinkedList<>();
-    */
     @ManyToOne
     @JsonBackReference("PetOwnerEntity-PetEntity")
     PetOwnerEntity petOwner;
@@ -27,18 +22,29 @@ public class PetEntity {
     @JsonManagedReference("PetEntity-TreatmentCaseEntity")
     List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
     boolean sterilized;
-    PetColorEnum color;
-    LocalDateTime dateOfBirth;
+    String color;
+    LocalDate dateOfBirth;
     int age;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private UUID uuid;
+    private String uuid;
     private PetGenderEnum gender;
     private String name;
-    @ManyToOne
-    @JsonBackReference("petType-pet")
-    private PetTypeEntity petType;
+    private String species;
+    private String petType;
+
+    public PetEntity() {
+        this.uuid=UUID.randomUUID().toString();
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
 
     public boolean isSterilized() {
         return sterilized;
@@ -48,11 +54,11 @@ public class PetEntity {
         this.sterilized = sterilized;
     }
 
-    public PetColorEnum getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(PetColorEnum color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
@@ -64,11 +70,11 @@ public class PetEntity {
         this.age = age;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -115,20 +121,20 @@ public class PetEntity {
         this.id = id;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
 
-    public PetTypeEntity getPetType() {
+    public String getPetType() {
         return petType;
     }
 
-    public void setPetType(PetTypeEntity petType) {
+    public void setPetType(String petType) {
         this.petType = petType;
     }
 }

@@ -1,0 +1,15 @@
+<table class="table table-bordered table-responsive">
+  <thead>
+  <tr>
+    <th>
+      姓名
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employee of list" [class.info]="isRowSelected(employee)"
+      (click)="onRowClicked(employee)">
+    <td>{{employee?.fullName}}</td>
+  </tr>
+  </tbody>
+</table>

@@ -1,9 +1,6 @@
 package com.isaac.pethospital.treatment.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 public class EmployeeEntity {
@@ -13,12 +10,33 @@ public class EmployeeEntity {
     DepartmentEntity department;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private UUID uuid;
+    private Long id;
+    private Long empId;
     private String selfIntroduction;
+
+    private boolean canBeRegistered;
     @ManyToOne
     private EmployeeTypeEntity employeeType;
     private String name;
+    private String loginAccount;
+
+    private String uuid;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public boolean isCanBeRegistered() {
+        return canBeRegistered;
+    }
+
+    public void setCanBeRegistered(boolean canBeRegistered) {
+        this.canBeRegistered = canBeRegistered;
+    }
 
     public String getLoginAccount() {
         return loginAccount;
@@ -27,8 +45,6 @@ public class EmployeeEntity {
     public void setLoginAccount(String loginAccount) {
         this.loginAccount = loginAccount;
     }
-
-    private String loginAccount;
 
     public EmployeeTypeEntity getEmployeeType() {
         return employeeType;
@@ -46,20 +62,20 @@ public class EmployeeEntity {
         this.selfIntroduction = selfIntroduction;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public Long getEmpId() {
+        return empId;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setEmpId(Long empId) {
+        this.empId = empId;
     }
 
     public String getName() {

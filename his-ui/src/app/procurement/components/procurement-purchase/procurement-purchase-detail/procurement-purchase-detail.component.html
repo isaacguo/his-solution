@@ -1,0 +1,48 @@
+<modal #confirmUpdatedModal (onClose)="confirmUpdatedModalClosed()" >
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      订单状态更新成功
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmUpdatedModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div *ngIf="procurement!=null">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      操作
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="statusDropdown">更新当前采购状态</label>
+        <div id="statusDropdown" class="dropdown">
+          <button [disabled]="!hasAlterPermission()" class="btn btn-default dropdown-toggle isaac-dropdown-250button"
+                  type="button" id="dropdownMenu1"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{selectedStatus}}
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li *ngFor="let status of flatenP">
+              <a (click)="onStatusDropdownClicked(status)">{{status}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button [disabled]="!hasAlterPermission()" class="btn btn-default" (click)="onUpdateStatusButtonClicked()">更新
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-procurement-request-detail [procurement]="procurement"></app-procurement-request-detail>
+

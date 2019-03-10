@@ -1,51 +1,162 @@
 package com.isaac.pethospital.treatment.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.isaac.pethospital.treatment.common.enums.TreatmentCaseStatusEnum;
+import org.apache.commons.lang.StringUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class TreatmentCaseEntity {
 
-    boolean createResult;
     LocalDateTime treatmentDate;
     LocalDateTime createdDate;
-    @ManyToOne
-    @JsonBackReference("DepartmentEntity-TreatmentCaseEntity")
-    DepartmentEntity department;
+    LocalDateTime lastModifiedDateTime;
+
+    String petOwnerDescription;
+    String doctorDiagnose;
+    String clinicSituation;
+    String doctorAdvice;
+
+    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.ALL)
+    @JsonManagedReference("TreatmentCase-TreatmentCaseMedicine")
+    List<TreatmentCaseMedicineEntity> medicineList = new LinkedList<>();
     @ManyToOne
     @JsonBackReference("EmployeeEntity-TreatmentCaseEntity")
     EmployeeEntity doctor;
     @ManyToOne
-    @JsonBackReference("PetOwnerEntity-TreatmentCaseEntity")
-    PetOwnerEntity petOwner;
-    @ManyToOne
     @JsonBackReference("PetEntity-TreatmentCaseEntity")
     PetEntity pet;
+    @ElementCollection
+    List<String> medicalTestReportUuidList = new LinkedList<>();
+
+    @OneToMany(mappedBy = "treatmentCase", cascade = CascadeType.ALL)
+    @JsonManagedReference("TreatmentCase-Comment")
+    List<CommentEntity> comments = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String uuid;
+
     @Enumerated(EnumType.STRING)
     private TreatmentCaseStatusEnum treatmentCaseStatus;
 
-    public boolean isCreateResult() {
-        return createResult;
+    public TreatmentCaseStatusEnum getTreatmentCaseStatus() {
+        return treatmentCaseStatus;
     }
 
-    public void setCreateResult(boolean createResult) {
-        this.createResult = createResult;
+    public void setTreatmentCaseStatus(TreatmentCaseStatusEnum treatmentCaseStatus) {
+        this.treatmentCaseStatus = treatmentCaseStatus;
     }
 
-    public PetOwnerEntity getPetOwner() {
-        return petOwner;
+    private boolean caseClosed;
+
+    public List<CommentEntity> getComments() {
+        return comments;
     }
 
-    public void setPetOwner(PetOwnerEntity petOwner) {
-        this.petOwner = petOwner;
+    public void addComment(CommentEntity comment) {
+        if (comment == null)
+            throw new RuntimeException("Comment is null");
+        comment.setTreatmentCase(this);
+        this.comments.add(comment);
     }
+
+    public boolean isCaseClosed() {
+        return caseClosed;
+    }
+
+    public void setCaseClosed(boolean caseClosed) {
+        this.caseClosed = caseClosed;
+    }
+
+    public List<TreatmentCaseMedicineEntity> getMedicineList() {
+        return medicineList;
+    }
+
+    public void removeMedicine(TreatmentCaseMedicineEntity medicine) {
+        if (medicine == null)
+            throw new RuntimeException("Medicine is null");
+        medicine.setTreatmentCase(null);
+        this.medicineList.remove(medicine);
+    }
+
+    public void addMedicine(TreatmentCaseMedicineEntity medicine) {
+        if (medicine == null)
+            throw new RuntimeException("Medicine is null");
+        medicine.setTreatmentCase(this);
+        this.medicineList.add(medicine);
+    }
+
+    public void removeMedicineList(TreatmentCaseMedicineEntity medicine) {
+        if (medicine == null)
+            throw new RuntimeException("Medicine is null");
+        medicine.setTreatmentCase(null);
+        this.medicineList.add(medicine);
+    }
+
+    public String getDoctorAdvice() {
+        return doctorAdvice;
+    }
+
+    public void setDoctorAdvice(String doctorAdvice) {
+        this.doctorAdvice = doctorAdvice;
+    }
+
+    public String getClinicSituation() {
+
+        return clinicSituation;
+    }
+
+    public void setClinicSituation(String clinicSituation) {
+        this.clinicSituation = clinicSituation;
+    }
+
+    public String getDoctorDiagnose() {
+        return doctorDiagnose;
+    }
+
+    public void setDoctorDiagnose(String doctorDiagnose) {
+        this.doctorDiagnose = doctorDiagnose;
+    }
+
+
+    public String getPetOwnerDescription() {
+        return petOwnerDescription;
+    }
+
+    public void setPetOwnerDescription(String petOwnerDescription) {
+        this.petOwnerDescription = petOwnerDescription;
+    }
+
+    public List<String> getMedicalTestReportUuidList() {
+        return medicalTestReportUuidList;
+    }
+
+    public void addMedicalTestReportUuid(String medicalTestReportUuid) {
+        if (StringUtils.isEmpty(medicalTestReportUuid))
+            throw new RuntimeException("Medical Test Id is null");
+        this.medicalTestReportUuidList.add(medicalTestReportUuid);
+    }
+
+    public void removeMedicalTestReportUuid(String medicalTestReportUuid) {
+        if (StringUtils.isEmpty(medicalTestReportUuid))
+            throw new RuntimeException("Medical Test Id is null");
+        this.medicalTestReportUuidList.remove(medicalTestReportUuid);
+    }
+
+    public LocalDateTime getLastModifiedDateTime() {
+        return lastModifiedDateTime;
+    }
+
+    public void setLastModifiedDateTime(LocalDateTime lastModifiedDateTime) {
+        this.lastModifiedDateTime = lastModifiedDateTime;
+    }
+
 
     public PetEntity getPet() {
         return pet;
@@ -56,11 +167,11 @@ public class TreatmentCaseEntity {
     }
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -70,14 +181,6 @@ public class TreatmentCaseEntity {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
-    }
-
-    public TreatmentCaseStatusEnum getTreatmentCaseStatus() {
-        return treatmentCaseStatus;
-    }
-
-    public void setTreatmentCaseStatus(TreatmentCaseStatusEnum treatmentCaseStatus) {
-        this.treatmentCaseStatus = treatmentCaseStatus;
     }
 
     public LocalDateTime getTreatmentDate() {
@@ -96,13 +199,6 @@ public class TreatmentCaseEntity {
         this.createdDate = createdDate;
     }
 
-    public DepartmentEntity getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(DepartmentEntity department) {
-        this.department = department;
-    }
 
     public EmployeeEntity getDoctor() {
         return doctor;

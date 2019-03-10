@@ -1,0 +1,29 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>就诊号</th>
+    <th>宠物名称</th>
+    <th>主人姓名</th>
+    <th>挂号状态</th>
+    <!--<th>操作</th>-->
+  </tr>
+  </thead>
+  <tbody>
+  <tr (click)="onRowClicked(registration)" *ngFor="let registration of list"
+      [class.info]="isRowSelected(registration)">
+    <td>{{registration.indexOfDay}}</td>
+    <td>{{registration.petName}}</td>
+    <td>{{registration.petOwnerName}}</td>
+    <td>{{getRegistrationStatusString(registration.registrationStatus)}}</td>
+    <!--
+    <td>
+      <div class="btn-group btn-group-sm">
+        <button *ngIf="registration.registrationStatus==='WAITING'" type="button"
+                class="btn btn-default btn-s"><span
+          class="glyphicon glyphicon-bullhorn"></span></button>
+      </div>
+    </td>
+    -->
+  </tr>
+  </tbody>
+</table>

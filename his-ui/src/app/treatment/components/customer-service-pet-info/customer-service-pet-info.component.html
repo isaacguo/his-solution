@@ -1,0 +1,105 @@
+<div class="row isaac-margin-top">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">主人信息</h3>
+    </div>
+    <div class="panel-body">
+      <form class="form-inline" role="form">
+        <div class="form-group isaac-form-space">
+          <label>编号:</label>
+          <input readonly [ngModel]="petOwner?.id" name="currentPetOwnerId" class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>姓名: </label>
+          <input readonly [ngModel]="petOwner?.name" name="currentPetOwnerName" class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>性别: </label>
+          <input readonly [ngModel]="petOwner?.gender" name="currentPetOwnerGender" class="form-control"
+                 type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>生日: </label>
+          <input readonly [ngModel]="petOwner?.dateOfBirth | date:'yyyy年MM月dd日' "
+                 name="currentPetOwnerDateOfBirth" class="form-control"
+                 type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>手机: </label>
+          <input readonly [ngModel]="petOwner?.cellPhone" name="currentPetOwnerCellPhone" class="form-control"
+                 type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>电话: </label>
+          <input readonly [ngModel]="petOwner?.homePhone" name="currentPetOwnerHomePhone" class="form-control"
+                 type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>邮箱: </label>
+          <input readonly [ngModel]="petOwner?.email" name="currentPetOwnerEmail" class="form-control"
+                 type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>住址: </label>
+          <input readonly [ngModel]="petOwner?.address" name="currentPetOwnerAddress" class="form-control"
+                 type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>卡号: </label>
+          <input readonly [ngModel]="petOwner?.memberNumber" name="currentPetOwnerMemberNumber"
+                 class="form-control" type="text">
+        </div>
+
+
+      </form>
+      <!--
+      <div class="btn-group btn-group-lg isaac-margin-top" role="group">
+        <button (click)="onModifyOwnerButtonClicked(createPetOwnerModal)" class="btn btn-default">修改主人信息</button>
+      </div>
+      -->
+    </div>
+  </div>
+</div>
+<div class="row isaac-margin-top">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">宠物信息</h3>
+    </div>
+    <div class="panel-body">
+      <form class="form-inline" role="form">
+        <div class="form-group isaac-form-space">
+          <label>编号:</label>
+          <input [ngModel]="this.petOwner?.petList[0].id" name="selectedPetId" class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>名称: </label>
+          <input [ngModel]="this.petOwner?.petList[0].name" name="selectedPetName" class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>性别: </label>
+          <input [ngModel]="this.petOwner?.petList[0].gender" name="selectedPetGender" class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>年龄: </label>
+          <input [ngModel]="this.petOwner?.petList[0].age" name="selectedPetAge" class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>颜色: </label>
+          <input [ngModel]="this.petOwner?.petList[0].color" name="selectedPetColor" class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>种类: </label>
+          <input [ngModel]="this.petOwner?.petList[0]?.petType?.name" name="selectedPetPetTypeName" class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>品种: </label>
+          <input class="form-control" type="text">
+        </div>
+        <div class="form-group isaac-form-space">
+          <label>绝育: </label>
+          <input [ngModel]="this.petOwner?.petList[0]?.sterilized" name="selectedPetSterilized" class="form-control" type="text">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,14 +1,23 @@
 package com.isaac.pethospital.treatment.dtos;
 
-import com.isaac.pethospital.common.enums.PetColorEnum;
 import com.isaac.pethospital.common.enums.PetGenderEnum;
 import com.isaac.pethospital.treatment.entities.PetEntity;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
-import com.isaac.pethospital.treatment.entities.PetTypeEntity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class PetOwnerPetOperationRequest {
+
+    private Long id;
+    private PetOwnerEntity petOwner;
+    private boolean sterilized;
+    private String color;
+    private LocalDate dateOfBirth;
+    private int age;
+    private PetGenderEnum gender;
+    private String name;
+    private String petType;
+    private String species;
 
     public Long getId() {
         return id;
@@ -18,15 +27,13 @@ public class PetOwnerPetOperationRequest {
         this.id = id;
     }
 
-    private Long id;
-    private PetOwnerEntity petOwner;
-    private boolean sterilized;
-    private PetColorEnum color;
-    private LocalDateTime dateOfBirth;
-    private int age;
-    private PetGenderEnum gender;
-    private String name;
-    private PetTypeEntity petType;
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
 
     public PetOwnerEntity getPetOwner() {
         return petOwner;
@@ -44,19 +51,19 @@ public class PetOwnerPetOperationRequest {
         this.sterilized = sterilized;
     }
 
-    public PetColorEnum getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(PetColorEnum color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -84,11 +91,11 @@ public class PetOwnerPetOperationRequest {
         this.name = name;
     }
 
-    public PetTypeEntity getPetType() {
+    public String getPetType() {
         return petType;
     }
 
-    public void setPetType(PetTypeEntity petType) {
+    public void setPetType(String petType) {
         this.petType = petType;
     }
 
@@ -101,6 +108,7 @@ public class PetOwnerPetOperationRequest {
         petEntity.setColor(this.color);
         petEntity.setDateOfBirth(this.dateOfBirth);
         petEntity.setGender(this.gender);
+        petEntity.setSpecies(this.species);
         return petEntity;
     }
 }

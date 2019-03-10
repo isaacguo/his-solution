@@ -4,9 +4,23 @@ import com.isaac.pethospital.common.enums.GenderEnum;
 import com.isaac.pethospital.treatment.entities.PetOwnerEntity;
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PetOwnerOperationRequest {
+
+    Long petId;
+    Long id;
+    @NotBlank
+    private String name;
+    private GenderEnum gender;
+    private LocalDate dateOfBirth;
+    private String address;
+    private String cellPhone;
+    private String email;
+    private String homePhone;
+    public PetOwnerOperationRequest() {
+    }
 
     public Long getId() {
         return id;
@@ -22,20 +36,6 @@ public class PetOwnerOperationRequest {
 
     public void setPetId(Long petId) {
         this.petId = petId;
-    }
-
-    Long petId;
-    Long id;
-    @NotBlank
-    private String name;
-    private GenderEnum gender;
-    private LocalDateTime dateOfBirth;
-    private String address;
-    private String cellPhone;
-    private String email;
-    private String homePhone;
-
-    public PetOwnerOperationRequest() {
     }
 
     public String getName() {
@@ -54,11 +54,11 @@ public class PetOwnerOperationRequest {
         this.gender = gender;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

@@ -1,0 +1,75 @@
+<div *ngIf="!treatmentCase" class="isaac-margin-15top">
+  <h4>请从病历列表中选择具体病历查看详细信息</h4>
+</div>
+
+
+
+<div *ngIf="treatmentCase" class="isaac-margin-15top">
+  <div class="panel panel-info isaac-margin-15top">
+    <div class="panel-heading">
+      基本信息
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group isaac-form-space">
+            <label>就诊日期: </label>
+            <!--<input formControlName="{{'treatmentDate' | date:'yyyy年MM月dd日 HH:mm:ss'}}" class="form-control" type="text">-->
+            <input readonly name="treatmentDate" [ngModel]="treatmentCase?.createdDate| date:'yyyy年MM月dd日 HH:mm:ss'"
+                   class="form-control" type="text">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group isaac-form-space">
+
+            <div class="form-group isaac-form-space">
+              <label>就诊状态: </label>
+              <!--<input formControlName="{{'treatmentDate' | date:'yyyy年MM月dd日 HH:mm:ss'}}" class="form-control" type="text">-->
+              <input readonly name="treatmentDate"
+                     [ngModel]="treatmentCase?.treatmentCaseStatus| treatmentCaseStatusEnum "
+                     class="form-control" type="text">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel panel-info isaac-margin-15top">
+    <div class="panel-heading">
+      病例详情 <label *ngIf="isTreatmentCaseFinished()">(病历已完成，不可以修改)</label>
+    </div>
+    <div class="panel-body">
+
+      <form [formGroup]="treatmentCaseInfoModel" (submit)="onSaveTreatmentCaseBasicInfo()" novalidate>
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>主人描述</b></span>
+          <textarea [readonly]="isTreatmentCaseFinished()" formControlName="petOwnerDescription" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>临床检查</b></span>
+          <textarea [readonly]="isTreatmentCaseFinished()" formControlName="clinicSituation" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>医生诊断</b></span>
+          <textarea [readonly]="isTreatmentCaseFinished()" formControlName="doctorDiagnose" rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="isaac-margin-15top col-md-12">
+          <span><b>医嘱</b></span>
+          <textarea formControlName="doctorAdvice" rows="3" class="form-control"
+           [readonly]="isTreatmentCaseFinished()"></textarea>
+        </div>
+      </form>
+      <div class="isaac-margin-15top col-md-3">
+        <button *ngIf="!isTreatmentCaseFinished()" class="btn btn-default" (click)="onSaveClicked()" type="submit">保存病历</button>
+        <button *ngIf="!isTreatmentCaseFinished()" class="btn btn-default" (click)="onCloseClicked()" type="submit">完成病历</button>
+      </div>
+    </div>
+  </div>
+</div>
+

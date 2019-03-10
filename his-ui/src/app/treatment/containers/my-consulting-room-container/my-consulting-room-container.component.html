@@ -1,0 +1,19 @@
+<div class="row">
+  <h1 class="page-header">我的诊室</h1>
+</div>
+
+<div class="row" style="height: 730px ">
+  <split [direction]="'horizontal'">
+    <split-area [size]="20">
+      <div style="padding-right:15px">
+        <app-pet-registration-list  (itemSelected)="onRegistrationSelected($event)" [list]="registration$ | async "></app-pet-registration-list>
+      </div>
+    </split-area>
+
+    <split-area [size]="80">
+      <div style="padding-left: 20px">
+        <router-outlet></router-outlet>
+      </div>
+    </split-area>
+  </split>
+</div>

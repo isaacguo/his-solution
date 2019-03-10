@@ -22,8 +22,6 @@ node {
         }
 
 
-
-
         stage('Build and Push Docker Image') {
             notifyBuild("In Build and Push Docker Image")
             echo 'Build Docker Image'
@@ -38,10 +36,11 @@ node {
 
         }
 
+        /*
         stage('Deploy to Staging Server') {
             notifyBuild("In Deploy to Staging Server")
             def workspaceInfSlave = pwd()
-            sh "cp docker-compose.yml /home/isaac/projects/ansible/playbook"
+            sh "cp docker-compose-staging.yml /home/isaac/projects/ansible/playbook/docker-compose.yml"
             sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml -c paramiko"
         }
 
@@ -49,21 +48,39 @@ node {
             notifyBuild("In User Acceptance Test")
             echo 'User Acceptance Test'
         }
+        */
+
+        stage('Deploy to Production Server') {
+                notifyBuild("In Deploy to Production Server")
+                def workspaceInfSlave = pwd()
+                sh "cp docker-compose-prod.yml /home/isaac/projects/ansible/playbook/docker-compose.yml"
+                sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml"
+        }
 
 
+        /*
         if (env.BRANCH_NAME.startsWith('release')) {
             stage('Release') {
                 echo 'Change Version Number'
             }
         } else if (env.BRANCH_NAME == 'master') {
-            stage('Deploy to Production') {
-                echo 'Do Deploy'
+            stage("Please Confirm") {
+                notifyBuild("Please Confirm to Release The Product");
+                def doRelease = input(message: 'Release to production?')
+            }
+
+            stage('Deploy to Production Server') {
+                notifyBuild("In Deploy to Production Server")
+                def workspaceInfSlave = pwd()
+                sh "cp docker-compose-prod.yml /home/isaac/projects/ansible/playbook/docker-compose.yml"
+                sh "docker run --rm -v /home/isaac/projects/ansible/ssh:/root/.ssh -v /home/isaac/projects/ansible/hosts:/etc/ansible/ -v /home/isaac/projects/ansible/playbook:/root/ansible/playbook williamyeh/ansible:centos7 ansible-playbook /root/ansible/playbook/playbook.yml -c paramiko"
             }
         } else if (env.BRANCH_NAME.startsWith('PR-')) {
             stage('Pull Request') {
                 echo 'Pull Request'
             }
         }
+        */
     }
     catch (e) {
         currentBuild.result = "FAILED";

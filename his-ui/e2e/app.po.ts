@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class HisUiPage {
+export class PethosUiPage {
   navigateTo() {
     return browser.get('/');
   }

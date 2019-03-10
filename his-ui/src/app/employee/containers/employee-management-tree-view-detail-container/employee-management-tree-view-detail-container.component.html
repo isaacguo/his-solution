@@ -1,0 +1,29 @@
+<modal #setAsManagerResultModal>
+  <form #modalForm4="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">调整部门</h4>
+    </modal-header>
+    <modal-body>
+      人员职位已调整完毕。接下来，请手动修改相关人员的职位信息。
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" data-dismiss="setAsManagerResultModal"
+              (click)="setAsManagerResultModal.dismiss()">确定
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div>
+  <button type="button" class="btn btn-primary" (click)="onCreateNewEmployee()">添加新员工</button>
+</div>
+<app-employee-management-category-detail
+  (employeeDepartmentAdjusted)="onEmployeeDepartmentAdjusted($event)"
+  (employeeEdited)="onEmployeeEdited($event)"
+  (employeeManagerSet)="onEmployeeManagerSet($event)"
+  (employeeRemoved)="onEmployeeRemoved($event)"
+  (employeeViewed)="onEmployeeViewed($event)"
+  [employeeList]="employeeListWithoutManager$|async"
+  [manager]="manager$|async"
+  [rootNode]="rootNode"
+></app-employee-management-category-detail>

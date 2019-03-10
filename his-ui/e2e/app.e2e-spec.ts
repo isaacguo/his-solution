@@ -1,10 +1,10 @@
-import { HisUiPage } from './app.po';
+import { PethosUiPage } from './app.po';
 
-describe('his-ui App', () => {
-  let page: HisUiPage;
+describe('pethos-ui App', () => {
+  let page: PethosUiPage;
 
   beforeEach(() => {
-    page = new HisUiPage();
+    page = new PethosUiPage();
   });
 
   it('should display welcome message', () => {

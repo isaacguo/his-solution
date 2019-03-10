@@ -1,0 +1,37 @@
+<div class="row isaac-margin-15top">
+
+  <div class="col-md-3">
+
+    <app-category-tool-bar
+      [canDelete]="true"
+      [canEdit]="true"
+      [canCreateChildNode]="true"
+      [canCreateRootNode]="true"
+      [selectedNode]="getSelectedNode() | async"
+      (rootNodeCreated)="onRootNodeCreated($event)"
+      (subNodeCreated)="onSubNodeCreated($event)"
+      (nodeDeleted)="onNodeDeleted($event)"
+      (nodeUpdated)="onNodeUpdated($event)"
+      (nodeExpanded)="onNodeExpanded()"
+      class="isaac-margin-15top"
+    ></app-category-tool-bar>
+
+    <app-medical-test-settings-report-template-list
+      #tree
+      (createNewTemplateClick)="onCreateNewTemplateClicked()"
+      (nodeSelected)="onNodeSelected($event)"
+
+      [nodes]="categoryNodes$|async"
+    >
+    </app-medical-test-settings-report-template-list>
+
+    <!--
+    <app-medical-test-settings-report-template-list
+      (createNewTemplateClick)="onCreateNewTemplateClicked()"
+      [list]="reportTemplates$|async"></app-medical-test-settings-report-template-list>
+      -->
+  </div>
+  <div class="col-md-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>

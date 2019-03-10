@@ -1,0 +1,29 @@
+<div *ngIf="!(employeeInfoInTreatment && employeeInfoInEmployee) ">
+  请从列表中选择一名员工进行设置
+</div>
+
+<div *ngIf="employeeInfoInTreatment && employeeInfoInEmployee">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      设置 <b>{{employeeInfoInEmployee?.fullName}}</b>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div>
+            <div class=" pull-left">
+              前台可见
+            </div>
+            <div class="pull-right">
+              <app-checkbox [checked]="this.employeeInfoInTreatment?.canBeRegistered" (outCheck)="onOutCheck($event)"></app-checkbox>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+</div>
+

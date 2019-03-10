@@ -1,0 +1,21 @@
+<form [formGroup]="formModel" novalidate>
+  <div (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" >
+    <div *ngIf="!isMouseEntered && formModel.valid && value!==undefined && value!==null">
+      {{value}}
+    </div>
+    <div *ngIf="isMouseEntered || !formModel.valid || value ===undefined || value===null">
+      <div [class.input-group]="true">
+        <input formControlName="price" [readonly]="isViewMode" type="text" [class.form-control]="true">
+        <span [class.input-group-btn]="true">
+        <button *ngIf="isViewMode" (click)="onEditClicked()" class="btn btn-default" type="button"><span
+          class="glyphicon glyphicon-pencil"></span> </button>
+        <button *ngIf="!isViewMode" [disabled]="!formModel.valid" (click)="onSaveClicked()" class="btn btn-default"
+                type="button"><span
+          class="glyphicon glyphicon-floppy-disk"></span> </button>
+        <button *ngIf="!isViewMode" (click)="onCancelClicked()" class="btn btn-default" type="button"><span
+          class="glyphicon glyphicon-remove"></span> </button>
+  </span>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,21 +1,24 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
+import com.isaac.pethospital.treatment.common.enums.RegistrationStatusEnum;
 import com.isaac.pethospital.treatment.dtos.RegistrationOperationRequest;
+import com.isaac.pethospital.treatment.dtos.RegistrationResponse;
 import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.entities.RegistrationEntity;
 import com.isaac.pethospital.treatment.services.EmployeeService;
 import com.isaac.pethospital.treatment.services.RegistrationService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
 @RequestMapping("registrations")
-public class RegistrationRestController {
+public class RegistrationRestController  {
 
     RegistrationService registrationService;
     EmployeeService employeeService;
@@ -29,6 +32,17 @@ public class RegistrationRestController {
     public List<RegistrationEntity> getRegistrations() {
         return this.registrationService.getRegistrations();
     }
+    @GetMapping("{id}")
+    public RegistrationEntity getOne(@PathVariable("id") Long id)
+    {
+        return this.registrationService.getOne(id);
+    }
+
+    @GetMapping("all/{status}")
+    public Page<RegistrationEntity> findAllRegistrationsByStatusOnPage(@PathVariable("status") String status, Pageable pageable) {
+        RegistrationStatusEnum statusEnum = RegistrationStatusEnum.valueOf(status);
+        return this.registrationService.findAllRegistrationsByStatusOnPage(statusEnum, pageable);
+    }
 
     @PostMapping("create-registration")
     public RegistrationEntity createRegistration(@Valid @RequestBody RegistrationOperationRequest request) {
@@ -36,7 +50,7 @@ public class RegistrationRestController {
     }
 
     @GetMapping("find-my-registration-today")
-    public List<RegistrationEntity> findMyRegistrationToday() {
+    public List<RegistrationResponse> findMyRegistrationToday() {
         EmployeeEntity doctor= this.employeeService.findByLoginAccount(getUserAccount());
         RegistrationOperationRequest request=new RegistrationOperationRequest();
         request.setDoctorId(doctor.getId());
@@ -49,9 +63,16 @@ public class RegistrationRestController {
     }
 
     @PostMapping("find-by-doctor-and-bookdate-after")
-    public List<RegistrationEntity> findByDoctorAndBookdateAfter(@Valid @RequestBody RegistrationOperationRequest request) {
+    public List<RegistrationResponse> findByDoctorAndBookdateAfter(@Valid @RequestBody RegistrationOperationRequest request) {
         return this.registrationService.findByDoctorAndBookDateAfter(request);
     }
+
+    @PutMapping("updateStatus")
+    public RegistrationStatusEnum updateStatus(@RequestBody RegistrationOperationRequest request )
+    {
+        return this.registrationService.updateStatus(request);
+    }
+
 
 
 }

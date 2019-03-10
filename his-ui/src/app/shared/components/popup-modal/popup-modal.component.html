@@ -1,0 +1,24 @@
+<modal #popupModal (onClose)="onPopupModalClosed()">
+  <form #modalForm4="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">{{_bundle?.title}}</h4>
+    </modal-header>
+    <modal-body>
+      <p [innerHtml]="_bundle?.body"></p>
+    </modal-body>
+    <modal-footer>
+
+      <button *ngIf="_bundle?.hasConfirmButton?_bundle?.hasConfirmButton:true" type="button" class="btn btn-primary"
+              data-dismiss="addTraineeModal"
+              (click)="popupModal.close()">
+        {{_bundle?.confirmButtonText?_bundle?.confirmButtonText:'OK'}}
+      </button>
+
+      <button *ngIf="_bundle?.hasCancelButton?_bundle?.hasCancelButton:false" type="button" class="btn btn-default"
+              data-dismiss="addTraineeModal"
+              (click)="popupModal.dismiss()">
+        {{_bundle?.cancelButtonText?_bundle?.cancelButtonText:'Cancel'}}
+      </button>
+    </modal-footer>
+  </form>
+</modal>

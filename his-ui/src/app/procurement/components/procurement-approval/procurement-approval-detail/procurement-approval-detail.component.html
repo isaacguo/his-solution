@@ -1,0 +1,120 @@
+<modal #confirmCreateModal (onClose)="onConfirmCreateModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">信息</h4>
+    </modal-header>
+    <modal-body>
+      {{approvalConfirmResultText}}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmCreateModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+<modal #commentModal (onClose)="onCommentModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">附加备注信息</h4>
+    </modal-header>
+    <modal-body>
+      <label>备注</label>
+      <input type="text" class="form-control" name="commentString" [(ngModel)]="commentString">
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="commentModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="commentModal" (click)="commentModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+
+<div *ngIf="procurement==null" class="isaac-margin-15top">
+  <h4>请从申请单列表中选择具体申请单查看详细信息</h4>
+</div>
+
+<div *ngIf="procurement!=null">
+  <div class="row isaac-margin-top">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">采购申请单信息</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-inline" role="form">
+          <div class="form-group isaac-form-space">
+            <label>编号:</label>
+            <input readonly [ngModel]="procurement.orderNumber" name="procurementOrderNumber" class="form-control"
+                   type="text">
+          </div>
+          <div class="form-group isaac-form-space">
+            <label>申请人:</label>
+            <input readonly [ngModel]="procurement.procurementRequest.requesterFullName" name="requester" class="form-control"
+                   type="text">
+          </div>
+          <div class="form-group isaac-form-space">
+            <label>状态: </label>
+            <input readonly [ngModel]="procurement.status" name="procurementStatus" class="form-control" type="text">
+          </div>
+          <div class="form-group isaac-form-space">
+            <label>提交日期: </label>
+            <input readonly [ngModel]="getSubmittedData(procurement) | date:'yyyy年MM月dd日 HH:mm:ss'"
+                   name="procurementSubmittedDate" class="form-control"
+                   type="text">
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-default">退回</button>
+            <button class="btn btn-default" (click)="onPassButtonClicked()">通过</button>
+          </div>
+        </form>
+        <div class="row">
+          <table class="table">
+            <thead>
+            <tr>
+              <td>序号</td>
+              <td>产品名称</td>
+              <td>包装规格</td>
+              <td>包装单位</td>
+              <td>数量</td>
+              <td>单价</td>
+              <td>总价</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let good of procurement.procurementRequest.goods;let goodIndex=index">
+              <td>{{goodIndex+1}}</td>
+              <td>{{good.name}}</td>
+              <td>{{good.packageSpecification}}</td>
+              <td>{{good.packageUnit}}</td>
+              <td>{{good.number}}</td>
+              <td>{{good.pricePerUnit}}</td>
+              <td>{{good.totalPrice}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="isaac-margin-15top">
+            <div class="col-md-3 form-inline">
+              <div class="form-group">
+                <label>付款合计:</label>
+                <input class="form-control" name="totalPrice" [ngModel]="procurement.procurementRequest.totalPrice" readonly>
+              </div>
+            </div>
+          </div>
+
+          <div class="isaac-margin-15top col-md-12">
+            <span><b>采购说明</b></span>
+            <textarea rows="10" class="form-control" [ngModel]="procurement.procurementRequest.explanation" readonly></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-procurement-table-list-view [approvalList]="procurement.approvalList"></app-procurement-table-list-view>
+</div>
+
+
+
+

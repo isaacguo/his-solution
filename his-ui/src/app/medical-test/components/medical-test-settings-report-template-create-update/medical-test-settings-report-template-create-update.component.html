@@ -1,0 +1,120 @@
+<h3 class="page-header">{{getOperationText()}}化验报告模板</h3>
+
+
+<app-popup-modal [bundle]="bundle$|async" (modalClosed)="onModalClosed()"></app-popup-modal>
+
+
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <input type="hidden" formControlName="id">
+    <label for="name">化验报告名称</label> <span color="red" class="text-danger"
+                                           [hidden]="formModel.controls.reportName.valid">*</span>
+    <input id="name" type="text" class="form-control" formControlName="reportName">
+    <small *ngIf="!formModel.controls.reportName.valid" class="text-danger">
+      化验报告名称不能为空
+    </small>
+  </div>
+
+  <!--
+    <label for="name">检查报告信息项</label>
+    <div formArrayName="reportInfo">
+
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>序号</th>
+          <th>名称</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let reportInfoItem of reportInfoData.controls; let i=index" [formGroupName]="i">
+          <td>{{i+1}}</td>
+          <td><input class="form-control" type="text" formControlName="reportKey">
+            <small [hidden]="reportInfoItem.controls.reportKey.valid" class="text-danger">
+              此报告项名称不可为空
+            </small>
+          </td>
+          <td>
+         <span class="glyphicon glyphicon-remove"
+               (click)="removeReportInfoItem(i)">
+                  </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="isaac-margin-top">
+      <a (click)="addReportInfoItem()" style="cursor: default">
+        添加新报告信息项目 +
+      </a>
+    </div>
+  -->
+
+  <div class="isaac-margin-15top" formArrayName="reportItems">
+    <label for="name">检查项目</label>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>序号</th>
+        <th>名称</th>
+        <th>单位</th>
+        <th>参考值(下限)</th>
+        <th>参考值(上限)</th>
+        <th>备注</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reportItem of reportData.controls; let i=index" [formGroupName]="i">
+        <td>{{i + 1}}</td>
+        <td><input class="form-control" type="text" formControlName="itemName">
+          <small [hidden]="reportItem.controls.itemName.valid" class="text-danger">
+            检测项名称不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="itemUnit">
+          <small [hidden]="reportItem.controls.itemUnit.valid" class="text-danger">
+            单位不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="referenceLowLimitValue">
+          <small [hidden]="reportItem.controls.referenceLowLimitValue.valid" class="text-danger">
+            参考值(下限)不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="referenceHighLimitValue">
+          <small [hidden]="reportItem.controls.referenceHighLimitValue.valid" class="text-danger">
+            参考值(上限)不能为空
+          </small>
+        </td>
+        <td>
+          <input class="form-control" type="text" formControlName="comments">
+        </td>
+        <td>
+       <span class="glyphicon glyphicon-remove"
+             (click)="removeReportItem(i)">
+                </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="isaac-margin-top">
+    <a (click)="addReportItem()" style="cursor: default">
+      添加新检测项 +
+    </a>
+  </div>
+
+
+  <button class="btn btn-primary isaac-margin-15top" type="submit" [disabled]="!formModel.valid">提交</button>
+
+</form>
+
+

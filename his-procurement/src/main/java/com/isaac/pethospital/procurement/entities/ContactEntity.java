@@ -1,22 +1,20 @@
 package com.isaac.pethospital.procurement.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class ContactEntity {
 
+    String name;
+    String telephone;
+    @ManyToOne
+    @JsonBackReference("VendorEntity-ContactEntity")
+    VendorEntity vendor;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    String name;
-
-    @ElementCollection
-    List<String> cellphone;
-
-    @ManyToOne
-    VendorEntity vendor;
 
     public Long getId() {
         return id;
@@ -34,12 +32,12 @@ public class ContactEntity {
         this.name = name;
     }
 
-    public List<String> getCellphone() {
-        return cellphone;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setCellphone(List<String> cellphone) {
-        this.cellphone = cellphone;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public VendorEntity getVendor() {

@@ -1,0 +1,63 @@
+<table class="table table-bordered table-responsive">
+  <thead>
+  <tr role="row">
+    <th>编号</th>
+    <th>照片</th>
+    <th>员工编号</th>
+    <th>姓名</th>
+    <th>职位</th>
+    <th>工作电话</th>
+    <th>部门</th>
+    <th>性别</th>
+    <th>直接汇报</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody role="alert" aria-live="polite" aria-relevant="all">
+  <tr *ngIf="manager">
+    <td>1</td>
+    <img
+      [src]="manager?.gender==='MALE'?'../../../../assets/images/user.svg':'../../../../assets/images/user.svg'"
+      style="width:45px;height: 45px;" alt="User Image">
+
+    <td>{{manager?.employeeNumber}}</td>
+    <td>{{manager?.fullName}}</td>
+    <td>{{manager?.jobTitle}}</td>
+    <td>{{manager?.workPhoneNumber}}</td>
+    <td>{{manager?.departmentName}}</td>
+    <td>{{manager?.gender==='MALE'?'男':'女'}}</td>
+    <td>{{manager?.directReportTo}}</td>
+    <td>
+      <app-employee-operation-bar
+        (employeeEdited)="onEmployeeEdited($event)"
+        (employeeViewed)="onEmployeeViewed($event)"
+        (employeeRemoved)="onEmployeeRemoved($event)"
+        (employeeDepartmentAdjusted)="onEmployeeDepartmentAdjusted($event)" [nodes]="rootNode|async"  [manager]="manager" [noTeamMembers]="employeeList?.length===0" ></app-employee-operation-bar>
+    </td>
+  </tr>
+  <ng-container *ngIf="employeeList" )>
+    <tr *ngFor="let employee of employeeList ; let i=index">
+      <td>{{i+2}}</td>
+      <img
+        [src]="manager?.gender==='MALE'?'../../../../assets/images/user.svg':'../../../../assets/images/user.svg'"
+        style="width:45px;height: 45px;" alt="User Image">
+      <td>{{employee?.employeeNumber}}</td>
+      <td>{{employee?.fullName}}</td>
+      <td>{{employee?.jobTitle}}</td>
+      <td>{{employee?.workPhoneNumber}}</td>
+      <td>{{employee?.departmentName}}</td>
+      <td>{{employee?.gender==='MALE'?'男':'女'}}</td>
+      <td>{{employee?.directReportTo}}</td>
+      <td>
+        <app-employee-operation-bar
+          (employeeEdited)="onEmployeeEdited($event)"
+          (employeeViewed)="onEmployeeViewed($event)"
+          (employeeManagerSet)="onEmployeeManagerSet($event)"
+          (employeeRemoved)="onEmployeeRemoved($event)"
+          (employeeDepartmentAdjusted)="onEmployeeDepartmentAdjusted($event)" [nodes]="rootNode|async" [employee]="employee"></app-employee-operation-bar>
+
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

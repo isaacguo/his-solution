@@ -1,0 +1,16 @@
+export enum PrescriptionStatusEnum {
+
+  UNSUBMITTED = "UNSUBMITTED",
+  UNPAID = "UNPAID",
+  PAID = "PAID",
+  WITHDREW="WITHDREW",
+  DISPENSED = "DISPENSED",
+  UNDISPENSED = "UNDISPENSED"
+
+
+
+
+
+
+
+}

@@ -1,0 +1,41 @@
+<table class="table table-bordered isaac-margin-top">
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>病历号</th>
+    <th>宠物名称</th>
+    <th>卡号</th>
+    <th>主人姓名</th>
+    <th>接诊医师</th>
+    <th>化验项目</th>
+    <th>开单时间</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let report of pageData?.content; let i=index">
+    <td>{{i+1}}</td>
+    <td></td>
+    <td>{{report.petName}}</td>
+    <td></td>
+    <td>{{report.petOwnerName}}</td>
+    <td></td>
+    <td>{{report.reportName}}</td>
+    <td>{{report.createdDateTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
+    <td>{{getStatusText(report.reportStatus)}}</td>
+    <td>
+      <div class="button-group">
+        <button title="修改报告" type="button" class="btn btn-default btn-sm"
+                (click)="onModifyButtonClicked(report)"><span
+          class="glyphicon glyphicon-pencil"></span></button>
+        <button title="修改报告状态" type="button" class="btn btn-default btn-sm"
+                (click)="onModifyStatusButtonClicked(report)"><span
+          class="glyphicon  glyphicon-flag"></span></button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<pagination-controls (pageChange)="onPageChanged($event)" previousLabel="上一页" nextLabel="下一页"></pagination-controls>

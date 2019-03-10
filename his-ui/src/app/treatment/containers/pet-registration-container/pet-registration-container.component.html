@@ -1,0 +1,45 @@
+<modal #findByNameResultModal>
+  <form #modalForm2="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请选择</h4>
+    </modal-header>
+    <modal-body>
+      <app-pet-owner-select-table (itemSelected)="onPetOwnerSelected($event)"
+                                  [list]="petOwnerList"></app-pet-owner-select-table>
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="findByNameResultModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="findByNameResultModal"
+              (click)="findByNameResultModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div class="row">
+  <app-query-bar (queryClicked)="onQueryClicked($event)"></app-query-bar>
+</div>
+<div class="row">
+  <app-pet-owner-info (petOwnerUpdated)="onPetOwnerUpdated($event)" (petOwnerCreated)="onPetOwnerCreated($event)"
+                      (petOwnerCleared)="onPetOwnerCleared()" (petSelected)="onPetSelected($event)"
+                      (petCreated)="onPetCreated($event)"
+                      (petUpdated)="onPetUpdated($event)"
+                      [petOwner]="petOwner$|async"></app-pet-owner-info>
+</div>
+
+<div class="row">
+  <app-pet-registration-panel
+    [departments]="departments$|async"
+    [doctors]="doctors$|async"
+    [selectedDepartment]="selectedDepartment$|async"
+    [selectedDoctor]="selectedDoctor$|async"
+    [selectedPetOwner]="petOwner$|async"
+    [selectedPet]="selectedPet$|async"
+    [registrationFee]="registrationFee$|async"
+    [registrationResult]="registrationResult$|async"
+    (departmentSelected)="onDepartmentSelected($event)"
+    (doctorSelected)="onDoctorSelected($event)"
+    (petRegistered)="onPetRegistered($event)"
+  ></app-pet-registration-panel>
+</div>
+

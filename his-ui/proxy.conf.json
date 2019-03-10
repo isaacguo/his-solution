@@ -4,12 +4,32 @@
     "secure": false,
     "logLevel": "debug"
   },
+  "/api/hisgateway": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
   "/api/histreatment": {
     "target": "http://localhost:8080",
     "secure": false,
     "logLevel": "debug"
   },
-  "/": {
+  "/api/hisprocurement": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/hisfinance": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/hismedicaltest": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/hismedicine": {
     "target": "http://localhost:8080",
     "secure": false,
     "logLevel": "debug"

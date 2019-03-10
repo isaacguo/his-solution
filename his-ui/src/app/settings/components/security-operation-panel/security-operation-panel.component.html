@@ -1,0 +1,76 @@
+<a href="javascript:void(0)"><i #spinner (click)="onRefreshIconClicked()" [ngClass]="getStatus()"></i></a>
+
+<h4>{{key!=null?key[1]:""}}</h4>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th [rowSpan]="2">用户/组</th>
+    <th *ngFor="let topic of authorizationTopics" [colSpan]="topic.availableTopicOperationList?.length">
+      {{topic.name}}
+    </th>
+    <th [rowSpan]="2">操作</th>
+  </tr>
+  <tr>
+    <ng-template ngFor let-topic [ngForOf]="authorizationTopics" let-j="index">
+      <ng-template ngFor let-operation [ngForOf]="topic.availableTopicOperationList">
+        <th>{{operation.name}}</th>
+      </ng-template>
+    </ng-template>
+  </tr>
+  </thead>
+
+  <tbody>
+  <ng-template ngFor let-authorization [ngForOf]="authorizations" let-i="index">
+    <tr>
+      <td> {{authorization.username}}({{authorization.userAccount}})</td>
+      <ng-template ngFor let-assignment [ngForOf]="authorization?.authorizationAssignmentList" let-j="index">
+        <ng-template ngFor let-op [ngForOf]="getAuthorizationTopicById(assignment.topic.id)?.availableTopicOperationList"
+                  let-k="index">
+          <td>
+            <input [checked]="isCheckedByDefault(assignment,op)" type="checkbox"
+                   (change)="onChange(authorization,assignment,op, $event.target.checked)">
+          </td>
+        </ng-template>
+      </ng-template>
+      <td>
+        <div class="btn-group-sm" role="group">
+          <button (click)="onCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
+            class="glyphicon glyphicon-check"></span></button>
+          <button (click)="onUnCheckAllButtonClicked(authorization)" type="button" class="btn btn-default"><span
+            class="glyphicon glyphicon-unchecked"></span></button>
+          <button (click)="onSaveButtonClicked(authorization)" type="button" class="btn btn-default"><span
+            class="glyphicon glyphicon-floppy-disk"></span></button>
+          <button (click)="onDeleteUserButtonClicked(i)" type="button" class="btn btn-default"><span
+            class="glyphicon glyphicon-remove"></span></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  </tbody>
+</table>
+
+<div class="form-inline">
+  <div>
+    <div class="dropdown" [class.open]="employees.length>0">
+
+      <input autocomplete="off" (click)="stopPropagation($event)" (focusout)="stopPropagation($event)" (focus)="stopPropagation($event)"
+             type="text" class="form-control dropdown-toggle"
+             placeholder="用户姓名汉语拼音" [formControl]="searchInput"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenu2"
+             >
+      <small [hidden]="searchInput.valid || searchInput.pristine" class="text-danger">
+        最少1个字符
+      </small>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li *ngFor="let e of employees">
+          <a href="javascript:void(0)" (click)="onEmployeeSelected(e)">{{e.fullName}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="page-header"></div>
+
+

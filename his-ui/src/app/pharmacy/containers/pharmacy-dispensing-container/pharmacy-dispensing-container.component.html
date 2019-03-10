@@ -1,0 +1,22 @@
+<div class="row">
+  <h1 class="page-header">发药管理</h1>
+</div>
+
+<div class="row" style="height: 730px ">
+  <split [direction]="'horizontal'">
+    <split-area [size]="20">
+      <div style="padding-right:15px">
+      <app-pharmacy-dispensing
+        (itemSelected)="itemSelected($event)"
+        [selectedPrescription]="selectedPrescription$|async"
+        [pageData]="pageData$|async" (pageChanged)="onPageChanged($event)"></app-pharmacy-dispensing>
+      </div>
+    </split-area>
+
+    <split-area [size]="80">
+      <div style="padding-left: 20px">
+      <router-outlet></router-outlet>
+      </div>
+    </split-area>
+  </split>
+</div>

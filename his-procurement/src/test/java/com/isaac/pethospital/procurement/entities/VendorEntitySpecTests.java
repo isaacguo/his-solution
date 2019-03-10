@@ -45,12 +45,6 @@ public class VendorEntitySpecTests {
     }
 
     @Test
-    public void givenVendorEntityThenHasFieldLegalPerson()
-    {
-        assertThat(this.vendorEntity, hasProperty("legalPerson"));
-    }
-
-    @Test
     public void givenVendorEntityThenHasFieldDescription()
     {
         assertThat(this.vendorEntity, hasProperty("description"));
@@ -59,7 +53,7 @@ public class VendorEntitySpecTests {
     @Test
     public void givenVendorEntityThenHasFieldContactList()
     {
-        assertThat(this.vendorEntity, hasProperty("contactList"));
+        assertThat(this.vendorEntity, hasProperty("contacts"));
     }
 
 }

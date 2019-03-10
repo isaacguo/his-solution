@@ -1,0 +1,33 @@
+<div *ngIf="exportReceiptId=== undefined ">
+  请选择出库单
+</div>
+
+<div class="isaac-margin-15top" *ngIf="exportReceiptId!= undefined && exportSheet!=null">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>编号</th>
+      <th>名称</th>
+      <th>单位</th>
+      <th>规格</th>
+      <th>数量</th>
+      <th>单价</th>
+      <th>金额</th>
+      <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of exportSheet.exportItemList;let i=index">
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.unit}}</td>
+      <td>{{item.specification}}</td>
+      <td>{{item.amount}}</td>
+      <td>{{item.pricePerUnit}}</td>
+      <td>{{item.totalPrice}}</td>
+      <td>{{item.comments}}</td>
+    </tr>
+    </tbody>
+
+  </table>
+</div>

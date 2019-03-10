@@ -1,0 +1,7 @@
+<div *ngIf="rootNode" class="col-md-3">
+  <app-medical-test-settings-department #tree [nodes]="rootNode|async" (nodeSelected)="onNodeSelected($event)"></app-medical-test-settings-department>
+</div>
+<div class="col-md-9">
+  <router-outlet></router-outlet>
+</div>
+

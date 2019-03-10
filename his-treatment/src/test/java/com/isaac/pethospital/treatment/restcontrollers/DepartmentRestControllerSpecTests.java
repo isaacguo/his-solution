@@ -57,8 +57,9 @@ public class DepartmentRestControllerSpecTests {
 
         List<DepartmentEntity> list=new LinkedList<>();
         departmentEntity.setName("全科");
+        departmentEntity.setOpenToFrontDesk(true);
         list.add(departmentEntity);
-        doReturn(list).when(departmentService).getDepartments();
+        doReturn(list).when(departmentService).getOpenToFrontDeskDepartments();
 
         this.mockMvc.perform(get("/departments")
                 .contentType(MediaType.APPLICATION_JSON))

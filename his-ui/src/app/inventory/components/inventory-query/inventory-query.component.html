@@ -1,0 +1,12 @@
+<div *ngIf="showTitle" class="row">
+  <h1 class="page-header">库存查询</h1>
+
+</div>
+
+<app-inventory-query-list [canEdit]="canEdit"
+                          [canDelete]="canDelete"
+                          [financePriceService]="financePriceService"
+                          [canCreateNewItem]="canCreateNewItem"
+                          [showToolBox]="showToolBox"></app-inventory-query-list>
+
+

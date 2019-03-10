@@ -1,10 +1,16 @@
 package com.isaac.pethospital.procurement.services;
 
 import com.isaac.pethospital.procurement.dtos.VendorOperationRequest;
+import com.isaac.pethospital.procurement.entities.VendorCategoryEntity;
 import com.isaac.pethospital.procurement.entities.VendorEntity;
+import com.isaac.pethospital.procurement.feignservices.EmployeeFeignService;
 import com.isaac.pethospital.procurement.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -12,11 +18,15 @@ public class VendorServiceSpecTests {
 
     VendorRepository vendorRepository;
     VendorService vendorService;
+    VendorCategoryService vendorCategoryService;
+    EmployeeFeignService employeeFeignService;
 
     @Before
     public void before() {
         this.vendorRepository = mock(VendorRepository.class);
-        this.vendorService = spy(new VendorServiceImpl(this.vendorRepository));
+        this.employeeFeignService = mock(EmployeeFeignService.class);
+        this.vendorCategoryService = mock(VendorCategoryService.class);
+        this.vendorService = spy(new VendorServiceImpl(this.vendorRepository, this.employeeFeignService, this.vendorCategoryService));
     }
 
     @Test
@@ -25,6 +35,7 @@ public class VendorServiceSpecTests {
         VendorOperationRequest vendorOperationRequest = new VendorOperationRequest();
         vendorOperationRequest.setName("Company");
         doReturn(null).when(vendorRepository).findByName("Company");
+        doReturn(new VendorCategoryEntity()).when(vendorCategoryService).findById(any(Long.class));
         //when
         this.vendorService.createVendor(vendorOperationRequest);
         //then
@@ -70,6 +81,18 @@ public class VendorServiceSpecTests {
         this.vendorService.findByName(vendorOperationRequest);
         //then
         verify(vendorRepository, times(1)).findByName("Company");
+    }
+
+
+    @Test
+    public void givenKeywordStringWhenFindByNameContainsKeywordThenReturnList() {
+        //given
+        String keyword = "com";
+        doReturn(new LinkedList<VendorEntity>()).when(vendorRepository).findByNameContainsIgnoreCase("com");
+        //when
+        this.vendorService.findByNameContains(keyword);
+        //then
+        verify(vendorRepository, times(1)).findByNameContainsIgnoreCase("com");
     }
 
 }

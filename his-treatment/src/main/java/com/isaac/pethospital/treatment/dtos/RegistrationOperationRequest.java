@@ -25,6 +25,25 @@ public class RegistrationOperationRequest {
     @NotNull
     private Long petId;
 
+    private String priceUuid;
+    private RegistrationStatusEnum registrationStatus;
+
+    public String getPriceUuid() {
+        return priceUuid;
+    }
+
+    public void setPriceUuid(String priceUuid) {
+        this.priceUuid = priceUuid;
+    }
+
+    public RegistrationStatusEnum getRegistrationStatus() {
+        return registrationStatus;
+    }
+
+    public void setRegistrationStatus(RegistrationStatusEnum registrationStatus) {
+        this.registrationStatus = registrationStatus;
+    }
+
     public int getIndexOfDay() {
         return indexOfDay;
     }
@@ -80,7 +99,7 @@ public class RegistrationOperationRequest {
         registrationEntity.setOperator(operator);
         registrationEntity.setPet(pet);
         registrationEntity.setCreatedDate(LocalDateTime.now());
-        registrationEntity.setRegistrationStatus(RegistrationStatusEnum.BOOKED);
+        registrationEntity.setRegistrationStatus(this.registrationStatus);
         return registrationEntity;
     }
 

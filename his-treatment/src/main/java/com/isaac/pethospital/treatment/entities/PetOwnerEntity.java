@@ -7,9 +7,11 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.isaac.pethospital.common.enums.GenderEnum;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class PetOwnerEntity {
@@ -17,17 +19,18 @@ public class PetOwnerEntity {
     @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
     @JsonManagedReference("PetOwnerEntity-PetEntity")
     List<PetEntity> petList = new LinkedList<>();
-    @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
-    @JsonManagedReference("PetOwnerEntity-TreatmentCaseEntity")
-    List<TreatmentCaseEntity> treatmentCaseList = new LinkedList<>();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String uuid;
+
+    public PetOwnerEntity() {
+        this.uuid = UUID.randomUUID().toString();
+    }
 
     private String name;
     private GenderEnum gender;
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
 
     private String memberNumber;
     @OneToMany(mappedBy = "petOwner", cascade = CascadeType.ALL)
@@ -81,13 +84,11 @@ public class PetOwnerEntity {
         this.cellPhone = cellPhone;
     }
 
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -99,11 +100,11 @@ public class PetOwnerEntity {
         this.gender = gender;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -127,14 +128,13 @@ public class PetOwnerEntity {
     public List<PetEntity> getPetList() {
         return petList;
     }
-    public void removePet(PetEntity pet)
-    {
-        if(pet==null)
+
+    public void removePet(PetEntity pet) {
+        if (pet == null)
             throw new RuntimeException("pet is null");
         pet.setPetOwner(null);
         this.petList.remove(pet);
     }
-
 
 
     public void addPet(PetEntity pet) {

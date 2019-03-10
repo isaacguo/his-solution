@@ -21,7 +21,7 @@ eureka:
 ---
 
 spring:
-  profiles: production
+  profiles: staging, production
   cloud:
     config:
       server:

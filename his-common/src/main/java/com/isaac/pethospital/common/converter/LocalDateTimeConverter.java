@@ -1,5 +1,7 @@
 package com.isaac.pethospital.common.converter;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.sql.Timestamp;

@@ -1,6 +1,8 @@
 package com.isaac.pethospital.treatment.restcontrollers;
 
+import com.isaac.pethospital.treatment.dtos.DepartmentOperationRequest;
 import com.isaac.pethospital.treatment.entities.DepartmentEntity;
+import com.isaac.pethospital.treatment.entities.EmployeeEntity;
 import com.isaac.pethospital.treatment.services.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,16 +19,30 @@ public class DepartmentRestController {
     }
 
     @GetMapping
-    public List<DepartmentEntity> getDepartments()
+    public List<DepartmentEntity> getOpenToFrontDeskDepartments()
     {
-        return this.departmentService.getDepartments();
+        return this.departmentService.getOpenToFrontDeskDepartments();
     }
+    @GetMapping(value = "/getDepartmentByDepId/{depId}")
+    public DepartmentEntity getDepartmentByDepId(@PathVariable("depId") Long depId)
+    {
+        return this.departmentService.getDepartmentByDepId(depId);
+    }
+
+    @GetMapping(value="/getEmployeesByDepartmentId/{depId}/")
+    public List<EmployeeEntity> getEmployeesByDepartmentUuid(@PathVariable("depId") Long depId)
+    {
+        return this.departmentService.getEmployeesByDepartmentId(depId);
+    }
+
+
+    @PostMapping(value = "/setDepartmentOpenToFrontDeskValue")
+    public boolean setDepartmentOpenToFrontDeskValue(@RequestBody DepartmentOperationRequest department)
+    {
+        return this.departmentService.setDepartmentOpenToFrontDeskValue(department);
+    }
+
     /*
-    @GetMapping(value = "/getDoctorsInDepartmentByUuid/{uuid}/")
-    public List<EmployeeEntity> getDoctorsInDepartmentByUuid(@PathVariable("uuid") String uuid)
-    {
-        return this.departmentSerivce.getDoctorsInDepartmentByUuid(uuid);
-    }
 
     @PostMapping(value = "/book")
     public TreatmentCaseEntity createTreatmentCase(@RequestBody TreatmentCaseEntity treatmentCase)

@@ -1,0 +1,12 @@
+<div class="row">
+  <h1 class="page-header">数据备份与恢复</h1>
+</div>
+
+<app-data-backup
+  [backupFolders]="backupFolders$|async"
+  [backupFiles]="backupFiles$|async"
+  [scheduleInfo]="scheduleInfo$ |async"
+  (restoreFolder)="onRestoreFolder($event)"
+  (scheduleInfoUpdated)="onScheduleInfoUpdated($event)"
+  (folderReview)="onFolderReview($event)"
+></app-data-backup>
