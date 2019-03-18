@@ -61,6 +61,17 @@ import { CreateMedicalTestsComponent } from './components/create-medical-tests/c
 import { TreatmentMedicalTestReportDetailComponent } from './components/treatment-medical-test-report-detail/treatment-medical-test-report-detail.component';
 import { TreatmentPrescriptionListComponent } from './components/treatment-prescription-list/treatment-prescription-list.component';
 import { TreatmentPrescriptionMedicineSelectorComponent } from './components/treatment-prescription-medicine-selector/treatment-prescription-medicine-selector.component';
+import { InpatientContainerComponent } from './containers/inpatient-container/inpatient-container.component';
+import { InpatientComponent } from './components/inpatient/inpatient.component';
+import { DailyManagementContainerComponent } from './containers/daily-management-container/daily-management-container.component';
+import { DailyManagementComponent } from './components/daily-management/daily-management.component';
+import { ProcedureInManagementContainerComponent } from './containers/procedure-in-management-container/procedure-in-management-container.component';
+import { ProcedureOutManagementContainerComponent } from './containers/procedure-out-management-container/procedure-out-management-container.component';
+import { ProcedureOutManagementComponent } from './components/procedure-out-management/procedure-out-management.component';
+import { ProcedureInManagementComponent } from './components/procedure-in-management/procedure-in-management.component';
+import { InpatientListContainerComponent } from './containers/inpatient-list-container/inpatient-list-container.component';
+import { InpatientListComponent } from './components/inpatient-list/inpatient-list.component';
+import { InpatientRecordCreateUpdateComponent } from './components/inpatient-record-create-update/inpatient-record-create-update.component';
 
 @NgModule({
   imports: [
@@ -125,7 +136,18 @@ import { TreatmentPrescriptionMedicineSelectorComponent } from './components/tre
     CreateMedicalTestsComponent,
     TreatmentMedicalTestReportDetailComponent,
     TreatmentPrescriptionListComponent,
-    TreatmentPrescriptionMedicineSelectorComponent
+    TreatmentPrescriptionMedicineSelectorComponent,
+    InpatientContainerComponent,
+    InpatientComponent,
+    DailyManagementContainerComponent,
+    DailyManagementComponent,
+    ProcedureInManagementContainerComponent,
+    ProcedureOutManagementContainerComponent,
+    ProcedureOutManagementComponent,
+    ProcedureInManagementComponent,
+    InpatientListContainerComponent,
+    InpatientListComponent,
+    InpatientRecordCreateUpdateComponent
     ]
 })
 export class TreatmentModule {

@@ -22,6 +22,10 @@ import {TreatmentMedicalTestContainerComponent} from "./containers/treatment-med
 import {TreatmentPrescriptionDetailContainerComponent} from './containers/treatment-prescription-detail-container/treatment-prescription-detail-container.component';
 import {TreatmentSettingsRoomDetailContainerComponent} from "./containers/treatment-settings-room-detail-container/treatment-settings-room-detail-container.component";
 import {TreatmentMedicalTestDetailContainerComponent} from "./containers/treatment-medical-test-detail-container/treatment-medical-test-detail-container.component";
+import {InpatientContainerComponent} from "./containers/inpatient-container/inpatient-container.component";
+import {DailyManagementContainerComponent} from "./containers/daily-management-container/daily-management-container.component";
+import {ProcedureInManagementContainerComponent} from "./containers/procedure-in-management-container/procedure-in-management-container.component";
+import {ProcedureOutManagementContainerComponent} from "./containers/procedure-out-management-container/procedure-out-management-container.component";
 
 const routes: Routes = [
   {
@@ -42,11 +46,29 @@ const routes: Routes = [
         path: 'fee-query',
         component: FeeQueryContainerComponent,
       },
+
       {
         path: '**',
         redirectTo: 'petreg',
-      }
+      },
+
     ]
+  },
+  {
+    path: 'inpatient',
+    component: InpatientContainerComponent
+  },
+  {
+    path: 'inpatient/procedure-in-management',
+    component:ProcedureInManagementContainerComponent
+  },
+  {
+    path: 'inpatient/procedure-out-management',
+    component:ProcedureOutManagementContainerComponent
+  },
+  {
+    path: 'inpatient/daily-management',
+    component: DailyManagementContainerComponent
   },
   {
     path: 'customer-service',
@@ -91,30 +113,30 @@ const routes: Routes = [
           {
             path: 'treatment-cases',
             component: PetTreatmentContainerComponent,
-            children:[
+            children: [
               {
-                path:':treatmentCaseId',
+                path: ':treatmentCaseId',
                 component: TreatmentCaseDetailContainerComponent
               }
             ]
           },
           {
-            path:'medical-tests',
-            component:TreatmentMedicalTestContainerComponent,
-            children:[
+            path: 'medical-tests',
+            component: TreatmentMedicalTestContainerComponent,
+            children: [
               {
-                path:':reportUuid',
+                path: ':reportUuid',
                 component: TreatmentMedicalTestDetailContainerComponent
               }
             ]
           },
           {
-            path:'treatment-prescriptions',
-            component:TreatmentPrescriptionsContainerComponent,
-            children:[
+            path: 'treatment-prescriptions',
+            component: TreatmentPrescriptionsContainerComponent,
+            children: [
               {
-                path:':prescriptionId',
-                component:TreatmentPrescriptionDetailContainerComponent
+                path: ':prescriptionId',
+                component: TreatmentPrescriptionDetailContainerComponent
               }
             ]
           },
@@ -134,12 +156,12 @@ const routes: Routes = [
         path: 'treatment-room',
         component: TreatmentSettingsRoomContainerComponent,
         children:
-        [
-          {
-            path:':departmentId',
-            component:TreatmentSettingsRoomDetailContainerComponent
-          }
-        ]
+          [
+            {
+              path: ':departmentId',
+              component: TreatmentSettingsRoomDetailContainerComponent
+            }
+          ]
 
       },
       {
@@ -147,8 +169,8 @@ const routes: Routes = [
         component: TreatmentSettingsBusinessContainerComponent
       },
       {
-        path:'**',
-        redirectTo:'treatment-room'
+        path: '**',
+        redirectTo: 'treatment-room'
       }
     ]
   },
