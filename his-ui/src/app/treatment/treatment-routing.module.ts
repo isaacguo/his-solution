@@ -26,6 +26,7 @@ import {InpatientContainerComponent} from "./containers/inpatient-container/inpa
 import {DailyManagementContainerComponent} from "./containers/daily-management-container/daily-management-container.component";
 import {ProcedureInManagementContainerComponent} from "./containers/procedure-in-management-container/procedure-in-management-container.component";
 import {ProcedureOutManagementContainerComponent} from "./containers/procedure-out-management-container/procedure-out-management-container.component";
+import {InpatientRecordCreateUpdateComponent} from "./components/inpatient-record-create-update/inpatient-record-create-update.component";
 
 const routes: Routes = [
   {
@@ -60,11 +61,17 @@ const routes: Routes = [
   },
   {
     path: 'inpatient/procedure-in-management',
-    component:ProcedureInManagementContainerComponent
+    component: ProcedureInManagementContainerComponent
   },
+
+  {
+    path: 'inpatient/procedure-in-management-create',
+    component: InpatientRecordCreateUpdateComponent
+  }
+  ,
   {
     path: 'inpatient/procedure-out-management',
-    component:ProcedureOutManagementContainerComponent
+    component: ProcedureOutManagementContainerComponent
   },
   {
     path: 'inpatient/daily-management',

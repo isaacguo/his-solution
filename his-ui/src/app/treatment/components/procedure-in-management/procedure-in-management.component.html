@@ -20,7 +20,7 @@
 
 <div class="row">
   <div class="btn-group" role="group" aria-label="...">
-    <button (click)="onCreateNewInpatientRecordClicked()" type="button" class="btn btn-primary">创建入院信息</button>
+    <a routerLink="/treatment/inpatient/procedure-in-management-create" type="button" class="btn btn-primary">创建入院信息</a>
   </div>
 </div>
 
@@ -28,7 +28,7 @@
 </div>
 
 <div class="row fixed-height isaac-margin-15top">
-  <split [direction]="direction">
+  <split [direction]="'vertical'">
     <split-area [size]="30">
       <table class="table table-bordered table-responsive">
         <thead>
