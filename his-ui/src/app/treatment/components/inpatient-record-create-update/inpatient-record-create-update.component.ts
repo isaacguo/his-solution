@@ -11,6 +11,8 @@ import {TreatmentDepartmentService} from "../../../core/services/treatment/treat
 import {TreatmentEmployeeService} from "../../../core/services/treatment/treatment-employee.service";
 import {RegistrationService} from "../../../core/services/treatment/registration.service";
 import {OperationEnum} from "../../../core/enums/operation.enum";
+import {InpatientManagementService} from "../../../core/services/treatment/inpatient-management.service";
+import {InpatientManagement} from "../../../core/models/treatment/model.component";
 
 @Component({
   selector: 'app-inpatient-record-create-update',
@@ -47,8 +49,8 @@ export class InpatientRecordCreateUpdateComponent implements OnInit {
   constructor(private petOwnerService: PetOwnerService,
               private treatmentDepartmentService: TreatmentDepartmentService,
               private treatmentEmployeeService: TreatmentEmployeeService,
-              private registrationService: RegistrationService,
-              private fb:FormBuilder
+              private inpatientManagementService:InpatientManagementService,
+              private fb: FormBuilder
   ) {
 
 
@@ -140,8 +142,14 @@ export class InpatientRecordCreateUpdateComponent implements OnInit {
     this.selectedDoctorSubject.next(event);
   }
 
-  onPetRegistered(event) {
-    this.registrationService.createRegistration(event.doctor.id, 1, event.pet.id, null, "WAITING", event.doctor.uuid).subscribe(r => {
+  onPetInpatientRequested(event) {
+
+    const request:InpatientManagement={
+      'petUuid': event.pet.id,
+      'requestDoctorUuid': event.doctor.id,
+    };
+
+    this.inpatientManagementService.createInpatientRecord(request).subscribe(r => {
       this.registrationResultSubject.next(r);
     });
   }
@@ -161,4 +169,5 @@ export class InpatientRecordCreateUpdateComponent implements OnInit {
   onSubmit() {
 
   }
+
 }

@@ -12,6 +12,7 @@ public class InpatientManagementEntity {
     Date outDate;
     String managementStatus;
     String petUuid;
+    String petName;
     String requestDoctor;
     String requestDoctorUuid;
     String reasonToInpatient;
@@ -19,6 +20,14 @@ public class InpatientManagementEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
 
     public Long getId() {
         return id;

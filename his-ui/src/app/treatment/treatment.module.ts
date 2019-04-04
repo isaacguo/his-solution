@@ -72,6 +72,8 @@ import { ProcedureInManagementComponent } from './components/procedure-in-manage
 import { InpatientListContainerComponent } from './containers/inpatient-list-container/inpatient-list-container.component';
 import { InpatientListComponent } from './components/inpatient-list/inpatient-list.component';
 import { InpatientRecordCreateUpdateComponent } from './components/inpatient-record-create-update/inpatient-record-create-update.component';
+import { InpatientRecordRequestComponent } from './components/inpatient-record-request/inpatient-record-request.component';
+import { InpatientRecordCreateUpdateContainerComponent } from './containers/inpatient-record-create-update-container/inpatient-record-create-update-container.component';
 
 @NgModule({
   imports: [
@@ -147,7 +149,9 @@ import { InpatientRecordCreateUpdateComponent } from './components/inpatient-rec
     ProcedureInManagementComponent,
     InpatientListContainerComponent,
     InpatientListComponent,
-    InpatientRecordCreateUpdateComponent
+    InpatientRecordCreateUpdateComponent,
+    InpatientRecordRequestComponent,
+    InpatientRecordCreateUpdateContainerComponent
     ]
 })
 export class TreatmentModule {

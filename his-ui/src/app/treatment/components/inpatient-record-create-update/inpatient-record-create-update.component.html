@@ -16,18 +16,44 @@
   </form>
 </modal>
 
+<div class="row">
+  <h1 class="page-header">创建入院信息</h1>
+</div>
+
+
 
 <div class="row">
   <app-query-bar (queryClicked)="onQueryClicked($event)"></app-query-bar>
 </div>
 <div class="row">
-  <app-pet-owner-info (petOwnerUpdated)="onPetOwnerUpdated($event)" (petOwnerCreated)="onPetOwnerCreated($event)"
-                      (petOwnerCleared)="onPetOwnerCleared()" (petSelected)="onPetSelected($event)"
+  <app-pet-owner-info (petOwnerUpdated)="onPetOwnerUpdated($event)"
+                      (petOwnerCreated)="onPetOwnerCreated($event)"
+                      (petOwnerCleared)="onPetOwnerCleared()"
+                      (petSelected)="onPetSelected($event)"
                       (petCreated)="onPetCreated($event)"
                       (petUpdated)="onPetUpdated($event)"
                       [petOwner]="petOwner$|async"></app-pet-owner-info>
 </div>
 
+<div class="row">
+  <app-inpatient-record-request
+    [departments]="departments$|async"
+    [doctors]="doctors$|async"
+    [selectedDepartment]="selectedDepartment$|async"
+    [selectedDoctor]="selectedDoctor$|async"
+    [selectedPetOwner]="petOwner$|async"
+    [selectedPet]="selectedPet$|async"
+    [registrationResult]="registrationResult$|async"
+    (departmentSelected)="onDepartmentSelected($event)"
+    (doctorSelected)="onDoctorSelected($event)"
+    (petInpatientRequested)="onPetInpatientRequested($event)"
+  >
+  </app-inpatient-record-request>
+
+</div>
+
+
+<!--
 <form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
   <div class="form-group isaac-form-space">
     <input type="hidden" formControlName="petUuid">
@@ -53,3 +79,4 @@
 
   <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
 </form>
+-->

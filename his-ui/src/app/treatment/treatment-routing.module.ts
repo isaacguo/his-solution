@@ -27,6 +27,7 @@ import {DailyManagementContainerComponent} from "./containers/daily-management-c
 import {ProcedureInManagementContainerComponent} from "./containers/procedure-in-management-container/procedure-in-management-container.component";
 import {ProcedureOutManagementContainerComponent} from "./containers/procedure-out-management-container/procedure-out-management-container.component";
 import {InpatientRecordCreateUpdateComponent} from "./components/inpatient-record-create-update/inpatient-record-create-update.component";
+import {InpatientRecordCreateUpdateContainerComponent} from "./containers/inpatient-record-create-update-container/inpatient-record-create-update-container.component";
 
 const routes: Routes = [
   {

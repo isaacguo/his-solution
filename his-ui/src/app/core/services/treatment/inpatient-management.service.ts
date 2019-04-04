@@ -15,12 +15,12 @@ export class InpatientManagementService extends CrudService<InpatientManagement>
     super(`${ServiceConstants.TREATMENT_URL}/inpatient-management`, authHttp);
   }
 
-  getRecordsByStatus(status: String): Observable<InpatientManagement> {
-    return this.authHttp.get(this.rootUrl).map(this.extractData);
+  getRecordsByStatus(status: String): Observable<InpatientManagement[]> {
+    return this.authHttp.get(`${this.rootUrl}/${status}`).map(this.extractData);
   }
 
-  createInpatientRecord(request: any): Observable<any> {
-    return this.authHttp.post(this.rootUrl, request).map(this.extractData);
+  createInpatientRecord(request: InpatientManagement): Observable<number> {
+    return this.authHttp.post(this.rootUrl, request).map((r)=>r.status);
   }
 }
 

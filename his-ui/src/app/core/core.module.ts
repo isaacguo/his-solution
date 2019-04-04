@@ -38,6 +38,7 @@ import {ProcurementStatusService} from "./services/procurement/procurement-statu
 import {ProcurementRequestService} from "./services/procurement/procurement-request.service";
 import {ProcurementService} from "./services/procurement/procurement.service";
 import {ProcurementApprovalService} from "./services/procurement/procurement-approval.service";
+import {InpatientManagementService} from "./services/treatment/inpatient-management.service";
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -107,7 +108,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MedicalTestReportTemplateCategoryService,
     MedicalTestReportService,
     PharmacyPrescriptionService,
-    PharmacyMedicineService
+    PharmacyMedicineService,
+
+    InpatientManagementService,
 
   ]
 

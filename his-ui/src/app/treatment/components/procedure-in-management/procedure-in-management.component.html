@@ -13,7 +13,6 @@
 </modal>
 
 
-
 <div class="row">
 
 </div>
@@ -38,21 +37,17 @@
           <th>编号</th>
           <th>名称</th>
           <th>联系人</th>
-          <th>总项数</th>
-          <th>总金额</th>
           <th>时间</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr *ngFor="let record of records|async">
+          <td>{{record.petUuid}}</td>
+          <td>{{record.managementStatus}}</td>
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{{record.inDate| date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
         </tr>
         </tbody>
       </table>

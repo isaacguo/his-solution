@@ -2,7 +2,11 @@ package com.isaac.pethospital.treatment.dtos;
 
 public class InpatientManagementRequest {
 
-    String
+    String petUuid;
+    String requestDoctor;
+    String requestDoctorUuid;
+    String reasonToInpatient;
+    String petStatus;
 
     public String getPetUuid() {
         return petUuid;
