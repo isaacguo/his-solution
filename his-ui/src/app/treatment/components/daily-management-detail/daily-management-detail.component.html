@@ -1,0 +1,26 @@
+<!--
+<app-pet-owner-info></app-pet-owner-info>
+-->
+
+<div class="isaac-margin-15top" style="height: 700px">
+<split [direction]="'horizontal'">
+  <split-area [size]="20">
+    <table class="table table-bordered table-responsive">
+      <thead>
+      <tr>
+        <th>Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let careRecord of dailyCare?.dailyCareRecords">
+        <td>{{careRecord.date}}</td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+  </split-area>
+  <split-area [size]="80">
+    <router-outlet></router-outlet>
+  </split-area>
+</split>
+</div>

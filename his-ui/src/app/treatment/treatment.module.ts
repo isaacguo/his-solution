@@ -74,6 +74,10 @@ import { InpatientListComponent } from './components/inpatient-list/inpatient-li
 import { InpatientRecordCreateUpdateComponent } from './components/inpatient-record-create-update/inpatient-record-create-update.component';
 import { InpatientRecordRequestComponent } from './components/inpatient-record-request/inpatient-record-request.component';
 import { InpatientRecordCreateUpdateContainerComponent } from './containers/inpatient-record-create-update-container/inpatient-record-create-update-container.component';
+import { DailyManagementDetailComponent } from './components/daily-management-detail/daily-management-detail.component';
+import { DailyManagementDetailContainerComponent } from './containers/daily-management-detail-container/daily-management-detail-container.component';
+import { DailyCareRecordContainerComponent } from './containers/daily-care-record-container/daily-care-record-container.component';
+import { DailyCareRecordComponent } from './components/daily-care-record/daily-care-record.component';
 
 @NgModule({
   imports: [
@@ -151,7 +155,11 @@ import { InpatientRecordCreateUpdateContainerComponent } from './containers/inpa
     InpatientListComponent,
     InpatientRecordCreateUpdateComponent,
     InpatientRecordRequestComponent,
-    InpatientRecordCreateUpdateContainerComponent
+    InpatientRecordCreateUpdateContainerComponent,
+    DailyManagementDetailComponent,
+    DailyManagementDetailContainerComponent,
+    DailyCareRecordContainerComponent,
+    DailyCareRecordComponent
     ]
 })
 export class TreatmentModule {

@@ -28,6 +28,8 @@ import {ProcedureInManagementContainerComponent} from "./containers/procedure-in
 import {ProcedureOutManagementContainerComponent} from "./containers/procedure-out-management-container/procedure-out-management-container.component";
 import {InpatientRecordCreateUpdateComponent} from "./components/inpatient-record-create-update/inpatient-record-create-update.component";
 import {InpatientRecordCreateUpdateContainerComponent} from "./containers/inpatient-record-create-update-container/inpatient-record-create-update-container.component";
+import {DailyManagementDetailContainerComponent} from "./containers/daily-management-detail-container/daily-management-detail-container.component";
+import {DailyCareRecordContainerComponent} from "./containers/daily-care-record-container/daily-care-record-container.component";
 
 const routes: Routes = [
   {
@@ -76,7 +78,20 @@ const routes: Routes = [
   },
   {
     path: 'inpatient/daily-management',
-    component: DailyManagementContainerComponent
+    component: DailyManagementContainerComponent,
+    children: [
+      {
+        path: ':inpatientPetId',
+        component: DailyManagementDetailContainerComponent,
+        children:[
+          {
+            path:':careRecordId',
+            component:DailyCareRecordContainerComponent
+          }
+        ]
+      }
+    ]
+
   },
   {
     path: 'customer-service',

@@ -1,3 +1,32 @@
 <div class="row">
   <h1 class="page-header">日常治疗</h1>
 </div>
+
+
+<div class="row fixed-height isaac-margin-15top">
+  <split [direction]="'horizontal'">
+    <split-area [size]="20">
+      <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+          <th>编号</th>
+          <th>状态</th>
+          <th>编号</th>
+          <th>名称</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let careRecord of careRecords">
+          <td>{{careRecord.petName}}</td>
+          <td>{{careRecord.nurseName}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </split-area>
+    <split-area [size]="80">
+      <router-outlet></router-outlet>
+    </split-area>
+  </split>
+</div>
