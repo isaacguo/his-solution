@@ -35,14 +35,14 @@
   <div class="panel-body">
 
     <div class="btn-group isaac-margin-top" role="group">
-      <button [disabled]="petOwner.id" (click)="onCreateNewOwnerButtonClicked()" class="btn btn-primary">新建主人信息</button>
-      <button [disabled]="!petOwner.id" (click)="onModifyOwnerButtonClicked()" class="btn btn-default">修改主人信息</button>
-      <button [disabled]="!petOwner.id" (click)="onClearPetButtonClicked()" class="btn btn-default">取消选择</button>
+      <button [disabled]="petOwner?.id" (click)="onCreateNewOwnerButtonClicked()" class="btn btn-primary">新建主人信息</button>
+      <button [disabled]="!petOwner?.id" (click)="onModifyOwnerButtonClicked()" class="btn btn-default">修改主人信息</button>
+      <button [disabled]="!petOwner?.id" (click)="onClearPetButtonClicked()" class="btn btn-default">取消选择</button>
     </div>
     <form class="form-inline" role="form">
       <div class="form-group isaac-form-space">
         <label>编号:</label>
-        <input readonly [ngModel]="petOwner.id" name="petOwnerId" class="form-control" type="text">
+        <input readonly [ngModel]="petOwner?.id" name="petOwnerId" class="form-control" type="text">
       </div>
       <div class="form-group isaac-form-space">
         <label>姓名: </label>

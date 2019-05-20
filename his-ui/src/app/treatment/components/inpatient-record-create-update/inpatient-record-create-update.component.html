@@ -1,0 +1,82 @@
+<modal #findByNameResultModal>
+  <form #modalForm2="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请选择</h4>
+    </modal-header>
+    <modal-body>
+      <app-pet-owner-select-table (itemSelected)="onPetOwnerSelected($event)"
+                                  [list]="petOwnerList"></app-pet-owner-select-table>
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="findByNameResultModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="findByNameResultModal"
+              (click)="findByNameResultModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<div class="row">
+  <h1 class="page-header">创建入院信息</h1>
+</div>
+
+
+
+<div class="row">
+  <app-query-bar (queryClicked)="onQueryClicked($event)"></app-query-bar>
+</div>
+<div class="row">
+  <app-pet-owner-info (petOwnerUpdated)="onPetOwnerUpdated($event)"
+                      (petOwnerCreated)="onPetOwnerCreated($event)"
+                      (petOwnerCleared)="onPetOwnerCleared()"
+                      (petSelected)="onPetSelected($event)"
+                      (petCreated)="onPetCreated($event)"
+                      (petUpdated)="onPetUpdated($event)"
+                      [petOwner]="petOwner$|async"></app-pet-owner-info>
+</div>
+
+<div class="row">
+  <app-inpatient-record-request
+    [departments]="departments$|async"
+    [doctors]="doctors$|async"
+    [selectedDepartment]="selectedDepartment$|async"
+    [selectedDoctor]="selectedDoctor$|async"
+    [selectedPetOwner]="petOwner$|async"
+    [selectedPet]="selectedPet$|async"
+    [registrationResult]="registrationResult$|async"
+    (departmentSelected)="onDepartmentSelected($event)"
+    (doctorSelected)="onDoctorSelected($event)"
+    (petInpatientRequested)="onPetInpatientRequested($event)"
+  >
+  </app-inpatient-record-request>
+
+</div>
+
+
+<!--
+<form [formGroup]="formModel" novalidate (ngSubmit)="onSubmit()">
+  <div class="form-group isaac-form-space">
+    <input type="hidden" formControlName="petUuid">
+    <input type="hidden" formControlName="requestDoctorUuid">
+    <label>申请医师: </label>
+    <input class="form-control" formControlName="requestDoctor" type="text">
+  </div>
+
+  <div class="form-group isaac-form-space">
+    <label>宠物名字: </label>
+    <input class="form-control" readonly formControlName="petName" type="text">
+  </div>
+
+  <div class="form-group isaac-form-space">
+    <label>住院原因: </label>
+    <input class="form-control" formControlName="reasonToInpatient" type="text">
+  </div>
+
+  <div class="form-group isaac-form-space">
+    <label>宠物状态: </label>
+    <input class="form-control" formControlName="petStatus" type="text">
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="!formModel.valid">确认</button>
+</form>
+-->

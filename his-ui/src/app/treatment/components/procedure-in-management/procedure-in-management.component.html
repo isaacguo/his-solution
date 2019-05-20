@@ -1,0 +1,55 @@
+<div class="row">
+  <h1 class="page-header">入院办理</h1>
+</div>
+
+
+<modal #createInpatientModal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">创建入院信息</h4>
+  </modal-header>
+  <modal-body>
+    <app-inpatient-record-create-update></app-inpatient-record-create-update>
+  </modal-body>
+</modal>
+
+
+<div class="row">
+  <div class="btn-group" role="group" aria-label="...">
+    <a routerLink="/treatment/inpatient/procedure-in-management-create" type="button" class="btn btn-primary">创建入院信息</a>
+  </div>
+</div>
+
+<div class="row isaac-margin-15top">
+</div>
+
+<div class="row fixed-height isaac-margin-15top">
+  <split [direction]="'vertical'">
+    <split-area [size]="30">
+      <table class="table table-bordered table-responsive">
+        <thead>
+        <tr>
+          <th>编号</th>
+          <th>状态</th>
+          <th>编号</th>
+          <th>名称</th>
+          <th>联系人</th>
+          <th>时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let record of records|async">
+          <td>{{record.petUuid}}</td>
+          <td>{{record.managementStatus}}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{{record.inDate| date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </split-area>
+    <split-area [size]="70">
+    </split-area>
+  </split>
+</div>
+

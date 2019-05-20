@@ -1,0 +1,82 @@
+<modal #confirmRegistrationModal (onClose)="onConfirmRegistrationModalClosed()">
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">请确认</h4>
+    </modal-header>
+    <modal-body>
+      确定为 <b>{{selectedPetOwner.name}}</b> 的宠物 <b>{{selectedPet.name}}</b> <br/>挂
+      <b>{{selectedDepartment.name}}</b> 科室
+      <b>{{selectedDoctor.name}}</b> 今日的号么？
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="confirmRegistrationModal.close()">确定</button>
+      <button type="button" class="btn btn-default" data-dismiss="createPetOwnerModal"
+              (click)="confirmRegistrationModal.dismiss()">取消
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+<modal #registrationResultModal>
+  <form #modalForm1="ngForm">
+    <modal-header [show-close]="true">
+      <h4 class="modal-title">已成功</h4>
+    </modal-header>
+    <modal-body>
+      挂号已成功, 号码 {{_registrationResult?.indexOfDay}}
+    </modal-body>
+    <modal-footer>
+      <button type="button" class="btn btn-primary" (click)="registrationResultModal.close()">确定</button>
+    </modal-footer>
+  </form>
+</modal>
+
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">挂号信息</h3>
+  </div>
+
+  <div class="panel-body">
+
+    <div *ngIf="selectedPet.id">
+      为 <b>{{selectedPetOwner.name}}</b> 的宠物 <b>{{selectedPet.name}}</b> 挂号：
+    </div>
+
+    <form class="form-inline" role="form">
+      <div class="dropup btn-group" role="group">
+        <button type="button" [disabled]="!selectedPet.id"
+                class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu1"
+                data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+          {{selectedDepartment.id?selectedDepartment.name:'请选择科室'}}  <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="javascript:void(0)" *ngFor="let department of departments"
+                 (click)="setSelectedDepartment(department)">{{department.name}}</a></li>
+        </ul>
+      </div>
+
+      <div class="dropup btn-group" role="group">
+
+        <button [disabled]="!selectedDepartment.id" type="button"
+                class="btn btn-default dropdown-toggle isaac-dropdown-button" id="dropdownMenu2"
+                data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+          {{selectedDoctor.id ?selectedDoctor.name:'请选择医生'}} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li><a href="javascript:void(0)" *ngFor="let doctor of doctors"
+                 (click)="setSelectedDoctor(doctor)">{{doctor.name}}</a></li>
+        </ul>
+      </div>
+
+      <div class="btn-group" role="group">
+        <button [disabled]="selectedDoctor?.id==null" (click)="onRegistrationButtonClicked()"
+                class="btn btn-default">
+          挂号
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

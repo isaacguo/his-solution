@@ -78,15 +78,27 @@
               </li>
             </ul>
           </li>
+          <li *ngIf="guardMap.get('Treatment-住院管理-操作')?.isAuthorized()|async">
+            <a href="#" routerLinkActive="active" class="text-center"> 住院管理<span
+              class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li>
+                <a routerLink="/treatment/inpatient/procedure-in-management" routerLinkActive="active" class="text-center">
+                  入院办理</a>
+              </li>
+              <li>
+                <a routerLink="/treatment/inpatient/procedure-out-management" routerLinkActive="active" class="text-center">
+                  出院办理</a>
+              </li>
+              <li>
+                <a routerLink="/treatment/inpatient/daily-management" routerLinkActive="active" class="text-center">
+                  日常治疗</a>
+              </li>
+            </ul>
+          </li>
           <li *ngIf="guardMap.get('Treatment-客户服务-操作')?.isAuthorized()|async">
             <a routerLink="/treatment/customer-service" routerLinkActive="active" class="text-center"> 客户服务</a>
           </li>
-          <!--
-          <li *ngIf="canShowInpatientManagement()">
-            <a routerLink="/inpatient"  routerLinkActive="active" class="text-center"> 住院管理</a>
-          </li>
-          -->
-
           <li *ngIf="(guardMap.get('MedicalTest-化验管理-操作')?.isAuthorized()|async) ||
             (guardMap.get('MedicalTest-化验设置-操作')?.isAuthorized()|async) ">
 

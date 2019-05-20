@@ -27,6 +27,7 @@ public class PetEntity {
     int age;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String uuid;
     private PetGenderEnum gender;
